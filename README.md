@@ -1,5 +1,5 @@
 # Community-JAS-39-C
-Welcome to the GitHub for the JAS-39C Gripen mod for DCS!
+Welcome to the GitHub for the JAS-39-C Gripen mod for DCS!
 
 We are a small group of enthusiastic players that would love to have a Gripen in DCS.
 We are currently using the VSN model on the JF-17 and adding the proper weapons and more.
