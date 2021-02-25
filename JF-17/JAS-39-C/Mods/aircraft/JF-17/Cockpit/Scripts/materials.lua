@@ -32,61 +32,61 @@ materials["RED"]                        = {255, 0, 0, 255}
 ]]
 
 -- COMMON
-materials["IND_COMMON_RED"]      = {255,   0,   0, 255}
-materials["DBG_GREY"]            = { 25,  25,  25, 255}
-materials["DBG_BLACK"]           = {  0,   0,   0, 100}
-materials["DBG_RED"]             = {255,   0,   0, 100}
-materials["DBG_GREEN"]           = {  0, 255,   0, 100}
+materials["IND_COMMON_RED"]      = {204,   0,   0, 255}
+materials["DBG_GREY"]            = { 26,  26,  26, 128}
+materials["DBG_BLACK"]           = {  0,   0,   0, 128}
+materials["DBG_RED"]             = {204,   0,   0, 128}
+materials["DBG_GREEN"]           = {  0, 255,  77, 128} --{ 26, 255, 128, 128}
 materials["BLACK"]               = {  0,   0,   0, 255}
-materials["SIMPLE_WHITE"]        = {255, 255, 255, 255}
-materials["PURPLE"]              = {255,   0, 255, 255}
+materials["SIMPLE_WHITE"]        = {204, 204, 204, 255}
+materials["PURPLE"]              = {204,   0, 255, 255}
 
 -- HUD
-materials["HUD_IND_DEF"]         = {  0, 255,   0, 255}
-materials["HUD_IND_CLIP"]        = {  0, 255,   0, 4  }
-materials["HUD_IND_RED"]         = {255,   0,   0, 255}
-materials["HUD_IND_GREEN"]       = {  0, 255,   0, 255}
-materials["HUD_IND_BLUE"]        = {  0,   0, 255, 255}
+materials["HUD_IND_DEF"]         = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["HUD_IND_CLIP"]        = {  0, 255,  77,   2} --{ 26, 255, 128,   2}
+materials["HUD_IND_RED"]         = {204,   0,   0, 255}
+materials["HUD_IND_GREEN"]       = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["HUD_IND_BLUE"]        = {  0,  51, 255, 255}
 materials["HUD_IND_WHITE"]       = {255, 255, 255, 255}
-materials["HUD_IND_YELLOW"]      = {255, 255,   0, 240}
+materials["HUD_IND_YELLOW"]      = {204, 153,   0, 255}
 materials["HUD_IND_DARK"]        = {  0,   0,   0, 255}
 materials["HUD_IND_HIDE"]        = {  0,   0,   0,   0}
 
-materials["HUD_IND_BASE1"]       = {  0, 255,   0,   4}
-materials["HUD_IND_BASE2"]       = {255, 255,   0,   4}
+materials["HUD_IND_BASE1"]       = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["HUD_IND_BASE2"]       = {204, 153,   0, 255}
 
 -- MFCDs
-materials["MFCD_IND_DEF"]        = {  0, 255,   0, 240}
-materials["MFCD_IND_RED"]        = {255,   0,   0, 240}
-materials["MFCD_IND_GREEN"]      = {  0, 255,   0, 150}
-materials["MFCD_IND_DGREEN"]     = {  3,  67,  40, 240}
-materials["MFCD_IND_BLUE"]       = {  0,   0, 255, 240}
-materials["MFCD_IND_BLUE_L"]     = { 70, 130, 180, 255}
-materials["MFCD_IND_BLACK"]      = {  0,   0,   0, 240}
-materials["MFCD_IND_DARK"]       = {  0,   0,   0, 128}
+materials["MFCD_IND_DEF"]        = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["MFCD_IND_RED"]        = {204,   0,   0, 255}
+materials["MFCD_IND_GREEN"]      = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["MFCD_IND_DGREEN"]     = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["MFCD_IND_BLUE"]       = {  0,   0, 255, 255}
+materials["MFCD_IND_BLUE_L"]     = { 16,  32, 255, 255}
+materials["MFCD_IND_BLACK"]      = {  0,   0,   0, 128}
+materials["MFCD_IND_DARK"]       = {  0,   0,   0,  51}
 materials["MFCD_IND_WHITE"]      = {255, 255, 255, 255}
-materials["MFCD_IND_WHITE_Y"]    = {255, 255, 240, 240}
-materials["MFCD_IND_PINK"]       = {160,  32, 240, 240}
-materials["MFCD_IND_YELLOW"]     = {255, 255,   0, 240}
-materials["MFCD_IND_SKY"]        = { 47, 135, 255, 255}
-materials["MFCD_IND_GRND"]       = { 49,   5,   1, 255}
-materials["MFCD_IND_BOXBASE"]    = {255, 255, 255,   0}
-materials["MFCD_IND_W_BASE"]     = {255, 255, 255, 255}
+materials["MFCD_IND_WHITE_Y"]    = {255, 255, 255, 255}
+materials["MFCD_IND_PINK"]       = {255,  26, 204, 255}
+materials["MFCD_IND_YELLOW"]     = {204, 153,   0, 255}
+materials["MFCD_IND_SKY"]        = { 10,  40,  83,  64}
+materials["MFCD_IND_GRND"]       = {  0, 255,  77, 128} --{ 26, 255, 128, 128}
+materials["MFCD_IND_BOXBASE"]    = {  0,   0,   0,   0}
+materials["MFCD_IND_W_BASE"]     = {  0,   0,   0, 208}
 
 -- UFCP
-materials["UFCP_IND_DEF"]        = {0, 255, 0, 100}
-materials["UFCP_IND_CURSOR"]     = {  0, 255, 0, 100}
-materials["UFCP_IND_PAGEBASE"]   = {0, 255, 0, 100}
+materials["UFCP_IND_DEF"]        = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["UFCP_IND_CURSOR"]     = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["UFCP_IND_PAGEBASE"]   = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
 
 -- RADIO
-materials["RADIO_IND_DEF"]       = {  0, 255,   0, 150}
-materials["RADIO_IND_RED"]       = {255,   0,   0, 240}
-materials["RADIO_IND_YELLOW"]    = {255, 255,   0, 240}
+materials["RADIO_IND_DEF"]       = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["RADIO_IND_RED"]       = {204,   0,   0, 255}
+materials["RADIO_IND_YELLOW"]    = {204, 153,   0, 255}
 
 -- CLOCK
-materials["CLOCK_IND_DEF"]       = {  0, 255,   0, 150}
-materials["CLOCK_IND_RED"]       = {255,   0,   0, 240}
-materials["CLOCK_IND_YELLOW"]    = {255, 255,   0, 240}
+materials["CLOCK_IND_DEF"]       = {  0, 255,  77, 255} --{ 26, 255, 128, 255}
+materials["CLOCK_IND_RED"]       = {204,   0,   0, 255}
+materials["CLOCK_IND_YELLOW"]    = {204, 153,   0, 255}
 
 ------- TEXTURES -------
 textures = {}
@@ -132,6 +132,7 @@ textures["mfcd_tex_basic_w"]     = {IND_TEX_PATH .. "label_basic.dds",   materia
 textures["mfcd_tex_basic_wy"]    = {IND_TEX_PATH .. "label_basic.dds",   materials["MFCD_IND_WHITE_Y"]}
 textures["mfcd_tex_basic_g"]     = {IND_TEX_PATH .. "label_basic.dds",   materials["MFCD_IND_GREEN"]}
 textures["mfcd_tex_basic_d"]     = {IND_TEX_PATH .. "label_basic.dds",   materials["MFCD_IND_DARK"]}
+textures["mfcd_tex_basic_bk"]    = {IND_TEX_PATH .. "label_basic.dds",   materials["MFCD_IND_BLACK"]}
 
 -- new ones, will all be replaced by them
 textures["mfcd_tex_ind1"]        = {IND_TEX_PATH .. "Indication_MFCD_1.dds", materials["MFCD_IND_DEF"]}
@@ -173,12 +174,15 @@ textures["mfcd_tex_ind5_r"]      = {IND_TEX_PATH .. "Indication_MFCD_5.dds", mat
 textures["mfcd_line_dashed_def"] = {IND_TEX_PATH .. "Indication_Line_Dashed.dds", materials["MFCD_IND_DEF"]}
 textures["mfcd_line_dashed_r"]   = {IND_TEX_PATH .. "Indication_Line_Dashed.dds", materials["MFCD_IND_RED"]}
 textures["mfcd_line_dashed_w"]   = {IND_TEX_PATH .. "Indication_Line_Dashed.dds", materials["MFCD_IND_WHITE"]}
+textures["mfcd_line_dashed_y"]   = {IND_TEX_PATH .. "Indication_Line_Dashed.dds", materials["MFCD_IND_YELLOW"]}
 
 
 textures["mfcd_mesh_def"]        = {nil, materials["MFCD_IND_DEF"]}
 textures["mfcd_mesh_r"]          = {nil, materials["MFCD_IND_RED"]}
 textures["mfcd_mesh_g"]          = {nil, materials["MFCD_IND_GREEN"]}
 textures["mfcd_mesh_b"]          = {nil, materials["MFCD_IND_BLUE"]}
+textures["mfcd_mesh_bl"]         = {nil, materials["MFCD_IND_BLUE_L"]}
+textures["mfcd_mesh_bk"]         = {nil, materials["MFCD_IND_BLACK"]}
 textures["mfcd_mesh_d"]          = {nil, materials["MFCD_IND_DARK"]}
 textures["mfcd_mesh_w"]          = {nil, materials["MFCD_IND_WHITE"]}
 textures["mfcd_mesh_wy"]         = {nil, materials["MFCD_IND_WHITE_Y"]} -- 略带淡黄色
@@ -694,6 +698,7 @@ fonts["mfcd_font_w"]    = {fontdescription["font_MFCD"], 10, materials["MFCD_IND
 fonts["mfcd_font_wy"]   = {fontdescription["font_MFCD"], 10, materials["MFCD_IND_WHITE_Y"]}
 fonts["mfcd_font_d"]    = {fontdescription["font_MFCD"], 10, materials["MFCD_IND_DARK"]}
 fonts["mfcd_font_r"]    = {fontdescription["font_MFCD"], 10, materials["MFCD_IND_RED"]}
+fonts["mfcd_font_bk"]   = {fontdescription["font_MFCD"], 10, materials["MFCD_IND_BLACK"]}
 
 fonts["mfcd_wpn_font_def"]  = {fontdescription["font_MFCD_wpn"], 10, materials["MFCD_IND_DEF"]}
 fonts["mfcd_wpn_font_g"]    = {fontdescription["font_MFCD_wpn"], 10, materials["MFCD_IND_GREEN"]}

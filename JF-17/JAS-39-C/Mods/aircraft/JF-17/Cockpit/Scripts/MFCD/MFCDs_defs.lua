@@ -45,10 +45,10 @@ PAGE_LEVEL_DOWN_AG_PARAM    = PAGE_LEVEL_DOWN_OFF
 
 IndTexture_Path    = IND_TEX_PATH
 
-MFCD_COLOR_DEF     = materials["MFCD_IND_WHITE"] --{255,255,255,255}
+MFCD_COLOR_DEF     = materials["MFCD_IND_DEF"] --{128,255,0,255}
 MFCD_COLOR_RED     = materials["MFCD_IND_RED"]
-MFCD_COLOR_GREEN   = materials["MFCD_IND_WHITE"]
-MFCD_COLOR_DGREEN  = materials["MFCD_IND_WHITE"] -- {255,255,255,255}
+MFCD_COLOR_GREEN   = materials["MFCD_IND_GREEN"]
+MFCD_COLOR_DGREEN  = materials["MFCD_IND_DGREEN"] -- {3,67,40,15}
 MFCD_COLOR_BLUE    = materials["MFCD_IND_BLUE"]
 MFCD_COLOR_BLUE_L  = materials["MFCD_IND_BLUE_L"]
 MFCD_COLOR_BLACK   = materials["MFCD_IND_BLACK"]
@@ -62,16 +62,17 @@ MFCD_COLOR_GRND    = materials["MFCD_IND_GRND"]
 MFCD_COLOR_BOXBASE = materials["MFCD_IND_BOXBASE"]
 MFCD_COLOR_W_BASE  = materials["MFCD_IND_W_BASE"]
 
-MFCD_LINE_DEF      = "mfcd_line_dashed_w"
+MFCD_LINE_DEF      = "mfcd_line_dashed_def"
 MFCD_LINE_RED      = "mfcd_line_dashed_r"
 MFCD_LINE_WHITE    = "mfcd_line_dashed_w"
 MFCD_LINE_YELLOW   = "mfcd_line_dashed_y"
 
-MFCD_MATERIAL_DEF     = "mfcd_mesh_w"
+MFCD_MATERIAL_DEF     = "mfcd_mesh_def"
 MFCD_MATERIAL_RED     = "mfcd_mesh_r"
-MFCD_MATERIAL_GREEN   = "mfcd_mesh_w"
+MFCD_MATERIAL_GREEN   = "mfcd_mesh_g"
 MFCD_MATERIAL_BLUE    = "mfcd_mesh_b"
-MFCD_MATERIAL_BLACK   = "mfcd_mesh_d"
+MFCD_MATERIAL_BLUE_L  = "mfcd_mesh_bl"
+MFCD_MATERIAL_BLACK   = "mfcd_mesh_bk"
 MFCD_MATERIAL_DARK    = "mfcd_mesh_d"
 MFCD_MATERIAL_WHITE   = "mfcd_mesh_w"
 MFCD_MATERIAL_WHITE_Y = "mfcd_mesh_wy"
@@ -83,20 +84,20 @@ MFCD_MATERIAL_BOXBASE = "mfcd_mesh_boxbase"
 MFCD_MATERIAL_W_BASE  = "mfcd_mesh_whitebase"
 
 
-MFCD_FONT_DEF    = "mfcd_font_w"
+MFCD_FONT_DEF    = "mfcd_font_def"
 MFCD_FONT_R      = "mfcd_font_r"
-MFCD_FONT_G      = "mfcd_font_w"
-MFCD_FONT_DG     = "mfcd_font_w"
+MFCD_FONT_G      = "mfcd_font_g"
+MFCD_FONT_DG     = "mfcd_font_dg"
 MFCD_FONT_B      = "mfcd_font_b"
 MFCD_FONT_W      = "mfcd_font_w"
 MFCD_FONT_WY     = "mfcd_font_wy"
 MFCD_FONT_D      = "mfcd_font_d"
 
 
-MFCD_WPN_FONT_DEF    = "mfcd_wpn_font_w"
+MFCD_WPN_FONT_DEF    = "mfcd_wpn_font_def"
 MFCD_WPN_FONT_R      = "mfcd_wpn_font_r"
-MFCD_WPN_FONT_G      = "mfcd_wpn_font_w"
-MFCD_WPN_FONT_DG     = "mfcd_wpn_font_w"
+MFCD_WPN_FONT_G      = "mfcd_wpn_font_g"
+MFCD_WPN_FONT_DG     = "mfcd_wpn_font_dg"
 MFCD_WPN_FONT_B      = "mfcd_wpn_font_b"
 MFCD_WPN_FONT_W      = "mfcd_wpn_font_w"
 MFCD_WPN_FONT_WY     = "mfcd_wpn_font_wy"
@@ -461,7 +462,7 @@ end
 function create_page_root()
     local page_root = CreateElement "ceSimple"
     page_root.name            = create_guid_string()
-    page_root.material        = MFCD_MATERIAL_WHITE
+    page_root.material        = MFCD_MATERIAL_DEF
     page_root.init_pos        = {0, 0, 0}
     page_root.init_rot        = {0, 0, 0}
     page_root.level           = MFCD_DEFAULT_LEVEL
