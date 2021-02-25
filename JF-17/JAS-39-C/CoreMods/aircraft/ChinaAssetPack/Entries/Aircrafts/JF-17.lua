@@ -11,6 +11,7 @@ local function add_aircraft_prop()
 end
 
 
+
 local mech_anime = make_default_mech_animation()
 mech_anime["ServiceHatches"] = {
     {Transition = {"Close", "Open"}, Sequence = {{C = {{"PosType", 3}, {"Sleep", "for", 30.0}}}, {C = {{"Arg", 24, "set", 1.0}}}}},
