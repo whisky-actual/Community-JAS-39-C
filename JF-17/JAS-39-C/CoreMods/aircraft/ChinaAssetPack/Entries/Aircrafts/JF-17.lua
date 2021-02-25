@@ -312,8 +312,8 @@ JF_17 = {
             },
         },
     -------------------------
-    M_empty                    = 6586.0,    -- JF-17 with pilot and nose load, kg
-    M_nominal                  = 8936.0,    -- JF-17 kg (Empty Plus Full Internal Fuel)
+    M_empty                    = 6800.0,    -- JF-17 with pilot and nose load, kg
+    M_nominal                  = 9125.0,    -- JF-17 kg (Empty Plus Full Internal Fuel)
     M_max                      = 14000.0,   -- JF-17 kg (Maximum Take Off Weight)
     M_fuel_max                 = 2325.0,    -- JF-17 kg (Internal Fuel Only)
     H_max                      = 16920,     -- JF-17 m  (Maximum Operational Ceiling)
@@ -366,13 +366,13 @@ JF_17 = {
     wing_type                 = 0,        -- Fixed wing
     flaps_maneuver            = 1.0,        -- Max flaps in take-off and maneuver (0.5 = 1st stage, 1.0 = 2nd stage) (for AI)
 
-    thrust_sum_max            = 11500,        -- JF-17 51.2 kN
-    thrust_sum_ab             = 19000,    -- JF-17 84.6 kN
+    thrust_sum_max            = 12433,        -- JF-17 51.2 kN
+    thrust_sum_ab             = 19569,    -- JF-17 84.6 kN
 
     length                    = 14.1,    -- JF-17 full lenght in m
     height                    = 4.5,        -- JF-17 height in m
     range                     = 1550,        -- Max range in km (for AI)
-    RCS                       = 0.5,        -- Radar Cross Section m2
+    RCS                       = 1.0,        -- Radar Cross Section m2
     IR_emission_coeff         = 0.6,        -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
     IR_emission_coeff_ab      = 1.33,        -- With afterburner
     --sound_name = "aircraft\JF-17\Sounds",
@@ -382,7 +382,7 @@ JF_17 = {
         [1] = {
             pos =   {-6.231,    0.268,  0},-- Tribwerke   -5.231,   -0.468, 0
                 elevation   =   0,-- AFB cone elevation  winkel nach oben unten
-                diameter    =   1.0,-- AFB cone diameter   Kreis Ø
+                diameter    =   1.130,-- AFB cone diameter   Kreis Ø --1.0 experimental
                 exhaust_length_ab   =   9.0,--lenght in m  Kreis Ø kegel efekt
                 exhaust_length_ab_K =   0.707,--animation geschwindigkeit
                 smokiness_level     =   0.01, --0.05
@@ -530,7 +530,7 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 },
+               -- { CLSID = "DIS_SD-10", arg_value = 0.2 },
                 -- Smoke Generator pods
                 { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
@@ -636,6 +636,7 @@ JF_17 = {
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
+		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
 
                -- { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
                -- { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
@@ -683,6 +684,8 @@ JF_17 = {
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
                 { CLSID = "DIS_SD-10", arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
+				
+		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
 
              --   { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
               --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
@@ -740,6 +743,7 @@ JF_17 = {
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
+		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
 
                -- { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
                -- { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
@@ -804,6 +808,7 @@ JF_17 = {
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
+				
 
                 -- dual bomb
                 { CLSID = "{BRU33_2X_MK-82}", arg_value = 0.5 }, -- Mk-82 * 2 -- 暂无双联挂架
@@ -833,7 +838,7 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 },
+               -- { CLSID = "DIS_SD-10", arg_value = 0.2 },
                 -- Smoke Generator pods
                 { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
