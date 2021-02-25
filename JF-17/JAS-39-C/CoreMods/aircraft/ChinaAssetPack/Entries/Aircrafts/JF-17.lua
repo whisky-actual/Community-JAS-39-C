@@ -372,7 +372,7 @@ JF_17 = {
     length                    = 14.1,    -- JF-17 full lenght in m
     height                    = 4.5,        -- JF-17 height in m
     range                     = 1550,        -- Max range in km (for AI)
-    RCS                       = 1.0,        -- Radar Cross Section m2
+    RCS                       = 1.0,        -- Radar Cross Section m2 -- saab states RCS of 0.5 to 1.5, this isnt balanced in dcs but its the "official" number
     IR_emission_coeff         = 0.6,        -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
     IR_emission_coeff_ab      = 1.33,        -- With afterburner
     --sound_name = "aircraft\JF-17\Sounds",
@@ -550,10 +550,10 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
                 { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
 
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
                 { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },
                 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
@@ -616,9 +616,9 @@ JF_17 = {
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
                 { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
@@ -723,9 +723,9 @@ JF_17 = {
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
                 { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
@@ -779,10 +779,10 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
 
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
                 { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
