@@ -312,9 +312,9 @@ JF_17 = {
             },
         },
     -------------------------
-    M_empty                    = 6586.0,    -- JF-17 with pilot and nose load, kg
-    M_nominal                  = 8936.0,    -- JF-17 kg (Empty Plus Full Internal Fuel)
-    M_max                      = 14000.0,   -- JF-17 kg (Maximum Take Off Weight)
+    M_empty                    = 6800.0,    -- Jas 39c with pilot and nose load, kg
+    M_nominal                  = 9125.0,    -- Jas 39c kg (Empty Plus Full Internal Fuel)
+    M_max                      = 14000.0,   -- Jas 39c kg (Maximum Take Off Weight)
     M_fuel_max                 = 2325.0,    -- JF-17 kg (Internal Fuel Only)
     H_max                      = 16920,     -- JF-17 m  (Maximum Operational Ceiling)
     average_fuel_consumption   = 0.021,     --
@@ -366,8 +366,8 @@ JF_17 = {
     wing_type                 = 0,        -- Fixed wing
     flaps_maneuver            = 1.0,        -- Max flaps in take-off and maneuver (0.5 = 1st stage, 1.0 = 2nd stage) (for AI)
 
-    thrust_sum_max            = 11500,        -- JF-17 51.2 kN
-    thrust_sum_ab             = 19000,    -- JF-17 84.6 kN
+    thrust_sum_max            = 12140,        -- Jas 39c 54.0 kN
+    thrust_sum_ab             = 18210,    -- Jas 81.0 kN
 
     length                    = 14.1,    -- JF-17 full lenght in m
     height                    = 4.5,        -- JF-17 height in m
