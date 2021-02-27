@@ -1,1 +1,0 @@
-return _('VSN_JAS39Gripen')
