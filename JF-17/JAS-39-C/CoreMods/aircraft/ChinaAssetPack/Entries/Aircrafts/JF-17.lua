@@ -554,7 +554,7 @@ JF_17 = {
                 { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
 
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-                { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },
+               -- { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },
                 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
@@ -619,7 +619,7 @@ JF_17 = {
                 { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-                { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
+              --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
 
@@ -726,7 +726,7 @@ JF_17 = {
                 { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-                { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
+              --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
 
@@ -783,7 +783,7 @@ JF_17 = {
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
 
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-                { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
+               -- { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
