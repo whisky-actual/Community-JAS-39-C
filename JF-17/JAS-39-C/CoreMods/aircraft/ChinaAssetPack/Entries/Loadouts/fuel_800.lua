@@ -1,5 +1,5 @@
 
-local ft800_name = '1100L Gripen Tank'
+local ft800_name = 'External drop tank 1100 litre'
 local pylon_mass = 0.0
 
 declare_loadout(
@@ -11,9 +11,9 @@ declare_loadout(
         attribute   = {wsType_Air, wsType_Free_Fall, wsType_FuelTank, WSTYPE_PLACEHOLDER},
         CLSID       = "DIS_TANK800",
         
-        Weight_Empty = 45 + pylon_mass,
-        Weight = 1030 + pylon_mass,
-        Capacity = 1030 - 45,
+        Weight_Empty = 95 + pylon_mass,
+        Weight = 95 + 924 + pylon_mass,
+    --  Capacity = 1030 - 45,
         Cx_pil = 0.0014, --0.002197266,
         shape_table_data =
         {
