@@ -312,11 +312,11 @@ JF_17 = {
             },
         },
     -------------------------
-    M_empty                    = 6800.0,    -- Jas 39c with pilot and nose load, kg
-    M_nominal                  = 9125.0,    -- Jas 39c kg (Empty Plus Full Internal Fuel)
+    M_empty                    = 6880.0,    -- Jas 39c with pilot and nose load, kg
+    M_nominal                  = 9400.0,    -- Jas 39c kg (Empty Plus Full Internal Fuel)
     M_max                      = 14000.0,   -- Jas 39c kg (Maximum Take Off Weight)
-    M_fuel_max                 = 2325.0,    -- JF-17 kg (Internal Fuel Only)
-    H_max                      = 16920,     -- JF-17 m  (Maximum Operational Ceiling)
+    M_fuel_max                 = 2520.0,    -- JF-17 kg (Internal Fuel Only)
+    H_max                      = 16000,     -- JF-17 m  (Maximum Operational Ceiling)
     average_fuel_consumption   = 0.021,     --
     CAS_min                    = 58,        --
     V_opt                      = 220,       --
@@ -362,7 +362,7 @@ JF_17 = {
 
     wing_tip_pos              = {-3.404,    -0.164, 4.05}, -- wingtip coords for visual effects
     wing_area                 = 30,        -- JF-17 wing area in m2
-    wing_span                 = 8.6,        -- JF-17 wing spain in m,
+    wing_span                 = 8.4,        -- JF-17 wing spain in m,
     wing_type                 = 0,        -- Fixed wing
     flaps_maneuver            = 1.0,        -- Max flaps in take-off and maneuver (0.5 = 1st stage, 1.0 = 2nd stage) (for AI)
 
@@ -371,7 +371,7 @@ JF_17 = {
 
     length                    = 14.1,    -- JF-17 full lenght in m
     height                    = 4.5,        -- JF-17 height in m
-    range                     = 1550,        -- Max range in km (for AI)
+    range                     = 3000,        -- Max range in km (for AI)
     RCS                       = 1.0,        -- Radar Cross Section m2 -- saab states RCS of 0.5 to 1.5, this isnt balanced in dcs but its the "official" number
     IR_emission_coeff         = 0.6,        -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
     IR_emission_coeff_ab      = 1.33,        -- With afterburner
