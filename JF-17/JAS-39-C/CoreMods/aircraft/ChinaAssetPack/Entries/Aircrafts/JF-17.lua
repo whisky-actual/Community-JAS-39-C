@@ -476,9 +476,9 @@ JF_17 = {
 
     passivCounterm = {
         CMDS_Edit         = true,
-        SingleChargeTotal = 88,
-        chaff = { default = 44, increment = 4, chargeSz = 1 },
-        flare = { default = 44, increment = 4, chargeSz = 1 },
+        SingleChargeTotal = 160,
+        chaff = { default = 80, increment = 4, chargeSz = 1 },
+        flare = { default = 80, increment = 4, chargeSz = 1 },
     },
 
     chaff_flare_dispenser = {
