@@ -35,14 +35,23 @@ mech_anime["CrewLadder"] = {
 
 local wheel_touch_comp = 0.02
 
-local WOLALIGHT_STROBES          = 1 -- must be collection
-local WOLALIGHT_SPOTS            = 2 -- must be collection
-local WOLALIGHT_NAVLIGHTS        = 3 -- must be collection
-local WOLALIGHT_FORMATION_LIGHTS = 4 -- must be collection
-local WOLALIGHT_TIPS_LIGHTS      = 5 -- must be collection
-local WOLALIGHT_CUSTOM_NAV       = 6 -- must be collection
-local WOLALIGHT_CUSTOM_FORM      = 7 -- must be collection
-local WOLALIGHT_CUSTOM_ANTI      = 8 -- must be collection
+-- WOLALIGHT_STROBES          = 1
+-- WOLALIGHT_SPOTS            = 2
+-- WOLALIGHT_LANDING_LIGHTS   = 2
+-- WOLALIGHT_NAVLIGHTS        = 3
+-- WOLALIGHT_FORMATION_LIGHTS = 4
+-- WOLALIGHT_TIPS_LIGHTS      = 5
+-- WOLALIGHT_TAXI_LIGHTS      = 6
+-- WOLALIGHT_BEACONS          = 7
+-- WOLALIGHT_CABIN_BOARDING   = 8
+-- WOLALIGHT_CABIN_NIGHT      = 9
+-- WOLALIGHT_REFUEL_LIGHTS    = 10
+-- WOLALIGHT_PROJECTORS       = 11
+-- WOLALIGHT_AUX_LIGHTS       = 12
+-- WOLALIGHT_IR_FORMATION     = 13
+
+local WOLALIGHT_CUSTOM_NAV    = WOLALIGHT_IR_FORMATION + 1
+local WOLALIGHT_CUSTOM_ANTI   = WOLALIGHT_CUSTOM_NAV + 1
 
 --- DECLARE SHELLS FOR BK 27
 declare_weapon({category = CAT_SHELLS, name = "BK_27_HE", user_name = _("27/85 SGR06 27 mm HE"),	
@@ -315,7 +324,7 @@ JF_17 = {
     M_empty                    = 6880.0,    -- Jas 39c with pilot and nose load, kg
     M_nominal                  = 9400.0,    -- Jas 39c kg (Empty Plus Full Internal Fuel)
     M_max                      = 14000.0,   -- Jas 39c kg (Maximum Take Off Weight)
-    M_fuel_max                 = 2520.0,    -- JF-17 kg (Internal Fuel Only)
+    M_fuel_max                 = 2327.5,    -- JF-17 kg (Internal Fuel Only) -- Higher value makes refueling not finish
     H_max                      = 16000,     -- JF-17 m  (Maximum Operational Ceiling)
     average_fuel_consumption   = 0.021,     --
     CAS_min                    = 58,        --
@@ -339,13 +348,13 @@ JF_17 = {
     -----------------------------------------------------------------------
     tand_gear_max                            = 3.73, --2.1445, -- tangent on maximum yaw angle of front wheel, 65 degrees tan(64deg)
 
-    nose_gear_pos 				                = {4.562,	-2.030,	0},   -- nosegear coord 
+    nose_gear_pos 				                = {4.562,	-1.830,	0},   -- nosegear coord 
     nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
     nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
     nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
-    nose_gear_wheel_diameter 	                =  0.544, -- in m
+    nose_gear_wheel_diameter 	                =  0.444, -- in m
 
-    main_gear_pos 						 	    = {-0.800,	-1.990,	1.25}, -- main gear coords 
+    main_gear_pos 						 	    = {-0.800,	-1.870,	1.25}, -- main gear coords 
     main_gear_amortizer_direct_stroke	 	    =   0,     --  down from main_gear_pos !!!
     main_gear_amortizer_reversal_stroke  	    =   -0.228, --  up 
     main_gear_amortizer_normal_weight_stroke    =   -0.114,-- down from main_gear_pos
@@ -2096,64 +2105,132 @@ JF_17 = {
     lights_data = {
         typename = 'collection',
         lights = {
-            -- STROBES
-            [WOLALIGHT_STROBES] = { 
-                    typename = "collection",
-                    lights = {  
-                        --{typename  = "natostrobelight",   argument_1  = 199, period = 1.2, color = {0.8,0,0}, connector = "RESERV_BANO_1"},--R
-                        --{typename  = "natostrobelight",   argument_1  = 199, period = 1.2, color = {0.8,0,0}, connector = "RESERV1_BANO_1"},--L
-                        --{typename  = "natostrobelight",   argument_1  = 199, period = 1.2, color = {0.8,0,0}, connector = "RESERV2_BANO_1"},--H
-                        --{typename  = "natostrobelight",   argument_1  = 195, period = 1.2, color = {0.8,0,0}, connector = "WHITE_BEACON L"},--195
-                        --{typename  = "natostrobelight",   argument_1  = 196, period = 1.2, color = {0.8,0,0}, connector = "WHITE_BEACON R"},--196
-                        --{typename  = "natostrobelight",   argument_1  = 192, period = 1.2, color = {0.8,0,0}, connector = "BANO_0_BACK"},
-                        --{typename  = "natostrobelight",   argument_1  = 195, period = 1.2, color = {0.8,0,0}, connector = "RED_BEACON L"},
-                        --{typename  = "natostrobelight",   argument_1  = 196, period = 1.2, color = {0.8,0,0}, connector = "RED_BEACON R"},
-                        --{typename = "argnatostrobelight", argument = 195, period = 1.2, phase_shift = 0},-- beacon lights
-                        --{typename = "argnatostrobelight", argument = 196, period = 1.2, phase_shift = 0},-- beacon lights
-                        {typename = "natostrobelight", argument = 193, period = 1.2, phase_shift = 0, color = {0.9, 1, 0.7}, connector = "BANO_0_BACK",intensity_max = 35},
-                    }
+            [WOLALIGHT_STROBES] = {
+                typename = 'collection',
+                lights   = {
+                }
             },
-            -- SPOTS
-            [WOLALIGHT_LANDING_LIGHTS] = { 
-                    typename = "collection",
-                    lights = {
-                        { typename  = "argumentlight",  argument  = 208, },
-                    },
+            [WOLALIGHT_SPOTS] = {
+				typename = "Collection",
+				lights = {
+					[1] = {
+						typename = "Collection",
+						lights = {
+							{
+								typename = "Spot", position = {8.02,  -1.291,  0.0}, direction = {azimuth = math.rad(-10.0), elevation = math.rad(8.0)}, argument = 209,
+								proto = lamp_prototypes.LFS_P_27_600,
+							},
+							{
+								typename = "Spot", position = {4.409, -0.508, 1.264}, direction = {elevation = math.rad(8.0)},
+								proto = lamp_prototypes.LFS_P_27_600,
+							},
+							{
+								typename = "Spot", position = {4.409, -0.508, -1.264}, direction = {elevation = math.rad(8.0)},
+								proto = lamp_prototypes.LFS_P_27_600,
+							},
+							{
+								typename = "Omni", position = {8.02 + 0.25,  -1.291,  0.0}, direction = {azimuth = math.rad(-10.0), elevation = math.rad(8.0)}, argument = 209,
+								proto = lamp_prototypes.LFS_P_27_600, range = 4.0,
+							},
+							{
+								typename = "Omni", position = {4.409 + 0.25, -0.508, 1.264}, direction = {elevation = math.rad(8.0)},
+								proto = lamp_prototypes.LFS_P_27_600, range = 4.0,
+							},
+							{
+								typename = "Omni", position = {4.409 + 0.25, -0.508, -1.264}, direction = {elevation = math.rad(8.0)},
+								proto = lamp_prototypes.LFS_P_27_600, range = 4.0,
+							},						
+						},
+					},
+			}
+			},
+            [WOLALIGHT_NAVLIGHTS] = {
+
             },
-            [WOLALIGHT_TAXI_LIGHTS] = { 
-                    typename = "collection",
-                    lights = {
-                        { typename  = "argumentlight",  argument  = 209, },
+            [WOLALIGHT_FORMATION_LIGHTS] = {
+                typename = 'collection',
+                lights   = {
+                    { -- left wing
+                        typename  = 'argumentlight', -- 'argumentlight',
+                        argument  = 200,
                     },
+                    { -- right wing
+                        typename  = 'argumentlight', -- 'argumentlight',
+                        argument  = 201,
+                    },
+                },
             },
-            -- NAVLIGHTS
-            [WOLALIGHT_NAVLIGHTS]   = { 
-                    typename = "collection", -- nav_lights_default
-                    lights = {
-                        {typename = "argumentlight",argument = 190}, -- Left Position(red)
-                        {typename = "argumentlight",argument = 191}, -- Right Position(green)
-                        {typename = "argumentlight",argument = 192}, -- Tail Position white)
-                    },
+            [WOLALIGHT_TIPS_LIGHTS] = {
+
             },
-            -- FORMATION
-            [WOLALIGHT_FORMATION_LIGHTS] = { 
-                    typename = "collection",
-                    lights = {
-                        {typename  = "argumentlight" ,argument  = 200,},--formation_lights_tail_1 = 200;
-                        {typename  = "argumentlight" ,argument  = 201,},
-                        --{typename  = "argumentlight" ,argument  =  88,},--old aircraft arg 
+			[WOLALIGHT_TAXI_LIGHTS] = {
+				typename = "Collection",
+				lights = {
+					[1] = {
+						typename = "Collection",
+						lights = {
+							{
+								typename = "Spot", position = {8.02,  -1.291,  0.0}, direction = {azimuth = math.rad(-10.0), elevation = math.rad(12.0)}, argument = 209,
+								proto = lamp_prototypes.LFS_R_27_180,
+							},
+							{
+								typename = "Spot", position = {4.409, -0.508, 1.264}, direction = {elevation = math.rad(12.0)},
+								proto = lamp_prototypes.LFS_R_27_180,
+							},
+							{
+								typename = "Spot", position = {4.409, -0.508, -1.264}, direction = {elevation = math.rad(12.0)},
+								proto = lamp_prototypes.LFS_R_27_180,
+							},
+							{
+								typename = "Omni", position = {8.02 + 0.25,  -1.291,  0.0}, direction = {azimuth = math.rad(-10.0), elevation = math.rad(12.0)}, argument = 209,
+                            proto = lamp_prototypes.LFS_R_27_180, intensity_max = 8.0,
+							},
+							{
+								typename = "Omni", position = {4.409 + 0.25, -0.508, 1.264}, direction = {elevation = math.rad(12.0)},
+								proto = lamp_prototypes.LFS_R_27_180, intensity_max = 8.0,
+							},
+							{
+								typename = "Omni", position = {4.409 + 0.25, -0.508, -1.264}, direction = {elevation = math.rad(12.0)},
+								proto = lamp_prototypes.LFS_R_27_180, intensity_max = 8.0,
+							},							
+						},
+					},
+				}
+			},
+            -- customized
+            [WOLALIGHT_CUSTOM_NAV] = {
+                typename = 'collection',
+                lights   = {
+                    { -- tail
+                        typename  = 'argumentlight',
+                        argument  = 192,
                     },
+                    { -- left inlet
+                        typename  = 'argumentlight',
+                        argument  = 190,
                     },
-            [WOLALIGHT_REFUEL_LIGHTS]   = {},-- REFUEL
-            [WOLALIGHT_BEACONS] = {},-- STROBE / ANTI-COLLISION
-            [WOLALIGHT_CABIN_NIGHT] = {},--
+                    { -- right inlet
+                        typename  = 'argumentlight',
+                        argument  = 191,
+                    },
+                },
+            },
+            [WOLALIGHT_CUSTOM_ANTI] = {
+                typename = 'collection',
+                lights   = {
+                    {
+                        typename = 'argumentlight',
+                        argument = 83,
+                    },
+                }
+            },
         }, -- end of lights_data.lights
     }, -- end lights_data
 }
 
 add_aircraft(JF_17)
 
-local function jas39_1100_ptb(clsid, center)
+local function jas39_1100_ptb(clsid, center) -- Is this used?
     local data = {
         category    = CAT_FUEL_TANKS,
         CLSID       = clsid,
