@@ -8,17 +8,7 @@ The project just started, who knows what we will achieve!
 Join us on Discord: https://discord.gg/5zDYvz7s6D
 
 ## Contributing Developers
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-
- https://discord.gg/5zDYvz7s6D
- 
- Hello all.
-=======
-=======
-
->>>>>>> 088d13f96b53cd103cee29c71e37df4dfd75d923
 Breadmaker91, Currenthill, Double Tap, FatSpacePanda, Luiz Renaultr, Neon, Ulvar40, Vinedog, Cdpkobra, Jerec, Whisky.Actual
 
 ## Special Thanks
@@ -59,7 +49,3 @@ TBD
 **Q: Is it really free?**
 
 - Yes, it’s really free!
-<<<<<<< HEAD
->>>>>>> 088d13f96b53cd103cee29c71e37df4dfd75d923
-=======
->>>>>>> 088d13f96b53cd103cee29c71e37df4dfd75d923
