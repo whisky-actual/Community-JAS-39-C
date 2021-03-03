@@ -559,8 +559,9 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
-                { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
+               -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
+				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.25, 0.0}, arg_value = 0.2 },
+				{ CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
 
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
                -- { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },
@@ -606,7 +607,7 @@ JF_17 = {
                 { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },
 
-                { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
+             --   { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
 
             }
         ),pylon(3, 0, 0, 0, 0,
@@ -625,8 +626,9 @@ JF_17 = {
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
-                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
+              -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.25, 0.0}, arg_value = 0.2 },
+                { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
               --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
@@ -668,7 +670,7 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
 
-                { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
+            --    { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
 
             }
         ),
@@ -713,7 +715,7 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
 
-                { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
+             --  { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
             }
         ),
         pylon(5, 0, 0, 0, 0,
@@ -732,7 +734,8 @@ JF_17 = {
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
+              -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.25, 0.0}, arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
               --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
@@ -773,7 +776,7 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
 
-                { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
+              --  { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
 
 
             }
@@ -788,7 +791,8 @@ JF_17 = {
             },
             {
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-                { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, 
+               -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+				{ CLSID = "DIS_SD-10",attach_point_position = {0.0, -0.25, 0.0}, arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
 
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
@@ -836,7 +840,7 @@ JF_17 = {
                 { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },
 
-                { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
+             --   { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
             }
         ),
         pylon(7, 0, 0, 0, 0,
