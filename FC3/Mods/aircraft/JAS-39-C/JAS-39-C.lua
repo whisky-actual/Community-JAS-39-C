@@ -166,12 +166,12 @@ VSN_JAS39Gripen =  {
 	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", "Datalink", "Link16"},
 	Categories= {"{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor",},
 	
-		M_empty						=	13380,	-- kg  with pilot and nose load, F15
-		M_nominal					=	19000,	-- kg (Empty Plus Full Internal Fuel)
-		M_max						=	30845,	-- kg (Maximum Take Off Weight)
-		M_fuel_max					=	6103,	-- kg (Internal Fuel Only)
-		H_max						=	18300,	-- m  (Maximum Operational Ceiling)
-		average_fuel_consumption	=	0.271,
+		M_empty						=	6880.0,	-- kg  with pilot and nose load, F15
+		M_nominal					=	9400.0,	-- kg (Empty Plus Full Internal Fuel)
+		M_max						=	14000.0,	-- kg (Maximum Take Off Weight)
+		M_fuel_max					=	2550,	-- kg (Internal Fuel Only)
+		H_max						=	16000,	-- m  (Maximum Operational Ceiling)
+		average_fuel_consumption	=	0.21,
 		CAS_min						=	58,		-- Minimum CAS speed (m/s) (for AI)
 		V_opt						=	220,	-- Cruise speed (m/s) (for AI)
 		V_take_off					=	61,		-- Take off speed in m/s (for AI)
@@ -199,24 +199,24 @@ VSN_JAS39Gripen =  {
 		Ny_max						=	8,		-- Max G (for AI)
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
-		wing_area					=	56.5,	-- wing area in m2
-		thrust_sum_max				=	13347,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	21952,	-- thrust in kgf (95.1 kN)
+		wing_area					=	30,	-- wing area in m2
+		thrust_sum_max				=	12140,	-- thrust in kgf (64.3 kN)
+		thrust_sum_ab				=	18210,	-- thrust in kgf (95.1 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
-		Mach_max					=	2.5,	-- Max speed in Mach (for AI)
+		Mach_max					=	2,	-- Max speed in Mach (for AI)
 		range						=	2540,	-- Max range in km (for AI)
-		RCS							=	5,		-- Radar Cross Section m2
+		RCS							=	1.0,		-- Radar Cross Section m2
 		Ny_max_e					=	8,		-- Max G (for AI)
 		detection_range_max			=	250,
-		IR_emission_coeff			=	0.91,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
-		IR_emission_coeff_ab		=	4,		-- With afterburner
+		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
+		IR_emission_coeff_ab		=	1.33,		-- With afterburner
 		tand_gear_max				=	3.73,--XX  1.732 FA18 3.73, 
 		tanker_type					=	2,--F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
-		wing_span					=	8.70,	--XX  wing spain in m
+		wing_span					=	8.40,	--XX  wing spain in m
 		wing_type 					= 	0,		-- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
-		length						=	19.43,
-		height						=	5.63,
+		length						=	14.1,
+		height						=	4.5,
 		crew_size					=	1, --XX
 		engines_count				=	1, --XX
 		wing_tip_pos 				= 	{-3.404,	-0.164,	4.05},
@@ -241,8 +241,8 @@ VSN_JAS39Gripen =  {
 			{
 				pos = 	{-6.231,	0.268,	0},-- Tribwerke   -5.231,	-0.468,	0
 				elevation	=	0,-- AFB cone elevation  winkel nach oben unten
-				diameter	=	1.0,-- AFB cone diameter   Kreis Ø
-				exhaust_length_ab	=	9.0,--lenght in m  Kreis Ø kegel efekt
+				diameter	=	1.0,-- AFB cone diameter   Kreis Ã˜
+				exhaust_length_ab	=	9.0,--lenght in m  Kreis Ã˜ kegel efekt
 				exhaust_length_ab_K	=	0.707,--animation geschwindigkeit
 				smokiness_level     = 	0.01, --0.05
 			}, -- end of [1]
