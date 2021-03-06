@@ -317,13 +317,13 @@ declare_loadout({
 			[2]	=
 			{	
 				Rotation	=	{80, 0, 0.5},
-				Position	=	{0.1, -0.075, -0.31},
+				Position	=	{0.1, -0.065, -0.20},
 				ShapeName	=	"pl12",
 					},
 			[3]	=
 			{
 				Rotation	=	{-80, 0, -0.5},
-				Position	=	{0.1, -0.075, 0.31},
+				Position	=	{0.1, -0.065, 0.20},
 				ShapeName	=	"pl12",					
 					},				
 	},
@@ -352,13 +352,13 @@ declare_loadout({
 			[2]	=
 			{	
 				Rotation	=	{80, 0, 0.5},
-				Position	=	{0.1, -0.075, -0.31},
+				Position	=	{0.1, -0.065, -0.20},
 				ShapeName	=	"pl12",
 					},
 			[3]	=
 			{
 				Rotation	=	{-80, 0, -0.5},
-				Position	=	{0.1, -0.075, 0.31},
+				Position	=	{0.1, -0.065, 0.20},
 				ShapeName	=	"pl12",
 					},
 	},
