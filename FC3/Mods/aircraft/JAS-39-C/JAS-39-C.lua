@@ -180,13 +180,13 @@ VSN_JAS39Gripen =  {
 		has_speedbrake				=	true,
 		radar_can_see_ground		=	true,
 
-		nose_gear_pos 				                = {4.488,	-2.140,	0},   -- nosegear coord 
+		nose_gear_pos 				                = {4.760,    -1.910,    0}   -- nosegear coord 
 	    nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
 	    nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
 	    nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
 	    nose_gear_wheel_diameter 	                =  0.544, -- in m
 	
-	    main_gear_pos 						 	    = {-0.800,	-2.020,	1.25}, -- main gear coords 
+	    main_gear_pos 						 	    = {-0.528,    -1.770,    1.259}, -- main gear coords 
 	    main_gear_amortizer_direct_stroke	 	    =   0,     --  down from main_gear_pos !!!
 	    main_gear_amortizer_reversal_stroke  	    =   -0.228, --  up 
 	    main_gear_amortizer_normal_weight_stroke    =   -0.114,-- down from main_gear_pos
@@ -258,7 +258,7 @@ VSN_JAS39Gripen =  {
 		}, -- end of crew_members
 		brakeshute_name	=	0,
 		is_tanker	=	false,
-		air_refuel_receptacle_pos = 	{-0.051,	0.911,	0},
+		air_refuel_receptacle_pos = 	{4.37,    0.9510, -0.89},
 		fires_pos = 
 		{
 			[1] = 	{-0.707,	0.553,	-0.213},
