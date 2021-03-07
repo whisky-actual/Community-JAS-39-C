@@ -561,7 +561,7 @@ JF_17 = {
             },
             {
 				-- Air to air missiles
-                { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
+                { CLSID = "DIS_PL-5EII",attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, 
             --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
 			--	{ CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
@@ -735,10 +735,7 @@ JF_17 = {
              -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
 				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },		
-
-
-                
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },					              
 				
 				-- Drop tanks
                 { CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 3,loadout = {"DIS_TANK800"}}} },
@@ -784,7 +781,7 @@ JF_17 = {
             },
             {
                 -- Air to air missiles
-				{ CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
+				{ CLSID = "DIS_PL-5EII",attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 },
             --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
 				{ CLSID = "DIS_SD-10",attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
