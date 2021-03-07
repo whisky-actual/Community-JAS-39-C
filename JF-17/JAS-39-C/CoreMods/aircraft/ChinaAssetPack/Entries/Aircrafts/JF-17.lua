@@ -348,13 +348,13 @@ JF_17 = {
     -----------------------------------------------------------------------
     tand_gear_max                            = 3.73, --2.1445, -- tangent on maximum yaw angle of front wheel, 65 degrees tan(64deg)
 
-    nose_gear_pos 				                = {4.562,	-1.830,	0},   -- nosegear coord 
+    nose_gear_pos 				                = {4.760,    -1.910,    0},   -- nosegear coord, jas 39 model
     nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
     nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
     nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
     nose_gear_wheel_diameter 	                =  0.444, -- in m
 
-    main_gear_pos 						 	    = {-0.800,	-1.870,	1.25}, -- main gear coords 
+    main_gear_pos 						 	    = {-0.528,    -1.770,    1.259}, -- main gear coords 
     main_gear_amortizer_direct_stroke	 	    =   0,     --  down from main_gear_pos !!!
     main_gear_amortizer_reversal_stroke  	    =   -0.228, --  up 
     main_gear_amortizer_normal_weight_stroke    =   -0.114,-- down from main_gear_pos
@@ -367,7 +367,8 @@ JF_17 = {
     
     tanker_type               = 2,        -- Tanker type if the plane is airrefuel capable (same type as F-14, aka drogue basket)
     is_tanker                 = false,    -- Tanker yes/no
-    air_refuel_receptacle_pos = {-0.051,    0.911,  0}, -- refuel coords
+	
+    air_refuel_receptacle_pos = {4.37,    0.9510, -0.89}, -- refuel coords, jas 39 model
 
     wing_tip_pos              = {-3.404,    -0.164, 4.05}, -- wingtip coords for visual effects
     wing_area                 = 30,        -- JF-17 wing area in m2
