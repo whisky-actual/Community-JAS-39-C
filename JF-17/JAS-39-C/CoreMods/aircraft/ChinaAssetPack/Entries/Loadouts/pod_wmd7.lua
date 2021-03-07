@@ -1,6 +1,6 @@
 
-local wmd7_name = 'SPK-39 (WMD7 POD)'
-local pylon_mass = 50.0
+local wmd7_name = 'LDP Litening III'
+local pylon_mass = 1.0
 
 declare_loadout(
 {
@@ -10,7 +10,7 @@ declare_loadout(
     attribute   = {wsType_Weapon,wsType_GContainer,wsType_Control_Cont,WSTYPE_PLACEHOLDER},
     CLSID       = "DIS_WMD7",
     
-    Weight = 245 + pylon_mass,
+    Weight = 208 + pylon_mass,
     Cx_pil = 0.00105,--0.002197266, -- Ragnar: I've calculated it to be exactly this much // changed to F-5 tank Cx -- Teo// testing
     shape_table_data =
     {

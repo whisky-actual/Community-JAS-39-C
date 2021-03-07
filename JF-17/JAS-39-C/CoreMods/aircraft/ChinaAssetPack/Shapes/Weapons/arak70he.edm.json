@@ -1,0 +1,20 @@
+{
+ "t544": {
+  "reflMult": 1.0,
+  "reflAdd": 0.0,
+  "specMult": -2.7960000038146972656,
+  "specAdd": 0.52799999713897705078,
+  "specSelect": 1,
+  "albedoLevel": 0.0,
+  "albedoContrast": 1.0
+ },
+ "02 - Default": {
+  "reflMult": 1.0,
+  "reflAdd": 0.0,
+  "specMult": -2.7960000038146972656,
+  "specAdd": 0.52799999713897705078,
+  "specSelect": 1,
+  "albedoLevel": 0.0,
+  "albedoContrast": 1.0
+ }
+}

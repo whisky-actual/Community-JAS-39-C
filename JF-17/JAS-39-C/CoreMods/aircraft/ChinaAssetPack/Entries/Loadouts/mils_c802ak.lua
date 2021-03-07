@@ -1,12 +1,12 @@
 
-local c802ak_name = 'RB-15F (C-802AK)'
-local c802ak_mass = 715
-local pylon_mass  = 50.0
+local c802ak_name = 'Rb15F Mk3'
+local c802ak_mass = 660
+local pylon_mass  = 1.0
 
 local C802AK_warhead = 
 {
-    mass                 = 165, 
-    caliber              = 360,
+    mass                 = 200, 
+    caliber              = 500,
     expl_mass            = 100,
     piercing_mass        = 0.0,
     other_factors        = { 1.0, 1.0, 1.0 },
@@ -27,7 +27,7 @@ C_802AK_AS = {
 
     Escort         = 0,
     Head_Type      = 5, -- 5,
-    sigma          = {8, 8, 8},
+    sigma          = {3, 3, 3},
     M              = c802ak_mass,
     H_max          = 15000.0,
     H_min          = -1,
@@ -56,7 +56,7 @@ C_802AK_AS = {
     X_back         = -2.566,
     Y_back         = 0.0,
     Z_back         = 0.0,
-    Reflection     = 0.121,
+    Reflection     = 0.09,
     KillDistance   = 0.0,
 
     manualWeaponFlag = 2,
@@ -82,8 +82,8 @@ C_802AK_AS = {
 
     },
 
-    warhead     = C802AK_warhead,
-    warhead_air = C802AK_warhead,
+    warhead     = antiship_penetrating_warhead(200, 500),
+    warhead_air = antiship_penetrating_warhead(200, 500),
 
     --add_attributes = {"Anti-Ship missiles"},
     add_attributes = {"Cruise missiles"},
@@ -143,9 +143,9 @@ C_802AK_AS = {
     autopilot =    --inertial autopilot + horiz correction when seeker is on
     {
         delay                     = 1.0,        -- time delay
-        Kpv                       = 0.04,       -- vertical control PID 0.026
-        Kdv                       = 12,         -- 8.0
-        Kiv                       = 0.00001,    -- 0.000004
+        Kpv                       = 0.03,       -- vertical control PID 0.026
+        Kdv                       = 6,         -- 8.0
+        Kiv                       = 0.00002,    -- 0.000004
         Kph                       = 40.0,       -- horiz control PID 28.0
         Kdh                       = 5.0,        -- 3.0
         Kih                       = 0.0,
@@ -153,13 +153,13 @@ C_802AK_AS = {
         cmd_Kd                    = 10.0,
         glide_height              = 100.0,      -- cruise glide height
         use_current_height        = 0,          -- keep launch height
-        max_vert_speed            = 100.0,      -- max vertical speed kept from launch height to glide height 70
+        max_vert_speed            = 30.0,      -- max vertical speed kept from launch height to glide height 70
         altim_vel_k               = 2.0,        -- proximity sensor correction by velocity coeff 1
         finsLimit                 = 0.68,       -- max signal value from autopilot to fins
         inertial_km_error         = 0.05,       -- inertial guidance error coeff to 1 km flight distance
         max_heading_err_val       = 0.05,       -- 0.09
-        skim_glide_height         = 5.0,
-        pre_maneuver_glide_height = 15.0,
+        skim_glide_height         = 15.0, 
+        pre_maneuver_glide_height = 15.0, 
         vel_proj_div              = 2.5,
     },
 
@@ -191,6 +191,7 @@ C_802AK_AS = {
         trigger_by_path                 = 1,
         pre_maneuver_glide_height       = 19,    -- triggers st nav instead of fin. maneuver if h>2*pre_maneuver_glide_height at fin. maneuver distance
         --final_maneuver_trig_v_lim       = , -- TODO
+        use_horiz_dist                  = 1,
     },
 
     controller = {
@@ -213,12 +214,12 @@ C_802AK_AS = {
     },
 
     march = {
-        impulse          = 660,
-        fuel_mass        = 80,
+        impulse          = 690, 
+        fuel_mass        = 80, 
         work_time        = 9999,
         min_fuel_rate    = 0.005,
         min_thrust       = 0,
-        max_thrust       = 5000,
+        max_thrust       = 5000, 
         thrust_Tau       = 0.0017,
 
         nozzle_position                  = {{-2.566, 0.0, 0.0}},
@@ -265,6 +266,9 @@ declare_loadout({
         {
             Position  = {0, 0, 0},
             ShapeName = 'c802ak',
+            DrawArgs  = {
+                [1] = {1, 1.0},
+            }
         },
     }, -- end of Elements
     --attribute = {4, 4, 8, WSTYPE_PLACEHOLDER, "Anti-Ship missiles"},

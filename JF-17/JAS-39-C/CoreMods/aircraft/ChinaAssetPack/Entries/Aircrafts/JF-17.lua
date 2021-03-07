@@ -348,13 +348,13 @@ JF_17 = {
     -----------------------------------------------------------------------
     tand_gear_max                            = 3.73, --2.1445, -- tangent on maximum yaw angle of front wheel, 65 degrees tan(64deg)
 
-    nose_gear_pos 				                = {4.760,    -1.910,    0},   -- nosegear coord, jas 39 model
+    nose_gear_pos 				                = {4.562,	-1.830,	0},   -- nosegear coord 
     nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
     nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
     nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
     nose_gear_wheel_diameter 	                =  0.444, -- in m
 
-    main_gear_pos 						 	    = {-0.528,    -1.770,    1.259}, -- main gear coords 
+    main_gear_pos 						 	    = {-0.800,	-1.870,	1.25}, -- main gear coords 
     main_gear_amortizer_direct_stroke	 	    =   0,     --  down from main_gear_pos !!!
     main_gear_amortizer_reversal_stroke  	    =   -0.228, --  up 
     main_gear_amortizer_normal_weight_stroke    =   -0.114,-- down from main_gear_pos
@@ -367,8 +367,7 @@ JF_17 = {
     
     tanker_type               = 2,        -- Tanker type if the plane is airrefuel capable (same type as F-14, aka drogue basket)
     is_tanker                 = false,    -- Tanker yes/no
-	
-    air_refuel_receptacle_pos = {4.37,    0.9510, -0.89}, -- refuel coords, jas 39 model
+    air_refuel_receptacle_pos = {-0.051,    0.911,  0}, -- refuel coords
 
     wing_tip_pos              = {-3.404,    -0.164, 4.05}, -- wingtip coords for visual effects
     wing_area                 = 30,        -- JF-17 wing area in m2
@@ -539,237 +538,123 @@ JF_17 = {
                 connector = "Pylon1",
             },
             {
-				-- Air to air missiles
-                { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
-               -- { CLSID = "DIS_SD-10", arg_value = 0.2 },
-                
-				-- Smoke Generator pods
-                { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
+--				=== Air to air IR missiles ===
+                { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, -- Rb98 IRIS-T
+				{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L  
+				
             }
         ),
         pylon(2, 0, 0, 0, 0,
             {
                 arg = 309,
                 arg_value = 0,
-                DisplayName = "3",
+                DisplayName = "2",
                 use_full_connector_position = true,
                 connector = "Pylon2",
             },
             {
-				-- Air to air missiles
-                { CLSID = "DIS_PL-5EII",attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, 
-            --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
-				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
-			--	{ CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 },
+--				=== Air to air IR missiles ===
+                { CLSID = "DIS_PL-5EII", attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, -- Rb98 IRIS-T
+				{ CLSID = "{Robot74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
 
-				-- Air to ground missiles
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-            --  { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },                
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },                
-                { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-                { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-            --  { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
-            
-			    -- Bombs
-			--  { CLSID = "DIS_Type200", arg_value = 0.2 },
-                { CLSID = "{Mk82SNAKEYE}", arg_value = 0.5 }, -- Mk-82 Snakeye
-                { CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_value = 0.5 }, -- Mk-82
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.6 }, -- Mk-83
-                { CLSID = "DIS_MK_20", arg_value = 0.5 }, -- Mk-20 Rockeye
+--				=== Air to air ARH missiles ===
+				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
+
+--				=== Air to ground missiles ===
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.3, 0.0} }, -- Rb75 AGM-65B
+                        
+--			    === Guided bombs ===
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
-                { CLSID = "DIS_TYPE200", arg_value = 0.5 },
-                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },                
-                { CLSID = "{BRU33_2X_MK-82}", arg_value = 0.5 }, -- Mk-82 * 2 -- 暂无双联挂架
-                { CLSID = "{BRU33_2X_MK-82_Snakeye}", arg_value = 0.5 }, -- Mk-82 Snakeye x2
-                { CLSID = "{BRU33_2X_ROCKEYE}", arg_value = 0.5 }, -- Mk-20 Rockeye x2
-                { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架
+				-- Add GBU-39 SDB -- { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
+				-- Add GBU-49
 
-                -- Rockets
-                { CLSID = "DIS_BRM1_90", arg_value = 0.5 }, 
-                { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 }, 
-                { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
-
-                -- Pods
-                { CLSID = "DIS_WMD7", arg_value = 0.7 },
-                { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
-                { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },				
+ --             === Unguided rockets ===
+                { CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
             }
         ),
 		pylon(3, 0, 0, 0, 0,
             {
                 arg = 310,
                 arg_value = 0,
-                DisplayName = "2",
+                DisplayName = "3",
                 use_full_connector_position = true,
                 connector = "Pylon3",
             },
             {
-                -- Air to air missiles
-             -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
-				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },		
+--              === Air to air ARH missiles ===
+				{ CLSID = "DIS_SD-10", attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
 								
-				-- Air to ground missiles
-				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
-                { CLSID = 'DIS_CM-802AKG', arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} },				
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-            --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
-                { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
-
-				-- Bombs
-            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
-                { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-                { CLSID = "DIS_GBU_10", arg_value = 0.5 }, -- GBU-10
-                { CLSID = "DIS_GBU_16", arg_value = 0.5 }, -- GBU-16
-                { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
-                { CLSID = "DIS_TYPE200", arg_value = 0.5 },
-                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	               
+--				=== Air to ground missiles ===
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+                -- Add BK90 MJ1 -- { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
+				-- Add BK90 MJ2 -- { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
 				
-				-- Drop tanks
-				{ CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK800"}}} },
-                { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK1100"}}} },
-            --  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
+--				=== Antiship missiles ===
+				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk3
 
-                -- Rockets
-                { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
-                { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
-                { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
-                { CLSID = "DIS_WMD7", arg_value = 0.5 },
-                { CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
-                { CLSID = "DIS_SPJ_POD", arg_value = 0.5 },
+--				=== Guided bombs ===
+                { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12	               
+				-- Add GBU-39 SDB -- { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 }, 
+				-- Add GBU-49
+				
+--				=== Drop tanks ===
+                { CLSID = "DIS_TANK800", arg_value = 0.1 }, -- External drop tank 1100 litre
 
-                -- Smoke Generator pods
-                { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
+--              === Unguided rockets ===
+				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
             }
         ),
         pylon(4, 0, -0.300, -0.336, 2.85,
             {
-                use_full_connector_position = true, connector = "Pylon6", arg = 313, arg_value = 0
+                DisplayName = "4",
+				use_full_connector_position = true, connector = "Pylon6", arg = 313, arg_value = 0
             },
 
             {
-                -- Drop tanks
-				{ CLSID = "DIS_TANK800", arg_value = 0.1 },
-                { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 4,loadout = {"DIS_TANK1100"}}} },
-            --  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
-			  
-				-- Bombs
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
-                { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-                { CLSID = "DIS_GBU_10", arg_value = 0.3 }, -- GBU-10
-                { CLSID = "DIS_GBU_16", arg_value = 0.3 }, -- GBU-16
-				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	
-                
-				-- Air to ground missiles
-				{ CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
-                { CLSID = "DIS_GB6_TSP", arg_value = 0.1, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.1, Type = 1 },
-                { CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.40, 0.0} }, 
-                { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-                
-				-- Air to air missiles
-				{ CLSID = "DIS_SD-10", arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
+--              === Drop tanks ===
+                { CLSID = "DIS_TANK800", arg_value = 0.1 }, -- External drop tank 1100 litre
 				
-				-- Pods
+--				=== Pods ===
                 { CLSID = "DIS_WMD7", arg_value = 0.5 },
-                { CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
-
-                -- Smoke Generator pods
-                { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
             }
         ),
         pylon(5, 0, 0, 0, 0,
             {
                 arg = 316,
                 arg_value = 0,
-                DisplayName = "7",
+                DisplayName = "5",
                 use_full_connector_position = true,
                 connector = "Pylon9",
             },
             {
-                
-				-- Air to ground missiles
-				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
-                { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-                { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-				{ CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-            --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
-                { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
+--              === Air to air ARH missiles ===
+				{ CLSID = "DIS_SD-10", attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
+								
+--				=== Air to ground missiles ===               
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+                -- Add BK90 MJ1 -- { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
+				-- Add BK90 MJ2 -- { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
 				
-				-- Air to air missiles
-             -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
-				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },					              
+--				=== Antiship missiles ===
+				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={-0.38, -0.27, 0.0} }, -- Rb15F Mk3
+
+--				=== Guided bombs ===
+                { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12	               
+				-- Add GBU-39 SDB -- { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
+				-- Add GBU-49
 				
-				-- Drop tanks
-                { CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 3,loadout = {"DIS_TANK800"}}} },
-                { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 3,loadout = {"DIS_TANK1100"}}} },
-			--  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
+--				=== Drop tanks ===
+                { CLSID = "DIS_TANK800", arg_value = 0.1 }, -- External drop tank 1100 litre
 
-				-- Bombs
-            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
-				{ CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
-                { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-                { CLSID = "DIS_GBU_10", arg_value = 0.5 }, -- GBU-10
-                { CLSID = "DIS_GBU_16", arg_value = 0.5 }, -- GBU-16
-                { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
-                { CLSID = "DIS_TYPE200", arg_value = 0.5 },
-                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	
-
-                -- Rockets
-                { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
-                { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
-                { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
-                { CLSID = "DIS_WMD7", arg_value = 0.5 },
-                { CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
-                { CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
-
-                -- Smoke Generator pods
-                { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
+--              === Unguided rockets ===
+				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
             }
         ),
         pylon(6, 0, 0, 0, 0,
@@ -781,117 +666,39 @@ JF_17 = {
                 connector = "Pylon10",
             },
             {
-                -- Air to air missiles
-				{ CLSID = "DIS_PL-5EII",attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 },
-            --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
-				{ CLSID = "DIS_SD-10",attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 },
+--				=== Air to air IR missiles ===
+                { CLSID = "DIS_PL-5EII", attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, -- Rb98 IRIS-T
+				{ CLSID = "{Robot74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
 
-				-- Air to ground missiles
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-             -- { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },                
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
-                { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-                { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-            --  { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
-            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
+--				=== Air to air ARH missiles ===
+				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
 
-				-- Bombs
-                { CLSID = "{Mk82SNAKEYE}", arg_value = 0.5 }, -- Mk-82 Snakeye
-                { CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_value = 0.5 }, -- Mk-82
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.6 }, -- Mk-83
-                { CLSID = "DIS_MK_20", arg_value = 0.5 }, -- Mk-20 Rockeye
+--				=== Air to ground missiles ===
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.30, 0.0} }, -- Rb75 AGM-65B                				
+                        
+--			    === Guided bombs ===
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
-                { CLSID = "DIS_TYPE200", arg_value = 0.5 },
-                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-                { CLSID = "{BRU33_2X_MK-82}", arg_value = 0.5 }, -- Mk-82 * 2 -- 暂无双联挂架
-                { CLSID = "{BRU33_2X_MK-82_Snakeye}", arg_value = 0.5 }, -- Mk-82 Snakeye x2
-                { CLSID = "{BRU33_2X_ROCKEYE}", arg_value = 0.5 }, -- Mk-20 Rockeye x2
-                { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架
+				-- Add GBU-39 SDB -- { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
+				-- Add GBU-49
 
-                -- Rockets
-                { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
-                { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
-                { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
-
-                -- Pods
-                { CLSID = "DIS_WMD7", arg_value = 0.7 },
-                { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
-                { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },
+--              === Unguided rockets ===
+                { CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
             }
         ),
         pylon(7, 0, 0, 0, 0,
             {
-                DisplayName = "8",
+                DisplayName = "7",
                 use_full_connector_position = true,
                 connector = "Pylon11",
             },
             {
-                
-				-- Air to air missiles
-				{ CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
-            --  { CLSID = "DIS_SD-10", arg_value = 0.2 },
-                
-				-- Smoke Generator pods
-                { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
-                { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
+--				=== Air to air IR missiles ===
+                { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, -- Rb98 IRIS-T
+				{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L
             }
-        ),
-        pylon(8, 2, 0, 0, 0,--26
-            {
-                arg = 312,
-                arg_value = 0,
-                DisplayName = "ECM",
-                use_full_connector_position = true,
-                connector = "Pylon5",
-            },
-            {
-                
-				-- Pods
-				{ CLSID = "DIS_WMD7", arg_value = 0.5 },
-				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
-				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
-            }
-        ),
-        pylon(9, 1, 0, 0, 0,
-            {
-                arg = 315,
-                arg_value = 0,
-                DisplayName = "POD",--6
-                use_full_connector_position = true,
-                connector = "Pylon7",
-            },
-            {
-				-- Pods
-                { CLSID = "DIS_WMD7", arg_value = 0.5 },
-				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
-				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
-            }
-        ),
-        pylon(10, 2, 0, 0, 0,--26
-            {
-                arg = 314,
-                arg_value = 0,
-                DisplayName = "DATA",
-                use_full_connector_position = true,
-                connector = "Pylon8",
-            },
-            {
-				-- Pods
-                { CLSID = "DIS_WMD7", arg_value = 0.5 },
-				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
-				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 }, 
-            }
-        ),
+        ),        
     },
 
     Tasks = {

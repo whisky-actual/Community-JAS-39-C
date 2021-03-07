@@ -7,7 +7,7 @@ declare_loadout(
         category    = CAT_FUEL_TANKS,
         name        = ft800_name,
         displayName = _(ft800_name),
-        Picture     = "tank800.png",        
+        Picture     = "droptank1100.png",        
         attribute   = {wsType_Air, wsType_Free_Fall, wsType_FuelTank, WSTYPE_PLACEHOLDER},
         CLSID       = "DIS_TANK800",
         

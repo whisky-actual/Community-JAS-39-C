@@ -19,7 +19,7 @@ declare_loadout(
         {
             {
                 name = ft1100_name,
-                file = "tank1100",
+                file = "droptank7100",
                 life = 1,
                 fire = { 0, 1},
                 username = ft1100_name,
