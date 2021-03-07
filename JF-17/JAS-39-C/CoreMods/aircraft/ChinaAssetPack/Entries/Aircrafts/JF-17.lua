@@ -538,9 +538,11 @@ JF_17 = {
                 connector = "Pylon1",
             },
             {
+				-- Air to air missiles
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
                -- { CLSID = "DIS_SD-10", arg_value = 0.2 },
-                -- Smoke Generator pods
+                
+				-- Smoke Generator pods
                 { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
@@ -558,59 +560,51 @@ JF_17 = {
                 connector = "Pylon2",
             },
             {
+				-- Air to air missiles
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-               -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
+            --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} }, --adjusted for meteor shape, same with other pylons
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
 			--	{ CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 },
 
+				-- Air to ground missiles
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-               -- { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },
-                
+            --  { CLSID = "DIS_LD-10_DUAL_L", arg_value = 0 },                
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
-                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
-
-                
+                { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },                
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-
-
-
                 { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-                -- { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
-                -- { CLSID = "DIS_Type200", arg_value = 0.2 },
-
+            --  { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
+            
+			    -- Bombs
+			--  { CLSID = "DIS_Type200", arg_value = 0.2 },
                 { CLSID = "{Mk82SNAKEYE}", arg_value = 0.5 }, -- Mk-82 Snakeye
                 { CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_value = 0.5 }, -- Mk-82
                 { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.6 }, -- Mk-83
-
                 { CLSID = "DIS_MK_20", arg_value = 0.5 }, -- Mk-20 Rockeye
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
-                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-
-                -- dual bomb
+                { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },                
                 { CLSID = "{BRU33_2X_MK-82}", arg_value = 0.5 }, -- Mk-82 * 2 -- 暂无双联挂架
                 { CLSID = "{BRU33_2X_MK-82_Snakeye}", arg_value = 0.5 }, -- Mk-82 Snakeye x2
                 { CLSID = "{BRU33_2X_ROCKEYE}", arg_value = 0.5 }, -- Mk-20 Rockeye x2
-
                 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架
 
-                -- rockets
+                -- Rockets
                 { CLSID = "DIS_BRM1_90", arg_value = 0.5 }, 
                 { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 }, 
                 { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
 
-                -- pod
+                -- Pods
                 { CLSID = "DIS_WMD7", arg_value = 0.7 },
                 { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
-                { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },
-
-             --   { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
-
+                { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },				
             }
-        ),pylon(3, 0, 0, 0, 0,
+        ),
+		pylon(3, 0, 0, 0, 0,
             {
                 arg = 310,
                 arg_value = 0,
@@ -619,42 +613,42 @@ JF_17 = {
                 connector = "Pylon3",
             },
             {
-                { CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
+                -- Air to air missiles
+             -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
+                { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },		
+								
+				-- Air to ground missiles
+				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.5, Type = 1 },
-
                 { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-              -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
-				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_L", arg_value = 0 },
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} },				
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-              --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
+            --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
 
-                -- { CLSID = "DIS_Type200", arg_value = 0.2 },
-
-                { CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK800"}}} },
-                { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK1100"}}} },
-
+				-- Bombs
+            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
                 { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
                 { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-
                 { CLSID = "DIS_GBU_10", arg_value = 0.5 }, -- GBU-10
                 { CLSID = "DIS_GBU_16", arg_value = 0.5 }, -- GBU-16
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
+				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	               
+				
+				-- Drop tanks
+				{ CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK800"}}} },
+                { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 5,loadout = {"DIS_TANK1100"}}} },
+            --  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
+            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
 
-               -- { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-               -- { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
-
-
-
-                -- rockets
+                -- Rockets
                 { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
                 { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
                 { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
@@ -669,9 +663,6 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
-
-            --    { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
-
             }
         ),
         pylon(4, 0, -0.300, -0.336, 2.85,
@@ -680,29 +671,31 @@ JF_17 = {
             },
 
             {
-                { CLSID = "DIS_TANK800", arg_value = 0.1 },
+                -- Drop tanks
+				{ CLSID = "DIS_TANK800", arg_value = 0.1 },
                 { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 4,loadout = {"DIS_TANK1100"}}} },
-
+            --  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
+            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
+			  
+				-- Bombs
                 { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
                 { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-
                 { CLSID = "DIS_GBU_10", arg_value = 0.3 }, -- GBU-10
                 { CLSID = "DIS_GBU_16", arg_value = 0.3 }, -- GBU-16
-                { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
+				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	
+                
+				-- Air to ground missiles
+				{ CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.1, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.1, Type = 1 },
                 { CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.40, 0.0} }, 
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-                { CLSID = "DIS_SD-10", arg_value = 0.2 },
+                
+				-- Air to air missiles
+				{ CLSID = "DIS_SD-10", arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
 				
-		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
-
-             --   { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-              --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
-
-
-
+				-- Pods
                 { CLSID = "DIS_WMD7", arg_value = 0.5 },
                 { CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
@@ -714,8 +707,6 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
-
-             --  { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
             }
         ),
         pylon(5, 0, 0, 0, 0,
@@ -727,40 +718,46 @@ JF_17 = {
                 connector = "Pylon9",
             },
             {
-                { CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
+                
+				-- Air to ground missiles
+				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ 0.0, -0.25, 0.0} }, 
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-
                 { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
-              -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
-				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
-                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
-                { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-              --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
+				{ CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
+            --  { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
+				
+				-- Air to air missiles
+             -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+				{ CLSID = "DIS_SD-10",attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 },
+                { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },		
 
-                -- { CLSID = "DIS_Type200", arg_value = 0.2 },
 
+                
+				
+				-- Drop tanks
                 { CLSID = "DIS_TANK800", arg_value = 0.1, required = {{station = 3,loadout = {"DIS_TANK800"}}} },
                 { CLSID = "DIS_TANK1100", arg_value = 0.1, required = {{station = 3,loadout = {"DIS_TANK1100"}}} },
+			--  { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
+            --  { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
 
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
+				-- Bombs
+            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
+				{ CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.5 }, -- Mk-83
                 { CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_value = 0.5 }, -- Mk-84
-
                 { CLSID = "DIS_GBU_10", arg_value = 0.5 }, -- GBU-10
                 { CLSID = "DIS_GBU_16", arg_value = 0.5 }, -- GBU-16
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-		 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架		
+				{ CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架	
 
-               -- { CLSID = "{jas39_1100_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1100 Liter
-               -- { CLSID = "{jas39_1700_ptb}"                        ,arg_increment = 0.8}, --Zusatztank 1700 Liter
-
-                -- rockets
+                -- Rockets
                 { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
                 { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
                 { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
@@ -775,10 +772,6 @@ JF_17 = {
                 { CLSID = 'DIS_SMOKE_GENERATOR_W', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_Y', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_O', arg_value = 0.1},
-
-              --  { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
-
-
             }
         ),
         pylon(6, 0, 0, 0, 0,
@@ -790,57 +783,48 @@ JF_17 = {
                 connector = "Pylon10",
             },
             {
-                { CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
-               -- { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
+                -- Air to air missiles
+				{ CLSID = "DIS_PL-5EII", arg_value = 0.1, attach_point_position ={0.0, -0.20, 0.0} }, 
+            --  { CLSID = "DIS_SD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.130, 0.0} },
 				{ CLSID = "DIS_SD-10",attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 },
                 { CLSID = "DIS_SD-10_DUAL_R", arg_value = 0 },
+				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 },
 
+				-- Air to ground missiles
                 { CLSID = "DIS_LD-10", arg_value = 0.2 , attach_point_position ={0.0, -0.25, 0.0} }, 
-               -- { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },
-                
+             -- { CLSID = "DIS_LD-10_DUAL_R", arg_value = 0 },                
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, 
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
                 { CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 },
-
-
                 { CLSID = 'DIS_CM-802AKG', arg_value = 0.9, Type = 1 },
-
-
-
                 { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
-                -- { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
-                -- { CLSID = "DIS_Type200", arg_value = 0.2 },
+            --  { CLSID = "DIS_GB6", arg_value = 0.1, Type = 1 },
+            --  { CLSID = "DIS_Type200", arg_value = 0.2 },
 
+				-- Bombs
                 { CLSID = "{Mk82SNAKEYE}", arg_value = 0.5 }, -- Mk-82 Snakeye
                 { CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_value = 0.5 }, -- Mk-82
                 { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_value = 0.6 }, -- Mk-83
-
                 { CLSID = "DIS_MK_20", arg_value = 0.5 }, -- Mk-20 Rockeye
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
                 { CLSID = "DIS_TYPE200", arg_value = 0.5 },
                 { CLSID = "DIS_TYPE200_DUAL_L", arg_value = 0.5 },
-				
-
-                -- dual bomb
                 { CLSID = "{BRU33_2X_MK-82}", arg_value = 0.5 }, -- Mk-82 * 2 -- 暂无双联挂架
                 { CLSID = "{BRU33_2X_MK-82_Snakeye}", arg_value = 0.5 }, -- Mk-82 Snakeye x2
                 { CLSID = "{BRU33_2X_ROCKEYE}", arg_value = 0.5 }, -- Mk-20 Rockeye x2
-
                 { CLSID = "DIS_GBU_12_DUAL", arg_value = 0.5 }, -- GBU-12 x2 -- 暂无双联挂架
 
-                -- rockets
+                -- Rockets
                 { CLSID = "DIS_BRM1_90", arg_value = 0.5 },
                 { CLSID = "DIS_RKT_90_UG", arg_value = 0.5 },
                 { CLSID = "{BRU33_2*LAU68_MK5}", arg_value = 0.5 },
 
-                -- pod
+                -- Pods
                 { CLSID = "DIS_WMD7", arg_value = 0.7 },
                 { CLSID = "DIS_AKG_DLPOD", arg_value = 0.7 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.7 },
-
-             --   { CLSID = "{RAFALE_MBDA_METEOR}",arg_increment =  0.10, attach_point_position = {0, -0.13 ,0 } }, --METEOR
             }
         ),
         pylon(7, 0, 0, 0, 0,
@@ -850,9 +834,12 @@ JF_17 = {
                 connector = "Pylon11",
             },
             {
-                { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
-               -- { CLSID = "DIS_SD-10", arg_value = 0.2 },
-                -- Smoke Generator pods
+                
+				-- Air to air missiles
+				{ CLSID = "DIS_PL-5EII", arg_value = 0.1 }, 
+            --  { CLSID = "DIS_SD-10", arg_value = 0.2 },
+                
+				-- Smoke Generator pods
                 { CLSID = 'DIS_SMOKE_GENERATOR_R', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_G', arg_value = 0.1},
                 { CLSID = 'DIS_SMOKE_GENERATOR_B', arg_value = 0.1},
@@ -870,7 +857,9 @@ JF_17 = {
                 connector = "Pylon5",
             },
             {
-                { CLSID = "DIS_WMD7", arg_value = 0.5 },
+                
+				-- Pods
+				{ CLSID = "DIS_WMD7", arg_value = 0.5 },
 				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
 				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
             }
@@ -884,6 +873,7 @@ JF_17 = {
                 connector = "Pylon7",
             },
             {
+				-- Pods
                 { CLSID = "DIS_WMD7", arg_value = 0.5 },
 				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
 				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 },
@@ -898,6 +888,7 @@ JF_17 = {
                 connector = "Pylon8",
             },
             {
+				-- Pods
                 { CLSID = "DIS_WMD7", arg_value = 0.5 },
 				{ CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
 				{ CLSID = "DIS_AKG_DLPOD", arg_value = 0.5 }, 
