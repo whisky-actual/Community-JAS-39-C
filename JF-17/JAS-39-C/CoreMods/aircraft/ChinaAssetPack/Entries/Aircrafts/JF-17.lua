@@ -367,7 +367,7 @@ JF_17 = {
     
     tanker_type               = 2,        -- Tanker type if the plane is airrefuel capable (same type as F-14, aka drogue basket)
     is_tanker                 = false,    -- Tanker yes/no
-    air_refuel_receptacle_pos = {-0.051,    0.911,  0}, -- refuel coords
+    air_refuel_receptacle_pos = {4.37,    0.9510, -0.89}, -- refuel coords
 
     wing_tip_pos              = {-3.404,    -0.164, 4.05}, -- wingtip coords for visual effects
     wing_area                 = 30,        -- JF-17 wing area in m2
