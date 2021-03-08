@@ -50,6 +50,7 @@ InputProfiles =
 mount_vfs_model_path	(current_mod_path.."/Shapes")
 mount_vfs_liveries_path (current_mod_path.."/Liveries")
 mount_vfs_texture_path  (current_mod_path.."/Textures/VSN_JAS39Gripen")
+mount_vfs_texture_path  (current_mod_path.."/Textures/Weapon_textures")
 mount_vfs_texture_path  (current_mod_path.."/Textures/DEVRiM_DCS_SU-27_EnglishGrayCockpitMod")
 ----------------------------------------------------------------------------------------
 dofile(current_mod_path.."/LUA/Views_F15Pit.lua")
@@ -62,5 +63,7 @@ make_flyable('VSN_JAS39Gripen_AG',current_mod_path..'/Cockpit/KneeboardRight/',{
 -------------------------------------------------------------------------------------
 dofile(current_mod_path..'/VSN_JAS39Gripen.lua')
 dofile(current_mod_path..'/VSN_JAS39Gripen_AG.lua')
+-------------------------------------------------------------------------------------
+dofile(current_mod_path.."/Weapons/Loadout_A2A.lua")
 -------------------------------------------------------------------------------------
 plugin_done()

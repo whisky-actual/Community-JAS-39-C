@@ -1,8 +1,10 @@
 local tips 		= {
-	{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
-    { CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0}, --AIM_120C
+	{ CLSID = "DIS_PL-5EII", arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	--{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
+    --{ CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
+	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
+	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0}, --AIM_120C
 	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}" ,arg_increment = 0.0}, -- smoke gen green
@@ -13,30 +15,35 @@ local tips 		= {
 }
 
 local outboard 	= {
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
+	{ CLSID = "DIS_PL-5EII",attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Robot74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "DIS_SD-10", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
+	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
+	--{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
+	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
+	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
+	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
 	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120C	
+	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120C	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
 
 local inboard 	= {
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
+{ CLSID = "DIS_SD-10", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
+	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
+	--{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
+	--{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
+	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
+	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
+	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
 	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
+	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
 
 	{ CLSID = "{jas39_1100_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1100 Liter
 	{ CLSID = "{jas39_1700_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1700 Liter
@@ -133,12 +140,12 @@ VSN_JAS39Gripen =  {
 	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", "Datalink", "Link16"},
 	Categories= {"{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor",},
 	
-		M_empty						=	13380,	-- kg  with pilot and nose load, F15
-		M_nominal					=	19000,	-- kg (Empty Plus Full Internal Fuel)
-		M_max						=	30845,	-- kg (Maximum Take Off Weight)
-		M_fuel_max					=	6103,	-- kg (Internal Fuel Only)
-		H_max						=	18300,	-- m  (Maximum Operational Ceiling)
-		average_fuel_consumption	=	0.271,
+		M_empty						=	6880,	-- kg  with pilot and nose load, JAS 39C
+		M_nominal					=	9430,	-- kg (Empty Plus Full Internal Fuel)
+		M_max						=	14000,	-- kg (Maximum Take Off Weight)
+		M_fuel_max					=	2550,	-- kg (Internal Fuel Only)
+		H_max						=	16000,	-- m  (Maximum Operational Ceiling)
+		average_fuel_consumption	=	0.021,
 		CAS_min						=	58,		-- Minimum CAS speed (m/s) (for AI)
 		V_opt						=	220,	-- Cruise speed (m/s) (for AI)
 		V_take_off					=	61,		-- Take off speed in m/s (for AI)
@@ -166,9 +173,9 @@ VSN_JAS39Gripen =  {
 		Ny_max						=	8,		-- Max G (for AI)
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
-		wing_area					=	56.5,	-- wing area in m2
-		thrust_sum_max				=	13347,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	21952,	-- thrust in kgf (95.1 kN)
+		wing_area					=	30,	-- wing area in m2
+		thrust_sum_max				=	12140,	-- thrust in kgf (64.3 kN)
+		thrust_sum_ab				=	18210,	-- thrust in kgf (95.1 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
 		Mach_max					=	2,	-- Max speed in Mach (for AI)
