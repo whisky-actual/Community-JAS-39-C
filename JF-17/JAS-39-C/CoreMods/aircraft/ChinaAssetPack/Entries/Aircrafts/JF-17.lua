@@ -563,6 +563,7 @@ JF_17 = {
 
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.3, 0.0} }, -- Rb75 AGM-65B
+				{ CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.37, -0.3, 0.0} }, -- Rb75T AGM-65E
                         
 --			    === Guided bombs ===
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
@@ -589,6 +590,7 @@ JF_17 = {
 								
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+				{ CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75T AGM-65E
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 }, -- BK90 MJ1
 				{ CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 }, -- BK90 MJ2
 				{ CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
@@ -639,6 +641,7 @@ JF_17 = {
 								
 --				=== Air to ground missiles ===               
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+				{ CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75T AGM-65E
                 { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 }, -- BK90 MJ1
 				{ CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 }, -- BK90 MJ2
 				{ CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
@@ -678,7 +681,8 @@ JF_17 = {
 
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.30, 0.0} }, -- Rb75 AGM-65B                				
-                        
+                { CLSID = "DIS_C-701IR", arg_value = 0.1 , attach_point_position ={0.37, -0.30, 0.0} }, -- Rb75T AGM-65E
+				
 --			    === Guided bombs ===
                 { CLSID = "DIS_GBU_12", arg_value = 0.5 }, -- GBU-12
 				-- Add GBU-39 SDB -- { CLSID = "DIS_LS_6_500", arg_value = 0.5, Type = 1 },
