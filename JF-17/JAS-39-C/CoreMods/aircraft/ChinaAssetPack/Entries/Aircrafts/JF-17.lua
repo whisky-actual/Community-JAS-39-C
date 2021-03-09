@@ -588,9 +588,10 @@ JF_17 = {
 				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
 								
 --				=== Air to ground missiles ===
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
-                -- Add BK90 MJ1 -- { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-				-- Add BK90 MJ2 -- { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 }, -- BK90 MJ1
+				{ CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 }, -- BK90 MJ2
+				{ CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
 				
 --				=== Antiship missiles ===
 				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk3
@@ -637,9 +638,10 @@ JF_17 = {
 				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
 								
 --				=== Air to ground missiles ===               
-                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
-                -- Add BK90 MJ1 -- { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 },
-				-- Add BK90 MJ2 -- { CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 },
+                { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
+                { CLSID = "DIS_GB6", arg_value = 0.5, Type = 1 }, -- BK90 MJ1
+				{ CLSID = "DIS_GB6_TSP", arg_value = 0.5, Type = 1 }, -- BK90 MJ2
+				{ CLSID = "DIS_GB6_HE", arg_value = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
 				
 --				=== Antiship missiles ===
 				{ CLSID = "DIS_C-802AK", arg_value = 0.9, Type = 1, attach_point_position ={-0.38, -0.27, 0.0} }, -- Rb15F Mk3
