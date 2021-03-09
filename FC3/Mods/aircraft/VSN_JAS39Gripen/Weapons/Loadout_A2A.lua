@@ -120,7 +120,7 @@ PL_5EII_AA.shape_table_data.index = PL_5EII_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category     = CAT_AIR_TO_AIR,
-    CLSID        = 'DIS_PL-5EII',
+    CLSID        = 'IRIS-T',
     Picture      = 'irist.png',
     attribute    = PL_5EII_AA.wsTypeOfWeapon,
     displayName  = _(pl5eii_name),
@@ -599,7 +599,7 @@ SD_10_AA.shape_table_data.index = SD_10_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category    = CAT_AIR_TO_AIR,
-    CLSID       = 'DIS_SD-10',
+    CLSID       = 'Meteor',
     Picture     = 'meteor.png',
     attribute   = SD_10_AA.wsTypeOfWeapon,
     displayName = _(sd10_name),
@@ -623,7 +623,7 @@ declare_loadout({
 
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = 'DIS_SD-10_DUAL_L',
+    CLSID          = 'Meteor_DUAL_L', --
     Picture        = 'meteor.png',
     wsTypeOfWeapon = SD_10_AA.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
@@ -658,7 +658,7 @@ declare_loadout({
 
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = 'DIS_SD-10_DUAL_R',
+    CLSID          = 'Meteor_DUAL_R',
     Picture        = 'meteor.png',
     wsTypeOfWeapon = SD_10_AA.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
