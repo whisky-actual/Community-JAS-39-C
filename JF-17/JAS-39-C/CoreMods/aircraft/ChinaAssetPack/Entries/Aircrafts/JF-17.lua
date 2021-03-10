@@ -559,7 +559,7 @@ JF_17 = {
 
 --				=== Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
+				{ CLSID	= "{Rb99}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B	
 
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.3, 0.0} }, -- Rb75 AGM-65B
@@ -589,7 +589,7 @@ JF_17 = {
             {
 --              === Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
+				{ CLSID	= "{Rb99}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
 								
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
@@ -645,7 +645,7 @@ JF_17 = {
             {
 --              === Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {-0.40, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 },	-- Rb99 AIM-120B
+				{ CLSID	= "{Rb99}", attach_point_position = {-0.15, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
 								
 --				=== Air to ground missiles ===               
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- Rb75 AGM-65B
@@ -687,7 +687,7 @@ JF_17 = {
 
 --				=== Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
-				{ CLSID	= "{C8E06185-7CD6-4C90-959F-044679E90751}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
+				{ CLSID	= "{Rb99}", attach_point_position = {0.30, -0.22, 0.0}, arg_value = 0.1 }, -- Rb99 AIM-120B
 
 --				=== Air to ground missiles ===
                 { CLSID = "DIS_C-701T", arg_value = 0.1 , attach_point_position ={0.37, -0.30, 0.0} }, -- Rb75 AGM-65B                				
