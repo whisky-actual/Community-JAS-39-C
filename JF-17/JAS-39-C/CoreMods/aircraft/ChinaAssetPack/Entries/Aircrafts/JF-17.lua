@@ -540,7 +540,7 @@ JF_17 = {
             {
 --				=== Air to air IR missiles ===
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L  
+				{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L  
 				
             }
         ),
@@ -555,7 +555,7 @@ JF_17 = {
             {
 --				=== Air to air IR missiles ===
                 { CLSID = "DIS_PL-5EII", attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "{Robot74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
+				{ CLSID = "{Rb74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
 
 --				=== Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
@@ -683,7 +683,7 @@ JF_17 = {
             {
 --				=== Air to air IR missiles ===
                 { CLSID = "DIS_PL-5EII", attach_point_position = {0.20, -0.14, 0.0}, arg_value = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "{Robot74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
+				{ CLSID = "{Rb74}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.5 }, -- Rb74 AIM-9L
 
 --				=== Air to air ARH missiles ===
 				{ CLSID = "DIS_SD-10", attach_point_position = {0.0, -0.24, 0.0}, arg_value = 0.2 }, -- Rb101 Meteor
@@ -714,7 +714,7 @@ JF_17 = {
             {
 --				=== Air to air IR missiles ===
                 { CLSID = "DIS_PL-5EII", arg_value = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L
+				{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_value = 0.1 }, -- Rb74 AIM-9L
             }
         ),        
     },
