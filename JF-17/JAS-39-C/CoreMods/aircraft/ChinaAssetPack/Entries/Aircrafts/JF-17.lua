@@ -722,7 +722,7 @@ JF_17 = {
     Tasks = {
         aircraft_task(Intercept), -- 10
         aircraft_task(CAP), -- 11
-        aircraft_task(Nothing), -- 15
+    --  aircraft_task(Nothing), -- 15
         aircraft_task(AFAC), -- 16
         aircraft_task(Reconnaissance), -- 17
         aircraft_task(Escort), -- 18
