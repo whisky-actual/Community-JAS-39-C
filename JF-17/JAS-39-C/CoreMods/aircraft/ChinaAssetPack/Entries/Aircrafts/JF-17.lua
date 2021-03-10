@@ -573,6 +573,9 @@ JF_17 = {
  --             === Unguided rockets ===
                 { CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
+				
+--				=== Remove pylon ===		
+				{ CLSID = "<CLEAN>"									,arg_value = 1},
             }
         ),
 		pylon(3, 0, 0, 0, 0,
@@ -609,6 +612,9 @@ JF_17 = {
 --              === Unguided rockets ===
 				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
+				
+--				=== Remove pylon ===		
+				{ CLSID = "<CLEAN>"									,arg_value = 1},
             }
         ),
         pylon(4, 0, -0.300, -0.336, 2.85,
@@ -624,6 +630,8 @@ JF_17 = {
 --				=== Pods ===
                 { CLSID = "DIS_WMD7", arg_value = 0.5 },
                 { CLSID = "DIS_SPJ_POD", arg_value = 0.55 },
+--				=== Remove pylon ===		
+				{ CLSID = "<CLEAN>"									,arg_value = 1},
             }
         ),
         pylon(5, 0, 0, 0, 0,
@@ -660,6 +668,8 @@ JF_17 = {
 --              === Unguided rockets ===
 				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
+--				=== Remove pylon ===		
+				{ CLSID = "<CLEAN>"									,arg_value = 1},
             }
         ),
         pylon(6, 0, 0, 0, 0,
@@ -691,6 +701,8 @@ JF_17 = {
 --              === Unguided rockets ===
                 { CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B HE 
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.5}, -- ARAK M70B AP
+--				=== Remove pylon ===		
+				{ CLSID = "<CLEAN>"									,arg_value = 1},
             }
         ),
         pylon(7, 0, 0, 0, 0,
