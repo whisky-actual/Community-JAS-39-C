@@ -18,6 +18,8 @@ local outboard 	= {
 	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
 	{ CLSID = "{Robot74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
 	{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
+	
 	
 	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
 	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
@@ -27,13 +29,14 @@ local outboard 	= {
 	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
 	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
 	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120B
+	
 	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120C	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
 
 local inboard 	= {
 { CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
 	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
 	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
 	--{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
@@ -42,7 +45,7 @@ local inboard 	= {
 	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
 	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
 	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120B
+	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120B
 	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
 
 	{ CLSID = "{jas39_1100_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1100 Liter
