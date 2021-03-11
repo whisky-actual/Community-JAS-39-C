@@ -1,6 +1,6 @@
 local tips 		= {
 	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "{Robot74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
 	--{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
     --{ CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
 	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
@@ -16,7 +16,7 @@ local tips 		= {
 
 local outboard 	= {
 	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "{Robot74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
 	{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
 	{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
 	
@@ -177,8 +177,8 @@ VSN_JAS39Gripen =  {
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
 		wing_area					=	30,	-- wing area in m2
-		thrust_sum_max				=	12140,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	18210,	-- thrust in kgf (95.1 kN)
+		thrust_sum_max				=	5200,	-- thrust in kgf (64.3 kN)
+		thrust_sum_ab				=	8566,	-- thrust in kgf (95.1 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
 		Mach_max					=	2,	-- Max speed in Mach (for AI)

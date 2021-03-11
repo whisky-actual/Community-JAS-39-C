@@ -167,6 +167,7 @@ declare_loadout({
 -- Rb74
 local wsType_Rb74 = 11039
 
+
 warhead = {}
 --AA MISSILES
 warhead["Rb74"] =  enhanced_a2a_warhead(9.4, 127); -- 2.9kg according to Arboga Robot Museum webpage,  ARBOGA IS USUALLY QUITE WRONG.
@@ -297,7 +298,7 @@ declare_weapon(Rb74)
 declare_loadout(
 	{		
 		category			= CAT_AIR_TO_AIR,
-		CLSID				= "{Robot74}",
+		CLSID				= "{Rb74}",
 		attribute			= {wsType_Weapon, wsType_Missile, wsType_Container, wsType_Rb74},
 		wsTypeOfWeapon		= Rb74.wsTypeOfWeapon,
 		Count				= 1,
