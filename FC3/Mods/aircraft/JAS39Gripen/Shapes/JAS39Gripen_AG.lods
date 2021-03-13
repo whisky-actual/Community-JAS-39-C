@@ -1,0 +1,9 @@
+model = {
+	lods = {		
+		{"JAS39Gripen.edm",500.000000};
+		{"JAS39Gripen_lod01.edm",1000.000000};
+		{"JAS39Gripen_lod02.edm",5000.000000};
+		{"JAS39Gripen_lod03.edm",50000.000000};	
+	};
+	collision_shell = "JAS39Gripen-collision.edm";
+}
