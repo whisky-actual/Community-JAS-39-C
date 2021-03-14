@@ -1,7 +1,0 @@
-model = {
-    lods = {
-        {"JF-17_lod0.edm",1500.000000};
-        {"JF-17_lod4.edm",50000.000000};
-    };
-    collision_shell = "JF-17-collision.edm";
-}
