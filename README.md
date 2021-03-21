@@ -9,11 +9,11 @@ Join us on Discord: https://discord.gg/5zDYvz7s6D
 
 ## Contributing Developers
 
-Breadmaker91, Currenthill, Double Tap, FatSpacePanda, Luiz Renaultr, Neon, Ulvar40, Vinedog, Cdpkobra, Jerec, Whisky.Actual
+Breadmaker91, Currenthill, Double Tap, FatSpacePanda, Ulvar40, Vinedog, Whisky Actual
 
 ## Special Thanks
 
-(Place Holder)
+Luiz Renaultr, Neon, Jerec, Cdpkobra and Razor+
 
 ## Features
 
@@ -22,7 +22,7 @@ Breadmaker91, Currenthill, Double Tap, FatSpacePanda, Luiz Renaultr, Neon, Ulvar
 
 ### Known Bugs
 
-(Place Holder)
+Find the full list of bugs and enhancements at https://github.com/whisky-actual/Community-JAS-39-C/issues
 
 ## Installation
 
