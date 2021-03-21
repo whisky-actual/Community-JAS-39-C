@@ -51,13 +51,12 @@ mount_vfs_model_path	(current_mod_path.."/Shapes")
 mount_vfs_liveries_path (current_mod_path.."/Liveries")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39Gripen")
 mount_vfs_texture_path  (current_mod_path.."/Textures/Weapon_textures")
-mount_vfs_texture_path  (current_mod_path.."/Textures/DEVRiM_DCS_SU-27_EnglishGrayCockpitMod")
 ----------------------------------------------------------------------------------------
-dofile(current_mod_path.."/LUA/Views_F15Pit.lua")
+dofile(current_mod_path.."/Views_JAS39Gripen.lua")
 make_view_settings('JAS39Gripen', ViewSettings, SnapViews)
 make_flyable('JAS39Gripen',current_mod_path..'/Cockpit/KneeboardRight/',{nil, old = 6}, current_mod_path..'/comm.lua')--SFM
 -------------------------------------------------------------------------------------
-dofile(current_mod_path.."/LUA/Views_SU27Pit.lua")
+dofile(current_mod_path.."/Views_JAS39Gripen_AG.lua")
 make_view_settings('JAS39Gripen_AG', ViewSettings, SnapViews)
 make_flyable('JAS39Gripen_AG',current_mod_path..'/Cockpit/KneeboardRight/',{nil, old = 54}, current_mod_path..'/comm.lua')--SFM
 -------------------------------------------------------------------------------------
@@ -65,5 +64,6 @@ dofile(current_mod_path..'/JAS39Gripen.lua')
 dofile(current_mod_path..'/JAS39Gripen_AG.lua')
 -------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Weapons/Loadout_A2A.lua")
+dofile(current_mod_path.."/Weapons/Loadout_A2G.lua")
 -------------------------------------------------------------------------------------
 plugin_done()

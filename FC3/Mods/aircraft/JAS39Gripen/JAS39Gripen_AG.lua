@@ -1,8 +1,7 @@
 local tips 		= {
-	{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
-    { CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0}, --AIM_120C
+	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	
 	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}" ,arg_increment = 0.0}, -- smoke gen green
@@ -13,16 +12,12 @@ local tips 		= {
 }
 
 local outboard 	= {
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120C
+	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	
+	{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
+	{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
+	
 	
 	{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA46}" ,arg_increment = 0.8}, -- agm-65d
 	{ CLSID = "{39821727-F6E2-45B3-B1F0-490CC8921D1E}" ,arg_increment = 0.8}, -- gbu-10 (KAB-1500)
@@ -35,19 +30,15 @@ local outboard 	= {
 }
 
 local inboard 	= {
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
-	{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120B
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
+	{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
+	{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
+	
+	{ CLSID = 'JAS-AGM65K', arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K
+	{ CLSID = 'JAS-AGM65G', arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65G
 
-	{ CLSID = "{jas39_1100_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1100 Liter
-	{ CLSID = "{jas39_1700_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1700 Liter
+	{ CLSID = "JAS_TANK1100" 						,arg_increment = 0.8}, --Gripen Fuel tank 1100 Liter
+	{ CLSID = "JAS_TANK1700" 						,arg_increment = 0.8}, --Gripen Fuel tank 1700 Liter
+	
 	{ CLSID = "{B4FC81C9-B861-4E87-BBDC-A1158E648EBF}" ,arg_increment = 0.8}, -- Kh-29T aka RBS-15
 	{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA46}" ,arg_increment = 0.8}, -- agm-65d
 	{ CLSID = "{39821727-F6E2-45B3-B1F0-490CC8921D1E}" ,arg_increment = 0.8}, -- gbu-10 (KAB-1500)
@@ -166,12 +157,12 @@ JAS39Gripen_AG =  {
 	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", "Datalink", "Link16"},
 	Categories= {"{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor",},
 	
-		M_empty						=	13380,	-- kg  with pilot and nose load, F15
-		M_nominal					=	19000,	-- kg (Empty Plus Full Internal Fuel)
-		M_max						=	30845,	-- kg (Maximum Take Off Weight)
-		M_fuel_max					=	6103,	-- kg (Internal Fuel Only)
-		H_max						=	18300,	-- m  (Maximum Operational Ceiling)
-		average_fuel_consumption	=	0.271,
+		M_empty						=	6880,	-- kg  with pilot and nose load, JAS 39C
+		M_nominal					=	9430,	-- kg (Empty Plus Full Internal Fuel)
+		M_max						=	14000,	-- kg (Maximum Take Off Weight)
+		M_fuel_max					=	2550,	-- kg (Internal Fuel Only)
+		H_max						=	16000,	-- m  (Maximum Operational Ceiling)
+		average_fuel_consumption	=	0.021,
 		CAS_min						=	58,		-- Minimum CAS speed (m/s) (for AI)
 		V_opt						=	220,	-- Cruise speed (m/s) (for AI)
 		V_take_off					=	61,		-- Take off speed in m/s (for AI)
@@ -199,24 +190,24 @@ JAS39Gripen_AG =  {
 		Ny_max						=	8,		-- Max G (for AI)
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
-		wing_area					=	56.5,	-- wing area in m2
-		thrust_sum_max				=	13347,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	21952,	-- thrust in kgf (95.1 kN)
+		wing_area					=	30,	-- wing area in m2
+		thrust_sum_max				=	5200,	-- thrust in kgf (64.3 kN)
+		thrust_sum_ab				=	8566,	-- thrust in kgf (95.1 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
-		Mach_max					=	2.5,	-- Max speed in Mach (for AI)
+		Mach_max					=	2,	-- Max speed in Mach (for AI)
 		range						=	2540,	-- Max range in km (for AI)
-		RCS							=	5,		-- Radar Cross Section m2
+		RCS							=	1.0,		-- Radar Cross Section m2
 		Ny_max_e					=	8,		-- Max G (for AI)
 		detection_range_max			=	250,
-		IR_emission_coeff			=	0.91,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
-		IR_emission_coeff_ab		=	4,		-- With afterburner
+		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
+		IR_emission_coeff_ab		=	1.33,		-- With afterburner
 		tand_gear_max				=	3.73,--XX  1.732 FA18 3.73, 
 		tanker_type					=	2,--F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
-		wing_span					=	8.70,	--XX  wing spain in m
+		wing_span					=	8.40,	--XX  wing spain in m
 		wing_type 					= 	0,		-- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
-		length						=	19.43,
-		height						=	5.63,
+		length						=	14.1,
+		height						=	4.5,
 		crew_size					=	1, --XX
 		engines_count				=	1, --XX
 		wing_tip_pos 				= 	{-3.404,	-0.164,	4.05},
@@ -464,78 +455,85 @@ Guns = {gun_mount("BK_27", { count = 180 },{muzzle_pos = {3.10000, -0.300000, -0
     },	
 	DefaultTask = aircraft_task(FighterSweep),
 
-	SFM_Data = {
-	aerodynamics = --F15
-		{
-			Cy0	=	0,
-			Mzalfa	=	6,
-			Mzalfadt	=	1,
-			kjx = 2.95,
-			kjz = 0.00125,
-			Czbe = -0.016,
-			cx_gear = 0.0268,
-			cx_flap = 0.06,
-			cy_flap = 0.4,
-			cx_brk = 0.06,
-			table_data = 
-			{
-			--      M	 Cx0		 Cya		 B		 B4	      Omxmax	Aldop	Cymax
-				{0.0,	0.0215,		0.055,		0.08,		0.22,	0.65,	25.0,	1.2 	},
-				{0.2,	0.0215,		0.055,		0.08,		0.22,	1.80,	25.0,	1.2     },
-				{0.4,	0.0215,		0.055,		0.08,	   	0.22,	3.00,	25.0,	1.2     },
-				{0.6,	0.0215,		0.055,		0.05,		0.28,	4.20,	25.0,	1.2     },
-				{0.7,	0.0215,		0.055,		0.05,		0.28,	4.20,	23.0,	1.15    },
-				{0.8,	0.0215,		0.055,		0.05,		0.28,	4.20,	21.7,	1.1     },
-				{0.9,	0.0230,		0.058,		0.09,		0.20,	4.20,	20.1,	1.07    },
-				{1.0,	0.0320,		0.062,		0.17,		0.15,	4.20,	18.9,	1.04    },
-				{1.1,	0.0430,		0.062,	   	0.235,		0.09,	3.78,	17.4,	1.02    },
-				{1.2,	0.0460,		0.062,	   	0.285,		0.08,	2.94,	17.0,	1.00 	},		
-				{1.3,	0.0470,		0.06,	   	0.29,		0.10,	2.10,	16.0,	0.92 	},				
-				{1.4,	0.0470,		0.056,	   	0.3,		0.136,	1.80,	15.0,	0.80 	},					
-				{1.6,	0.0470,		0.052,	   	0.34,		0.21,	1.08,	13.0,	0.7 	},					
-				{1.8,	0.0460,		0.042,	   	0.34,		2.43,	0.96,	12.0,	0.55 	},		
-				{2.2,	0.0420,		0.037,	   	0.49,		3.5,	0.84,	 10.0,	0.37 	},					
-				{2.5,	0.0420,		0.033,		0.6,		4.7,	0.84,	 9.0,	0.3 	},		
-				{3.9,	0.0400,		0.023,		0.9,		6.0,	0.84,	 7.0,	0.2		},
-			}, -- end of table_data
-		}, -- end of aerodynamics
+SFM_Data = {
+        aerodynamics = { -- Cx = Cx_0 + Cy^2*B2 +Cy^4*B4
+   
+            Cy0        = 0,      -- zero AoA lift coefficient
+            Mzalfa     = 4.54,  -- coefficients for pitch agility
+            Mzalfadt   = 0.8,    -- coefficients for pitch agility
+            kjx        = 2.75,
+            kjz        = 0.00125,
+            Czbe       = -0.016, -- coefficient, along Z axis (perpendicular), affects yaw, negative value means force orientation in FC coordinate system
+            cx_gear    = 0.03,    -- coefficient, drag, gear
+            cx_flap    = 0.05,   -- coefficient, drag, full flaps
+            cy_flap    = 0.47,    -- coefficient, normal force, lift, flaps
+            cx_brk     = 0.08,   -- coefficient, drag, breaks
+            table_data = {
+	
+                --          M       Cx0      Cya    B      B4  Omxmax  Aldop   Cymax
+                [1]  = { 0.000, 0.025, 0.068, 0.132, 0.032, 0.48, 27.000, 1.2 },
+                [2]  = { 0.200, 0.025, 0.068, 0.132, 0.032, 1.47, 26.500, 1.2 },
+                [3]  = { 0.400, 0.024, 0.07, 0.133, 0.032, 2.4, 25.500, 1.2 },
+                [4]  = { 0.600, 0.024, 0.072, 0.133, 0.043, 3.5, 25.000, 1.2 },
+                [5]  = { 0.700, 0.025, 0.074, 0.134, 0.045, 3.5, 25.000, 1.2 },
+                [6]  = { 0.800, 0.024, 0.080, 0.135, 0.052, 3.5, 25.000, 1.2 },
+                [7]  = { 0.900, 0.032, 0.081, 0.135, 0.058, 3.5, 25.000, 1.15 },
+                [8]  = { 1.000, 0.050, 0.083, 0.252, 0.10, 2.5, 21.250, 1.12 },
+                [9]  = { 1.050, 0.045, 0.084, 0.320, 0.095, 2.304, 19.375, 1.1 },
+                [10] = { 1.100, 0.040, 0.091, 0.387, 0.09, 2.261, 17.500, 1.05 },
+                [11] = { 1.200, 0.036, 0.095, 0.410, 0.12, 2.178, 15.625, 1.00 },
+                [12] = { 1.300, 0.026, 0.096, 0.427, 0.17, 1.979, 13.750, 0.912 },
+                [13] = { 1.500, 0.026, 0.090, 0.452, 0.20, 1.609, 10.000, 0.740 },
+                [14] = { 1.700, 0.026, 0.093, 0.432, 0.30, 1.469, 10.000, 0.800 },
+                [15] = { 1.850, 0.027, 0.092, 0.432, 0.38, 1.401, 10.000, 0.700 },
+                [16] = { 2.000, 0.028, 0.090, 0.400, 3.20, 1.269, 10.000, 0.600 },
+																															   
+            }, -- end of table_data
+            -- M    - Mach number
+            -- Cx0    - Coefficient, drag, profile, of the airplane
+            -- Cya    - Normal force coefficient of the wing and body of the aircraft in the normal direction to that of flight. Inversely proportional to the available G-loading at any Mach value. (lower the Cya value, higher G available) per 1 degree AOA
+            -- B    - Polar quad coeff
+            -- B4    - Polar 4th power coeff
+            -- Omxmax    - roll rate, rad/s
+            -- Aldop    - Alfadop Max AOA at current M - departure threshold
+            -- Cymax    - Coefficient, lift, maximum possible (ignores other calculations if current Cy > Cymax)
+}, -- end of aerodynamics
 		engine = 
 		{
 			Nmg	=	67.5,
-			MinRUD	=	0,
+			MinRUD	=	0.1,
 			MaxRUD	=	1,
 			MaksRUD	=	0.85,
 			ForsRUD	=	0.91,
 			type	=	"TurboJet",
-			hMaxEng	=	19.5,
-			dcx_eng	=	0.0114,
+			hMaxEng	=	19,
+			dcx_eng	=	0.0144,
 			cemax	=	1.24,
 			cefor	=	2.56,
-			dpdh_m	=	6000,
-			dpdh_f	=	14000.0,
-			table_data = {
-			--   M		Pmax		 Pfor
-				{0.0,	115000,		212000},
-				{0.2,	 94000,		200000},
-				{0.4,	 92000,		205000},
-				{0.6,	103000,		207000},
-				{0.7,	105000,		210000},
-				{0.8,	105000,		220000},
-				{0.9,	105000,		235000},
-				{1.0,	107000,		250000},
-				{1.1,	103000,		258000},
-				{1.2,	 94000,		268000},
-				{1.3,	 84000,		285000},
-				{1.4,	 71000,		300000},
-				{1.6,	 34000,		318000},
-				{1.8,	 19000,		337000},
-				{2.2,	 17000,		370000},
-				{2.5,	 19000,		390000},
-				{3.9,	 82000,		310000},
+			dpdh_m	=	3500,
+			dpdh_f	=	6500,
+			table_data = 
+			{
+				[1] = 	{0,	68000,	140000},
+				[2] = 	{0.2,	68000,	140000},
+				[3] = 	{0.4,	73000,	140000},
+				[4] = 	{0.6,	80000,	137000},
+				[5] = 	{0.7,	92000,	140000},
+				[6] = 	{0.8,	90000,	145000},
+				[7] = 	{0.9,	86000,	143000},
+				[8] = 	{1,	60000,	143000},
+				[9] = 	{1.11,	27000,	145000},
+				[10] = 	{1.2,	13000,	149000},
+				[11] = 	{1.3,	7000,	145000},
+				[12] = 	{1.4,	5000,	147000},
+				[13] = 	{1.6,	3000,	149000},
+				[14] = 	{1.8,	2000,	145000},
+				[15] = 	{2.2,	1500,	113000},
+				[16] = 	{2.35,	1000,	94000},
+				[17] = 	{3.9,	0,	30000},
 			}, -- end of table_data
 		}, -- end of engine
 	},
-
 
 	--damage , index meaning see in  Scripts\Aircrafts\_Common\Damage.lua
 	Damage = {
