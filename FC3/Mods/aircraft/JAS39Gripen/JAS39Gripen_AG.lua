@@ -1,7 +1,6 @@
 local tips 		= {
 	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
-	
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L	
 	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}" ,arg_increment = 0.0}, -- smoke gen green
@@ -13,8 +12,7 @@ local tips 		= {
 
 local outboard 	= {
 	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
-	
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L	
 	{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
 	{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
 	
@@ -69,6 +67,8 @@ local fuselageRight	= {
 	{ CLSID = "{FAAFA032-8996-42BF-ADC4-8E2C86BCE536}" ,arg_increment = 0.8},
 	{ CLSID = "{40AB87E8-BEFB-4D85-90D9-B2753ACF9514}" ,arg_increment = 0.8},
 	{ CLSID = "{B5CA9846-776E-4230-B4FD-8BCC9BFB1676}" ,arg_increment = 0.8},
+	{ CLSID = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}" }, -- ALQ-131
+	{ CLSID = "ALQ_184" }, -- ALQ-184	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
 
