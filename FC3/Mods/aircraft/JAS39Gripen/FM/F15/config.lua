@@ -2,8 +2,10 @@
 --[[ --------------------------------------------------------------- ]]--
 
 F15FM = {
-center_of_mass		= {-0.172  ,  -0.6,	   0},--x,y,z
-moment_of_inertia 	= {38912  ,254758,223845,-705},--Ix,Iy,Iz,Ixy
+--center_of_mass		= {-0.172  ,  -0.6,	   0},--x,y,z
+--moment_of_inertia 	= {38912  ,254758,223845,-705},--Ix,Iy,Iz,Ixy 
+center_of_mass    = { 0.05, 0.0, 0.0},
+moment_of_inertia = {12793.0, 82531.8, 75190, 1081.0},
 suspension 			= {
 	  { -- NOSE WHEEL
 		  self_attitude     = true,
@@ -90,8 +92,8 @@ disable_built_in_oxygen_system	= true,
 -- END -- this part of the file is not intended for an end-user editing
 
 -- view shake amplitude
-minor_shake_ampl = 0.21,
-major_shake_ampl = 0.5,
+minor_shake_ampl = 0.125,
+major_shake_ampl = 0.25,
 
 -- debug
 debugLine = "{M}:%1.3f {IAS}:%4.1f {AoA}:%2.1f {ny}:%2.1f {nx}:%1.2f {AoS}:%2.1f {mass}:%2.1f {Fy}:%2.1f {Fx}:%2.1f {wx}:%.1f {wy}:%.1f {wz}:%.1f {Vy}:%2.1f {dPsi}:%2.1f",
