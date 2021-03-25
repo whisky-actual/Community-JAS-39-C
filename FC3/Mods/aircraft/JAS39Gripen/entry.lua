@@ -51,6 +51,7 @@ mount_vfs_model_path	(current_mod_path.."/Shapes")
 mount_vfs_liveries_path (current_mod_path.."/Liveries")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39Gripen")
 mount_vfs_texture_path  (current_mod_path.."/Textures/Weapon_textures")
+mount_vfs_texture_path  (current_mod_path.."/Textures/Cockpit_textures")
 ----------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Views_JAS39Gripen.lua")
 make_view_settings('JAS39Gripen', ViewSettings, SnapViews)
@@ -66,4 +67,6 @@ dofile(current_mod_path..'/JAS39Gripen_AG.lua')
 dofile(current_mod_path.."/Weapons/Loadout.lua")
 
 -------------------------------------------------------------------------------------
+--dofile(current_mod_path.."/Cockpit/Scripts/Hud_size.lua")
+
 plugin_done()

@@ -82,8 +82,12 @@ join(res.axisCommands,{
 {action = iCommandPlaneMFDZoomAbs 			, name = _('MFD Range')},
 {action = iCommandPlaneBase_DistanceAbs 	, name = _('Base/Distance')},
 
-{action = iCommandWheelBrake,		name = _('Wheel Brake')},
-{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left')},
-{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right')},
+--{action = iCommandWheelBrake,		name = _('Wheel Brake')},
+--{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left')},
+--{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right')},
+{action = B_BRAKE,		                        name = _('Wheel Brake Both')},
+    {action = L_BRAKE,		                        name = _('Wheel Brake Left')},
+    {action = R_BRAKE,		                        name = _('Wheel Brake Right')},
+
 })
 return res
