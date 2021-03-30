@@ -19,16 +19,19 @@ local outboard 	= {
 --				
 
 --				=== Air to ground missiles ===
-                { CLSID = "JAS_C-701T", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K
-				{ CLSID = "JAS_C-701IR", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65G				
-				{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2								
-				{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
+                { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
+				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
+				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
+				--{ CLSID = "{BK90MJ1}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1
+				--{ CLSID = "{BK90MJ2}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
+				--{ CLSID = "{BK90}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
+				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
 
 --				=== Antiship missiles ===
-				{ CLSID = "JAS_C-802AK", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
+				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
 				
 --				=== Anti radiation missiles ===
-				{ CLSID = "JAS_LD-10", arg_increment = 0.5 }, -- MAR-1
+				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
 						
 --			    === Guided bombs ===
                 { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
@@ -46,7 +49,7 @@ local outboard 	= {
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
 				
 --				=== Guided rockets ===
-				{ CLSID = "JAS_BRM1_90", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5, forbidden = {{station = 3, loadout = {"JAS_BRM1_90"}}} }, -- Brimstone
+				{ CLSID = "JAS_BRM1_90", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
 				
 --				=== Remove pylon ===		
 				{ CLSID = "<CLEAN>", arg_increment = 1},
@@ -55,18 +58,19 @@ local outboard 	= {
 local inboard 	= {
 				
 --				=== Air to ground missiles ===
-                { CLSID = "JAS_C-701T", arg_increment = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- AGM-65K
-				{ CLSID = "JAS_C-701IR", arg_increment = 0.1 , attach_point_position = {0.0, -0.30, 0.0} }, -- AGM-65G
-                { CLSID = "JAS_GB6", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2									
-				{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
-				{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
+                { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
+				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
+				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
+                { CLSID = "JAS_Stormshadow", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
+				--{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2									
+				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
+				--{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 				
 --				=== Antiship missiles ===
-				{ CLSID = "JAS_C-802AK", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
+				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
 
 --				=== Anti radiation missiles ===
-				{ CLSID = "JAS_LD-10", arg_increment = 0.5 }, -- MAR-1
+				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
 
 --			    === Guided bombs ===
                 { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
@@ -90,22 +94,25 @@ local inboard 	= {
 				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
 
 --				=== Guided rockets ===
-				{ CLSID = "JAS_BRM1_90", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5, forbidden = {{station = 2, loadout = {"JAS_BRM1_90"}}, {station = 2, loadout = {"JAS_SD-10_DUAL_L"}}} }, -- Brimstone
+				{ CLSID = "JAS_BRM1_90", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
 				
 --				=== Remove pylon ===		
 				{ CLSID = "<CLEAN>", arg_increment = 1},
 }
 
 local fuselageLeft	= {
+
 	--
 }
 
 local fuselageRight	= {
-{ CLSID = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}" }, -- ALQ-131
-{ CLSID = "ALQ_184" }, -- ALQ-184	
+--{ CLSID = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}" }, -- ALQ-131
+--{ CLSID = "ALQ_184" }, -- ALQ-184	
 
 { CLSID = "JAS_WMD7", arg_increment = 0.5 },
-{ CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
+--{ CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
+{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
+{CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",arg_increment = 0.5,},-- L-081 Fantasmagoria ELINT pod
 	
 }
 
@@ -114,10 +121,10 @@ local centerline 	= {
 					
 
 --				=== Air to ground missiles ===
-                { CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C				
-				{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
-				{ CLSID = "JAS_GB6", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
+               -- { CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C				
+				--{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
+				{ CLSID = "JAS_Stormshadow", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
+				--{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 
 --			    === Guided bombs ===
                 { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
@@ -137,7 +144,7 @@ local centerline 	= {
 				
 --				=== Pods ===
                 { CLSID = "JAS_WMD7", arg_increment = 0.5 },
-                { CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
+               -- { CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
 				
 --				=== Guided rockets ===
 				{ CLSID = "JAS_BRM1_90", attach_point_position = {0.0, 0.02, 0.0}, arg_increment = 0.5 }, -- Brimstone
@@ -150,6 +157,8 @@ local centerline 	= {
 local ECM_ELINT 	= {
 	{ CLSID = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}" }, --L005 Sorbtsiya ECM pod (left)
 	{ CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",attach_point_position = {0, 0 ,0 } },-- ELINT
+	{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
+
 	{ CLSID = "{INV-SMOKE-RED}		"},		--Smoke Generator - red
 	{ CLSID = "{INV-SMOKE-GREEN}	"},		--Smoke Generator - green
 	{ CLSID = "{INV-SMOKE-BLUE}		"},		--Smoke Generator - blue
