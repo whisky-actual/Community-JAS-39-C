@@ -2,7 +2,7 @@ local stormshadow = {
 
 	category		= CAT_MISSILES,
 	name			= "stormshadow",
-	user_name		= _("stormshadow"),
+	user_name		= _("Stormshadow"),
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",
 	class_name		= "wAmmunitionSelfHoming",

@@ -2,7 +2,7 @@ local rb15 = {
 
 	category		= CAT_MISSILES,
 	name			= "rb15",
-	user_name		= _("rb15"),
+	user_name		= _("Rb-15F MK4"),
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",
 	class_name		= "wAmmunitionSelfHoming",

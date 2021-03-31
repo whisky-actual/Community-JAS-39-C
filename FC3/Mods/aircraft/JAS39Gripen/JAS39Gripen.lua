@@ -219,10 +219,14 @@ JAS39Gripen =  {
 			{
 				pos = 	{-6.231,	0.268,	0},-- Tribwerke   -5.231,	-0.468,	0
 				elevation	=	0,-- AFB cone elevation  winkel nach oben unten
-				diameter	=	1.0,-- AFB cone diameter   Kreis Ø
-				exhaust_length_ab	=	9.0,--lenght in m  Kreis Ø kegel efekt
-				exhaust_length_ab_K	=	0.707,--animation geschwindigkeit
-				smokiness_level     = 	0.01, --0.05
+				diameter    =   1.05,-- AFB cone diameter   Kreis Ø --1.0
+                exhaust_length_ab   =   10,--lenght in m  Kreis Ø kegel efekt
+                exhaust_length_ab_K =   0.707,--animation geschwindigkeit
+                smokiness_level     =   0.01, --0.05
+				afterburner_circles_count = 11,
+				afterburner_circles_pos = {0.2, 0.8},
+				afterburner_circles_scale = 0.95,
+				afterburner_effect_texture = "afterburner_gripen",
 			}, -- end of [1]
 		}, -- end of engines_nozzles
 		crew_members = 
@@ -258,16 +262,10 @@ JAS39Gripen =  {
 		
 		chaff_flare_dispenser = 
 		{
-			[1] = 
-			{
-				dir = 	{0,	1,	0},--0,	1,	0  vorne
-				pos = 	{-2.776,	-1.0,	-0.422},---5.776,	1.4,	-0.422
-			}, -- end of [1]
-			[2] = 
-			{
-				dir = 	{0,	1,	0},--0,	1,	0
-     			pos = 	{-2.776,	-1.0,	0.422},---5.776,	1.4,	0.422
-			}, -- end of [2]
+		[1] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Flares L
+        [2] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, -0.85}, }, -- Flares R
+        [3] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Chaffs L
+        [4] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4	, -0.85}, }, -- Chaffs R
 		}, -- end of chaff_flare_dispenser
 
         -- Countermeasures
@@ -493,23 +491,23 @@ SFM_Data = {
 			dpdh_f	=	6500,
 			table_data = 
 			{
-				[1] = 	{0,		68000,	140000},
-				[2] = 	{0.2,	68000,	140000},
-				[3] = 	{0.4,	73000,	140000},
-				[4] = 	{0.6,	80000,	137000},
-				[5] = 	{0.7,	92000,	140000},
-				[6] = 	{0.8,	90000,	145000},
-				[7] = 	{0.9,	86000,	143000},
-				[8] = 	{1,		60000,	143000},
-				[9] = 	{1.11,	27000,	145000},
-				[10] = 	{1.2,	13000,	149000},
-				[11] = 	{1.3,	7000,	145000},
-				[12] = 	{1.4,	5000,	147000},
-				[13] = 	{1.6,	3000,	149000},
-				[14] = 	{1.8,	2000,	145000},
+				[1] = 	{0,	68000,	128436},
+				[2] = 	{0.2,	68000,	128436},
+				[3] = 	{0.4,	73000,	128436},
+				[4] = 	{0.6,	80000,	125683},
+				[5] = 	{0.7,	92000,	128436},
+				[6] = 	{0.8,	90000,	133023},
+				[7] = 	{0.9,	86000,	131188},
+				[8] = 	{1,		60000,	131188},
+				[9] = 	{1.11,	27000,	133023},
+				[10] = 	{1.2,	13000,	136692},
+				[11] = 	{1.3,	7000,	133023},
+				[12] = 	{1.4,	5000,	134857},
+				[13] = 	{1.6,	3000,	136692},
+				[14] = 	{1.8,	2000,	133023},
 				[15] = 	{2.2,	1500,	113000},
 				[16] = 	{2.35,	1000,	94000},
-				[17] = 	{3.9,	0,		30000},
+				[17] = 	{3.9,	0,	30000},
 			}, -- end of table_data
 		}, -- end of engine
 	},

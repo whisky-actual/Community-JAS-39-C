@@ -1,25 +1,24 @@
-
-local aaq28_name = 'LDP Litening III'
-local pylon_mass = 1.0
+local AAQ_name = 'Litening III POD (LLTV)'
+local pylon_mass = 50.0
 
 declare_loadout(
 {
     category    = CAT_PODS,
-    displayName = _(aaq28_name),
-    Picture     = "aaq-28.png",
-    attribute   = {wsType_Weapon,wsType_GContainer,wsType_Control_Cont,WSTYPE_PLACEHOLDER},
-    CLSID       = "JAS_WMD7",
+    displayName = _(AAQ_name),
+    Picture     = "AAQ-28.png",
+    attribute    =    {4,    15,    44,    19},
+    CLSID       = "JAS_Litening",
     
-    Weight = 208 + pylon_mass,
-    Cx_pil = 0.00105,--0.002197266, -- Ragnar: I've calculated it to be exactly this much // changed to F-5 tank Cx -- Teo// testing
+    Weight = 245 + pylon_mass,
+    Cx_pil = 0.00105,
     shape_table_data =
     {
         {
-            name = aaq28_name,
-            file = "aaq-28 litening",
+            name = AAQ_name,
+            file = "AAQ",
             life = 1,
             fire = { 0, 1},
-            username = aaq28_name,
+            username = AAQ_name,
             index = WSTYPE_PLACEHOLDER,
         },
     },
@@ -27,7 +26,7 @@ declare_loadout(
     {
         [1] = {
             Position = {0, 0, 0},
-            ShapeName = "aaq-28 litening",
+            ShapeName = "kingal",
         },
     },
 }

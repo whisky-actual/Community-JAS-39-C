@@ -1,3 +1,0 @@
-FC3v0.0.1 : start of versioning
-
-FC3v0.0.2 : Added first guided Ag missiles, still wip

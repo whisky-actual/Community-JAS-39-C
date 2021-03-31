@@ -14,9 +14,9 @@ dofile(current_mod_path .. '/Weapons/Loadouts/bomb_m71.lua')
 -- jsow
 --dofile(current_mod_path .. '/Weapons/Loadouts/jsow_ls6.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gb6.lua')
---dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk90.lua') --*
+dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua') --*
 dofile(current_mod_path .. '/Weapons/Loadouts/jsow_agm154c.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu31.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk_90.lua')
 
 -- rock
 --dofile(current_mod_path .. '/Weapons/Loadouts/rkt_brm1.lua')
@@ -36,7 +36,7 @@ dofile(current_mod_path .. '/Weapons/Loadouts/rkt_brimstone.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/mils_pl8.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/mils_akd.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_mar-1.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_agm-65g.lua')
+--dofile(current_mod_path .. '/Weapons/Loadouts/mils_agm-65g.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_iris-t.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb74.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_meteor.lua')

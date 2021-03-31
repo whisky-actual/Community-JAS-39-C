@@ -22,9 +22,9 @@ local outboard 	= {
                 { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
 				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
 				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
-				--{ CLSID = "{BK90MJ1}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1
-				--{ CLSID = "{BK90MJ2}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
-				--{ CLSID = "{BK90}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
+				{ CLSID = "JAS_BK90_MJ1", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1
+				{ CLSID = "JAS_BK90_MJ2", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
+				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
 				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
 
 --				=== Antiship missiles ===
@@ -62,9 +62,9 @@ local inboard 	= {
 				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
 				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
                 { CLSID = "JAS_Stormshadow", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				--{ CLSID = "JAS_GB6_HE", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2									
+				--{ CLSID = "", arg_increment = 0.5 }, -- BK 90									
 				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
-				--{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
+				{ CLSID = "JAS_GBU31", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 				
 --				=== Antiship missiles ===
 				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
@@ -109,10 +109,10 @@ local fuselageRight	= {
 --{ CLSID = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}" }, -- ALQ-131
 --{ CLSID = "ALQ_184" }, -- ALQ-184	
 
-{ CLSID = "JAS_WMD7", arg_increment = 0.5 },
+{ CLSID = "JAS_Litening", arg_increment = 0.5 },
 --{ CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
-{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
-{CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",arg_increment = 0.5,},-- L-081 Fantasmagoria ELINT pod
+--{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
+--{CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",arg_increment = 0.5,},-- L-081 Fantasmagoria ELINT pod
 	
 }
 
@@ -157,7 +157,7 @@ local centerline 	= {
 local ECM_ELINT 	= {
 	{ CLSID = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}" }, --L005 Sorbtsiya ECM pod (left)
 	{ CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",attach_point_position = {0, 0 ,0 } },-- ELINT
-	{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
+	
 
 	{ CLSID = "{INV-SMOKE-RED}		"},		--Smoke Generator - red
 	{ CLSID = "{INV-SMOKE-GREEN}	"},		--Smoke Generator - green
@@ -307,10 +307,14 @@ JAS39Gripen_AG =  {
 			{
 				pos = 	{-6.231,	0.268,	0},-- Tribwerke   -5.231,	-0.468,	0
 				elevation	=	0,-- AFB cone elevation  winkel nach oben unten
-				diameter	=	1.0,-- AFB cone diameter   Kreis Ø
-				exhaust_length_ab	=	9.0,--lenght in m  Kreis Ø kegel efekt
-				exhaust_length_ab_K	=	0.707,--animation geschwindigkeit
-				smokiness_level     = 	0.01, --0.05
+				diameter    =   1.05,-- AFB cone diameter   Kreis Ø --1.0
+                exhaust_length_ab   =   10,--lenght in m  Kreis Ø kegel efekt
+                exhaust_length_ab_K =   0.707,--animation geschwindigkeit
+                smokiness_level     =   0.01, --0.05
+				afterburner_circles_count = 11,
+				afterburner_circles_pos = {0.2, 0.8},
+				afterburner_circles_scale = 0.95,
+				afterburner_effect_texture = "afterburner_gripen",
 			}, -- end of [1]
 		}, -- end of engines_nozzles
 		crew_members = 
@@ -346,16 +350,10 @@ JAS39Gripen_AG =  {
 		
 		chaff_flare_dispenser = 
 		{
-			[1] = 
-			{
-				dir = 	{0,	1,	0},--0,	1,	0  vorne
-				pos = 	{-2.776,	-1.0,	-0.422},---5.776,	1.4,	-0.422
-			}, -- end of [1]
-			[2] = 
-			{
-				dir = 	{0,	1,	0},--0,	1,	0
-     			pos = 	{-2.776,	-1.0,	0.422},---5.776,	1.4,	0.422
-			}, -- end of [2]
+		[1] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Flares L
+        [2] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, -0.85}, }, -- Flares R
+        [3] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Chaffs L
+        [4] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4	, -0.85}, }, -- Chaffs R
 		}, -- end of chaff_flare_dispenser
 
         -- Countermeasures
@@ -363,7 +361,7 @@ passivCounterm 		= {
 CMDS_Edit 			= true,
 SingleChargeTotal 	= 180,
 chaff 				= {default = 90, increment = 45, chargeSz = 1},
-flare 				= {default = 45, increment = 45, chargeSz = 2}
+flare 				= {default = 45, increment = 45, chargeSz = 1}
  },
 	
         CanopyGeometry 	= {
@@ -589,20 +587,20 @@ SFM_Data = {
 			dpdh_f	=	6500,
 			table_data = 
 			{
-				[1] = 	{0,	68000,	140000},
-				[2] = 	{0.2,	68000,	140000},
-				[3] = 	{0.4,	73000,	140000},
-				[4] = 	{0.6,	80000,	137000},
-				[5] = 	{0.7,	92000,	140000},
-				[6] = 	{0.8,	90000,	145000},
-				[7] = 	{0.9,	86000,	143000},
-				[8] = 	{1,	60000,	143000},
-				[9] = 	{1.11,	27000,	145000},
-				[10] = 	{1.2,	13000,	149000},
-				[11] = 	{1.3,	7000,	145000},
-				[12] = 	{1.4,	5000,	147000},
-				[13] = 	{1.6,	3000,	149000},
-				[14] = 	{1.8,	2000,	145000},
+				[1] = 	{0,	68000,	128436},
+				[2] = 	{0.2,	68000,	128436},
+				[3] = 	{0.4,	73000,	128436},
+				[4] = 	{0.6,	80000,	125683},
+				[5] = 	{0.7,	92000,	128436},
+				[6] = 	{0.8,	90000,	133023},
+				[7] = 	{0.9,	86000,	131188},
+				[8] = 	{1,		60000,	131188},
+				[9] = 	{1.11,	27000,	133023},
+				[10] = 	{1.2,	13000,	136692},
+				[11] = 	{1.3,	7000,	133023},
+				[12] = 	{1.4,	5000,	134857},
+				[13] = 	{1.6,	3000,	136692},
+				[14] = 	{1.8,	2000,	133023},
 				[15] = 	{2.2,	1500,	113000},
 				[16] = 	{2.35,	1000,	94000},
 				[17] = 	{3.9,	0,	30000},
