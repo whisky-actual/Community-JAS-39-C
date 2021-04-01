@@ -1,6 +1,6 @@
 local tips 		= {
-	{ CLSID = "JAS_IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "JAS_Rb74", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
 	--{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
     --{ CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
 	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
@@ -15,10 +15,10 @@ local tips 		= {
 }
 
 local outboard 	= {
-	{ CLSID = "JAS_IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "JAS_Rb74", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
-	{ CLSID = "JAS_Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
-	{ CLSID = "JAS_Meteor_DUAL_L", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	{ CLSID = "Meteor_DUAL_L", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
 	{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
 	
 	
@@ -36,7 +36,7 @@ local outboard 	= {
 }
 
 local inboard 	= {
-{ CLSID = "JAS_Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
 { CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
 	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
 	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
@@ -335,7 +335,6 @@ Guns = {gun_mount("BK_27", { count = 180 },{muzzle_pos = {3.10000, -0.300000, -0
 				connector = "Pylon3",
 			},
 			inboard
-			
 		),
         pylon(3, 0, 0, 0, 0,
 			{
@@ -406,7 +405,6 @@ Guns = {gun_mount("BK_27", { count = 180 },{muzzle_pos = {3.10000, -0.300000, -0
 				connector = "Pylon10",
 			},
 			outboard
-			
 		),
         pylon(10, 0, 0, 0, 0,
 			{

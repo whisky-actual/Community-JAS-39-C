@@ -132,7 +132,7 @@ declare_weapon(Rb74)
 declare_loadout(
 	{		
 		category			= CAT_AIR_TO_AIR,
-		CLSID				= "JAS_Rb74",
+		CLSID				= "{Rb74}",
 		attribute			= {wsType_Weapon, wsType_Missile, wsType_Container, wsType_Rb74},
 		wsTypeOfWeapon		= Rb74.wsTypeOfWeapon,
 		Count				= 1,
