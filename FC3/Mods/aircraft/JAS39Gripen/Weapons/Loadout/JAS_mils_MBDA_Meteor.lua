@@ -274,7 +274,7 @@ MBDA_METEOR.shape_table_data.index = MBDA_METEOR.wsTypeOfWeapon[4]
 
 declare_loadout({
     category    = CAT_AIR_TO_AIR,
-    CLSID       = "Meteor",
+    CLSID       = "JAS_Meteor",
     Picture     = 'meteor.png',
     attribute   = MBDA_METEOR.wsTypeOfWeapon,
     displayName = _(meteor_name),
@@ -298,7 +298,7 @@ declare_loadout({
 
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = 'JAS_SD-10_DUAL_L',
+    CLSID          = 'JAS_Meteor_DUAL_L',
     Picture        = 'meteor.png',
     wsTypeOfWeapon = MBDA_METEOR.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
@@ -333,7 +333,7 @@ declare_loadout({
 
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = 'JAS_SD-10_DUAL_R',
+    CLSID          = 'JAS_Meteor_DUAL_R',
     Picture        = 'meteor.png',
     wsTypeOfWeapon = MBDA_METEOR.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},

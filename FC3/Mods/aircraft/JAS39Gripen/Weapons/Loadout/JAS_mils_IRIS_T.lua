@@ -141,7 +141,7 @@ declare_loadout({
 
 declare_loadout({
     category     = CAT_AIR_TO_AIR,
-    CLSID        = 'DIS_PL-5EII_TIP',
+    CLSID        = "JAS_IRIS-T",
     Picture      = 'irist.png',
     attribute    = IRIST_AA.wsTypeOfWeapon,
     displayName  = _(irist_name),

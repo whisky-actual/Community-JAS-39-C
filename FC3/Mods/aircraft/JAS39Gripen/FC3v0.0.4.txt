@@ -9,3 +9,7 @@ Changed Thrust while in afterburner. -9% to counteract engine spooling up to 109
 Added Litening III pod to replace Mercury LLTV pod. Now called "Litening III LLTV"
 Fixed Displaynames for Mar-1, Rb-15 and Stormshadow
 Added GBU-31 and BK90
+
+FC3v0.0.4 :
+Changed Filenames and CLSIDs to avoid conflict with other modules.
+Removed files that were not in use.
