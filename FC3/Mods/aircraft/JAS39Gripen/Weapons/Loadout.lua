@@ -7,16 +7,18 @@ tail_liquid = { 0.9, 0.9, 0.9, 0.05 };
 dofile(current_mod_path .. '/Weapons/Loadouts/tools.lua')
 
 -- bomb
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_type200.lua')
+
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_misc.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_m71.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_10.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16.lua')
 
 -- jsow
---dofile(current_mod_path .. '/Weapons/Loadouts/jsow_ls6.lua')
---dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gb6.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua') --*
-dofile(current_mod_path .. '/Weapons/Loadouts/jsow_agm154c.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua')
+--dofile(current_mod_path .. '/Weapons/Loadouts/jsow_agm154c.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk_90.lua')
+
 
 -- rock
 --dofile(current_mod_path .. '/Weapons/Loadouts/rkt_brm1.lua')
@@ -53,7 +55,6 @@ dofile(current_mod_path .. '/Weapons/Loadouts/pod_aaq28.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/pod_ews39.lua')
 
 -- fuel
---dofile(current_mod_path .. '/Weapons/Loadouts/fuel_800.lua')
---dofile(current_mod_path .. '/Weapons/Loadouts/fuel_1100.lua')
+
 dofile(current_mod_path .. '/Weapons/Loadouts/fuel_gripen1100.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/fuel_gripen1700.lua')

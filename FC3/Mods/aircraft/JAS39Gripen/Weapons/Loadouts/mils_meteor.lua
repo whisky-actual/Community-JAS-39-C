@@ -298,7 +298,7 @@ declare_loadout({
 
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = 'JAS_SD-10_DUAL_L',
+    CLSID          = "Meteor_DUAL",
     Picture        = 'meteor.png',
     wsTypeOfWeapon = MBDA_METEOR.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
@@ -331,37 +331,4 @@ declare_loadout({
 	JettisonSubmunitionOnly = true,
 })
 
-declare_loadout({
-    category       = CAT_AIR_TO_AIR,
-    CLSID          = 'JAS_SD-10_DUAL_R',
-    Picture        = 'meteor.png',
-    wsTypeOfWeapon = MBDA_METEOR.wsTypeOfWeapon,
-    attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
-    displayName    = _(meteor_name .. ' x 2'),
-    Cx_pil         = 0.000859765625 * 1.31,
-    Count          = 2,
-    Weight         = 2 * meteor_mass + pylon_dual_mass,
-	
-	Elements	=
-	{
-			[1]	=
-			{
-				Position	=	{0,	0,	0},
-				ShapeName	=	"LAU-115C+2_LAU127", IsAdapter = true,
-					},
-			[2]	=
-			{	
-				Rotation	=	{80, 0, 0.5},
-				Position	=	{0.1, -0.065, -0.20},
-				ShapeName	=	"meteor",
-					},
-			[3]	=
-			{
-				Rotation	=	{-80, 0, -0.5},
-				Position	=	{0.1, -0.065, 0.20},
-				ShapeName	=	"meteor",
-					},
-	},
-	
-    JettisonSubmunitionOnly = true,
-})
+

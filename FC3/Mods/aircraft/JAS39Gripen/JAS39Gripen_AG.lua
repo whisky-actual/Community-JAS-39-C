@@ -22,8 +22,8 @@ local outboard 	= {
                 { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
 				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
 				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
-				{ CLSID = "JAS_BK90_MJ1", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1
-				{ CLSID = "JAS_BK90_MJ2", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
+				{ CLSID = "{5335D97A-35A5-4643-9D9B-026C75961E52}", arg_increment = 0.5, Type = 1 }, -- cbu-97
+				--{ CLSID = "{DWS39_MJ2}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
 				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
 				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
 
@@ -34,8 +34,8 @@ local outboard 	= {
 				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
 						
 --			    === Guided bombs ===
-                { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "{0D33DDAE-524F-4A4E-B5B8-621754FE3ADE}", arg_increment = 0.5 }, -- GBU-16
+                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
 								
 --				=== Unguided bombs ===
@@ -73,10 +73,10 @@ local inboard 	= {
 				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
 
 --			    === Guided bombs ===
-                { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "{0D33DDAE-524F-4A4E-B5B8-621754FE3ADE}", arg_increment = 0.5 }, -- GBU-16
+                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10
+				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10
 								
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -86,8 +86,8 @@ local inboard 	= {
 				{ CLSID = "{M71BOMB}", attach_point_position = {-0.70, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
 				
 --				=== Drop tanks ===
-                { CLSID = "JAS_TANK800", arg_increment = 0.1 }, -- External drop tank 1100 litre				
-				{ CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1700 litre
+                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre				
+				{ CLSID = "JAS_TANK1700", arg_increment = 0.1 }, -- External drop tank 1700 litre
 
 --              === Unguided rockets ===
 				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
@@ -127,10 +127,10 @@ local centerline 	= {
 				--{ CLSID = "JAS_GB6_TSP", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 
 --			    === Guided bombs ===
-                { CLSID = "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "{0D33DDAE-524F-4A4E-B5B8-621754FE3ADE}", arg_increment = 0.5 }, -- GBU-16
+                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10
+				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10
 
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -140,7 +140,7 @@ local centerline 	= {
 				{ CLSID = "{M71BOMB}", attach_point_position = {-0.50, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
 
 --              === Drop tanks ===
-                { CLSID = "JAS_TANK800", arg_increment = 0.1 }, -- External drop tank 1100 litre
+                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre
 				
 --				=== Pods ===
                 { CLSID = "JAS_WMD7", arg_increment = 0.5 },

@@ -72,12 +72,8 @@ join(res.axisCommands,{
 {action = iCommandPlaneMFDZoomAbs 			, name = _('I-251 Zoom')},
 {action = iCommandPlaneBase_DistanceAbs 	, name = _('Target Box Size / Funnel target wing span / Gunpod Elevation')},
 
---{action = iCommandWheelBrake,		name = _('Wheel Brake')},
---{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left')},
---{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right')},
-
-{action = B_BRAKE,		                        name = _('Wheel Brake Both')},
-    {action = L_BRAKE,		                        name = _('Wheel Brake Left')},
-    {action = R_BRAKE,		                        name = _('Wheel Brake Right')},
+{action = iCommandWheelBrake,		name = _('Wheel Brake'),		category = {_('Systems')}},
+{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left'),	category = {_('Systems')}},
+{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right'),	category = {_('Systems')}}, 
 })
 return res

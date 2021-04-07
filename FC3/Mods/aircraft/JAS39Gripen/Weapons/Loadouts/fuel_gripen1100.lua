@@ -9,7 +9,7 @@ declare_loadout(
         displayName = _(gripenft1100_name),
         Picture     = "gripentank1100.png",        
         attribute   = {wsType_Air, wsType_Free_Fall, wsType_FuelTank, WSTYPE_PLACEHOLDER},
-        CLSID       = "JAS_TANK800",
+        CLSID       = "JAS_TANK1100",
         
         Weight_Empty = 95 + pylon_mass,
         Weight = 95 + 924 + pylon_mass,

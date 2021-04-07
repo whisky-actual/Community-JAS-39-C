@@ -36,140 +36,16 @@ local function KAB(main, fm, autopilot, tgdata)
 end
 
 
- KAB_1500T = KAB({
-	--main--
-	Name    		= KAB_1500T,
-	name			= "KAB_1500T",
-	type			= 3,
-	model			= "kab-1500t",
-	user_name		= _("KAB-1500Kr"),
-	mass			= 1525,
-	hMax    		= 15000.0,
-    Cx      		= 0.00436,
-	scheme			= "bomb_guided_pn",
-	class_name		= "wAmmunitionSelfHoming",
-   	warhead			= predefined_warhead("KAB_1500F"),
-},
-{	--fm--
-	caliber			= 0.58,
-	cx_coeff        = {1.000000, 0.400000, 0.370000, 0.288000, 1.310000},
-	L               = 4.63,
-	Sw				= 3.4,
-	dCydA			= {0.066, 0.036}
-},
-{	--bang_bang_autopilot--
-	Kg			= 0.25,
-	Ki			= 0.0,
-	finsLimit	= 0.35,
-	delay		= 2.0
-},
-{	--targeting_data--
-	char_time = 20.46
-})
-
-declare_loadout({
-	category 		= CAT_BOMBS,
-	CLSID	 		= "{KAB_1500Kr_LOADOUT}",
-	attribute		= KAB_1500T.wsTypeOfWeapon,
-	Count 			= 1,
-	Cx_pil			= KAB_1500T.Cx,
-	Picture			= "kab1500kr.png",
-	displayName		= KAB_1500T.user_name,
-	Weight			= KAB_1500T.mass,
-	Elements  		= {{ShapeName = "kab-1500t"}},
-})
-
-
-local KAB_1500LG =
-{
-	category		= CAT_BOMBS,
-	wsTypeOfWeapon	= {wsType_Weapon, wsType_Bomb, wsType_Bomb_Guided, WSTYPE_PLACEHOLDER},
-	type			= 4,
-	mass			= 1525.0,
-	hMin			= 1000.0,
-	hMax			= 10000.0,
-	Cx				= 0.00133,
-	VyHold			= -80.0,
-	Ag				= -1.0,
-	
-	name			= "KAB_1500LG",
-	model			= "kab-1500lg",
-	user_name		= _("KAB-1500LG-Pr"),
-	scheme			= "bomb-paveway-III-afm",
-	class_name		= "wAmmunitionLaserHoming",
-	
-	warhead			= predefined_warhead("KAB_1500Kr"),
-	
-	fm =
-    {
-        mass			= 1525,
-		wind_time		= 1000.0,
-		wind_sigma		= 0,
-		A				= 0.6,
-		maxAoa			= math.rad(7),
-		finsTau			= 0.1,
-		dCydA			= {0.066, 0.036},
-		caliber			= 0.58,
-		cx_coeff        = {1.0, 0.4, 0.37, 0.288, 1.31},
-		L               = 4.28,
-		I				= 1 / 12 * 1525 * 4.28 * 4.28,
-		Sm				= 0.2642,
-		Sw				= 1.5,
-		Ma				= 0.85,
-		Mw				= 4.55,
-		Ma_x			= 0.9,
-		Ma_z			= 0.5,
-		Mw_x			= 2.0,
-    },
-	
-	autopilot = {	
-		K					= 1.0,
-		Kg					= 0.3,
-		Ki					= 0.0,
-		finsLimit			= 0.7,
-	},
-	
-	shape_table_data =
-	{
-		{
-			name		= "KAB_1500LG",
-			file		= "kab-1500lg",
-			life		= 1,
-			fire		= {0, 1},
-			username	= _("KAB-1500LG-Pr"),
-			index		= WSTYPE_PLACEHOLDER,
-		},
-	},
-	
-	targeting_data = 
-	{
-		char_time		= 20.3,
-	}
-}
-
-declare_weapon(KAB_1500LG)
-
-declare_loadout({
-	category 		= CAT_BOMBS,
-	CLSID	 		= "{KAB_1500LG_LOADOUT}",
-	attribute		= KAB_1500LG.wsTypeOfWeapon,
-	Count 			= 1,
-	Cx_pil			= KAB_1500LG.Cx,
-	Picture			= "kab1500lg.png",
-	displayName		= KAB_1500LG.user_name,
-	Weight			= KAB_1500LG.mass,
-	Elements  		= {{ShapeName = "kab-1500lg"}},
-})
-
+ 
 
 local gbu_31 =
 {
 	category		= CAT_BOMBS,
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Bomb, wsType_Bomb_Guided, WSTYPE_PLACEHOLDER},
 	type			= 4,
-	mass			= 500.0,
-	hMin			= 1000.0,
-	hMax			= 10000.0,
+	mass			= 934.0,
+	hMin			= 400.0,
+	hMax			= 15000.0,
 	Cx				= 0.00133,
 	VyHold			= -80.0,
 	Ag				= -1.0,
@@ -184,7 +60,7 @@ local gbu_31 =
 	warhead_air = simple_warhead(850, 457),
 	fm =
     {
-        mass			= 500,
+        mass			= 934.0,
 		wind_time		= 1000.0,
 		wind_sigma		= 0,
 		A				= 0.6,

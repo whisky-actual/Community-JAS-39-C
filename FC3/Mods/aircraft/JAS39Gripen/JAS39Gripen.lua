@@ -1,10 +1,7 @@
 local tips 		= {
 	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
 	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
-	--{ CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" ,arg_increment = 0.0}, --aim 9M
-    --{ CLSID = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}" ,arg_increment = 0.0}, --aim 9p
-	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0}, --AIM_120B
-	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0}, --AIM_120C
+	
 	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}" ,arg_increment = 0.0}, -- smoke gen green
@@ -17,19 +14,13 @@ local tips 		= {
 local outboard 	= {
 	{ CLSID = "IRIS-T" , attach_point_position = {0.1, -0.13, 0.0}, arg_increment = 0.0 }, -- Rb98 IRIS-T
 	{ CLSID = "{Rb74}", attach_point_position = {0.1, -0.1, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	
 	{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
-	{ CLSID = "Meteor_DUAL_L", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
+	{ CLSID = "Meteor_DUAL", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor 2x
 	{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
 	
 	
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	--{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
+	
 	
 	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},--AIM-120C	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
@@ -38,19 +29,12 @@ local outboard 	= {
 local inboard 	= {
 { CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
 { CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9M"				,arg_increment = 0.8},	-- 2xAIM-9M
-	--{ CLSID = "LAU-115_2*LAU-127_CATM-9M"				,arg_increment = 0.8},	-- 2xCATM-9M
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9L"				,arg_increment = 0.8},	-- 2xAIM-9L
-	--{ CLSID = "LAU-115_2*LAU-127_AIM-9X"				,arg_increment = 0.8},	-- 2xAIM-9X
-	--{ CLSID = "LAU-115_LAU-127_AIM-9X"					,arg_increment = 0.8},	-- AIM-9X
-	--{ CLSID = "LAU-115_LAU-127_CATM-9M"					,arg_increment = 0.8},	-- CATM-9M
-	--{ CLSID = "LAU-115_LAU-127_AIM-9L"					,arg_increment = 0.8},	-- AIM-9L
-	--{ CLSID = "LAU-115_LAU-127_AIM-9M"					,arg_increment = 0.8},	-- AIM-9M
-	--{ CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120B
+	
 	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
 
-	{ CLSID = "{jas39_1100_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1100 Liter
-	{ CLSID = "{jas39_1700_ptb}" 						,arg_increment = 0.8}, --Zusatztank 1700 Liter
+--				=== Drop tanks ===
+                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre				
+				{ CLSID = "JAS_TANK1700", arg_increment = 0.1 }, -- External drop tank 1700 litre
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
 
@@ -63,8 +47,9 @@ local fuselageRight	= {
 }
 
 local centerline 	= {
-	{ CLSID = "{jas39_1100_ptb}" ,arg_increment = 0.0},               --Zusatztank 1100 Liter
-	{ CLSID = "{jas39_1700_ptb}" ,arg_increment = 0.0},               --Zusatztank 1700 Liter
+--					=== Drop tanks ===
+                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre
+	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
 
@@ -82,11 +67,11 @@ local ECM_ELINT 	= {
 
 JAS39Gripen =  {
       
-		Name 			= 'JAS39Gripen',--AG
-		DisplayName		= _('JAS 39 Gripen'),--AG
+		Name 			= 'JAS39Gripen',
+		DisplayName		= _('JAS 39 Gripen'),
         Picture 		= "JAS39Gripen.png",
         Rate 			= "50",
-        Shape			= "JAS39Gripen",--AG	
+        Shape			= "JAS39Gripen",
         WorldID			=  WSTYPE_PLACEHOLDER, 
         
 	shape_table_data 	= 
@@ -178,8 +163,8 @@ JAS39Gripen =  {
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
 		wing_area					=	30,	-- wing area in m2
-		thrust_sum_max				=	5200,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	8566,	-- thrust in kgf (95.1 kN)
+		thrust_sum_max				=	5200,	-- thrust in kgf 
+		thrust_sum_ab				=	8566,	-- thrust in kgf 
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
 		Mach_max					=	2,	-- Max speed in Mach (for AI)
@@ -191,7 +176,7 @@ JAS39Gripen =  {
 		IR_emission_coeff_ab		=	1.33,		-- With afterburner
 		tand_gear_max				=	3.73,--XX  1.732 FA18 3.73, 
 		tanker_type					=	2,--F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
-		wing_span					=	8.40,	--XX  wing spain in m
+		wing_span					=	8.40,	--XX  wing span in m
 		wing_type 					= 	0,		-- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
 		length						=	14.1,
 		height						=	4.5,
