@@ -1,0 +1,5 @@
+model = {
+	lods = {
+		{"Cockpit_Su-25T.edm",20000.000000},
+	},
+}
