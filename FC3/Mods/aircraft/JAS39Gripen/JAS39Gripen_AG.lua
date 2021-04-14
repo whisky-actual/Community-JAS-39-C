@@ -12,7 +12,7 @@ local tips 		= {
 }
 
 local outboard 	= {
---	=== Air to air IR missiles ===
+--				=== Air to air IR missiles ===
                 { CLSID = "IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- Rb98 IRIS-T
 				{ CLSID = "{Rb74}", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- Rb74 AIM-9L
 
@@ -22,7 +22,7 @@ local outboard 	= {
                 { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
 				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
 				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
-				{ CLSID = "{5335D97A-35A5-4643-9D9B-026C75961E52}", arg_increment = 0.5, Type = 1 }, -- cbu-97
+				--{ CLSID = "{5335D97A-35A5-4643-9D9B-026C75961E52}", arg_increment = 0.5, Type = 1 }, -- cbu-97
 				--{ CLSID = "{DWS39_MJ2}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
 				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
 				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
@@ -35,8 +35,14 @@ local outboard 	= {
 						
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
+				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
+				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
+				
+				{ CLSID = "GBU12_TEST", arg_increment = 0.5 }, -- GBU-12
+				
+				
 								
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -62,7 +68,7 @@ local inboard 	= {
 				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65K	
 				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
                 { CLSID = "JAS_Stormshadow", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				--{ CLSID = "", arg_increment = 0.5 }, -- BK 90									
+				--{ CLSID = "{5335D97A-35A5-4643-9D9B-026C75961E52}", arg_increment = 0.5 }, -- BK 90									
 				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
 				{ CLSID = "JAS_GBU31", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 				
@@ -74,9 +80,12 @@ local inboard 	= {
 
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12 TV GUIDED
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10
+				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16 TV GUIDED
+				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
+				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10 
+				{ CLSID = "JAS_GBU10_TV", arg_increment = 0.5 }, -- GBU-10 TV GUIDED
 								
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -128,9 +137,12 @@ local centerline 	= {
 
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10
+				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
+				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
+				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10 LASER GUIDED
+				{ CLSID = "JAS_GBU10_TV", arg_increment = 0.5 }, -- GBU-10 TV GUIDED
 
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82

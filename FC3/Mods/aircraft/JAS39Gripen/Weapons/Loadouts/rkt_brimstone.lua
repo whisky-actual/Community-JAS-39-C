@@ -190,7 +190,7 @@ declare_loadout({
 		},		
 		
 	},
-    Required        = {"JAS_WMD7"},
+    
     JettisonSubmunitionOnly = false,
 })
 
