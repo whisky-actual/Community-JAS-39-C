@@ -68,4 +68,5 @@ dofile(current_mod_path..'/JAS39Gripen_AG.lua')
 -------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Weapons/Loadout.lua")
 -------------------------------------------------------------------------------------
+--make_flyable('JAS39Gripen_AG', current_mod_path..'/Cockpit/Scripts/', {nil,old=3}, current_mod_path..'/comm.lua')
 plugin_done()

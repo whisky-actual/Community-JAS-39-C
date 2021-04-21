@@ -58,7 +58,7 @@ BRIM_STONE =
     Y_back          = -0.0,
     Z_back          = 0.0,
     Reflection      = 0.05,
-    KillDistance    = 0.0,
+    KillDistance    = 5.0,
     
     LaunchDistData  =       
 	{
@@ -119,7 +119,7 @@ BRIM_STONE =
         wind_time   = 1.1,
         dCydA       = {0.11, 0.11},
         A           = 0.36,
-        Sw          = 0.04,
+        Sw          = 0.2,
         maxAoa      = math.rad(8),        
         finsTau     = 0.1,
         Mx0         = 0.2,

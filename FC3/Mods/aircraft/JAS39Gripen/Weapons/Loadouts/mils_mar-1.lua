@@ -1,13 +1,30 @@
+local MAR_warhead = 
+{
+    mass                 = 90, 
+    caliber              = 231,
+    expl_mass            = 90,
+    piercing_mass        = 0.0,					
+    other_factors        = { 1.0, 1.0, 1.0 },	
+    concrete_factors     = { 1.0, 1.0, 1.0 },
+    concrete_obj_factor  = 1.0,
+    obj_factors          = { 2.0, 1.0 },
+    cumulative_factor    = 2.0,
+    cumulative_thickness = 0.0, 
+}
+local mass = 350.0
+
+
+
 local mar1 = {
 
 	category		= CAT_MISSILES,
 	name			= "mar1",
-	user_name		= _("Mar-1"),
+	user_name		= _("MAR-1"),
 	wsTypeOfWeapon 	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",              
 	class_name		= "wAmmunitionSelfHoming",                          
 	model			= "mar1",
-	 mass = 640,
+	 mass = mass,
 	
 	
 	
@@ -15,37 +32,37 @@ local mar1 = {
       
         Escort = 0,
         Head_Type = 3,
-		    sigma = {8, 8, 8},
-        M = 628.0,
-        H_max = 10000.0,
+		sigma = {10, 10, 10},
+        M = mass,
+        H_max = 25000.0,
         H_min = -1,
-        Diam = 343.0,
-        Cx_pil = 6,
-        D_max = 125000.0,  --85000.0,
-        D_min = 2000.0,
+        Diam = 231.0,
+        Cx_pil = 2,
+        D_max = 100000.0,  --85000.0,
+        D_min = 700.0,
         Head_Form = 0,
-        Life_Time = 1850.0,
-        Nr_max = 18,
-        v_min = 170.0,
-        v_mid = 272.0,
-        Mach_max = 1.2, --0.9,
+        Life_Time = 400.0,
+        Nr_max = 25,
+        v_min = 140.0,
+        v_mid = 900.0,
+        Mach_max = 4.0,
         t_b = 0.0,
-        t_acc = 5.0,
-        t_marsh = 1800.0,
-        Range_max = 159000.0,  --139000.0,
+        t_acc = 3.0,
+        t_marsh = 5.0,
+        Range_max = 100000.0,  --139000.0,
         H_min_t = 0.0,
-        Fi_start = 0.5,
+        Fi_start = 0.5236,
         Fi_rak = 3.14152,
         Fi_excort = 1.05,
-        Fi_search = 99.9,
-        OmViz_max = 99.9,
+        Fi_search = 1.05,
+        OmViz_max = 0.52,
         --warhead = warheads["AGM_84E"],
         -- No exhaust (turbo)
-        X_back = -1.581,
-        Y_back = -0.173,
+        X_back = -1.3,
+        Y_back = -0.50,
         Z_back = 0.0,
-        Reflection = 0.121,
-        KillDistance = 11.0, --0.0,
+        Reflection = 0.0329,
+        KillDistance = 7.0,
 		add_attributes = {"Cruise missiles"},
 		
     
@@ -67,16 +84,16 @@ local mar1 = {
 	
 	
 	fm = {
-		mass        = 640,  
-		caliber     = 0.380,  
-		cx_coeff    = {1,0.4,1.1,0.5,1.4},
-		L           = 4.8,
-		I           = 1 / 12 * 640 * 4.8 * 4.8,
+		mass        = mass,
+		caliber     = 0.231,
+		cx_coeff    = {1, 0.4, 1.1, 0.5, 1.4},
+		L           = 3.8,
+		I           = 1 / 12 * mass * 3.8 * 3.8,
 		Ma          = 0.3,
 		Mw          = 1.116,
 		wind_sigma	= 0.0,
 		wind_time	= 0.0,
-		Sw			= 1.65,
+		Sw			= 0.85,
 		dCydA		= {0.07, 0.036},
 		A			= 0.36,
 		maxAoa		= 0.28,
@@ -89,17 +106,17 @@ local mar1 = {
 	
 	radio_seeker = {
 		FOV					= math.rad(5),
-		op_time				= 600,--200Kh58
-		keep_aim_time		= 4,
-		pos_memory_time		= 200,
-		sens_near_dist		= 300.0,
-		sens_far_dist		= 70000.0,
-		err_correct_time	= 2.5,
-		err_val				= 0.0036,
+		op_time				= 185,
+		keep_aim_time		= 8,
+		pos_memory_time		= 60,
+		sens_near_dist		= 200.0,
+		sens_far_dist		= 60000.0,
+		err_correct_time	= 1.0,
+		err_val				= 0.001,
 		calc_aim_dist		= 500000,
 		blind_rad_val		= 0.1,
-		blind_ctrl_dist		= 2800,
-		aim_y_offset		= 4.5,
+		blind_ctrl_dist		= 1000,
+		aim_y_offset		= 2.0,
 	},
 	
 	simple_gyrostab_seeker = {
@@ -112,26 +129,26 @@ local mar1 = {
 	
 	autopilot = {
 		delay			 = 1.0,
-		K				 = 300.0,
-		Kg				 = 5.0,
+		K				 = 100.0,
+		Kg				 = 6.0,
 		Ki				 = 0.0,
-		finsLimit		 = 0.1,
+		finsLimit		 = 0.22,
 		useJumpByDefault = 1,
 		J_Power_K		 = 1.2,
-		J_Diff_K		 = 0.3,
+		J_Diff_K		 = 0.1,
 		J_Int_K			 = 0.0,
-		J_Angle_K		 =  math.rad(08),       -- 11 --angle de recherche horizontale ( axe X ) à 50m de la cible
-		J_FinAngle_K	 =  math.rad(05),  		-- 18 --angle de cabrage ( axe Y ) après le shoot
-		J_Angle_W		 = 1.5,                 -- 3.5 --angle de plongée (axe Y) vers le bas à 50m de la cible
+		J_Angle_K		 =  math.rad(12),      
+		J_FinAngle_K	 =  math.rad(18),  		
+		J_Angle_W		 = 1.5,                 
 	},
 	
 	start_helper = {
-		delay				= 1.0,
-		power				= 0.1,
-		time				= 1,
+		delay               = 0.2,
+		power               = 0.02,
+		time				= 2,
 		use_local_coord		= 0,
 		max_vel				= 200,
-		max_height			= 200,
+		max_height			= 400,
 		vh_logic_or			= 0,
 	},
 	
@@ -141,12 +158,12 @@ local mar1 = {
 	},
 	
 booster = {
-		impulse								= 450,      --195,
-		fuel_mass							= 75.26,    --112.18,
-		work_time							= 2.5,      --3.6,
-		boost_time							= 0,
+		impulse								= 260,
+		fuel_mass							= 150.18,
+		work_time							= 12.0,
+		boost_time							= 20,
 		boost_factor						= 0,
-		nozzle_position						=  {{-2.30, 0.0, 0}},            --{{-2.20, 0.15, 0}},
+		nozzle_position						= {{-2.0, -0.1, -0.0}},
 		nozzle_orientationXYZ				= {{0.0, 0.0, 0.0}},
 		tail_width							= 0.4,
 		smoke_color							= {1.0, 1.0, 1.0},
@@ -155,17 +172,17 @@ booster = {
 	},
 	
 	march = {
-		impulse								= 320,        --210,
-		fuel_mass							= 320.50,   --220.50,     --70.86,
-		work_time							= 75,  --65,  --45,
+		impulse								= 205,        
+		fuel_mass							= 100,   
+		work_time							= 15,  
 		boost_time							= 0,
 		boost_factor						= 0,
-		nozzle_position						= {{-2.25, 0.0, 0}},  -- -1.5, -0.19, 0
+		nozzle_position                     = {{-2.0, -0.1, -0.0}},
 		nozzle_orientationXYZ				= {{0.0, 0.0, 0.0}},
-		tail_width							=  0.1,       --0.4,
-		smoke_color							= {0.6, 0.6, 0.6},  --{1.0, 1.0, 1.0},
-		smoke_transparency					= 0.5,  --0.9,
-		custom_smoke_dissipation_factor		= 0.1,	
+		tail_width                          = 0.3,
+		smoke_color							= {0.6, 0.6, 0.6},  
+		smoke_transparency                  = 0.5,
+		custom_smoke_dissipation_factor		= 0.2,	
 	},
 	
 	engine_control = {
@@ -173,15 +190,13 @@ booster = {
 		K				= 265,
 		Kd				= 0.01,
 		Ki				= 0.001,
-		-- burst_signal = 9999, -- used in 'anti_ship_missile_tb' scheme
+		
 	
 	},
 		
-	warhead		= antiship_penetrating_warhead(3310, 3370), -- 3310 3370
-	warhead_air = antiship_penetrating_warhead(3310, 3370), --3310 3370	
-	--warhead = predefined_warhead("X_58"),
-	--warhead_air = predefined_warhead("X_58"),
-   
+	warhead		= MAR_warhead,
+	warhead_air = MAR_warhead,
+	
 }
 
 declare_weapon(mar1)

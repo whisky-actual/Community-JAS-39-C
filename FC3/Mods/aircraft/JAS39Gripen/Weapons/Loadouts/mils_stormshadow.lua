@@ -2,7 +2,7 @@ local stormshadow = {
 
 	category		= CAT_MISSILES,
 	name			= "stormshadow",
-	user_name		= _("Stormshadow"),
+	user_name		= _("Storm Shadow"),
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",
 	class_name		= "wAmmunitionSelfHoming",
@@ -23,58 +23,59 @@ local stormshadow = {
 
 		Escort = 0,
 		Head_Type = 3,
-		sigma = {5, 5, 5},
-		M = 770.0,
-		H_max = 300.0,
-		H_min = 35,
-		Diam = 400.0,
-		Cx_pil = 2.0,    --8.0
-		D_max = 285000.0,
+		sigma = {2, 2, 2},
+		M = 1100.0,
+		H_max = 15000.0, 
+		H_min = -1,
+		Diam = 480.0,
+		Cx_pil = 8,
+		D_max = 548192.0, 
 		D_min = 10000.0,
 		Head_Form = 1,
-		Life_Time = 1800.0,
-		Nr_max = 18,
-		v_min = 180.0,
-		v_mid = 275.0,
-		Mach_max = 1.9,  --1.1
+		Life_Time = 100000,
+		Nr_max = 6,
+		v_min = 170.0,
+		v_mid = 237.5,
+		Mach_max = 0.90,  
 		t_b = 0.0,
-		t_acc = 1.0,
-		t_marsh = 1200.0,
-		Range_max = 285000.0,
-		H_min_t = 0.0,
-		Fi_start = 1,5709,
+		t_acc = 5.0,
+		t_marsh = 10000.0,
+		Range_max = 548192.0,
+		H_min_t = 500.0,
+		Fi_start = 0.35,
 		Fi_rak = 3.14152,
-		Fi_excort = 1,0472,
+		Fi_excort = 0.7,
 		Fi_search = 99.9,
 		OmViz_max = 99.9,
-		warhead = antiship_penetrating_warhead(5320, 5370),  
+		warhead     = HE_penetrating_warhead(500.0,480),
+		warhead_air = HE_penetrating_warhead(500.0,480),
 		-- No exhaust (turbo)
-		X_back = -2.0,
-		Y_back = -0.2,
+		X_back = -3.392,
+		Y_back = 0.064,
 		Z_back = 0.0,
-		Reflection = 0.02,
+		Reflection = 0.05,
 		KillDistance = 25.0, 
 		add_attributes = {"Cruise missiles"},
 
 
 -- Missile Flight Model Data
 	fm = {
-		mass		= 770.0,
-		caliber		= 0.400,
-		cx_coeff	= {1, 0.3, 0.65, 0.010, 1.6},
-		L			= 4.2,
-		I			= 1 / 12 * 770.0 * 4.2 * 4.2, -- 1131.9 moment of inertia
-		Ma			= 0.3,
-		Mw			= 1.116,
+		mass		= 1300,  
+		caliber		= 0.480, 
+		cx_coeff	= {1, 0.3, 0.65, 0.018, 1.6},
+		L			= 4.37,
+		I			= 1 / 12 * 1300 * 4.2 * 4.2, 
+		Ma			= 3,
+		Mw			= 10,
 		wind_sigma	= 0.0,
 		wind_time	= 1000.0,
 		Sw			= 1.2,
 		dCydA		= {0.07, 0.036},
-		A			= 0.06,
-		maxAoa		= 0.26,
-		finsTau		= 1.25,	-- !	?????? ????? / wingspan
-		Ma_x		= 2,
-		Ma_z		= 2,
+		A			= 0.08,
+		maxAoa		= 0.2,
+		finsTau		= 0.08,	-- !	?????? ????? / wingspan
+		Ma_x		= 3,
+		Ma_z		= 3,
 		Kw_x		= 0.05,
 		addDeplSw		= 1.0,
 		wingsDeplDelay	= 1.0,
@@ -82,31 +83,31 @@ local stormshadow = {
 
 -- Missile Engine Data
 	controller = {
-		boost_start = 0.01,  --0.001
-		march_start = 1.001,
+		boost_start = 0.001,  
+		march_start = 0.8,
 	},
 
-	booster = {
-		impulse								= 550, 
-		fuel_mass							= 30.0,  
-		work_time							= 1.0,   
+	booster = {					--	air launch - no booster
+		impulse								= 690, 
+		fuel_mass							= 10,  
+		work_time							= 2,   
 		boost_time							= 0,
 		boost_factor						= 0,
-		nozzle_position						= {{-2.2, -0.28, 0}},  
+		nozzle_position						= {{0, 0, 0}},
 		nozzle_orientationXYZ				= {{0.0, 0.0, 0.0}},  
-		tail_width							= 0.03,  
-		smoke_color							= {1.0, 1.0, 1.0},  
-		smoke_transparency					= 0.5,          
+		tail_width							= 0.00,  
+		smoke_color							= {0.0, 0.0, 0.0},  
+		smoke_transparency					= 0.0,          
 		custom_smoke_dissipation_factor		= 0.0,
 	},
 
 	march = {
-		impulse								= 890,    
-		fuel_mass							= 720.0,  
-		work_time							= 3200,  
+		impulse								= 690,   
+		fuel_mass							= 283.5,
+		work_time							= 9999,  
 		boost_time							= 0,
 		boost_factor						= 0,
-		nozzle_position						= {{-2.15, -0.28, 0}},  --= {{-1.0, -0.2, 0}},
+		nozzle_position						= {{-0.15, -0.285, 0}},  --= {{-1.0, -0.2, 0}},
 		nozzle_orientationXYZ				= {{0.0, 0.0, 0.0}},
 		tail_width							= 0.01,
 		smoke_color							= {0.5, 0.5, 0.5},    --{0.1, 0.1, 0.1},
@@ -116,10 +117,10 @@ local stormshadow = {
 
 -- Missile Radar Homing Data   
 	radio_seeker = {
-		FOV					= math.rad(8),   --0
-		op_time				= 1500,
-		keep_aim_time		= 5,
-		pos_memory_time		= 200,
+		FOV					= math.rad(8),   
+		op_time				= 9999,
+		keep_aim_time		= 10,
+		pos_memory_time		= 400,
 		sens_near_dist		= 300.0,
 		sens_far_dist		= 300000.0,
 		err_correct_time	= 2.5,
@@ -162,6 +163,8 @@ local stormshadow = {
 		J_Angle_K		 =  math.rad(05),   
 		J_FinAngle_K	 =  math.rad(15),  
 		J_Angle_W		 = 0.5,    
+		auto_terrain_following			= 1,
+		auto_terrain_following_height	= 60,
 	},
 
 	start_helper = {
@@ -189,12 +192,11 @@ triggers_control = {
 		min_cruise_height_trigger_mlt	= 237/33,		
 	},
 	
-	warhead		= antiship_penetrating_warhead(4310, 4370), -- 3310 3370
-	warhead_air = antiship_penetrating_warhead(4310, 4370), --3310 3370
+	
 		
 }
 
-declare_weapon(stormshadow, { mass = 770 })
+declare_weapon(stormshadow)
 
 declare_loadout(
 	{
@@ -205,8 +207,8 @@ declare_loadout(
 		CLSID			= "JAS_Stormshadow",
 		attribute		= stormshadow.wsTypeOfWeapon,
 		Count			= 1,
-		Cx_pil			= 0.001,
-		ejectImpulse	= 5000,
+		Cx_pil			= 0.000365,
+		ejectImpulse	= 140,
 		Elements		=
 		{
 			[1]	=
