@@ -1,0 +1,55 @@
+FC3v0.0.1 : 
+Start of versioning
+
+FC3v0.0.2 : 
+Added first guided Ag missiles, still wip
+
+FC3v0.0.3 : 
+Changed Afterburner effect
+Changed Flare ejection position 
+Changed Thrust while in afterburner. -9% to counteract engine spooling up to 109% rpm when going from full military power 		-- Not final
+Added Litening III pod to replace Mercury LLTV pod. Now called "Litening III LLTV"
+Fixed Displaynames for Mar-1, Rb-15 and Stormshadow
+Added GBU-31 and BK90
+
+FC3v0.0.4 : 
+Removed Liveries until we come up with a solution to not have triplicates
+Added Luas to enable tuning of GBU 10, 12 and 16.
+Added new textures for Meteor and Stormshadow
+Fixed Shape model for 1700 L tank
+Removed files that were not in use. Bomb type 200 and some input profiles
+Removed content of jsow_bk_90.lua in preparation of cbu 97 reskin
+
+FC3v0.0.5 : 
+Updated exterior model
+Fixed canopy geometry
+Fixed air intake geometry
+Animated canards for FC with increased maximum pitch angles
+Animated flaps for FC with increased maximum pitch angles
+Animated ailerons for FC and separated them from flaps
+Animated raised flaps, pitched slats and pitched canards for FC braking effect
+Animated slats for FC
+
+FC3v0.0.6 : 
+Texture renamed in english
+Texture LUA to avoid duplication
+Template LUA for texture for custom skins
+Added the FC3_COCKPITS_LOD for testing
+
+FC3v0.0.7 : 
+Changed GBU-1X to tv-guidance 
+Added Maverick based Laser guided GBU-12
+Added new livery textures, with dispenser texture. Update your missions to load them in :)
+
+FC3v0.0.8 : 
+Added BK-90, based on cbu 99 and not 97 as previously planned. Added MJ2 cluster data + warhead
+Added different ammo types for bk27
+Added Scripts folder in /cockpit with files to add radar. These are disabled in entry.lua. Un-comment last line to enable them. Needs work before being useable.
+Changed to correct flight data for MAR-1 Anti radiation missile, RB 15 anti ship missile and Storm shadow Cruise missile
+Changed Displayname of RB 15 and mar 1
+Began Changing flight data for Brimstone to avoid it flying into the ground/trees before reaching its target. note// not finished, ran out of time for today
+
+FC3v0.0.9 :
+Added Vindog's textures
+Removed duplicated textures
+Tweeked the SFM to be less OP 

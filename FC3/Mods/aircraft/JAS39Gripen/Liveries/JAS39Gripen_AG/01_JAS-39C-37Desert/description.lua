@@ -3,7 +3,7 @@ livery = {
 	{"VSN_JAS39_Mat1",	NORMAL_MAP			,	"jas39_mat1_b", true};   
     {"VSN_JAS39_Mat2",	DIFFUSE			,	"01_jas39_mat2", true};
 	{"VSN_JAS39_Mat2",	NORMAL_MAP			,	"jas39_mat2_b", true};
-	{"VSN_JAS39_Mat3",	DIFFUSE			,	"01_jas39_mat3", true};
+	{"VSN_JAS39_Mat3",	DIFFUSE			,	"jas39_mat3", true};
 	{"VSN_JAS39_Mat3",	NORMAL_MAP			,	"jas39_mat3_b", true};
 	{"VSN_JAS39_Hud",	DIFFUSE			,	"jas39_hud", true};
 	{"VSN_JAS39_landing-light",	DIFFUSE			,	"jas39_landinglight", true};
