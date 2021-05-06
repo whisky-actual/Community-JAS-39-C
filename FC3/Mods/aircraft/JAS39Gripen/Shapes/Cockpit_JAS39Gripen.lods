@@ -1,5 +1,5 @@
 model = {
 	lods = {
-		{"Jas-39-CPT.edm",20000.000000},
+		{"Cockpit_F-15C.edm",20000.000000},
 	},
 }
