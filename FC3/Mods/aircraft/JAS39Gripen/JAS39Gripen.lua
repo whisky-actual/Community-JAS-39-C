@@ -186,8 +186,9 @@ local outboard 	= {
 	
 	{ CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
 	{ CLSID = "Meteor_DUAL", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor 2x
-	{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
-	
+	{ CLSID = "JAS_Rb99" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
+	{ CLSID = "JAS_Rb99_DUAL" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
+	{ CLSID = "LAU-115_2*LAU-127_AIM-120C" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  AIM 120C
 	
 	
 	
@@ -197,7 +198,9 @@ local outboard 	= {
 
 local inboard 	= {
 { CLSID = "Meteor", attach_point_position = {-0.35, -0.24, 0.0}, arg_increment = 0.2 }, -- Rb101 Meteor
-{ CLSID = "{Rb99}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
+{ CLSID = "JAS_Rb99" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  RB99 AIM-120B
+{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.3, -0.22, 0.0}},   --  AIM 120C
+
 	
 	--{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0, attach_point_position = {0.0, -0.22, 0.0}},--AIM-120C
 
@@ -218,6 +221,12 @@ local fuselageRight	= {
 local centerline 	= {
 --					=== Drop tanks ===
                 { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre
+				
+--					========= Air to air missiles ==============				
+	{ CLSID = "Meteor",  arg_increment = 0.2 }, -- Rb101 Meteor
+	{ CLSID = "Meteor_DUAL",  arg_increment = 0.2 }, -- Rb101 Meteor 2x
+	{ CLSID = "JAS_Rb99" ,arg_increment = 0.0},   --  RB99 AIM-120B
+	{ CLSID = "JAS_Rb99_DUAL" ,arg_increment = 0.0},    --  RB99 AIM-120B
 	
 	{ CLSID = "<CLEAN>"									,arg_increment = 1},
 }
@@ -312,11 +321,12 @@ JAS39Gripen =  {
 		has_speedbrake				=	true,
 		radar_can_see_ground		=	true,
 
+		tand_gear_max                            = 0.57, --2.1445, -- tangent on maximum yaw angle of front wheel, 65 degrees tan(64deg)
 		nose_gear_pos 				                = {4.488,	-2.140,	0},   -- nosegear coord 
 	    nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
 	    nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
 	    nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
-	    nose_gear_wheel_diameter 	                =  0.544, -- in m
+	    nose_gear_wheel_diameter 	                =   0.544, -- in m
 	
 	    main_gear_pos 						 	    = {-0.800,	-2.020,	1.25}, -- main gear coords 
 	    main_gear_amortizer_direct_stroke	 	    =   0,     --  down from main_gear_pos !!!
@@ -338,7 +348,7 @@ JAS39Gripen =  {
 		flaps_maneuver				=	1,
 		Mach_max					=	2,	-- Max speed in Mach (for AI)
 		range						=	2540,	-- Max range in km (for AI)
-		RCS							=	1.0,		-- Radar Cross Section m2
+		RCS							=	2.5,		-- Radar Cross Section m2 -- Changed from 1.0, that was overpowered
 		Ny_max_e					=	8,		-- Max G (for AI)
 		detection_range_max			=	250,
 		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
@@ -491,79 +501,82 @@ Guns = {
 			{
 				DisplayName = "1",
   				use_full_connector_position = true,
-				connector = "Pylon1",
+				connector = "Pylon1",	--Wing tip left
 			},
 			tips
 		),
         pylon(2, 0, 0, 0, 0,
 			{
-				arg = 310,
-				arg_value = 0,
-				DisplayName = "3",
-				use_full_connector_position = true,
-				connector = "Pylon3",
-			},
-			inboard
-		),
-        pylon(3, 0, 0, 0, 0,
-			{
 				arg = 309,
 				arg_value = 0,
 				DisplayName = "2",
 				use_full_connector_position = true,
-				connector = "Pylon2",
+				connector = "Pylon2",	--Outer left
 			},
+			
 			outboard
 		),
-        pylon(4, 1, 0, 0, 0,
-            {
-				arg = 311,
+        pylon(3, 0, 0, 0, 0,
+			{
+				arg = 310,
 				arg_value = 0,
-				DisplayName = "-",--4
-            	use_full_connector_position = true,
-				connector = "Pylon4",
+				DisplayName = "3",
+				use_full_connector_position = true,
+				connector = "Pylon3",	--inner left
 			},
-			fuselageLeft
+			inboard
 		),
-        pylon(5, 2, 0, 0, 0,--26
+       
+        pylon(4, 2, 0, 0, 0,--26
 			{
 				arg = 312,
 				arg_value = 0,
 				DisplayName = "ELINT",
 				use_full_connector_position = true,
-				connector = "Pylon5",
+				connector = "Pylon5",		--integrated Elint
 			},
 			ECM_ELINT
 		),
-        pylon(6, 1, 0, 0, 0,
+        pylon(5, 1, 0, 0, 0,
 			{
 				arg = 313,
 				arg_value = 0,
 				DisplayName = "4",
 				use_full_connector_position = true,
-				connector = "Pylon6",
+				connector = "Pylon6",		--Centerline
 			},
 			centerline
 		),
-		pylon(7, 2, 0, 0, 0,--26
+		pylon(6, 2, 0, 0, 0,--26
 			{
 				arg = 314,
 				arg_value = 0,
 				DisplayName = "ECM",
 				use_full_connector_position = true,
-				connector = "Pylon8",
+				connector = "Pylon8",		--integrated Ecm
 			},
 			ECM_ELINT
 		),
-        pylon(8, 1, 0, 0, 0,
+        pylon(7, 1, 0, 0, 0,
             {
 				arg = 315,
 				arg_value = 0,
 				DisplayName = "5",--6
             	use_full_connector_position = true,
-				connector = "Pylon7",
+				connector = "Pylon7",		--cheek
 			},
 			fuselageRight
+		),
+        pylon(8, 0, 0, 0, 0,
+			{
+				arg = 316,
+				arg_value = 0,
+				DisplayName = "6",
+				use_full_connector_position = true,
+				connector = "Pylon9",		--inner right
+			},
+			
+			inboard
 		),
         pylon(9, 0, 0, 0, 0,
 			{
@@ -571,25 +584,15 @@ Guns = {
 				arg_value = 0,
 				DisplayName = "7",
 				use_full_connector_position = true,
-				connector = "Pylon10",
+				connector = "Pylon10",		--outer right
 			},
 			outboard
 		),
-        pylon(10, 0, 0, 0, 0,
-			{
-				arg = 316,
-				arg_value = 0,
-				DisplayName = "6",
-				use_full_connector_position = true,
-				connector = "Pylon9",
-			},
-			inboard
-		),
-		pylon(11, 0, 0, 0, 0,
+		pylon(10, 0, 0, 0, 0,
 			{
 				DisplayName = "8",
 				use_full_connector_position = true,
-				connector = "Pylon11",
+				connector = "Pylon11",	--Wing tip right
 			},
 			tips
 		),
@@ -617,7 +620,7 @@ SFM_Data = {
             cy_flap    = 0.47,    -- coefficient, normal force, lift, flaps
             cx_brk     = 0.08,   -- coefficient, drag, breaks
             table_data = {
-                --          M       Cx0      Cya    B      B4  Omxmax  Aldop   Cymax
+                --      M       Cx0    Cya    B      B4  Omxmax  Aldop   Cymax
                 [1]  = { 0.000, 0.025, 0.068, 0.132, 0.032, 0.48, 27.000, 1.2 },
                 [2]  = { 0.200, 0.025, 0.068, 0.132, 0.032, 1.47, 26.500, 1.2 },
                 [3]  = { 0.400, 0.024, 0.07, 0.133, 0.032, 2.4, 25.500, 1.2 },
@@ -669,7 +672,7 @@ SFM_Data = {
             cemax      = 1.24,      -- not used for fuel calulation , only for AI routines to check flight time ( fuel calculation algorithm is built in )
             cefor      = 2.56,      -- not used for fuel calulation , only for AI routines to check flight time ( fuel calculation algorithm is built in )
             dpdh_m     = 2200,      --  altitude coefficient for max thrust
-            dpdh_f     = 4200,      --  altitude coefficient for AB thrust
+            dpdh_f     = 3500,      --  altitude coefficient for AB thrust
             table_data = {
             --            M     Pmax     Pfor
                 [1]  =  { 0.00, 44453,  75008 },

@@ -1,5 +1,5 @@
 
-local irist_name = 'Rb98 IRIS-T'
+local irist_name = 'Rb98 IRIS-T Sidewinder IR AAM'
 local irist_mass = 87.4
 local pylon_mass = 1.0
 
@@ -53,7 +53,7 @@ IRIST_AA = {
             file     = 'iris-t',
             life     = 1,
             fire     = {0, 1},
-            username = irist_name,
+            username = "Rb98",
             index    = WSTYPE_PLACEHOLDER,
         },
     },

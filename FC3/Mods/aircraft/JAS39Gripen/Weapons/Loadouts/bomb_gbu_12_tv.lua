@@ -38,7 +38,7 @@ end
 
  
 
-local gbu_12_tv =
+local gbu_49_tv =
 {
 	category		= CAT_BOMBS,
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Bomb, wsType_Bomb_Guided, WSTYPE_PLACEHOLDER},
@@ -50,9 +50,9 @@ local gbu_12_tv =
 	VyHold			= -80.0,
 	Ag				= -1.0,
 	
-	name			= "gbu-12",
-	model			= "gbu-12",
-	user_name		= _("GBU-12 TV"),
+	name			= "gbu-49",
+	model			= "gbu-49",
+	user_name		= _("GBU-49 500lb TV Guided Bomb"),   --Note/ made these 49s since they look the same and we already have the laser guided 12s. 
 	scheme			= "bomb_jdam",
 	class_name		= "wAmmunitionChangeableTrajectory",
 	
@@ -70,7 +70,7 @@ local gbu_12_tv =
 		caliber			= 0.279000,
 		cx_coeff        = {1.037, 0.74, 0.6, 0.382, 1.34},
 		L               = 3.276000,
-		Sw				= 0.4,
+		Sw				= 0.6,
 		Ma_x			= 0.1,
 		Ma_z			= 0.5,
 		Kw_x			= 0.03,
@@ -105,11 +105,11 @@ local gbu_12_tv =
 	shape_table_data =
 	{
 		{
-			name     = "gbu-12",
-			file     = "gbu-12",
+			name     = "gbu-49",
+			file     = "gbu-49",
 			life     = 1,
 			fire     = {0, 1},
-			username = _("gbu-12"),
+			username = _("gbu-49"),
 			index    = WSTYPE_PLACEHOLDER,
 		},
 	},
@@ -120,17 +120,17 @@ local gbu_12_tv =
 	}
 }
 
-declare_weapon(gbu_12_tv)
+declare_weapon(gbu_49_tv)
 
 declare_loadout({
 	category 		= CAT_BOMBS,
-	CLSID	 		= "JAS_GBU12_TV",
-	attribute		= gbu_12_tv.wsTypeOfWeapon,
+	CLSID	 		= "JAS_GBU49_TV",
+	attribute		= gbu_49_tv.wsTypeOfWeapon,
 	Count 			= 1,
-	Cx_pil			= gbu_12_tv.Cx,
+	Cx_pil			= gbu_49_tv.Cx,
 	Picture			= "gbu12.png",
-	displayName		= gbu_12_tv.user_name,
-	Weight			= gbu_12_tv.mass,
+	displayName		= gbu_49_tv.user_name,
+	Weight			= gbu_49_tv.mass,
 	Elements	=	
 				{
 					[1]	=	
@@ -146,7 +146,7 @@ declare_loadout({
 							[2]	=	{2,	1},
 						}, -- end of DrawArgs
 						Position	=	{0,	0.0, -0.70},--8.00    7.30
-						ShapeName	=	"gbu-12",
+						ShapeName	=	"gbu-49",
 				
 					}, 
 				}, -- end of Elements

@@ -1,5 +1,5 @@
 
-local meteor_name = 'Rb101 Meteor'
+local meteor_name = 'Rb101 Meteor BVRAAM Active Rdr AAM'
 local meteor_mass = 190.0
 local pylon_mass = 1.0
 local pylon_dual_mass = 1.0
@@ -56,7 +56,7 @@ MBDA_METEOR = {
             file     = 'meteor',
             life     = 1,
             fire     = {0, 1},
-            username = meteor_name,
+            username = "Rb101",
             index    = WSTYPE_PLACEHOLDER,
         },
     },

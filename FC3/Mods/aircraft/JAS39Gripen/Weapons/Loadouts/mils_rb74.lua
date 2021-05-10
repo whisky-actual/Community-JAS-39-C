@@ -10,7 +10,7 @@ local Rb74 = {
 
 	category		= CAT_AIR_TO_AIR,
 	name			= "Rb 74",
-	user_name		= _("Rb 74"),
+	user_name		= _("Rb74 AIM-9L Sidewinder IR AAM"),
 	--/N/ wrong -> wsTypeOfWeapon = {4, 4, 11, WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon = {wsType_Weapon,wsType_Missile,wsType_AA_Missile, wsType_Rb74},
 	NatoName		=	"(Rb74)",
@@ -23,7 +23,7 @@ local Rb74 = {
 			file  = "AIM-9L"; -- <--/N/ replace this file name with proper one
 			life  = 1;
 			fire  = { 0, 1};
-			username = "Robot 74";
+			username = "Rb 74";
 			index = wsType_Rb74,
 		},
 	},
@@ -137,7 +137,7 @@ declare_loadout(
 		wsTypeOfWeapon		= Rb74.wsTypeOfWeapon,
 		Count				= 1,
 		Picture				= "aim9m.png",
-		displayName			= _("Rb74 AIM-9L"), -- Rb74.user_name.._(" with launcher"), --<-- /N/  put the launcher name here if any
+		displayName			= _("Rb74 AIM-9L Sidewinder IR AAM"), -- Rb74.user_name.._(" with launcher"), --<-- /N/  put the launcher name here if any
 		Weight				= 90, --<--/N/ missile + launcher weight (if any), this is important since the launcher stays on  aircraft! So this weight should be higher than a missile itself!
 		Cx_pil				= 0.0001, --<--/N/ this is too low, you might have difficulties later to set up the human and AI FM (ignore the 21 code when it comes to weapons Cx, it is a special case) -- edited Jedi
 		Elements			={

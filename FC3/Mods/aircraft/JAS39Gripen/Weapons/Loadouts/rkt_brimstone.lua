@@ -13,7 +13,7 @@ local brimstone_warhead =
 }
 local pylon_mass = 1.0
 
-local brimstone_name  = 'Brimstone'
+local brimstone_name  = 'Brimstone Laser Guided Missile'
 local brimstone_mass  = 48.5
 local brimstone_model = 'brimstone'
 
@@ -79,7 +79,7 @@ BRIM_STONE =
             file     = brimstone_model,
             life     = 1,
             fire     = {0, 1},
-            username = brimstone_name,
+            username = "Brimstone",
             index    = WSTYPE_PLACEHOLDER,
         },
     },

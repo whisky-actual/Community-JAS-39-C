@@ -1,4 +1,4 @@
-gbu12 =
+local gbu12 =
 {
 	category		= CAT_BOMBS,
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Bomb, wsType_Bomb_Guided, WSTYPE_PLACEHOLDER},
@@ -12,7 +12,7 @@ gbu12 =
 	
 	name			= "gbu-12",
 	model			= "gbu-12",
-	user_name		= _("GBU-12"),
+	user_name		= _("GBU-12 500 lb Laser-guided Bomb"),
 	scheme			= "bomb-paveway-III-afm",
 	class_name		= "wAmmunitionLaserHoming",
 	

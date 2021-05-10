@@ -19,7 +19,7 @@ local mar1 = {
 
 	category		= CAT_MISSILES,
 	name			= "mar1",
-	user_name		= _("MAR-1"),
+	user_name		= _("MAR-1 High Speed Anti-Radiation Missile"),
 	wsTypeOfWeapon 	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",              
 	class_name		= "wAmmunitionSelfHoming",                          

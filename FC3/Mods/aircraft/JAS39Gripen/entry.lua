@@ -67,6 +67,9 @@ dofile(current_mod_path..'/JAS39Gripen.lua')
 dofile(current_mod_path..'/JAS39Gripen_AG.lua')
 -------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Weapons/Loadout.lua")
+-----------------------------------------------------------
+local cfg_path =current_mod_path.."/FM/JAS39/config.lua"
+dofile(cfg_path)
 -------------------------------------------------------------------------------------
 --make_flyable('JAS39Gripen_AG', current_mod_path..'/Cockpit/Scripts/', {nil,old=3}, current_mod_path..'/comm.lua')
 plugin_done()

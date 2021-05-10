@@ -2,7 +2,7 @@ local rb15f_warhead = {
     mass                 = 200, 
     caliber              = 500,
     expl_mass            = 100,
-    piercing_mass        = 100,
+    piercing_mass        = 50,
     other_factors        = { 1.0, 1.0, 1.0 },
     concrete_factors     = { 5.0, 1.0, 1.0 },
     concrete_obj_factor  = 2.0,
@@ -17,7 +17,7 @@ local rb15 = {
 
 	category		= CAT_MISSILES,
 	name			= "rb15",
-	user_name		= _("RBS-15 Mk. IV Gungnir"),
+	user_name		= _("RBS-15 Mk. IV Gungnir Radiation Seeking Anti-ship Missile "),
 	wsTypeOfWeapon	= {wsType_Weapon, wsType_Missile, wsType_AS_Missile, WSTYPE_PLACEHOLDER},
 	scheme			= "anti_radiation_missile",
 	class_name		= "wAmmunitionSelfHoming",
@@ -31,7 +31,7 @@ local rb15 = {
 			file	 = "rb15f4",
 			life	 = 1,
 			fire	 = { 0, 1},
-			username = _("rb15"),
+			username = _("Rb15"),
 			index	 = WSTYPE_PLACEHOLDER,
 		},
 	},
@@ -221,8 +221,8 @@ declare_loadout(
 		CLSID			= "JAS_RB15F",
 		attribute		= rb15.wsTypeOfWeapon,
 		Count			= 1,
-		Cx_pil			= 0.001,
-		ejectImpulse	= 5000,
+		Cx_pil			= 0.001,  --/note: This is too low but its the one HB uses and it works fine
+		ejectImpulse	= 50,
 		Elements		=
 		{
 			[1]	=

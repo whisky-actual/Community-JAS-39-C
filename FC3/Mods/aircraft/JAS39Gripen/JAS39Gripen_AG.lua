@@ -1,126 +1,3 @@
--- ========= Gun ===========
-declare_weapon({category = CAT_SHELLS, name = "BK_27_HE", user_name = _("27/85 SGR06 27 mm HE"),	
-	model_name    = "tracer_bullet_yellow",
-	v0    = 1025.0,
-	Dv0   = 0.0040,
-	Da0     = 0.00005,
-	Da1     = 0.0,
-	mass      = 0.26,
-	round_mass = 0.516,
-	explosive     = 0.119,
-	life_time     = 5,
-	caliber     = 27.0,
-	s         = 0.0,
-	j         = 0.0,
-	l         = 0.0,
-	charTime    = 0,
-	cx        = {1,0.605,0.8,0.22,1.9},
-	k1        = 6.3e-09,
-	tracer_off    = 0,
-	scale_tracer  = 1,
-	scale_smoke	= 1.5,
-	cartridge = 0,
-});
-
-	declare_weapon({category = CAT_SHELLS, name = "BK_27_AP", user_name = _("27/85 PPRJ06 27 mm AP"),
-	model_name    = "tracer_bullet_yellow",
-	v0    = 1025.0,
-	Dv0   = 0.0040,
-	Da0     = 0.00005,
-	Da1     = 0.0,
-	mass      = 0.26,
-	round_mass = 0.516,
-	explosive     = 0.0,
-	life_time     = 5,
-	caliber     = 27.0,
-	AP_cap_caliber = 15.0,
-	s         = 0.0,
-	j         = 0.0,
-	l         = 0.0,
-	charTime    = 0,
-	cx        = {1,0.605,0.8,0.22,1.9},
-	k1        = 6.3e-09,
-	tracer_off    = 0,
-	scale_tracer  = 1,
-	scale_smoke	= 1.5,	  
-	cartridge = 0,
-});
-
-	declare_weapon({category = CAT_SHELLS, name = "BK_27_APHE", user_name = _("27/85 HPGR06 27 mm APHE"),
-	model_name    = "tracer_bullet_yellow",
-	v0    = 1025.0,
-	Dv0   = 0.0040,
-	Da0     = 0.00005,
-	Da1     = 0.0,
-	mass      = 0.26,
-	round_mass = 0.516,
-	explosive     = 0.033,
-	life_time     = 5,
-	caliber     = 27.0,
-	AP_cap_caliber = 10.0,
-	s         = 0.0,
-	j         = 0.0,
-	l         = 0.0,
-	charTime    = 0,
-	cx        = {1,0.605,0.8,0.22,1.9},
-	k1        = 6.3e-09,
-	tracer_off    = 0,
-	scale_tracer  = 1,
-	scale_smoke	= 1.5,
-	cartridge = 0,
-});
-
-	declare_weapon({category = CAT_SHELLS, name = "BK_27_PELE", user_name = _("27/85 HPGR07 27 mm PELE"),
-	model_name    = "tracer_bullet_yellow",
-	v0    = 1025.0,
-	Dv0   = 0.0040,
-	Da0     = 0.00005,
-	Da1     = 0.0,
-	mass      = 0.26,
-	round_mass = 0.516,
-	explosive     = 0.0,
-	life_time     = 5,
-	caliber     = 27.0,
-	subcalibre = true,	
-	AP_cap_caliber = 15.0,
-	piercing_mass = 0.150,
-	s         = 0.0,
-	j         = 0.0,
-	l         = 0.0,
-	charTime    = 0,
-	cx        = {1,0.605,0.8,0.22,1.9},
-	k1        = 6.3e-09,
-	tracer_off    = 0,
-	scale_tracer  = 1,
-	scale_smoke	= 1.5,
-	cartridge = 0,
-});
-
-	declare_weapon({category = CAT_SHELLS, name = "BK_27_PELET", user_name = _("27/85 SLHPGR07 27 mm PELE-T"),
-	model_name    = "tracer_bullet_yellow",
-	v0    = 1025.0,
-	Dv0   = 0.0040,
-	Da0     = 0.00005,
-	Da1     = 0.0,
-	mass      = 0.26,
-	round_mass = 0.516,
-	explosive     = 0.0,
-	life_time     = 5,
-	caliber     = 27.0,
-	subcalibre = true,
-	AP_cap_caliber = 15.0,
-	piercing_mass = 0.150,
-	s         = 0.0,
-	j         = 0.0,
-	l         = 0.0,
-	charTime    = 0,
-	cx        = {1,0.605,0.8,0.22,1.9},
-	k1        = 6.3e-09,
-	tracer_off    = 0,
-	scale_tracer  = 1,
-	scale_smoke	= 1.5,
-	cartridge = 0,
-});
 
 --- DECLARE BK 27 GUN
 local function m85(tbl)
@@ -204,8 +81,8 @@ local outboard 	= {
 				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
 						
 --			    === Guided bombs ===
-                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12
+                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12 laser guided
+				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 tv guided
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
 				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
@@ -252,12 +129,12 @@ local inboard 	= {
 
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12 TV GUIDED
+				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-12 TV GUIDED displayed as gbu 49
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16 TV GUIDED
-				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10 
-				{ CLSID = "JAS_GBU10_TV", arg_increment = 0.5 }, -- GBU-10 TV GUIDED
+				
+				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10 laser guided
+				
 								
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -312,12 +189,12 @@ local centerline 	= {
 
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU12_TV", arg_increment = 0.5 }, -- GBU-12
+				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 tv guided
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
 				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
-				{ CLSID = "JAS_GBU10", arg_increment = 0.5 }, -- GBU-10 LASER GUIDED
-				{ CLSID = "JAS_GBU10_TV", arg_increment = 0.5 }, -- GBU-10 TV GUIDED
+				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10 LASER GUIDED
+				
 
 --				=== Unguided bombs ===
 				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
@@ -432,7 +309,7 @@ JAS39Gripen_AG =  {
 		has_afteburner				=	true,
 		has_speedbrake				=	true,
 		radar_can_see_ground		=	true,
-
+		tand_gear_max                            = 0.57, --2.1445, -- tangent on maximum yaw angle of front wheel, 65 degrees tan(64deg)
 		nose_gear_pos 				                = {4.488,	-2.140,	0},   -- nosegear coord 
 	    nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
 	    nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
@@ -459,7 +336,7 @@ JAS39Gripen_AG =  {
 		flaps_maneuver				=	1,
 		Mach_max					=	2,	-- Max speed in Mach (for AI)
 		range						=	2540,	-- Max range in km (for AI)
-		RCS							=	1.0,		-- Radar Cross Section m2
+		RCS							=	2.5,		-- Radar Cross Section m2 -- Changed from 1.0, that was overpowered
 		Ny_max_e					=	8,		-- Max G (for AI)
 		detection_range_max			=	250,
 		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
@@ -606,111 +483,104 @@ Guns = {
 
 --pylons_enumeration = {1, 11, 10, 2, 3, 9, 4, 8, 5, 7, 6},
 
-	Pylons =     {
+		Pylons =     {
 
         pylon(1, 0, 0, 0, 0,
 			{
 				DisplayName = "1",
   				use_full_connector_position = true,
-				connector = "Pylon1",
+				connector = "Pylon1",	--Wing tip left
 			},
 			tips
 		),
         pylon(2, 0, 0, 0, 0,
 			{
-				arg = 310,
-				arg_increment = 0,
-				DisplayName = "3",
+				arg = 309,
+				arg_value = 0,
+				DisplayName = "2",
 				use_full_connector_position = true,
-				connector = "Pylon3",
+				connector = "Pylon2",	--Outer left
 			},
-			inboard
+			
+			outboard
 		),
         pylon(3, 0, 0, 0, 0,
 			{
-				arg = 309,
-				arg_increment = 0,
-				DisplayName = "2",
+				arg = 310,
+				arg_value = 0,
+				DisplayName = "3",
 				use_full_connector_position = true,
-				connector = "Pylon2",
+				connector = "Pylon3",	--inner left
 			},
-			outboard
+			inboard
 		),
-        pylon(4, 1, 0, 0, 0,
-            {
-				arg = 311,
-				arg_increment = 0,
-				DisplayName = "-",--4
-            	use_full_connector_position = true,
-				connector = "Pylon4",
-			},
-			fuselageLeft
-		),
-        pylon(5, 2, 0, 0, 0,--26
+       
+        pylon(4, 2, 0, 0, 0,--26
 			{
 				arg = 312,
-				arg_increment = 0,
+				arg_value = 0,
 				DisplayName = "ELINT",
 				use_full_connector_position = true,
-				connector = "Pylon5",
+				connector = "Pylon5",		--integrated Elint
 			},
 			ECM_ELINT
 		),
-        pylon(6, 1, 0, 0, 0,
+        pylon(5, 1, 0, 0, 0,
 			{
 				arg = 313,
-				arg_increment = 0,
+				arg_value = 0,
 				DisplayName = "4",
 				use_full_connector_position = true,
-				connector = "Pylon6",
+				connector = "Pylon6",		--Centerline
 			},
 			centerline
 		),
-		pylon(7, 2, 0, 0, 0,--26
+		pylon(6, 2, 0, 0, 0,--26
 			{
 				arg = 314,
-				arg_increment = 0,
+				arg_value = 0,
 				DisplayName = "ECM",
 				use_full_connector_position = true,
-				connector = "Pylon8",
+				connector = "Pylon8",		--integrated Ecm
 			},
 			ECM_ELINT
 		),
-        pylon(8, 1, 0, 0, 0,
+        pylon(7, 1, 0, 0, 0,
             {
 				arg = 315,
-				arg_increment = 0,
+				arg_value = 0,
 				DisplayName = "5",--6
             	use_full_connector_position = true,
-				connector = "Pylon7",
+				connector = "Pylon7",		--cheek
 			},
 			fuselageRight
+		),
+        pylon(8, 0, 0, 0, 0,
+			{
+				arg = 316,
+				arg_value = 0,
+				DisplayName = "6",
+				use_full_connector_position = true,
+				connector = "Pylon9",		--inner right
+			},
+			
+			inboard
 		),
         pylon(9, 0, 0, 0, 0,
 			{
 				arg = 317,
-				arg_increment = 0,
+				arg_value = 0,
 				DisplayName = "7",
 				use_full_connector_position = true,
-				connector = "Pylon10",
+				connector = "Pylon10",		--outer right
 			},
 			outboard
 		),
-        pylon(10, 0, 0, 0, 0,
-			{
-				arg = 316,
-				arg_increment = 0,
-				DisplayName = "6",
-				use_full_connector_position = true,
-				connector = "Pylon9",
-			},
-			inboard
-		),
-		pylon(11, 0, 0, 0, 0,
+		pylon(10, 0, 0, 0, 0,
 			{
 				DisplayName = "8",
 				use_full_connector_position = true,
-				connector = "Pylon11",
+				connector = "Pylon11",	--Wing tip right
 			},
 			tips
 		),

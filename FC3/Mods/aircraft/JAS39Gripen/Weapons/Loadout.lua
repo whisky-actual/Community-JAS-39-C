@@ -11,13 +11,13 @@ dofile(current_mod_path .. '/Weapons/Loadouts/tools.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_misc.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_m71.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_10.lua')
---dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12.lua')
 --dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_10_tv.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12_tv.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16_tv.lua')
 
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_gbu_12.lua')
+--dofile(current_mod_path .. '/Weapons/Loadouts/mils_gbu_12.lua')
 
 -- jsow
 dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua')

@@ -1,16 +1,19 @@
 
-local Rb99_name = 'Rb99 AIM-120B'
+local Rb99_name = 'Rb99 AIM-120B AMRAAM Active Rdr AAM'
 local Rb99_mass = 156.0
 local pylon_mass = 1.0
+local pylon_dual_mass = 1.0
+
+local wsType_RB99 = 18839
 
 local Rb99_warhead = enhanced_a2a_warhead(11, 169)
 
-RB99_AA = {
+local RB99_AA = {
     category        = CAT_AIR_TO_AIR,
     name            = Rb99_name,
     model           = 'aim-120b',
     user_name       = _(Rb99_name),
-    wsTypeOfWeapon  = {4,4,7,WSTYPE_PLACEHOLDER},
+    wsTypeOfWeapon  = {4,4,7,18839},
     mass            = Rb99_mass,
 
     Escort          = 0,
@@ -58,8 +61,8 @@ RB99_AA = {
             file     = 'aim-120b',
             life     = 1,
             fire     = {0, 1},
-            username = Rb99_name,
-            index    = WSTYPE_PLACEHOLDER,
+            username = "Rb99",		--Shortened name for cockpit displays
+            index    = 18839,
         },
     },
 
@@ -264,7 +267,7 @@ RB99_AA.shape_table_data.index = RB99_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category    = CAT_AIR_TO_AIR,
-    CLSID       = "{Rb99}",
+    CLSID       = "JAS_Rb99",
     Picture     = 'us_AIM-120B.png',
     attribute   = RB99_AA.wsTypeOfWeapon,
     displayName = _(Rb99_name),
@@ -284,3 +287,40 @@ declare_loadout({
         },
     }, -- end of Elements
 })
+
+declare_loadout({
+    category    = CAT_AIR_TO_AIR,
+    CLSID       = "JAS_Rb99_DUAL", 
+    Picture     = 'us_AIM-120B.png',
+	wsTypeOfWeapon = RB99_AA.wsTypeOfWeapon,
+    attribute   = {4,4,32,18839},
+    displayName = _(Rb99_name .. ' x 2'),
+    Cx_pil      = 0.001959765625 * 1.31,
+    Count       = 2,
+    Weight      = 2 * Rb99_mass + pylon_dual_mass, 
+
+	Elements	=
+	{
+			[1]	=
+			{
+				
+				Position	=	{0,	0,	0},
+				ShapeName	=	"LAU-115C+2_LAU127", IsAdapter = true,
+					},
+			[2]	=
+			{	
+				Rotation	=	{80, 0, 0.5},
+				Position	=	{0.1, -0.065, -0.20},
+				ShapeName	=	"aim-120b",
+					},
+			[3]	=
+			{
+				Rotation	=	{-80, 0, -0.5},
+				Position	=	{0.1, -0.065, 0.20},
+				ShapeName	=	"aim-120b",					
+					},				
+	},
+    
+	JettisonSubmunitionOnly = true,
+})
+

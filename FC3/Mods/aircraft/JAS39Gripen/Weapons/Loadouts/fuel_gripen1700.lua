@@ -22,7 +22,7 @@ declare_loadout(
                 file = "gripentank1700",
                 life = 1,
                 fire = { 0, 1},
-                username = gripenft1700_name,
+                username = "1700L Tank",
                 index = WSTYPE_PLACEHOLDER,
             },
         },

@@ -52,7 +52,7 @@ local gbu_16_tv =
 	
 	name			= "gbu-16",
 	model			= "gbu-16",
-	user_name		= _("GBU-16 TV"),
+	user_name		= _("GBU-16 1000lb TV Guided Bomb"),
 	scheme			= "bomb_jdam",
 	class_name		= "wAmmunitionChangeableTrajectory",
 	

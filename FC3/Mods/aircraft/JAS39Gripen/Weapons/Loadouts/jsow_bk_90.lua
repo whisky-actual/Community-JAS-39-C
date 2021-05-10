@@ -65,7 +65,7 @@ local BK_90 =
 
 	name			= "BK_90",
 	model			= "BK_90",
-	user_name		= _("BK-90"),
+	user_name		= _("BK-90 Unguided Cluster Munition"),
 	scheme			= "bomb-cassette-2",
 	class_name		= "wAmmunition",
 	
