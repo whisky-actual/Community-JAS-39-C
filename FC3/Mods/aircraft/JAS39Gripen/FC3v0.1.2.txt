@@ -70,3 +70,10 @@ Changed Tv guided gbu 10 to laser guidance, since it was very similar to gbu 31
 Changed cockpit lods to enable gripen cockpit by deafult
 Fixed order of pylons in rearming window. removed unused pylon
 Fixed an error with gun ammo that was causing an error in the logs
+
+FC3v0.1.2 :
+removed dual meteors
+reduced burn time for meteor
+Sfm tweaks:
+Increased subsonic dry thrust
+Small changes to drag and thrust values to tune top speeds at different altitudes
