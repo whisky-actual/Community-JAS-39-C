@@ -224,7 +224,7 @@ local centerline 	= {
 				
 --					========= Air to air missiles ==============				
 	{ CLSID = "Meteor",  arg_increment = 0.2 }, -- Rb101 Meteor
-	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0,  --  AIM 120C
+	{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}" ,arg_increment = 0.0},  --  AIM 120C
 	{ CLSID = "JAS_Rb99" ,arg_increment = 0.0},   --  RB99 AIM-120B
 	{ CLSID = "JAS_Rb99_DUAL" ,arg_increment = 0.0},    --  RB99 AIM-120B
 	
