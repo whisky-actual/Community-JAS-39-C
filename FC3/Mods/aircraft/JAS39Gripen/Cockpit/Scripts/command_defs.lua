@@ -514,15 +514,15 @@ device_commands =
 {
 	FuelProbeSwitch		= __counter(),
 	FuelProbeCover		= __counter(),
-	HookSwitch			= __counter(),
-	BatterySwitchClick 	= __counter(),
-	GenRightSwitch 		= __counter(),
-	GenLeftSwitch 		= __counter(),
-	FuelPumpRight		= __counter(),
-	FuelPumpLeft		= __counter(),
-	FuelPumpRCover		= __counter(),
-	FuelPumpLCover		= __counter(),
-	CanopySwitch		= __counter(),
-	ParkingBrakeSwitch  = __counter(),
+	
+	SpoilersArmToggle               = __custom_counter(),
+    SpoilersArmOn                   = __custom_counter(),
+    SpoilersArmOff                  = __custom_counter(),
+	spoiler_cover                   = __counter(),
+	spoiler_arm                     = __counter(),
+	
+	wheelbrake_AXIS 	            = __counter(),
+	left_wheelbrake_AXIS            = __counter(),
+    right_wheelbrake_AXIS           = __counter(),
 
 }

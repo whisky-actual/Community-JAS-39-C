@@ -50,7 +50,7 @@ IRIST_AA = {
     shape_table_data = {
         {
             name     = irist_name,
-            file     = 'iris-t',
+            file     = 'Rb98_iris-t',
             life     = 1,
             fire     = {0, 1},
             username = "Rb98",
@@ -118,7 +118,7 @@ IRIST_AA.shape_table_data.index = IRIST_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category     = CAT_AIR_TO_AIR,
-    CLSID        = "IRIS-T",
+    CLSID        = "JAS_IRIS-T",
     Picture      = 'irist.png',
     attribute    = IRIST_AA.wsTypeOfWeapon,
     displayName  = _(irist_name),
@@ -134,30 +134,8 @@ declare_loadout({
                 [2] = {2, 1},
             }, -- end of DrawArgs
             Position  = {0, 0, 0},
-            ShapeName = 'iris-t',
+            ShapeName = 'Rb98_iris-t',
         },
     }, -- end of Elements
 })
 
-declare_loadout({
-    category     = CAT_AIR_TO_AIR,
-    CLSID        = 'DIS_PL-5EII_TIP',
-    Picture      = 'irist.png',
-    attribute    = IRIST_AA.wsTypeOfWeapon,
-    displayName  = _(irist_name),
-    Cx_pil       = 0.0,
-    Count        = 1,
-    Weight       = irist_mass,
-    Elements     = {
-        [1] =
-        {
-            DrawArgs =
-            {
-                [1] = {1, 1},
-                [2] = {2, 1},
-            }, -- end of DrawArgs
-            Position  = {0, 0, 0},
-            ShapeName = 'iris-t',
-        },
-    }, -- end of Elements
-})

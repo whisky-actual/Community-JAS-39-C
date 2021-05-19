@@ -1,3 +1,7 @@
+local cockpit = folder.."../../../Cockpit/Scripts/"
+dofile(cockpit.."devices.lua")
+dofile(cockpit.."command_defs.lua")
+
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 join(res.keyCommands,{
 
@@ -12,6 +16,9 @@ join(res.keyCommands,{
 {down = iCommandPlaneStabHrad, name = _('Autopilot - Radar Altitude Hold'), category = _('Autopilot')},
 {down = iCommandPlaneRouteAutopilot, name = _('Autopilot - \'Route following\''), category = _('Autopilot')},
 {down = iCommandPlaneStabCancel, name = _('Autopilot Disengage'), category = _('Autopilot')},
+
+--Brakes	
+{down = iCommandPlaneWheelBrakeOn,                          up = iCommandPlaneWheelBrakeOff,			        name = _('Wheel Brake On'),		                                category = _('Systems')},
 
 -- Systems
 {down = iCommandPlaneJettisonFuelTanks, name = _('Jettison Fuel Tanks'), category = _('Systems')},
@@ -72,8 +79,9 @@ join(res.axisCommands,{
 {action = iCommandPlaneMFDZoomAbs 			, name = _('I-251 Zoom')},
 {action = iCommandPlaneBase_DistanceAbs 	, name = _('Target Box Size / Funnel target wing span / Gunpod Elevation')},
 
-{action = iCommandWheelBrake,		name = _('Wheel Brake'),		category = {_('Systems')}},
-{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left'),	category = {_('Systems')}},
-{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right'),	category = {_('Systems')}}, 
+    {                                               action = device_commands.wheelbrake_AXIS,       cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake'),       category = {_('Systems')}},
+    {                                               action = device_commands.left_wheelbrake_AXIS,  cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Left'),  category = {_('Systems')}},
+    {                                               action = device_commands.right_wheelbrake_AXIS, cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Right'), category = {_('Systems')}},
+
 })
 return res

@@ -56,12 +56,12 @@ mount_vfs_texture_path  (current_mod_path.."/Textures/Cockpit_textures")
 dofile(current_mod_path.."/Views_JAS39Gripen.lua")
 make_view_settings('JAS39Gripen', ViewSettings, SnapViews)
 make_flyable('JAS39Gripen',current_mod_path..'/Cockpit/KneeboardRight/',{nil, old = 6}, current_mod_path..'/comm.lua')--SFM
---make_flyable('JAS39Gripen',current_mod_path..'/Cockpit/Scripts/',{nil, old = 6}, current_mod_path..'/comm.lua')--SFM
+make_flyable('JAS39Gripen',current_mod_path..'/Cockpit/Scripts/',{nil, old = 6}, current_mod_path..'/comm.lua')--SFM
 -------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Views_JAS39Gripen_AG.lua")
 make_view_settings('JAS39Gripen_AG', ViewSettings, SnapViews)
 make_flyable('JAS39Gripen_AG',current_mod_path..'/Cockpit/KneeboardRight/',{nil, old = 54}, current_mod_path..'/comm.lua')--SFM
---make_flyable('JAS39Gripen_AG',current_mod_path..'/Cockpit/Scripts/',{nil, old = 54}, current_mod_path..'/comm.lua')--SFM
+make_flyable('JAS39Gripen_AG',current_mod_path..'/Cockpit/Scripts/',{nil, old = 54}, current_mod_path..'/comm.lua')--SFM
 -------------------------------------------------------------------------------------
 dofile(current_mod_path..'/JAS39Gripen.lua')
 dofile(current_mod_path..'/JAS39Gripen_AG.lua')

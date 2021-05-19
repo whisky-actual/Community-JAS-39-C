@@ -9,7 +9,7 @@ local meteor_warhead = enhanced_a2a_warhead(24, 203)
 MBDA_METEOR = {
     category        = CAT_AIR_TO_AIR,
     name            = meteor_name,
-    model           = 'meteor',
+    model           = 'Rb101_meteor',
     user_name       = _(meteor_name),
     wsTypeOfWeapon  = {4,4,7,WSTYPE_PLACEHOLDER},
     mass            = meteor_mass,
@@ -53,7 +53,7 @@ MBDA_METEOR = {
     shape_table_data = {
         {
             name     = meteor_name,
-            file     = 'meteor',
+            file     = 'Rb101_meteor',
             life     = 1,
             fire     = {0, 1},
             username = "Rb101",
@@ -274,7 +274,7 @@ MBDA_METEOR.shape_table_data.index = MBDA_METEOR.wsTypeOfWeapon[4]
 
 declare_loadout({
     category    = CAT_AIR_TO_AIR,
-    CLSID       = "Meteor",
+    CLSID       = "JAS_Meteor",
     Picture     = 'meteor.png',
     attribute   = MBDA_METEOR.wsTypeOfWeapon,
     displayName = _(meteor_name),
@@ -290,15 +290,15 @@ declare_loadout({
                 [2] = {2, 1},
             }, -- end of DrawArgs
             Position  = {0, 0, 0},
-            ShapeName = 'meteor',
+            ShapeName = 'Rb101_meteor',
         },
     }, -- end of Elements
 })
 
-
+--[[
 declare_loadout({
     category       = CAT_AIR_TO_AIR,
-    CLSID          = "Meteor_DUAL",
+    CLSID          = "JAS_Meteor_DUAL",
     Picture        = 'meteor.png',
     wsTypeOfWeapon = MBDA_METEOR.wsTypeOfWeapon,
     attribute      = {4,4,32,WSTYPE_PLACEHOLDER},
@@ -318,13 +318,13 @@ declare_loadout({
 			{	
 				Rotation	=	{80, 0, 0.5},
 				Position	=	{0.1, -0.065, -0.20},
-				ShapeName	=	"meteor",
+				ShapeName	=	"Rb101_meteor",
 					},
 			[3]	=
 			{
 				Rotation	=	{-80, 0, -0.5},
 				Position	=	{0.1, -0.065, 0.20},
-				ShapeName	=	"meteor",					
+				ShapeName	=	"Rb101_meteor",					
 					},				
 	},
     
@@ -332,3 +332,4 @@ declare_loadout({
 })
 
 
+--]]

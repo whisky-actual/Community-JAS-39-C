@@ -1,0 +1,15 @@
+What works: axis braking
+What doesnt work: pretty much everything else
+tried:
+Copied files from a4
+Command_defs:	Used our old file but added lines for spoilers and wheel brake axis
+mainpanel_init:	edited shape_name   	   = "Jas-39-CPT"
+spoilers: changed arg to what our model uses, 35
+sfm_extender: Out-commented  function "rudder", made ground handling impossible
+airbrakes: This includes wheel braking. 
+input/joystick: added custom brake axis
+Notes: Cannot find any key commands for electrical system
+	If you remove a device from devices or device_init- everything stops working, even if the file being called does not exist in the folder
+	remove Any file and it stops working
+	See if you can bypass the electrical and hydraulic systems somehow (maybe?)
+	sorry for the mess :) good luck

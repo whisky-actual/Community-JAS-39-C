@@ -1,3 +1,4 @@
+Completely remove old version, if any
 Put folder "JAS39Gripen" into *user* / Saved games / DCS / mods / aircraft
 
 To switch between fc3 and Gripen cockpits: 

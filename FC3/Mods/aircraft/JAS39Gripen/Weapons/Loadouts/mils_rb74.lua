@@ -20,7 +20,7 @@ local Rb74 = {
 	{
 		{
 			name	 = "Robot74";
-			file  = "AIM-9L"; -- <--/N/ replace this file name with proper one
+			file  = "Rb74_aim-9L"; 
 			life  = 1;
 			fire  = { 0, 1};
 			username = "Rb 74";
@@ -132,7 +132,7 @@ declare_weapon(Rb74)
 declare_loadout(
 	{		
 		category			= CAT_AIR_TO_AIR,
-		CLSID				= "{Rb74}",
+		CLSID				= "JAS_Rb74",
 		attribute			= {wsType_Weapon, wsType_Missile, wsType_Container, wsType_Rb74},
 		wsTypeOfWeapon		= Rb74.wsTypeOfWeapon,
 		Count				= 1,
@@ -150,7 +150,7 @@ declare_loadout(
 			[2]	=
 			{
 				Position	=	{0.0,	-0.10,	0}, 
-				ShapeName	=	"AIM-9L", --<-- /N/  put the missile shape name here
+				ShapeName	=	"Rb74_aim-9L", --<-- /N/  put the missile shape name here
 			},
 		},
 	}

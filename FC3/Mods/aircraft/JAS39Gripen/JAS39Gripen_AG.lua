@@ -46,8 +46,8 @@ local function m85(tbl)
 end
 -- ================ Pylons ==================
 local tips 		= {
-	{ CLSID = "IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "{Rb74}", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+	{ CLSID = "JAS_IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
+	{ CLSID = "JAS_Rb74", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
 	
 	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
     { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
@@ -60,8 +60,8 @@ local tips 		= {
 
 local outboard 	= {
 --				=== Air to air IR missiles ===
-                { CLSID = "IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "{Rb74}", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- Rb74 AIM-9L
+                { CLSID = "JAS_IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- Rb98 IRIS-T
+				{ CLSID = "JAS_Rb74", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- Rb74 AIM-9L
 
 --				
 
@@ -330,13 +330,13 @@ JAS39Gripen_AG =  {
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
 		wing_area					=	30,	-- wing area in m2
-		thrust_sum_max				=	5200,	-- thrust in kgf (64.3 kN)
-		thrust_sum_ab				=	8566,	-- thrust in kgf (95.1 kN)
+		thrust_sum_max				=	5200,	-- thrust in kgf (54.0 kN)
+		thrust_sum_ab				=	8566,	-- thrust in kgf (81.0 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
 		flaps_maneuver				=	1,
 		Mach_max					=	2.5,	-- Max speed in Mach (for AI)
 		range						=	2540,	-- Max range in km (for AI)
-		RCS							=	2.5,		-- Radar Cross Section m2 -- Changed from 1.0, that was overpowered
+		RCS							=	2.0,		-- Radar Cross Section m2 -- Changed from 1.0, that was overpowered
 		Ny_max_e					=	8,		-- Max G (for AI)
 		detection_range_max			=	250,
 		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
@@ -621,9 +621,9 @@ SFM_Data = {
                 [5]  = { 0.700, 0.025, 0.074, 0.134, 0.045, 3.5, 25.000, 1.2 },
                 [6]  = { 0.800, 0.024, 0.080, 0.135, 0.052, 3.5, 25.000, 1.2 },
                 [7]  = { 0.900, 0.028, 0.081, 0.135, 0.058, 3.5, 25.000, 1.15 },
-                [8]  = { 1.000, 0.043, 0.083, 0.252, 0.10, 2.5, 21.250, 1.12 },
-                [9]  = { 1.050, 0.040, 0.084, 0.320, 0.095, 2.304, 19.375, 1.1 },
-                [10] = { 1.100, 0.0385, 0.091, 0.387, 0.09, 2.261, 17.500, 1.05 },
+                [8]  = { 1.000, 0.036, 0.083, 0.252, 0.10, 2.5, 21.250, 1.12 },
+                [9]  = { 1.050, 0.035, 0.084, 0.320, 0.095, 2.304, 19.375, 1.1 },
+                [10] = { 1.100, 0.037, 0.091, 0.387, 0.09, 2.261, 17.500, 1.05 },
                 [11] = { 1.200, 0.0367, 0.095, 0.410, 0.12, 2.178, 15.625, 1.00 },
                 [12] = { 1.300, 0.035, 0.096, 0.427, 0.17, 1.979, 13.750, 0.912 },
                 [13] = { 1.500, 0.035, 0.090, 0.452, 0.20, 1.609, 10.000, 0.740 },
@@ -667,7 +667,7 @@ SFM_Data = {
             dpdh_m     = 2500,      --  altitude coefficient for max thrust
             dpdh_f     = 2500,      --  altitude coefficient for AB thrust
             table_data = {
---            M     Pmax     Pfor
+		    --            M     Pmax     	Pfor
                 [1]  =  { 0.00, 44453*1.45,  75008 },
                 [2]  =  { 0.20, 43262*1.40,  74957 },
                 [3]  =  { 0.30, 44896*1.33,  75608 },
@@ -676,22 +676,22 @@ SFM_Data = {
                 [6]  =  { 0.60, 49979*1.33,  85230 },
                 [7]  =  { 0.70, 51133*1.33,  97896 },
                 [8]  =  { 0.80, 52093*1.33,  98147 },
-                [9]  =  { 0.97, 49117*1.10,  98727 },
-                [10] =  { 1.00, 49651*1.0,   99451 },
-                [11] =  { 1.05, 48569*1.0,  98869 },
-                [12] =  { 1.10, 43486*1.0, 101121 },
-                [13] =  { 1.15, 40698*1.0, 105076 },
-                [14] =  { 1.20, 36910*1.0, 117101 },
-                [15] =  { 1.30, 33933*1.0, 108449 },
-                [16] =  { 1.40, 32150*1.0, 103915 },
-                [17] =  { 1.50, 30362*1.0, 91733 },
-                [18] =  { 1.60, 28579*1.0, 95436 },
-                [19] =  { 1.70, 26791*1.0,  94836 },
-                [20] =  { 1.85, 25003*1.0,  94436 },
-                [21] =  { 1.90, 24220*1.0,  94917 },
-				[22] =  { 2.00, 23220*1.0,  97117 },
-                [23] =  { 2.20, 19649*1.0,  98079 },
-				[24] =  { 3.90, 16649*1.0,  61279 },
+                [9]  =  { 0.97, 49117*1.0,  99727 },
+                [10] =  { 1.00, 49651*0.8,  100451 },
+                [11] =  { 1.05, 48569*0.9,  99869 },
+                [12] =  { 1.10, 43486*0.9, 101121 },
+                [13] =  { 1.15, 40698*0.9, 105076 },
+                [14] =  { 1.20, 36910*0.9, 117101 },
+                [15] =  { 1.30, 33933*0.9, 108449 },
+                [16] =  { 1.40, 32150*0.9, 103915 },
+                [17] =  { 1.50, 30362*0.9, 91733 },
+                [18] =  { 1.60, 28579*0.9, 95436 },
+                [19] =  { 1.70, 26791*0.9,  94836 },
+                [20] =  { 1.85, 25003*0.9,  94436 },
+                [21] =  { 1.90, 24220*0.9,  94917 },
+				[22] =  { 2.00, 23220*0.9,  97117 },
+                [23] =  { 2.20, 19649*0.9,  98079 },
+				[24] =  { 3.90, 16649*0.9,  61279 },
             }, -- end of table_data
             -- M    - Mach number
             -- Pmax    - Engine thrust at military power

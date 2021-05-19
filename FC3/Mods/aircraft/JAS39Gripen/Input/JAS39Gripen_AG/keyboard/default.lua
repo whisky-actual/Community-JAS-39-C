@@ -1,3 +1,7 @@
+local cockpit = folder.."../../../Cockpit/Scripts/"
+dofile(cockpit.."devices.lua")
+dofile(cockpit.."command_defs.lua")
+
 local res = external_profile("Config/Input/Aircrafts/base_keyboard_binding.lua")
 join(res.keyCommands,{
 
@@ -24,9 +28,8 @@ join(res.keyCommands,{
 {combos = {{key = 'Q', reformers = {'LAlt'}}}, down = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, up = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, name = _('Nose Wheel Steering'), category = _('Systems')},
 -- Systems Su33
 {combos = {{key = 'R', reformers = {'LCtrl'}}}, down = iCommandPlaneAirRefuel, name = _('Refueling Boom'), category = _('Systems')},
-{combos = {{key = 'G', reformers = {'LAlt'}}}, down = iCommandPlaneHook, name = _('Tail Hook'), category = _('Systems')},
-{combos = {{key = 'P', reformers = {'RCtrl'}}}, down = iCommandPlanePackWing, name = _('Folding Wings'), category = _('Systems')},
-
+--{category = _('Flight Control'), name = _('Drag Chute DEPLOY'),         		down = iCommandPlaneParachute,  											combos = {{key = 'P'}}, 								},
+{combos = {{key = 'P'}}, down = iCommandPlaneParachute, name = _('Canard Braking'), category = _('Flight Control') }, 
 -- Modes
 --{combos = {{key = '2'}}, down = iCommandPlaneModeBVR, name = _('(2) Beyond Visual Range Mode'), category = _('Modes')},
 --{combos = {{key = '3'}}, down = iCommandPlaneModeVS, name = _('(3) Close Air Combat Vertical Scan Mode'), category = _('Modes')},

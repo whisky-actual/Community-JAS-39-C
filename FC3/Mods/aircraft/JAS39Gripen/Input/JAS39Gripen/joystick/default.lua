@@ -1,3 +1,7 @@
+local cockpit = folder.."../../../Cockpit/Scripts/"
+dofile(cockpit.."devices.lua")
+dofile(cockpit.."command_defs.lua")
+
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 
 join(res.keyCommands,{
@@ -8,6 +12,8 @@ join(res.keyCommands,{
 {down = iCommandHelicopter_PPR_button_K_up, name = _('CAS Roll'), category = _('Autopilot')},
 {down = iCommandHelicopter_PPR_button_H_up, name = _('CAS Yaw'), category = _('Autopilot')},
 
+{down = iCommandPlaneWheelBrakeOn,                          up = iCommandPlaneWheelBrakeOff,			        name = _('Wheel Brake On'),		                                category = _('Systems')},
+
 --Flight Control
 {down = iCommandPlaneTrimOn, up = iCommandPlaneTrimOff, name = _('T/O Trim'), category = _('Flight Control')},
 
@@ -16,8 +22,8 @@ join(res.keyCommands,{
 {down = iCommandPlaneJettisonFuelTanks, name = _('Jettison Fuel Tanks'), category = _('Systems')},
 {down = iCommandPlane_HOTAS_NoseWheelSteeringButton, up = iCommandPlane_HOTAS_NoseWheelSteeringButton, name = _('Nose Gear Maneuvering Range'), category = _('Systems')},
 {down = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, up = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, name = _('Nose Wheel Steering'), category = _('Systems')},
-{down = iCommandPlaneWheelBrakeLeftOn, up = iCommandPlaneWheelBrakeLeftOff, name = _('Wheel Brake Left On/Off'), category = _('Systems')},
-{down = iCommandPlaneWheelBrakeRightOn, up = iCommandPlaneWheelBrakeRightOff, name = _('Wheel Brake Right On/Off'), category = _('Systems')},
+--{down = iCommandPlaneWheelBrakeLeftOn, up = iCommandPlaneWheelBrakeLeftOff, name = _('Wheel Brake Left On/Off'), category = _('Systems')},
+--{down = iCommandPlaneWheelBrakeRightOn, up = iCommandPlaneWheelBrakeRightOff, name = _('Wheel Brake Right On/Off'), category = _('Systems')},
 {down = iCommandPlaneFSQuantityIndicatorSelectorMAIN, name = _('Fuel Quantity Selector'), category = _('Systems')},
 {down = iCommandPlaneFSQuantityIndicatorTest, up = iCommandPlaneFSQuantityIndicatorTest, value_down = 1, value_up = 0, name = _('Fuel Quantity Test'), category = _('Systems')},
 {down = iCommandPlaneFSQuantityIndicatorSelectorINT,	up = iCommandPlaneFSQuantityIndicatorSelectorINT, value_down = 1,  value_up = 0, 	name = _('Bingo Fuel Index, CW'),  category = _('Systems')},
@@ -82,9 +88,10 @@ join(res.axisCommands,{
 {action = iCommandPlaneMFDZoomAbs 			, name = _('MFD Range')},
 {action = iCommandPlaneBase_DistanceAbs 	, name = _('Base/Distance')},
 
-{action = iCommandWheelBrake,		name = _('Wheel Brake'),		category = {_('Systems')}},
-{action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left'),	category = {_('Systems')}},
-{action = iCommandRightWheelBrake,	name = _('Wheel Brake Right'),	category = {_('Systems')}}, 
+    {                                               action = device_commands.wheelbrake_AXIS,       cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake'),       category = {_('Systems')}},
+    {                                               action = device_commands.left_wheelbrake_AXIS,  cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Left'),  category = {_('Systems')}},
+    {                                               action = device_commands.right_wheelbrake_AXIS, cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Right'), category = {_('Systems')}},
+
  
 
 
