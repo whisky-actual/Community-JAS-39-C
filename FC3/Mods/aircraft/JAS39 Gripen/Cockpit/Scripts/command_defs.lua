@@ -503,7 +503,7 @@ Keys =
 }
 
 
-start_command   = 10000
+start_command   =  3000
 local __count = start_command-1
 local function __counter()
 	__count = __count + 1

@@ -29,7 +29,7 @@ dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk_90.lua')
 
 dofile(current_mod_path .. '/Weapons/Loadouts/rkt_arakm70l.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/rkt_arakm70b.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_brimstone.lua')
+--dofile(current_mod_path .. '/Weapons/Loadouts/mils_brimstone.lua')
 
 -- mils
 

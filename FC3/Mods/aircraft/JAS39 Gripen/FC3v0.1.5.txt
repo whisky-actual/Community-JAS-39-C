@@ -92,3 +92,7 @@ Tweaked flame position on stormshadow and rbs15. Hid them better
 added new quick action missions
 animated canards. When rpm < 75%, speed < 140 knots and weight on front wheel. automatically return when speed is < 15 knots. Need to add actual braking to this. 
 animated slats, depending on AOA the slats extend different amounts
+
+FC3v0.1.5 :
+Changes to get axis braking closer to a working stage
+disabled brimstone since its a WIP

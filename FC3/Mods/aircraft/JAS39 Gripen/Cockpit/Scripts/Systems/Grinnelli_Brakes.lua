@@ -14,27 +14,36 @@ local BrakesOFF     = true
 local L_axis_value  = -1
 local R_axis_value  = -1
 
-dev:listen_command(10000)--Brakes On	74
-dev:listen_command(10001)--Brakes Off	75
+dev:listen_command(10038)--Brakes On	74
+dev:listen_command(10039)--Brakes Off	75
 
 --TODO: Create custom 
 
 --You will need to create custom input commands for the brakes same way I did for F-22 there was an F-22 wheel brakes axis
-dev:listen_command(10002)--left axis
-dev:listen_command(10003)--right axis
-dev:listen_command(10004)--both axis
+dev:listen_command(10056)--left axis
+dev:listen_command(10057)--right axis
+dev:listen_command(10058)--both axis
 
 
-function SetCommand(command,value)
+--[[function SetCommand(command,value)
 --Axis Commands
-    if command == 10002 then --left brake
+    if command == 10056 then --left brake
         L_axis_value = value
-    elseif command == 10003 then--right brake
+    elseif command == 10057 then--right brake
         R_axis_value = value
-    elseif command == 10004 then-- Both brakes ?
+    elseif command == 10058 then-- Both brakes ?
         L_axis_value = value
         R_axis_value = value
-    end
+    end --]]
+    function SetCommand(_ARG_0_, _ARG_1_)
+        if _ARG_0_ == 10056 then
+          _UPVALUE0_ = _ARG_1_
+        elseif _ARG_0_ == 10057 then
+          _UPVALUE1_ = _ARG_1_
+        elseif _ARG_0_ == 10058 then
+          _UPVALUE0_ = _ARG_1_
+          _UPVALUE1_ = _ARG_1_
+        end    
 --Keyboard Commands
     if command == 10000 and (BrakesON == false or BrakesOFF == true) then
         BrakesON = true
