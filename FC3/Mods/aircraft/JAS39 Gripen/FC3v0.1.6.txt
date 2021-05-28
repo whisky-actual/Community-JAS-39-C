@@ -96,3 +96,11 @@ animated slats, depending on AOA the slats extend different amounts
 FC3v0.1.5 :
 Changes to get axis braking closer to a working stage
 disabled brimstone since its a WIP
+
+
+FC3v0.1.6 :
+(Re)added brimstone. Now works a little bit better and show up as a missile instead of a rocket
+added a file with all useful dcs commands, for system scripting
+Brake axis attempts
+Added canard_system to make canards tilt down at high AOA. Disabled due to it over-riding the pitch animation
+added mach cone file, does not work

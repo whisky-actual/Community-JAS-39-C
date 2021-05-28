@@ -13,11 +13,15 @@ local fmt = '%.2f'
 local slat_pos
 local SLATS_STATE = 0
 local SLATS_TARGET = 0
+local CANARD_POS = 0
+
 
 local DEGREE_TO_RAD  = 0.0174532925199433
 local RAD_TO_DEGREE  = 57.29577951308233
 local slat_system = GetSelf()
 local AOA = 0
+
+local PITCH_STATE = 0
 function post_initialize()
     local birth = LockOn_Options.init_conditions.birth_place
 end
@@ -30,6 +34,8 @@ function getIASKnots()
     AOA =(sensor_data.getAngleOfAttack() * RAD_TO_DEGREE)
     -- SLATS_STATE = tonumber(string.format(fmt,AOA))
     -- print_message_to_user(SLATS_STATE)
+    local PITCH_STATE =  sensor_data:getStickPitchPosition() / 100
+
 end
 
 function SetCommand(command,value)
@@ -37,13 +43,14 @@ end
 
 function update()
     getIASKnots()--si el AOA es menor que 2, slats = 0; si slats < 8 pon AOA/8 si AOA > 8 slats =1 si IAS <115 slat slat_system = 0
-    if (AOA >= 24) then
+    if (AOA >= 24 ) then
         SLATS_TARGET = -1
-    elseif (AOA < 24) then
+    elseif (AOA < 24 ) then
         SLATS_TARGET= AOA/-24
     end
     -- print_message_to_user(AOA)
     set_aircraft_draw_argument_value(91,SLATS_TARGET)
+        
     
 end
 

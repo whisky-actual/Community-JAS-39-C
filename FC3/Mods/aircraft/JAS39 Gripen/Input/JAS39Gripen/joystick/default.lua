@@ -4,8 +4,8 @@ dofile(cockpit.."command_defs.lua")
 
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 -- Brakes
-local BrakesON      = 100038
-local BrakesOFF     = 100039
+local BrakesON      = 10038
+local BrakesOFF     = 10039
 local L_BRAKE       = 10056
 local R_BRAKE       = 10057
 local B_BRAKE       = 10058
@@ -89,19 +89,19 @@ join(res.keyCommands,{
 })
 -- joystick axes 
 join(res.axisCommands,{
-{action = iCommandPlaneSelecterHorizontalAbs, name = _('TDC Slew Horizontal')},
-{action = iCommandPlaneSelecterVerticalAbs	, name = _('TDC Slew Vertical')},
-{action = iCommandPlaneRadarHorizontalAbs	, name = _('Radar Horizontal')},
-{action = iCommandPlaneRadarVerticalAbs		, name = _('Radar Vertical')},
+    {action = iCommandPlaneSelecterHorizontalAbs, name = _('TDC Slew Horizontal')},
+    {action = iCommandPlaneSelecterVerticalAbs	, name = _('TDC Slew Vertical')},
+    {action = iCommandPlaneRadarHorizontalAbs	, name = _('Radar Horizontal')},
+    {action = iCommandPlaneRadarVerticalAbs		, name = _('Radar Vertical')},
 
-{action = iCommandPlaneMFDZoomAbs 			, name = _('MFD Range')},
-{action = iCommandPlaneBase_DistanceAbs 	, name = _('Base/Distance')},
+    {action = iCommandPlaneMFDZoomAbs 			, name = _('MFD Range')},
+    {action = iCommandPlaneBase_DistanceAbs 	, name = _('Base/Distance')},
 
 
---Brakes
-    {action = B_BRAKE,		                        name = _('Wheel Brake Both')},
-    {action = L_BRAKE,		                        name = _('Wheel Brake Left')},
-    {action = R_BRAKE,		                        name = _('Wheel Brake Right')},
+    --Brakes
+    {action = B_BRAKE,		                        name = _('Gripen Wheel Brake Both')},
+    {action = L_BRAKE,		                        name = _('Gripen Wheel Brake Left')},
+    {action = R_BRAKE,		                        name = _('Gripen Wheel Brake Right')},
 
  
 

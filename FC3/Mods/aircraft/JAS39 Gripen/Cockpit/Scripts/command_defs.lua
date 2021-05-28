@@ -503,21 +503,16 @@ Keys =
 }
 
 
-start_command   =  3000
-local __count = start_command-1
-local function __counter()
-	__count = __count + 1
-	return __count
-end
+
 -- add custom commands here --
 device_commands =
 {
 	
-	BrakesON      = __counter(),
-	BrakesOFF     = __counter(),
-	L_BRAKE       = __counter(),
-	R_BRAKE       = __counter(),
-	B_BRAKE       = __counter(),
-	Brakes        = __counter(),
+	 BrakesON      = 10038,
+	 BrakesOFF     = 10039,
+	 L_BRAKE       = 10056,
+	 R_BRAKE       = 10057,
+	 B_BRAKE       = 10058,
+	 Brakes        = 10023,
 
 }

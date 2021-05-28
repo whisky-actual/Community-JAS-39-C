@@ -396,8 +396,8 @@ JAS39Gripen_AG =  {
 			{
 				pos = 	{-6.231,	0.268,	0},-- Tribwerke   -5.231,	-0.468,	0
 				elevation	=	0,-- AFB cone elevation  winkel nach oben unten
-				diameter    =   1.05,-- AFB cone diameter   Kreis Ø --1.0
-                exhaust_length_ab   =   10,--lenght in m  Kreis Ø kegel efekt
+				diameter    =   1.05,-- AFB cone diameter   Kreis ï¿½ --1.0
+                exhaust_length_ab   =   10,--lenght in m  Kreis ï¿½ kegel efekt
                 exhaust_length_ab_K =   0.707,--animation geschwindigkeit
                 smokiness_level     =   0.01, --0.05
 				afterburner_circles_count = 11,

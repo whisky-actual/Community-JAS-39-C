@@ -25,7 +25,7 @@ dev:listen_command(10057)--right axis
 dev:listen_command(10058)--both axis
 
 
---[[function SetCommand(command,value)
+-function SetCommand(command,value)
 --Axis Commands
     if command == 10056 then --left brake
         L_axis_value = value
@@ -34,8 +34,8 @@ dev:listen_command(10058)--both axis
     elseif command == 10058 then-- Both brakes ?
         L_axis_value = value
         R_axis_value = value
-    end --]]
-    function SetCommand(_ARG_0_, _ARG_1_)
+    end 
+   --[[ function SetCommand(_ARG_0_, _ARG_1_)
         if _ARG_0_ == 10056 then
           _UPVALUE0_ = _ARG_1_
         elseif _ARG_0_ == 10057 then
@@ -43,14 +43,14 @@ dev:listen_command(10058)--both axis
         elseif _ARG_0_ == 10058 then
           _UPVALUE0_ = _ARG_1_
           _UPVALUE1_ = _ARG_1_
-        end    
+        end    --]]
 --Keyboard Commands
-    if command == 10000 and (BrakesON == false or BrakesOFF == true) then
+    if command == 10039 and (BrakesON == false or BrakesOFF == true) then
         BrakesON = true
         BrakesOFF = false
         L_axis_value = 1
         R_axis_value = 1
-    elseif command == 10001 and (BrakesON == true or BrakesOFF == false) then
+    elseif command == 10038 and (BrakesON == true or BrakesOFF == false) then
 		BrakesON = false
 		BrakesOFF = true
 		L_axis_value = -1
