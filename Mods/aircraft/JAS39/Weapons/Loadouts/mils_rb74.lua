@@ -6,7 +6,7 @@ warhead = {}
 --AA MISSILES
 warhead["Rb74"] =  enhanced_a2a_warhead(9.4, 127); -- 2.9kg according to Arboga Robot Museum webpage,  ARBOGA IS USUALLY QUITE WRONG.
 
-local Rb74 = { 
+local Rb_74 = { 
 
 	category		= CAT_AIR_TO_AIR,
 	name			= "Rb 74",
@@ -127,14 +127,14 @@ local Rb74 = {
 	
 }
 
-declare_weapon(Rb74)
+declare_weapon(Rb_74)
 
 declare_loadout(
 	{		
 		category			= CAT_AIR_TO_AIR,
 		CLSID				= "JAS_Rb74",
 		attribute			= {wsType_Weapon, wsType_Missile, wsType_Container, wsType_Rb74},
-		wsTypeOfWeapon		= Rb74.wsTypeOfWeapon,
+		wsTypeOfWeapon		= Rb_74.wsTypeOfWeapon,
 		Count				= 1,
 		Picture				= "aim9m.png",
 		displayName			= _("Rb74 AIM-9L Sidewinder IR AAM"), -- Rb74.user_name.._(" with launcher"), --<-- /N/  put the launcher name here if any

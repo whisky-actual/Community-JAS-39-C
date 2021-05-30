@@ -64,7 +64,7 @@ getPitch
 
 getRadarAltitude
 
-getRateOfPitch
+getRateOfPitch					--Radians per second
 
 getRateOfRoll
 

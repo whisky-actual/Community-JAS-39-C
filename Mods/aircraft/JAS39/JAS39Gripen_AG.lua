@@ -66,13 +66,13 @@ local outboard 	= {
 --				
 
 --				=== Air to ground missiles ===
-                { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
-				--
-				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
+                { CLSID = "JAS_RB75T", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- Rb75t AGM-65E
+				
+				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, --AGM-65K
 
-				--{ CLSID = "{DWS39_MJ2}", arg_increment = 0.5, Type = 1 }, -- BK90 MJ2
+				
 				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
-				--{ CLSID = "{AGM-154A}", arg_increment = 0.5, Type = 1 }, -- AGM-154a
+				
 
 --				=== Antiship missiles ===
 				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
@@ -85,7 +85,7 @@ local outboard 	= {
 				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 tv guided
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
-				--{ CLSID = "DIS_GBU_12_DUAL" 					  ,	arg_increment = 0.5 }, -- GBU-12 x 2
+				
 				
 				{ CLSID = "GBU12_TEST", arg_increment = 0.5 }, -- GBU-12
 				
@@ -100,8 +100,8 @@ local outboard 	= {
 				
 				
 --              === Unguided rockets ===
-                { CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
-				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
+                { CLSID = "JAS_ARAKM70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "JAS_ARAKM70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
 				
 --				=== Guided rockets ===
 				{ CLSID = "JAS_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
@@ -113,12 +113,12 @@ local outboard 	= {
 local inboard 	= {
 				
 --				=== Air to ground missiles ===
-                { CLSID = "{F16A4DE0-116C-4A71-97F0-2CF85B0313EF}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65E
+                { CLSID = "JAS_RB75T", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- Rb75t AGM-65E
 				--
-				{ CLSID = "{444BA8AE-82A7-4345-842E-76154EFCCA47}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- AGM-65D
+				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, --AGM-65K
                 { CLSID = "JAS_Stormshadow", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
 				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2								
-				--{ CLSID = "JAS_LS_6_500", arg_increment = 0.5, Type = 1 }, -- AGM-154C
+				
 				{ CLSID = "JAS_GBU31", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
 				
 --				=== Antiship missiles ===
@@ -129,7 +129,7 @@ local inboard 	= {
 
 --			    === Guided bombs ===
                 { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-12 TV GUIDED displayed as gbu 49
+				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 TV GUIDED 
 				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
 				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16 TV GUIDED
 				
@@ -148,8 +148,8 @@ local inboard 	= {
 				{ CLSID = "JAS_TANK1700", arg_increment = 0.1 }, -- External drop tank 1700 litre
 
 --              === Unguided rockets ===
-				{ CLSID = "{ARAKM70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
-				{ CLSID = "{ARAKM70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
+				{ CLSID = "JAS_ARAKM70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
+				{ CLSID = "JAS_ARAKM70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
 
 --				=== Guided rockets ===
 				{ CLSID = "JAS_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
@@ -354,7 +354,7 @@ JAS39Gripen_AG =  {
 		Ny_max						=	8,		-- Max G (for AI)
 		V_max_sea_level				=	403,	-- Max speed at sea level in m/s (for AI)
 		V_max_h						=	736.11,	-- Max speed at max altitude in m/s (for AI)
-		wing_area					=	30,	-- wing area in m2
+		wing_area					=	30,		-- wing area in m2
 		thrust_sum_max				=	5200,	-- thrust in kgf (54.0 kN)
 		thrust_sum_ab				=	8566,	-- thrust in kgf (81.0 kN)
 		Vy_max						=	275,	-- Max climb speed in m/s (for AI)
@@ -366,8 +366,8 @@ JAS39Gripen_AG =  {
 		detection_range_max			=	250,
 		IR_emission_coeff			=	0.6,	-- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
 		IR_emission_coeff_ab		=	1.33,		-- With afterburner
-		tand_gear_max				=	0.84,--XX  1.732 FA18 3.73, 
-		tanker_type					=	2,--F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
+		tand_gear_max				=	0.84,	--XX  1.732 FA18 3.73, 
+		tanker_type					=	2,		--F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
 		wing_span					=	8.40,	--XX  wing spain in m
 		wing_type 					= 	0,		-- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
 		length						=	14.1,

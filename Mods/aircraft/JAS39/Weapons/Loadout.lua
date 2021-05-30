@@ -8,11 +8,7 @@ dofile(current_mod_path .. '/Weapons/Loadouts/tools.lua')
 
 -- bomb
 
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_misc.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_m71.lua')
-
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12.lua')
-
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_10_tv.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12_tv.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16_tv.lua')
@@ -21,15 +17,12 @@ dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16_tv.lua')
 
 -- jsow
 dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua')
-
 dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk_90.lua')
 
 
 -- rock
 
-dofile(current_mod_path .. '/Weapons/Loadouts/rkt_arakm70l.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/rkt_arakm70b.lua')
-
 
 -- mils
 
@@ -41,6 +34,8 @@ dofile(current_mod_path .. '/Weapons/Loadouts/mils_meteor.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb99.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb15f.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/mils_stormshadow.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb75t.lua')
+
 
 -- pod
 

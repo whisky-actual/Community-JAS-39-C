@@ -84,7 +84,7 @@ declare_weapon(ARAK70BHE)
 declare_loadout(
 {
 	category 		= CAT_ROCKETS,
-	CLSID 			= "{ARAKM70BHE}",
+	CLSID 			= "JAS_ARAKM70BHE",
 	attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,wsType_ARAK70HEPOD},
 	--attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon	=	ARAK70BHE.wsTypeOfWeapon,	
@@ -225,7 +225,7 @@ declare_weapon(ARAK70BAP)
 declare_loadout(
 {
 	category 		= CAT_ROCKETS,
-	CLSID 			= "{ARAKM70BAP}",
+	CLSID 			= "JAS_ARAKM70BAP",
 	attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,wsType_ARAK70APPOD},
 	--attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon	=	ARAK70BAP.wsTypeOfWeapon,	
