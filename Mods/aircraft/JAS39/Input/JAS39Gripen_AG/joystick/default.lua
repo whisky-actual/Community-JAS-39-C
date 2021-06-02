@@ -3,8 +3,16 @@ dofile(cockpit.."devices.lua")
 dofile(cockpit.."command_defs.lua")
 
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
-join(res.keyCommands,{
 
+-- Brakes
+local BrakesON      = 10038
+local BrakesOFF     = 10039
+local L_BRAKE       = 10056
+local R_BRAKE       = 10057
+local B_BRAKE       = 10058
+local Brakes        = 10023 
+
+join(res.keyCommands,{
 -- Autopilot
 {down = iCommandPlaneAutopilot, name = _('Autopilot'), category = _('Autopilot')},
 {down = iCommandPlaneSAUHBarometric, name = _('Autopilot - Barometric Altitude Hold \'H\''), category = _('Autopilot')},
@@ -79,11 +87,9 @@ join(res.axisCommands,{
 {action = iCommandPlaneMFDZoomAbs 			, name = _('I-251 Zoom')},
 {action = iCommandPlaneBase_DistanceAbs 	, name = _('Target Box Size / Funnel target wing span / Gunpod Elevation')},
 
-    {                                               action = iCommandWheelBrake,		name = _('Wheel Brake'),		category = {_('Systems')}},
-
-  --  {                                               action = device_commands.wheelbrake_AXIS,       cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake'),       category = {_('Systems')}},
-  --  {                                               action = device_commands.left_wheelbrake_AXIS,  cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Left'),  category = {_('Systems')}},
-  --  {                                               action = device_commands.right_wheelbrake_AXIS, cockpit_device_id = devices.AIRBRAKES ,  name = _('Wheel Brake Right'), category = {_('Systems')}},
-
+  --Brakes
+    {action = B_BRAKE,		                        name = _('Gripen Wheel Brake Both')},
+    {action = L_BRAKE,		                        name = _('Gripen Wheel Brake Left')},
+    {action = R_BRAKE,		                        name = _('Gripen Wheel Brake Right')},
 })
 return res

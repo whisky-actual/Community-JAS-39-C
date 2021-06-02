@@ -1,0 +1,488 @@
+{
+ "arg_0": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 1.0
+ },
+ "F-15C__TX9": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.89999997615814208984
+ },
+ "F-15C__TX10": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "F-15C_Instr_TX1": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "ACES-02": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "F-15C__TX7": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "Alpha-test_TX1": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 241": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "ILS_glass_f15": {
+  "reflMult": -0.20000000298023223877,
+  "reflAdd": 0.10000000149011611938,
+  "specMult": 0.40000000596046447754,
+  "specAdd": 0.10000000149011611938,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 0.10000000149011611938
+ },
+ "ILLUMINATION_TX2_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 240": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "F-15C__glass_texture": {
+  "reflMult": -0.20000000298023223877,
+  "reflAdd": 0.10000000149011611938,
+  "specMult": 0.40000000596046447754,
+  "specAdd": 0.10000000149011611938,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 0.10000000149011611938
+ },
+ "arg43_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "F-15C_Mirrors": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "F-15C__TX11": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 0.80000001192092895508
+ },
+ "ILLUMINATION_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "F-15C_Instr_TX2": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.80000001192092895508
+ },
+ "ACES-01": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "F-15C__TX4": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.30000001192092895508,
+  "albedoContrast": 1.0
+ },
+ "F-15C__TX3": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.30000001192092895508,
+  "albedoContrast": 1.0
+ },
+ "arg_138_SAM": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg_137_AI": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "F-15C__TX5": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "F-15C__TX6": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "F-15C__TX8": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.30000001192092895508,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "glass_f15_test1": {
+  "reflMult": -0.20000000298023223877,
+  "reflAdd": 0.10000000149011611938,
+  "specMult": 0.40000000596046447754,
+  "specAdd": 0.10000000149011611938,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 0.10000000149011611938
+ },
+ "RUCHKA": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 242": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.80000001192092895508
+ },
+ "TX11_ReD": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg39_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg40_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg 249": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg41_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg42_TX1_G": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "TX1_RED": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 127": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 126": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 243": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 117": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg 244": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 245": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 246": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.30000001192092895508,
+  "albedoContrast": 1.0
+ },
+ "arg 247": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg 248": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 250": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 251": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 0.85000002384185791016
+ },
+ "arg 252": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 1.0
+ },
+ "arg 253": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg 254": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 1.0
+ },
+ "arg 255": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.25,
+  "albedoContrast": 1.0
+ },
+ "arg 256": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.10000000149011611938,
+  "albedoContrast": 1.0
+ },
+ "arg504_TX11": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.34999999403953552246,
+  "albedoContrast": 1.0
+ },
+ "arg 257": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.20000000298023223877,
+  "albedoContrast": 1.0
+ },
+ "arg_TRIM_indicator": {
+  "reflMult": -0.40000000596046447754,
+  "reflAdd": 0.5,
+  "specMult": -0.15000000596046447754,
+  "specAdd": 0.40000000596046447754,
+  "specSelect": 1,
+  "albedoLevel": 0.15000000596046447754,
+  "albedoContrast": 1.0
+ }
+}

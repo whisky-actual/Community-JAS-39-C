@@ -216,7 +216,8 @@ local fuselageLeft	= {
 }
 
 local fuselageRight	= {
-	{ CLSID = "<CLEAN>"									,arg_increment = 1},
+	{ CLSID = "JAS_Litening", arg_increment = 0.5 },
+	{ CLSID = "<CLEAN>"		,arg_increment = 1},
 }
 
 local centerline 	= {
@@ -233,16 +234,7 @@ local centerline 	= {
 }
 
 
-local ECM_ELINT 	= {
-	{ CLSID = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}" }, --L005 Sorbtsiya ECM pod (left)
-	{ CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",attach_point_position = {0, 0 ,0 } },-- ELINT
-	{ CLSID = "{INV-SMOKE-RED}		"},		--Smoke Generator - red
-	{ CLSID = "{INV-SMOKE-GREEN}	"},		--Smoke Generator - green
-	{ CLSID = "{INV-SMOKE-BLUE}		"},		--Smoke Generator - blue
-	{ CLSID = "{INV-SMOKE-WHITE}	"},		--Smoke Generator - white
-	{ CLSID = "{INV-SMOKE-YELLOW}	"},		--Smoke Generator - yellow
-	{ CLSID = "{INV-SMOKE-ORANGE}	"},		--Smoke Generator - orange
-}
+
 
 JAS39Gripen =  {
       
@@ -560,7 +552,10 @@ Guns = {
 				use_full_connector_position = true,
 				connector = "Pylon5",		--integrated Elint
 			},
-			ECM_ELINT
+			{
+			
+			{ CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",attach_point_position = {0, 0 ,0 } },-- ELINT
+			}
 		),
         pylon(5, 1, 0, 0, 0,
 			{
@@ -580,7 +575,9 @@ Guns = {
 				use_full_connector_position = true,
 				connector = "Pylon8",		--integrated Ecm
 			},
-			ECM_ELINT
+			{
+			{ CLSID = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}" }, --L005 Sorbtsiya ECM pod (left)
+			}
 		),
         pylon(7, 1, 0, 0, 0,
             {

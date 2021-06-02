@@ -48,6 +48,7 @@ function update()
         end
         if FCS_TARGET >= 1 then
             FCS_TARGET = 1
+			
         end
     else
         if FCS_TARGET ~= 0 then

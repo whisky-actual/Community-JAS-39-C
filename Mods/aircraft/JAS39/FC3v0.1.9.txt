@@ -86,7 +86,7 @@ Changes to input, command_defs and creation of custom braking device to add brak
 removed cbu97
 Adjusted cockpit positioning
 removed AGM 65 K, was not working. Edit: They do work, you just have to angle the plane more towards the target
-improved accuracy of gbu 49, was missing most of the time
+fixed accuracy of gbu 49, was missing most of the time
 Improvements to rbs15, sometimes the missile would hit the water after a while when fired at very long distances
 Tweaked flame position on stormshadow and rbs15. Hid them better
 added new quick action missions
@@ -119,3 +119,13 @@ Removed Agm 65D due to green textures
 (Re) Added Agm 65K
 Added Payload presets for AG version
 Fixed formation lights
+
+FC3v0.1.9 : 		
+Added new Brimstone
+Fixed missing corner error on formation light
+Changed name of mirrors
+Added axis braking for 'Gripen Wheel Brake Both'
+Added Litening pod to AA version, for looks
+Changed arming of integrated pods, now they only go on their specific pylons
+Added AA Payload presets
+Added More AG Payload presets

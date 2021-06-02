@@ -1,0 +1,20 @@
+{
+ "Material #1112": {
+  "reflMult": 1.0,
+  "reflAdd": 0.0,
+  "specMult": -3.0,
+  "specAdd": 0.57200002670288085938,
+  "specSelect": 1,
+  "albedoLevel": 0.0,
+  "albedoContrast": 1.0
+ },
+ "Material #713": {
+  "reflMult": 1.0,
+  "reflAdd": 0.0,
+  "specMult": -3.0,
+  "specAdd": 0.57200002670288085938,
+  "specSelect": 1,
+  "albedoLevel": 0.0,
+  "albedoContrast": 1.0
+ }
+}
