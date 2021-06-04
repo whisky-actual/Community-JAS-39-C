@@ -74,15 +74,15 @@ If you game fails to launch maybe the JAS39 mod is conflicting with another one.
 
 ## Frequently Asked Questions
 - **Q: Do you need FC3 to use the module?**
- - Yes for the AA variant (F15) (not free)
- - No for the AG variant since it use the SU25T avionics (free)
+  - Yes for the AA variant (F15) (not free)
+  - No for the AG variant since it use the SU25T avionics (free)
 - **Q: Do we plan to make it a standalone?**
- - Yes, but no promises since we are still exploring the limits of development without the SDK.
+  - Yes, but no promises since we are still exploring the limits of development without the SDK.
 - **Q: Do we need test pilot?**
- - Not currently, I will post here and in the discord closer to release.
+  - Not currently, I will post here and in the discord closer to release.
 - **Q: Do we plan do have a D model (two seater)?**
- - Yes, but no plans for the 2nd seat to be active.
+  - Yes, but no plans for the 2nd seat to be active.
 - **Q: Do you have a release date yet?**
- - 6/6/2021.
+  - 6/6/2021.
 - **Q: Will the JAS39 mod pass IC?**
- - Yes, but a public server will need to have the same version for it to work properly.
+  - Yes, but a public server will need to have the same version for it to work properly.
