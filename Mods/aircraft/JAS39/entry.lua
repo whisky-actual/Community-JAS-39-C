@@ -9,7 +9,7 @@ developerName = _("Lion Eagle Simulations"),
 
 fileMenuName = _("JAS39Gripen"),
 update_id        = "JAS39Gripen",
-version		 = "0.1.9",
+version		 = "0.2.1",
 state		 = "installed",
 info		 = _("The Saab JAS 39 Gripen is a light single-engine multirole fighter aircraft manufactured by the Swedish aerospace company Saab AB. The Gripen has a delta wing and canard configuration with relaxed stability design and fly-by-wire flight controls. Various versions have been built, grouped as A-, C- and E-series. Gripen A- and C-series are powered by the GE F404G engine (previously designated Volvo RM12) and the E-series is powered by the GE F414G engine, and has a top speed of Mach 2. Later aircraft are modified for NATO interoperability standards and to undertake air to air refuelling."),
 

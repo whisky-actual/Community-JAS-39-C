@@ -113,7 +113,7 @@ hook_click.parameter_name	            = "HOOK"
 -- EngineSwitch.parameter_name	        = "EngineSwitch"
 
 mirrors_data = {
-    center_point          = {0.0,0.0,0}, 
+    center_point          = {0.247411,0.67882,0}, 
     width                 = 0.8, --integrated (keep in mind that mirrors can be none planar )
     aspect                = 5.0,
     rotation              = math.rad(-4);
@@ -129,9 +129,10 @@ mirrors_data = {
     }
 }
 mirrors_draw                        = CreateGauge()
-mirrors_draw.arg_number                = 1000
+mirrors_draw.arg_number                = 3
 mirrors_draw.input                   = {0,1}
 mirrors_draw.output                   = {1,0}
 mirrors_draw.controller             = controllers.mirrors_draw
+
 --need_to_be_closed = true
 -- need_to_be_closed = false
