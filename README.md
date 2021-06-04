@@ -12,45 +12,45 @@ Breadmaker91, Currenthill, Double Tap, Lanky, Roughmaster, FatSpacePanda, Vinedo
 Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, Ulv, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
 ## Features
-
-- New high detailed exterior textures
-- Liveries for each nation that operates the JAS-39
-- New template to create your own liveries
-- Updated animations
-- Canards (in flight and aero braking on landings)
-- Leading edges
-- Flaps
-- Updated exterior model (currently using the VSN model as base; but with adjusted geometries that align with the real plane)
-- New Gripen cockpit (clickable in the future)
+- Improvements
+  - New high detailed exterior textures
+  - Liveries for each nation that operates the JAS-39
+  - New template to create your own liveries
+  - Updated animations
+  - Canards (in flight and aero braking on landings)
+  - Leading edges
+  - Flaps
+  - Updated exterior model (currently using the VSN model as base; but with adjusted geometries that align with the real plane)
+  - New Gripen cockpit (clickable in the future)
 - Authentic weapons loadout 
-- Canon
-- AKAN M85 BK 27 (with different ammo belts)
-- Air-to-Air
-- RB98 IRIS-T
-- RB74 Aim-9L
-- RB101 Meteor
-- RB99 Aim-120-C
-- Aim-120-C
-- Air-to-Ground Missiles
-- Mar-1
-- RB75 (AGM-65B)
-- RB75T (AGM-65E)
-- Brimstone
-- Guided bombs
-- BK90 MJ2
-- Storm Shadow
-- RB15-F MK3
-- GBU-10
-- GBU-12
-- GBU-16
-- GBU-31
-- Dumb munition
-- Mk82
-- MK83
-- Mk84
-- ARAKM 70-B
-- ARAKM 70-L
-- SB M71 LD
+  - Canon
+  - AKAN M85 BK 27 (with different ammo belts)
+   - Air-to-Air
+    - RB98 IRIS-T
+    - RB74 Aim-9L
+    - RB101 Meteor
+    - RB99 Aim-120-C
+    - Aim-120-C
+    - Air-to-Ground Missiles
+    - Mar-1
+    - RB75 (AGM-65B)
+    - RB75T (AGM-65E)
+    - Brimstone
+   - Guided bombs
+    - BK90 MJ2
+    - Storm Shadow
+    - RB15-F MK3
+    - GBU-10
+    - GBU-12
+    - GBU-16
+    - GBU-31
+   - Dumb munition
+    - Mk82
+    - MK83
+    - Mk84
+    - ARAKM 70-B
+    - ARAKM 70-L
+    - SB M71 LD
 - Others
   - LDP Lightening III
   - Fuel tank 1100 L
@@ -66,11 +66,11 @@ Find the full list of bugs and enhancements at https://github.com/whisky-actual/
 
 ## Installation
 
-Drop the content of the zip file under C:\Users\username\Saved Games\DCS\
+Drop the content of the zip file under `C:\Users\username\Saved Games\DCS`
 
 ## Installation Troubleshooting
 
-If you game fails to launch maybe the JAS39 mod is conflicting with another one. We suggest to remove all of the mods found in C:\Users\username\Saved Games\DCS\Mods\. You can add you mods back one at the time and see which one conflicts
+If you game fails to launch maybe the JAS39 mod is conflicting with another one. We suggest to remove all of the mods found in `C:\Users\username\Saved Games\DCS\Mods\`. You can add you mods back one at the time and see which one conflicts
 
 ## Frequently Asked Questions
 - Q: Do you need FC3 to use the module?
