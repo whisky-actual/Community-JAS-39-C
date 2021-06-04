@@ -24,7 +24,7 @@ Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, U
   - New Gripen cockpit (clickable in the future)
 - Authentic weapons loadout 
  - Canon
-  - AKAN M85 BK 27 (with different ammo belts)
+   - AKAN M85 BK 27 (with different ammo belts)
  - Air-to-Air
    - RB98 IRIS-T
    - RB74 Aim-9L
