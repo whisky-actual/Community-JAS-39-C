@@ -66,7 +66,9 @@ Find the full list of bugs and enhancements at https://github.com/whisky-actual/
 
 ## Installation
 
-Drop the content of the zip file under `C:\Users\username\Saved Games\DCS`
+1) Dowload the latest release at https://github.com/whisky-actual/Community-JAS-39-C/releases select **assets** -> Source code (zip)
+2) Open the zip and go inside the first folder that will have the relase name
+3) Select the **Mods** folder and drop it under `C:\Users\username\Saved Games\DCS` (usersname will vary on your machine and DCS could be DCS beta)
 
 ## Installation Troubleshooting
 
