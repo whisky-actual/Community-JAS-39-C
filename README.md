@@ -36,7 +36,7 @@ Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, U
    - RB75 (AGM-65B)
    - RB75T (AGM-65E)
    - Brimstone
-  - Guided bombs
+ - Guided bombs
    - BK90 MJ2
    - Storm Shadow
    - RB15-F MK3
@@ -44,7 +44,7 @@ Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, U
    - GBU-12
    - GBU-16
    - GBU-31
-  - Dumb munition
+ - Dumb munition
    - Mk82
    - MK83
    - Mk84
