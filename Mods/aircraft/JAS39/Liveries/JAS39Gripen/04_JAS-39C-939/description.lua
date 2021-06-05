@@ -5,6 +5,9 @@ livery = {
 	{"VSN_JAS39_Mat2",	NORMAL_MAP			,	"jas39_mat2_b", true};
 	{"VSN_JAS39_Mat3",	DIFFUSE			,	"jas39_mat3", true};
 	{"VSN_JAS39_Mat3",	NORMAL_MAP			,	"jas39_mat3_b", true};
+	{"VSN_JAS39_Mat1",    ROUGHNESS_METALLIC            ,    "JAS39_Mat1_RoughMet", true};
+	{"VSN_JAS39_Mat2",    ROUGHNESS_METALLIC            ,    "JAS39_Mat2_RoughMet", true};
+	{"VSN_JAS39_Mat3",    ROUGHNESS_METALLIC            ,    "JAS39_Mat3_RoughMet", true};
 	{"VSN_JAS39_Hud",	DIFFUSE			,	"jas39_hud", true};
 	{"VSN_JAS39_landing-light",	DIFFUSE			,	"jas39_landinglight", true};
 	{"VSN_JAS39_LightsOn",	DIFFUSE			,	"jas39_lightson", true};
