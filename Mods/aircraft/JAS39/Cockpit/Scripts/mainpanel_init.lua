@@ -112,27 +112,42 @@ hook_click.parameter_name	            = "HOOK"
 -- EngineSwitch.output			        = {-1, 1}
 -- EngineSwitch.parameter_name	        = "EngineSwitch"
 
-mirrors_data = {
-    center_point          = {0.247411,0.67882,0}, 
+
+--------------------------------------------------------------------------------
+-- Mirror
+--------------------------------------------------------------------------------
+mirrors_data = 
+{
+    center_point 	= {0,0,0},
+    width 		 	= 0.8,
+    aspect 		 	= 4, 
+	rotation 	 	= 20, 
+	animation_speed = 2.0;
+	near_clip 		= 0.1;
+	middle_clip		= 10;
+	far_clip		= 60000;
+}
+
+
+--[[mirrors_data = {
+    center_point          = {-2.247411,2.67882,0}, -- XYZ
     width                 = 0.8, --integrated (keep in mind that mirrors can be none planar )
     aspect                = 5.0,
-    rotation              = math.rad(-4);
+    rotation              = math.rad(4);
     animation_speed       = 4.0;
     near_clip             = 0.1;
     middle_clip           = 40;
     far_clip              = 60000;
     flaps                 = 
     {
-        "PNT_MIRROR_CTR",
-        "PNT_L_MIRROR",
-        "PNT_R_MIRROR",
+        
     }
-}
+}	--]]
 mirrors_draw                        = CreateGauge()
 mirrors_draw.arg_number                = 3
 mirrors_draw.input                   = {0,1}
 mirrors_draw.output                   = {1,0}
 mirrors_draw.controller             = controllers.mirrors_draw
 
---need_to_be_closed = true
--- need_to_be_closed = false
+
+need_to_be_closed = true -- close lua state after initialization
