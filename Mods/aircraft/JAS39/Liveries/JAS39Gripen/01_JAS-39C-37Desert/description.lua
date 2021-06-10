@@ -8,7 +8,6 @@ livery = {
 	{"VSN_JAS39_Mat1",    ROUGHNESS_METALLIC            ,    "JAS39_Mat1_RoughMet", true};
 	{"VSN_JAS39_Mat2",    ROUGHNESS_METALLIC            ,    "JAS39_Mat2_RoughMet", true};
 	{"VSN_JAS39_Mat3",    ROUGHNESS_METALLIC            ,    "JAS39_Mat3_RoughMet", true};
-	{"VSN_JAS39_Triebwerk",	ROUGHNESS_METALLIC			,	"jas39_engines_RoughMet", true};	
 	{"VSN_JAS39_Hud",	DIFFUSE			,	"jas39_hud", true};
 	{"VSN_JAS39_landing-light",	DIFFUSE			,	"jas39_landinglight", true};
 	{"VSN_JAS39_LightsOn",	DIFFUSE			,	"jas39_lightson", true};
@@ -27,6 +26,7 @@ livery = {
 	{"VSN_JAS39_Nachbrenner",	DIFFUSE			,	"jas39_afterburner", true};
 	{"VSN_JAS39_Triebwerk",	DIFFUSE			,	"jas39_engines", true};
 	{"VSN_JAS39_Triebwerk",	NORMAL_MAP			,	"jas39_engines_b", true};
+	{"VSN_JAS39_Triebwerk",	ROUGHNESS_METALLIC			,	"jas39_engines_RoughMet", true};	
 	{"Material #3",	DIFFUSE			,	"air_intake_cover_1", true};
 	{"Material #4",	DIFFUSE			,	"air_intake_cover_2", true};
 	{"Material #2",	DIFFUSE			,	"wheelchock", true};

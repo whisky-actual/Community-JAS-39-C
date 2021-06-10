@@ -33,4 +33,4 @@ livery = {
 	{"Material #2",	NORMAL_MAP			,	"wheelchock_bmp", true};
 	{"Material #2",	11,						"wheelchock_spc", true};
 }
-name = "Czech Air Force Samurai 9242"
+name = "Czech Air Force 9242"

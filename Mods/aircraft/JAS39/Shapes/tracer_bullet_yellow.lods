@@ -1,8 +1,0 @@
-model = {
-	lods = {
-		{"tracer_bullet_yellow.edm",600.000000};
-		{"tracer_bullet_yellow_lod1.edm",2000.000000};
-		{"tracer_bullet_yellow_lod2.edm",1000000.000000};
-	};
-	collision_shell = "V_lom.edm";
-}
