@@ -1,5 +1,5 @@
 shape_name   	   = "Jas-39-CPT"
-is_EDM			   = true
+--[[is_EDM			   = true
 new_model_format   = true
 ambient_light    = {255,255,255}
 ambient_color_day_texture    = {72, 100, 160}
@@ -112,7 +112,7 @@ hook_click.parameter_name	            = "HOOK"
 -- EngineSwitch.output			        = {-1, 1}
 -- EngineSwitch.parameter_name	        = "EngineSwitch"
 
-
+]]
 --------------------------------------------------------------------------------
 -- Mirror
 --------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 dofile(LockOn_Options.script_path.."devices.lua")
-dofile(LockOn_Options.script_path.."Terrain.lua")
-dofile(LockOn_Options.script_path.."materials.lua") -- 加载材质
-dofile(LockOn_Options.common_script_path.."KNEEBOARD/declare_kneeboard_device.lua")
+--dofile(LockOn_Options.script_path.."Terrain.lua")
+--dofile(LockOn_Options.script_path.."materials.lua") -- 加载材质
+--dofile(LockOn_Options.common_script_path.."KNEEBOARD/declare_kneeboard_device.lua")
 
 -- set panel
 
@@ -11,7 +11,7 @@ attributes = {
 	"support_for_cws",
 }
 ---------------------------------------------
-MainPanel = {"ccMainPanel",LockOn_Options.script_path.."mainpanel_init.lua"}
+--MainPanel = {"ccMainPanel",LockOn_Options.script_path.."mainpanel_init.lua"}
 
 creators = {}
 
