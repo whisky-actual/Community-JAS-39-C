@@ -1,15 +1,27 @@
 # Community-JAS-39-C
 Welcome to our GitHub for the JAS-39-C Gripen mod for DCS!
 
-We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen in DCS. We are currently using the VSN model with their animations and are improving this great module. The team is adding a cockpit, authentic and unique weapons, making modifications to the SFM (based on Gripen pilot feedback) and we are planning for much more in the future. The project started in February 2021, and in a very short amount of time, we achieved a basic FC3 module, join us on Discord and find out more! We would like to thank the Community A-4E-C team for sharing some code, Grinnelli for his help with the brakes axis, Gonzalodesanta for his support, Megalax for his textures, VSN Team for sharing their model with us, the DCS modding community for ideas and tips and Eagle Dynamics for this wonderful sandbox. 
+We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen in DCS. We are currently using the VSN model with their animations and are improving this great module. The team is adding a cockpit, authentic and unique weapons, making modifications to the SFM (based on Gripen pilot feedback) and we are planning for much more in the future. The project started in February 2021, and in a very short amount of time, we achieved a basic FC3 module, join us on Discord and find out more! We would like to thank the Community A-4E-C team for sharing some code, Grinnelli for his help with the brakes axis, Freebird and Gonzalodesanta for thier support, Megalax, Isak and 313_Paegas for thier textures, VSN Team for sharing their model with us, the DCS modding community for ideas and tips and Eagle Dynamics for this wonderful sandbox. 
 
 ## Contributing Developers
 
-Breadmaker91, Currenthill, Double Tap, Lanky, Roughmaster, FatSpacePanda, Vinedog, Wolfthrower, Whisky Actual
+Breadmaker91, Currenthill, Double Tap, Roughmaster, FatSpacePanda, Vinedog, Wolfthrower, Whisky Actual
+
+## Liveries
+
+313_Paegas, Isak Khysing, Megalax
+
+## Admins
+
+Cortexus, Ulv
+
+## Testers
+
+Bimbac, BLACK LIONS, CJordense, Chesty, DJTaz1975, Silverbullet_238, Simba, Sushy
 
 ## Special Thanks
 
-Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, Ulv, Ulvar40, VSN Team (Cdpkobra and Razor+)
+Freebird, Gonzalodesanta, Grinnelli, Gripen Viking, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
 ## Features
 - Improvements
@@ -30,20 +42,29 @@ Freebird, Gonzalodesanta, Grinnelli, Luiz Renault, Megalax, Neon, PORS, Jerec, U
    - RB74 Aim-9L
    - RB101 Meteor
    - RB99 Aim-120-C
-   - Aim-120-C
-   - Air-to-Ground Missiles
+   - Aim-120-C5
+   - Aim-120-C7
+   - A-Darter
+   - Aim-132 ASRAM
+   - PYTHON-5
+   - I-Derbyer
+ - Air-to-Ground Missiles
    - Mar-1
-   - RB75 (AGM-65B)
-   - RB75T (AGM-65E)
+   - RB75 (AGM-65H)
+   - RB75T (AGM-65K)
    - Brimstone
  - Guided bombs
    - BK90 MJ2
    - Storm Shadow
-   - RB15-F MK3
+   - RBS15 Gungnir
    - GBU-10
    - GBU-12
    - GBU-16
+   - GBU-49
    - GBU-31
+   - GBU-32
+   - GBU-38
+   - GBU-39 SDB
  - Dumb munition
    - Mk82
    - MK83
