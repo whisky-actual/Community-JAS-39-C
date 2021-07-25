@@ -3,46 +3,37 @@
 tail_solid  = { 1, 1, 1, 1 };
 tail_liquid = { 0.9, 0.9, 0.9, 0.05 };
 
--- utility
-dofile(current_mod_path .. '/Weapons/Loadouts/tools.lua')
-
--- bomb
-
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_10_tv.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_12_tv.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/bomb_gbu_16_tv.lua')
-
-
-
--- jsow
-dofile(current_mod_path .. '/Weapons/Loadouts/jsow_gbu-31.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/jsow_bk_90.lua')
-
-
--- rock
-
-dofile(current_mod_path .. '/Weapons/Loadouts/rkt_arakm70b.lua')
-
--- mils
-
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_mar-1.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_brimstone.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_iris-t.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb74.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_meteor.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb99.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb15f.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_stormshadow.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/mils_rb75t.lua')
-
-
--- pod
-
-dofile(current_mod_path .. '/Weapons/Loadouts/pod_aaq28.lua')
-
-
--- fuel
-
-dofile(current_mod_path .. '/Weapons/Loadouts/fuel_gripen1100.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/fuel_gripen1700.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-9l.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_iris-t.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-120b.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_meteor.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-120c5.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-120c7.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_m70b.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_a-darter.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_mar-1.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_brimstone.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_litening.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_ews39.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_elint.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_tank1100.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_tank1700.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-9m.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_aim-9x.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_python-5.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-31.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-32.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-38.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_sdb.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-49.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_m71.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-10.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-12.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-16.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_dws39.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_rbs-15.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_stormshadow.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_asraam.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_flir.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_derby.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_rbs-15ai.lua')

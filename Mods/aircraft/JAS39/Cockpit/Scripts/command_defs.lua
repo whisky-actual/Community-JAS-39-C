@@ -514,5 +514,6 @@ device_commands =
 	 R_BRAKE       = 10057,
 	 B_BRAKE       = 10058,
 	 Brakes        = 10023,
+	 P_BRAKE	   = 10059,
 
 }

@@ -4,14 +4,21 @@ dofile(cockpit.."command_defs.lua")
 
 local res = external_profile("Config/Input/Aircrafts/base_keyboard_binding.lua")
 
-local DragParachute = 391
-
-
+-- Brakes
+local BrakesON      = 10038
+local BrakesOFF     = 10039
+local L_BRAKE       = 10056
+local R_BRAKE       = 10057
+local B_BRAKE       = 10058
+local Brakes        = 10023 
+local P_BRAKE	    = 10059
 ignore_features(res.keyCommands,{
 "dragchute"
 })
 
 join(res.keyCommands,{
+{down = P_BRAKE, name = _('Gripen Parking Brake - Toggle'), 	                category = _('Systems')},
+{down = BrakesON, up = BrakesOFF,   name = _('Gripen Wheel Brakes Both'), 	                category = _('Systems')},
 
 -- Autopilot
 {combos = {{key = 'A'}, {key = '1', reformers = {'LAlt'}}}, down = iCommandPlaneAutopilot, name = _('Autopilot - Attitude Hold'), category = _('Autopilot')},
@@ -38,8 +45,13 @@ join(res.keyCommands,{
 {combos = {{key = 'D', reformers = {'LCtrl'}}}, down = iCommandPlaneFSQuantityIndicatorSelectorINT,	up = iCommandPlaneFSQuantityIndicatorSelectorINT, value_down = -1, value_up = 0, 	name = _('Bingo Fuel Index, CCW'), category = _('Systems')},
 {combos = {{key = 'L', reformers = {'RCtrl','RAlt'}}}, down = iCommandPlaneAntiCollisionLights, name = _('Anti-collision lights'), category = _('Systems')},
 
+--NightVision
+    {combos = {{key = 'H', reformers = {'RShift'}}}        , down = iCommandViewNightVisionGogglesOn   , name = _('Night Vision Goggle - Toggle'), category = _('Sensors')},
+    {combos = {{key = 'H', reformers = {'RShift','RCtrl'}}}, down = iCommandPlane_Helmet_Brightess_Up  , name = _('Goggle Gain - Inc'),            category = _('Sensors')},
+    {combos = {{key = 'H', reformers = {'RShift','RAlt'}}} , down = iCommandPlane_Helmet_Brightess_Down, name = _('Goggle Gain - Dec'),            category = _('Sensors')},
+
 -- Systems Su33
-{combos = {{key = 'G', reformers = {'LAlt'}}}, down = iCommandPlaneHook, name = _('Tail Hook'), category = _('Systems')},
+--{combos = {{key = 'G', reformers = {'LAlt'}}}, down = iCommandPlaneHook, name = _('Tail Hook'), category = _('Systems')},
 --{combos = {{key = 'P', reformers = {'RCtrl'}}}, down = iCommandPlanePackWing, name = _('Folding Wings'), category = _('Systems')},
 
 {combos = {{key = 'P'}}, down = DragParachute, name = _('Canard Braking'), category = _('Flight Control') }, 

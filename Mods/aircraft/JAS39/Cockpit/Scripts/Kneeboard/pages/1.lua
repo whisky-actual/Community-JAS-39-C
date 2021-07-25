@@ -39,4 +39,4 @@ SetScale(FOV)
 -- 44 - Quick-Start 4. Emergency Procedures
 
 -- add background image for kneeboard
-add_picture(LockOn_Options.script_path.."../Textures/cover.png")
+add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/cover.png")

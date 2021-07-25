@@ -1,36 +1,58 @@
-livery = {
-	{"VSN_JAS39_Mat1",	DIFFUSE			,	"08_jas39_mat1", true};
-	{"VSN_JAS39_Mat1",	NORMAL_MAP			,	"jas39_mat1_b", true};   
-    {"VSN_JAS39_Mat2",	DIFFUSE			,	"08_jas39_mat2", true};
-	{"VSN_JAS39_Mat2",	NORMAL_MAP			,	"jas39_mat2_b", true};
-	{"VSN_JAS39_Mat3",	DIFFUSE			,	"jas39_mat3", true};
-	{"VSN_JAS39_Mat3",	NORMAL_MAP			,	"jas39_mat3_b", true};
-	{"VSN_JAS39_Mat1",    ROUGHNESS_METALLIC            ,    "JAS39_Mat1_RoughMet", true};
-	{"VSN_JAS39_Mat2",    ROUGHNESS_METALLIC            ,    "JAS39_Mat2_RoughMet", true};
-	{"VSN_JAS39_Mat3",    ROUGHNESS_METALLIC            ,    "JAS39_Mat3_RoughMet", true};
-	{"VSN_JAS39_Triebwerk",	ROUGHNESS_METALLIC			,	"jas39_engines_RoughMet", true};
-	{"VSN_JAS39_Hud",	DIFFUSE			,	"jas39_hud", true};
-	{"VSN_JAS39_landing-light",	DIFFUSE			,	"jas39_landinglight", true};
-	{"VSN_JAS39_LightsOn",	DIFFUSE			,	"jas39_lightson", true};
-	{"VSN_JAS39_LightsOn",	SELF_ILLUMINATION	,	"jas39_lightson", true};
-	{"VSN_JAS39_LightsOff",	DIFFUSE			,	"jas39_lightsoff", true};
-	{"VSN_JAS39_bano-red",	DIFFUSE			,	"jas39_navred", true};
-	{"VSN_JAS39_bano-green",	DIFFUSE			,	"jas39_navgreen", true};
-	{"VSN_JAS39_bano-white",	DIFFUSE			,	"jas39_navwhite", true};
-	{"VSN_JAS39_glass",	DIFFUSE			,	"jas39_glass", true};
-	{"VSN_JAS39_glass",	SPECULAR			,	"jas39_glass_s", true};
-	{"VSN_JAS39_Helm",	DIFFUSE			,	"jas39_pilothelmet", true};
-	{"VSN_JAS39_Helm",	NORMAL_MAP			,	"jas39_pilothelmet_b", true};
-	{"VSN_JAS39_Helmvisier",	DIFFUSE			,	"jas39_pilothelmet", true};
-	{"VSN_JAS39_Pilot",	DIFFUSE			,	"jas39_pilot", true};
-	{"VSN_JAS39_Pilot",	NORMAL_MAP			,	"jas39_pilot_b", true};
-	{"VSN_JAS39_Nachbrenner",	DIFFUSE			,	"jas39_afterburner", true};
-	{"VSN_JAS39_Triebwerk",	DIFFUSE			,	"jas39_engines", true};
-	{"VSN_JAS39_Triebwerk",	NORMAL_MAP			,	"jas39_engines_b", true};
-	{"Material #3",	DIFFUSE			,	"air_intake_cover_1", true};
-	{"Material #4",	DIFFUSE			,	"air_intake_cover_2", true};
-	{"Material #2",	DIFFUSE			,	"wheelchock", true};
-	{"Material #2",	NORMAL_MAP			,	"wheelchock_bmp", true};
-	{"Material #2",	11,						"wheelchock_spc", true};
-}
+--Livery credit: vinedog
 name = "SAAF"
+countries = {}
+
+livery = {
+--MAIN MATERIALS DIFFUSE
+	{"JAS39_mat1",	DIFFUSE			,	"08_jas39_mat1", true};
+	{"JAS39_mat2",	DIFFUSE			,	"08_jas39_mat2", true};
+	{"JAS39_mat3",	DIFFUSE			,	"jas39_mat3", true};
+--MAIN MATERIALS NORMAL_MAP
+	{"JAS39_mat1",	NORMAL_MAP			,	"jas39_mat1_b", true};      
+	{"JAS39_mat2",	NORMAL_MAP			,	"jas39_mat2_b", true};	
+	{"JAS39_mat3",	NORMAL_MAP			,	"jas39_mat3_b", true};
+--MAIN MATERIALS ROUGHNESS_METALLIC
+	{"JAS39_mat1",    ROUGHNESS_METALLIC            ,    "JAS39_Mat1_RoughMet", true};
+	{"JAS39_mat2",    ROUGHNESS_METALLIC            ,    "JAS39_Mat2_RoughMet", true};
+	{"JAS39_mat3",    ROUGHNESS_METALLIC            ,    "JAS39_Mat3_RoughMet", true};
+--LIGTHS
+	{"JAS39_landinglight",	DIFFUSE			,	"jas39_landinglight", true};
+	{"JAS39_lightson",	DIFFUSE			,	"jas39_lightson", true};
+	{"JAS39_lightsoff",	DIFFUSE			,	"jas39_lightsoff", true};
+	{"JAS39_navred",	DIFFUSE			,	"jas39_navred", true};
+	{"JAS39_navgreen",	DIFFUSE			,	"jas39_navgreen", true};
+	{"JAS39_navwhite",	DIFFUSE			,	"jas39_navwhite", true};
+--GLASS
+	{"JAS39_hud",	DIFFUSE			,	"jas39_hud", true};
+	{"JAS39_glass",	DIFFUSE			,	"jas39_glass", true};
+	{"JAS39_glass",	SPECULAR			,	"jas39_glass_s", true};
+--PILOT
+	{"JAS39_pilot",	DIFFUSE			,	"jas39_pilot", true};
+	{"JAS39_pilot",	NORMAL_MAP			,	"jas39_pilot_b", true};
+	{"JAS39_pilothelmet",	DIFFUSE			,	"jas39_pilothelmet", true};
+	{"JAS39_pilothelmet",	NORMAL_MAP			,	"jas39_pilothelmet_b", true};
+--ENGINES
+	{"JAS39_engines",	DIFFUSE			,	"jas39_engines", true};
+	{"JAS39_engines",	NORMAL_MAP			,	"jas39_engines_b", true};
+	{"JAS39_engines",	ROUGHNESS_METALLIC			,	"jas39_engines_RoughMet", true};
+-- OTHERS
+	{"JAS39_afterburner",	DIFFUSE			,	"jas39_afterburner", true};
+	{"JAS39_Wheel_chock_body", DIFFUSE   ,  "jas39_wheel_chock_body_diff", true};
+	{"JAS39_Wheel_chock_body", NORMAL_MAP   ,  "jas39_wheel_chock_body_nm", true};
+	{"JAS39_Wheel_chock_body", ROUGHNESS_METALLIC   ,  "jas39_wheel_chock_body_diff_roughmet", true};
+	{"JAS39_Wheel_chock_rope", DIFFUSE   ,  "jas39_wheel_chock_rope_diff", true};
+	{"JAS39_Wheel_chock_rope", NORMAL_MAP   ,  "jas39_wheel_chock_rope_nm", true};
+	{"JAS39_Wheel_chock_rope", ROUGHNESS_METALLIC   ,  "jas39_wheel_chock_rope_diff_roughmet", true};	
+	{"JAS39_Ladder_body", DIFFUSE   ,  "jas39_ladder_body_diff", true};
+	{"JAS39_Ladder_body", NORMAL_MAP   ,  "jas39_ladder_body_nm", true};
+	{"JAS39_Ladder_body", ROUGHNESS_METALLIC   ,  "jas39_ladder_body_diff_roughmet", true};	
+	{"JAS39_Ladder_wheels", DIFFUSE   ,  "jas39_ladder_wheels_diff", true};
+	{"JAS39_Ladder_wheels", NORMAL_MAP   ,  "jas39_ladder_wheels_nm", true};		
+	{"JAS39_Ladder_wheels", ROUGHNESS_METALLIC   ,  "jas39_ladder_wheels_diff_roughmet", true};	
+	{"JAS39_drop_tank_1100", DIFFUSE   ,  "jas39_drop_tank_1100_diff", true};
+	{"JAS39_drop_tank_1100", NORMAL_MAP   ,  "jas39_drop_tank_1100_nm", true};		
+	{"JAS39_drop_tank_1100", ROUGHNESS_METALLIC   ,  "jas39_drop_tank_1100_diff_roughmet", true};
+	{"JAS39_drop_tank_1700", DIFFUSE , "jas39_drop_tank_1700_diff", true};	
+	{"JAS39_drop_tank_1700", NORMAL_MAP   ,  "jas39_drop_tank_1700_nm", true};		
+	{"JAS39_drop_tank_1700", ROUGHNESS_METALLIC   ,  "jas39_drop_tank_1700_diff_roughmet", true};			
+}

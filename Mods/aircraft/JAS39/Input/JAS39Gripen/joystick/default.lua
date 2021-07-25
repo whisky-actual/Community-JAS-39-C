@@ -10,6 +10,7 @@ local L_BRAKE       = 10056
 local R_BRAKE       = 10057
 local B_BRAKE       = 10058
 local Brakes        = 10023 
+local P_BRAKE	    = 10059
 join(res.keyCommands,{
 {down = iCommandPlaneAutopilot, name = _('Autopilot - Attitude Hold'), category = _('Autopilot')},
 {down = iCommandPlaneStabHbar, name = _('Autopilot - Altitude Hold'), category = _('Autopilot')},
@@ -19,9 +20,10 @@ join(res.keyCommands,{
 {down = iCommandHelicopter_PPR_button_H_up, name = _('CAS Yaw'), category = _('Autopilot')},
 
 -- Brakes
---{down = iCommandPlaneWheelBrakeOn,    up = iCommandPlaneWheelBrakeOff,	  name = _('Wheel Brake On'),		   category = _('Systems')},
-{down = iCommandPlaneWheelBrakeLeftOn, up = iCommandPlaneWheelBrakeLeftOff, name = _('Wheel Brake Left On/Off'), category = _('Systems')},
-{down = iCommandPlaneWheelBrakeRightOn, up = iCommandPlaneWheelBrakeRightOff, name = _('Wheel Brake Right On/Off'), category = _('Systems')},
+{down = BrakesON,    up = BrakesOFF,	  name = _('Gripen Wheel Brakes Both'),		   category = _('Systems')},
+{down = P_BRAKE, name = _('Gripen Parking Brake - Toggle'), 	                category = _('Systems')},
+--{down = iCommandPlaneWheelBrakeLeftOn, up = iCommandPlaneWheelBrakeLeftOff, name = _('Wheel Brake Left On/Off'), category = _('Systems')},
+--{down = iCommandPlaneWheelBrakeRightOn, up = iCommandPlaneWheelBrakeRightOff, name = _('Wheel Brake Right On/Off'), category = _('Systems')},
 
 
 --Flight Control
@@ -42,6 +44,12 @@ join(res.keyCommands,{
 -- Systems Su33
 {down = iCommandPlaneHook, name = _('Tail Hook'), category = _('Systems')},
 {down = iCommandPlanePackWing, name = _('Folding Wings'), category = _('Systems')},
+
+
+--NightVision
+    {down   = iCommandViewNightVisionGogglesOn   , name = _('Night Vision Goggle - Toggle'), category = _('Sensors')},
+    {down   = iCommandPlane_Helmet_Brightess_Up  , name = _('Goggle Gain - Inc'),            category = _('Sensors')},
+    {down   = iCommandPlane_Helmet_Brightess_Down, name = _('Goggle Gain - Dec'),            category = _('Sensors')},
 
 -- Modes
 {down = iCommandPlaneModeBVR, name = _('(2) Beyond Visual Range Mode'), category = _('Modes')},

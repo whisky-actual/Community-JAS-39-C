@@ -4,4 +4,4 @@ SetScale(FOV)
 -- tile
 
 -- add background image for kneeboard
-add_picture(LockOn_Options.script_path.."../Textures/aa.png")
+add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/aa.png")

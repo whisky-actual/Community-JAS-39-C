@@ -3,8 +3,22 @@ dofile(cockpit.."devices.lua")
 dofile(cockpit.."command_defs.lua")
 
 local res = external_profile("Config/Input/Aircrafts/base_keyboard_binding.lua")
+-- Brakes
+local BrakesON      = 10038
+local BrakesOFF     = 10039
+local L_BRAKE       = 10056
+local R_BRAKE       = 10057
+local B_BRAKE       = 10058
+local Brakes        = 10023 
+local P_BRAKE	    = 10059
+ignore_features(res.keyCommands,{
+"dragchute"
+})
 join(res.keyCommands,{
-
+{down = P_BRAKE, name = _('Gripen Parking Brake - Toggle'), 	                category = _('Systems')},
+{down = BrakesON, up = BrakesOFF,   name = _('Gripen Wheel Brakes Both'), 	                category = _('Systems')},
+{combos = {{key = 'A', reformers = {'LCtrl'}}}, down = iCommandPlaneWheelBrakeLeftOn, up = iCommandPlaneWheelBrakeLeftOff, name = _('Wheel Brake Left On/Off'), category = _('Systems')},
+{combos = {{key = 'D', reformers = {'LAlt'}}}, down = iCommandPlaneWheelBrakeRightOn, up = iCommandPlaneWheelBrakeRightOff, name = _('Wheel Brake Right On/Off'), category = _('Systems')},
 -- Autopilot
 {combos = {{key = 'A'}}, down = iCommandPlaneAutopilot, name = _('Autopilot'), category = _('Autopilot')},
 {combos = {{key = 'H'}}, down = iCommandPlaneSAUHBarometric, name = _('Autopilot - Barometric Altitude Hold \'H\''), category = _('Autopilot')},
@@ -26,6 +40,12 @@ join(res.keyCommands,{
 -- Systems F15
 {combos = {{key = 'S'}}, down = iCommandPlane_HOTAS_NoseWheelSteeringButton, up = iCommandPlane_HOTAS_NoseWheelSteeringButton, name = _('Nose Gear Maneuvering Range'), category = _('Systems')},
 {combos = {{key = 'Q', reformers = {'LAlt'}}}, down = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, up = iCommandPlane_HOTAS_NoseWheelSteeringButtonOff, name = _('Nose Wheel Steering'), category = _('Systems')},
+
+--NightVision
+    {combos = {{key = 'H', reformers = {'RShift'}}}        , down = iCommandViewNightVisionGogglesOn   , name = _('Night Vision Goggle - Toggle'), category = _('Sensors')},
+    {combos = {{key = 'H', reformers = {'RShift','RCtrl'}}}, down = iCommandPlane_Helmet_Brightess_Up  , name = _('Goggle Gain - Inc'),            category = _('Sensors')},
+    {combos = {{key = 'H', reformers = {'RShift','RAlt'}}} , down = iCommandPlane_Helmet_Brightess_Down, name = _('Goggle Gain - Dec'),            category = _('Sensors')},
+
 -- Systems Su33
 {combos = {{key = 'R', reformers = {'LCtrl'}}}, down = iCommandPlaneAirRefuel, name = _('Refueling Boom'), category = _('Systems')},
 --{category = _('Flight Control'), name = _('Drag Chute DEPLOY'),         		down = iCommandPlaneParachute,  											combos = {{key = 'P'}}, 								},

@@ -9,7 +9,7 @@ developerName = _("Lion Eagle Simulations"),
 
 fileMenuName = _("JAS39Gripen"),
 update_id        = "JAS39Gripen",
-version		 = "v1.0.1-Beta",
+version		 = "v1.5-Beta",
 state		 = "installed",
 info		 = _("The Saab JAS 39 Gripen is a light single-engine multirole fighter aircraft manufactured by the Swedish aerospace company Saab AB. The Gripen has a delta wing and canard configuration with relaxed stability design and fly-by-wire flight controls. Various versions have been built, grouped as A-, C- and E-series. Gripen A- and C-series are powered by the GE F404G engine (previously designated Volvo RM12) and the E-series is powered by the GE F414G engine, and has a top speed of Mach 2. Later aircraft are modified for NATO interoperability standards and to undertake air to air refuelling."),
 
@@ -48,10 +48,19 @@ InputProfiles =
 })
 ----------------------------------------------------------------------------------------
 mount_vfs_model_path	(current_mod_path.."/Shapes")
+mount_vfs_model_path	(current_mod_path.."/Weapons/Shapes")
+mount_vfs_model_path	(current_mod_path.."/Cockpit/Shapes")
 mount_vfs_liveries_path (current_mod_path.."/Liveries")
-mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39Gripen")
-mount_vfs_texture_path  (current_mod_path.."/Textures/Weapon_textures")
-mount_vfs_texture_path  (current_mod_path.."/Textures/Cockpit_textures")
+mount_vfs_texture_path  (current_mod_path.."/Textures")
+mount_vfs_texture_path  (current_mod_path.."/Cockpit/Textures/JAS39_Cockpit")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Common")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_CAF")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_RSAF")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Fictional")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Operators")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_AA_Weapons")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_AG_Weapons")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Cockpit")
 ----------------------------------------------------------------------------------------
 dofile(current_mod_path.."/Views_JAS39Gripen.lua")
 make_view_settings('JAS39Gripen', ViewSettings, SnapViews)

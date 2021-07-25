@@ -7,7 +7,7 @@ ViewSettings = {
 		CameraAngleLimits      = {190.000000,-75.000000,115.000000},--Kopf drehen = links rechts,runter,hoch
 		EyePoint               = {0.000000,0.000000,0.000000},--front/back,up/down,left/right}<-'neck dimension'in meters 
 		limits_6DOF            = {x = {-0.050000,0.470000},y ={-0.300000,0.100000},z = {-0.300000,0.300000},roll = 90.000000},--Bewegen = hinten vorne,oben unten,links rechts
-		ShoulderSize		   = 0.25,-- bewegt Körper, wenn Azimuth Wert mehr als 90 Grad
+		ShoulderSize		   = 0.1,-- bewegt Körper, wenn Azimuth Wert mehr als 90 Grad
 		Allow360rotation	   = false,
 	},	
 	}, -- Cockpit 

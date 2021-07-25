@@ -1,10 +1,9 @@
-
---- DECLARE BK 27 GUN
-local function m85(tbl)
+--	=================== BK-27 CANNON ================================================================================
+local function bk27_cannon(tbl)
 
     tbl.category = CAT_GUN_MOUNT
-    tbl.name =  "bk27m85"
-    tbl.display_name =  _("BK 27 Akan m/85")
+    tbl.name =  "bk_27"
+    tbl.display_name =  _("BK-27 Cannon")
     tbl.supply      =
     {
         shells = {"BK_27_HE", "BK_27_AP", "BK_27_APHE", "BK_27_PELE", "BK_27_PELET"},
@@ -44,188 +43,183 @@ local function m85(tbl)
     end
     return declare_weapon(tbl)
 end
--- ================ Pylons ==================
+
+--	=================== PYLONS ===================================================================================
+
 local tips 		= {
-	{ CLSID = "JAS_IRIS-T", arg_increment = 0.0 }, -- Rb98 IRIS-T
-	{ CLSID = "JAS_Rb74", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0 }, -- Rb74 AIM-9L
+--	=================== INFRARED AIR TO AIR MISSILES =============================================================
+	{ CLSID = "JAS39_IRIS-T", arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- IRIS-T
+	{ CLSID = "JAS39_AIM-9L", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- AIM-9L
+	{ CLSID = "JAS39_A-DARTER", attach_point_position = {-0.45, -0.025, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- A-Darter
+	{ CLSID = "JAS39_AIM-9M", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- AIM-9M
+	{ CLSID = "JAS39_AIM-9X", attach_point_position = {0.1, 0.0, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- AIM-9X	
+	{ CLSID = "JAS39_PYTHON-5", attach_point_position = {-0.1, -0.12, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- Python-5		
+	{ CLSID = "JAS39_ASRAAM", attach_point_position = {0.1, -0.10, 0.0}, arg_increment = 0.0, required = {{station = 10,loadout = {"{JAS39_ELINT}"}}, {station = 11,loadout = {"{JAS39_EWS39}"}}} }, -- AIM-132 ASRAAM	
 	
-	{ CLSID = "{AIS_ASQ_T50}" ,arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}" ,arg_increment = 0.0}, -- smoke gen blue
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}" ,arg_increment = 0.0}, -- smoke gen green
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E743}" ,arg_increment = 0.0}, -- smoke gen orange
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E744}" ,arg_increment = 0.0}, -- smoke gen red
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E745}" ,arg_increment = 0.0}, -- smoke gen white
-    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E746}" ,arg_increment = 0.0}, -- smoke gen yellow
+--	=================== SMOKE ====================================================================================
+	{ CLSID = "{AIS_ASQ_T50}", arg_increment = 0.0, attach_point_position = {0.30,  0.0,  0.0}},-- ACMI pod
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E741}", arg_increment = 0.0}, -- Smoke blue
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E742}", arg_increment = 0.0}, -- Smoke green
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E743}", arg_increment = 0.0}, -- Smoke orange
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E744}", arg_increment = 0.0}, -- Smoke red
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E745}", arg_increment = 0.0}, -- Smoke white
+    { CLSID = "{A4BCC903-06C8-47bb-9937-A30FEDB4E746}", arg_increment = 0.0}, -- Smoke yellow
 }
 
 local outboard 	= {
---				=== Air to air IR missiles ===
-                { CLSID = "JAS_IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- Rb98 IRIS-T
-				{ CLSID = "JAS_Rb74", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- Rb74 AIM-9L
+--	=================== INFRARED AIR TO AIR MISSILES ==============================================================
+    { CLSID = "JAS39_IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- IRIS-T
+	{ CLSID = "JAS39_AIM-9L", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9L
+	{ CLSID = "JAS39_A-DARTER", attach_point_position = {0.0, -0.14, 0.0}, arg_increment = 0.1 }, -- A-Darter
+	{ CLSID = "JAS39_AIM-9M", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9M
+	{ CLSID = "JAS39_AIM-9X", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9X	
+	{ CLSID = "JAS39_PYTHON-5", attach_point_position = {0.1, -0.23, 0.0}, arg_increment = 0.1 }, -- Python-5	
+	{ CLSID = "JAS39_ASRAAM", attach_point_position = {0.40, -0.23, 0.0}, arg_increment = 0.1 }, -- AIM-132 ASRAAM
+	
+--	=================== ANTI SHIP MISSILES ========================================================================
+	{ CLSID = "JAS39_RBS15", arg_increment = 0.9, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
+	{ CLSID = "JAS39_RBS15AI", arg_increment = 0.9, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir AI	
+	
+--	=================== ANTI RADIATION MISSILES ===================================================================
+	{ CLSID = "JAS39_MAR-1", arg_increment = 0.5, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
+			
+--	=================== GUIDED BOMBS ==============================================================================
+	{ CLSID = "JAS39_GBU49", arg_increment = 0.5}, -- GBU-49 TV Guided
+	{ CLSID = "JAS39_GBU32", arg_increment = 0.5}, -- GBU-32 TV Guided
+	{ CLSID = "JAS39_GBU38", arg_increment = 0.5}, -- GBU-38 TV Guided
+	{ CLSID = "JAS39_SDB", arg_increment = 0.5, Type = 1}, -- GBU-39 SDB TV Guided		
+    { CLSID = "JAS39_GBU12", arg_increment = 0.5 }, -- GBU-12 laser guided
+	{ CLSID = "JAS39_GBU16", arg_increment = 0.5 }, -- GBU-16 laser guided
+	{ CLSID = "JAS39_DWS39", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
+	
+--	=================== UNGUIDED BOMBS ============================================================================
+	{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
+    { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
+	{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
+	{ CLSID = "JAS39_M71LD", attach_point_position = {-0.70, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
+		
+--	=================== UNGUIDED ROCKETS ==========================================================================
+    { CLSID = "JAS39_M70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- M70B HE 
+	{ CLSID = "JAS39_M70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- M70B AP
 
---				
-
---				=== Air to ground missiles ===
-                { CLSID = "JAS_RB75T", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- Rb75t AGM-65E
-				
-				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, --AGM-65K
-
-				
-				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2
-				
-
---				=== Antiship missiles ===
-				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
-				
---				=== Anti radiation missiles ===
-				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
-						
---			    === Guided bombs ===
-                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12 laser guided
-				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 tv guided
-				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
-				
-				
-				{ CLSID = "GBU12_TEST", arg_increment = 0.5 }, -- GBU-12
-				
-				
-								
---				=== Unguided bombs ===
-				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
-				{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
-				{ CLSID = "{M71BOMB}", attach_point_position = {-0.70, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
-				
-				
-				
---              === Unguided rockets ===
-                { CLSID = "JAS_ARAKM70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
-				{ CLSID = "JAS_ARAKM70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
-				
---				=== Guided rockets ===
-				{ CLSID = "JAS_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
-				
---				=== Remove pylon ===		
-				{ CLSID = "<CLEAN>", arg_increment = 1},
+--	=================== AIR TO GROUND MISSILES ====================================================================
+	{ CLSID = "JAS39_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
+	{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B66}", arg_increment = 0.5 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
+	{ CLSID = "LAU_117_AGM_65H", arg_increment = 0.5 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
+	
+--	=================== REMOVE PYLON ==============================================================================	
+	{ CLSID = "<CLEAN>", arg_increment = 1},
 }
 
-local inboard 	= {
-				
---				=== Air to ground missiles ===
-                { CLSID = "JAS_RB75T", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, -- Rb75t AGM-65E
-				--
-				{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B65}", arg_increment = 0.1 , attach_point_position = {0.37, -0.3, 0.0} }, --AGM-65K
-                { CLSID = "JAS_Stormshadow", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				{ CLSID = "JAS_BK90", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2								
-				
-				{ CLSID = "JAS_GBU31", attach_point_position = {0.0, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- GBU-31
-				
---				=== Antiship missiles ===
-				{ CLSID = "JAS_RB15F", arg_increment = 0.9, Type = 1, attach_point_position ={ -0.38, -0.27, 0.0} }, -- Rb15F Mk4
+local inboard 	= {				
+--	=================== INFRARED AIR TO AIR MISSILES ==============================================================
+    { CLSID = "JAS39_AIM-9L", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9L
+	{ CLSID = "JAS39_IRIS-T", attach_point_position = {0.20, -0.14, 0.0}, arg_increment = 0.1 }, -- IRIS-T
+	{ CLSID = "JAS39_A-DARTER", attach_point_position = {0.0, -0.14, 0.0}, arg_increment = 0.1 }, -- A-Darter
+	{ CLSID = "JAS39_AIM-9M", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9M
+	{ CLSID = "JAS39_AIM-9X", attach_point_position = {0.25, 0.0, 0.0}, arg_increment = 0.5 }, -- AIM-9X		
+	{ CLSID = "JAS39_PYTHON-5", attach_point_position = {0.15, -0.23, 0.0}, arg_increment = 0.1 }, -- Python-5
+	{ CLSID = "JAS39_ASRAAM", attach_point_position = {0.30, -0.23, 0.0}, arg_increment = 0.1 }, -- AIM-132 ASRAAM
+	
+--	=================== AIR TO GROUND MISSILES ====================================================================	
+	{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B66}", arg_increment = 0.5 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
+	{ CLSID = "LAU_117_AGM_65H", arg_increment = 0.5 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
+	{ CLSID = "JAS39_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
+	
+--	=================== ANTI SHIP MISSILES ========================================================================
+	{ CLSID = "JAS39_RBS15", arg_increment = 0.9, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
+	{ CLSID = "JAS39_RBS15AI", arg_increment = 0.9, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir AI	
 
---				=== Anti radiation missiles ===
-				{ CLSID = "JAS_MAR-1", arg_increment = 0.5 }, -- MAR-1
+--	=================== ANTI RADIATION MISSILES ===================================================================
+	{ CLSID = "JAS39_MAR-1", arg_increment = 0.5, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
 
---			    === Guided bombs ===
-                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 TV GUIDED 
-				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16 TV GUIDED
-				
-				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10 laser guided
-				
-								
---				=== Unguided bombs ===
-				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
-				{ CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_increment = 0.5 }, -- Mk-84
-				{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
-				{ CLSID = "{M71BOMB}", attach_point_position = {-0.70, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
-				
---				=== Drop tanks ===
-                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre				
-				{ CLSID = "JAS_TANK1700", arg_increment = 0.1 }, -- External drop tank 1700 litre
+--	=================== GUIDED BOMBS ==============================================================================
+	{ CLSID = "JAS39_GBU49", arg_increment = 0.5}, -- GBU-49 TV Guided
+	{ CLSID = "JAS39_GBU31", arg_increment = 0.5}, -- GBU-31 TV Guided
+	{ CLSID = "JAS39_GBU32", arg_increment = 0.5}, -- GBU-32 TV Guided
+	{ CLSID = "JAS39_GBU38", arg_increment = 0.5}, -- GBU-38 TV Guided
+	{ CLSID = "JAS39_SDB", arg_increment = 0.5, Type = 1}, -- GBU-39 SDB TV Guided		
+	
+    { CLSID = "JAS39_GBU12", arg_increment = 0.5 }, -- GBU-12 laser guided
+	{ CLSID = "JAS39_GBU10", arg_increment = 0.5 }, -- GBU-10 laser guided
+	{ CLSID = "JAS39_GBU16", arg_increment = 0.5 }, -- GBU-16 laser guided
+	{ CLSID = "JAS39_DWS39", arg_increment = 0.5, Type = 1 }, -- BK90 MJ1-MJ2	
+					
+--	=================== UNGUIDED BOMBS ============================================================================
+	{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
+    { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
+	{ CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_increment = 0.5 }, -- Mk-84
+	{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
+	{ CLSID = "JAS39_M71LD", attach_point_position = {-0.70, 0.0, 0.0}, arg_increment = 0.5 }, -- M71LD x 4
+	
+--	=================== DROP TANKS ================================================================================
+    { CLSID = "JAS39_TANK1100", arg_increment = 0.5 }, -- Drop tank 1100 litre				
+	{ CLSID = "JAS39_TANK1700", arg_increment = 0.5 }, -- Drop tank 1700 litre
 
---              === Unguided rockets ===
-				{ CLSID = "JAS_ARAKM70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B HE 
-				{ CLSID = "JAS_ARAKM70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- ARAK M70B AP
-
---				=== Guided rockets ===
-				{ CLSID = "JAS_BRIMSTONE", attach_point_position = {-0.15, 0.02, 0.0}, arg_increment = 0.5}, -- Brimstone
-				
---				=== Remove pylon ===		
-				{ CLSID = "<CLEAN>", arg_increment = 1},
+--	=================== UNGUIDED ROCKETS ==========================================================================
+	{ CLSID = "JAS39_M70BHE", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- M70B HE 
+	{ CLSID = "JAS39_M70BAP", attach_point_position = {-0.1, 0.0, 0.0}, arg_increment = 0.5}, -- M70B AP
+	
+--	=================== AIR LAUNCHED CRUISE MISSILES ==============================================================	
+    { CLSID = "JAS39_STORMSHADOW", attach_point_position = {-0.60, 0.0, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
+	
+--	=================== REMOVE PYLON ==============================================================================	
+	{ CLSID = "<CLEAN>", arg_increment = 1},
 }
 
 local fuselageLeft	= {
+--	
 
-	--
 }
 
 local fuselageRight	= {
--- 		=========== Pods =============
---{ CLSID = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}" }, -- ALQ-131
---{ CLSID = "ALQ_184" }, -- ALQ-184	
+--	=================== PODS =====================================================================================
+	{ CLSID = "JAS39_Litening", arg_increment = 0.5, required = {{station = 9,loadout = {"{JAS39_FLIR}"}}} },
 
-{ CLSID = "JAS_Litening", arg_increment = 0.5 },
---{ CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
---{CLSID = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",arg_increment = 0.5,},-- Mercury LLTV Pod
---{CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",arg_increment = 0.5,},-- L-081 Fantasmagoria ELINT pod
---				=== Remove pylon ===		
-				{ CLSID = "<CLEAN>", arg_increment = 1},
+--	=================== REMOVE PYLON =============================================================================		
+	{ CLSID = "<CLEAN>", arg_increment = 1},
 	
 }
 
-local centerline 	= {
+local centerline 	= {				
+--	=================== AIR TO GROUND MISSILES ===================================================================	
+    { CLSID = "JAS39_BRIMSTONE", attach_point_position = {0.0, 0.02, 0.0}, arg_increment = 0.5 }, -- Brimstone
 	
-					
+--	=================== AIR LAUNCHED CRUISE MISSILES =============================================================			
+	{ CLSID = "JAS_Stormshadow", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
+	
+--	=================== GUIDED BOMBS =============================================================================
+	{ CLSID = "JAS39_GBU49", arg_increment = 0.5}, -- GBU-49 TV Guided
+	{ CLSID = "JAS39_GBU31", arg_increment = 0.5}, -- GBU-31 TV Guided
+	{ CLSID = "JAS39_GBU32", arg_increment = 0.5}, -- GBU-32 TV Guided
+	{ CLSID = "JAS39_GBU38", arg_increment = 0.5}, -- GBU-38 TV Guided
+	{ CLSID = "JAS39_SDB", arg_increment = 0.5, Type = 1}, -- GBU-39 SDB TV Guided		
+	{ CLSID = "JAS39_GBU10", arg_increment = 0.5 }, -- GBU-10 laser guided
+    { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
+	{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
+	
+	
+--	=================== UNGUIDED BOMBS ============================================================================
+	{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
+    { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
+	{ CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_increment = 0.5 }, -- Mk-84
+	{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
+	{ CLSID = "JAS39_M71LD", attach_point_position = {-0.50, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
 
---				=== Air to ground missiles ===
-               
-				{ CLSID = "JAS_Stormshadow", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
-				
+--	=================== DROP TANKS ================================================================================
+    { CLSID = "JAS39_TANK1100", arg_increment = 0.5 }, -- Drop tank 1100 litre
 
---			    === Guided bombs ===
-                { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-				{ CLSID = "JAS_GBU49_TV", arg_increment = 0.5 }, -- GBU-49 tv guided
-				{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
-				{ CLSID = "JAS_GBU16_TV", arg_increment = 0.5 }, -- GBU-16
-				
-				{ CLSID = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}", arg_increment = 0.5 }, -- GBU-10 LASER GUIDED
-				
+--	=================== SMOKE =====================================================================================		
+	{ CLSID = "{INV-SMOKE-RED}		"}, --Smoke Generator - red
+	{ CLSID = "{INV-SMOKE-GREEN}	"}, --Smoke Generator - green
+	{ CLSID = "{INV-SMOKE-BLUE}		"}, --Smoke Generator - blue
+	{ CLSID = "{INV-SMOKE-WHITE}	"}, --Smoke Generator - white
+	{ CLSID = "{INV-SMOKE-YELLOW}	"}, --Smoke Generator - yellow
+	{ CLSID = "{INV-SMOKE-ORANGE}	"}, --Smoke Generator - orange
 
---				=== Unguided bombs ===
-				{ CLSID = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}", arg_increment = 0.5 }, -- Mk-82
-                { CLSID = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}", arg_increment = 0.5 }, -- Mk-83
-				{ CLSID = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}", arg_increment = 0.5 }, -- Mk-84
-				{ CLSID = "{BRU33_2X_MK-82}", arg_increment = 0.5 }, -- Mk-82 x 2
-				{ CLSID = "{M71BOMB}", attach_point_position = {-0.50, 0.0, 0.0}, arg_increment = 0.5 }, -- M71 x 4
-
---              === Drop tanks ===
-                { CLSID = "JAS_TANK1100", arg_increment = 0.1 }, -- External drop tank 1100 litre
-				
---				=== Pods ===
-                { CLSID = "JAS_WMD7", arg_increment = 0.5 },
-               -- { CLSID = "JAS_SPJ_POD", arg_increment = 0.55 },
-				
---				=== Guided rockets ===
-				{ CLSID = "JAS_BRIMSTONE", attach_point_position = {0.0, 0.02, 0.0}, arg_increment = 0.5 }, -- Brimstone
-				
-				{ CLSID = "{INV-SMOKE-RED}		"},		--Smoke Generator - red
-				{ CLSID = "{INV-SMOKE-GREEN}	"},		--Smoke Generator - green
-				{ CLSID = "{INV-SMOKE-BLUE}		"},		--Smoke Generator - blue
-				{ CLSID = "{INV-SMOKE-WHITE}	"},		--Smoke Generator - white
-				{ CLSID = "{INV-SMOKE-YELLOW}	"},		--Smoke Generator - yellow
-				{ CLSID = "{INV-SMOKE-ORANGE}	"},		--Smoke Generator - orange
-
---				=== Remove pylon ===		
-				{ CLSID = "<CLEAN>", arg_increment = 1},
+--	=================== REMOVE PYLON =============================================================================		
+	{ CLSID = "<CLEAN>", arg_increment = 1},
 }
-
-
-
-
 
 JAS39Gripen_AG =  {
       
@@ -282,36 +276,7 @@ JAS39Gripen_AG =  {
 		91, -- Canard tilt angle of attack
     },
 	
-	LandRWCategories = 
-        {
-        [1] = 
-        {
-			Name = "AircraftCarrier",
-        },
-        [2] = 
-        {
-            Name = "AircraftCarrier With Catapult",
-        }, 
-        [3] = 
-        {
-            Name = "AircraftCarrier With Tramplin",
-        }, 
-    }, -- end of LandRWCategories
-        TakeOffRWCategories = 
-        {
-        [1] = 
-        {
-			Name = "AircraftCarrier",
-        },
-        [2] = 
-        {
-            Name = "AircraftCarrier With Catapult",
-        }, 
-        [3] = 
-        {
-            Name = "AircraftCarrier With Tramplin",
-        }, 
-    }, -- end of TakeOffRWCategories
+	
 	
 	mapclasskey 		= "P0091000024",
 	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", "Datalink", "Link16"},
@@ -333,7 +298,7 @@ JAS39Gripen_AG =  {
 		
 		nose_gear_pos 				                = {4.488,	-2.140,	0},   -- nosegear coord 
 	    nose_gear_amortizer_direct_stroke   		=  0,      -- down from nose_gear_pos !!!
-	    nose_gear_amortizer_reversal_stroke  		=  -0.43,  -- up 
+	    nose_gear_amortizer_reversal_stroke  		=  -0.4,  -- up 
 	    nose_gear_amortizer_normal_weight_stroke 	=  -0.215,   -- up 
 	    nose_gear_wheel_diameter 	                =  0.544, -- in m
 	
@@ -403,14 +368,23 @@ JAS39Gripen_AG =  {
 			}, -- end of [1]
 		}, -- end of engines_nozzles
 		crew_members = 
-		{
-			[1] = 
-			{
-				ejection_seat_name	=	17,
-				drop_canopy_name	=	"jas39gripen-fonar";
-				pos = 	{3.9,	1.4,	0},
-			}, -- end of [1]
-		}, -- end of crew_members
+        {
+            [1] = 
+            {
+                    ejection_seat_name    =    17,
+                    drop_canopy_name    =    "jas39gripen-fonar",
+                    pos =     {3.9,    1.4,    0},
+                    ejection_order         = 1,
+                    canopy_arg          = 38, 
+                    can_be_playable     = true,
+                    ejection_added_speed = {-5,15,0},
+                    role                  = "pilot",
+                    role_display_name    = _("Pilot"),
+            }, -- end of [1]
+            [2] = 
+            {
+            },-- end of [2]
+        }, -- end of crew_members
 		brakeshute_name	=	0,
 		is_tanker	=	false,
 		air_refuel_receptacle_pos = 	{-0.051,	0.911,	0},
@@ -435,18 +409,18 @@ JAS39Gripen_AG =  {
 		
 		chaff_flare_dispenser = 
 		{
-		[1] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Flares L
-        [2] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, -0.85}, }, -- Flares R
-        [3] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4, 0.85}, }, -- Chaffs L
-        [4] = { dir = {0, 1.0, 0}, pos = {-4.2, 0.4	, -0.85}, }, -- Chaffs R
-		}, -- end of chaff_flare_dispenser
+		[1] = { dir = {0, 1.0, 0}, pos = {-3.25, 0.35, 0.8}, },
+        [2] = { dir = {0, -1.0, 0}, pos = {-3.25, 0.35, 0.8}, },
+        [3] = { dir = {0, -1.0, 0}, pos = {-3.25, 0.35, 0.8}, },
+        [4] = { dir = {0, 1.0, 0}, pos = {-3.25, 0.35, 0.8}, }, 
+		}, -- end of chaff_flare_dispenser  
 
         -- Countermeasures
 passivCounterm 		= {
 CMDS_Edit 			= true,
-SingleChargeTotal 	= 180,
-chaff 				= {default = 90, increment = 45, chargeSz = 1},
-flare 				= {default = 45, increment = 45, chargeSz = 1}
+SingleChargeTotal 	= 120,
+chaff 				= {default = 80, increment = 40, chargeSz = 1},
+flare 				= {default = 40, increment = 20, chargeSz = 1}
  },
 	
         CanopyGeometry 	= {
@@ -485,7 +459,7 @@ ECM 			= "AN/ALQ-135"--F15
 	},
 
 Guns = {
-        m85({muzzle_pos_connector   = "GUN_POINT",
+        bk27_cannon({muzzle_pos_connector   = "GUN_POINT",
             supply_position        = {2.6, -0.4, 0.0},
             -- drop_cartridge         = 204,
             ejector_pos_connector  = "GUN_EJECTOR_01",
@@ -496,10 +470,10 @@ Guns = {
 		
 		},
     				
-		ammo_type_default = 1,
+		ammo_type_default = 2,
 		ammo_type ={
-			_("AM BAND 06 (HE/AP/APHE)"),
-			_("AM BAND 07 (PELE/PELE-T)"),				
+			_("HE/AP/APHE"),
+			_("PELE/PELE-T"),				
 		},
 
 --pylons_enumeration = {1, 11, 10, 2, 3, 9, 4, 8, 5, 7, 6},
@@ -535,20 +509,7 @@ Guns = {
 			},
 			inboard
 		),
-       
-        pylon(4, 2, 0, 0, 0,--26
-			{
-				arg = 312,
-				arg_value = 0,
-				DisplayName = "ELINT",
-				use_full_connector_position = true,
-				connector = "Pylon5",		--integrated Elint
-			},
-			{
-				{ CLSID = "{0519A264-0AB6-11d6-9193-00A0249B6F00}",attach_point_position = {0, 0 ,0 } },-- ELINT
-			}
-		),
-        pylon(5, 1, 0, 0, 0,
+        pylon(4, 1, 0, 0, 0,
 			{
 				arg = 313,
 				arg_value = 0,
@@ -558,19 +519,7 @@ Guns = {
 			},
 			centerline
 		),
-		pylon(6, 2, 0, 0, 0,--26
-			{
-				arg = 314,
-				arg_value = 0,
-				DisplayName = "ECM",
-				use_full_connector_position = true,
-				connector = "Pylon8",		--integrated Ecm
-			},
-			{	
-				{ CLSID = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}" }, --L005 Sorbtsiya ECM pod (left)
-			}
-		),
-        pylon(7, 1, 0, 0, 0,
+        pylon(5, 1, 0, 0, 0,
             {
 				arg = 315,
 				arg_value = 0,
@@ -580,7 +529,7 @@ Guns = {
 			},
 			fuselageRight
 		),
-        pylon(8, 0, 0, 0, 0,
+        pylon(6, 0, 0, 0, 0,
 			{
 				arg = 316,
 				arg_value = 0,
@@ -591,7 +540,7 @@ Guns = {
 			
 			inboard
 		),
-        pylon(9, 0, 0, 0, 0,
+        pylon(7, 0, 0, 0, 0,
 			{
 				arg = 317,
 				arg_value = 0,
@@ -601,7 +550,7 @@ Guns = {
 			},
 			outboard
 		),
-		pylon(10, 0, 0, 0, 0,
+		pylon(8, 0, 0, 0, 0,
 			{
 				DisplayName = "8",
 				use_full_connector_position = true,
@@ -609,6 +558,42 @@ Guns = {
 			},
 			tips
 		),
+		pylon(9, 2, 0, 0, 0,--26
+			{
+				arg = 319,
+				arg_value = 0,
+				DisplayName = "FLIR",
+				use_full_connector_position = true,
+				connector = "Pylon12",		--LDP FLIR
+			},
+			{	
+				{ CLSID = "{JAS39_FLIR}" }, -- Litening Laser Designator Pod FLIR
+			}
+		),
+        pylon(10, 2, 0, 0, 0,--26
+			{
+				arg = 312,
+				arg_value = 0,
+				DisplayName = "ELINT",
+				use_full_connector_position = true,
+				connector = "Pylon5",		--integrated Elint
+			},
+			{
+				{ CLSID = "{JAS39_ELINT}",attach_point_position = {0, 0 ,0 } },-- ELINT
+			}
+		),	
+		pylon(11, 2, 0, 0, 0,--26
+			{
+				arg = 314,
+				arg_value = 0,
+				DisplayName = "ECM",
+				use_full_connector_position = true,
+				connector = "Pylon8",		--integrated Ecm
+			},
+			{	
+				{ CLSID = "{JAS39_EWS39}" }, -- EWS39 Integrated ECM
+			}
+		),		
 },
 	
 	Tasks = {
@@ -635,16 +620,16 @@ SFM_Data = {
             cx_brk     = 0.08,   -- coefficient, drag, breaks
             table_data = {
                   --      M       Cx0    Cya    B      B4  Omxmax  Aldop   Cymax
-                [1]  = { 0.000, 0.025, 0.068, 0.132, 0.032, 0.48, 27.000, 1.2 },
-                [2]  = { 0.200, 0.025, 0.068, 0.132, 0.032, 1.47, 26.500, 1.2 },
-                [3]  = { 0.400, 0.024, 0.07, 0.133, 0.032, 2.4, 25.500, 1.2 },
-                [4]  = { 0.600, 0.024, 0.072, 0.133, 0.043, 3.5, 25.000, 1.2 },
-                [5]  = { 0.700, 0.025, 0.074, 0.134, 0.045, 3.5, 25.000, 1.2 },
-                [6]  = { 0.800, 0.024, 0.080, 0.135, 0.052, 3.5, 25.000, 1.2 },
-                [7]  = { 0.900, 0.028, 0.081, 0.135, 0.058, 3.5, 25.000, 1.15 },
-                [8]  = { 1.000, 0.036, 0.083, 0.252, 0.10, 2.5, 21.250, 1.12 },
-                [9]  = { 1.050, 0.035, 0.084, 0.320, 0.095, 2.304, 19.375, 1.1 },
-                [10] = { 1.100, 0.037, 0.091, 0.387, 0.09, 2.261, 17.500, 1.05 },
+                [1]  = { 0.000, 0.025, 0.068, 0.132, 0.032, 1.48, 27.000, 1.2 },
+                [2]  = { 0.200, 0.025, 0.068, 0.132, 0.032, 2.47, 26.500, 1.2 },
+                [3]  = { 0.400, 0.024, 0.07, 0.133, 0.032, 3.4, 25.500, 1.2 },
+                [4]  = { 0.600, 0.024, 0.072, 0.133, 0.043, 4.2, 25.000, 1.2 },
+                [5]  = { 0.700, 0.025, 0.074, 0.134, 0.045, 4.5, 25.000, 1.2 },
+                [6]  = { 0.800, 0.024, 0.080, 0.135, 0.052, 4.5, 25.000, 1.2 },
+                [7]  = { 0.900, 0.028, 0.081, 0.135, 0.058, 4.2, 25.000, 1.15 },
+                [8]  = { 1.000, 0.036, 0.083, 0.252, 0.10, 3.5, 21.250, 1.12 },
+                [9]  = { 1.050, 0.035, 0.084, 0.320, 0.095, 3.040, 19.375, 1.1 },
+                [10] = { 1.100, 0.037, 0.091, 0.387, 0.09, 2.461, 17.500, 1.05 },
                 [11] = { 1.200, 0.0367, 0.095, 0.410, 0.12, 2.178, 15.625, 1.00 },
                 [12] = { 1.300, 0.035, 0.096, 0.427, 0.17, 1.979, 13.750, 0.912 },
                 [13] = { 1.500, 0.035, 0.090, 0.452, 0.20, 1.609, 10.000, 0.740 },

@@ -11,7 +11,7 @@ local L_BRAKE       = 10056
 local R_BRAKE       = 10057
 local B_BRAKE       = 10058
 local Brakes        = 10023 
-
+local P_BRAKE	    = 10059
 join(res.keyCommands,{
 -- Autopilot
 {down = iCommandPlaneAutopilot, name = _('Autopilot'), category = _('Autopilot')},
@@ -26,7 +26,9 @@ join(res.keyCommands,{
 {down = iCommandPlaneStabCancel, name = _('Autopilot Disengage'), category = _('Autopilot')},
 
 --Brakes	
-{down = iCommandPlaneWheelBrakeOn,                          up = iCommandPlaneWheelBrakeOff,			        name = _('Wheel Brake On'),		                                category = _('Systems')},
+{down = BrakesON,    up = BrakesOFF,	  name = _('Gripen Wheel Brakes Both'),		   category = _('Systems')},
+{down = P_BRAKE, name = _('Gripen Parking Brake - Toggle'), 	                category = _('Systems')},
+
 
 -- Systems
 {down = iCommandPlaneJettisonFuelTanks, name = _('Jettison Fuel Tanks'), category = _('Systems')},
@@ -40,6 +42,12 @@ join(res.keyCommands,{
 {down = iCommandPlaneAirRefuel, name = _('Refueling Boom'), category = _('Systems')},
 {down = iCommandPlaneHook, name = _('Tail Hook'), category = _('Systems')},
 {down = iCommandPlanePackWing, name = _('Folding Wings'), category = _('Systems')},
+
+--NightVision
+    {down   = iCommandViewNightVisionGogglesOn   , name = _('Night Vision Goggle - Toggle'), category = _('Sensors')},
+    {down   = iCommandPlane_Helmet_Brightess_Up  , name = _('Goggle Gain - Inc'),            category = _('Sensors')},
+    {down   = iCommandPlane_Helmet_Brightess_Down, name = _('Goggle Gain - Dec'),            category = _('Sensors')},
+
 
 -- Modes
 {down = iCommandPlaneModeFI0, name = _('(6) Longitudinal Missile Aiming Mode'), category = _('Modes')},

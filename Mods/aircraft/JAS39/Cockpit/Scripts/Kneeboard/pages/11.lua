@@ -5,7 +5,7 @@ SetScale(FOV)
 -- NAVIGATION LOG
 
 -- add background image for kneeboard
-add_picture(LockOn_Options.script_path.."../Textures/nav.png")
+add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/nav.png")
 
 local gettext = require("i_18n")
 _ = gettext.translate
