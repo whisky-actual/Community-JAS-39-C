@@ -186,7 +186,7 @@ local centerline 	= {
     { CLSID = "JAS39_BRIMSTONE", attach_point_position = {0.0, 0.02, 0.0}, arg_increment = 0.5 }, -- Brimstone
 	
 --	=================== AIR LAUNCHED CRUISE MISSILES =============================================================			
-	{ CLSID = "JAS_Stormshadow", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
+	{ CLSID = "JAS39_Stormshadow", attach_point_position = {-0.2, 0.025, 0.0}, arg_increment = 0.5, Type = 1 }, -- Storm Shadow
 	
 --	=================== GUIDED BOMBS =============================================================================
 	{ CLSID = "JAS39_GBU49", arg_increment = 0.5}, -- GBU-49 TV Guided
@@ -195,8 +195,8 @@ local centerline 	= {
 	{ CLSID = "JAS39_GBU38", arg_increment = 0.5}, -- GBU-38 TV Guided
 	{ CLSID = "JAS39_SDB", arg_increment = 0.5, Type = 1}, -- GBU-39 SDB TV Guided		
 	{ CLSID = "JAS39_GBU10", arg_increment = 0.5 }, -- GBU-10 laser guided
-    { CLSID = "JAS_GBU12", arg_increment = 0.5 }, -- GBU-12
-	{ CLSID = "JAS_GBU16", arg_increment = 0.5 }, -- GBU-16
+        { CLSID = "JAS39_GBU12", arg_increment = 0.5 }, -- GBU-12
+	{ CLSID = "JAS39_GBU16", arg_increment = 0.5 }, -- GBU-16
 	
 	
 --	=================== UNGUIDED BOMBS ============================================================================
