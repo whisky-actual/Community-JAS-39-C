@@ -9,7 +9,7 @@ declare_loadout(
         displayName = _(jas_tank1700_name),
         Picture     = "jas39_tank1700.png",
         attribute   = {wsType_Air, wsType_Free_Fall, wsType_FuelTank, WSTYPE_PLACEHOLDER},
-        CLSID       = "JAS39_TANK1700",
+        CLSID       = "{JAS39_TANK1700}",
         
         Weight_Empty = 145 + pylon_mass,
         Weight = 145 + 1388 + pylon_mass,

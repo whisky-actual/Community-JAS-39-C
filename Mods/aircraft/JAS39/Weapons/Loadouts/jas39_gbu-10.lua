@@ -69,7 +69,7 @@ declare_weapon(jas39_gbu_10)
 
 declare_loadout({
 	category 		= CAT_BOMBS,
-	CLSID	 		= "JAS39_GBU10",
+	CLSID	 		= "{JAS39_GBU10}",
 	attribute		= jas39_gbu_10.wsTypeOfWeapon,
 	Count 			= 1,
 	Cx_pil			= jas39_gbu_10.Cx,

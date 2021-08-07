@@ -27,5 +27,6 @@ devices["LIFT_DUMPING_SYSTEM"]	    = counter()  -- 4
 devices["NVG"]              		= counter()  -- 5 
 devices["WHEEL_CHOCKS_LADDER"]		= counter()  -- 6
 devices["GEAR_BAYS"]				= counter()  -- 7
+devices["ENGINE_NOZZLE"]			= counter()  -- 8
 devices["MFD"]						= counter()	-- test
 

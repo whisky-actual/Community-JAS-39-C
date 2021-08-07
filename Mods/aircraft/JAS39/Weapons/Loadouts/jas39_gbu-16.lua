@@ -69,7 +69,7 @@ declare_weapon(jas39_gbu_16)
 
 declare_loadout({
 	category 		= CAT_BOMBS,
-	CLSID	 		= "JAS39_GBU16",
+	CLSID	 		= "{JAS39_GBU16}",
 	attribute		= jas39_gbu_16.wsTypeOfWeapon,
 	Count 			= 1,
 	Cx_pil			= jas39_gbu_16.Cx,
@@ -79,3 +79,27 @@ declare_loadout({
 	Elements  		= {{ShapeName = "gbu-16"}},
 
 })
+
+declare_loadout({
+	category 		= CAT_BOMBS,
+	CLSID	 		= "{JAS39_BRU33_GBU16}",
+	wsTypeOfWeapon	= jas39_gbu_16.wsTypeOfWeapon,
+	attribute		= {4, 4, 32, WSTYPE_PLACEHOLDER},
+	Count 			= 2,
+	Cx_pil			= jas39_gbu_16.Cx,
+	Picture			= "gbu16.png",
+	displayName		= _('2 x ' .. jas39_gbu_16.user_name),
+	Weight			= (jas39_gbu_16.mass * 2) + 75,
+	Elements = { {
+			IsAdapter = true,
+			ShapeName = "BRU_33AA"
+		}, {
+			ShapeName = "GBU-16",
+			connector_name = "Point02"
+		}, {
+			ShapeName = "GBU-16",
+			connector_name = "Point01"
+		} },
+
+})
+

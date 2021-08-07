@@ -122,7 +122,7 @@ declare_weapon(JAS_BRIM_STONE)
 
 declare_loadout({
     category        = CAT_MISSILES,
-    CLSID           = "JAS39_BRIMSTONE",
+    CLSID           = "{JAS39_BRIMSTONE}",
     wsTypeOfWeapon  = JAS_BRIM_STONE.wsTypeOfWeapon,
     attribute       = {4, 4, 32, WSTYPE_PLACEHOLDER},
     Count           = 3,

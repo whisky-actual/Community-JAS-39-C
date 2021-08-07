@@ -48,6 +48,15 @@ local JAS_aim120c5_AA = {
 	loft 			= 1,
 	hoj 			= 1,
 	ccm_k0 			= 0.15,
+	loft_factor 	= 1.1,	
+
+	active_radar_lock_dist	= 15000.0,
+	go_active_by_default	= 1,
+	
+	PN_coeffs = {3, 				-- Number of Entries	
+				15000.0 ,1.0,		-- Less 5 km to target Pn = 1
+				25000.0, 0.5,		-- Between 10 and 5 km  to target, Pn smoothly changes from 0.5 to 1.0. 
+				40000.0, 0.25};		-- Between 15 and 10 km  to target, Pn smoothly changes from 0.2 to 0.5. Longer then 15 km Pn = 0.2.
 
     warhead         = jas_aim120c5_warhead,
     warhead_air     = jas_aim120c5_warhead,
@@ -106,9 +115,9 @@ local JAS_aim120c5_AA = {
 					 0.75, -- безразмерный коэф. эффективности САУ ракеты
 					 70.0, -- расчет времени полета
 					  -- DLZ. Данные для рассчета дальностей пуска (индикация на прицеле)
-					 35000.0, -- дальность ракурс   180(навстречу) град,  Н=10000м, V=900км/ч, м
-					 30000.0, -- дальность ракурс 0(в догон) град,  Н=10000м, V=900км/ч
-					 12000.0, -- дальность ракурс 	180(навстречу) град, Н=1000м, V=900км/ч
+					 65000.0, -- дальность ракурс   180(навстречу) град,  Н=10000м, V=900км/ч, м
+					 22000.0, -- дальность ракурс 0(в догон) град,  Н=10000м, V=900км/ч
+					 25000.0, -- дальность ракурс 	180(навстречу) град, Н=1000м, V=900км/ч
 					 0.2, 
 					 0.6,
 					 1.4,
@@ -121,11 +130,11 @@ declare_weapon(JAS_aim120c5_AA)
 
 declare_loadout({
 	category		=	CAT_AIR_TO_AIR,
-	CLSID			= 	"JAS39_AIM120C5",
+	CLSID			= 	"{JAS39_AIM120C5}",
 	Picture			=	"us_AIM-120C.png",
 	wsTypeOfWeapon	=	JAS_aim120c5_AA.wsTypeOfWeapon,
 	displayName		=	_(jas_aim120c5_name),
-	attribute		=	{4,	4,	32,	103,	WSTYPE_PLACEHOLDER},
+	attribute		=	{4,	4,	32, WSTYPE_PLACEHOLDER},
 	Count			=	1,
 	Weight			=	jas_aim120c5_mass + pylon_mass,
 	Elements		=	

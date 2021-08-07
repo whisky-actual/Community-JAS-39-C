@@ -12,7 +12,7 @@ JAS_PYTHON5_AA = {
     Head_Type       = 1,
     sigma           = {2, 2, 2},
     M               = jas_python5_mass,
-        H_max = 20000.0,
+        H_max = 20000.0, 
         H_min = -1,
         Diam = 160.0,
         Cx_pil = 2.2,
@@ -29,9 +29,9 @@ JAS_PYTHON5_AA = {
         t_marsh = 0.0,
         Range_max = 20000.0,
         H_min_t = 1.0,
-        Fi_start = 0.3,
+        Fi_start = 3.14152,
         Fi_rak = 3.14152,
-        Fi_excort = 1.57,
+        Fi_excort = 3.14152,
         Fi_search = 0.09,
         OmViz_max = 1.10,
 		warhead = enhanced_a2a_warhead(11),       
@@ -80,8 +80,8 @@ JAS_PYTHON5_AA = {
         
         -- Engine data. Time, fuel flow, thrust.    
         --    t_statr        t_b        t_accel        t_march        t_inertial        t_break        t_end            -- Stage
-        -1.0,        -1.0,    6,          0.0,        0.0,            0.0,        1.0e9,         -- time of stage, sec
-         0.0,        0.0,    5.0,        0.0,        0.0,            0.0,        0.0,           -- fuel flow rate in second, kg/sec(секундный расход массы топлива кг/сек)
+        -1.0,        -1.0,    6.5,          0.0,        0.0,            0.0,        1.0e9,         -- time of stage, sec
+         0.0,        0.0,    5.5,        0.0,        0.0,            0.0,        0.0,           -- fuel flow rate in second, kg/sec(секундный расход массы топлива кг/сек)
          0.0,        0.0,    16500.0,    0.0,    0.0,            0.0,        0.0,           -- thrust, newtons
     
          1.0e9, -- таймер самоликвидации, сек
@@ -118,7 +118,7 @@ JAS_PYTHON5_AA.shape_table_data.index = JAS_PYTHON5_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category     = CAT_AIR_TO_AIR,
-    CLSID        = "JAS39_PYTHON-5",
+    CLSID        = "{JAS39_PYTHON-5}",
     Picture      = 'jas39_python5.png',
     attribute    = JAS_PYTHON5_AA.wsTypeOfWeapon,
     displayName  = _(jas_python5_name),

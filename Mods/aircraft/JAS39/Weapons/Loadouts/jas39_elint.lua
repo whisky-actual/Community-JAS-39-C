@@ -7,7 +7,7 @@ declare_loadout(
 		Picture = "L005.png",
         displayName = _("Integrated ELINT"),
         Weight = 1,
-        Cx_pil = 0.000244140625,
+        Cx_pil = 0.00001,
         shape_table_data =
         {
             {

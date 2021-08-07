@@ -32,7 +32,7 @@ local JAS_aim120c7_AA = {
     t_b 			= 0.0,
     t_acc 			= 0.0,
     t_marsh 		= 8.0,
-    Range_max 		= 100000.0,
+    Range_max 		= 90000.0,
     H_min_t 		= 1.0,
     Fi_start 		= 0.5,
     Fi_rak 			= 3.14152,
@@ -48,6 +48,16 @@ local JAS_aim120c7_AA = {
 	loft 			= 1,
 	hoj 			= 1,
 	ccm_k0 			= 0.1,
+	loft_factor 	= 1.1,
+
+	active_radar_lock_dist	= 15000.0,
+	go_active_by_default	= 1,
+	
+	PN_coeffs = {4, 				-- Number of Entries	
+				15000.0 ,1.0,		-- Less 5 km to target Pn = 1
+				25000.0, 0.5,		-- Between 10 and 5 km  to target, Pn smoothly changes from 0.5 to 1.0. 
+				40000.0, 0.25,
+				60000.0, 0.10};		-- Between 15 and 10 km  to target, Pn smoothly changes from 0.2 to 0.5. Longer then 15 km Pn = 0.2.
 
     warhead         = jas_aim120c7_warhead,
     warhead_air     = jas_aim120c7_warhead,
@@ -84,7 +94,7 @@ local JAS_aim120c7_AA = {
 					
 				-- Engine data. Time, fuel flow, thrust.	
 				--	t_statr		t_b		t_accel		t_march		t_inertial		t_break		t_end			-- Stage
-					-1.0,		-1.0,	9.0,  		0.0,		0.0,			0.0,		1.0e9,         -- time of stage, sec
+					-1.0,		-1.0,	10.0,  		0.0,		0.0,			0.0,		1.0e9,         -- time of stage, sec
 					 0.0,		0.0,	8.5,		0.0,		0.0,			0.0,		0.0,           -- fuel flow rate in second, kg/sec(секундный расход массы топлива кг/сек)
 					 0.0,		0.0,	20000.0,	0.0,		0.0,			0.0,		0.0,           -- thrust, newtons
 				
@@ -106,9 +116,9 @@ local JAS_aim120c7_AA = {
 					 0.75, -- безразмерный коэф. эффективности САУ ракеты
 					 70.0, -- расчет времени полета
 					  -- DLZ. Данные для рассчета дальностей пуска (индикация на прицеле)
-					 40000.0, -- дальность ракурс   180(навстречу) град,  Н=10000м, V=900км/ч, м
-					 35000.0, -- дальность ракурс 0(в догон) град,  Н=10000м, V=900км/ч
-					 14000.0, -- дальность ракурс 	180(навстречу) град, Н=1000м, V=900км/ч
+					 75000.0, -- дальность ракурс   180(навстречу) град,  Н=10000м, V=900км/ч, м
+					 25000.0, -- дальность ракурс 0(в догон) град,  Н=10000м, V=900км/ч
+					 30000.0, -- дальность ракурс 	180(навстречу) град, Н=1000м, V=900км/ч
 					 0.2, 
 					 0.6,
 					 1.4,
@@ -121,11 +131,11 @@ declare_weapon(JAS_aim120c7_AA)
 
 declare_loadout({
 	category		=	CAT_AIR_TO_AIR,
-	CLSID			= 	"JAS39_AIM120C7",
+	CLSID			= 	"{JAS39_AIM120C7}",
 	Picture			=	"us_AIM-120C.png",
 	wsTypeOfWeapon	=	JAS_aim120c7_AA.wsTypeOfWeapon,
 	displayName		=	_(jas_aim120c7_name),
-	attribute		=	{4,	4,	32,	103,	WSTYPE_PLACEHOLDER},
+	attribute		=	{4,	4,	32,	WSTYPE_PLACEHOLDER},
 	Count			=	1,
 	Weight			=	jas_aim120c7_mass + pylon_mass,
 	Elements		=	

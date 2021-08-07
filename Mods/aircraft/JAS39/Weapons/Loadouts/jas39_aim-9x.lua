@@ -123,7 +123,7 @@ JAS_AIM9X_AA.shape_table_data.index = JAS_AIM9X_AA.wsTypeOfWeapon[4]
 
 declare_loadout({
     category     	= CAT_AIR_TO_AIR,
-    CLSID        	= "JAS39_AIM-9X",
+    CLSID        	= "{JAS39_AIM-9X}",
     Picture     	= 'us_aim-9x.png',
     attribute       = {4,4,32,WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon	= JAS_AIM9X_AA.wsTypeOfWeapon,

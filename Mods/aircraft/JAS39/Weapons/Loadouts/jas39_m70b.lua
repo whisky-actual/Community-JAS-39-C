@@ -80,7 +80,7 @@ declare_weapon(JAS_M70BHE_RKT)
 declare_loadout(
 {
 	category 		= CAT_ROCKETS,
-	CLSID 			= "JAS39_M70BHE",
+	CLSID 			= "{JAS39_M70BHE}",
 	attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon	=	JAS_M70BHE_RKT.wsTypeOfWeapon,	
 	Picture 		= "jas39_m70bhe.png",
@@ -224,7 +224,7 @@ declare_weapon(JAS_M70BAP_RKT)
 declare_loadout(
 {
 	category 		= CAT_ROCKETS,
-	CLSID 			= "JAS39_M70BAP",
+	CLSID 			= "{JAS39_M70BAP}",
 	attribute 		= {wsType_Weapon,wsType_NURS,wsType_Container,WSTYPE_PLACEHOLDER},
 	wsTypeOfWeapon	=	JAS_M70BAP_RKT.wsTypeOfWeapon,	
 	Picture 		= "jas39_m70bap.png",

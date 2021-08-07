@@ -1,43 +1,3 @@
-local function KAB(main, fm, autopilot, tgdata)
-	local t = main
-	
-	t.category  = CAT_BOMBS
-	t.wsTypeOfWeapon = {wsType_Weapon, wsType_Bomb, wsType_Bomb_Guided, WSTYPE_PLACEHOLDER}
-    t.hMin    = 1000.0
-    t.VyHold  = -80.0
-    t.Ag      = -1.0
-	
-	t.fm				= fm
-	
-	t.fm.mass			= t.mass
-	t.fm.wind_time		= 1000.000000
-	t.fm.wind_sigma		= 0
-	t.fm.A				= 0.6
-	t.fm.maxAoa			= math.rad(7)
-	t.fm.finsTau		= 0.1
-	t.fm.dCydA			= {0.066, 0.036}
-	
-	t.bang_bang_autopilot = autopilot
-	t.targeting_data = tgdata
-
-	t.shape_table_data ={
-		{
-			name     = t.name,
-			file     = t.model,
-			life     = 1,
-			fire     = {0, 1},
-			username = t.user_name,
-			index    = WSTYPE_PLACEHOLDER,
-		},
-	}
-	
-	declare_weapon(t)
-	return t
-end
-
-
- 
-
 local jas_sdb_bomb =
 {
 	category		= CAT_BOMBS,
@@ -52,7 +12,7 @@ local jas_sdb_bomb =
 	
 	name			= "jas_sdb",
 	model			= "jas39_gbu-39",
-	user_name		= _("GBU-39 SDB 285lb TV Guided Glide-Bomb"),
+	user_name		= _("GBU-39 SDB 285 lb TV Guided Glide-Bomb"),
 	scheme			= "bomb_jdam",
 	class_name		= "wAmmunitionChangeableTrajectory",
 	
@@ -129,13 +89,13 @@ declare_weapon(jas_sdb_bomb)
 
 declare_loadout({
 	category 		= CAT_BOMBS,
-	CLSID	 		= "JAS39_SDB",
+	CLSID	 		= "{JAS39_SDB}",
 	wsTypeOfWeapon  = jas_sdb_bomb.wsTypeOfWeapon,
     attribute       = {4, 4, 32, WSTYPE_PLACEHOLDER},
 	Count 			= 4,
 	Cx_pil			= jas_sdb_bomb.Cx,
 	Picture			= "jas39_gbu39.png",
-	displayName		= jas_sdb_bomb.user_name,
+	displayName		= _('4 x ' .. jas_sdb_bomb.user_name),
 	Weight			= jas_sdb_bomb.mass * 4 + 145,
 	ejectImpulse    = 140,
 	Elements = {

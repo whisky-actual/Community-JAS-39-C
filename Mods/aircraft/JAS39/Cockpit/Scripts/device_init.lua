@@ -37,6 +37,7 @@ creators[devices.WHEEL_CHOCKS_LADDER]		 = {"avLuaDevice",LockOn_Options.script_p
 --creators[devices.MISC_ELEC]			={"avSimpleElectricSystem",LockOn_Options.script_path.."avRWR_example/miscSystems/simple_electric_system.lua"}
 --creators[devices.RWR]				={"avSimpleRWR"			,LockOn_Options.script_path.."avRWR_example/Device/RWR_init.lua"}
 creators[devices.GEAR_BAYS]	  = {"avLuaDevice",LockOn_Options.script_path.."Systems/Gear_bays.lua"}
+creators[devices.ENGINE_NOZZLE]	  = {"avLuaDevice",LockOn_Options.script_path.."Systems/Engine_nozzle.lua"}
 creators[devices.NVG]         = {"avNightVisionGoggles"  ,LockOn_Options.script_path.."HELMET/NVG.lua"                            ,{}}
 
 creators[devices.MFD]        = {"avLuaDevice", LockOn_Options.script_path.."MFD/Device/MFD_init.lua"}	

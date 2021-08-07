@@ -10,7 +10,7 @@ declare_loadout(
     CLSID       = "{JAS39_FLIR}",
     
     Weight = 1 + pylon_mass,
-    Cx_pil = 0.00105,
+    Cx_pil = 0.00001,
     shape_table_data =
     {
         {

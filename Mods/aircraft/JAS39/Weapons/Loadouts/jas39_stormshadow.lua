@@ -75,7 +75,7 @@ local jas39_stormshadow = {
 		dCydA		= {0.07, 0.036},
 		A			= 0.08,
 		maxAoa		= 0.2,
-		finsTau		= 0.08,	-- !	?????? ????? / wingspan
+		finsTau		= 0.08,	
 		Ma_x		= 3,
 		Ma_z		= 3,
 		Kw_x		= 0.05,
@@ -136,7 +136,7 @@ local jas39_stormshadow = {
 	simple_seeker =	{
 		sensitivity = 0,
 		delay		= 0.0,
-		FOV			= math.rad(8),    --0
+		FOV			= math.rad(8),  
 		maxW		= 500,
 		opTime		= 9999,
 	},
@@ -206,7 +206,7 @@ declare_loadout(
 		Picture			= "jas39_stormshadow.png",
 		displayName		= jas39_stormshadow.user_name,
 		Weight			= jas39_stormshadow_mass,
-		CLSID			= "JAS39_STORMSHADOW",
+		CLSID			= "{JAS39_STORMSHADOW}",
 		attribute		= jas39_stormshadow.wsTypeOfWeapon,
 		Count			= 1,
 		Cx_pil			= 0.000365,

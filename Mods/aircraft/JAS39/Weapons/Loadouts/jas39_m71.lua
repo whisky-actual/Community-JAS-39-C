@@ -1,4 +1,4 @@
-local jas39_m70ld_name = 'M/71 120kg GP Bomb Low-drag '
+local jas39_m70ld_name = 'M/71 120 kg GP Bomb Low-drag '
 local jas39_m70ld_mass = 120
 
 local jas39_M71LD_BOMB = {
@@ -57,7 +57,7 @@ declare_weapon(jas39_M71LD_BOMB)
 declare_loadout(
 {
 	category			= CAT_BOMBS,
-	CLSID				= "JAS39_M71LD",
+	CLSID				= "{JAS39_M71LD}",
 	attribute			= {4,	5,	32,	32},	
 	wsTypeOfWeapon		= jas39_M71LD_BOMB.wsTypeOfWeapon,
 	Count				= 4,
@@ -65,7 +65,7 @@ declare_loadout(
 
 
 	Picture				= "jas39_M71LD.png",
-	displayName			= _("4x M/71 120kg GP Bomb Low-drag"),
+	displayName			= _('4 x ' .. jas39_m70ld_name),
 	Weight				=  (jas39_m70ld_mass * 4) + 125,
 Elements	=	{
 					[1]	=	

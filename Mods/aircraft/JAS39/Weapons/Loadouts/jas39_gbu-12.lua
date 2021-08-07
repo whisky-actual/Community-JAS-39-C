@@ -69,7 +69,7 @@ declare_weapon(jas39_gbu_12)
 
 declare_loadout({
 	category 		= CAT_BOMBS,
-	CLSID	 		= "JAS39_GBU12",
+	CLSID	 		= "{JAS39_GBU12}",
 	attribute		= jas39_gbu_12.wsTypeOfWeapon,
 	Count 			= 1,
 	Cx_pil			= jas39_gbu_12.Cx,
@@ -78,31 +78,26 @@ declare_loadout({
 	Weight			= jas39_gbu_12.mass,
 	Elements  		= {{ShapeName = "gbu-12"}},
 
+})
 
-
-
-
---[[Elements	=	
-				{
-					[1]	=	
-					{
-						Position	=	{0,	0,	0},
-						ShapeName	=	"",
-					}, 
-					[2]	=	
-					{
-						DrawArgs	=	
-						{
-							[1]	=	{1,	1},
-							[2]	=	{2,	1},
-						}, -- end of DrawArgs
-						Position	=	{0,	0.0, -0.70},--8.00    7.30
-						ShapeName	=	"jas39_gbu-12",
-				
-					}, 
-				}, -- end of Elements
-
-
-
---]]
+declare_loadout({
+	category 		= CAT_BOMBS,
+	CLSID	 		= "{JAS39_BRU33_GBU12}",
+	wsTypeOfWeapon	= jas39_gbu_12.wsTypeOfWeapon,
+	attribute		= {4, 4, 32, WSTYPE_PLACEHOLDER},
+	Count 			= 2,
+	Cx_pil			= jas39_gbu_12.Cx,
+	Picture			= "gbu12.png",
+	displayName		= _('2 x ' .. jas39_gbu_12.user_name),
+	Weight			= (jas39_gbu_12.mass * 2) + 75,
+	Elements = { {
+			IsAdapter = true,
+			ShapeName = "BRU_33A"
+		}, {
+			ShapeName = "GBU-12",
+			connector_name = "Point02"
+		}, {
+			ShapeName = "GBU-12",
+			connector_name = "Point01"
+		} },
 })

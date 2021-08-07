@@ -188,7 +188,7 @@ declare_weapon(mar1)
 
 declare_loadout({
 	category 		= CAT_MISSILES,
-	CLSID	 		= "JAS39_MAR-1",
+	CLSID	 		= "{JAS39_MAR-1}",
 	attribute		= mar1.wsTypeOfWeapon,
 	Count 			= 1,
 	Cx_pil			= mar1.Cx,

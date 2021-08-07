@@ -9,10 +9,10 @@ declare_loadout(
         displayName = _(jas_litening_name),
         Picture     = "AAQ-28.png",        
         attribute = {wsType_Weapon, wsType_GContainer, wsType_Support, WSTYPE_PLACEHOLDER},
-        CLSID       = "JAS39_Litening",
+        CLSID       = "{JAS39_Litening}",
         
         Weight = 208 + pylon_mass,
-        Cx_pil = 0.0014,
+        Cx_pil = 0.0005,
         shape_table_data =
         {
             {

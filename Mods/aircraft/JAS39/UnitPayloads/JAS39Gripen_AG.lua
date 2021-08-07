@@ -6,7 +6,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, GBU-10 x2, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -18,19 +18,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU10",
+					["CLSID"] = "{JAS39_GBU10}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU10",
+					["CLSID"] = "{JAS39_GBU10}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -47,7 +47,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -59,7 +59,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 			},
@@ -72,7 +72,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, GBU-10 x2, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -84,19 +84,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU10",
+					["CLSID"] = "{JAS39_GBU10}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU10",
+					["CLSID"] = "{JAS39_GBU10}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -113,7 +113,7 @@ local unitPayloads = {
 			["name"] = "Aim-9X x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9X",
+					["CLSID"] = "{JAS39_AIM-9X}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -125,7 +125,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9X",
+					["CLSID"] = "{JAS39_AIM-9X}",
 					["num"] = 1,
 				},
 			},
@@ -138,7 +138,7 @@ local unitPayloads = {
 			["name"] = "Aim-132 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -150,7 +150,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 1,
 				},
 			},
@@ -162,7 +162,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -174,7 +174,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 			},
@@ -186,7 +186,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -198,7 +198,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 			},
@@ -211,7 +211,7 @@ local unitPayloads = {
 			["name"] = "Python-5 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -223,7 +223,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 1,
 				},
 			},
@@ -236,7 +236,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, M70B AP x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -248,23 +248,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_M70BAP",
+					["CLSID"] = "{JAS39_M70BAP}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_M70BAP",
+					["CLSID"] = "{JAS39_M70BAP}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_M70BAP",
+					["CLSID"] = "{JAS39_M70BAP}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_M70BAP",
+					["CLSID"] = "{JAS39_M70BAP}",
 					["num"] = 2,
 				},
 			},
@@ -277,7 +277,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, GBU-12 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -289,27 +289,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -326,7 +326,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, AGM-65-K x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -338,7 +338,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -358,7 +358,7 @@ local unitPayloads = {
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -375,7 +375,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2, Mk-83 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -387,23 +387,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}",
+					["CLSID"] = "{JAS39_MK83}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}",
+					["CLSID"] = "{JAS39_MK83}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}",
+					["CLSID"] = "{JAS39_MK83}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "{7A44FF09-527C-4B7E-B42B-3F111CFE50FB}",
+					["CLSID"] = "{JAS39_MK83}",
 					["num"] = 6,
 				},
 			},
@@ -416,7 +416,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, RBS-15 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -428,15 +428,15 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 6,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 3,
 				},
 			},
@@ -449,7 +449,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2, GBU-12 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -461,11 +461,11 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[6] = {
@@ -473,19 +473,19 @@ local unitPayloads = {
 					["num"] = 9,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 7,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 3,
 				},
 				[10] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 2,
 				},
 			},
@@ -498,7 +498,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, M71 x16",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -510,23 +510,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 6,
 				},
 			},
@@ -539,7 +539,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, GBU-38 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -551,27 +551,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 7,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -588,7 +588,7 @@ local unitPayloads = {
 			["name"] = "Python-5 x2, Brimstone x12, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -600,27 +600,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_BRIMSTONE",
+					["CLSID"] = "{JAS39_BRIMSTONE}",
 					["num"] = 6,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_BRIMSTONE",
+					["CLSID"] = "{JAS39_BRIMSTONE}",
 					["num"] = 3,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_BRIMSTONE",
+					["CLSID"] = "{JAS39_BRIMSTONE}",
 					["num"] = 7,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_BRIMSTONE",
+					["CLSID"] = "{JAS39_BRIMSTONE}",
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -636,7 +636,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -648,7 +648,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 			},
@@ -661,7 +661,7 @@ local unitPayloads = {
 			["name"] = "Aim-132 x2, GBU-32 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -673,27 +673,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU32",
+					["CLSID"] = "{JAS39_GBU32}",
 					["num"] = 6,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU32",
+					["CLSID"] = "{JAS39_GBU32}",
 					["num"] = 3,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU32",
+					["CLSID"] = "{JAS39_GBU32}",
 					["num"] = 7,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU32",
+					["CLSID"] = "{JAS39_GBU32}",
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -710,7 +710,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, GBU-31 x2, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -722,19 +722,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -751,7 +751,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, GBU-49 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -763,27 +763,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU49",
+					["CLSID"] = "{JAS39_GBU49}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU49",
+					["CLSID"] = "{JAS39_GBU49}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU49",
+					["CLSID"] = "{JAS39_GBU49}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU49",
+					["CLSID"] = "{JAS39_GBU49}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -800,7 +800,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, AGM-65-H x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -812,7 +812,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -832,7 +832,7 @@ local unitPayloads = {
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -849,7 +849,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, GBU-12 , Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -861,27 +861,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -898,7 +898,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, AGM-65-H x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -910,7 +910,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -930,7 +930,7 @@ local unitPayloads = {
 					["num"] = 2,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -947,7 +947,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, DWS-39 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -959,23 +959,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_DWS39",
+					["CLSID"] = "{JAS39_DWS39}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_DWS39",
+					["CLSID"] = "{JAS39_DWS39}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_DWS39",
+					["CLSID"] = "{JAS39_DWS39}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_DWS39",
+					["CLSID"] = "{JAS39_DWS39}",
 					["num"] = 2,
 				},
 			},
@@ -988,7 +988,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, GBU-16 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1000,27 +1000,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -1037,7 +1037,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, GBU-16 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1049,27 +1049,27 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU16",
+					["CLSID"] = "{JAS39_GBU16}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[10] = {
@@ -1086,7 +1086,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, Mk-82 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1098,23 +1098,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 6,
 				},
 			},
@@ -1127,7 +1127,7 @@ local unitPayloads = {
 			["name"] = "Python-5 x2, Storm Shadow x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1139,15 +1139,15 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_STORMSHADOW",
+					["CLSID"] = "{JAS39_STORMSHADOW}",
 					["num"] = 6,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_STORMSHADOW",
+					["CLSID"] = "{JAS39_STORMSHADOW}",
 					["num"] = 3,
 				},
 			},
@@ -1160,7 +1160,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, RBS-15 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1172,23 +1172,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_RBS15",
+					["CLSID"] = "{JAS39_RBS15}",
 					["num"] = 2,
 				},
 			},
@@ -1201,7 +1201,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, GBU-31 x2, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1213,19 +1213,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -1242,7 +1242,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, GBU-38 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1254,19 +1254,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -1274,11 +1274,11 @@ local unitPayloads = {
 					["num"] = 9,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 7,
 				},
 				[10] = {
-					["CLSID"] = "JAS39_GBU38",
+					["CLSID"] = "{JAS39_GBU38}",
 					["num"] = 2,
 				},
 			},
@@ -1291,7 +1291,7 @@ local unitPayloads = {
 			["name"] = "IRIS-T x2, Mk-84 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1303,15 +1303,15 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_IRIS-T",
+					["CLSID"] = "{JAS39_IRIS-T}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					["CLSID"] = "{JAS39_MK84}",
 					["num"] = 6,
 				},
 				[6] = {
-					["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					["CLSID"] = "{JAS39_MK84}",
 					["num"] = 3,
 				},
 			},
@@ -1324,7 +1324,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2, M71 x16",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1336,23 +1336,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_M71LD",
+					["CLSID"] = "{JAS39_M71LD}",
 					["num"] = 6,
 				},
 			},
@@ -1365,7 +1365,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, GBU-12 x4, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1377,11 +1377,11 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[6] = {
@@ -1389,19 +1389,19 @@ local unitPayloads = {
 					["num"] = 9,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 7,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 6,
 				},
 				[9] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 3,
 				},
 				[10] = {
-					["CLSID"] = "JAS39_GBU12",
+					["CLSID"] = "{JAS39_GBU12}",
 					["num"] = 2,
 				},
 			},
@@ -1414,7 +1414,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, GBU-31 x2, Litening III",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1426,19 +1426,19 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 3,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_GBU31",
+					["CLSID"] = "{JAS39_GBU31}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_Litening",
+					["CLSID"] = "{JAS39_Litening}",
 					["num"] = 5,
 				},
 				[8] = {
@@ -1455,7 +1455,7 @@ local unitPayloads = {
 			["name"] = "Aim-9L x2, M70B HE x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1467,23 +1467,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9L",
+					["CLSID"] = "{JAS39_AIM-9L}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_M70BHE",
+					["CLSID"] = "{JAS39_M70BHE}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_M70BHE",
+					["CLSID"] = "{JAS39_M70BHE}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_M70BHE",
+					["CLSID"] = "{JAS39_M70BHE}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_M70BHE",
+					["CLSID"] = "{JAS39_M70BHE}",
 					["num"] = 2,
 				},
 			},
@@ -1496,7 +1496,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2, MAR-1 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1508,23 +1508,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_MAR-1",
+					["CLSID"] = "{JAS39_MAR-1}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_MAR-1",
+					["CLSID"] = "{JAS39_MAR-1}",
 					["num"] = 6,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_MAR-1",
+					["CLSID"] = "{JAS39_MAR-1}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_MAR-1",
+					["CLSID"] = "{JAS39_MAR-1}",
 					["num"] = 2,
 				},
 			},
@@ -1537,7 +1537,7 @@ local unitPayloads = {
 			["name"] = "Aim-9M x2, Mk-82 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1549,23 +1549,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_AIM-9M",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					["CLSID"] = "{JAS39_MK82}",
 					["num"] = 6,
 				},
 			},
@@ -1578,7 +1578,7 @@ local unitPayloads = {
 			["name"] = "A-Darter x2, Aim-132 x2, Pyhton-5 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -1590,23 +1590,23 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "JAS39_A-DARTER",
+					["CLSID"] = "{JAS39_A-DARTER}",
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_ASRAAM",
+					["CLSID"] = "{JAS39_ASRAAM}",
 					["num"] = 2,
 				},
 				[7] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 3,
 				},
 				[8] = {
-					["CLSID"] = "JAS39_PYTHON-5",
+					["CLSID"] = "{JAS39_PYTHON-5}",
 					["num"] = 6,
 				},
 			},
@@ -1614,6 +1614,275 @@ local unitPayloads = {
 				[1] = 31,
 			},
 		},
+		
+				[41] = {
+			["name"] = "Tank 1100L x1",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 4,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[42] = {
+			["displayName"] = "Tank 1100L x2",
+			["name"] = "Tank 1100L x2",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 3,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 6,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[43] = {
+			["displayName"] = "Tank 1100L x3",
+			["name"] = "Tank 1100L x3",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 3,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 6,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 4,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[44] = {
+			["displayName"] = "Tank 1700L x2",
+			["name"] = "Tank 1700L x2",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_TANK1700}",
+					["num"] = 3,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_TANK1700}",
+					["num"] = 6,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[45] = {
+			["displayName"] = "Tank 1700L x2, Tank 1100L x1",
+			["name"] = "Tank 1700L x2, Tank 1100L x1",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_TANK1700}",
+					["num"] = 3,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_TANK1700}",
+					["num"] = 6,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_TANK1100}",
+					["num"] = 4,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[46] = {
+			["name"] = "IRIS-T x2, GBU-39 sdb x8, Litening III",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_EWS39}",
+					["num"] = 11,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 7,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 1,
+				},
+				[4] = {
+					["CLSID"] = "{JAS39_ELINT}",
+					["num"] = 10,
+				},
+				[5] = {
+					["CLSID"] = "{JAS39_FLIR}",
+					["num"] = 9,
+				},
+				[6] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 8,
+				},
+				[7] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 2,
+				},
+				[8] = {
+					["CLSID"] = "{JAS39_Litening}",
+					["num"] = 5,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[47] = {
+			["displayName"] = "IRIS-T x2, GBU-39 sdb x16, Litening III",
+			["name"] = "IRIS-T x2, GBU-39 sdb x16, Litening III",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_EWS39}",
+					["num"] = 11,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 7,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 1,
+				},
+				[4] = {
+					["CLSID"] = "{JAS39_ELINT}",
+					["num"] = 10,
+				},
+				[5] = {
+					["CLSID"] = "{JAS39_FLIR}",
+					["num"] = 9,
+				},
+				[6] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 8,
+				},
+				[7] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 2,
+				},
+				[8] = {
+					["CLSID"] = "{JAS39_Litening}",
+					["num"] = 5,
+				},
+				[9] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 6,
+				},
+				[10] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 3,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[48] = {
+			["displayName"] = "Python-5 x2, GBU-39 sdb x8, Brimstone x6, Litening III",
+			["name"] = "Python-5 x2, GBU-39 sdb x8, Brimstone x6, Litening III",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_EWS39}",
+					["num"] = 11,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 7,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_PYTHON-5}",
+					["num"] = 1,
+				},
+				[4] = {
+					["CLSID"] = "{JAS39_ELINT}",
+					["num"] = 10,
+				},
+				[5] = {
+					["CLSID"] = "{JAS39_FLIR}",
+					["num"] = 9,
+				},
+				[6] = {
+					["CLSID"] = "{JAS39_PYTHON-5}",
+					["num"] = 8,
+				},
+				[7] = {
+					["CLSID"] = "{JAS39_SDB}",
+					["num"] = 2,
+				},
+				[8] = {
+					["CLSID"] = "{JAS39_Litening}",
+					["num"] = 5,
+				},
+				[9] = {
+					["CLSID"] = "{JAS39_BRIMSTONE}",
+					["num"] = 6,
+				},
+				[10] = {
+					["CLSID"] = "{JAS39_BRIMSTONE}",
+					["num"] = 3,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		[49] = {
+			["displayName"] = "IRIS-T x2, GBU-31p x2, Litening III",
+			["name"] = "IRIS-T x2, GBU-31p x2, Litening III",
+			["pylons"] = {
+				[1] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 8,
+				},
+				[2] = {
+					["CLSID"] = "{JAS39_ELINT}",
+					["num"] = 10,
+				},
+				[3] = {
+					["CLSID"] = "{JAS39_EWS39}",
+					["num"] = 11,
+				},
+				[4] = {
+					["CLSID"] = "{JAS39_IRIS-T}",
+					["num"] = 1,
+				},
+				[5] = {
+					["CLSID"] = "{JAS39_GBU31_BLU109}",
+					["num"] = 3,
+				},
+				[6] = {
+					["CLSID"] = "{JAS39_GBU31_BLU109}",
+					["num"] = 6,
+				},
+				[7] = {
+					["CLSID"] = "{JAS39_Litening}",
+					["num"] = 5,
+				},
+				[8] = {
+					["CLSID"] = "{JAS39_FLIR}",
+					["num"] = 9,
+				},
+			},
+			["tasks"] = {
+				[1] = 31,
+			},
+		},
+		
 	},
 	["tasks"] = {
 	},
