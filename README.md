@@ -5,11 +5,14 @@ We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen
 
 ## Contributing Developers
 
-Breadmaker91, Currenthill, Double Tap, Roughmaster, FatSpacePanda, Vinedog, Wolfthrower, Whisky Actual
+Breadmaker91, Currenthill, FatSpacePanda, FrM|Shaft, Glaucus, Gripen Viking, Kreazle, MangoTango, Roughmaster, Whisky Actual
+
+## Past Developers
+Double Tap, Vinedog, Wolfthrower
 
 ## Liveries
 
-313_Paegas, Isak Khysing, Megalax
+313_Paegas, 59th_Jack, Isak Khysing, Megalax
 
 ## Admins
 
@@ -17,11 +20,11 @@ Cortexus, Ulv
 
 ## Testers
 
-Bimbac, BLACK LIONS, CJordense, Chesty, DJTaz1975, Silverbullet_238, Simba, Sushy
+CJordense, Cortexus, DJTaz1975, Norman, Simba11
 
 ## Special Thanks
 
-Freebird, Gonzalodesanta, Grinnelli, Gripen Viking, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
+Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
 ## Features
 - Improvements
@@ -100,12 +103,17 @@ If your game fails to launch maybe the JAS39 mod is conflicting with another one
   - Yes for the AA variant (F15) (not free)
   - No for the AG variant since it uses the SU25T avionics (free)
 - **Q: Do we plan to make it a standalone?**
-  - Yes, but no promises since we are still exploring the limits of development without the SDK.
+  - Maybe, but no promises since we are still exploring the limits of development without the SDK.
 - **Q: Do we need test pilots?**
-  - Not currently, I will post here and in the discord closer to release.
+  - Not currently, thank you.
 - **Q: Do we plan to have a D model (two seater)?**
-  - Yes, but no plans for the 2nd seat to be active.
-- **Q: Do you have a release date yet?**
-  - 6/6/2021.
+  - No, focus will be on the Charlie model.
+- **Q: My keybinds don't work (axis, brakes, etc.)**
+  - The Gripen has specail keybinds and axis, you will need to bind them before flying.
+- **Why can't I fire my tv guided bomb (this includes the SBD 39)? **
+  - There is a conflict with other mods, try disabling them and it should fire as intended.
+- **How can I support the mod/team?? **
+  - We currently do not have a paypal set up, so here are some ways you can support the development:
+    Learn 3D, 2D, coding etc and join the dev team. Help us recruit members to fill gaps in the team. Constructively report bugs and inaccuracies. Contribute to discussions or questions in this Discord. Watch, like and subscribe to content creators who support our mod through trailers as well as tutorial. 
 - **Q: Will the JAS39 mod pass IC?**
   - Yes, but a public server will need to have the same version for it to work properly.
