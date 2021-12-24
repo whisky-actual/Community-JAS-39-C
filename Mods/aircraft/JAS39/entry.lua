@@ -4,37 +4,37 @@ declare_plugin(self_ID,
 image     	 = "FC3.bmp",
 installed 	 = true, -- if false that will be place holder , or advertising
 dirName	  	 = current_mod_path,
-displayName  = _("JAS39Gripen"),
+displayName  = _("JAS 39 Gripen"),
 developerName = _("Lion Eagle Simulations"),
 
-fileMenuName = _("JAS39Gripen"),
+fileMenuName = _("JAS 39 Gripen"),
 update_id        = "JAS39Gripen",
-version		 = "v1.6.0-Beta",
+version		 = "v1.8.0-Beta",
 state		 = "installed",
 info		 = _("The Saab JAS 39 Gripen is a light single-engine multirole fighter aircraft manufactured by the Swedish aerospace company Saab AB. The Gripen has a delta wing and canard configuration with relaxed stability design and fly-by-wire flight controls. Various versions have been built, grouped as A-, C- and E-series. Gripen A- and C-series are powered by the GE F404G engine (previously designated Volvo RM12) and the E-series is powered by the GE F414G engine, and has a top speed of Mach 2. Later aircraft are modified for NATO interoperability standards and to undertake air to air refuelling."),
 
 Skins	=
 	{
 		{
-		    name	= _("JAS39Gripen"),
+		    name	= _("JAS 39 Gripen"),
 			dir		= "Theme"
 		},
 	},
 Missions =
 	{
 		{
-			name		    = _("JAS39Gripen"),
+			name		    = _("JAS 39 Gripen"),
 			dir			    = "Missions",
   		},
 	},
 LogBook =
 	{
 		{
-			name		= _("JAS39Gripen"),
+			name		= _("JAS 39 Gripen A/A"),
 			type		= "JAS39Gripen",
 		},
 		{
-			name		= _("JAS39Gripen_AG"),
+			name		= _("JAS 39 Gripen A/G"),
 			type		= "JAS39Gripen_AG",
 		},
 	},	
@@ -55,7 +55,7 @@ mount_vfs_texture_path  (current_mod_path.."/Textures")
 mount_vfs_texture_path  (current_mod_path.."/Cockpit/Textures/JAS39_Cockpit")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Common")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_CAF")
-mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_RSAF")
+mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_SwAF")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Fictional")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_Operators")
 mount_vfs_texture_path  (current_mod_path.."/Textures/JAS39_AA_Weapons")

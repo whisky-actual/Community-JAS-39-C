@@ -31,6 +31,16 @@ livery = {
 	{"JAS39_pilot",	NORMAL_MAP			,	"jas39_pilot_b", true};
 	{"JAS39_pilothelmet",	DIFFUSE			,	"JAS39_PilotHelmet_Green", true};
 	{"JAS39_pilothelmet",	NORMAL_MAP			,	"jas39_pilothelmet_b", true};
+	{"JAS39_sk60_helmet",	DIFFUSE				, "jas39_sk60_helmet", true};
+	{"JAS39_sk60_helmet",	NORMAL_MAP			, "jas39_sk60_helmet_normal", true};
+	{"JAS39_sk60_helmet",	ROUGHNESS_METALLIC	, "jas39_sk60_helmet_roughmet", true};	
+	{"JAS39_sk60_mask",	DIFFUSE					, "jas39_sk60_mask", true};
+	{"JAS39_sk60_mask",	NORMAL_MAP				, "jas39_sk60_mask_normal", true};
+	{"JAS39_sk60_mask",	ROUGHNESS_METALLIC		, "jas39_sk60_mask_roughmet", true};	
+	{"JAS39_sk60_visor",	DIFFUSE				, "jas39_sk60_visor", true};
+	{"JAS39_sk60_visor",	NORMAL_MAP			, "jas39_sk60_visor_normal", true};
+	{"JAS39_sk60_visor",	ROUGHNESS_METALLIC	, "jas39_sk60_visor_roughmet", true};	
+	{"JAS39_sk60_pilothead",	DIFFUSE			, "jas39_sk60_pilothead", true};	
 --ENGINES
 	{"JAS39_engines",	DIFFUSE			,	"jas39_engines_dark", true};
 	{"JAS39_engines",	NORMAL_MAP			,	"jas39_engines_dark_b", true};
@@ -55,4 +65,12 @@ livery = {
 	{"JAS39_drop_tank_1700", DIFFUSE , "jas39_drop_tank_1700_diff", true};	
 	{"JAS39_drop_tank_1700", NORMAL_MAP   ,  "jas39_drop_tank_1700_nm", true};		
 	{"JAS39_drop_tank_1700", ROUGHNESS_METALLIC   ,  "jas39_drop_tank_1700_diff_roughmet", true};	
+	{"JAS39_cd_light", DIFFUSE 					, "jas39_cd_light_day", true};	
+	{"JAS39_ld_light", DIFFUSE 					, "jas39_ld_light_day", true};	
+	{"JAS39_rd_light", DIFFUSE 					, "jas39_rd_light_day", true};	
+	{"JAS39_mfd_black", DIFFUSE 				, "jas39_mfd_black", true};	
+	{"JAS39_mfd_black", ROUGHNESS_METALLIC 		, "jas39_mfd_black_roughmet", true};	
+	{"JAS39_mk10l", DIFFUSE 					, "jas39_mk10l_diff", true};	
+	{"JAS39_mk10l", NORMAL_MAP   				, "jas39_mk10l_nm", true};		
+	{"JAS39_mk10l", ROUGHNESS_METALLIC   		, "jas39_mk10l_diff_roughmet", true};		
 }

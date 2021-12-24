@@ -12,7 +12,6 @@ draw_pilot					 = false
 
 external_model_canopy_arg	 = 38
 
-use_external_views = false
 
 day_texture_set_value   = 0.0
 night_texture_set_value = 0.1
@@ -20,128 +19,108 @@ night_texture_set_value = 0.1
 
 local controllers = LoRegisterPanelControls()
 
---[[
-StickPitch							= CreateGauge()
-StickPitch.arg_number				= 74
-StickPitch.input					= {-100, 100}
-StickPitch.output					= {-1, 1}
-StickPitch.controller				= controllers.base_gauge_StickPitchPosition
-
-StickBank							= CreateGauge()
-StickBank.arg_number				= 71
-StickBank.input						= {-100, 100}
-StickBank.output					= {-1, 1}
-StickBank.controller				= controllers.base_gauge_StickRollPosition
-
-RudderPedals						= CreateGauge()
-RudderPedals.arg_number				= 500
-RudderPedals.input					= {-100,100}
-RudderPedals.output					= {-1,1}
-RudderPedals.controller				= controllers.base_gauge_RudderPosition
+PilotDraw                           = CreateGauge()
+PilotDraw.arg_number    	        = 1200
+PilotDraw.input				        = {0.0, 1.0}
+PilotDraw.output			        = {0.1, 1.0}
+PilotDraw.controller		        = controllers.pilot_draw
 
 Throttle							= CreateGauge()
-Throttle.arg_number					= 105
-Throttle.input						= {0, 100}
+Throttle.arg_number					= 1071
+Throttle.input						= {0, 1}
 Throttle.output						= {0, 1}
 Throttle.controller					= controllers.base_gauge_ThrottleLeftPosition
 
-Battery_click					    = CreateGauge("parameter")
-Battery_click.arg_number		    = 700
-Battery_click.input				    = {0, 1}
-Battery_click.output			    = {0, 1}
-Battery_click.parameter_name	    = "BATTERY" 
+CanopyLight	                 		= CreateGauge("parameter")
+CanopyLight.arg_number      		= 251
+CanopyLight.input           		= {0,1}
+CanopyLight.output          		= {0,1}
+CanopyLight.parameter_name			= "CANOPY_LIGHT"
 
-canopy_click					    = CreateGauge("parameter")
-canopy_click.arg_number		           = 701
-canopy_click.input				    = {0, 1}
-canopy_click.output			        = {0, 1}
-canopy_click.parameter_name	        = "CANOPY" 
+LDP_Background                      = CreateGauge("parameter")
+LDP_Background.arg_number           = 1063
+LDP_Background.input                = {0, 1}
+LDP_Background.output               = {0, 1}
+LDP_Background.parameter_name       = "LDP_BACKGROUND"
 
-fuel_cover_click					    = CreateGauge("parameter")
-fuel_cover_click.arg_number		        = 750
-fuel_cover_click.input				    = {0, 1}
-fuel_cover_click.output			        = {0, 1}
-fuel_cover_click.parameter_name	        = "FUELCOVER" 
-
-fuel_probe_click					    = CreateGauge("parameter")
-fuel_probe_click.arg_number		        = 751
-fuel_probe_click.input				    = {0, 1}
-fuel_probe_click.output			        = {0, 1}
-fuel_probe_click.parameter_name	        = "FUELPROBE" 
-
-hook_click					            = CreateGauge("parameter")
-hook_click.arg_number		            = 707
-hook_click.input				            = {0, 1}
-hook_click.output			            = {0, 1}
-hook_click.parameter_name	            = "HOOK"
-
--- reng_cover_click					    = CreateGauge("parameter")
--- reng_cover_click.arg_number		        = 704
--- reng_cover_click.input				    = {0, 1}
--- reng_cover_click.output			        = {0, 1}
--- reng_cover_click.parameter_name	        = "ENGINE_R_COVER" 
-
--- reng_crank_click					    = CreateGauge("parameter")
--- reng_crank_click.arg_number		        = 705
--- reng_crank_click.input				    = {0, 1}
--- reng_crank_click.output			        = {0, 1}
--- reng_crank_click.parameter_name	        = "ENGINE_R_CRANK" 
-
--- leng_crank_click					    = CreateGauge("parameter")
--- leng_crank_click.arg_number		        = 698
--- leng_crank_click.input				    = {0, 1}
--- leng_crank_click.output			        = {0, 1}
--- leng_crank_click.parameter_name	        = "ENGINE_L_CRANK" 
+RWR_Background                      = CreateGauge("parameter")
+RWR_Background.arg_number           = 1239
+RWR_Background.input                = {0, 1}
+RWR_Background.output               = {0, 1}
+RWR_Background.parameter_name       = "RWR_BACKGROUND"
 
 
--- GenLeftSwitch					    = CreateGauge("parameter")
--- GenLeftSwitch.arg_number		    = 702
--- GenLeftSwitch.input				    = {0, 1}
--- GenLeftSwitch.output			    = {0, 1}
--- GenLeftSwitch.parameter_name	    = "GenLeftSwitch"
 
--- GenRightSwitch					    = CreateGauge("parameter")
--- GenRightSwitch.arg_number		    = 703
--- GenRightSwitch.input				= {0, 1}
--- GenRightSwitch.output			    = {0, 1}
--- GenRightSwitch.parameter_name	    = "GenRightSwitch"
+JoystickPitch                 		= CreateGauge("parameter")
+JoystickPitch.arg_number            = 1001
+JoystickPitch.input                 = {-1, 1}
+JoystickPitch.output                = {-1, 1}
+JoystickPitch.parameter_name        = "JOYSTICK_PITCH_ANIM"
 
--- EngineSwitch					    = CreateGauge("parameter")
--- EngineSwitch.arg_number		        = 123
--- EngineSwitch.input				    = {0, 1}
--- EngineSwitch.output			        = {-1, 1}
--- EngineSwitch.parameter_name	        = "EngineSwitch"
+JoystickRoll                 	    = CreateGauge("parameter")
+JoystickRoll.arg_number             = 1002
+JoystickRoll.input                  = {-1, 1}
+JoystickRoll.output                 = {-1, 1}
+JoystickRoll.parameter_name         = "JOYSTICK_ROLL_ANIM"
 
-]]
+GearNoseLight	            		= CreateGauge("parameter")
+GearNoseLight.arg_number     		= 1066
+GearNoseLight.input          		= {0,1}
+GearNoseLight.output         		= {0,1}
+GearNoseLight.parameter_name		= "GEAR_NOSE_LIGHT"
+	
+GearLeftLight	            		= CreateGauge("parameter")
+GearLeftLight.arg_number     		= 1067
+GearLeftLight.input          		= {0,1}
+GearLeftLight.output         		= {0,1}
+GearLeftLight.parameter_name		= "GEAR_LEFT_LIGHT"
+	
+GearRightLight	            		= CreateGauge("parameter")
+GearRightLight.arg_number     		= 1068
+GearRightLight.input          		= {0,1}
+GearRightLight.output         		= {0,1}
+GearRightLight.parameter_name		= "GEAR_RIGHT_LIGHT"
+
+APUStartLight	            		= CreateGauge("parameter")
+APUStartLight.arg_number     		= 1076
+APUStartLight.input          		= {0,1}
+APUStartLight.output         		= {0,1}
+APUStartLight.parameter_name		= "APU_START_LIGHT"
+
+APURunningLight	            		= CreateGauge("parameter")
+APURunningLight.arg_number     		= 1077
+APURunningLight.input          		= {0,1}
+APURunningLight.output         		= {0,1}
+APURunningLight.parameter_name		= "APU_RUNNING_LIGHT"
+
+RUDDER_PEDAL                 		= CreateGauge("parameter")
+RUDDER_PEDAL.arg_number            	= 1235
+RUDDER_PEDAL.input                 	= {-1, 1}
+RUDDER_PEDAL.output                	= {-1, 1}
+RUDDER_PEDAL.parameter_name        	= "RUDDER_PEDAL_ANIM"
+
+CautionLight	            		= CreateGauge("parameter")
+CautionLight.arg_number     		= 1236
+CautionLight.input          		= {0,1}
+CautionLight.output         		= {0,1}
+CautionLight.parameter_name			= "CAUTION_LIGHT"
+
+
 --------------------------------------------------------------------------------
 -- Mirror
 --------------------------------------------------------------------------------
  
-mirrors_data = 
-{
-    center_point 	= {0,0,0},
-    width 		 	= 0.8,
-    aspect 		 	= 4, 
-	rotation 	 	= 20, 
-	animation_speed = 2.0;
-	near_clip 		= 0.1;
-	middle_clip		= 10;
-	far_clip		= 60000;
-}
   
 mirrors_data = {
-    center_point          = {-2.247411,2.67882,0}, -- XYZ
-    width                 = 0.8, --integrated (keep in mind that mirrors can be none planar )
-    aspect                = 5.0,
-    rotation              = math.rad(4);
-    animation_speed       = 4.0;
+    center_point          = {-4.5,2.2,0}, -- XYZ
+    width                 = 2, --integrated (keep in mind that mirrors can be none planar )
+    aspect                = 2,
+    rotation              = math.rad(0);
+    animation_speed       = 2.0;
     near_clip             = 0.1;
     middle_clip           = 40;
     far_clip              = 60000;
-    flaps                 = 
-    {
-        
-    }
+	
 }	
 mirrors_draw                        = CreateGauge()
 mirrors_draw.arg_number                = 3

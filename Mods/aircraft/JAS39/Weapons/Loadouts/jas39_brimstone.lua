@@ -128,7 +128,7 @@ declare_loadout({
     Count           = 3,
     Cx_pil          = 0.0001,
     Picture         = "jas39_brimstone.png",
-    displayName     = _(jas_brimstone_name),
+    displayName     = _('3 x ' .. jas_brimstone_name),
     Weight          = jas_brimstone_mass * 3 + 50,
 	Elements = {
 	

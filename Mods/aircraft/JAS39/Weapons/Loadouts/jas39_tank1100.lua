@@ -1,6 +1,6 @@
 
 local jas_tank1100_name = 'Drop tank 1100 litre'
-local pylon_mass = 0.0
+
 
 declare_loadout(
     {
@@ -11,8 +11,8 @@ declare_loadout(
         attribute   = {wsType_Air, wsType_Free_Fall, wsType_FuelTank, WSTYPE_PLACEHOLDER},
         CLSID       = "{JAS39_TANK1100}",
         
-        Weight_Empty = 95 + pylon_mass,
-        Weight = 95 + 924 + pylon_mass,
+        Weight_Empty = 95 ,
+        Weight = 95 + 851.06,
         Cx_pil = 0.0014,
         shape_table_data =
         {

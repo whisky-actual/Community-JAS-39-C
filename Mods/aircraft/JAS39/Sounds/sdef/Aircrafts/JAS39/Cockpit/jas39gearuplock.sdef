@@ -1,0 +1,6 @@
+wave = "/Effects/Cockpit/Gear_UpLock"
+inner_radius = 10
+outer_radius = 100
+pitch_random = 0.05
+gain_random = 0.15
+gain = 1.0

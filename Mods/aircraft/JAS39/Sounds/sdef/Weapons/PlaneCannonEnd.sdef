@@ -1,0 +1,7 @@
+wave = "Effects/Weapons/PlaneCannonEnd"
+inner_radius = 1000
+outer_radius = 4000
+attack = 0.0
+release = 0.15
+gain = 12.0
+position = {0.0,  -1.5, -0.5}

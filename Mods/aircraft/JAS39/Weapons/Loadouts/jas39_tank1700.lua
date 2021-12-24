@@ -12,7 +12,7 @@ declare_loadout(
         CLSID       = "{JAS39_TANK1700}",
         
         Weight_Empty = 145 + pylon_mass,
-        Weight = 145 + 1388 + pylon_mass,
+        Weight = 145 + 1315.27 + pylon_mass,
         Cx_pil = 0.00148,
         shape_table_data =
         {

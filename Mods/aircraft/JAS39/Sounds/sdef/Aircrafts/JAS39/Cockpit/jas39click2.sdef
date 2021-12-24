@@ -1,0 +1,6 @@
+wave = "Effects/Aircrafts/JAS39/Cockpit/jas39click2.wav"
+
+inner_radius = 1
+outer_radius = 4
+gain = 0.05
+detached = true

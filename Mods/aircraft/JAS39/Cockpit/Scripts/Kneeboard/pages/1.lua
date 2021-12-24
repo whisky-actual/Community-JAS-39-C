@@ -22,21 +22,16 @@ SetScale(FOV)
 -- ================================
 -- 2x - WEAPONS
 -- ================================
--- 21 - Bombing Table / CP-741/A Instructions
--- 22 - Weapon Info (CBUs)
+-- 21 - A/A
+-- 22 - A/G
 
 -- ================================
--- 3x - FLIGHT INSTRUCTION
+-- 3x - FLIGHT CREW CHECKLISTS
 -- ================================
--- 31 - Case III Recovery
-
--- ================================
--- 4x - QUICK-START
--- ================================
--- 41 - Quick-Start 1. Start Up
--- 42 - Quick-Start 2. Taxi
--- 43 - Quick-Start 3. Takeoff
--- 44 - Quick-Start 4. Emergency Procedures
+-- 31 - Before Engine Start
+-- 32 - Engine Starting - Before Taxiing - Before Take-Off
+-- 33 - Take-Off - Landing
+-- 34 - On Ramp
 
 -- add background image for kneeboard
 add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/cover.png")

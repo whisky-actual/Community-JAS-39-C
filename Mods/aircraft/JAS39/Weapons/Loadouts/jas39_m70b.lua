@@ -9,7 +9,7 @@ local JAS_M70BHE_RKT = {
 	user_name			= _(jas_m70bhe),
 	wsTypeOfWeapon		= {wsType_Weapon,wsType_NURS,wsType_Rocket,WSTYPE_PLACEHOLDER},
 	scheme 				= "nurs-standard",
-	model 				= "M70BHE",
+	model 				= "jas39_arak70he",
 
         fm = 
         {
@@ -59,7 +59,7 @@ local JAS_M70BHE_RKT = {
 	shape_table_data =
 	{
 		{
-			file		 = "jas39_m70bhe",
+			file		 = "jas39_arak70he",
 			life		 = 1,
 			fire		 = {0, 1},
 			username = "M70BHE",
@@ -93,49 +93,49 @@ declare_loadout(
 	Elements = {
 	
 		{
-			ShapeName	=	"jas39_m70b", -- pod name
+			ShapeName	=	"jas39_arakm70b", -- pod name
 			IsAdapter = true,
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.192,	-0.077}, --1
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.45,	-0.073}, --2
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.326, 0.143}, --3
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.326,	-0.143}, --4
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.192,	0.077}, --5
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.45,	0.073}, --6
-			ShapeName	=	"jas39_m70bhe",
+			ShapeName	=	"jas39_arak70he",
 			Rotation = {0,0,0},
 		},
 	},
@@ -153,7 +153,7 @@ local JAS_M70BAP_RKT = {
 	user_name			= _(jas_m70bap),
 	wsTypeOfWeapon		= {wsType_Weapon,wsType_NURS,wsType_Rocket,WSTYPE_PLACEHOLDER},
 	scheme 				= "nurs-standard",
-	model 				= "M70BAP",
+	model 				= "jas39_arak70ap",
 
         fm = 
         {
@@ -203,7 +203,7 @@ local JAS_M70BAP_RKT = {
 	shape_table_data =
 	{
 		{
-			file		 = "jas39_m70bap",
+			file		 = "jas39_arak70ap",
 			life		 = 1,
 			fire		 = {0, 1},
 			username = "M70BAP",
@@ -237,49 +237,49 @@ declare_loadout(
 	Elements = {
 	
 		{
-			ShapeName	=	"jas39_m70b", -- pod name
+			ShapeName	=	"jas39_arakm70b", -- pod name
 			IsAdapter = true,
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.192,	-0.077}, --1
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.45,	-0.073}, --2
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.326, 0.143}, --3
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.326,	-0.143}, --4
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.192,	0.077}, --5
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.1,	-0.45,	0.073}, --6
-			ShapeName	=	"jas39_m70bap",
+			ShapeName	=	"jas39_arak70ap",
 			Rotation = {0,0,0},
 		},
 	},

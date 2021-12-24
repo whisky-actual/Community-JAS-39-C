@@ -4,10 +4,10 @@ ViewSettings = {
 		CockpitLocalPoint      = {4.275,0.65,0.000},--Cockpit placement, Forward/back, Up/down, Left/right
 		CameraViewAngleLimits  = {20.000000,160.000000},
 		CameraAngleRestriction = {false,90.000000,0.400000},
-		CameraAngleLimits      = {190.000000,-75.000000,115.000000},--Kopf drehen = links rechts,runter,hoch
+		CameraAngleLimits      = {190.000000,-75.000000,115.000000},--head turn = left right, down, up
 		EyePoint               = {0.000000,0.000000,0.000000},--front/back,up/down,left/right}<-'neck dimension'in meters 
-		limits_6DOF            = {x = {-0.050000,0.470000},y ={-0.300000,0.100000},z = {-0.300000,0.300000},roll = 90.000000},--Bewegen = hinten vorne,oben unten,links rechts
-		ShoulderSize		   = 0.1,-- bewegt Körper, wenn Azimuth Wert mehr als 90 Grad
+		limits_6DOF            = {x = {-0.05,0.47},y ={-0.3,0.035},z = {-0.25,0.25},roll = 90},--Move = back forwards, up down, left right
+		ShoulderSize		   = 0.15,-- moves body when azimuth value is more than 90 degrees
 		Allow360rotation	   = false,
 	},	
 	}, -- Cockpit 
@@ -132,13 +132,14 @@ SnapViews = {
 		rollAngle = 0.000000,
 	},
 	[13] = {--default view
-		viewAngle = 88.727844,--FOV
-		hAngle	 = 0.000000,
-		vAngle	 = -8.414850,
-		x_trans	 = 0.247411,
-		y_trans	 = -0.067882,
-		z_trans	 = 0.000000,
-		rollAngle = 0.000000,
+		viewAngle		= 110.274963,--FOV
+		hAngle			= -0.090332,
+		vAngle			= 0.772705,
+		x_trans			= 0.186777,
+		y_trans			= -0.015956,
+		z_trans			= 0.000000,
+		rollAngle		= 0.000000,
+		cockpit_version	= 0,
 	},
 },
 }

@@ -22,12 +22,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,				
 			},
 		},
 		[2] = {
-			["displayName"] = "Aim-132 x2",
-			["name"] = "Aim-132 x2",
+			["name"] = "AIM-132 ASRAAM x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_ASRAAM}",
@@ -47,12 +51,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[3] = {
-			["displayName"] = "Aim-9L x2, Aim-120B x4",
-			["name"] = "Aim-9L x2, Aim-120B x4",
+			["name"] = "AIM-9L x2, AIM-120B x4",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -71,11 +79,11 @@ local unitPayloads = {
 					["num"] = 1,
 				},
 				[5] = {
-					["CLSID"] = "JAS39_AIM120B}",
+					["CLSID"] = "{JAS39_AIM120B}",
 					["num"] = 7,
 				},
 				[6] = {
-					["CLSID"] = "JAS39_AIM120B}",
+					["CLSID"] = "{JAS39_AIM120B}",
 					["num"] = 2,
 				},
 				[7] = {
@@ -88,12 +96,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,
 			},
 		},
 		[4] = {
-			["displayName"] = "Aim-9X x2",
-			["name"] = "Aim-9X x2",
+			["name"] = "AIM-9X x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9X}",
@@ -113,12 +125,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[5] = {
-			["displayName"] = "Aim-9L x2, Aim-120C-5 x4",
-			["name"] = "Aim-9L x2, Aim-120C-5 x4",
+			["name"] = "AIM-9L x2, AIM-120C-5 x4",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -154,12 +170,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[6] = {
-			["displayName"] = "Aim-9L x2, Aim-120C-5 x2",
-			["name"] = "Aim-9L x2, Aim-120C-5 x2",
+			["name"] = "AIM-9L x2, AIM-120C-5 x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -187,12 +207,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[7] = {
-			["displayName"] = "IRIS-T x2, Aim-120B x4",
-			["name"] = "IRIS-T x2, Aim-120B x4",
+			["name"] = "IRIS-T x2, AIM-120B x4",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_IRIS-T}",
@@ -228,12 +252,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[8] = {
-			["displayName"] = "Aim-9M x2, Aim-120C-5 x2",
-			["name"] = "Aim-9M x2, Aim-120C-5 x2",
+			["name"] = "AIM-9M x2, AIM-120C-5 x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -261,12 +289,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[9] = {
-			["displayName"] = "Aim-9L x2, Aim-120C-7 x4",
-			["name"] = "Aim-9L x2, Aim-120C-7 x4",
+			["name"] = "AIM-9L x2, AIM-120C-7 x4",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -302,12 +334,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[10] = {
-			["displayName"] = "IRIS-T x2, Aim-120B x2",
-			["name"] = "IRIS-T x2, Aim-120B x2",
+			["name"] = "IRIS-T x2, AIM-120B x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_IRIS-T}",
@@ -335,15 +371,19 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[11] = {
-			["displayName"] = "Aim-9M x2, Aim-120C-7 x2",
-			["name"] = "Aim-9M x2, Aim-120C-7 x2",
+			["name"] = "AIM-9M x2, AIM-120C-7 x2",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -355,7 +395,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -368,15 +408,19 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[12] = {
-			["displayName"] = "Aim-9M x2, Aim-120C-7 x4",
-			["name"] = "Aim-9M x2, Aim-120C-7 x4",
+			["name"] = "AIM-9M x2, AIM-120C-7 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -388,7 +432,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -409,12 +453,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[13] = {
-			["displayName"] = "Aim-9L x2",
-			["name"] = "Aim-9L x2",
+			["name"] = "AIM-9L x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -434,11 +482,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[14] = {
-			["displayName"] = "A-Darter x2, Meteor x4",
 			["name"] = "A-Darter x2, Meteor x4",
 			["pylons"] = {
 				[1] = {
@@ -475,12 +527,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[15] = {
-			["displayName"] = "Aim-9M x2",
-			["name"] = "Aim-9M x2",
+			["name"] = "AIM-9M x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9M}",
@@ -500,12 +556,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[16] = {
-			["displayName"] = "Aim-9L x2, Aim-120C-7 x2",
-			["name"] = "Aim-9L x2, Aim-120C-7 x2",
+			["name"] = "AIM-9L x2, AIM-120C-7 x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -533,11 +593,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[17] = {
-			["displayName"] = "IRIS-T x2",
 			["name"] = "IRIS-T x2",
 			["pylons"] = {
 				[1] = {
@@ -558,12 +622,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[18] = {
-			["displayName"] = "Aim-9L x2, Meteor x2",
-			["name"] = "Aim-9L x2, Meteor x2",
+			["name"] = "AIM-9L x2, Meteor x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -591,12 +659,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[19] = {
-			["displayName"] = "Aim-9L x2, Meteor x4",
-			["name"] = "Aim-9L x2, Meteor x4",
+			["name"] = "AIM-9L x2, Meteor x4",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -632,11 +704,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[20] = {
-			["displayName"] = "IRIS-T x2, Meteor x4",
 			["name"] = "IRIS-T x2, Meteor x4",
 			["pylons"] = {
 				[1] = {
@@ -673,12 +749,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[21] = {
-			["displayName"] = "Aim-9L x2, Aim-120B x2",
-			["name"] = "Aim-9L x2, Aim-120B x2",
+			["name"] = "AIM-9L x2, AIM-120B x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_AIM-9L}",
@@ -706,11 +786,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[22] = {
-			["displayName"] = "IRIS-T x2, Meteor x2",
 			["name"] = "IRIS-T x2, Meteor x2",
 			["pylons"] = {
 				[1] = {
@@ -739,11 +823,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[23] = {
-			["displayName"] = "A-Darter x2, Meteor x2",
 			["name"] = "A-Darter x2, Meteor x2",
 			["pylons"] = {
 				[1] = {
@@ -772,15 +860,19 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[24] = {
-			["displayName"] = "Aim-9M x2, Aim-120C-5 x4",
-			["name"] = "Aim-9M x2, Aim-120C-5 x4",
+			["name"] = "AIM-9M x2, AIM-120C-5 x4",
 			["pylons"] = {
 				[1] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 8,
 				},
 				[2] = {
@@ -792,7 +884,7 @@ local unitPayloads = {
 					["num"] = 11,
 				},
 				[4] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
+					["CLSID"] = "{JAS39_AIM-9M}",
 					["num"] = 1,
 				},
 				[5] = {
@@ -813,11 +905,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[25] = {
-			["displayName"] = "Python-5 x2",
 			["name"] = "Python-5 x2",
 			["pylons"] = {
 				[1] = {
@@ -838,12 +934,16 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 		[26] = {
-			["displayName"] = "A-Darter x2, Aim-132 x2, Python-5 x2",
-			["name"] = "A-Darter x2, Aim-132 x2, Python-5 x2",
+			["name"] = "A-Darter x2, AIM-132 ASRAAM x2, Python-5 x2",
 			["pylons"] = {
 				[1] = {
 					["CLSID"] = "{JAS39_A-DARTER}",
@@ -879,94 +979,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
-	
-
-			[27] = {
-			["displayName"] = "Aim-9L x2, Aim-120B x4",
-			["name"] = "Aim-9L x2, Aim-120B x4",
-			["pylons"] = {
-				[1] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
-					["num"] = 8,
-				},
-				[2] = {
-					["CLSID"] = "{JAS39_ELINT}",
-					["num"] = 10,
-				},
-				[3] = {
-					["CLSID"] = "{JAS39_EWS39}",
-					["num"] = 11,
-				},
-				[4] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
-					["num"] = 1,
-				},
-				[5] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 7,
-				},
-				[6] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 2,
-				},
-				[7] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 3,
-				},
-				[8] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 6,
-				},
-			},
-			["tasks"] = {
-				[1] = 19,
-			},
-		},
-		[28] = {
-			["displayName"] = "Aim-9L x2, Aim-120B x2",
-			["name"] = "Aim-9L x2, Aim-120B x2",
-			["pylons"] = {
-				[1] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
-					["num"] = 8,
-				},
-				[2] = {
-					["CLSID"] = "{JAS39_ELINT}",
-					["num"] = 10,
-				},
-				[3] = {
-					["CLSID"] = "{JAS39_EWS39}",
-					["num"] = 11,
-				},
-				[4] = {
-					["CLSID"] = "{JAS39_AIM-9L}",
-					["num"] = 1,
-				},
-				[5] = {
-					["CLSID"] = "JAS39_AIM120B",
-					["num"] = 7,
-				},
-				[6] = {
-					["CLSID"] = "JAS39_AIM120B",
-					["num"] = 2,
-				},
-				[7] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 3,
-				},
-				[8] = {
-					["CLSID"] = "{JAS39_AIM120B}",
-					["num"] = 6,
-				},
-			},
-			["tasks"] = {
-				[1] = 19,
-			},
-		},
-		[29] = {
+		[27] = {
 			["name"] = "Tank 1100L x1",
 			["pylons"] = {
 				[1] = {
@@ -975,11 +996,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
-		[30] = {
-			["displayName"] = "Tank 1100L x2",
+		[28] = {
 			["name"] = "Tank 1100L x2",
 			["pylons"] = {
 				[1] = {
@@ -992,11 +1017,15 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
-		[31] = {
-			["displayName"] = "Tank 1100L x3",
+		[29] = {
 			["name"] = "Tank 1100L x3",
 			["pylons"] = {
 				[1] = {
@@ -1013,45 +1042,12 @@ local unitPayloads = {
 				},
 			},
 			["tasks"] = {
-				[1] = 19,
-			},
-		},
-		[32] = {
-			["displayName"] = "Tank 1700L x2",
-			["name"] = "Tank 1700L x2",
-			["pylons"] = {
-				[1] = {
-					["CLSID"] = "{JAS39_TANK1700}",
-					["num"] = 3,
-				},
-				[2] = {
-					["CLSID"] = "{JAS39_TANK1700}",
-					["num"] = 6,
-				},
-			},
-			["tasks"] = {
-				[1] = 19,
-			},
-		},
-		[33] = {
-			["displayName"] = "Tank 1700L x2, Tank 1100L x1",
-			["name"] = "Tank 1700L x2, Tank 1100L x1",
-			["pylons"] = {
-				[1] = {
-					["CLSID"] = "{JAS39_TANK1700}",
-					["num"] = 3,
-				},
-				[2] = {
-					["CLSID"] = "{JAS39_TANK1700}",
-					["num"] = 6,
-				},
-				[3] = {
-					["CLSID"] = "{JAS39_TANK1100}",
-					["num"] = 4,
-				},
-			},
-			["tasks"] = {
-				[1] = 19,
+				[1] = 10,
+				[2] = 11,
+				[3] = 15,
+				[4] = 17,
+				[5] = 18,
+				[6] = 19,	
 			},
 		},
 	},
