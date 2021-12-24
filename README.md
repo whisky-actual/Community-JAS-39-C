@@ -1,7 +1,7 @@
 # Community-JAS-39-C
 Welcome to our GitHub for the JAS-39-C Gripen mod for DCS!
 
-We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen in DCS. We are currently using the VSN model with their animations and are improving this great module. The team is adding a cockpit, authentic and unique weapons, making modifications to the SFM (based on Gripen pilot feedback) and we are planning for much more in the future. The project started in February 2021, and in a very short amount of time, we achieved a basic FC3 module, join us on Discord and find out more! We would like to thank the Community A-4E-C team for sharing some code, Grinnelli for his help with the brakes axis, Freebird and Gonzalodesanta for thier support, Megalax, Isak and 313_Paegas for thier textures, VSN Team for sharing their model with us, the DCS modding community for ideas and tips and Eagle Dynamics for this wonderful sandbox. 
+We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen in DCS. We are currently using the VSN model with their animations and are improving this great module. The team is adding a cockpit, authentic and unique weapons, making modifications to the SFM (based on Gripen pilot feedback) and we are planning for much more in the future. The project started in February 2021, and in a very short amount of time, we achieved a basic FC3 module, join us on Discord and find out more! We would like to thank the Community A-4E-C team for sharing some code, Grinnelli for his help with the brakes axis, Freebird and Gonzalodesanta for thier support, Megalax, Isak and 313_Paegas for thier textures, Krieger for sharing is assets, VSN Team for sharing their model with us, the DCS modding community for ideas and tips and Eagle Dynamics for this wonderful sandbox. 
 
 ## Contributing Developers
 
@@ -24,7 +24,7 @@ CJordense, Cortexus, DJTaz1975, Norman, Simba11
 
 ## Special Thanks
 
-Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
+Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Krieger, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
 ## Features
 - Improvements
@@ -84,7 +84,7 @@ Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sid
   - Multiple practice missions
   - More to come
 
-### Known Bugs
+## Known Bugs
 
 Find the full list of bugs and enhancements at https://github.com/whisky-actual/Community-JAS-39-C/issues or in our Discord under #bug-reporting
 
