@@ -26,9 +26,10 @@ CJordense, Cortexus, DJTaz1975, Norman, Simba11
 
 Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Krieger, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
-## Features
-- Version 1.8 highlights
- - Added
+## What's new in version 1.8
+For a complete list of changes - check out the change log file included in the package.
+
+- Added
   - Clickable cockpit
   - Custom HUD
   - Clickable left display
@@ -48,8 +49,8 @@ Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sid
   - Anti radiation decoy SPEAR-EW with triple launcher 
   - Terrain following and pop-up for Storm Shadow
   - Dynamic launch zones for multiple weapons 
-  
- - Changed
+
+- Changed
   - Higher quality cockpit textures 
   - More realistic flight control surfaces
   - Higher quality liveries
@@ -57,15 +58,14 @@ Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sid
   - Higher quality pilot head and helmet
   - DWS 39 is now guided
   - RBS-15 AI with added sea skimming and pop-up features
-
- - Fixed
+- Fixed
   - RBS-15 blowing up after release
   - Guided A/G weapons that wouldn't release from rack
 
-- Authentic weapons loadout 
- - Cannon
-  - BK-27 (with PELE/PELE-T and AP/HE/APHE ammo types)
- - Air-to-Air WVR
+## Complete list of weapons 
+- Cannon
+   - BK-27 (with PELE/PELE-T and AP/HE/APHE ammo types)
+- Air-to-Air WVR
   - AIM-9L
   - AIM-9M
   - AIM-9X
@@ -73,13 +73,13 @@ Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sid
   - IRIS-T
   - AIM-132 ASRAAM
   - Python-5
- - Air-to-Air BVR 
+- Air-to-Air BVR 
   - AIM-120B
   - AIM-120C-5
   - AIM-120C-7
   - I-Derby ER
   - Meteor
- - Air-to-Ground guided
+- Air-to-Ground guided
   - AGM-65H
   - AGM-65K
   - Brimstone
@@ -99,14 +99,14 @@ Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sid
   - SPEAR-EW
   - KEPD 350
   - Storm Shadow
- - Air-to-Ground unguided
+- Air-to-Ground unguided
   - M70B AP
   - M70B HE
   - M71
   - Mk82
   - Mk83
   - Mk84
- - Other
+- Other
   - LDP Litening III
   - Drop tank 1100 litre
 
