@@ -27,6 +27,8 @@ CJordense, Cortexus, DJTaz1975, Norman, Simba11
 Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Krieger, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
 ## What's new in version 1.8
+For a complete list of changes - check out the change log file included in the package.
+
 - Added
   - Clickable cockpit
   - Custom HUD
