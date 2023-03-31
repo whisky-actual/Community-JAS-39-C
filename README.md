@@ -1,14 +1,14 @@
 # Community-JAS-39-C
 Welcome to our GitHub for the JAS-39-C Gripen mod for DCS!
 
-We are a small group of enthusiastic players that wanted to have a JAS-39 Gripen in DCS. We started from the VSN model and have then added and improved on it. The team is adding a cockpit, authentic and unique weapons, making modifications to the SFM (based on Gripen pilot feedback) and we are planning for much more in the future. The project started in February 2021, and in a very short amount of time, we achieved a basic FC3 module, join us on Discord and find out more! We would like to thank the Community A-4E-C team for sharing some code, Grinnelli for his help with the brakes axis, Freebird and Gonzalodesanta for thier support, Megalax, Isak and 313_Paegas for thier textures, Krieger for sharing is assets, VSN Team for sharing their model with us, the DCS modding community for ideas and tips and Eagle Dynamics for this wonderful sandbox. 
+Our team is passionate about aviation and DCS, and we wanted to bring the JAS-39 Gripen to the simulator. We started working on the mod in February 2021, and in a short amount of time, we have achieved a basic FC3 module. We have put a lot of effort into the mod and have added several features to enhance the user experience. Our main focus has been on creating an authentic and immersive cockpit that accurately represents the Gripen's instruments and controls. We have also added unique weapons and made modifications to the SFM to make it as realistic as possible, taking feedback from Gripen SMEs into consideration. We are grateful to the Community A-4E-C team, Grinnelli, Freebird, Gonzalodesanta, Megalax, Isak, 313_Paegas, Krieger, and VSN Team for their support and contributions. Without their help, this project would not have been possible. We are excited to share our mod with the DCS community and welcome anyone who shares our passion to join us on Discord to learn more about the project.
 
 ## Contributing Developers
 
-Breadmaker91, Currenthill, FatSpacePanda, FrM|Shaft, Glaucus, Gripen Viking, Kreazle, MangoTango, Roughmaster, Whisky Actual
+Breadmaker91, Currenthill, FatSpacePanda, FrM|Shaft, kingdevc, Luiz Renault, Gripen Viking, MangoTango, Roughmaster, Whisky Actual, Yatsie
 
 ## Past Developers
-Double Tap, Vinedog, Wolfthrower
+Double Tap, Glaucus, Kreazle, Vinedog, Wolfthrower
 
 ## Liveries
 
@@ -16,7 +16,7 @@ Double Tap, Vinedog, Wolfthrower
 
 ## Admins
 
-Cortexus, Ulv
+Cortexus, Jack ”Rabbit”, Ulv
 
 ## Testers
 
@@ -24,43 +24,40 @@ CJordense, Cortexus, DJTaz1975, Norman, Simba11
 
 ## Special Thanks
 
-Bimbac, Fox, Fox2 Productions, Freebird, Gonzalodesanta, Grinnelli, Growling Sidewinder, Krieger, Lanky, Luiz Renault, Neon, PORS, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
+Bimbac, Fox, Fox2 Productions, Freebird, Generic, Gonzalodesanta, Grinnelli, Growling Sidewinder, Krieger, Neon, PORS, rudel-chw, Jerec, Ulvar40, VSN Team (Cdpkobra and Razor+)
 
-## What's new in version 1.8
+## What's new in version 1.8.5
 For a complete list of changes - check out the change log file included in the package.
 
 - Added
-  - Clickable cockpit
-  - Custom HUD
-  - Clickable left display
-  - Clickable center display
-  - Startup procedure
-  - Custom canopy and APU sounds
-  - Custom external lights  
-  - Autothrottle with AoA 12 and AoA 14 landing modes
-  - Kneeboard flight checklists
-  - Kneeboard weapons deployment overviews
-  - Damage model with bullet holes
-  - External model cockpit lights for MFDs, flood and HUD
-  - Tire overspeed damage 
-  - Bare metal livery
-  - Air launched cruise missile Taurus KEPD 350 
-  - Anti radiation missile SPEAR-3 with triple launcher
-  - Anti radiation decoy SPEAR-EW with triple launcher 
-  - Terrain following and pop-up for Storm Shadow
-  - Dynamic launch zones for multiple weapons 
+  - Cockpit model (added many details, animations, and one easter egg)
+  - Cockpit textures (full PBR, normal maps, and proper AO)
+  - Cockpit lighting (flood, instruments, and indicators)
+  - In-cockpit pilot model with removable kneeboards
+  - HMD for all variants, but you can cue weapons only with the new WVR variant
+  - Within Visual Ranger (WVR) variant based on the SU33 avionics with HMD
+  - More cockpit functionalities such as interior lighting, autopilot, radar controls, etc.
+  - Custom RWR for all 3 variants
+  - Custom GE F404 engine sounds
+  - Training missions by rudel-chw
+  - GamePad and keyboard support
 
 - Changed
-  - Higher quality cockpit textures 
-  - More realistic flight control surfaces
-  - Higher quality liveries
-  - More realistic nose wheel and rudder turning 
-  - Higher quality pilot head and helmet
-  - DWS 39 is now guided
-  - RBS-15 AI with added sea skimming and pop-up features
+  - Controls schemes, grouped by systems and unified into 1 profile
+  - Removed B* Betty sounds
+  
 - Fixed
-  - RBS-15 blowing up after release
-  - Guided A/G weapons that wouldn't release from rack
+  - APU sounds
+  - Ground handeling (discoball bug)
+  - Weapons bugs
+  - Many bug fixes and improvements
+
+- Known Bugs
+  - Works with MT, but some stuff could be broken
+  - RWR will work with several clients, but only on 2nd load (e.g. you will need to get out of the cockpit and come back in) -- FC3 limitation
+  - Incompatible with some other mods like the Eurofighter and the A4E (will not CTD, but can be buggy)
+  - SFM limitations while ground handling and in slow regimes in the air (will not be fixed since we are moving to EFM) 
+  - Some weapons can't be fired by the AI (check for the AI versions of these) 
 
 ## Complete list of weapons 
 - Cannon
@@ -126,10 +123,11 @@ If your game fails to launch maybe the JAS39 mod is conflicting with another one
 
 ## Frequently Asked Questions
 - **Q: Do you need FC3 to use the module?**
-  - Yes for the AA variant (F15) (not free)
+  - Yes for the BVR variant (F15) (not free)
+  - Yes for the WVR (SU33) (not free)
   - No for the AG variant since it uses the SU25T avionics (free)
 - **Q: Do we plan to make it a standalone?**
-  - Maybe, but no promises since we are still exploring the limits of development without the SDK.
+  - We are working on it for v2.0, but no promises since we are still exploring the limits of development without the SDK.
 - **Q: Do we need test pilots?**
   - Not currently, thank you.
 - **Q: Do we plan to have a D model (two seater)?**
