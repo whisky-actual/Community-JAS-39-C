@@ -1,0 +1,12 @@
+wave = "Effects/Aircrafts/Engines/Distant_Jet_Flyby_S"
+auto_width = false
+distance_filter_offset = 1000
+silent_radius = 10
+peak_radius = 50
+inner_radius = 450
+outer_radius = 1300
+cone_inner_angle = 90
+cone_outer_angle = 55
+cone_outer_gain = 0
+direction = {1, 0, 0}
+gain = 4.4

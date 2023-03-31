@@ -6,7 +6,7 @@ SetScale(FOV)
 -- ILS DATA
 
 -- add background image for kneeboard
-add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/ils.png")
+add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/ils")
 
 local gettext = require("i_18n")
 _ = gettext.translate

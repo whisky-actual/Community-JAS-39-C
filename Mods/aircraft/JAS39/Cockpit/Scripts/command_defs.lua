@@ -1,19 +1,15 @@
--- Two counters (Keys: start at 10100 [__custom_counter], and device_commands: start at 3100 [__counter])
-
 start_custom_command   = 10100
 local __count_custom = start_custom_command-1
 local function __custom_counter()
 	__count_custom = __count_custom + 1
 	return __count_custom
 end
-
+-------------------------------------------------------
+--KEYS
+-------------------------------------------------------
 Keys =
 {	
-
-
-    TriggerAA      	     					= __custom_counter(),
-    TriggerAG      	     					= __custom_counter(),	
-    WeaponRelease			    			= __custom_counter(),	
+    Trigger      	     					= __custom_counter(),	
 	GearUp					                = __custom_counter(),
 	GearDown                                = __custom_counter(),
 	MassSafe                                = __custom_counter(),
@@ -34,6 +30,7 @@ Keys =
 	FuelCover								= __custom_counter(),
 	ParkingBrake                			= __custom_counter(),
 	FloodLight                  			= __custom_counter(),
+	IndicatorLight                  		= __custom_counter(),
 	SeatUpDown                     			= __custom_counter(),
 	NavigationLights            			= __custom_counter(),
 	AntiCollisionLights         			= __custom_counter(),
@@ -54,65 +51,28 @@ Keys =
 	AARProbe                               	= __custom_counter(),
 	EmergencyJettisonCover                  = __custom_counter(),
 	EmergencyJettison                       = __custom_counter(),
-
---LEFT DISPLAY SOFT KEY
-	LDSK_1									= __custom_counter(),
-	LDSK_2									= __custom_counter(),
-	LDSK_3									= __custom_counter(),
-	LDSK_4									= __custom_counter(),
-	LDSK_5									= __custom_counter(),
-	LDSK_6									= __custom_counter(),
-	LDSK_7									= __custom_counter(),
-	LDSK_8									= __custom_counter(),
-	LDSK_9									= __custom_counter(),
-	LDSK_10									= __custom_counter(),
-	LDSK_11									= __custom_counter(),
-	LDSK_12									= __custom_counter(),
-	LDSK_13									= __custom_counter(),
-	LDSK_14									= __custom_counter(),
-	LDSK_15									= __custom_counter(),
-	LDSK_16									= __custom_counter(),
-	LDSK_17									= __custom_counter(),
-	LDSK_18									= __custom_counter(),
-	LDSK_19									= __custom_counter(),
-	LDSK_20									= __custom_counter(),
---Brightnessness                                 
-	LD_Brightness_Up						= __custom_counter(),
-	LD_Brightness_Down						= __custom_counter(),
---Contrast                                  
-	LD_Contrast_Up							= __custom_counter(),
-	LD_Contrast_Down						= __custom_counter(),
-
---CENTER DISPLAY SOFT KEY
-	CDSK_1									= __custom_counter(),
-	CDSK_2									= __custom_counter(),
-	CDSK_3									= __custom_counter(),
-	CDSK_4									= __custom_counter(),
-	CDSK_5									= __custom_counter(),
-	CDSK_6									= __custom_counter(),
-	CDSK_7									= __custom_counter(),
-	CDSK_8									= __custom_counter(),
-	CDSK_9									= __custom_counter(),
-	CDSK_10									= __custom_counter(),
-	CDSK_11									= __custom_counter(),
-	CDSK_12									= __custom_counter(),
-	CDSK_13									= __custom_counter(),
-	CDSK_14									= __custom_counter(),
-	CDSK_15									= __custom_counter(),
-	CDSK_16									= __custom_counter(),
-	CDSK_17									= __custom_counter(),
-	CDSK_18									= __custom_counter(),
-	CDSK_19									= __custom_counter(),
-	CDSK_20									= __custom_counter(),
---Brightnessness                                 
-	CD_Brightness_Up						= __custom_counter(),
-	CD_Brightness_Down						= __custom_counter(),
---Contrast                                  
-	CD_Contrast_Up							= __custom_counter(),
-	CD_Contrast_Down						= __custom_counter(),	
+	LadderChocks	                        = __custom_counter(),
 	
-	NoHotas									= __custom_counter(),	
-	
+	GripenPlaneUpStart			            = __custom_counter(),
+	GripenPlaneDownStart		            = __custom_counter(),
+	GripenPlaneLeftStart		            = __custom_counter(),
+	GripenPlaneRightStart		            = __custom_counter(),
+	GripenPlaneLeftRudderStart	            = __custom_counter(),
+	GripenPlaneRightRudderStart             = __custom_counter(),
+	GripenThrottleIncrease					= __custom_counter(),
+	GripenThrottleDecrease           	  	= __custom_counter(),
+	GripenThrottleStop						= __custom_counter(),
+	GripenPlaneUpStop		                = __custom_counter(),
+	GripenPlaneDownStop		                = __custom_counter(),
+	GripenPlaneLeftStop		                = __custom_counter(),
+	GripenPlaneRightStop		            = __custom_counter(),
+	GripenPlaneLeftRudderStop               = __custom_counter(),
+	GripenPlaneRightRudderStop              = __custom_counter(),
+
+
+-------------------------------------------------------
+--FC3 Commands
+-------------------------------------------------------
 	ICommandHUDBrightnessDown	            = 747,
 	ICommandHUDBrightnessUp	            	= 746,
 	PlaneGear								= 68,
@@ -185,94 +145,91 @@ Keys =
 	HOTAS_DataManagementSwitchRight			= 552,
 	HOTAS_DataManagementSwitchOff  			= 553,
 --from iCommand.h
-	PlaneSAUAutomatic 						= 58,				-- Стабилизация углов
-	PlaneSAUHBarometric 					= 59,			-- Стабилизация абсолютной высоты
-	PlaneSAUHRadio 							= 60,			-- Полет с огибанием рельефа
-	PlaneSAUHorizon							= 61,				-- Приведение к горизонту
-	PlaneAutopilot 							= 62,					-- Автопилот
-	PlaneAUTOnOff 							= 63,					-- Переключение режима АУТ
-	PlaneAUTIncrease 						= 64,				-- Увеличить заданную скорость
-	PlaneAUTDecrease						= 65,				-- Уменьшить заданную скорость
-	PlaneGear 								= 68,						-- Шасси
-	PlaneHook 								= 69,						-- Гак
-	PlanePackWing 							= 70,				-- Складывание крыльев
-	PlaneFonar 								= 71,						-- Фонарь
-	PlaneFlaps 								= 72,						-- Закрылки
-	PlaneAirBrake 							= 73,					-- Воздушный тормоз
-	PlaneWheelBrakeOn 						= 74,				-- Включение тормоза колес
-	PlaneWheelBrakeOff 						= 75,				-- Выключение тормоза колес
-	PlaneParachute 							= 76,					-- Парашют
-	PlaneDropSnar 							= 77,					-- Сброс ловушек
-	PlaneWingtipSmokeOnOff 					= 78,			-- Вкл/выкл дымовых шашек на концах крыльев
-	PlaneFuelOn 							= 79,					-- Включение слива топлива или заправки
-	PlaneFuelOff							= 80,				-- Выключение слива топлива или заправки
-	PlaneSalvoOnOff 						= 81,				-- Залповый режим вкл/выкл
-	PiCommandSelecterUplaneJettisonWeapons 	= 82,			-- Сброс оружия парами
-	PlaneEject 								= 83,						-- Катапультирование
-	PlaneFire 								= 84,						-- Гашетка
-	PlaneFireOff 							= 85,					-- Гашетку отпустили
-	PlaneRadarOnOff 						= 86,				-- Включение / выключение радара
-	PlaneEOSOnOff 							= 87,					-- Включение / выключение ОЛС
-	PlaneRadarLeft 							= 88,					-- Поворот антенны РЛС влево
-	PlaneRadarRight 						= 89,				-- Поворот антенны РЛС вправо
-	PlaneRadarUp							= 90,				-- Поворот антенны РЛС вверх
-	PlaneRadarDown 							= 91,					-- Поворот антенны РЛС вниз
-	PlaneRadarCenter 						= 92,				-- Возврат антенны РЛС в центр
-	PlaneTrimLeft							= 93,					-- Триммер влево
-	PlaneTrimRight 							= 94,					-- Триммер вправо
-	PlaneTrimUp 							= 95,					-- Триммер вверх
-	PlaneTrimDown 							= 96,					-- Триммер вниз
-	PlaneTrimCancel 						= 97,				-- Сброс триммера
-	PlaneTrimLeftRudder						= 98,			-- Триммер левой педали
-	PlaneTrimRightRudder 					= 99,			-- Триммер правой педали
-	PlaneChangeLock 						= 100,			-- Переключение подрежимов / захват
-	PlaneChangeWeapon 						= 101,				-- Переключение подрежимов / перебор оружия
-	PlaneChangeTarget 						= 102,				-- Перебор целей
-	PlaneZoomIn 							= 103,					-- Изменение масштаба МФД +
-	PlaneZoomOut 							= 104,					-- Изменение масштаба МФД -
-	PlaneModeNAV 							= 105,					-- Переход в режим навигации
-	PlaneModeBVR 							= 106,					-- Переход в режим дальнего воздушного боя
-	PlaneModeVS 							= 107,					-- Переход в режим ближнего воздушного боя (полоса)
-	PlaneModeBore 							= 108,					-- Переход в режим ближнего воздушного боя (кольцо)
-	PlaneModeHelmet 						= 109,				-- Переход в режим ближнего воздушного боя (шлем)
-	PlaneModeFI0 							= 110,				-- Переход в режим FI0
-	PlaneModeGround 						= 111,				-- Переход в режим атаки наземных целей
-	PlaneModeGrid 							= 112,					-- Переход в режим "сетка"
-	PlaneModeCannon 						= 113,				-- Включение/выключение пушки
-	PlaneDoAndHome 							= 114,					-- Выполни задание и вернись на базу
-	PlaneDoAndBack 							= 115,					-- Выполни задание и вернись ко мне
-	PlaneFormation 							= 116,					-- Идти рассеянным/плотным строем
-	PlaneJoinUp    							= 117,					-- Собраться
-	PlaneAttackMyTarget 					= 118,			-- Атакуй мою цель
-	PlaneCoverMySix 						= 119,				-- Прикрой меня сзади
-	PlaneShipTakeOff 						= 120,			-- Хочу взлететь с авианосца
+	PlaneSAUAutomatic 						= 58,			
+	PlaneSAUHBarometric 					= 59,			
+	PlaneSAUHRadio 							= 60,			
+	PlaneSAUHorizon							= 61,			
+	PlaneAutopilot 							= 62,			
+	PlaneAUTOnOff 							= 63,			
+	PlaneAUTIncrease 						= 64,			
+	PlaneAUTDecrease						= 65,			
+	PlaneGear 								= 68,			
+	PlaneHook 								= 69,			
+	PlanePackWing 							= 70,			
+	PlaneFonar 								= 71,			
+	PlaneFlaps 								= 72,			
+	PlaneAirBrake 							= 73,			
+	PlaneWheelBrakeOn 						= 74,			
+	PlaneWheelBrakeOff 						= 75,			
+	PlaneParachute 							= 76,			
+	PlaneDropSnar 							= 77,			
+	PlaneWingtipSmokeOnOff 					= 78,			
+	PlaneFuelOn 							= 79,			
+	PlaneFuelOff							= 80,			
+	PlaneSalvoOnOff 						= 81,			
+	PiCommandSelecterUplaneJettisonWeapons 	= 82,			
+	PlaneEject 								= 83,			
+	PlaneFire 								= 84,			
+	PlaneFireOff 							= 85,			
+	PlaneRadarOnOff 						= 86,			
+	PlaneEOSOnOff 							= 87,			
+	PlaneRadarLeft 							= 88,			
+	PlaneRadarRight 						= 89,			
+	PlaneRadarUp							= 90,			
+	PlaneRadarDown 							= 91,			
+	PlaneRadarCenter 						= 92,			
+	PlaneTrimLeft							= 93,			
+	PlaneTrimRight 							= 94,			
+	PlaneTrimUp 							= 95,			
+	PlaneTrimDown 							= 96,			
+	PlaneTrimCancel 						= 97,			
+	PlaneTrimLeftRudder						= 98,			
+	PlaneTrimRightRudder 					= 99,			
+	PlaneChangeLock 						= 100,			
+	PlaneChangeWeapon 						= 101,			
+	PlaneChangeTarget 						= 102,			
+	PlaneZoomIn 							= 103,			
+	PlaneZoomOut 							= 104,			
+	PlaneModeNAV 							= 105,			
+	PlaneModeBVR 							= 106,			
+	PlaneModeVS 							= 107,			
+	PlaneModeBore 							= 108,			
+	PlaneModeHelmet 						= 109,			
+	PlaneModeFI0 							= 110,			
+	PlaneModeGround 						= 111,			
+	PlaneModeGrid 							= 112,			
+	PlaneModeCannon 						= 113,			
+	PlaneDoAndHome 							= 114,			
+	PlaneDoAndBack 							= 115,			
+	PlaneFormation 							= 116,			
+	PlaneJoinUp    							= 117,			
+	PlaneAttackMyTarget 					= 118,			
+	PlaneCoverMySix 						= 119,			
+	PlaneShipTakeOff 						= 120,			
 	ActiveJamming 							= 136,
-	LandDetailsIncrease 					= 137,			-- Отладочное увеличение детализации (Non-simulation Action)
-	LandDetailsDecrease 					= 138,			-- Отладочное уменьшение детализации (Non-simulation Action)
-	SelecterLeft							= 139,				    -- движение маркера захвата целей на HUD влево
-	SelecterRight 							= 140,			-- вправо
-	SelecterUp  							= 141,					    -- вверх
-	SelecterDown 							= 142,					-- вниз
-	RefusalTWS 								= 143,						-- отказ от СНП
+	LandDetailsIncrease 					= 137,			
+	LandDetailsDecrease 					= 138,			
+	SelecterLeft							= 139,			
+	SelecterRight 							= 140,			
+	SelecterUp  							= 141,			
+	SelecterDown 							= 142,			
+	RefusalTWS 								= 143,			
 	PlaneResetMasterWarning 				= 144,
 	PlaneFlapsOn 							= 145,
 	PlaneFlapsOff 							= 146,
 	PlaneAirBrakeOn 						= 147,
 	PlaneAirBrakeOff 						= 148,
-	PlaneAirRefuel 							= 155,				-- Переключатель положения штанги заправки
-	BrightnessILS 							= 156,				-- Яркость ILS
-	
-
-	
+	PlaneAirRefuel 							= 155,			
+	BrightnessILS 							= 156,			
 	PlaneAUTIncreaseLeft 					= 161,
 	PlaneAUTDecreaseLeft 					= 162,
 	PlaneAUTIncreaseRight 					= 163,
 	PlaneAUTDecreaseRight 					= 164,
-	PlaneLightsOnOff 						= 175,			-- Вкл/выкл огни на своем самолете
-	PlaneDropSnarOnce 						= 176,			-- Однократный сброс ловушек
-	PlaneJettisonFuelTanks 					= 178,		-- Сброс топливных баков
-	PlaneWingmenCommand 					= 179,		-- Вызов панели команд ведомым
-	PlaneDown 								= 186,					-- Тонкое управление автопилотом по высоте
+	PlaneLightsOnOff 						= 175,		
+	PlaneDropSnarOnce 						= 176,		
+	PlaneJettisonFuelTanks 					= 178,		
+	PlaneWingmenCommand 					= 179,		
+	PlaneDown 								= 186,		
 	PlaneUp 								= 187,
 	PlaneLeft 								= 188,
 	PlaneRight 								= 189,
@@ -299,10 +256,10 @@ Keys =
     PlaneRadarDownLeft 						= 233,
     PlaneRadarUpLeft 						= 234,
     PlaneRadarStop 							= 235,
-	PlaneHUDFilterOnOff 					= 247,			-- Поднять/опустить светофильтр ИЛС (Ka-50)
-	PlaneMasterCaution 						= 252,				-- Аналог "Экран вызов" (МиГ-29), кнопка-лампа ЦСО (Ка-50)
-	PlaneScalesReject						= 253,				-- Scales reject / огранич. индикац. на ИЛС (Ка-50)
-	PlaneBettyRepeat 						= 254,				-- Repeat Betty messages (Rf-50)
+	PlaneHUDFilterOnOff 					= 247,			
+	PlaneMasterCaution 						= 252,			
+	PlaneScalesReject						= 253,			
+	PlaneBettyRepeat 						= 254,			
 	ThreatMissilePadlock 					= 258,
 	AllMissilePadlock 						= 259,
 	DecreaseRadarScanArea 					= 262,
@@ -329,56 +286,56 @@ Keys =
 	ChangeRWRMode 							= 286,
 	FlightClockReset 						= 288,
 	PlaneCockpitIllumination 				= 300,
-	ChangeRippleIntervalDown 				= 308,		-- Изменение интервала сброса бомб в залпе для А10 в обратном направлении
-	EnginesStart 							= 309,				-- Запуск двигателей
-	EnginesStop 							= 310,			-- Выключение двигателей
-	LeftEngineStart 						= 311,			-- Запуск левого двигателя
-	RightEngineStart 						= 312,			-- Запуск правого двигателя
-	LeftEngineStop							= 313,				-- Выключение левого двигателя
-	RightEngineStop 						= 314,			-- Выключение правого двигателя
-	PowerOnOff 								= 315,					-- Включение/выключение электропитания
+	ChangeRippleIntervalDown 				= 308,	
+	EnginesStart 							= 309,	
+	EnginesStop 							= 310,	
+	LeftEngineStart 						= 311,	
+	RightEngineStart 						= 312,	
+	LeftEngineStop							= 313,	
+	RightEngineStop 						= 314,	
+	PowerOnOff 								= 315,	
 	PowerGeneratorLeft 						= 711,
     PowerGeneratorRight 					= 712,
-    BatteryPower 							= 1073,        -- iCommandBatteryPower
-	AltimeterPressureIncrease 				= 316,	-- Увеличение давления на ВД
-	AltimeterPressureDecrease 				= 317,	-- Уменьшение давления на ВД
+    BatteryPower 							= 1073,  
+	AltimeterPressureIncrease 				= 316,	
+	AltimeterPressureDecrease 				= 317,	
 	AltimeterPressureStop 					= 318,
-	PlaneHeadLightOnOff 					= 328,		-- Вкл/выкл фары на передней стойке шасси
-	PlaneLockPadlock 						= 329,				-- Следить за ближайшим объектом
-	PlaneUnlockPadlock 						= 330,		-- Бросить следить за объектом
-	PlaneLaunchPermissionOverride			= 349,	-- Снятие блокировки с оружия
-	PlanePickleOn 							= 350,		-- Пуск ракет/сброс бомб для западных самолетов
+	PlaneHeadLightOnOff 					= 328,	
+	PlaneLockPadlock 						= 329,	
+	PlaneUnlockPadlock 						= 330,	
+	PlaneLaunchPermissionOverride			= 349,	
+	PlanePickleOn 							= 350,	
 	PlanePickleOff 							= 351,
-	PlaneDropFlareOnce 						= 357,			-- Однократный сброс ИК-ловушек
-	PlaneDropChaffOnce 						= 358,			-- Однократный сброс дипольных отражателей
-	PlaneCMDDispence 						= 364,				-- Пассивные средства РЭБ выброс ловушек
+	PlaneDropFlareOnce 						= 357,	
+	PlaneDropChaffOnce 						= 358,	
+	PlaneCMDDispence 						= 364,	
 	PlaneCMDDispenceOff 					= 365,
-	PlaneCMDDispenceStop 					= 366,			-- Пассивные средства РЭБ остановка выброса ловушек
+	PlaneCMDDispenceStop 					= 366,	
 	PlaneCMDDispenceStopOff 				= 367,
-	PlaneCMDChangeRippleQuantity 			= 368,	-- Пассивные средства РЭБ изменить количество в серии
-	PlaneCMDChangeRippleInterval 			= 370,	-- Пассивные средства РЭБ изменить интервал в серии
-	PlaneCMDChangeBurstAmount 				= 372,		-- Пассивные средства РЭБ изменить количество серий
+	PlaneCMDChangeRippleQuantity 			= 368,	
+	PlaneCMDChangeRippleInterval 			= 370,	
+	PlaneCMDChangeBurstAmount 				= 372,	
 	PlaneCMDChangeBurstAmountOff 			= 373,
-	PlaneCMDCancelCurrentProgram 			= 374,	-- Пассивные средства РЭБ сброс программы
-	PlaneCMDChangeBoard 					= 376,			-- Пассивные средства РЭБ выбор борта
-	PlaneCMDShowAmountOrProgram 			= 377,	-- Пассивные средства РЭБ смена индикации - наличие ловушек или текущая программа
-	PlaneCancelWeaponsDelivery 				= 378,		-- сброс режима работы авионики (Ка - 50)
+	PlaneCMDCancelCurrentProgram 			= 374,	
+	PlaneCMDChangeBoard 					= 376,	
+	PlaneCMDShowAmountOrProgram 			= 377,	
+	PlaneCancelWeaponsDelivery 				= 378,	
 	PlaneMasterCautionOff 					= 379,
-	PlaneStabTangBank 						= 386,			-- Стабилизация тангажа и крена
-	PlaneStabHbarBank 						= 387,			-- Стабилизация Hbar и крена
-	PlaneStabHorizon 						= 388,			-- Стабилизация тангажа и крена
-	PlaneStabHbar 							= 389,				-- Стабилизация Hbar
-	PlaneStabHrad 							= 390,				-- Стабилизация Hrad
-	ActiveIRJamming 						= 391,			-- IR OnOff
-	PlaneLaserRangerOnOff 					= 392, 		-- Вкл/Выкл лазерный дальномер
-	PlaneNightTVOnOff						= 393,         -- Вкл/Выкл ночной канал телевизионной системы (IR or LLTV) 
-	PlaneChangeRadarPRF 					= 394,       -- Изменить частоту повторения импульсов радара
-	PlaneStabCancel 						= 408,			-- Сброс всех режимов стабилизации и автопилота
-	PlaneThreatWarnSoundVolumeDown 			= 409,	-- Уменьшение громкости звуковых сигналов СПО
-	PlaneThreatWarnSoundVolumeUp 			= 410,	-- Увеличение громкости звуковых сигналов СПО
+	PlaneStabTangBank 						= 386,	
+	PlaneStabHbarBank 						= 387,	
+	PlaneStabHorizon 						= 388,	
+	PlaneStabHbar 							= 389,	
+	PlaneStabHrad 							= 390,	
+	ActiveIRJamming 						= 391,	
+	PlaneLaserRangerOnOff 					= 392, 	
+	PlaneNightTVOnOff						= 393,   
+	PlaneChangeRadarPRF 					= 394,   
+	PlaneStabCancel 						= 408,	
+	PlaneThreatWarnSoundVolumeDown 			= 409,	
+	PlaneThreatWarnSoundVolumeUp 			= 410,	
 	ViewLaserOnOff 							= 411,
-	PlaneIncreaseBase_Distance 				= 412,     -- Увеличение базы цели
-	PlaneDecreaseBase_Distance				= 413,     -- Уменьшение базы цели
+	PlaneIncreaseBase_Distance 				= 412,     
+	PlaneDecreaseBase_Distance				= 413,     
 	PlaneStopBase_Distance 					= 414,
 	PlaneAutopilotOverrideOn 				= 427,
 	PlaneAutopilotOverrideOff 				= 428,
@@ -516,11 +473,8 @@ Keys =
 	Plane_HOTAS_BoatSwitchOff				= 822,
 	Plane_HOTAS_BoatSwitchForwardMomentary 	= 823,
 	Plane_HOTAS_BoatSwitchAftMomentary 		= 824,
+	Plane_CockpitShowPilotOnOff				= 835,
 	Plane_HOTAS_LeftThrottleButton_Off 		= 1557,
-	
-	
-	
--- ANALOG COMMANDS
 	PlaneRadarHorizontal 	   				= 2025,
 	PlaneRadarVertical 		   				= 2026,
 	PlaneRadarHorizontalAbs    				= 2027,
@@ -535,10 +489,182 @@ Keys =
 	PlaneBase_DistanceAbs 	   				= 2041,
 	LampsControl							= 762,
 	LampsControl_up							= 800,
+-------------------------------------------------------
+--Left Console Panel
+------------------------------------------------------- 
+
+-------------------------------------------------------
+--Left Auxiliary Console
+-------------------------------------------------------
+
+-------------------------------------------------------
+--UCP (Upfront Control Panel)
+-------------------------------------------------------
+	UCP_MENU								= __custom_counter(),
+	UCP_1									= __custom_counter(),
+	UCP_2									= __custom_counter(),
+	UCP_3									= __custom_counter(),
+	UCP_DAT									= __custom_counter(),
+	UCP_SHIFT								= __custom_counter(),
+	UCP_4									= __custom_counter(),
+	UCP_5									= __custom_counter(),
+	UCP_6									= __custom_counter(),
+	UCP_0									= __custom_counter(),
+	UCP_AMFM_ENT							= __custom_counter(),
+	UCP_7									= __custom_counter(),
+	UCP_8									= __custom_counter(),
+	UCP_9									= __custom_counter(),
+	UCP_L									= __custom_counter(),
+	UCP_CLR									= __custom_counter(),
+	UCP_Brightness							= __custom_counter(),
+
+-------------------------------------------------------
+--Instrument Panel
+-------------------------------------------------------
+--Left control panel
+	LCP_X	      							= __custom_counter(),
+	LCP_SYS       							= __custom_counter(),
+	LCP_TAC       							= __custom_counter(),
+	LCP_IFF       							= __custom_counter(),
+	LCP_COM       							= __custom_counter(),
+	LCP_SK01      							= __custom_counter(), --upper left dashed lcp softkey
+	LCP_SK02      							= __custom_counter(),
+	LCP_SK03      							= __custom_counter(),
+	LCP_SK04      							= __custom_counter(),
+	LCP_SK05      							= __custom_counter(),
+	LCP_SK06      							= __custom_counter(),
+	LCP_SK07      							= __custom_counter(),--middle bottom dashed lcp softkey
+	LCP_SK08      							= __custom_counter(),
+	LCP_SK09      							= __custom_counter(),
+	LCP_SK10      							= __custom_counter(),
+	LCP_SK11      							= __custom_counter(),
+	LCP_SK12      							= __custom_counter(),
+	LCP_SK13      							= __custom_counter(),--upper right dashed lcp softkey
+	LCP_Brightness							= __custom_counter(),
+	LCP_Contrast  							= __custom_counter(),
+	LCP_1                  					= __custom_counter(),
+	LCP_2                  					= __custom_counter(),
+	LCP_3                  					= __custom_counter(),
+	LCP_4                  					= __custom_counter(),
+	LCP_5                  					= __custom_counter(),
+	LCP_6                  					= __custom_counter(),
+	LCP_7                  					= __custom_counter(),
+	LCP_8                  					= __custom_counter(),
+	LCP_9                  					= __custom_counter(),
+	LCP_0                  					= __custom_counter(),
+	LCP_ENT                					= __custom_counter(),
+	LCP_CLR                					= __custom_counter(),
+-------------------------------------------------------
+--LD
+-------------------------------------------------------
+	LDSK_1									= __custom_counter(),
+	LDSK_2									= __custom_counter(),
+	LDSK_3									= __custom_counter(),
+	LDSK_4									= __custom_counter(),
+	LDSK_5									= __custom_counter(),
+	LDSK_6									= __custom_counter(),
+	LDSK_7									= __custom_counter(),
+	LDSK_8									= __custom_counter(),
+	LDSK_9									= __custom_counter(),
+	LDSK_10									= __custom_counter(),
+	LDSK_11									= __custom_counter(),
+	LDSK_12									= __custom_counter(),
+	LDSK_13									= __custom_counter(),
+	LDSK_14									= __custom_counter(),
+	LDSK_15									= __custom_counter(),
+	LDSK_16									= __custom_counter(),
+	LDSK_17									= __custom_counter(),
+	LDSK_18									= __custom_counter(),
+	LDSK_19									= __custom_counter(),
+	LDSK_20									= __custom_counter(),
+--Brightnessness                                 
+	LD_Brightness_Up						= __custom_counter(),
+	LD_Brightness_Down						= __custom_counter(),
+--Contrast                                  
+	LD_Contrast_Up							= __custom_counter(),
+	LD_Contrast_Down						= __custom_counter(),
+-------------------------------------------------------
+--CD
+-------------------------------------------------------
+	CDSK_1									= __custom_counter(),
+	CDSK_2									= __custom_counter(),
+	CDSK_3									= __custom_counter(),
+	CDSK_4									= __custom_counter(),
+	CDSK_5									= __custom_counter(),
+	CDSK_6									= __custom_counter(),
+	CDSK_7									= __custom_counter(),
+	CDSK_8									= __custom_counter(),
+	CDSK_9									= __custom_counter(),
+	CDSK_10									= __custom_counter(),
+	CDSK_11									= __custom_counter(),
+	CDSK_12									= __custom_counter(),
+	CDSK_13									= __custom_counter(),
+	CDSK_14									= __custom_counter(),
+	CDSK_15									= __custom_counter(),
+	CDSK_16									= __custom_counter(),
+	CDSK_17									= __custom_counter(),
+	CDSK_18									= __custom_counter(),
+	CDSK_19									= __custom_counter(),
+	CDSK_20									= __custom_counter(),
+--Brightnessness                                 
+	CD_Brightness_Up						= __custom_counter(),
+	CD_Brightness_Down						= __custom_counter(),
+--Contrast                                  
+	CD_Contrast_Up							= __custom_counter(),
+	CD_Contrast_Down						= __custom_counter(),	
+-------------------------------------------------------
+--RD 
+-------------------------------------------------------
+	CDSK_1									= __custom_counter(),
+	RDSK_2									= __custom_counter(),
+	RDSK_3									= __custom_counter(),
+	RDSK_4									= __custom_counter(),
+	RDSK_5									= __custom_counter(),
+	RDSK_6									= __custom_counter(),
+	RDSK_7									= __custom_counter(),
+	RDSK_8									= __custom_counter(),
+	RDSK_9									= __custom_counter(),
+	RDSK_10									= __custom_counter(),
+	RDSK_11									= __custom_counter(),
+	RDSK_12									= __custom_counter(),
+	RDSK_13									= __custom_counter(),
+	RDSK_14									= __custom_counter(),
+	RDSK_15									= __custom_counter(),
+	RDSK_16									= __custom_counter(),
+	RDSK_17									= __custom_counter(),
+	RDSK_18									= __custom_counter(),
+	RDSK_19									= __custom_counter(),
+	RDSK_20									= __custom_counter(),
+--Brightnessness                                 
+	RD_Brightness_Up						= __custom_counter(),
+	RD_Brightness_Down						= __custom_counter(),
+--Contrast                                  
+	RD_Contrast_Up							= __custom_counter(),
+	RD_Contrast_Down						= __custom_counter(),	
+-------------------------------------------------------
+--Right Auxiliary Console
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Right Console Panel
+-------------------------------------------------------
+-------------------------------------------------------
+--HOTAS
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Ejection Seat
+-------------------------------------------------------
+
 	
-	
+
+-------------------------------------------------------
+--Other
+-------------------------------------------------------	
 }
--- DEVICE COMMANDS
+-------------------------------------------------------
+--DEVICE COMMANDS
+-------------------------------------------------------
 device_commands =
 {
 	
@@ -557,15 +683,112 @@ device_commands =
 	 ATAOA_1214	   							= 10065,
 	 THROTTLE_AXIS 							= 10066,
 }
-start_command   = 3100
+start_command   = 3200
 local __count = start_command-1
 local function __counter()
 	__count = __count + 1
 	return __count
 end
-
 device_commands =
 {
+-------------------------------------------------------
+--FC3 Commands
+------------------------------------------------------- 	
+	COM1                                    = __counter(),
+	COM2                                    = __counter(),
+	AP_ATT									= __counter(),
+	AP_ALT									= __counter(),
+	AP_RSET									= __counter(),
+	AP_OFF									= __counter(),
+	NAV_NEXT                                = __counter(),
+	NAV_PREV                                = __counter(),
+	RDR_PRF                                 = __counter(),
+	RDR_PWR                                 = __counter(),
+	RDR_MODE                                = __counter(),
+	RDR_IN                                  = __counter(),
+	RDR_OUT                                 = __counter(),
+	RDR_UP									= __counter(),
+	RDR_DOWN								= __counter(),
+	RDR_LEFT								= __counter(),
+	RDR_RIGHT								= __counter(),
+	EO										= __counter(),
+	Seat_Ajust								= __counter(),
+	T1										= __counter(),
+	T2										= __counter(),
+	T3										= __counter(),
+	T4										= __counter(),
+	T5										= __counter(),
+	T6										= __counter(),
+	MIRROR									= __counter(),
+	LKneeboardDraw							= __counter(),
+	RKneeboardDraw							= __counter(),
+	JoystickDraw							= __counter(),
+	MAP										= __counter(),
+	HMD_LIGHT								= __counter(),--2090
+	ATT_LIGHT								= __counter(),--2078
+	ALT_LIGTH								= __counter(),--2077
+	MAN_LIGTH								= __counter(),--2079
+	SPEEDBRAKEIND							= __counter(),--2036(-1 off 0 on)
+-------------------------------------------------------
+--Left Console Panel
+------------------------------------------------------- 
+--Left control panel
+	LCP_X	      							= __counter(),
+	LCP_SYS       							= __counter(),
+	LCP_TAC       							= __counter(),
+	LCP_IFF       							= __counter(),
+	LCP_COM       							= __counter(),
+	LCP_SK01      							= __counter(),  --upper left dashed lcp softkey
+	LCP_SK02      							= __counter(),
+	LCP_SK03      							= __counter(),
+	LCP_SK04      							= __counter(),
+	LCP_SK05      							= __counter(),
+	LCP_SK06      							= __counter(),
+	LCP_SK07      							= __counter(),	--middle bottom dashed lcp softkey
+	LCP_SK08      							= __counter(),
+	LCP_SK09      							= __counter(),
+	LCP_SK10      							= __counter(),
+	LCP_SK11      							= __counter(),
+	LCP_SK12      							= __counter(),
+	LCP_SK13      							= __counter(),	--upper right dashed lcp softkey
+	LCP_Brightness							= __counter(),
+	LCP_Contrast  							= __counter(),
+	LCP_1                  					= __counter(),
+	LCP_2                  					= __counter(),
+	LCP_3                  					= __counter(),
+	LCP_4                  					= __counter(),
+	LCP_5                  					= __counter(),
+	LCP_6                  					= __counter(),
+	LCP_7                  					= __counter(),
+	LCP_8                  					= __counter(),
+	LCP_9                  					= __counter(),
+	LCP_0                  					= __counter(),
+	LCP_ENT                					= __counter(),
+	LCP_CLR                					= __counter(),
+--Target acquisition panel
+	TAP_ERAZ_cover							= __counter(),
+	TAP_ERAZ								= __counter(),	
+	TAP_T2									= __counter(),
+	TAP_T3									= __counter(),
+	TAP_INIT								= __counter(),
+	TAP_RDR									= __counter(),
+	TAP_ECM									= __counter(),
+	TAP_CMDS								= __counter(),
+	TAP_T6									= __counter(),
+	TAP_T9									= __counter(),
+	TAP_XPCR								= __counter(),
+	TAP_IQ									= __counter(),
+	TAP_INT									= __counter(),
+	TAP_T13									= __counter(),
+	TAP_T14									= __counter(),
+	TAP_IFFEMGY_OFF							= __counter(),
+	TAP_FREQ							    = __counter(),
+	TAP_CONT							    = __counter(),
+	TAP_THRSHOLD							= __counter(),
+	TAP_GAIN								= __counter(),
+-------------------------------------------------------
+--Left Auxiliary Console
+-------------------------------------------------------
     LandingGearLever            			= __counter(),
 	Start                       			= __counter(),
 	Main                        			= __counter(),
@@ -590,8 +813,10 @@ device_commands =
 	NavigationLights            			= __counter(),
 	AntiCollisionLights         			= __counter(),	
 	GearLights                  			= __counter(),
-	FloodLight                  			= __counter(),	
-	SeatEject 	                 			= __counter(),	
+	FloodLight                  			= __counter(),
+	IndicatorLight							= __counter(),
+	BackLight								= __counter(),
+	IN_Knob			 						= __counter(),--Work
 	SeatArm		                  			= __counter(),
 	DTU	                                    = __counter(),
 	TriggerSafe                             = __counter(),
@@ -600,10 +825,37 @@ device_commands =
 	AARProbe                                = __counter(),
 	EmergencyJettisonCover                  = __counter(),
 	EmergencyJettison                       = __counter(),
-	COM1                                    = __counter(),
-	COM2                                    = __counter(),
-	
---LEFT DISPLAY SOFT KEY
+	Compartment								= __counter(),
+-------------------------------------------------------
+--UCP (Upfront Control Panel)
+-------------------------------------------------------
+	UCP_MENU								= __counter(),
+	UCP_1									= __counter(),
+	UCP_2									= __counter(),
+	UCP_3									= __counter(),
+	UCP_DAT									= __counter(),
+	UCP_SHIFT								= __counter(),
+	UCP_4									= __counter(),
+	UCP_5									= __counter(),
+	UCP_6									= __counter(),
+	UCP_0									= __counter(),
+	UCP_AMFM_ENT							= __counter(),
+	UCP_7									= __counter(),
+	UCP_8									= __counter(),
+	UCP_9									= __counter(),
+	UCP_CLR									= __counter(),
+	UCP_L									= __counter(),
+	UCP_Brightness							= __counter(),
+-------------------------------------------------------
+--Instrument Panel
+-------------------------------------------------------
+--HMD On off
+	HMDTOGGLE								= __counter(),	
+--HUD	
+	HUD_Brightness							= __counter(),
+-------------------------------------------------------
+--LD
+-------------------------------------------------------
 	LDSK_1									= __counter(),
 	LDSK_2									= __counter(),
 	LDSK_3									= __counter(),
@@ -630,8 +882,9 @@ device_commands =
 --Contrast                             
 	LD_Contrast_Up							= __counter(),
 	LD_Contrast_Down						= __counter(),	
-	
-	--CENTER DISPLAY SOFT KEY
+-------------------------------------------------------
+--CD
+-------------------------------------------------------
 	CDSK_1									= __counter(),
 	CDSK_2									= __counter(),
 	CDSK_3									= __counter(),
@@ -658,8 +911,72 @@ device_commands =
 --Contrast                                 
 	CD_Contrast_Up							= __counter(),
 	CD_Contrast_Down						= __counter(),
-	
-	
---HUD	
-	HUD_Brightness							= __counter(),
+-------------------------------------------------------
+--RD
+-------------------------------------------------------
+	RDSK_1									= __counter(),
+	RDSK_2									= __counter(),
+	RDSK_3									= __counter(),
+	RDSK_4									= __counter(),
+	RDSK_5									= __counter(),
+	RDSK_6									= __counter(),
+	RDSK_7									= __counter(),
+	RDSK_8									= __counter(),
+	RDSK_9									= __counter(),
+	RDSK_10									= __counter(),
+	RDSK_11									= __counter(),
+	RDSK_12									= __counter(),
+	RDSK_13									= __counter(),
+	RDSK_14									= __counter(),
+	RDSK_15									= __counter(),
+	RDSK_16									= __counter(),
+	RDSK_17									= __counter(),
+	RDSK_18									= __counter(),
+	RDSK_19									= __counter(),
+	RDSK_20									= __counter(),
+--Brightnessness                            
+	RD_Brightness_Up						= __counter(),	
+	RD_Brightness_Down						= __counter(),	
+--Contrast                                 	
+	RD_Contrast_Up							= __counter(),	
+	RD_Contrast_Down						= __counter(),	
+-------------------------------------------------------
+--Right Auxiliary Console
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Right Console Panel
+-------------------------------------------------------
+--Audio control panel
+	ACP_1                  					= __counter(),
+	ACP_2                  					= __counter(),
+	ACP_3                  					= __counter(),
+	ACP_4                  					= __counter(),
+	ACP_5                  					= __counter(),
+	ACP_6                  					= __counter(),
+	ACP_7                  					= __counter(),
+	ACP_8                  					= __counter(),
+	ACP_9                  					= __counter(),
+    ACP_0                  					= __counter(),
+    ACP_AMFM_ENT                  			= __counter(),
+	ACP_CLR_MUTE                  			= __counter(),
+	ACP_COM1_EDIT                 			= __counter(),
+	ACP_COM2_EDIT                 			= __counter(),
+	ACP_AUX_EDIT                  			= __counter(),
+	ACP_TELE_OFF                  			= __counter(),
+	ACP_PTT1                  				= __counter(),
+	ACP_PTT2                  				= __counter(),
+	ACP_VOL                  				= __counter(),
+	ACP_MENU                 				= __counter(),
+-------------------------------------------------------
+--HOTAS
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Ejection Seat
+-------------------------------------------------------
+	SeatEject 	                 			= __counter(),	
+-------------------------------------------------------
+--Others
+-------------------------------------------------------
 }

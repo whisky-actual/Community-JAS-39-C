@@ -92,37 +92,21 @@ local gear_nose_light = get_param_handle("GEAR_NOSE_LIGHT")
 local gear_left_light = get_param_handle("GEAR_LEFT_LIGHT")
 local gear_right_light = get_param_handle("GEAR_RIGHT_LIGHT")
 	
+	
 function landing_gear_lights()
-	local gear_n_up = sensor_data.getNoseLandingGearUp()						-- Nose gear up
+
 	local gear_n_down = sensor_data.getNoseLandingGearDown()					-- Nose gear down
-	local gear_l_up = sensor_data.getLeftMainLandingGearUp()					-- Main gear left up
 	local gear_l_down = sensor_data.getLeftMainLandingGearDown()				-- Main gear left down
-	local gear_r_up = sensor_data.getRightMainLandingGearUp()					-- Main gear right up
 	local gear_r_down = sensor_data.getRightMainLandingGearDown()				-- Main gear right down
 
 	if get_param_handle("MAINPOWER"):get() == 1 then
-		if gear_n_down == 1 then 
-			gear_nose_light:set(0)
-		elseif gear_n_down == 0 then
-			gear_nose_light:set(1)
-		end
-		
-		if gear_l_down == 1 then
-			gear_left_light:set(0)
-		elseif gear_l_down == 0 then
-			gear_left_light:set(1)
-		end
-		
-		if gear_r_down == 1 then
-			gear_right_light:set(0)	
-		elseif gear_r_down == 0 then
-			gear_right_light:set(1)			
-		end
-		
+		gear_nose_light:set(gear_n_down)
+		gear_left_light:set(gear_l_down)
+		gear_right_light:set(gear_r_down)	
 	elseif get_param_handle("MAINPOWER"):get() == 0 then
-		gear_nose_light:set(1)	
-		gear_left_light:set(1)	
-		gear_right_light:set(1)							
+		gear_nose_light:set(0)	
+		gear_left_light:set(0)	
+		gear_right_light:set(0)							
 	end	
 
 end
@@ -138,7 +122,6 @@ function update()
 	local wow_r = sensor_data.getWOW_RightMainLandingGear()						-- Right main gear weight on wheels 
 	local gear_handle_pos = sensor_data.getLandingGearHandlePos()				-- Gear handle position
 	local vertical_vel = sensor_data.getVerticalVelocity()						-- Vertical velocity in m/s	
-	local tas = sensor_data.getTrueAirSpeed()*1.944								-- TAS in kts
 	local ias = sensor_data.getIndicatedAirSpeed()*1.944						-- IAS in kts	
 
 	landing_gear_lights()

@@ -34,4 +34,4 @@ SetScale(FOV)
 -- 34 - On Ramp
 
 -- add background image for kneeboard
-add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/cover.png")
+add_picture(LockOn_Options.script_path.."../Textures/Kneeboard/cover")

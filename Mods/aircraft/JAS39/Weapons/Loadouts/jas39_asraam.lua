@@ -36,7 +36,7 @@ JAS_ASRAAM_AA = {
         OmViz_max = 1.10,
 		warhead = enhanced_a2a_warhead(10),       
         exhaust = { 0.84, 0.66, 0.43, 0.08 };				
-		X_back = -1.78,
+		X_back = -1.72,
         Y_back = 0.0,
         Z_back = 0.0,
         Reflection = 0.040,
@@ -44,7 +44,7 @@ JAS_ASRAAM_AA = {
 
     --seeker sensivity params
     SeekerSensivityDistance = 35000, -- The range of target with IR value = 1. In meters.
-    ccm_k0        = 0.15,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
+    ccm_k0        = 0.05,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
     SeekerCooled  = true, -- True is cooled seeker and false is not cooled seeker.
 
     shape_table_data = {

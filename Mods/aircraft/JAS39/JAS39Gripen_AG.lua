@@ -78,7 +78,7 @@ local outboard 	= {
 	
 --	=================== ANTI SHIP MISSILES ========================================================================
 	{ CLSID = "{JAS39_RBS15}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
-	{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir AI	
+	{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir	
 	
 --	=================== ANTI RADIATION MISSILES ===================================================================
 	{ CLSID = "{JAS39_MAR-1}", arg_value = 0.81, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
@@ -100,7 +100,8 @@ local outboard 	= {
 	{ CLSID = "{JAS39_MK82}", arg_value = 0.69 }, -- Mk-82
 	{ CLSID = "{JAS39_MK83}", arg_value = 0.70 }, -- Mk-83
 	{ CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
-	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71 x 4
+	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71LD x 4
+	{ CLSID = "{JAS39_M71HD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.91 }, -- M71HD x 4
 		
 --	=================== UNGUIDED ROCKETS ==========================================================================
     { CLSID = "{JAS39_M70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.64}, -- M70B HE 
@@ -108,8 +109,8 @@ local outboard 	= {
 
 --	=================== AIR TO GROUND MISSILES ====================================================================
 	{ CLSID = "{JAS39_BRIMSTONE}", attach_point_position = {-0.15, 0.02, 0.0}, arg_value = 0.67}, -- Brimstone
-	{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B66}", arg_value = 0.66 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
-	{ CLSID = "LAU_117_AGM_65H", arg_value = 0.65 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
+	{ CLSID = "{JAS39_AGM_65K}", arg_value = 0.66 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
+	{ CLSID = "{JAS39_AGM_65H}", arg_value = 0.65 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
 	{ CLSID = "{JAS39_SPEAR3}", attach_point_position = {0.0, 0.01, 0.0}, arg_value = 0.92, Type = 1}, -- SPEAR-3
 	{ CLSID = "{JAS39_SPEAREW}", attach_point_position = {0.0, 0.01, 0.0}, arg_value = 0.93, Type = 1}, -- SPEAR-EW	
 
@@ -126,15 +127,15 @@ local inboard 	= {
 	{ CLSID = "{JAS39_ASRAAM}", attach_point_position = {0.30, -0.23, 0.0}, arg_value = 0.17 }, -- AIM-132 ASRAAM
 	
 --	=================== AIR TO GROUND MISSILES ====================================================================	
-	{ CLSID = "{69DC8AE7-8F77-427B-B8AA-B19D3F478B66}", arg_value = 0.66 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
-	{ CLSID = "LAU_117_AGM_65H", arg_value = 0.65 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
+	{ CLSID = "{JAS39_AGM_65K}", arg_value = 0.66 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65K
+	{ CLSID = "{JAS39_AGM_65H}", arg_value = 0.65 , attach_point_position = {-0.4, -0.08, 0.0} }, --AGM-65H
 	{ CLSID = "{JAS39_BRIMSTONE}", attach_point_position = {-0.15, 0.02, 0.0}, arg_value = 0.67}, -- Brimstone
 	{ CLSID = "{JAS39_SPEAR3}", attach_point_position = {0.0, 0.01, 0.0}, arg_value = 0.92, Type = 1}, -- SPEAR-3
 	{ CLSID = "{JAS39_SPEAREW}", attach_point_position = {0.0, 0.01, 0.0}, arg_value = 0.93, Type = 1}, -- SPEAR-EW		
 	
 --	=================== ANTI SHIP MISSILES ========================================================================
 	{ CLSID = "{JAS39_RBS15}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
-	{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir AI	
+	{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
 
 --	=================== ANTI RADIATION MISSILES ===================================================================
 	{ CLSID = "{JAS39_MAR-1}", arg_value = 0.81, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
@@ -164,6 +165,7 @@ local inboard 	= {
 	{ CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
 	{ CLSID = "{JAS39_BRU33_MK83}", arg_value = 0.70, Type = 1}, -- Mk-83 x 2		
 	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71LD x 4
+	{ CLSID = "{JAS39_M71HD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.91 }, -- M71HD x 4
 	
 --	=================== DROP TANKS ================================================================================
     { CLSID = "{JAS39_TANK1100}", arg_value = 0.90 }, -- Drop tank 1100 litre				
@@ -208,6 +210,8 @@ local centerline 	= {
 	-- { CLSID = "{JAS_GBU16}", arg_value = 0.73 }, -- GBU-16
 	-- { CLSID = "{JAS39_BRU33_GBU16}", arg_value = 0.73, Type = 1}, -- GBU-16 x 2	
 	-- { CLSID = "{JAS39_BRU33_GBU32}", arg_value = 0.77, Type = 1}, -- GBU-32 x 2		
+	
+	{ CLSID = "DIS_LS_6_100_DUAL_L", arg_value = 0.80}, 
 	
 	
 --	=================== UNGUIDED BOMBS ============================================================================
@@ -326,7 +330,7 @@ JAS39Gripen_AG =  {
 	
 	
 	mapclasskey 		= "P0091000024",
-	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", "Datalink", "Link16"},
+	attribute  			= {wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Bombers", "Refuelable", "Datalink", "Link16"},
 	Categories= {"{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor",},
 	
 		M_empty						=	6880,	-- kg  with pilot and nose load, JAS 39C
@@ -475,10 +479,18 @@ flare 				= {default = 40, increment = 20, chargeSz = 1}
             elevation 	= {-50.0, 90.0}-- pilot view vertical (AI)
         },
 
+
 Sensors = {
-RADAR 			= "AN/APG-63",--F15
-RWR 			= "Abstract RWR"--F15
+	RADAR = "PS-05/A",
+	RWR = "BOW-21 RWR",
+	OPTIC = {"Litening AN/AAQ-28 FLIR", "Litening AN/AAQ-28 CCD TV"},
 },
+
+laserEquipment = { 
+	laserDesignator = true,
+	laserRangefinder = true
+},
+
 Countermeasures = {
 ECM 			= "AN/ALQ-135"--F15
 },

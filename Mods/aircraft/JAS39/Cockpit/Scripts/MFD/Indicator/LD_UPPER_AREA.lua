@@ -40,11 +40,35 @@ TAN_Background.controllers    	= {{"opacity_using_parameter", 0}}
 Add(TAN_Background)
 
 
-add_text_param(0.87, 1.36, "SECONDSTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
-add_text(",", 0.834, 1.3675, TAN_Background, "Gripen_Font_black" )
-add_text_param(0.78, 1.36, "MINUTESTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
-add_text(",", 0.745, 1.3675, TAN_Background, "Gripen_Font_black" )
-add_text_param(0.695, 1.36, "HOURTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
+
+Clockparent 				= CreateElement "ceMeshPoly"
+Clockparent.name 			= create_guid_string()
+Clockparent.primitivetype 	= "triangles"
+Clockparent.vertices	   	= { {-1.0 , 1.4 }, { 1.0,1.4}, { 1.0,-1.4}, {-1.0,-1.4}, }
+Clockparent.indices			= {0, 1, 2, 0, 2, 3}
+Clockparent.init_pos		= {0, 0, 0}
+Clockparent.material		= MakeMaterial(nil,{0, 0, 0, 0})	--RGBA
+Clockparent.parent_element	= TAN_LD_MASTER.name
+Clockparent.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
+Clockparent.level			= MFD_DEFAULT_LEVEL
+Clockparent.change_opacity	= false
+Clockparent.collimated 		= false
+Clockparent.isvisible		= false
+Clockparent.element_params 	= {"LD_UPPER"}
+Clockparent.controllers    	= {{"parameter_in_range", 0, 0, 4}}
+Add(Clockparent)
+
+
+
+
+
+
+
+add_text_param(0.87, 1.34, "SECONDSTIME", "%02.0f", Clockparent, mfd_strdefs_digit_XS, "Gripen_Font_black")
+add_text(",", 0.834, 1.3475, Clockparent, "Gripen_Font_black" )
+add_text_param(0.78, 1.34, "MINUTESTIME", "%02.0f", Clockparent, mfd_strdefs_digit_XS, "Gripen_Font_black")
+add_text(",", 0.745, 1.3475, Clockparent, "Gripen_Font_black" )
+add_text_param(0.695, 1.34, "HOURTIME", "%02.0f", Clockparent, mfd_strdefs_digit_XS, "Gripen_Font_black")
 
 
 
@@ -701,7 +725,7 @@ AddElement(M_LASER)
 
 local LDP_Background 				= create_mfd_tex(LDP_BACKGROUND, 30, 5, 1255 , 1085, 1.569)
 LDP_Background.name 				= create_guid_string()
-LDP_Background.init_pos				= {0.018, 0.552, 0.05 }
+LDP_Background.init_pos				= {0.0155, 0.5555, 0.025 }
 LDP_Background.parent_element		= LDP_PAGE.name
 LDP_Background.h_clip_relation 		= h_clip_relations.NULL
 LDP_Background.level				= MFD_DEFAULT_LEVEL
@@ -715,7 +739,7 @@ Add(LDP_Background)
 
 local LDP_Background_Boost 					= create_mfd_tex(CENTER_DISPLAY_COLOR, 30, 5, 1255 , 1085, 1.569)
 LDP_Background_Boost.name 					= create_guid_string()
-LDP_Background_Boost.init_pos				= {0.018, 0.552, 0.05 }
+LDP_Background_Boost.init_pos				= {0.0155, 0.5555, 0.025 }
 LDP_Background_Boost.parent_element			= LDP_PAGE.name
 LDP_Background_Boost.h_clip_relation 		= h_clip_relations.NULL
 LDP_Background_Boost.level					= MFD_DEFAULT_LEVEL
@@ -744,18 +768,19 @@ local Auto_throttle_mode14 = add_text("14", -0.82, 1.33, TAN_LD_MASTER , "Gripen
 Auto_throttle_mode14.element_params  = {"AUTOTHROTTLE_MODE"}
 Auto_throttle_mode14.controllers     = {{"parameter_in_range" ,0,0.9,1.1} }
 
+local xcor = 0.022
 
 
 -- all pages
 local EMGY			= create_mfd_tex(LD_LABLES, 0, 1270, 125 , 1700,FONT_SIZE) 
 EMGY.name			= create_guid_string()
-EMGY.init_pos		= {-0.967, 1.15}
+EMGY.init_pos		= {-0.967+xcor, 1.15}
 EMGY.parent_element	= TAN_LD_MASTER.name
 AddElement(EMGY)	
 
 local CURS			= create_mfd_tex(LD_LABLES, 320, 1270, 400 , 1700,FONT_SIZE) 
 CURS.name			= create_guid_string()
-CURS.init_pos		= {-0.97, -0.30}
+CURS.init_pos		= {-0.97+xcor, -0.30}
 CURS.parent_element	= TAN_LD_MASTER.name
 AddElement(CURS)
 
@@ -771,43 +796,43 @@ AddElement(CURS_BOX)
 
 local MENU			= create_mfd_tex(LD_LABLES, 425, 1630, 500 , 2030,FONT_SIZE) 
 MENU.name			= create_guid_string()
-MENU.init_pos		= {-0.97, -0.60}
+MENU.init_pos		= {-0.97+xcor, -0.60}
 MENU.parent_element	= TAN_LD_MASTER.name
 AddElement(MENU)
 
 local MENU_GEN			= create_mfd_tex(NAV_WHEEL_BLACK, 445, 1465, 545 , 1805,FONT_SIZE) 
 MENU_GEN.name			= create_guid_string()
-MENU_GEN.init_pos		= {-0.92, -0.58}
+MENU_GEN.init_pos		= {-0.92+xcor, -0.58}
 MENU_GEN.parent_element	= GEN_PAGE.name
 AddElement(MENU_GEN)
 
 local MENU_DEF			= create_mfd_tex(NAV_WHEEL_BLACK, 555, 1465, 655 , 1805,FONT_SIZE) 
 MENU_DEF.name			= create_guid_string()
-MENU_DEF.init_pos		= {-0.92, -0.58}
+MENU_DEF.init_pos		= {-0.92+xcor, -0.58}
 MENU_DEF.parent_element	= DEF_PAGE.name
 AddElement(MENU_DEF)
 
 local MENU_AAR			= create_mfd_tex(NAV_WHEEL_BLACK, 445, 1110, 545 , 1458,FONT_SIZE) 
 MENU_AAR.name			= create_guid_string()
-MENU_AAR.init_pos		= {-0.92, -0.5744}
+MENU_AAR.init_pos		= {-0.92+xcor, -0.5744}
 MENU_AAR.parent_element	= AAR_PAGE.name
 AddElement(MENU_AAR)
 
 local MENU_LDP			= create_mfd_tex(NAV_WHEEL_BLACK, 555, 1110, 655 , 1460,FONT_SIZE) 
 MENU_LDP.name			= create_guid_string()
-MENU_LDP.init_pos		= {-0.92, -0.58}
+MENU_LDP.init_pos		= {-0.92+xcor, -0.58}
 MENU_LDP.parent_element	= LDP_PAGE.name
 AddElement(MENU_LDP)
 
 local AD			= create_mfd_tex(LD_LABLES, 225, 1725, 305 , 1915, FONT_SIZE) 
 AD.name				= create_guid_string()
-AD.init_pos			= {0.96, -0.60}
+AD.init_pos			= {0.96-xcor, -0.60}
 AD.parent_element	= TAN_LD_MASTER.name
 AddElement(AD)
 
 local AD_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1745, 215, 1840 , 443, FONT_SIZE) 	-- 2 Letter box
 AD_BOX.name				= create_guid_string()
-AD_BOX.init_pos			= {0.9635, -0.60}
+AD_BOX.init_pos			= {0.9635-0.024, -0.60}
 AD_BOX.parent_element		= TAN_LD_MASTER.name
 AD_BOX.element_params 	= {"ALTITUDE_MODE"}
 AD_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
@@ -815,13 +840,13 @@ AddElement(AD_BOX)
 
 local RALT			= create_mfd_tex(LD_LABLES, 540, 1630, 608 , 2025, FONT_SIZE) 
 RALT.name				= create_guid_string()
-RALT.init_pos			= {0.915, -0.66}
+RALT.init_pos			= {0.915-xcor, -0.66}
 RALT.parent_element	= TAN_LD_MASTER.name
 AddElement(RALT)
 
 local RALT_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 	-- 4 Letter box
 RALT_BOX.name				= create_guid_string()
-RALT_BOX.init_pos			= {0.9140, -0.66}
+RALT_BOX.init_pos			= {0.9140-0.025, -0.66}
 RALT_BOX.parent_element		= TAN_LD_MASTER.name
 RALT_BOX.element_params 	= {"ALTITUDE_MODE"}
 RALT_BOX.controllers   		= {{"parameter_compare_with_number",0, 2}}
@@ -830,13 +855,13 @@ AddElement(RALT_BOX)
 
 local GME			= create_mfd_tex(LD_LABLES, 425, 1295, 500 , 1592, FONT_SIZE) 
 GME.name				= create_guid_string()
-GME.init_pos			= {0.9592, -0.32}
+GME.init_pos			= {0.9592-xcor, -0.32}
 GME.parent_element	= TAN_LD_MASTER.name
 AddElement(GME)
 
 local G_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1650, 215, 1742 , 335, FONT_SIZE) 	-- 1 Letter box
 G_BOX.name				= create_guid_string()
-G_BOX.init_pos			= {0.96, -0.26}
+G_BOX.init_pos			= {0.958-xcor, -0.26}
 G_BOX.parent_element	= TAN_LD_MASTER.name
 G_BOX.element_params 	= {"LD_LOWER"}
 G_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
@@ -844,7 +869,7 @@ AddElement(G_BOX)
 
 local M_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1650, 215, 1742 , 335, FONT_SIZE) 	-- 1 Letter box
 M_BOX.name				= create_guid_string()
-M_BOX.init_pos			= {0.96, -0.322}
+M_BOX.init_pos			= {0.958-xcor, -0.322}
 M_BOX.parent_element	= TAN_LD_MASTER.name
 M_BOX.element_params 	= {"LD_LOWER"}
 M_BOX.controllers   		= {{"parameter_compare_with_number",0, 2}}
@@ -852,21 +877,21 @@ AddElement(M_BOX)
 
 local E_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1650, 215, 1742 , 335, FONT_SIZE) 	-- 1 Letter box
 E_BOX.name				= create_guid_string()
-E_BOX.init_pos			= {0.96, -0.3825}
+E_BOX.init_pos			= {0.958-xcor, -0.3825}
 E_BOX.parent_element	= TAN_LD_MASTER.name
 E_BOX.element_params 	= {"LD_LOWER"}
 E_BOX.controllers   	= {{"parameter_compare_with_number",0, 3}}
 AddElement(E_BOX)
 
-local STOR			= create_mfd_tex(LD_LABLES, 642, 1630, 708 , 2025, FONT_SIZE) 
+local STOR			= create_mfd_tex(LD_LABLES, 638, 1630, 708 , 2025, FONT_SIZE) 
 STOR.name				= create_guid_string()
-STOR.init_pos			= {0.96, -0.04}
+STOR.init_pos			= {0.96-xcor, -0.04}
 STOR.parent_element	= TAN_LD_MASTER.name
 AddElement(STOR)
 
 local STOR_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 STOR_BOX.name				= create_guid_string()
-STOR_BOX.init_pos			= {0.959, -0.04}
+STOR_BOX.init_pos			= {0.957-xcor, -0.04}
 STOR_BOX.parent_element	= TAN_LD_MASTER.name
 STOR_BOX.element_params = {"STORES_TOGGLE"}
 STOR_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -876,7 +901,7 @@ AddElement(STOR_BOX)
 -- GEN PAGE BUTTON LABLES
 local HUD			= create_mfd_tex(LD_LABLES, 0, 1730, 110 , 2025,FONT_SIZE) 
 HUD.name			= create_guid_string()
-HUD.init_pos		= {-0.97, 0.84}
+HUD.init_pos		= {-0.97+xcor, 0.84}
 HUD.parent_element	= GEN_PAGE.name
 AddElement(HUD)	
 
@@ -892,13 +917,13 @@ AddElement(HUD_BOX)
 
 local CAB			= create_mfd_tex(LD_LABLES, 120, 1270, 210 , 1590,FONT_SIZE) 
 CAB.name			= create_guid_string()
-CAB.init_pos		= {-0.97, 0.56}
+CAB.init_pos		= {-0.97+xcor, 0.56}
 CAB.parent_element	= GEN_PAGE.name
 AddElement(CAB)	
 
 local CAB_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1945 , 555,FONT_SIZE) 
 CAB_BOX.name			= create_guid_string()
-CAB_BOX.init_pos		= {-0.9675, 0.55}
+CAB_BOX.init_pos		= {-0.9675+xcor, 0.55}
 CAB_BOX.parent_element	= GEN_PAGE.name
 CAB_BOX.element_params = {"CABIN_TOGGLE"}
 CAB_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -907,13 +932,13 @@ AddElement(CAB_BOX)
 
 local EPE			= create_mfd_tex(LD_LABLES, 120, 1730, 210 , 2025,FONT_SIZE) 
 EPE.name			= create_guid_string()
-EPE.init_pos		= {-0.97, 0.26}
+EPE.init_pos		= {-0.97+xcor, 0.26}
 EPE.parent_element	= GEN_PAGE.name	
 AddElement(EPE)	
 
 local EPE_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1945 , 555,FONT_SIZE) 
 EPE_BOX.name			= create_guid_string()
-EPE_BOX.init_pos		= {-0.9675, 0.26}
+EPE_BOX.init_pos		= {-0.9675+xcor, 0.26}
 EPE_BOX.parent_element	= GEN_PAGE.name
 EPE_BOX.element_params = {"EPERROR_TOGGLE"}
 EPE_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -921,13 +946,13 @@ AddElement(EPE_BOX)
 
 local ECON			= create_mfd_tex(LD_LABLES, 225, 1270, 300 , 1700,FONT_SIZE) 
 ECON.name			= create_guid_string()
-ECON.init_pos		= {-0.97, -0.03}
+ECON.init_pos		= {-0.97+xcor, -0.03}
 ECON.parent_element	= GEN_PAGE.name	
 AddElement(ECON)
 
 local ECON_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 ECON_BOX.name				= create_guid_string()
-ECON_BOX.init_pos			= {-0.97, -0.035}
+ECON_BOX.init_pos			= {-0.97+xcor, -0.035}
 ECON_BOX.parent_element	= GEN_PAGE.name	
 ECON_BOX.element_params = {"ECON_TOGGLE"}
 ECON_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -935,27 +960,27 @@ AddElement(ECON_BOX)
 
 local TRUE			= create_mfd_tex(LD_LABLES, 850, 1635, 925 , 2025, FONT_SIZE) 
 TRUE.name				= create_guid_string()
-TRUE.init_pos			= {0.96, 1.1}
+TRUE.init_pos			= {0.96-0.01, 1.1}
 TRUE.parent_element	= GEN_PAGE.name
 AddElement(TRUE)
 
 local TRUE_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 TRUE_BOX.name				= create_guid_string()
-TRUE_BOX.init_pos			= {0.9575, 1.102}
+TRUE_BOX.init_pos			= {0.9575-0.0115, 1.102}
 TRUE_BOX.parent_element	= GEN_PAGE.name	
 TRUE_BOX.element_params = {"HEADING_MODE"}
 TRUE_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
 AddElement(TRUE_BOX)
 
-local MAG			= create_mfd_tex(LD_LABLES, 540, 1295, 605 , 1594, FONT_SIZE) 
+local MAG			= create_mfd_tex(LD_LABLES, 535, 1295, 605 , 1594, FONT_SIZE) 
 MAG.name				= create_guid_string()
-MAG.init_pos			= {0.91, 1.125}
+MAG.init_pos			= {0.91-0.01, 1.125}
 MAG.parent_element	= GEN_PAGE.name
 AddElement(MAG)
 
 local MAG_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1945 , 555,FONT_SIZE) 
 MAG_BOX.name			= create_guid_string()
-MAG_BOX.init_pos		= {0.912, 1.125}
+MAG_BOX.init_pos		= {0.912-0.0125, 1.125}
 MAG_BOX.parent_element	= GEN_PAGE.name
 MAG_BOX.element_params = {"HEADING_MODE"}
 MAG_BOX.controllers    = {{"parameter_compare_with_number",0, 2}}
@@ -965,13 +990,13 @@ AddElement(MAG_BOX)
 -- DEF PAGE BUTTON LABLES
 local EWS			= create_mfd_tex(LD_LABLES, 760, 1300, 840 , 1593,FONT_SIZE) 
 EWS.name			= create_guid_string()
-EWS.init_pos		= {-0.97, 0.84}
+EWS.init_pos		= {-0.97+xcor, 0.84}
 EWS.parent_element	= DEF_PAGE.name
 AddElement(EWS)
 
 local AS			= create_mfd_tex(LD_LABLES, 646, 1305, 732 , 1495,FONT_SIZE) 
 AS.name			= create_guid_string()
-AS.init_pos		= {-0.92, 0.865}
+AS.init_pos		= {-0.92+xcor, 0.865}
 AS.parent_element	= DEF_PAGE.name
 AddElement(AS)
 
@@ -995,19 +1020,19 @@ AddElement(S_BOX)
 
 local FLAR			= create_mfd_tex(LD_LABLES, 957, 1640, 1020 , 2025,FONT_SIZE) 
 FLAR.name			= create_guid_string()
-FLAR.init_pos		= {-0.97, 0.56}
+FLAR.init_pos		= {-0.97+xcor, 0.56}
 FLAR.parent_element	= DEF_PAGE.name
 AddElement(FLAR)
 
 local FLAR_OFF			= create_mfd_tex(NAV_WHEEL_BLACK, 1220, 650, 1445 , 743 ,FONT_SIZE) 
 FLAR_OFF.name			= create_guid_string()
-FLAR_OFF.init_pos		= {-0.878, 0.54}
+FLAR_OFF.init_pos		= {-0.878+xcor, 0.54}
 FLAR_OFF.parent_element	= DEF_PAGE.name
 AddElement(FLAR_OFF)
 
 local FLAR_OFF_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1590, 650, 1860 , 770, FONT_SIZE) 	-- 3  Letter horizontal box
 FLAR_OFF_BOX.name				= create_guid_string()
-FLAR_OFF_BOX.init_pos			= {-0.8773, 0.54}
+FLAR_OFF_BOX.init_pos			= {-0.8773+xcor, 0.54}
 FLAR_OFF_BOX.parent_element	= DEF_PAGE.name
 FLAR_OFF_BOX.element_params 	= {"FLAR_TOGGLE"}
 FLAR_OFF_BOX.controllers   	= {{"parameter_compare_with_number",0, 0}}
@@ -1015,13 +1040,13 @@ AddElement(FLAR_OFF_BOX)
 
 local FLAR_ON			= create_mfd_tex(NAV_WHEEL_BLACK, 1225, 750, 1370 , 850 ,FONT_SIZE) 
 FLAR_ON.name			= create_guid_string()
-FLAR_ON.init_pos		= {-0.903, 0.60}
+FLAR_ON.init_pos		= {-0.903+xcor, 0.60}
 FLAR_ON.parent_element	= DEF_PAGE.name
 AddElement(FLAR_ON)
 
 local FLAR_ON_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1861, 650, 2045 , 770, FONT_SIZE) 	-- 2  Letter horizontal box
 FLAR_ON_BOX.name				= create_guid_string()
-FLAR_ON_BOX.init_pos			= {-0.900, 0.6025}
+FLAR_ON_BOX.init_pos			= {-0.900+xcor, 0.6025}
 FLAR_ON_BOX.parent_element		= DEF_PAGE.name
 FLAR_ON_BOX.element_params 		= {"FLAR_TOGGLE"}
 FLAR_ON_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
@@ -1029,19 +1054,19 @@ AddElement(FLAR_ON_BOX)
 
 local CHAF			= create_mfd_tex(LD_LABLES, 1044, 1640, 1120 , 2025,FONT_SIZE) 
 CHAF.name			= create_guid_string()
-CHAF.init_pos		= {-0.97, 0.26}
+CHAF.init_pos		= {-0.97+xcor, 0.26}
 CHAF.parent_element	= DEF_PAGE.name
 AddElement(CHAF)
 
 local CHAF_OFF			= create_mfd_tex(NAV_WHEEL_BLACK, 1220, 650, 1445 , 743 ,FONT_SIZE) 
 CHAF_OFF.name			= create_guid_string()
-CHAF_OFF.init_pos		= {-0.88, 0.24}
+CHAF_OFF.init_pos		= {-0.88+xcor, 0.24}
 CHAF_OFF.parent_element	= DEF_PAGE.name
 AddElement(CHAF_OFF)
 
 local CHAF_OFF_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1590, 650, 1860 , 770, FONT_SIZE) 	-- 3  Letter horizontal box
 CHAF_OFF_BOX.name				= create_guid_string()
-CHAF_OFF_BOX.init_pos			= {-0.8773, 0.24}
+CHAF_OFF_BOX.init_pos			= {-0.8773+xcor, 0.24}
 CHAF_OFF_BOX.parent_element		= DEF_PAGE.name
 CHAF_OFF_BOX.element_params 	= {"CHAF_TOGGLE"}
 CHAF_OFF_BOX.controllers   		= {{"parameter_compare_with_number",0, 0}}
@@ -1049,13 +1074,13 @@ AddElement(CHAF_OFF_BOX)
 
 local CHAF_ON			= create_mfd_tex(NAV_WHEEL_BLACK, 1225, 750, 1370 , 850 ,FONT_SIZE) 
 CHAF_ON.name			= create_guid_string()
-CHAF_ON.init_pos		= {-0.902, 0.30}
+CHAF_ON.init_pos		= {-0.902+xcor, 0.30}
 CHAF_ON.parent_element	= DEF_PAGE.name
 AddElement(CHAF_ON)
 
 local CHAF_ON_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1861, 650, 2045 , 770, FONT_SIZE) 	-- 2  Letter horizontal box
 CHAF_ON_BOX.name				= create_guid_string()
-CHAF_ON_BOX.init_pos			= {-0.900, 0.3025}
+CHAF_ON_BOX.init_pos			= {-0.900+xcor, 0.3025}
 CHAF_ON_BOX.parent_element		= DEF_PAGE.name
 CHAF_ON_BOX.element_params 		= {"CHAF_TOGGLE"}
 CHAF_ON_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
@@ -1063,7 +1088,7 @@ AddElement(CHAF_ON_BOX)
 
 local SCAL			= create_mfd_tex(LD_LABLES, 1155, 1300, 1225 , 1700 ,FONT_SIZE) 
 SCAL.name			= create_guid_string()
-SCAL.init_pos		= {-0.97, -0.02}
+SCAL.init_pos		= {-0.97+xcor, -0.02}
 SCAL.parent_element	= DEF_PAGE.name
 AddElement(SCAL)
 
@@ -1074,13 +1099,13 @@ AddElement(SCAL)
 
 local NORM			= create_mfd_tex(NAV_WHEEL_BLACK, 1025, 10, 1130 , 400 ,FONT_SIZE) 
 NORM.name			= create_guid_string()
-NORM.init_pos		= {-0.97, 0.26}
+NORM.init_pos		= {-0.97+xcor, 0.26}
 NORM.parent_element	= AAR_PAGE.name
 AddElement(NORM)
 
 local NORM_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 NORM_BOX.name				= create_guid_string()
-NORM_BOX.init_pos			= {-0.965, 0.2575}
+NORM_BOX.init_pos			= {-0.965+xcor, 0.2575}
 NORM_BOX.parent_element		= AAR_PAGE.name	
 NORM_BOX.element_params 	= {"NORM_MODE"}
 NORM_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1088,33 +1113,33 @@ AddElement(NORM_BOX)
 
 local REF			= create_mfd_tex(NAV_WHEEL_BLACK, 1125, 10, 1225 , 302 ,FONT_SIZE) 
 REF.name			= create_guid_string()
-REF.init_pos		= {-0.91, 0.29}
+REF.init_pos		= {-0.91+xcor, 0.29}
 REF.parent_element	= AAR_PAGE.name
 AddElement(REF)
 
 local REF_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1945 , 555,FONT_SIZE) 
 REF_BOX.name			= create_guid_string()
-REF_BOX.init_pos		= {-0.91, 0.2875}
+REF_BOX.init_pos		= {-0.91+xcor, 0.2875}
 REF_BOX.parent_element	= AAR_PAGE.name
 REF_BOX.element_params = {"NORM_MODE"}
 REF_BOX.controllers    = {{"parameter_compare_with_number",0, 2}}
 AddElement(REF_BOX)
 
-local UNIT				= create_mfd_tex(NAV_WHEEL_BLACK, 1210, 1, 1320 , 400, FONT_SIZE) 
+local UNIT				= create_mfd_tex(NAV_WHEEL_BLACK, 1210, 1, 1319 , 400, FONT_SIZE) 
 UNIT.name				= create_guid_string()
-UNIT.init_pos			= {0.97, 0.26}
+UNIT.init_pos			= {0.97-xcor, 0.26}
 UNIT.parent_element		=  AAR_PAGE.name
 AddElement(UNIT)
 
 local KG				= create_mfd_tex(NAV_WHEEL_BLACK, 1390, 1, 1550 , 110, FONT_SIZE) 
 KG.name					= create_guid_string()
-KG.init_pos				= {0.89, 0.345}
+KG.init_pos				= {0.89-xcor, 0.345}
 KG.parent_element		=  AAR_PAGE.name
 AddElement(KG)
 
 local KG_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1861, 650, 2045 , 770, FONT_SIZE) 	-- 2  Letter horizontal box
 KG_BOX.name					= create_guid_string()
-KG_BOX.init_pos				= {0.8975, 0.342}
+KG_BOX.init_pos				= {0.8975-xcor, 0.342}
 KG_BOX.parent_element		= AAR_PAGE.name
 KG_BOX.element_params 		= {"UNIT_MODE"}
 KG_BOX.controllers   		= {{"parameter_compare_with_number",0, 4}}
@@ -1122,13 +1147,13 @@ AddElement(KG_BOX)
 
 local LB				= create_mfd_tex(NAV_WHEEL_BLACK, 1390, 111, 1550 , 205, FONT_SIZE) 
 LB.name					= create_guid_string()
-LB.init_pos				= {0.89, 0.28}
+LB.init_pos				= {0.89-xcor, 0.28}
 LB.parent_element		=  AAR_PAGE.name
 AddElement(LB)
 
 local LB_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1861, 650, 2045 , 770, FONT_SIZE) 	-- 2  Letter horizontal box
 LB_BOX.name					= create_guid_string()
-LB_BOX.init_pos				= {0.8975, 0.277}
+LB_BOX.init_pos				= {0.8975-xcor, 0.277}
 LB_BOX.parent_element		= AAR_PAGE.name
 LB_BOX.element_params 		= {"UNIT_MODE"}
 LB_BOX.controllers   		= {{"parameter_compare_with_number",0, 3}}
@@ -1136,13 +1161,13 @@ AddElement(LB_BOX)
 
 local L					= create_mfd_tex(NAV_WHEEL_BLACK, 1465, 210, 1540 , 300, FONT_SIZE) 
 L.name					= create_guid_string()
-L.init_pos				= {0.91, 0.215}
+L.init_pos				= {0.91-xcor, 0.215}
 L.parent_element		=  AAR_PAGE.name
 AddElement(L)
 
 local L_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1650, 215, 1742 , 335, FONT_SIZE) 	-- 1 Letter box
 L_BOX.name				= create_guid_string()
-L_BOX.init_pos			= {0.9175, 0.215}
+L_BOX.init_pos			= {0.9175-xcor, 0.215}
 L_BOX.parent_element	= AAR_PAGE.name
 L_BOX.element_params 	= {"UNIT_MODE"}
 L_BOX.controllers   	= {{"parameter_compare_with_number",0, 2}}
@@ -1151,13 +1176,13 @@ AddElement(L_BOX)
 
 local PCT					= create_mfd_tex(NAV_WHEEL_BLACK, 1465, 310, 1540 , 400, FONT_SIZE) 
 PCT.name					= create_guid_string()
-PCT.init_pos				= {0.91, 0.15}
+PCT.init_pos				= {0.91-xcor, 0.15}
 PCT.parent_element			=  AAR_PAGE.name
 AddElement(PCT)
 
 local PCT_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1650, 215, 1742 , 335, FONT_SIZE) 	-- 1 Letter box
 PCT_BOX.name				= create_guid_string()
-PCT_BOX.init_pos			= {0.9175, 0.15}
+PCT_BOX.init_pos			= {0.9175-xcor, 0.15}
 PCT_BOX.parent_element		= AAR_PAGE.name
 PCT_BOX.element_params 		= {"UNIT_MODE"}
 PCT_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
@@ -1166,13 +1191,13 @@ AddElement(PCT_BOX)
 
 local MLAS			= create_mfd_tex(NAV_WHEEL_BLACK, 35, 1410, 110 , 1810,FONT_SIZE) 
 MLAS.name			= create_guid_string()
-MLAS.init_pos		= {-0.97, 0.84}
+MLAS.init_pos		= {-0.97+xcor, 0.84}
 MLAS.parent_element	= LDP_PAGE.name
 AddElement(MLAS)
 
 local MLAS_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 MLAS_BOX.name				= create_guid_string()
-MLAS_BOX.init_pos			= {-0.97, 0.84}
+MLAS_BOX.init_pos			= {-0.97+xcor, 0.84}
 MLAS_BOX.parent_element		= LDP_PAGE.name	
 MLAS_BOX.element_params 	= {"MLAS_TOGGLE"}
 MLAS_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1180,13 +1205,13 @@ AddElement(MLAS_BOX)
 
 local SYMB			= create_mfd_tex(NAV_WHEEL_BLACK, 125, 1080, 225 , 1495,FONT_SIZE) 
 SYMB.name			= create_guid_string()
-SYMB.init_pos		= {-0.97, 0.56}
+SYMB.init_pos		= {-0.97+xcor, 0.56}
 SYMB.parent_element	= LDP_PAGE.name
 AddElement(SYMB)
 
 local SYMB_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 SYMB_BOX.name				= create_guid_string()
-SYMB_BOX.init_pos			= {-0.9725, 0.5575}
+SYMB_BOX.init_pos			= {-0.9725+xcor, 0.5575}
 SYMB_BOX.parent_element		= LDP_PAGE.name	
 SYMB_BOX.element_params 	= {"SYMB_TOGGLE"}
 SYMB_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1195,13 +1220,13 @@ AddElement(SYMB_BOX)
 
 local SRCH			= create_mfd_tex(NAV_WHEEL_BLACK, 125, 1510, 225 , 1910,FONT_SIZE) 
 SRCH.name			= create_guid_string()
-SRCH.init_pos		= {-0.97, 0.26}
+SRCH.init_pos		= {-0.97+xcor, 0.26}
 SRCH.parent_element	= LDP_PAGE.name
 AddElement(SRCH)	
 
 local SRCH_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 SRCH_BOX.name				= create_guid_string()
-SRCH_BOX.init_pos			= {-0.975, 0.2575}
+SRCH_BOX.init_pos			= {-0.975+xcor, 0.2575}
 SRCH_BOX.parent_element		= LDP_PAGE.name	
 SRCH_BOX.element_params 	= {"SRCH_TRCK_MODE"}
 SRCH_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1209,13 +1234,13 @@ AddElement(SRCH_BOX)
 
 local TRCK			= create_mfd_tex(NAV_WHEEL_BLACK, 225, 1080, 325 , 1495,FONT_SIZE) 
 TRCK.name			= create_guid_string()
-TRCK.init_pos		= {-0.97, -0.02}
+TRCK.init_pos		= {-0.97+xcor, -0.02}
 TRCK.parent_element	= LDP_PAGE.name
 AddElement(TRCK)
 
 local TRCK_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 TRCK_BOX.name				= create_guid_string()
-TRCK_BOX.init_pos			= {-0.975, -0.0225}
+TRCK_BOX.init_pos			= {-0.975+xcor, -0.0225}
 TRCK_BOX.parent_element		= LDP_PAGE.name	
 TRCK_BOX.element_params 	= {"SRCH_TRCK_MODE"}
 TRCK_BOX.controllers    	= {{"parameter_compare_with_number",0, 2}}
@@ -1223,13 +1248,13 @@ AddElement(TRCK_BOX)
 
 local BOST			= create_mfd_tex(NAV_WHEEL_BLACK, 225, 1510, 325 , 1910,FONT_SIZE) 
 BOST.name			= create_guid_string()
-BOST.init_pos		= {0.97, 0.56}
+BOST.init_pos		= {0.97-xcor, 0.56}
 BOST.parent_element	= LDP_PAGE.name
 AddElement(BOST)
 
 local SYMB_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 SYMB_BOX.name				= create_guid_string()
-SYMB_BOX.init_pos			= {0.9625, 0.56}
+SYMB_BOX.init_pos			= {0.9625-xcor, 0.56}
 SYMB_BOX.parent_element		= LDP_PAGE.name	
 SYMB_BOX.element_params 	= {"BOST_TOGGLE"}
 SYMB_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1238,13 +1263,13 @@ AddElement(SYMB_BOX)
 
 local WHOT			= create_mfd_tex(NAV_WHEEL_BLACK, 325, 1080, 425 , 1495,FONT_SIZE) 
 WHOT.name			= create_guid_string()
-WHOT.init_pos		= {0.97, 0.84}
+WHOT.init_pos		= {0.97-xcor, 0.84}
 WHOT.parent_element	= LDP_PAGE.name
 AddElement(WHOT)
 
 local WHOT_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_SIZE) 
 WHOT_BOX.name				= create_guid_string()
-WHOT_BOX.init_pos			= {0.9655, 0.8375}
+WHOT_BOX.init_pos			= {0.9655-xcor, 0.8375}
 WHOT_BOX.parent_element		= LDP_PAGE.name	
 WHOT_BOX.element_params 	= {"WHOT_TOGGLE"}
 WHOT_BOX.controllers    	= {{"parameter_compare_with_number",0, 1}}
@@ -1253,7 +1278,7 @@ AddElement(WHOT_BOX)
 
 local IFB			= create_mfd_tex(NAV_WHEEL_BLACK, 325, 1510, 425 , 1820,FONT_SIZE) 
 IFB.name			= create_guid_string()
-IFB.init_pos		= {0.97, 1.15}
+IFB.init_pos		= {0.97-xcor, 1.15}
 IFB.parent_element	= LDP_PAGE.name
 AddElement(IFB)
 

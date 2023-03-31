@@ -529,12 +529,12 @@ local Digital_TGT = add_text_param(0.09, -0.2, "TGT_PARAM", "%02.0f", tgt_indica
 --===================================================================================================================================================================================
 --	STATIC OBJECTS, stuff that stays the same across pages
 --===================================================================================================================================================================================
-
+Ycor = 0.02
 local STORE_SCALE = 0.9
 
 local Stores_WINGS			= create_mfd_tex(STORES_WHITE_COLOR,135, 1740, 1920, 1832, STORE_SCALE)
 Stores_WINGS.name			= create_guid_string()
-Stores_WINGS.init_pos		= {-0.00,-1.25 }
+Stores_WINGS.init_pos		= {-0.00,-1.25+Ycor }
 Stores_WINGS.parent_element	= TAN_LD_MASTER.name
 Stores_WINGS.element_params = {"LD_BRIGHTNESS","STORES_TOGGLE" }
 Stores_WINGS.controllers    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}}
@@ -542,7 +542,7 @@ AddElement(Stores_WINGS)
 
 local Stores_GUN_XF		= create_mfd_tex(STORES_BLACK,810, 1570, 1240, 1740, STORE_SCALE)
 Stores_GUN_XF.name			= create_guid_string()
-Stores_GUN_XF.init_pos		= {-0.0025,-1.235 }
+Stores_GUN_XF.init_pos		= {-0.0025,-1.235+Ycor }
 Stores_GUN_XF.parent_element	= TAN_LD_MASTER.name
 Stores_GUN_XF.element_params = {"STORES_TOGGLE"}
 Stores_GUN_XF.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -550,7 +550,7 @@ AddElement(Stores_GUN_XF)
 
 local Stores_WPN_BOXES		= create_mfd_tex(STORES_BLACK,35, 1960, 2020, 2045, STORE_SCALE)
 Stores_WPN_BOXES.name			= create_guid_string()
-Stores_WPN_BOXES.init_pos		= {-0.00,-1.31 }
+Stores_WPN_BOXES.init_pos		= {-0.00,-1.31+Ycor }
 Stores_WPN_BOXES.parent_element	= TAN_LD_MASTER.name
 Stores_WPN_BOXES.element_params = {"STORES_TOGGLE"}
 Stores_WPN_BOXES.controllers    = {{"parameter_compare_with_number",0, 1}}
@@ -558,7 +558,7 @@ AddElement(Stores_WPN_BOXES)
 
 local MASS_LIVE				= create_mfd_tex(STORES_BLACK, 830, 610, 975, 680, STORE_SCALE)
 MASS_LIVE.name				= create_guid_string()
-MASS_LIVE.init_pos			= {-0.48,-1.1833}
+MASS_LIVE.init_pos			= {-0.48,-1.1833+Ycor}
 MASS_LIVE.parent_element	= TAN_LD_MASTER.name
 MASS_LIVE.element_params 	= {"STORES_TOGGLE", "MASS_PARAM"}
 MASS_LIVE.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number",1, 1} }	
@@ -566,7 +566,7 @@ AddElement(MASS_LIVE)
 
 local MASS_STBY				= create_mfd_tex(STORES_BLACK, 820, 710, 1000, 775, STORE_SCALE)
 MASS_STBY.name				= create_guid_string()
-MASS_STBY.init_pos			= {-0.48,-1.1833}
+MASS_STBY.init_pos			= {-0.48,-1.1833+Ycor}
 MASS_STBY.parent_element	= TAN_LD_MASTER.name
 MASS_STBY.element_params 	= {"STORES_TOGGLE", "MASS_PARAM"}
 MASS_STBY.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number",1, 0} }	
@@ -574,7 +574,7 @@ AddElement(MASS_STBY)
 
 local MASS_SAFE				= create_mfd_tex(STORES_BLACK, 820, 800, 1000, 875, STORE_SCALE)
 MASS_SAFE.name				= create_guid_string()
-MASS_SAFE.init_pos			= {-0.48,-1.1833}
+MASS_SAFE.init_pos			= {-0.48,-1.1833+Ycor}
 MASS_SAFE.parent_element	= TAN_LD_MASTER.name
 MASS_SAFE.element_params 	= {"STORES_TOGGLE", "MASS_PARAM"}
 MASS_SAFE.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number",1, -1} }	
@@ -582,12 +582,12 @@ AddElement(MASS_SAFE)
 
 local tan_offset = 1005	--  Tan text is 1005 px to the right of black text in the dds
 
-local Tip_Left_init_pos = {-0.7325,-1.313 }
-local Outer_Left_init_pos = {-0.455,-1.313 }
-local Inner_Left_init_pos = {-0.18,-1.313 }
-local Tip_Right_init_pos = {0.7225,-1.313 }
-local Outer_Right_init_pos = {0.445,-1.313 }
-local Inner_Right_init_pos = {0.1675,-1.313 }
+local Tip_Left_init_pos = {-0.7325,-1.313+Ycor }
+local Outer_Left_init_pos = {-0.455,-1.313+Ycor }
+local Inner_Left_init_pos = {-0.18,-1.313+Ycor }
+local Tip_Right_init_pos = {0.7225,-1.313+Ycor }
+local Outer_Right_init_pos = {0.445,-1.313+Ycor }
+local Inner_Right_init_pos = {0.1675,-1.313+Ycor }
 
 
 -- =====================================================================================================
@@ -792,13 +792,13 @@ BMST_LO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_L_LOADOUT"}
 BMST_LO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.665,0.675} }
 AddElement(BMST_LO_B)
 
-local M71_LO_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
-M71_LO_B.name			= create_guid_string()
-M71_LO_B.init_pos		= Outer_Left_init_pos
-M71_LO_B.parent_element	= TAN_LD_MASTER.name
-M71_LO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_L_LOADOUT"}
-M71_LO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
-AddElement(M71_LO_B)
+local M71LD_LO_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
+M71LD_LO_B.name				= create_guid_string()
+M71LD_LO_B.init_pos			= Outer_Left_init_pos
+M71LD_LO_B.parent_element	= TAN_LD_MASTER.name
+M71LD_LO_B.element_params 	= {"STORES_TOGGLE", "OUTER_PYLON_L_LOADOUT"}
+M71LD_LO_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
+AddElement(M71LD_LO_B)
 
 local FF82_LO_B			= create_mfd_tex(STORES_BLACK, 400 , 800, 600, 900, STORE_SCALE*1.15)
 FF82_LO_B.name			= create_guid_string()
@@ -912,6 +912,13 @@ SPEAREW_LO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_L_LOADOUT"}
 SPEAREW_LO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.929,0.931} }
 AddElement(SPEAREW_LO_B)
 
+M71HD_LO_B					= create_mfd_tex(STORES_BLACK, 800, 900, 1000, 1000, STORE_SCALE*1.15)
+M71HD_LO_B.name				= create_guid_string()
+M71HD_LO_B.init_pos			= Outer_Left_init_pos
+M71HD_LO_B.parent_element	= TAN_LD_MASTER.name
+M71HD_LO_B.element_params 	= {"STORES_TOGGLE", "OUTER_PYLON_L_LOADOUT"}
+M71HD_LO_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.909,0.911} }
+AddElement(M71HD_LO_B)
 
 
 -- =====================================================================================================
@@ -1055,13 +1062,13 @@ BMST_LI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter
 AddElement(BMST_LI_B)
 
 
-local M71_LI_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
-M71_LI_B.name			= create_guid_string()
-M71_LI_B.init_pos		= Inner_Left_init_pos
-M71_LI_B.parent_element	= TAN_LD_MASTER.name
-M71_LI_B.element_params = {"STORES_TOGGLE", "INNER_PYLON_L_LOADOUT"}
-M71_LI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
-AddElement(M71_LI_B)
+local M71LD_LI_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
+M71LD_LI_B.name				= create_guid_string()
+M71LD_LI_B.init_pos			= Inner_Left_init_pos
+M71LD_LI_B.parent_element	= TAN_LD_MASTER.name
+M71LD_LI_B.element_params 	= {"STORES_TOGGLE", "INNER_PYLON_L_LOADOUT"}
+M71LD_LI_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
+AddElement(M71LD_LI_B)
 
 local FF82_LI_B			= create_mfd_tex(STORES_BLACK, 400 , 800, 600, 900, STORE_SCALE*1.15)
 FF82_LI_B.name			= create_guid_string()
@@ -1231,6 +1238,14 @@ KEPD_LI_B.element_params	= {"STORES_TOGGLE", "INNER_PYLON_L_LOADOUT"}
 KEPD_LI_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.939,0.941} }
 AddElement(KEPD_LI_B)
 
+M71HD_LI_B					= create_mfd_tex(STORES_BLACK, 800, 900, 1000, 1000, STORE_SCALE*1.15)
+M71HD_LI_B.name				= create_guid_string()
+M71HD_LI_B.init_pos			= Inner_Left_init_pos
+M71HD_LI_B.parent_element	= TAN_LD_MASTER.name
+M71HD_LI_B.element_params	= {"STORES_TOGGLE", "INNER_PYLON_L_LOADOUT"}
+M71HD_LI_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.909,0.911} }
+AddElement(M71HD_LI_B)
+
 
 -- Centerline pylon 	==================================================================================================
 
@@ -1240,7 +1255,7 @@ AddElement(KEPD_LI_B)
 -- Cheek pylon 	==================================================================================================
 local LDP			= create_mfd_tex(STORES_BLACK, 800 ,500, 1000,600, STORE_SCALE*1.15)
 LDP.name			= create_guid_string()
-LDP.init_pos		= {0.08,-1.215 }
+LDP.init_pos		= {0.08,-1.195 }
 LDP.parent_element	= TAN_LD_MASTER.name
 LDP.element_params = {"STORES_TOGGLE", "CHEEK_PYLON_LOADOUT"}
 LDP.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.855,0.865} }
@@ -1387,13 +1402,13 @@ BMST_RI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter
 AddElement(BMST_RI_B)
 
 
-local M71_RI_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
-M71_RI_B.name			= create_guid_string()
-M71_RI_B.init_pos		= Inner_Right_init_pos
-M71_RI_B.parent_element	= TAN_LD_MASTER.name
-M71_RI_B.element_params = {"STORES_TOGGLE", "INNER_PYLON_R_LOADOUT"}
-M71_RI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
-AddElement(M71_RI_B)
+local M71LD_RI_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
+M71LD_RI_B.name			= create_guid_string()
+M71LD_RI_B.init_pos		= Inner_Right_init_pos
+M71LD_RI_B.parent_element	= TAN_LD_MASTER.name
+M71LD_RI_B.element_params = {"STORES_TOGGLE", "INNER_PYLON_R_LOADOUT"}
+M71LD_RI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
+AddElement(M71LD_RI_B)
 
 local FF82_RI_B			= create_mfd_tex(STORES_BLACK, 400 , 800, 600, 900, STORE_SCALE*1.15)
 FF82_RI_B.name			= create_guid_string()
@@ -1563,6 +1578,14 @@ KEPD_RI_B.element_params = {"STORES_TOGGLE", "INNER_PYLON_R_LOADOUT"}
 KEPD_RI_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.939,0.941} }
 AddElement(KEPD_RI_B)
 
+M71HD_RI_B					= create_mfd_tex(STORES_BLACK, 800, 900, 1000, 1000, STORE_SCALE*1.15)
+M71HD_RI_B.name				= create_guid_string()
+M71HD_RI_B.init_pos			= Inner_Right_init_pos
+M71HD_RI_B.parent_element	= TAN_LD_MASTER.name
+M71HD_RI_B.element_params 	= {"STORES_TOGGLE", "INNER_PYLON_R_LOADOUT"}
+M71HD_RI_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.909,0.911} }
+AddElement(M71HD_RI_B)
+
 
 -- =====================================================================================================
 -- Right outer				[   ]
@@ -1704,13 +1727,13 @@ BMST_RO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_R_LOADOUT"}
 BMST_RO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.665,0.675} }
 AddElement(BMST_RO_B)
 
-local M71_RO_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
-M71_RO_B.name			= create_guid_string()
-M71_RO_B.init_pos		= Outer_Right_init_pos
-M71_RO_B.parent_element	= TAN_LD_MASTER.name
-M71_RO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_R_LOADOUT"}
-M71_RO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
-AddElement(M71_RO_B)
+local M71LD_RO_B			= create_mfd_tex(STORES_BLACK, 800 , 0, 1000, 100, STORE_SCALE*1.15)
+M71LD_RO_B.name				= create_guid_string()
+M71LD_RO_B.init_pos			= Outer_Right_init_pos
+M71LD_RO_B.parent_element	= TAN_LD_MASTER.name
+M71LD_RO_B.element_params 	= {"STORES_TOGGLE", "OUTER_PYLON_R_LOADOUT"}
+M71LD_RO_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.675,0.685} }
+AddElement(M71LD_RO_B)
 
 local FF82_RO_B			= create_mfd_tex(STORES_BLACK, 400 , 800, 600, 900, STORE_SCALE*1.15)
 FF82_RO_B.name			= create_guid_string()
@@ -1824,6 +1847,14 @@ SPEAREW_RO_B.element_params = {"STORES_TOGGLE", "OUTER_PYLON_R_LOADOUT"}
 SPEAREW_RO_B.controllers    = { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.929,0.931} }
 AddElement(SPEAREW_RO_B)
 
+M71HD_RO_B					= create_mfd_tex(STORES_BLACK, 800, 900, 1000, 1000, STORE_SCALE*1.15)
+M71HD_RO_B.name				= create_guid_string()
+M71HD_RO_B.init_pos			= Outer_Right_init_pos
+M71HD_RO_B.parent_element	= TAN_LD_MASTER.name
+M71HD_RO_B.element_params 	= {"STORES_TOGGLE", "OUTER_PYLON_R_LOADOUT"}
+M71HD_RO_B.controllers    	= { {"parameter_compare_with_number",0, 1}, {"parameter_in_range" ,1,0.909,0.911} }
+AddElement(M71HD_RO_B)
+
 -- =====================================================================================================
 --  Right Wingtip																				[   ]
 -- =====================================================================================================
@@ -1898,7 +1929,7 @@ AddElement(A132_RT_B)
 
 local fuel_percent		= create_mfd_tex_3k(MFD_ELEMENTS_PDD,1724, 0, 2240, 512 )
 fuel_percent.name			= create_guid_string()
-fuel_percent.init_pos		= {0.7, -1}
+fuel_percent.init_pos		= {0.72, -0.99}
 fuel_percent.parent_element	= TAN_LD_MASTER.name
 fuel_percent.element_params = {"FUEL_IND_TOGGLE_M",}
 fuel_percent.controllers    = { {"parameter_compare_with_number",0, 1}}
@@ -1948,7 +1979,7 @@ HORIZON_LINE.element_params 	= {"LD_BRIGHTNESS"}
 HORIZON_LINE.controllers		= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 AddElement2(HORIZON_LINE)
 
-HORIZON_ALT_A			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1512, 1887, 1571 , 1960, 0.8) 
+HORIZON_ALT_A			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1512, 1887, 1571 , 1960, 1) 
 HORIZON_ALT_A.name			= create_guid_string()
 HORIZON_ALT_A.init_pos		= {0.35, 0.039}
 HORIZON_ALT_A.parent_element	= HORIZON_LINE.name
@@ -1956,7 +1987,7 @@ HORIZON_ALT_A.element_params 	= {"LD_BRIGHTNESS"}
 HORIZON_ALT_A.controllers		= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 AddElement3(HORIZON_ALT_A)
 
-green_text_param_with_brightness(0.1, 0 , "RAW_RALT", "%0.0f", HORIZON_ALT_A, mfd_strdefs_digit_S, "Gripen_Font_HL_Green")
+green_text_param_with_brightness(0.14, 0 , "RAW_RALT", "%0.0f", HORIZON_ALT_A, {0.007,0.007, 0, 0}, "Gripen_Font_HL_Green")
 
 
 HORIZON_LINE_FPM			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1504, 1717, 1709 , 1818, 2) 

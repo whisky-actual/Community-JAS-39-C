@@ -40,9 +40,7 @@ dev:listen_command(178)															-- Tank Jettison
 dev:listen_command(82)															-- Weapon Jettison  
 dev:listen_command(171)															-- Weapon Jettison Up  
 dev:listen_command(device_commands.Mass)										-- MASS switch, -1 = Safe, 1 = Live, 0 = Standby
-dev:listen_command(Keys.TriggerAA)
-dev:listen_command(Keys.TriggerAG)
-dev:listen_command(Keys.WeaponRelease)
+dev:listen_command(Keys.Trigger)
 dev:listen_command(Keys.WeaponJettison)
 dev:listen_command(Keys.WeaponJettisonCover)
 dev:listen_command(Keys.TankJettison)
@@ -77,6 +75,8 @@ local PlaneCannonMode = 0
 local MissileMode = 0
 local EmergencyJettisonCover = 0
 local OverrideLA = 0
+
+local GripenType = get_aircraft_type()
 
 local MASS_PARAM = get_param_handle("MASS_PARAM")
 MASS_PARAM:set(MASTER_ARM)
@@ -171,31 +171,31 @@ function SetCommand(command,value)												-- Listen for commands
 		
 	end	
 		
-	if command == Keys.TriggerAA then
-        if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 1 and MissileMode == 0 then 
-            dispatch_action(nil,84)
-        elseif value == 0 then
-            dispatch_action(nil,85)
-        elseif value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 0 and MissileMode == 1 then 
-            dispatch_action(nil,350)
-        elseif value == 0 then
-            dispatch_action(nil,351)				
-        end	
-	end
-
-	if command == Keys.TriggerAG then
-        if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then 
-            dispatch_action(nil,84)
-        elseif value == 0 then
-            dispatch_action(nil,85)			
-        end	
+	if command == Keys.Trigger then
+        if GripenType == 'JAS39Gripen_BVR' then		
+			if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 1 and MissileMode == 0 then 
+				dispatch_action(nil,84)
+			elseif value == 0 then
+				dispatch_action(nil,85)
+			elseif value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 0 and MissileMode == 1 then 
+				dispatch_action(nil,350)
+			elseif value == 0 then
+				dispatch_action(nil,351)				
+			end
+		elseif GripenType == 'JAS39Gripen' or 'JAS39Gripen_AG' then
+			if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then 
+				dispatch_action(nil,84)
+			elseif value == 0 then
+				dispatch_action(nil,85)	
+			end
+		end	
 	end
 
     if command == device_commands.TankJettisonCover then 
 		if value == 1 then
-			TankJettisonCover = 1
+			TankJettisonCover = 1				
 		elseif value == 0 then	
-			TankJettisonCover = 0
+			TankJettisonCover = 0			
 		end
 	end	
 	
@@ -209,9 +209,9 @@ function SetCommand(command,value)												-- Listen for commands
 
     if command == device_commands.WeaponJettisonCover then 
 		if value == 1 then
-			WeaponJettisonCover = 1
+			WeaponJettisonCover = 1			
 		elseif value == 0 then	
-			WeaponJettisonCover = 0
+			WeaponJettisonCover = 0		
 		end
 	end	
 
@@ -227,9 +227,9 @@ function SetCommand(command,value)												-- Listen for commands
 
     if command == device_commands.EmergencyJettisonCover then 
 		if value == 1 then
-			EmergencyJettisonCover = 1
+			EmergencyJettisonCover = 1		
 		elseif value == 0 then	
-			EmergencyJettisonCover = 0
+			EmergencyJettisonCover = 0			
 		end
 	end	
 

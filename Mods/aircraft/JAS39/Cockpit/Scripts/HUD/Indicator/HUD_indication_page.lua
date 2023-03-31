@@ -35,6 +35,10 @@ vs_mode_ind.controllers     		= {{"parameter_in_range" ,0,2.9,3.1} }
 local bore_mode_ind 				= add_text_hud("BORE", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
 bore_mode_ind.element_params  		= {"HUD_MODE"}
 bore_mode_ind.controllers     		= {{"parameter_in_range" ,0,3.9,4.1} }
+
+local hmd_mode_ind 					= add_text_hud("HMD", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+hmd_mode_ind.element_params  		= {"HUD_MODE"}
+hmd_mode_ind.controllers     		= {{"parameter_in_range" ,0,7.9,8.1} }
 	
 local lngt_mode_ind 				= add_text_hud("LNGT", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
 lngt_mode_ind.element_params  		= {"HUD_MODE"}
@@ -69,6 +73,8 @@ local Alfa_indicator 	= add_text_hud_param(-0.63, 0.255, "CUR_AOA","HUD_BRIGHTNE
 local alfa_text 		=  add_text_hud("@", -0.71, 0.255, Left_Side_Indication_base , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
 
 local G_indicator 		= add_text_hud_param(-0.63, 0.18, "CUR_G","HUD_BRIGHTNESS", "%0.1f", Left_Side_Indication_base, HUD_strdefs_digit, "Gripen_Font_green")
+
+local G_indicatoryaw 		= add_text_hud_param(-0.53, 0.18, "Curr_Nylua","HUD_BRIGHTNESS", "%0.1f", Left_Side_Indication_base, HUD_strdefs_digit, "Gripen_Font_green")
 
 local G_text 			= add_text_hud("G", -0.71, 0.18, Left_Side_Indication_base , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
 

@@ -44,7 +44,7 @@ JAS_ADARTER_AA = {
 
     --seeker sensivity params
     SeekerSensivityDistance = 22000, -- The range of target with IR value = 1. In meters.
-    ccm_k0        = 0.18,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
+    ccm_k0        = 0.05,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
     SeekerCooled  = true, -- True is cooled seeker and false is not cooled seeker.
 
     shape_table_data = {

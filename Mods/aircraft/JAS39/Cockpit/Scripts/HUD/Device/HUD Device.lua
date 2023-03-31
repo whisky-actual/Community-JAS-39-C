@@ -68,8 +68,10 @@ function post_initialize()
 
 	if GripenType == 'JAS39Gripen' then
 		get_param_handle("GRIPEN_TYPE"):set(1)
-	elseif GripenType == 'JAS39Gripen_AG' then
+	elseif GripenType == 'JAS39Gripen_BVR' then
 		get_param_handle("GRIPEN_TYPE"):set(2)
+	elseif GripenType == 'JAS39Gripen_AG' then
+		get_param_handle("GRIPEN_TYPE"):set(3)
 	end
 
 

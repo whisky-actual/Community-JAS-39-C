@@ -1,0 +1,13 @@
+wave = "Effects/Aircrafts/Engines/Distant_Jet_Front2"
+auto_width = false
+nodoppler = true
+distance_filter_offset = 350
+silent_radius = 10
+peak_radius = 150
+inner_radius = 350
+outer_radius = 3000
+cone_inner_angle = 30
+cone_outer_angle = 70
+cone_outer_gain = 0
+direction = {1, 0, 0}
+gain = 4.9

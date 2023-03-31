@@ -1,0 +1,13 @@
+wave = "Effects/Aircrafts/Engines/Distant_Jet_Afterburner_Side"
+auto_width = false
+nodoppler = true
+distance_filter_offset = 1000
+silent_radius = 10
+peak_radius = 50
+inner_radius = 800
+outer_radius = 3300
+cone_inner_angle = 70
+cone_outer_angle = 45
+cone_outer_gain = 0
+direction = {1, 0, 0}
+gain = 7.5

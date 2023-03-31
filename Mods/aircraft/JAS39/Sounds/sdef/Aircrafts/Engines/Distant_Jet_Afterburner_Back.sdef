@@ -1,0 +1,14 @@
+wave = "Effects/Aircrafts/Engines/Distant_Jet_Afterburner_Back"
+auto_width = false
+distance_filter_offset = 800
+silent_radius = 10
+peak_radius = 200
+inner_radius = 400
+outer_radius = 3500
+cone_inner_angle = 40
+cone_outer_angle = 85
+cone_outer_gain = 0.03
+direction = {-1, 0, 0}
+position = {-3.0, 0.0, 0.0}
+pitch = 1.5
+gain = 7.2

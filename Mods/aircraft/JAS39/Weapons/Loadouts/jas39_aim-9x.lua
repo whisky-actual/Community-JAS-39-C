@@ -36,7 +36,7 @@ JAS_AIM9X_AA = {
         OmViz_max = 1.10,
         warhead = enhanced_a2a_warhead(5.0),
         exhaust = { 0.7, 0.7, 0.7, 0.08 };
-        X_back = -1.92,
+        X_back = -1.65,
         Y_back = 0.0,
         Z_back = 0.0,
         Reflection = 0.03,
@@ -44,7 +44,7 @@ JAS_AIM9X_AA = {
 
     --seeker sensivity params
     SeekerSensivityDistance = 14000, -- The range of target with IR value = 1. In meters.
-    ccm_k0        = 0.2,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
+    ccm_k0        = 0.05,  -- Counter Countermeasures Probability Factor. Value = 0 - missile has absolutely resistance to countermeasures. Default = 1 (medium probability)
     SeekerCooled  = true, -- True is cooled seeker and false is not cooled seeker.
 
 	PN_coeffs = {3, 				-- Number of Entries	

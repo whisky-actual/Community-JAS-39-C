@@ -5,7 +5,7 @@ local function counter()
 end
 -------DEVICE ID----------
 devices = {}
---devices["ELECTRIC_SYSTEM"]	= counter()
+devices["ELECTRIC_SYSTEM"]	= counter()
 devices["OP_PHASES"]		= counter()
 devices["WHEEL_BRAKES"]		= counter()
 devices["ACCESSORIES"]		= counter()
@@ -14,10 +14,10 @@ devices["ENGINE"]			= counter()
 devices["NVG"]              = counter()
 devices["AIRBRAKES"]      	= counter()
 devices["LEF"]				= counter()
+devices["FLYBYWIRE"]		= counter()
 devices["ELEVONS"]			= counter()
 devices["RUDDER"]			= counter()
 devices["CANARDS"]			= counter()
-devices["FLYBYWIRE"]		= counter()
 devices["AUTOTHROTTLE"]		= counter()
 devices["WEAPONS"]			= counter()
 devices["MFD"]				= counter()
@@ -29,5 +29,8 @@ devices["COUNTERMEASURES"]	= counter()
 devices["STORES"]			= counter()
 devices["FUEL"]				= counter()-- Needs to be after STORES in order for it to work
 devices["NAVIGATION"]		= counter()
-
-
+devices["HMD"]				= counter()
+devices["RWR"]        		= counter()
+devices["FC3"]        		= counter()
+devices["UCP"]        		= counter()
+devices["LCP"]        		= counter()

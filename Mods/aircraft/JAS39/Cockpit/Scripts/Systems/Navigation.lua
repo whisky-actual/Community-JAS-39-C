@@ -58,7 +58,21 @@ function post_initialize()
 --local x, z = Terrain.convertLatLonToMeters(lat,long)
 --gets you the METERS coord system from Lat Long
 
+
+
+
+	--local mr = get_mission_route()
+
+
+
 end
+
+local degrees =  0
+local minutes =  0
+local seconds =  0
+
+local LCP_CoordLAT = get_param_handle("LCP_LAT")
+local LCP_CoordLON = get_param_handle("LCP_LON")
 
 local DDM_DEG_LAT = 0
 local DDM_MIN_LAT = 0
@@ -73,23 +87,82 @@ local LON_DECIMALMINUTES = get_param_handle("LON_DECIMALMINUTES")
 
 local PULLUPQUE 		 = get_param_handle("PULLUPQUE")
 local PULLMORE 		 	 = get_param_handle("PULLMORE")
+local TEST_PARAM 		 = get_param_handle("TEST_PARAM")
+
 local LoadFactorBlink 	 = 0
 local LoadfactorTooLow 	 = 0
 
+
+function set_d1_xy(x, y)
+    local geopos = lo_to_geo_coords(x, y)
+    asn41_d1_lat_offset = 0
+    asn41_d1_lon_offset = 0
+    asn41_d1_lat = geopos.lat
+    asn41_d1_lon = geopos.lon
+end
+
+function set_d2_xy(x, y)
+    local geopos = lo_to_geo_coords(x, y)
+    asn41_d2_lat_offset = 0
+    asn41_d2_lon_offset = 0
+    asn41_d2_lat = geopos.lat
+    asn41_d2_lon = geopos.lon
+end
+
+
+function convert_dd_to_dms(decimal_degrees)
+    local d = math.floor(decimal_degrees)
+    local m = math.floor((decimal_degrees - d) * 60)
+    local s = math.floor(((((decimal_degrees - d) * 60) - m) * 60) + 0.5 )
+    return d, m, s
+end
+
+function AddCharIf(DSM, LONbool)
+
+	if not LONbool then
+		if DSM < 10 then
+			DSM = "0"..DSM
+		end
+	else
+		if DSM >= 10 and DSM < 100 then
+			DSM = "0"..DSM
+		elseif DSM < 10 then
+			DSM = "00"..DSM
+		end
+	end
+
+	return DSM
+end
+
+
 function update()
+
 	-- Y = LON, X = LAT
+	
 	local X_COORD_MET, Z_COORD_MET, Y_COORD_MET = sensor_data.getSelfCoordinates()		-- AC coordinates in meters
 		
+	--convert_to_dms(X_COORD_MET, Y_COORD_MET)
+
+
 		GPS_ALTITUDE_FEET:set(Z_COORD_MET* 3.2808399)
 		
 	local LAT_COORD_DEC,LON_COORD_DEC = Terrain.convertMetersToLatLon(X_COORD_MET,Y_COORD_MET)
 	-- turns the Meters Coords system to LatLong (be aware , it returns 2 vars)
+	--print_message_to_user(LAT_COORD_DEC.."  "..LON_COORD_DEC)
+
+
+	degrees, minutes, seconds = convert_dd_to_dms(LAT_COORD_DEC)
+
+	LCP_CoordLAT:set("A/C POS:  "..AddCharIf(degrees).."@"..AddCharIf(minutes).."^"..AddCharIf(seconds).."]N")
 	
+
+	degrees, minutes, seconds = convert_dd_to_dms(LON_COORD_DEC)
+
+	LCP_CoordLON:set("_______: "..AddCharIf(degrees, true).."@"..AddCharIf(minutes).."^"..AddCharIf(seconds).."]E")
+
+
 	
-	--print_message_to_user(LON_COORD_DEC)
-	
-	
-	
+--Degrees, decimal minutes	
 	DDM_DEG_LAT = math.floor(LAT_COORD_DEC) 
 	DDM_MIN_LAT = (LAT_COORD_DEC - DDM_DEG_LAT) * 60
 	
@@ -102,27 +175,16 @@ function update()
 	LON_DEGREES:set(DDM_DEG_LON) 		
 	LON_DECIMALMINUTES:set(DDM_MIN_LON-0.0005)
 	
-	
 	local TerrainAltitude = Terrain.GetHeight(X_COORD_MET,Y_COORD_MET)	-- terrain altitude at given X,Y coordinates, in meters
 	
 	TERRAIN_ALT:set(TerrainAltitude* 3.2808399)	--Terrain Altitude in feet
-	
 	
 	local v_x, v_z, v_y = sensor_data.getSelfVelocity() --Velocity in m/s
 	
 	local SafteySeconds = 5 
 	
-	
-	
+	SafteySeconds = SafteySeconds + math.sqrt(sensor_data.getPitch()^2) + sensor_data.getMachNumber()
 
-		SafteySeconds = SafteySeconds + math.sqrt(sensor_data.getPitch()^2) + sensor_data.getMachNumber()
-
-	
-	--print_message_to_user( SafteySeconds)
-	
-	
-	
-	
 	v_x = v_x * SafteySeconds	-- +m/s North
 	
 	v_y = v_y * SafteySeconds	-- +m/*s East	
@@ -137,132 +199,25 @@ function update()
 
 	if (PlaneAltitude - CollisionAltitude <= PULLUPQUE:get()) and ( v_z < 0) then
 		LoadfactorTooLow = 1
-		
-		
 	else
-
 		LoadfactorTooLow = 0
 		LoadFactorBlink = 0
-		
-		
 	end
 	
 	if LoadfactorTooLow == 1 then
 		if LoadFactorBlink < 1 then
 			LoadFactorBlink = LoadFactorBlink + 0.0225
-			
 		else
 			LoadFactorBlink = 0
-
 		end	
-	
-		
 	end
 
 	PULLMORE:set(LoadFactorBlink)
 
-
 -- terrain height of AC coords in 5 seconds  - AC Altitude in 5 seconds
 	PULLUPQUE:set(PlaneAltitude - CollisionAltitude)
-
-	--get_param_handle("PULLUPQUE"):set(-2000)
-
---print_message_to_user(PULLUPQUE:get())
 
 end
 
 need_to_be_closed = 0
 
---[[
---**This file is an attempt to document every available function in lua in DCS, but is incomplete at the moment**
-
-local dev = GetSelf() --With this utility function the following can be used: performClickableAction, listen_command, listen_event, and for some special devices like avSimpleElectricSystem and avSimpleWeaponSystem there are a few more available
-
-dev:listen_command()
-function SetCommand(command,value) -- function called by DCS when a command is triggered
-end
-
-dev:listen_event("GroundPowerOn")
-dev:listen_event("GroundPowerOff")
-dev:listen_event("GroundAirOff")
-dev:listen_event("GroundAirOn")
-dev:listen_event("WeaponRearmFirstStep")
-dev:listen_event("WeaponRearmComplete")
-dev:listen_event("WeaponRearmSingleStepComplete")
-dev:listen_event("UnlimitedWeaponStationRestore")
-dev:listen_event("WheelChocksOn")
-dev:listen_event("WheelChocksOff")
-function CockpitEvent(event,val) -- function called by DCS when event happens
-end
-
-dev:performClickableAction(command, value, true/false)--This is used to ‘click’ a switch without using your mouse. This is used a lot for when a key is pressed and you want that key to move a switch.
-
-post_initialize() --This function is run once at the beginning of mission start
-
-update() --This function is run multiple times a second, depending on the update rate set. At the beginning of your device script you must define the update rate using make_default_activity()
-
-print_message_to_user(output)--prints on screen in game, very useful for debug
-
-local sensor_data = get_base_data() -- sensor data, full list below
-getAngleOfAttack()
-getAngleOfSlide()
-getBarometricAltitude()
-getCanopyPos()
-getCanopyState()
-getEngineLeftFuelConsumption()
-getEngineLeftRPM()
-getEngineLeftTemperatureBeforeTurbine()
-getEngineRightFuelConsumption()
-getEngineRightRPM()
-getEngineRightTemperatureBeforeTurbine()
-getFlapsPos()
-getFlapsRetracted()
-getHeading()
-getHorizontalAcceleration()
-getIndicatedAirSpeed()
-getLandingGearHandlePos()
-getLateralAcceleration()
-getLeftMainLandingGearDown()
-getLeftMainLandingGearUp()
-getMachNumber()
-getMagneticHeading()
-getNoseLandingGearDown()
-getNoseLandingGearUp()
-getPitch()
-getRadarAltitude()
-getRateOfPitch()
-getRateOfRoll()
-getRateOfYaw()
-getRightMainLandingGearDown()
-getRightMainLandingGearUp()
-getRoll()
-getRudderPosition()
-getSpeedBrakePos()
-getSelfAirspeed()
-getSelfCoordinates()
-getSelfVelocity()
-getStickPitchPosition()
-getStickRollPosition()
-getThrottleLeftPosition()
-getThrottleRightPosition()
-getTotalFuelWeight()
-getTrueAirSpeed()
-getVerticalAcceleration()
-getVerticalVelocity()
-getWOW_LeftMainLandingGear()
-getWOW_NoseLandingGear()
-getWOW_RightMainLandingGear()
-
-set_aircraft_draw_argument_value(arg #, value)
-get_aircraft_draw_argument_value(arg)
-get_cockpit_draw_argument_value(arg)
-
-dispatch_action(device ID, command, value)--Triggers command with value. Similar to device:performClickableAction() but doesn’t move the switch
-
-get_param_handle(name)--This is used to set a param handle, best described as a global variable. It is useful for setting animations in mainpanel.lua, getting information into indicators, and getting information between an EFM and lua if you have an EFM. You use :set(value) and :get() to set and read it. Usage would look like:
-throttle_position = get_param_handle("THROTTLE_POSITION")
-throttle_position:set(0.5)
-throttle_position:get()
-
-
---]]

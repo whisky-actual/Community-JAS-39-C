@@ -2,6 +2,18 @@ dofile(LockOn_Options.script_path.."clickable_defs.lua")
 dofile(LockOn_Options.script_path.."command_defs.lua")
 dofile(LockOn_Options.script_path.."devices.lua")
 --dofile(LockOn_Options.script_path.."sounds.lua")
+--------------------------------------------------
+--QAQC Functions
+--------------------------------------------------
+--function update()
+--print_message_to_user(get_cockpit_draw_argument_value(2077))
+--show_element_boxes = true
+--show_element_parent_boxes = true
+--show_indicator_borders = true
+--enable_commands_log = true
+--use_click_and_pan_mode = true
+--show_tree_boxes = true
+--show_other_pointers = true
 
 cursor_mode = 
 { 
@@ -17,49 +29,153 @@ local gettext = require("i_18n")
 _ = gettext.translate
 
 elements = {}
-
-
-
-elements["PNT_1003"] = default_2_position_tumb(_("Landing Gear (Up/Down)"),	devices.GEAR,	device_commands.LandingGearLever,	1003,JAS39HEAVYSWITCH,1.5)
-elements["PNT_1013"] = default_3_position_tumb(_("Mass (Safe/Stby/Live)"),	devices.WEAPONS,	device_commands.Mass, 	1013,nil,true,JAS39KNOB2)
-elements["PNT_1060"] = springloaded_3_pos_tumb(_("Start (On/Off)"),	devices.ENGINE,	device_commands.Start, 	1060, false, JAS39KNOB1,5)
-elements["PNT_904"] = default_2_position_tumb(_("Main Power (On/Off)"),	devices.ENGINE,	device_commands.Main, 	904,JAS39CLICK2)
-elements["PNT_1011"] = default_2_position_tumb(_("Fuel Switch Cover (Open/Close)"),	devices.ENGINE,	device_commands.FuelCover, 	1011,JAS39KNOB1)
-elements["PNT_1010"] = default_2_position_tumb(_("Fuel Switch (On/Off)"),	devices.ENGINE,	device_commands.Fuel, 	1010,JAS39CLICK2)
-elements["PNT_1061"] = default_2_position_tumb(_("APU (On/Off)"),	devices.ENGINE,	device_commands.APU, 	1061,JAS39CLICK2)
-elements["PNT_571"] = default_2_position_tumb(_("ThrottleStop (On/Off)"),	devices.ENGINE,	device_commands.ThrottleStop, 	571,JAS39KNOB2,3.0)
-elements["PNT_1005"] = default_2_position_tumb("Canopy (Open/Close)", devices.CANOPY, device_commands.CanopyLever, 1005,JAS39HEAVYSWITCH, 1.5)
-elements["PNT_1018"] = default_2_position_tumb(_("Tank Jettison Cover (Open/Close)"),	devices.WEAPONS,	device_commands.TankJettisonCover, 	1018,JAS39KNOB1)
-elements["PNT_1016"] = default_button(_("Tank Jettison"),	devices.WEAPONS,	device_commands.TankJettison,	1016,1,{0,1},JAS39CLICK1)
-elements["PNT_1017"] = default_2_position_tumb(_("Weapons Jettison Cover (Open/Close)"),	devices.WEAPONS,	device_commands.WeaponJettisonCover, 	1017,JAS39KNOB1)
-elements["PNT_1015"] = default_button(_("Weapons Jettison"),  devices.WEAPONS, device_commands.WeaponJettison,   	1015,1,{0,1}, JAS39CLICK1)
-elements["PNT_976"] = default_2_position_tumb(_("Parking Brake (Enable/Disable)"),	devices.WHEEL_BRAKES,	device_commands.ParkingBrake,	976,JAS39KNOB2,3.0)
-elements["PNT_946"]	= default_axis_limited(_("Flood Light"),	devices.LIGHTS, device_commands.FloodLight, 180)
-
-elements["PNT_842"] = Mfd_button(_("Master Caution"),  devices.CANOPY, device_commands.MasterCaution,  842,1,{0,1},JAS39CLICK1)
+-------------------------------------------------------
+--FC3 Commands
+-------------------------------------------------------
+elements["PNT_1253"] = Mfd_button(_("Autopilot - Transition To Level Flight Control"),  devices.FC3,	device_commands.AP_RSET,	1253,1,{0,1},JAS39MFD1)
+elements["PNT_1254"] = Mfd_button(_("Autopilot - Altitude Hold"),devices.FC3,	device_commands.AP_ALT,		1254,1,{0,1},JAS39MFD1)
+elements["PNT_1255"] = Mfd_button(_("Autopilot - Attitude Hold"),devices.FC3,	device_commands.AP_ATT,		1255,1,{0,1},JAS39MFD1)
+elements["PNT_1256"] = Mfd_button(_("Autopilot - Disengage"),	devices.FC3,	device_commands.AP_OFF,		1256,1,{0,1},JAS39MFD1)
+--elements["PNT_730"] = Mfd_button(_("Next Waypoint"),		    devices.FC3,	device_commands.NAV_NEXT,	730,1,{0,1},JAS39MFD1)
+--elements["PNT_730"] = Mfd_button(_("Previous Waypoint"),	    devices.FC3,	device_commands.NAV_PREV,	730,1,{0,1},JAS39MFD1)
+elements["PNT_1097"] = Mfd_button(_("Radar Power"),			    devices.FC3,	device_commands.RDR_PWR,	1097,1,{0,1},JAS39MFD1)
+elements["PNT_1098"] = Mfd_button(_("Radar Mode"),			    devices.FC3,	device_commands.RDR_MODE,	1098,1,{0,1},JAS39MFD1)
+elements["PNT_1099"] = Mfd_button(_("Radar Pulse Repeat Frequency"),devices.FC3,device_commands.RDR_PRF,	1099,1,{0,1},JAS39MFD1)
+elements["PNT_1100"] = Mfd_button(_("Radar Zoom Out"),		    devices.FC3,	device_commands.RDR_OUT,	1100,1,{0,1},JAS39MFD1)
+elements["PNT_1101"] = Mfd_button(_("Radar Zoom In"),		    devices.FC3,	device_commands.RDR_IN,		1101,1,{0,1},JAS39MFD1)
+elements["PNT_1102"] = Mfd_button(_("Scan Zone Left/Radar Scan Zone Decrease"), devices.FC3,	device_commands.RDR_LEFT,	1102,1,{0,1},JAS39MFD1)
+elements["PNT_1103"] = Mfd_button(_("Scan Zone Right/Radar Scan Zone Increase"),devices.FC3,	device_commands.RDR_RIGHT,	1103,1,{0,1},JAS39MFD1)
+elements["PNT_1086"] = Mfd_button(_("Electro-Optical System On/Off"),			devices.FC3,	device_commands.EO,			1086,1,{0,1},JAS39MFD1)
+elements["PNT_1087"] = Mfd_button(_("Scan Zone Up"),			devices.FC3,	device_commands.RDR_UP,		1087,1,{0,1},JAS39MFD1)
+elements["PNT_1088"] = Mfd_button(_("Scan Zone Down"),		    devices.FC3,	device_commands.RDR_DOWN,	1088,1,{0,1},JAS39MFD1)
+elements["PNT_1257"] = Mfd_button(_("HMD ON/OFF"),				devices.HMD,	device_commands.HMDTOGGLE,	1257,1,{0,1},JAS39MFD1)
+elements["PNT_2001"] = Mfd_button(_("Kneeboard"),				devices.FC3,	device_commands.MAP,	2001,1,{0,1},JAS39MFD1)
+elements["PNT_3009"] = Mfd_button(_("Hide Left Kneeboard"),	    devices.FC3,	device_commands.LKneeboardDraw,		3009,1,{0,1},JAS39MFD1)
+elements["PNT_3010"] = Mfd_button(_("Hide Rigth Kneeboard"),    devices.FC3,	device_commands.RKneeboardDraw,		3010,1,{0,1},JAS39MFD1)
+elements["PNT_3006"] = Mfd_button(_("Hide Joystick"),			devices.FC3,	device_commands.JoystickDraw,		3006,1,{0,1},JAS39MFD1)
+--elements["PNT_2002"] = Mfd_button(_("F10 Map"),				devices.FC3,	device_commands.KNEEBOARD,	2002,1,{0,1},JAS39MFD1)
+elements["PNT_3004"] = Mfd_button(_("Mirrors On/Off"),		    devices.FC3,	device_commands.MIRROR,		3004,1,{0,1},JAS39MFD1)
+elements["PNT_3004_1"] = Mfd_button(_("Mirrors On/Off"),		devices.FC3,	device_commands.MIRROR,		3004,1,{0,1},JAS39MFD1)
+elements["PNT_1091"] = Mfd_button(_("T1"),						devices.FC3,	device_commands.T1,			1091,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+elements["PNT_1092"] = Mfd_button(_("T2"),						devices.FC3,	device_commands.T2,			1092,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+elements["PNT_1093"] = Mfd_button(_("T3"),						devices.FC3,	device_commands.T3,			1093,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+elements["PNT_1094"] = Mfd_button(_("T4"),						devices.FC3,	device_commands.T4,			1094,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+elements["PNT_1095"] = Mfd_button(_("T5"),						devices.FC3,	device_commands.T5,			1095,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+elements["PNT_1096"] = Mfd_button(_("T6"),						devices.FC3,	device_commands.T6,			1096,1,{0,1},JAS39MFD1) -- lower row RD softkeys (use to test)
+-------------------------------------------------------
+--Left Console Panel
+------------------------------------------------------- 
+elements["PNT_564"] = default_2_position_tumb(_("AAR Probe Cover (Open/Close)"),	devices.CANOPY,	device_commands.AARProbeCover, 	564,JAS39KNOB1)
+elements["PNT_963"] = default_2_position_tumb(_("AAR Probe (In/Out)"),	devices.CANOPY,	device_commands.AARProbe, 	963,JAS39CLICK2)
 elements["PNT_947"] = default_2_position_tumb(_("Covert Lights (Covert/Normal)"),	devices.LIGHTS,	device_commands.CovertLights,  947,JAS39CLICK2)
 elements["PNT_948"]	= multiposition_switch_limited(_("Formation lights (Off/1/2/3/4)"),	devices.LIGHTS, device_commands.FormationLights, 948, 5, 0.5, false, -1, JAS39KNOB2, 3.0)
 elements["PNT_950"] = default_3_position_tumb(_("Navigation Lights (Off/Dim/Bright)"),	devices.LIGHTS, device_commands.NavigationLights, 950,nil,true,JAS39CLICK2)
 elements["PNT_951"] = default_2_position_tumb(_("Navigation Lights Flash (Flash/Steady)"),	devices.LIGHTS,	device_commands.FormFlashLights,  951,JAS39CLICK2)
 elements["PNT_952"] = default_2_position_tumb(_("Anti collision Lights (On/Off)"),	devices.LIGHTS,	device_commands.AntiCollisionLights,  952,JAS39CLICK2)
 elements["PNT_980"] = springloaded_3_pos_tumb(_("Seat (Down/Up"),	devices.CANOPY,	device_commands.SeatUpDown,  980,false,JAS39CLICK2,10)
-elements["PNT_1012"] = default_2_position_tumb(_("Canopy Jettison (Enable/Disable)"),	devices.CANOPY,	device_commands.CanopyJettison,	1012,JAS39KNOB2,3.0)
 elements["PNT_1065"] = default_3_position_tumb(_("Landing and Taxi Lights (Land/Off/Taxi"),	devices.LIGHTS, device_commands.LandingTaxiLights, 1065,nil,true,JAS39CLICK2)
-elements["PNT_973"] = default_axis_limited(_("Ejection handle"),  devices.CANOPY, device_commands.SeatEject,  973)
-elements["PNT_972"] = default_2_position_tumb(_("Ejection Seat (Safe/Arm)"),	devices.CANOPY,	device_commands.SeatArm,	972,JAS39HEAVYSWITCH,1.5)
-elements["PNT_953"] = default_2_position_tumb(_("DTU (Insert/Eject)"),	devices.ENGINE,	device_commands.DTU, 	953,JAS39MFD1,1.0)
-elements["PNT_1075"] = default_2_position_tumb(_("Trigger Safe (Safe/Armed)"),	devices.WEAPONS,	device_commands.TriggerSafe, 	1075,JAS39MFD1)
-elements["PNT_564"] = default_2_position_tumb(_("AAR Probe Cover (Open/Close)"),	devices.CANOPY,	device_commands.AARProbeCover, 	564,JAS39KNOB1)
-elements["PNT_963"] = default_2_position_tumb(_("AAR Probe (In/Out)"),	devices.CANOPY,	device_commands.AARProbe, 	963,JAS39CLICK2)
+elements["PNT_1011"] = default_2_position_tumb(_("Fuel Switch Cover (Open/Close)"),	devices.ENGINE,	device_commands.FuelCover, 	1011,JAS39KNOB1)
+elements["PNT_1010"] = default_2_position_tumb(_("Fuel Switch (On/Off)"),	devices.ENGINE,	device_commands.Fuel, 	1010,JAS39CLICK2)
+-------------------------------------------------------
+--Left Auxiliary Console
+-------------------------------------------------------
+elements["PNT_1003"] = default_2_position_tumb(_("Landing Gear (Up/Down)"),	devices.GEAR,	device_commands.LandingGearLever,	1003,JAS39HEAVYSWITCH,1.5)
+elements["PNT_1060"] = springloaded_3_pos_tumb(_("Start (On/Off)"),	devices.ENGINE,	device_commands.Start, 	1060, false, JAS39KNOB1,5)
 elements["PNT_1080"] = default_2_position_tumb(_("Emergency Jettison Cover (Open/Close)"),	devices.WEAPONS,	device_commands.EmergencyJettisonCover, 	1080,JAS39KNOB1)
 elements["PNT_1081"] = default_button(_("Emergency Jettison"),	devices.WEAPONS,	device_commands.EmergencyJettison,	1081,1,{0,1},JAS39CLICK1)
+-------------------------------------------------------
+--UCP (Upfront Control Panel)
+-------------------------------------------------------
+--elements["PNT_1238"] = default_axis_limited(_("HUD Brightness"),		devices.DISPLAYS,	device_commands.HUD_Brightness, 1238)
+elements["PNT_1238"] = default_axis_limited(_("HUD Brightness"),        devices.DISPLAYS,   device_commands.HUD_Brightness, 1238, 0, 0.1, false, false, {0, 1})
+elements["PNT_1262"] = Mfd_button(_("MENU"),							devices.UCP,	 	device_commands.UCP_MENU,	    1262,1,{0,1},JAS39MFD1)
+--elements["PNT_1263"] = Mfd_button(_("1"),								devices.UCP,		device_commands.UCP_1,			1263,1,{0,1},JAS39MFD1)
+elements["PNT_1263"] = Mfd_button(_("COM1 (Comms menu)"),				devices.FC3,		device_commands.COM1,			1263,1,{0,1},JAS39MFD1)
+elements["PNT_1264"] = Mfd_button(_("T (2)"),							devices.UCP,		device_commands.UCP_2,			1264,1,{0,1},JAS39MFD1)
+elements["PNT_1265"] = Mfd_button(_("LP (3)"),							devices.UCP,		device_commands.UCP_3,			1265,1,{0,1},JAS39MFD1)
+elements["PNT_1266"] = Mfd_button(_("DAT (+/-)"),						devices.UCP,		device_commands.UCP_DAT,		1266,1,{0,1},JAS39MFD1)
+elements["PNT_1267"] = Mfd_button(_("SHIFT"),							devices.UCP,		device_commands.UCP_SHIFT,		1267,1,{0,1},JAS39MFD1)
+--elements["PNT_1268"] = Mfd_button(_("4"),								devices.UCP,		device_commands.UCP_4,			1268,1,{0,1},JAS39MFD1)
+elements["PNT_1268"] = Mfd_button(_("COM2 (Rearm and refuel)"),			devices.FC3,		device_commands.COM2,			1268,1,{0,1},JAS39MFD1)
+elements["PNT_1269"] = Mfd_button(_("W (5)"),							devices.UCP,		device_commands.UCP_5,			1269,1,{0,1},JAS39MFD1)
+elements["PNT_1270"] = Mfd_button(_("OF (6)"),							devices.UCP,		device_commands.UCP_6,			1270,1,{0,1},JAS39MFD1)
+elements["PNT_1271"] = Mfd_button(_("IFF (0)"),							devices.UCP,		device_commands.UCP_0,			1271,1,{0,1},JAS39MFD1)
+elements["PNT_1272"] = Mfd_button(_("ENTER"),							devices.UCP,		device_commands.UCP_AMFM_ENT,	1272,1,{0,1},JAS39MFD1)
+elements["PNT_1273"] = Mfd_button(_("CP (7)"),							devices.UCP,		device_commands.UCP_7,			1273,1,{0,1},JAS39MFD1)
+--elements["PNT_1274"] = Mfd_button(_("8"),								devices.UCP,		device_commands.UCP_8,			1274,1,{0,1},JAS39MFD1)
+elements["PNT_1274"] = Mfd_button(_("L (8)"),							devices.UCP,		device_commands.UCP_L,			1274,1,{0,1},JAS39MFD1)
+elements["PNT_1275"] = Mfd_button(_("D (9)"),							devices.UCP,		device_commands.UCP_9,			1275,1,{0,1},JAS39MFD1)
+elements["PNT_1276"] = Mfd_button(_("CLR"),								devices.UCP,		device_commands.UCP_CLR,		1276,1,{0,1},JAS39MFD1)
+elements["PNT_1249"] = default_axis_limited(_("UCP Brightness"),		devices.UCP,		device_commands.UCP_Brightness, 1243, 0, 0.1, false, false, {0, 1})
 
--- UCP =====
-elements["PNT_701"] = Mfd_button(_("COM1 (Comms menu)"),		devices.DISPLAYS,	device_commands.COM1,	701,1,{0,1},JAS39MFD1)
-elements["PNT_708"] = Mfd_button(_("COM2 (Rearm and refuel)"),	devices.DISPLAYS,	device_commands.COM2,	708,1,{0,1},JAS39MFD1)
-elements["PNT_716"] = Toggle_Button(_("Landing Mode"),			devices.OP_PHASES,	10060,					716,1,{0,1},JAS39MFD1)
 
--- Left MFD =====
+-- elements["PNT_1263"] = Mfd_button(_("COM1 EDIT"),						devices.UCP,		device_commands.UCP_COM1_EDIT,	1263,1,{0,1},JAS39MFD1)
+--elements["PNT_1327"] = Mfd_button(_("COM2 EDIT"),						devices.UCP,		device_commands.UCP_COM2_EDIT,	1327,1,{0,1},JAS39MFD1)
+--elements["PNT_1331"] = Mfd_button(_("AUX EDIT"),						devices.UCP,		device_commands.UCP_AUX_EDIT,	1331,1,{0,1},JAS39MFD1)
+--elements["PNT_934"]	 = default_axis_limited(_("PTT1"),					devices.UCP,	 	device_commands.UCP_PTT1,	    934)
+--elements["PNT_938"]	 = default_axis_limited(_("PTT2"),					devices.UCP,	 	device_commands.UCP_PTT2,	    938)
+--elements["PNT_939"]  = default_axis_limited(_("Volume"),				devices.UCP,	 	device_commands.UCP_VOL,	    939)
+--elements["PNT_935"]  = default_2_position_tumb(_("TELE (on/off)"),		devices.UCP,		device_commands.UCP_TELE_OFF,   935,JAS39CLICK2)
+-------------------------------------------------------
+--Instrument Panel
+-------------------------------------------------------
+elements["PNT_1280"] = default_axis_limited(_("MFD Brightness Master"),	devices.DISPLAYS, device_commands.MASTER_BRIGHTNESS, 1280)--Work
+elements["PNT_842"]  = Mfd_button(_("Master Caution"),  devices.CANOPY, device_commands.MasterCaution,  842,1,{0,1},JAS39CLICK1)
+
+
+
+
+
+
+-- LCP ====
+elements["LCP_Button_X"]   = Mfd_button(_("X"),		devices.LCP,	device_commands.LCP_X,		1335,1,{0,1},JAS39MFD1)
+elements["LCP_Button_SYS"] = Mfd_button(_("SYS"),	devices.LCP,	device_commands.LCP_SYS,	1336,1,{0,1},JAS39MFD1)
+elements["LCP_Button_TAC"] = Mfd_button(_("TAC"),	devices.LCP,	device_commands.LCP_TAC,	1337,1,{0,1},JAS39MFD1)
+elements["LCP_Button_IFF"] = Mfd_button(_("IFF"),	devices.LCP,	device_commands.LCP_IFF,	1338,1,{0,1},JAS39MFD1)
+elements["LCP_Button_COM"] = Mfd_button(_("COM"),	devices.LCP,	device_commands.LCP_COM,	1339,1,{0,1},JAS39MFD1)
+
+
+elements["LCP_MFD_1"]  = Mfd_button(_("LCP Softkey 01"),	devices.LCP,	device_commands.LCP_SK01,	1340,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_2"]  = Mfd_button(_("LCP Softkey 02"),	devices.LCP,	device_commands.LCP_SK02,	1341,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_3"]  = Mfd_button(_("LCP Softkey 03"),	devices.LCP,	device_commands.LCP_SK03,	1342,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_4"]  = Mfd_button(_("LCP Softkey 04"),	devices.LCP,	device_commands.LCP_SK04,	1343,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_5"]  = Mfd_button(_("LCP Softkey 05"),	devices.LCP,	device_commands.LCP_SK05,	1344,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_6"]  = Mfd_button(_("LCP Softkey 06"),	devices.LCP,	device_commands.LCP_SK06,	1345,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_7"]  = Mfd_button(_("LCP Softkey 07"),	devices.LCP,	device_commands.LCP_SK07,	1346,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_8"]  = Mfd_button(_("LCP Softkey 08"),	devices.LCP,	device_commands.LCP_SK08,	1347,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_9"]  = Mfd_button(_("LCP Softkey 09"),	devices.LCP,	device_commands.LCP_SK09,	1348,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_10"] = Mfd_button(_("LCP Softkey 10"),	devices.LCP,	device_commands.LCP_SK10,	1349,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_11"] = Mfd_button(_("LCP Softkey 11"),	devices.LCP,	device_commands.LCP_SK11,	1350,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_12"] = Mfd_button(_("LCP Softkey 12"),	devices.LCP,	device_commands.LCP_SK12,	1351,1,{0,1},JAS39MFD1)
+elements["LCP_MFD_13"] = Mfd_button(_("LCP Softkey 13"),	devices.LCP,	device_commands.LCP_SK13,	1371,1,{0,1},JAS39MFD1)	--missing animation
+
+
+elements["LCP_Brightness_Knob"]	= default_axis_limited(_("LCP Brightness"),	devices.LCP, device_commands.LCP_Brightness, 1352, 0, 0.1, false, false, {0, 1})
+elements["LCP_Contrast_Knob"]	= default_axis_limited(_("LCP Contrast"),	devices.LCP, device_commands.LCP_Contrast,   1353, 0, 0.1, false, false, {0, 1})
+
+
+
+
+elements["LCP_Button_1"] = Mfd_button(_("1"),	devices.LCP,	device_commands.LCP_1,	1354,1,{0,1},JAS39MFD1)
+elements["LCP_Button_2"] = Mfd_button(_("2"),	devices.LCP,	device_commands.LCP_2,	1355,1,{0,1},JAS39MFD1)
+elements["LCP_Button_3"] = Mfd_button(_("3"),	devices.LCP,	device_commands.LCP_3,	1356,1,{0,1},JAS39MFD1)
+elements["LCP_Button_4"] = Mfd_button(_("4"),	devices.LCP,	device_commands.LCP_4,	1357,1,{0,1},JAS39MFD1)
+elements["LCP_Button_5"] = Mfd_button(_("5"),	devices.LCP,	device_commands.LCP_5,	1358,1,{0,1},JAS39MFD1)
+elements["LCP_Button_CLR"] = Mfd_button(_("Clear"),	devices.LCP,	device_commands.LCP_CLR,	1359,1,{0,1},JAS39MFD1)
+elements["LCP_Button_6"] = Mfd_button(_("6"),	devices.LCP,	device_commands.LCP_6,	1360,1,{0,1},JAS39MFD1)
+elements["LCP_Button_7"] = Mfd_button(_("7"),	devices.LCP,	device_commands.LCP_7,	1361,1,{0,1},JAS39MFD1)
+elements["LCP_Button_8"] = Mfd_button(_("8"),	devices.LCP,	device_commands.LCP_8,	1362,1,{0,1},JAS39MFD1)
+elements["LCP_Button_9"] = Mfd_button(_("9"),	devices.LCP,	device_commands.LCP_9,	1363,1,{0,1},JAS39MFD1)
+elements["LCP_Button_0"] = Mfd_button(_("0"),	devices.LCP,	device_commands.LCP_0,	1364,1,{0,1},JAS39MFD1)
+elements["LCP_Button_ENT"] = Mfd_button(_("Enter"),	devices.LCP,	device_commands.LCP_ENT,	1365,1,{0,1},JAS39MFD1) -- missing animation
+
+
+
+
+
+-------------------------------------------------------
+--LD
+-------------------------------------------------------
 elements["PNT_1031"] = Mfd_button(_("Softkey 1 LD") ,devices.DISPLAYS, device_commands.LDSK_1,  1031,0.5,{0,1},JAS39MFD1)
 elements["PNT_1032"] = Mfd_button(_("Softkey 2 LD") ,devices.DISPLAYS, device_commands.LDSK_2,  1032,1,{0,1},JAS39MFD1)
 elements["PNT_1033"] = Mfd_button(_("Softkey 3 LD") ,devices.DISPLAYS, device_commands.LDSK_3,  1033,1,{0,1},JAS39MFD1)
@@ -80,13 +196,15 @@ elements["PNT_1054"] = Mfd_button(_("Softkey 17 LD"),devices.DISPLAYS, device_co
 elements["PNT_1053"] = Mfd_button(_("Softkey 18 LD"),devices.DISPLAYS, device_commands.LDSK_18, 1053,1,{0,1},JAS39MFD1)
 elements["PNT_1052"] = Mfd_button(_("Softkey 19 LD"),devices.DISPLAYS, device_commands.LDSK_19, 1052,1,{0,1},JAS39MFD1)
 elements["PNT_1051"] = Mfd_button(_("Softkey 20 LD"),devices.DISPLAYS, device_commands.LDSK_20, 1051,1,{0,1},JAS39MFD1)
--- Brighness + contrastMfd_button
-elements["PNT_1038"] = Mfd_button(_("Brightness + LD"),devices.DISPLAYS, device_commands.LD_Brightness_Up,   1038,1,{0,1},JAS39MFD1)
-elements["PNT_1039"] = Mfd_button(_("Brightness - LD"),devices.DISPLAYS, device_commands.LD_Brightness_Down, 1039,1,{0,1},JAS39MFD1)
+-- Brighness+Contrast  Mfd_button
+
+elements["PNT_1038"] = Mfd_button(_("Brightness + LD"),devices.DISPLAYS, device_commands.LD_Brightness_Up,   1038,-1,{-1,1},JAS39MFD1)
+elements["PNT_1039"] = Mfd_button(_("Brightness - LD"),devices.DISPLAYS, device_commands.LD_Brightness_Down, 1038,1,{-1,1},JAS39MFD1)
 elements["PNT_1058"] = Mfd_button(_("Contrast + LD")  ,devices.DISPLAYS, device_commands.LD_Contrast_Up,     1058,1,{0,1},JAS39MFD1)
 elements["PNT_1059"] = Mfd_button(_("Contrast - LD")  ,devices.DISPLAYS, device_commands.LD_Contrast_Down,   1059,1,{0,1},JAS39MFD1)
-
--- Center MFD =====
+-------------------------------------------------------
+--CD
+-------------------------------------------------------
 elements["PNT_1200"] = Mfd_button(_("Softkey 1 CD") ,devices.DISPLAYS, device_commands.CDSK_1,  1200,1,{0,1},JAS39MFD1)
 elements["PNT_1201"] = Mfd_button(_("Softkey 2 CD") ,devices.DISPLAYS, device_commands.CDSK_2,  1201,1,{0,1},JAS39MFD1)
 elements["PNT_1202"] = Mfd_button(_("Softkey 3 CD") ,devices.DISPLAYS, device_commands.CDSK_3,  1202,1,{0,1},JAS39MFD1)
@@ -106,18 +224,81 @@ elements["PNT_1219"] = Mfd_button(_("Softkey 16 CD"),devices.DISPLAYS, device_co
 elements["PNT_1218"] = Mfd_button(_("Softkey 17 CD"),devices.DISPLAYS, device_commands.CDSK_17, 1218,1,{0,1},JAS39MFD1)
 elements["PNT_1217"] = Mfd_button(_("Softkey 18 CD"),devices.DISPLAYS, device_commands.CDSK_18, 1217,1,{0,1},JAS39MFD1)
 elements["PNT_1216"] = Mfd_button(_("Softkey 19 CD"),devices.DISPLAYS, device_commands.CDSK_19, 1216,1,{0,1},JAS39MFD1)
-elements["PNT_1215"] = Mfd_button(_("Softkey 20 CD"),devices.DISPLAYS, device_commands.CDSK_20, 1215,1,{0,1},JAS39MFD1)
--- Brighness + contrast
-elements["PNT_1207"] = Mfd_button(_("Brightness + CD"),devices.DISPLAYS, device_commands.CD_Brightness_Up,   1207,1,{0,1},JAS39MFD1)
-elements["PNT_1208"] = Mfd_button(_("Brightness - CD"),devices.DISPLAYS, device_commands.CD_Brightness_Down, 1208,1,{0,1},JAS39MFD1)
+-- Brighness+Contrast  Mfd_button
+elements["PNT_1207"] = Mfd_button(_("Brightness + CD"),devices.DISPLAYS, device_commands.CD_Brightness_Up,   1207,-1,{-1,1},JAS39MFD1)
+elements["PNT_1208"] = Mfd_button(_("Brightness - CD"),devices.DISPLAYS, device_commands.CD_Brightness_Down, 1207,1,{-1,1},JAS39MFD1)
 elements["PNT_1222"] = Mfd_button(_("Contrast + CD")  ,devices.DISPLAYS, device_commands.CD_Contrast_Up,     1222,1,{0,1},JAS39MFD1)
 elements["PNT_1223"] = Mfd_button(_("Contrast - CD")  ,devices.DISPLAYS, device_commands.CD_Contrast_Down,   1223,1,{0,1},JAS39MFD1)
+-------------------------------------------------------
+--RD (Check FC3 Commands)
+-------------------------------------------------------
+elements["PNT_1082"] = Mfd_button(_("Softkey 1 RD") ,devices.DISPLAYS, device_commands.RDSK_1,  1082,1,{0,1},JAS39MFD1)
+--[[
 
-
-
-elements["PNT_1238"]	= default_axis_limited(_("HUD Brightness"),	devices.DISPLAYS, device_commands.HUD_Brightness, 1238)
--- FOR REFERENCE --------------------------------------------------------------------------
-
+elements["PNT_1083"] = Mfd_button(_("Softkey 2 RD") ,devices.DISPLAYS, device_commands.RDSK_2,  1083,1,{0,1},JAS39MFD1)
+elements["PNT_1084"] = Mfd_button(_("Softkey 3 RD") ,devices.DISPLAYS, device_commands.RDSK_3,  1084,1,{0,1},JAS39MFD1)
+elements["PNT_1085"] = Mfd_button(_("Softkey 4 RD") ,devices.DISPLAYS, device_commands.RDSK_4,  1085,1,{0,1},JAS39MFD1)
+elements["PNT_1086"] = Mfd_button(_("Softkey 5 RD") ,devices.DISPLAYS, device_commands.RDSK_5,  1086,1,{0,1},JAS39MFD1)
+elements["PNT_1087"] = Mfd_button(_("Softkey 6 RD") ,devices.DISPLAYS, device_commands.RDSK_6,  1087,1,{0,1},JAS39MFD1)
+elements["PNT_1088"] = Mfd_button(_("Softkey 7 RD") ,devices.DISPLAYS, device_commands.RDSK_7,  1088,1,{0,1},JAS39MFD1)
+elements["PNT_1091"] = Mfd_button(_("Softkey 8 RD") ,devices.DISPLAYS, device_commands.RDSK_8,  1091,1,{0,1},JAS39MFD1)
+elements["PNT_1092"] = Mfd_button(_("Softkey 9 RD") ,devices.DISPLAYS, device_commands.RDSK_9,  1092,1,{0,1},JAS39MFD1)
+elements["PNT_1093"] = Mfd_button(_("Softkey 10 RD"),devices.DISPLAYS, device_commands.RDSK_10, 1093,1,{0,1},JAS39MFD1)
+elements["PNT_1094"] = Mfd_button(_("Softkey 11 RD"),devices.DISPLAYS, device_commands.RDSK_11, 1094,1,{0,1},JAS39MFD1)
+elements["PNT_1095"] = Mfd_button(_("Softkey 12 RD"),devices.DISPLAYS, device_commands.RDSK_12, 1095,1,{0,1},JAS39MFD1)
+elements["PNT_1096"] = Mfd_button(_("Softkey 13 RD"),devices.DISPLAYS, device_commands.RDSK_13, 1096,1,{0,1},JAS39MFD1)																								
+elements["PNT_1097"] = Mfd_button(_("Softkey 14 RD"),devices.DISPLAYS, device_commands.RDSK_14, 1097,1,{0,1},JAS39MFD1)
+elements["PNT_1098"] = Mfd_button(_("Softkey 15 RD"),devices.DISPLAYS, device_commands.RDSK_15, 1098,1,{0,1},JAS39MFD1)
+elements["PNT_1099"] = Mfd_button(_("Softkey 16 RD"),devices.DISPLAYS, device_commands.RDSK_16, 1099,1,{0,1},JAS39MFD1)
+elements["PNT_1100"] = Mfd_button(_("Softkey 17 RD"),devices.DISPLAYS, device_commands.RDSK_17, 1100,1,{0,1},JAS39MFD1)
+elements["PNT_1101"] = Mfd_button(_("Softkey 18 RD"),devices.DISPLAYS, device_commands.RDSK_18, 1101,1,{0,1},JAS39MFD1)
+elements["PNT_1102"] = Mfd_button(_("Softkey 19 RD"),devices.DISPLAYS, device_commands.RDSK_19, 1102,1,{0,1},JAS39MFD1)
+elements["PNT_1103"] = Mfd_button(_("Softkey 20 RD"),devices.DISPLAYS, device_commands.RDSK_20, 1103,1,{0,1},JAS39MFD1)
+]]--
+-- Brighness+Contrast  Mfd_button
+elements["PNT_1089"] = Mfd_button(_("Brightness + RD"),devices.DISPLAYS, device_commands.RD_Brightness_Up,   1089,-1,{0,1},JAS39MFD1)
+elements["PNT_1090"] = Mfd_button(_("Brightness - RD"),devices.DISPLAYS, device_commands.RD_Brightness_Down, 1089,1,{0,1},JAS39MFD1)
+elements["PNT_1104"] = Mfd_button(_("Contrast + RD")  ,devices.DISPLAYS, device_commands.RD_Contrast_Up,     1104,1,{0,1},JAS39MFD1)
+elements["PNT_1105"] = Mfd_button(_("Contrast - RD")  ,devices.DISPLAYS, device_commands.RD_Contrast_Down,   1105,1,{0,1},JAS39MFD1)
+-- Brighness+Contrast  Mfd_button
+elements["PNT_1089"] = Mfd_button(_("Brightness + RD"),devices.DISPLAYS, device_commands.RD_Brightness_Up,   1089,-1,{-1,1},JAS39MFD1)
+elements["PNT_1090"] = Mfd_button(_("Brightness - RD"),devices.DISPLAYS, device_commands.RD_Brightness_Down, 1089,1,{-1,1},JAS39MFD1)
+elements["PNT_1104"] = Mfd_button(_("Contrast + RD")  ,devices.DISPLAYS, device_commands.RD_Contrast_Up,     1104,1,{0,1},JAS39MFD1)
+elements["PNT_1105"] = Mfd_button(_("Contrast - RD")  ,devices.DISPLAYS, device_commands.RD_Contrast_Down,   1105,1,{0,1},JAS39MFD1)
+-------------------------------------------------------
+--Right Auxiliary Console
+-------------------------------------------------------
+elements["PNT_1281"] = fika_compartment("Compartment (Open/Close)", devices.ACCESSORIES, device_commands.Compartment, 1281,JAS39HEAVYSWITCH, 1)
+-------------------------------------------------------
+--Right Console Panel
+-------------------------------------------------------
+elements["PNT_946"]	= default_axis_limited(_("Flood Lights"),	devices.LIGHTS, device_commands.FloodLight, 946)
+elements["PNT_945"]	= default_axis_limited(_("Backlights"),	devices.LIGHTS, device_commands.BackLight, 945)
+elements["PNT_944"]	= default_axis_limited(_("Indicator Lights"),	devices.LIGHTS, device_commands.IndicatorLight, 944)
+elements["PNT_1013"] = default_3_position_tumb(_("Mass (Safe/Stby/Live)"),	devices.WEAPONS,	device_commands.Mass, 	1013,nil,true,JAS39KNOB2)
+elements["PNT_904"] = default_2_position_tumb(_("Main Power (On/Off)"),	devices.ENGINE,	device_commands.Main, 	904,JAS39CLICK2)
+elements["PNT_1061"] = default_2_position_tumb(_("APU (On/Off)"),	devices.ENGINE,	device_commands.APU, 	1061,JAS39CLICK2)
+elements["PNT_1005"] = default_2_position_tumb("Canopy (Open/Close)", devices.CANOPY, device_commands.CanopyLever, 1005,JAS39HEAVYSWITCH, 1.5)
+elements["PNT_1018"] = default_2_position_tumb(_("Tank Jettison Cover (Open/Close)"),	devices.WEAPONS,	device_commands.TankJettisonCover, 	1018,JAS39KNOB1)
+elements["PNT_1016"] = default_button(_("Tank Jettison"),	devices.WEAPONS,	device_commands.TankJettison,	1016,1,{0,1},JAS39CLICK1)
+elements["PNT_1017"] = default_2_position_tumb(_("Weapons Jettison Cover (Open/Close)"),	devices.WEAPONS,	device_commands.WeaponJettisonCover, 	1017,JAS39KNOB1)
+elements["PNT_1015"] = default_button(_("Weapons Jettison"),  devices.WEAPONS, device_commands.WeaponJettison,   	1014,1,{0,1}, JAS39CLICK1)
+elements["PNT_976"] = default_2_position_tumb(_("Parking Brake (Enable/Disable)"),	devices.WHEEL_BRAKES,	device_commands.ParkingBrake,	976,JAS39KNOB2,3.0)
+elements["PNT_1012"] = default_2_position_tumb(_("Canopy Jettison (Enable/Disable)"),	devices.CANOPY,	device_commands.CanopyJettison,	1012,JAS39KNOB2,3.0)
+elements["PNT_953"] = default_2_position_tumb(_("DTU (Insert/Eject)"),	devices.ENGINE,	device_commands.DTU, 	953,JAS39MFD1,1.0)
+-------------------------------------------------------
+--HOTAS
+-------------------------------------------------------
+elements["PNT_571"] = default_2_position_tumb(_("ThrottleStop (On/Off)"),	devices.ENGINE,	device_commands.ThrottleStop, 	571,JAS39KNOB2,3.0)
+elements["PNT_1075"] = default_2_position_tumb(_("Trigger Safe (Safe/Armed)"),	devices.WEAPONS,	device_commands.TriggerSafe, 	1075,JAS39MFD1)
+-------------------------------------------------------
+--Ejection Seat
+-------------------------------------------------------
+elements["PNT_973"] = default_axis_limited(_("Ejection handle"),  devices.CANOPY, device_commands.SeatEject,  973)
+elements["PNT_972"] = default_2_position_tumb(_("Ejection Seat (Safe/Arm)"),	devices.CANOPY,	device_commands.SeatArm,	972,JAS39HEAVYSWITCH,1.5)
+-------------------------------------------------------
+--FOR REFERENCE 
+-------------------------------------------------------
 -- elements["PNT_1015"] =
 -- {
 	-- class 							= {class_type.BTN},
@@ -233,8 +414,8 @@ elements["PNT_1238"]	= default_axis_limited(_("HUD Brightness"),	devices.DISPLAY
 --elements["PNT-032"]	= default_axis(_("HI flag setting knob"), devices.AVIONICS, device_commands.HIset, 32)
 
 -- -- Mirrors
--- elements["PNT_MIRROR_LEFT"]  = default_2_position_tumb("Toggle Mirrors", 0, 1625, nil)
--- elements["PNT_MIRROR_RIGHT"] = default_2_position_tumb("Toggle Mirrors", 0, 1625, nil)
+--elements["PNT_MIRROR_LEFT"]  = default_2_position_tumb("Toggle Mirrors", 0, 1625, nil)
+--elements["PNT_MIRROR_RIGHT"] = default_2_position_tumb("Toggle Mirrors", 0, 1625, nil)
 
 -- elements["PNT_2"] = default_2_position_tumb("Hide Stick Toggle", devices.GEAR, Keys.ToggleStick, nil)
 
@@ -268,9 +449,6 @@ elements["PNT_1238"]	= default_axis_limited(_("HUD Brightness"),	devices.DISPLAY
 -- elements["PNT_941"] = default_axis_limited("Panel (Off/Brightness)",                            devices.INTLIGHTS, device_commands.IntLightPnl,    941, 0.0,0.15)
 -- elements["PNT_942"] = default_2_position_tumb("Storm (On/Off)",                                 devices.INTLIGHTS, device_commands.IntLightStorm,  942,TOGGLECLICK_MID_FWD)
 -- elements["PNT_943"] = default_axis_limited("Console (Off/Brightness)",                          devices.INTLIGHTS, device_commands.IntLightCsl,    943, 0.0,0.15)
--- elements["PNT_944"] = springloaded_3_pos_tumb("Alarm Test (Panel/Fire)",                        devices.INTLIGHTS, device_commands.IntLightAlm,    944, true)
--- elements["PNT_945"] = default_axis_limited("Chart (Off/Brightness)",                            devices.INTLIGHTS, device_commands.IntLightChart,  945, 0.0,0.15)
--- elements["PNT_946"] = default_2_position_tumb("Nightvision (NVG/Norm)",                         devices.INTLIGHTS, device_commands.IntLightNvg,    946,TOGGLECLICK_MID_FWD)
 
 
 -- EXTERNAL LIGHTS
@@ -803,5 +981,50 @@ elements["PNT_1238"]	= default_axis_limited(_("HUD Brightness"),	devices.DISPLAY
 -- 	   (o.class[3]  and o.class[3] == class_type.TUMB)  then
 -- 	   o.updatable = true
 -- 	   o.use_OBB   = true
--- 	end
 -- end
+
+
+-------------------------------------------------------
+--FC3 Commands
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Left Console Panel
+------------------------------------------------------- 
+
+-------------------------------------------------------
+--Left Auxiliary Console
+-------------------------------------------------------
+
+-------------------------------------------------------
+--UCP (Upfront Control Panel)
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Instrument Panel
+-------------------------------------------------------
+
+-------------------------------------------------------
+--LD
+-------------------------------------------------------
+-------------------------------------------------------
+--CD
+-------------------------------------------------------
+-------------------------------------------------------
+--RD (Check FC3 Commands)
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Right Auxiliary Console
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Right Console Panel
+-------------------------------------------------------
+-------------------------------------------------------
+--HOTAS
+-------------------------------------------------------
+
+-------------------------------------------------------
+--Ejection Seat
+-------------------------------------------------------

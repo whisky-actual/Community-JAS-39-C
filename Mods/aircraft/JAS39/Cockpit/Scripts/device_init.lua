@@ -15,32 +15,36 @@ MainPanel = {"ccMainPanel",LockOn_Options.script_path.."mainpanel_init.lua"}
 
 creators = {}
 
--- creators[devices.ELECTRIC_SYSTEM]	= {"avSimpleElectricSystem"}
+creators[devices.ELECTRIC_SYSTEM]  		= {"avSimpleElectricSystem" ,LockOn_Options.script_path.."Systems/electric_system.lua"}
 -- creators[devices.WEAPONS]			= {"avSimpleWeaponSystem"}  ,LockOn_Options.script_path.."Systems/Weapons.lua"}
 creators[devices.OP_PHASES] 			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Op_Phases.lua"}
 creators[devices.WHEEL_BRAKES] 			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Wheel_Brakes.lua"}
 creators[devices.ACCESSORIES] 			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Accessories.lua"}
-creators[devices.GEAR]	  				= {"avLuaDevice"		,LockOn_Options.script_path.."Systems/Gear.lua"}
+creators[devices.GEAR]	  				= {"avLuaDevice"		    ,LockOn_Options.script_path.."Systems/Gear.lua"}
 creators[devices.ENGINE] 				= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Engine.lua"}
-creators[devices.NVG]         			= {"avNightVisionGoggles"  ,LockOn_Options.script_path.."HELMET/NVG.lua"}                          
+creators[devices.NVG]         			= {"avNightVisionGoggles"   ,LockOn_Options.script_path.."HELMET/NVG.lua"}                          
 creators[devices.AIRBRAKES] 			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Airbrakes.lua"}
-creators[devices.LEF]       			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/LEF.lua"}
-creators[devices.ELEVONS]   		    = {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Elevons.lua"}
-creators[devices.RUDDER]	  			= {"avLuaDevice"		,LockOn_Options.script_path.."Systems/Rudder.lua"}
-creators[devices.CANARDS]      			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Canards.lua"}
-creators[devices.FLYBYWIRE]      		= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Flybywire.lua"}
-creators[devices.AUTOTHROTTLE]     		= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Autothrottle.lua"}
-creators[devices.WEAPONS]     			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Weapons.lua"}  
-creators[devices.CANOPY]     			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Canopy.lua"}
-creators[devices.LIGHTS]     			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Lights.lua"}
-creators[devices.DISPLAYS]     		    = {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Displays.lua"}
-creators[devices.MFD]        			= {"avLuaDevice"		,LockOn_Options.script_path.."MFD/Device/MFD_Device.lua"}	
-creators[devices.HUD]        			= {"avLuaDevice"		,LockOn_Options.script_path.."HUD/Device/HUD Device.lua"}	
-creators[devices.COUNTERMEASURES]       = {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Countermeasures.lua"}
-creators[devices.STORES]       			= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Stores.lua"}
-creators[devices.FUEL]     		   		= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Fuel.lua"}	-- Needs to be after STORES in order for it to work
-creators[devices.NAVIGATION]       		= {"avLuaDevice"         ,LockOn_Options.script_path.."Systems/Navigation.lua"}
-
+creators[devices.LEF]       			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/LEF.lua"}
+creators[devices.FLYBYWIRE]      		= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Flybywire_SFM.lua"}
+creators[devices.ELEVONS]   		    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Elevons.lua"}
+creators[devices.RUDDER]	  			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Rudder.lua"}
+creators[devices.CANARDS]      			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Canards.lua"}
+creators[devices.AUTOTHROTTLE]     		= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Autothrottle.lua"}
+creators[devices.WEAPONS]     			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Weapons.lua"}  
+creators[devices.CANOPY]     			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Canopy.lua"}
+creators[devices.LIGHTS]     			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Lights.lua"}
+creators[devices.DISPLAYS]     		    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Displays.lua"}
+creators[devices.MFD]        			= {"avLuaDevice"			,LockOn_Options.script_path.."MFD/Device/MFD_Device.lua"}	
+creators[devices.HUD]        			= {"avLuaDevice"			,LockOn_Options.script_path.."HUD/Device/HUD Device.lua"}	
+creators[devices.COUNTERMEASURES]       = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Countermeasures.lua"}
+creators[devices.STORES]       			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Stores.lua"}
+creators[devices.FUEL]     		   		= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Fuel.lua"}	-- Needs to be after STORES in order for it to work
+creators[devices.NAVIGATION]       		= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Navigation.lua"}
+creators[devices.HMD]  		   	   		= {"avLuaDevice"			,LockOn_Options.script_path.."HMD/Device/HMD_Device.lua"}
+creators[devices.LCP]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."LCP/Device/LCP_Device.lua"}
+creators[devices.UCP]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."UCP/Device/UCP_Device.lua"}
+creators[devices.RWR]  		   	   		= {"avSimpleRWR"			,LockOn_Options.script_path.."RWR/RWR_init.lua"}
+creators[devices.FC3]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/FC3.lua"}
 
 
 
@@ -53,7 +57,7 @@ indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."MFD/I
 		{"JAS39-LMFD-CENTER", "JAS39-LMFD-DOWN", "JAS39-LMFD-RIGHT"},	-- initial geometry anchor , triple of connector names.
 		{sx_l =  0.0000,  -- center position correction in meters (+forward , -backward)
 		 sy_l =  0,  -- center position correction in meters (+up , -down)
-		 sz_l =  0,  -- center position correction in meters (-left , +right)
+		 sz_l =  0.0001,  -- center position correction in meters (-left , +right)
 		 sh   =  0,  -- half height correction 
 		 sw   =  0,  -- half width correction 
 		 rz_l =  0,  -- rotation corrections  z
@@ -61,8 +65,6 @@ indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."MFD/I
 		 ry_l =  0}	 -- rotation corrections  y
 	}	
 }
-
-
 
 indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."MFD/Indicator/RMFD_init.lua",	--init script
  nil, 
@@ -109,6 +111,57 @@ indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."HUD/I
 		 ry_l =  0}
 	}	
 }
+
+indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."HMD/Indicator/HMD_init.lua",	--init script
+ nil, 
+    {
+		{"JAS39-HUD-CENTER", "JAS39-HUD-DOWN", "JAS39-HUD-RIGHT"},	-- initial geometry anchor , triple of connector names. 
+		{sx_l =  0,  -- center position correction in meters (+forward , -backward)
+		 sy_l =  0,  -- center position correction in meters (+up , -down)
+		 sz_l =  0,  -- center position correction in meters (-left , +right)
+		 sh   =  0,  -- half height correction 
+		 sw   =  0,  -- half width correction 
+		 rz_l =  0,  -- rotation corrections  
+		 rx_l =  0,
+		 ry_l =  0}
+	}	
+}
+indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."LCP/Indicator/LCP_init.lua",	--init script
+ nil, 
+    {
+		{"LCP_SCREEN_CENTER", "LCP_SCREEN_DOWN", "LCP_SCREEN_RIGHT"},	-- initial geometry anchor , triple of connector names. 
+		{sx_l =  0,  -- center position correction in meters (+forward , -backward)
+		 sy_l =  0,  -- center position correction in meters (+up , -down)
+		 sz_l =  0,  -- center position correction in meters (-left , +right)
+		 sh   =  0,  -- half height correction 
+		 sw   =  0,  -- half width correction 
+		 rz_l =  0,  -- rotation corrections  
+		 rx_l =  0,
+		 ry_l =  0}
+	}	
+}
+indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."UCP/Indicator/UCP_init.lua",	--init script
+ nil, 
+    {
+		{"UFC_SCREEN_CENTER", "UFC_SCREEN_DOWN", "UFC_SCREEN_RIGHT"},	-- initial geometry anchor , triple of connector names. 
+		{sx_l =  0,  -- center position correction in meters (+forward , -backward)
+		 sy_l =  0,  -- center position correction in meters (+up , -down)
+		 sz_l =  0,  -- center position correction in meters (-left , +right)
+		 sh   =  0,  -- half height correction 
+		 sw   =  0,  -- half width correction 
+		 rz_l =  0,  -- rotation corrections  
+		 rx_l =  0,
+		 ry_l =  0}
+	}	
+}
+
+
+
+
+
+
+
+
 
 
 ---------------------------------------------

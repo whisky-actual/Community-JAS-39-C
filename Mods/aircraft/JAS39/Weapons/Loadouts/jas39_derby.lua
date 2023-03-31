@@ -40,7 +40,7 @@ JAS_MBDA_DERBY = {
     Fi_search       = 1.05,
     OmViz_max       = 0.6981,
     exhaust         = { 1, 1, 1, 0.3 };
-	X_back          = -1.45,
+	X_back          = -1.4,
     Y_back          = 0.0, -- -0.11
     Z_back          = 0.0,
     Reflection      = 0.03,
@@ -48,24 +48,20 @@ JAS_MBDA_DERBY = {
 	loft 			= 1,
 	hoj 			= 1,
 	ccm_k0 			= 0.05,
-	loft_factor 	= 1.1,	
+    rad_correction 	= 1,
+    loft_factor 	= 2.5,
+	loft_angle 		= 0.17,	
 
-	active_radar_lock_dist	= 20000.0,
+	active_radar_lock_dist	= 18000.0,
 	go_active_by_default	= 1,
 	
-	PN_coeffs = {11,                 -- Number of Entries
-				0.0, 1.0,
-				4000.0, 0.995,
-				5000.0, 0.99,
-				6000.0, 0.97,
-				7000.0, 0.94,
-				10000.0, 0.80,
-				15000.0, 0.50,
-				20000.0, 0.35,
-				30000.0, 0.20,
-				40000.0, 0.14,
-				80000.0, 0.05,
-				};
+	PN_coeffs = {
+		4,
+		15000.0 ,1.0,
+		25000.0, 0.85,
+		40000.0, 0.65,
+		100000.0, 0.3,
+	};
 	
     warhead         = jas_derby_warhead,
     warhead_air     = jas_derby_warhead,

@@ -25,7 +25,11 @@ local autothrottle_pid = PID(5, 0.02, 0.1, -0.85, 1.0, 1)   					-- Create the P
 dev:listen_command(10064)														-- Toggle autothrottle
 dev:listen_command(10065)														-- Toggle AoA 12/14
 dev:listen_command(10066)														-- Gripen Throttle Axis
+dev:listen_command(Keys.GripenThrottleIncrease)
+dev:listen_command(Keys.GripenThrottleDecrease)
 
+
+local ThrottleIncrement = 0.045
 local AOA1214_STATE = 0
 local AUTOTHROTTLE_STATE = 0
 local speedHold = -100
@@ -38,6 +42,15 @@ function SetCommand(command,value)
 	if command == 10066 then													-- Gripen Throttle Axis
 		THROTTLE_INPUT = value
 	end	
+   
+	if command == Keys.GripenThrottleDecrease and THROTTLE_INPUT < 1 then			-- 1 is off, -1 is AB
+		THROTTLE_INPUT = THROTTLE_INPUT + 0.045
+	end
+	
+	if command == Keys.GripenThrottleIncrease and THROTTLE_INPUT > -1 then
+		THROTTLE_INPUT = THROTTLE_INPUT - 0.045
+	end
+   
    
 	if command == 10064 then													-- Engage and disengage AT
 		if AUTOTHROTTLE_STATE == 0 then
@@ -95,9 +108,7 @@ function update_autothrottle_aoa14()											-- AoA 14 landing mode function
 end
 
 function throttle_axis()
-	if get_param_handle("I_dont_like_fun"):get() == 0 then
-		dispatch_action(nil, ThrottleAxis, THROTTLE_INPUT)
-	end
+	dispatch_action(nil, ThrottleAxis, THROTTLE_INPUT)
 end			
 
 function throttle_override()
@@ -109,6 +120,8 @@ function throttle_override()
 end
 
 function update()		
+
+--print_message_to_user(THROTTLE_INPUT)
 
 	local ias = sensor_data.getIndicatedAirSpeed()*1.944						-- IAS in kts
 

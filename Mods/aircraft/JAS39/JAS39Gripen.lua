@@ -212,11 +212,18 @@ local outboard 	= {
 	{ CLSID = "{JAS39_MK82}", arg_value = 0.69 }, -- Mk-82
 	{ CLSID = "{JAS39_MK83}", arg_value = 0.70 }, -- Mk-83
 	{ CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
-	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71 x 4
+	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71LD x 4
+	{ CLSID = "{JAS39_M71HD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.91 }, -- M71HD x 4
 		
 --	=================== UNGUIDED ROCKETS ==========================================================================
     { CLSID = "{JAS39_M70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.64}, -- M70B HE 
 	{ CLSID = "{JAS39_M70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.63}, -- M70B AP
+
+--	=================== ANTI RADIATION MISSILES ===================================================================
+	-- { CLSID = "{JAS39_MAR-1_WVR}", arg_value = 0.81, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
+	
+--	=================== ANTI SHIP MISSILES ========================================================================
+	-- { CLSID = "{JAS39_RBS15_WVR}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir		
 
 }
 
@@ -244,10 +251,17 @@ local inboard 	= {
 	{ CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
 	{ CLSID = "{JAS39_BRU33_MK83}", arg_value = 0.70, Type = 1}, -- Mk-83 x 2		
 	{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.68 }, -- M71LD x 4
+	{ CLSID = "{JAS39_M71HD}", attach_point_position = {-0.70, 0.0, 0.0}, arg_value = 0.91 }, -- M71HD x 4
 
 --	=================== UNGUIDED ROCKETS ==========================================================================
 	{ CLSID = "{JAS39_M70BHE}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.64}, -- M70B HE 
 	{ CLSID = "{JAS39_M70BAP}", attach_point_position = {-0.1, 0.0, 0.0}, arg_value = 0.63}, -- M70B AP	
+
+--	=================== ANTI RADIATION MISSILES ===================================================================
+	-- { CLSID = "{JAS39_MAR-1_WVR}", arg_value = 0.81, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
+	
+--	=================== ANTI SHIP MISSILES ========================================================================
+	-- { CLSID = "{JAS39_RBS15_WVR}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir	
 	
 --	=================== DROP TANKS ================================================================================
     { CLSID = "{JAS39_TANK1100}", arg_value = 0.90 }, -- Drop tank 1100 litre				
@@ -282,7 +296,7 @@ local centerline 	= {
 JAS39Gripen =  {
       
 		Name 			= 'JAS39Gripen',
-		DisplayName		= _('JAS 39 Gripen A/A'),
+		DisplayName		= _('JAS 39 Gripen A/A WVR'),
         Picture 		= "JAS39Gripen.png",
         Rate 			= "50",
         Shape			= "JAS39Gripen",
@@ -526,9 +540,16 @@ flare 				= {default = 40, increment = 20, chargeSz = 1}
 
 
 Sensors = {
-RADAR 			= "AN/APG-63",--F15
-RWR 			= "Abstract RWR"--F15
+	RADAR = "PS-05/A",
+	RWR = "BOW-21 RWR",
+	OPTIC = {"Litening AN/AAQ-28 FLIR", "Litening AN/AAQ-28 CCD TV"},
 },
+
+laserEquipment = { 
+	laserDesignator = true,
+	laserRangefinder = true
+},
+
 Countermeasures = {
 ECM 			= "AN/ALQ-135"--F15
 },

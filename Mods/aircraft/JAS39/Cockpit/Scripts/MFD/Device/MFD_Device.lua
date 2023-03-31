@@ -225,12 +225,7 @@ function update()
 		NEEDLE_RPM = NEEDLE_RPM * 0.5
 	elseif CURR_RPM > 60 then
 		NEEDLE_RPM = NEEDLE_RPM - 29.5 - (CURR_RPM/99)
-		
-		if NEEDLE_RPM > 69 then
-			NEEDLE_RPM = 69
-		end
 	end
-
 
 	if CURR_RPM <= 61 then
 		TGT_TARGET = (sensor_data.getEngineLeftTemperatureBeforeTurbine() + (260 * CURR_RPM / 60) * 0.6175) - 0.5
@@ -254,7 +249,7 @@ function update()
 
 	if CURR_RPM > 100 then
 		CURR_RPM = 100
-		NEEDLE_RPM = 70
+		NEEDLE_RPM = 69
 	end
 	
 	

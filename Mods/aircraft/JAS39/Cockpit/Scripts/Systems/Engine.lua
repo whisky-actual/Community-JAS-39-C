@@ -17,8 +17,9 @@ APUPower:set(0.0)
 
 local apu_start_light = get_param_handle("APU_START_LIGHT")
 local apu_running_light = get_param_handle("APU_RUNNING_LIGHT")
+local apuemgy_running_light = get_param_handle("APUEMGY_RUNNING_LIGHT")
 
-local APUStartLightWait = 45
+local APUStartLightWait = 25
 local APUStartLightIncrement = update_time_step / APUStartLightWait
 local APU_start_light_target = 1
 local APU_start_light_state = 0
@@ -34,7 +35,7 @@ local SlowNozzleOpenCloseTimeSec = 3.0
 local SlowNozzleOpenCloseIncrement = update_time_step / SlowNozzleOpenCloseTimeSec
 
 -- APU sounds
-local APUwait = 183
+local APUwait = 120
 local APUincrement = update_time_step / APUwait
 local APU_target = 1
 local APU_liftoff = 0
@@ -114,7 +115,7 @@ function post_initialize()
 	
     end
 	
-sndhost = create_sound_host("COCKPIT_ARMS","HEADPHONES",0,0,0)
+sndhost = create_sound_host("COCKPIT_ARMS","3D",0,0,0)
 JAS39APURUN = sndhost:create_sound("Aircrafts/JAS39/Cockpit/JAS39APURUN") 
 JAS39ELECTRICNOISE = sndhost:create_sound("Aircrafts/JAS39/Cockpit/JAS39ELECTRICNOISE") 
 JAS39APUSTART = sndhost:create_sound("Aircrafts/JAS39/Cockpit/JAS39APUSTART")
@@ -156,12 +157,14 @@ local tposition = get_cockpit_draw_argument_value(1071)
 			end
 			Main = 1
 			MainPower:set(1)
+			get_param_handle("littlegreendots"):set(0)
         elseif value == 0 then
 			if Main == 1 then
 				dispatch_action(nil, 315)
 			end
 			Main = 0
 			MainPower:set(0)
+			get_param_handle("littlegreendots"):set(-1)
         end
 
     elseif command == Keys.Main then
@@ -169,6 +172,7 @@ local tposition = get_cockpit_draw_argument_value(1071)
 			dev:performClickableAction(device_commands.Main, 1, true)	
 			Main = 1
 			MainPower:set(1)
+			get_param_handle("littlegreendots"):set(0)
         elseif Main == 1 then
 			dev:performClickableAction(device_commands.Main, 0, true)			
 			if Main == 1 then
@@ -176,6 +180,7 @@ local tposition = get_cockpit_draw_argument_value(1071)
 			end
 			Main = 0
 			MainPower:set(0)
+			get_param_handle("littlegreendots"):set(-1)
         end
 
     elseif command == device_commands.Fuel then
@@ -223,11 +228,11 @@ local tposition = get_cockpit_draw_argument_value(1071)
     elseif command == device_commands.FuelCover then
         if value == 1 then 
 			FuelCover = 1
-			Fuel = 1
+			Fuel = 1		
         elseif value == 0 then
 			dev:performClickableAction(device_commands.Fuel, 0, true)				
 			FuelCover = 0
-			Fuel = 1			
+			Fuel = 1				
         end
 
     elseif command == Keys.FuelCover then
@@ -351,20 +356,24 @@ function apu_lights()
 		
 		if APU_start_light_state < 1 then
 			apu_start_light:set(0)
-			apu_running_light:set(1)					
+			apu_running_light:set(1)
+			apuemgy_running_light:set(-1)
 		elseif APU_start_light_state >= 1 then 
 			if APU_stby == 0 then
 				apu_start_light:set(1)
-				apu_running_light:set(0)
+				apu_running_light:set(-1)
+				apuemgy_running_light:set(1)
 			elseif APU_stby == 2 then
 				apu_start_light:set(1)
-				apu_running_light:set(1)								
+				apu_running_light:set(1)
+				apuemgy_running_light:set(-1)
 			end
 		end	
 
 	elseif get_param_handle("APUPOWER"):get() == 0 then
 	apu_start_light:set(1)
 	apu_running_light:set(1)
+	apuemgy_running_light:set(-1)
 	APU_start_light_state = 0	
 	end	
 
@@ -378,8 +387,8 @@ function update()
 
 	local rpm = sensor_data.getEngineLeftRPM() 
 
-	local NOZZLE_TARGET_STATE3 = ((rpm - 101)*(1/(109-101)))	
-	local NOZZLE_TARGET_STATE2 = math.abs(((rpm - 60)*(1/(100-60))-1))
+	local NOZZLE_TARGET_STATE3 = ((rpm - 96)*(1/(100-96)))	
+	local NOZZLE_TARGET_STATE2 = math.abs(((rpm - 60)*(1/(95-60))-1))
 	
 	if (rpm < 60) then 												-- State 1: Engine off: Nozzle closing
 		if NOZZLE_STATE > NOZZLE_TARGET_STATE1 then
@@ -394,7 +403,7 @@ function update()
 		NOZZLE_STATE = NOZZLE_STATE + SlowNozzleOpenCloseIncrement
 		end
 
-		elseif (rpm > 60) and (rpm < 101) then						-- State 2: Engine 70000 rpm: Nozzle from fully open to closing at higher rpm	
+		elseif (rpm > 60) and (rpm < 96) then						-- State 2: Engine 70000 rpm: Nozzle from fully open to closing at higher rpm	
 		if NOZZLE_STATE > NOZZLE_TARGET_STATE2 then
 		NOZZLE_STATE = NOZZLE_STATE - FastNozzleOpenCloseIncrement
 		end
@@ -402,7 +411,7 @@ function update()
 		NOZZLE_STATE = NOZZLE_STATE + FastNozzleOpenCloseIncrement
 		end
 				
-		elseif (rpm > 100) then										-- State 3: Engine 101009 rpm AB: Nozzle from almost fully open to fully open
+		elseif (rpm > 95) then										-- State 3: Engine 101009 rpm AB: Nozzle from almost fully open to fully open
 		if NOZZLE_STATE < NOZZLE_TARGET_STATE3 then
 		NOZZLE_STATE = NOZZLE_STATE + FastNozzleOpenCloseIncrement
 		end

@@ -149,3 +149,20 @@ function PID_alt:reset(centre)
   self.errorI = 0.0
   self.centre = centre
 end
+
+
+function MoveControlSurface(State, Target, Increment)
+
+	if (State < Target) and (Target - State >= Increment) then
+		State = State + Increment
+	elseif (State > Target) and (State - Target >= Increment) then
+		State = State - Increment
+	end
+
+	if (State < -1) then							
+		State = -1
+	elseif (State > 1) then
+		State = 1
+	end
+return State
+end

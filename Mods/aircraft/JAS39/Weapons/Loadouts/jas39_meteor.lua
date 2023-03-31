@@ -40,31 +40,28 @@ JAS_MBDA_METEOR = {
     Fi_search       = 1.05,
     OmViz_max       = 0.6981,
     exhaust         = {0.8, 0.8, 0.8, 0.05 };
-	X_back          = -1.54,
+	X_back          = -1.48,
     Y_back          = 0.0,
     Z_back          = 0.0,
     Reflection      = 0.03,
     KillDistance    = 20.0,
-	loft 			= 0,
+	loft 			= 1,
 	hoj 			= 1,
 	ccm_k0 			= 0.025,
+    rad_correction 	= 1,
+    loft_factor 	= 2.5,
+	loft_angle 		= 0.17,		
 	
-	active_radar_lock_dist	= 20000.0,
+	active_radar_lock_dist	= 18000.0,
 	go_active_by_default	= 1,
 
-	PN_coeffs = {11,                 -- Number of Entries
-				0.0, 1.0,
-				4000.0, 0.995,
-				5000.0, 0.99,
-				6000.0, 0.97,
-				7000.0, 0.94,
-				10000.0, 0.80,
-				15000.0, 0.50,
-				20000.0, 0.35,
-				30000.0, 0.20,
-				40000.0, 0.14,
-				100000.0, 0.05,
-				};
+	PN_coeffs = {
+		4,
+		15000.0 ,1.0,
+		25000.0, 0.85,
+		40000.0, 0.65,
+		100000.0, 0.3,
+	};
 	
     warhead         = jas_meteor_warhead,
     warhead_air     = jas_meteor_warhead,
@@ -101,7 +98,7 @@ JAS_MBDA_METEOR = {
         0.00, --угловая скорость создаваймая моментом газовых рулей
 
         --    t_statr   t_b      t_accel  t_march   t_inertial   t_break  t_end
-        -1.0,   -1.0,       8.0,     30.0,      0.0,          0.0,      1.0e9,           -- time interval
+        -1.0,   -1.0,       8.0,     40.0,      0.0,          0.0,      1.0e9,           -- time interval
         0.0,    0.0,       6.0,     0.4,      0.0,          0.0,        0.0,           -- fuel flow rate in second kg/sec(секундный расход массы топлива кг/сек)
         0.0,    0.0,   19000.0,  1000.0,      0.0,          0.0,        0.0,           -- thrust
 

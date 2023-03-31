@@ -58,7 +58,7 @@ JAS_SPEAREW_MISSILE =
 	X_back	= -0.9,
 	Y_back	= -0.15,
 	Z_back 	= 0.0,
-	Reflection	= 0.5,
+	Reflection	= 1.5,
 	KillDistance= 0.0,
 	add_attributes = {"Cruise missiles"},	
 	

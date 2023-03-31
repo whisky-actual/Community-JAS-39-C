@@ -17,6 +17,22 @@ dev:listen_command(10039)
 
 dev:listen_event("WheelChocksOn")
 dev:listen_event("WheelChocksOff")
+dev:listen_event("Compartment")
+dev:listen_command(device_commands.Compartment)			-- 0 = closed, 1 = open
+dev:listen_command(Keys.Compartment)
+
+function post_initialize()
+
+dev:performClickableAction(device_commands.Compartment, -1, true)		-- close compartment at mission start
+
+end
+
+
+
+
+
+
+
 
 function CockpitEvent(event,val)
     if event == "WheelChocksOn" then
@@ -26,16 +42,19 @@ function CockpitEvent(event,val)
     end
 end
 
-function update()		
+function update()	
+	
 	if WHEELCHOCKS_STATE == 1 then
-	dispatch_action(nil,10038)
+		dispatch_action(nil,10038)
 	elseif WHEELCHOCKS_STATE == 0 then
-	dispatch_action(nil,10039)
-	WHEELCHOCKS_STATE = -1
+		dispatch_action(nil,10039)
+		WHEELCHOCKS_STATE = -1
 	end
 
 	set_aircraft_draw_argument_value(WHEELCHOCKS_LADDER_ANIM_ARG, WHEELCHOCKS_STATE)
 	
 end
+
+
 
 need_to_be_closed = false

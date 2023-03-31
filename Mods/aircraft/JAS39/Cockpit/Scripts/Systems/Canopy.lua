@@ -23,9 +23,6 @@ local ProbeTime = 20
 local ProbeIncrement = update_time_step / ProbeTime
 
 local SeatTarget = 0
-local SeatCurrent = 0
-local SeatTime = 10
-local SeatIncrement = update_time_step / SeatTime
 
 dev:listen_event("WeaponRearmSingleStepComplete")
 
@@ -74,7 +71,7 @@ function post_initialize()
 		dev:performClickableAction(device_commands.AARProbeCover, 0, true)	
     end
 
-	sndhost = create_sound_host("COCKPIT_CANOPY","HEADPHONES",0,0,0)
+	sndhost = create_sound_host("COCKPIT_CANOPY","3D",0,0,0)
 	JAS39CANOPYJETTISON = sndhost:create_sound("Aircrafts/JAS39/Cockpit/JAS39CANOPYJETTISON") 
 
 end
@@ -159,14 +156,14 @@ function SetCommand(command,value)
 
 	elseif command == device_commands.AARProbeCover then
 		if value == 1 then 				
-			AARProbeCoverState = 1
+			AARProbeCoverState = 1			
 		elseif value == 0 then 				
 			if AARProbeState == 1 then
 				dispatch_action(nil,155)
 				AARProbeState = 0
 			end	
 			dev:performClickableAction(device_commands.AARProbe, 0, true)	
-			AARProbeCoverState = 0			
+			AARProbeCoverState = 0	
 		end
 
 	elseif command == device_commands.AARProbe then
@@ -234,41 +231,41 @@ local caution_light = get_param_handle("CAUTION_LIGHT")
 function caution_lights()
 
 	local GripenType = get_aircraft_type()
-	local master_caution_aa = get_cockpit_draw_argument_value(117)
+	local master_caution_wvr = get_cockpit_draw_argument_value(107)
+	local master_caution_bvr = get_cockpit_draw_argument_value(117)
 	local master_caution_ag = get_cockpit_draw_argument_value(107)
 
 	if GripenType == 'JAS39Gripen' then
-		if master_caution_aa > 0 then
+		if master_caution_wvr > 0 then
 			caution_light:set(1)
-		elseif master_caution_aa == 0 then
-			caution_light:set(0)
+		elseif master_caution_wvr == 0 then
+			caution_light:set(-1)
 		end		
 	elseif GripenType == 'JAS39Gripen_AG' then
 		if master_caution_ag > 0 then
 			caution_light:set(1)
 		elseif master_caution_ag == 0 then
-			caution_light:set(0)
+			caution_light:set(-1)
+		end
+		elseif GripenType == 'JAS39Gripen_BVR' then
+		if master_caution_bvr > 0 then
+			caution_light:set(1)
+		elseif master_caution_bvr == 0 then
+			caution_light:set(-1)
 		end
 	end	
 end	
 
-function seat_adjustment() 														-- Broken at the moment!
-	-- if SeatCurrent < SeatTarget then
-		-- SeatCurrent = SeatCurrent + SeatIncrement
-	-- end
-	
-	-- dispatch_action(nil,484,SeatCurrent)
-	
-	-- if SeatCurrent > SeatTarget then
-		-- SeatCurrent = SeatCurrent - SeatIncrement
-		-- dispatch_action(nil,485,SeatCurrent)
-	-- end	
-			
-	-- if SeatTarget == 1 then
-		-- dispatch_action(nil,484)
-	-- elseif SeatTarget == -1 then
-		-- dispatch_action(nil,485)
-	-- end
+function seat_adjustment()
+
+	if SeatTarget == 1 then
+		dispatch_action(nil,484)
+		SeatTarget = 0
+	elseif SeatTarget == -1 then
+		dispatch_action(nil,485)
+		SeatTarget = 0
+	end
+
 end
 
 function extend_probe()

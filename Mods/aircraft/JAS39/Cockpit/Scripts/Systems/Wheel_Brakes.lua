@@ -110,13 +110,13 @@ end
 
 function update()
 	
-    if B_axis_value > 0.1 or (L_axis_value > 0.1 or R_axis_value > 0.1) then
-        dispatch_action(nil,74)
-        
-    else
-        dispatch_action(nil,75)
-    end
-print_message_to_user(get_param_handle("BRAKE_FORCE"))		--used for debugging
+   if B_axis_value > 0.1 or (L_axis_value > 0.1 or R_axis_value > 0.1) then
+       dispatch_action(nil,74)
+       
+   else
+       dispatch_action(nil,75)
+   end
+--print_message_to_user(get_param_handle("BRAKE_FORCE"))		--used for debugging
 
 end		
 need_to_be_closed = false

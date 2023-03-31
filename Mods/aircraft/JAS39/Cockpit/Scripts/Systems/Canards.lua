@@ -1,5 +1,5 @@
 dofile(LockOn_Options.script_path.."command_defs.lua")
-
+dofile(LockOn_Options.script_path.."utils.lua")
 local update_time_step = 0.01 
 make_default_activity(update_time_step)
 local Canard_system = GetSelf()
@@ -7,8 +7,8 @@ local sensor_data = get_base_data()
 
 local rate_met2knot = 0.539956803456
 local ias_knots = 0
-local CANARDS_STATE = 0 
-local CANARDS_TARGET = 0
+CANARDS_STATE = 0 
+CANARDS_TARGET = 0
 local RAD_TO_DEGREE  = 57.29577951308233
 local AOA = 0
 local FLAPS_STATE = 0
@@ -175,23 +175,8 @@ function update()
 
 --===================== Actuation of canards ==========================
 
-	Diff1 = CANARDS_TARGET - CANARDS_STATE  			-- Difference between desired and current canard angle
-	Diff2 = CANARDS_STATE - CANARDS_TARGET				-- Difference between current and desired canard angle
--- if current canard angle does not match desiered angle and requiered actuation is greater than the increment in which the movement is done
+	CANARDS_STATE = MoveControlSurface(CANARDS_STATE, CANARDS_TARGET, CanardsIncrement)
 
-	if (CANARDS_STATE < CANARDS_TARGET) and (Diff1 >= CanardsIncrement) then
-		CANARDS_STATE = CANARDS_STATE + CanardsIncrement
-	elseif (CANARDS_STATE > CANARDS_TARGET) and (Diff2 >= CanardsIncrement) then
-		CANARDS_STATE = CANARDS_STATE - CanardsIncrement
-	end
-	--CANARDS_STATE = -CANARDS_STATE 
--- Enforces max/min values for canard angle
-
-	if (CANARDS_STATE < -1) then							
-		CANARDS_STATE = -1
-	elseif (CANARDS_STATE > 1) then
-		CANARDS_STATE = 1
-	end
 	
 	if (TRIM_STATE > 1 ) then		-- makes sure TRIM_STATE won't go above 1 or below 0
 		TRIM_STATE = 1

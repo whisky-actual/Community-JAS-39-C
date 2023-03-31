@@ -18,7 +18,8 @@ function post_initialize()
         dev:performClickableAction(device_commands.AntiCollisionLights, 0, true)	
         dev:performClickableAction(device_commands.FormationLights, 0, true)			
         dev:performClickableAction(device_commands.FormFlashLights, 0, true)			
-        dev:performClickableAction(device_commands.NavigationLights, 0, true)			
+        dev:performClickableAction(device_commands.NavigationLights, 0, true)
+		dev:performClickableAction(device_commands.MasterCaution, -1, true)
 	
     elseif birth=="GROUND_HOT" then
         dev:performClickableAction(device_commands.LandingTaxiLights, 1, true)
@@ -26,7 +27,8 @@ function post_initialize()
         dev:performClickableAction(device_commands.AntiCollisionLights, 1, true)
         dev:performClickableAction(device_commands.FormationLights, 0, true)			
         dev:performClickableAction(device_commands.FormFlashLights, 1, true)			
-        dev:performClickableAction(device_commands.NavigationLights, 0, true)		
+        dev:performClickableAction(device_commands.NavigationLights, 0, true)
+		dev:performClickableAction(device_commands.MasterCaution, -1, true)
 	
     elseif birth=="GROUND_COLD" then
         dev:performClickableAction(device_commands.LandingTaxiLights, -1, true)
@@ -34,12 +36,25 @@ function post_initialize()
         dev:performClickableAction(device_commands.AntiCollisionLights, 0, true)
         dev:performClickableAction(device_commands.FormationLights, -1, true)			
         dev:performClickableAction(device_commands.FormFlashLights, 0, true)			
-        dev:performClickableAction(device_commands.NavigationLights, -1, true)			
+        dev:performClickableAction(device_commands.NavigationLights, -1, true)
+		dev:performClickableAction(device_commands.MasterCaution, -1, true)
 		
     end
+	
+	dev:performClickableAction(device_commands.BackLight, -1, true)
+	dev:performClickableAction(device_commands.FloodLight, -1, true)
+	
 end
 
+
+
+
 dev:listen_command(device_commands.FloodLight)
+dev:listen_command(device_commands.BackLight)
+dev:listen_command(device_commands.IndicatorLight)
+
+
+
 dev:listen_command(device_commands.LandingTaxiLights)
 dev:listen_command(device_commands.CovertLights)
 dev:listen_command(device_commands.AntiCollisionLights)
@@ -51,6 +66,10 @@ dev:listen_command(Keys.LandingLights)
 dev:listen_command(Keys.TaxiLights)
 dev:listen_command(Keys.LandingTaxiLightsOff)  
 
+
+dev:listen_command(Keys.Main)  
+dev:listen_command(device_commands.Main)  
+
 local LD_BRIGHTNESS = get_param_handle("LD_BRIGHTNESS")
 
 local landing_lights_state = 0              -- 0: off, 1: on
@@ -61,9 +80,44 @@ local formation_lights_state = 0			-- 0: off, 0.5: step 1, 0.625: step 2, 0.875:
 local formation_lights_flash_state = 0		-- 0: steady, 1: flash
 local navigation_lights_state = 0			-- -1: brt, 0: dim, 1: off
 
+
+
+
+
+local MAINPOWER = get_param_handle("MAINPOWER"):get()
+
+local FLOOD_LIGHT = get_param_handle("FLOOD_LIGHT")
+
+FLOOD_LIGHT:set(0)
+
+local BACK_LIGHTS = get_param_handle("BACK_LIGHTS")
+BACK_LIGHTS:set(-1) -- -1 = off
+
+local INDICATOR_LIGHTS = get_param_handle("INDICATOR_LIGHTS")
+INDICATOR_LIGHTS:set(-1) -- 0 = default IRL
+
+local tempfloodlight = 0
+local tempbacklight  = 0
+local tempindlight   = 0
+
+
+
 function SetCommand(command,value)
 	
-	if command == device_commands.LandingTaxiLights then
+	if command == device_commands.FloodLight then
+		--FLOOD_LIGHT:set(value)
+		tempfloodlight = value
+	elseif command == device_commands.BackLight then
+		--BACK_LIGHTS:set(value)
+		tempbacklight = value
+		
+	elseif command == device_commands.IndicatorLight then
+		--INDICATOR_LIGHTS:set(value)
+		tempindlight = value
+	
+	
+	
+	elseif command == device_commands.LandingTaxiLights then
 			if value == -1 then			
 				landing_lights_state = 0
 				taxi_lights_state = 0					
@@ -144,6 +198,10 @@ function SetCommand(command,value)
 		
 	end	
 end
+
+
+
+
 
 -- Anti collision lights flash 
 local flashcounter_anticoll = 0
@@ -245,17 +303,34 @@ function interior_lights()
 	if get_param_handle("MAINPOWER"):get() == 1 then	
 		set_aircraft_draw_argument_value(210,LD_BRIGHTNESS:get())
 		set_aircraft_draw_argument_value(212,LD_BRIGHTNESS:get())
+		FLOOD_LIGHT:set(tempfloodlight)
+		BACK_LIGHTS:set(tempbacklight)
+		INDICATOR_LIGHTS:set(tempindlight)
+		
+		
+		
 	elseif 	get_param_handle("MAINPOWER"):get() == 0 then
 		set_aircraft_draw_argument_value(210,-1)
 		set_aircraft_draw_argument_value(212,0)
+		FLOOD_LIGHT:set(0)
+		BACK_LIGHTS:set(-1)
+		INDICATOR_LIGHTS:set(-1)
+		
+		
 	end	
 	
 	set_aircraft_draw_argument_value(211,floodlight_status)
 
 end
 
+
+
+
 function update()
 
+	--print_message_to_user(INDICATOR_LIGHTS:get())
+	
+	
 	interior_lights()
 	update_flashing_form() -- Formation lights flash
 		
@@ -345,4 +420,3 @@ function update()
 end
 
 need_to_be_closed = false
-

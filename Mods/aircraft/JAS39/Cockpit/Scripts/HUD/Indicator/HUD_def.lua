@@ -37,7 +37,8 @@ materials["BBLACK"]     = MakeMaterial(nil, materials["DBG_BLACK"])
 -------FONTS-------
 local IndicationFontPath = LockOn_Options.script_path.."Resources/fonts/"
 local BASE_COLOR  = {36,255,113,255}
-local GREEN 		= {0,255,0,255}
+local GREEN 		= {0,500,0,1000}
+--local GREEN 		= {-50,255,-50,1000}
  
 fontdescription = {}
 
@@ -46,7 +47,7 @@ CMFD_Y_PIXEL =  144
 
 local Gripen_Font = 
 {
-    texture = IndicationFontPath.."Gripen_Font_HUD.dds",
+    texture = IndicationFontPath.."Gripen_Font_HUD",
     size        = {10, 10},
     resolution  = {1440, 1440},
     default     = {CMFD_X_PIXEL, CMFD_Y_PIXEL},
@@ -159,13 +160,13 @@ HUD_DAY_COLOR               = {255,255,255,255}
 HUD_DARK_COLOR               = {0,0,0,255}
 
 
-HUD_HORIZON = MakeMaterial(HUD_IND_TEX_PATH.."HUD/JAS_HUD_Symbols.dds", GREEN)
-HUD_POSITIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLines.dds", GREEN)
-HUD_NEGATIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLinesNegative.dds", GREEN)
-HUD_HeadingScale = MakeMaterial(HUD_IND_TEX_PATH.."HUD/HUD_HeadingScale.dds", GREEN)
-HUD_AimingCircle = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircle.dds", GREEN)
-HUD_AimingCircleThin = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircleThin.dds", GREEN)
-HUD_GroundCollisionWarning = MakeMaterial(HUD_IND_TEX_PATH.."HUD/GroundCollisionWarning.dds", GREEN)
+HUD_HORIZON = MakeMaterial(HUD_IND_TEX_PATH.."HUD/JAS_HUD_Symbols", GREEN)
+HUD_POSITIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLines", GREEN)
+HUD_NEGATIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLinesNegative", GREEN)
+HUD_HeadingScale = MakeMaterial(HUD_IND_TEX_PATH.."HUD/HUD_HeadingScale", GREEN)
+HUD_AimingCircle = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircle", GREEN)
+HUD_AimingCircleThin = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircleThin", GREEN)
+HUD_GroundCollisionWarning = MakeMaterial(HUD_IND_TEX_PATH.."HUD/GroundCollisionWarning", GREEN)
 
 
 

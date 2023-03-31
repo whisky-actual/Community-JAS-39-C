@@ -39,10 +39,12 @@ local LD_VSI_TOGGLE = get_param_handle("LD_VSI_TOGGLE")
 local LDP_BACKGROUND = get_param_handle("LDP_BACKGROUND")
 -- Hide 3d object blocking rwr
 local RWR_BACKGROUND = get_param_handle("RWR_BACKGROUND")
+local RDR_BACKGROUND = get_param_handle("RDR_BACKGROUND")
 
 local PLAYER_SELECTED_STATION = get_param_handle("PLAYER_SELECTED_STATION")
 local LD_BRIGHTNESS = get_param_handle("LD_BRIGHTNESS")
 local CD_BRIGHTNESS = get_param_handle("CD_BRIGHTNESS")
+local RD_BRIGHTNESS = get_param_handle("RD_BRIGHTNESS")
 
 local HOURTIME = get_param_handle("HOURTIME")
 local MINUTESTIME = get_param_handle("MINUTESTIME")
@@ -63,13 +65,17 @@ local CD_TEMP_TOGGLE = get_param_handle("CD_TEMP_TOGGLE")
 local CD_ENG_TOGGLE = get_param_handle("CD_ENG_TOGGLE")
 local CD_VSI_TOGGLE = get_param_handle("CD_VSI_TOGGLE")
 
+-- RIGHT DISPLAY ===================
+local RD_EMGY_MODE = get_param_handle("RD_EMGY_MODE")
+
+-- EMGY specific
+local RD_TEMP_TOGGLE = get_param_handle("RD_TEMP_TOGGLE")
+local RD_ENG_TOGGLE = get_param_handle("RD_ENG_TOGGLE")
+local RD_VSI_TOGGLE = get_param_handle("RD_VSI_TOGGLE")
+
 
 
 local HUD_BRIGHTNESS = get_param_handle("HUD_BRIGHTNESS")
-
-
-
-
 
 -- commands =====================================================
 -- LEFT DISPLAY ===================
@@ -149,6 +155,8 @@ dev:listen_command(Keys.CDSK_20)
 dev:listen_command(Keys.CD_Brightness_Up)
 dev:listen_command(Keys.CD_Brightness_Down)
 
+dev:listen_command(Keys.RD_Brightness_Up)
+dev:listen_command(Keys.RD_Brightness_Down)
 
 --Clickable
 dev:listen_command(device_commands.CDSK_1)
@@ -175,20 +183,20 @@ dev:listen_command(device_commands.CDSK_20)
 dev:listen_command(device_commands.CD_Brightness_Up)
 dev:listen_command(device_commands.CD_Brightness_Down)
 
+dev:listen_command(device_commands.RDSK_1)
+dev:listen_command(Keys.RDSK_1)
+dev:listen_command(device_commands.RD_Brightness_Up)
+dev:listen_command(device_commands.RD_Brightness_Down)
+
 dev:listen_command(device_commands.HIDE_HUD)
 
+
 -- UCP ===================
-dev:listen_command(device_commands.COM1)
-dev:listen_command(device_commands.COM2)
 dev:listen_command(device_commands.LANDING_MODE)
 
 -- HUD ===================
 
 dev:listen_command(device_commands.HUD_Brightness)
-
-
-
-
 
 
 dev:listen_command(136) 	-- active jamming
@@ -206,6 +214,7 @@ dev:listen_command(105)
 dev:listen_command(106)
 dev:listen_command(107)
 dev:listen_command(108)
+dev:listen_command(109)
 dev:listen_command(110)
 dev:listen_command(111)
 
@@ -216,7 +225,6 @@ HUD_MODE:set(1)
 local RedHUD = 0
 
 dev:listen_command(87)	-- TGP on
-
 
 
 function post_initialize()	-- modes / toggle default settings
@@ -258,17 +266,23 @@ function post_initialize()	-- modes / toggle default settings
 	CD_LDG_TOGGLE:set(0)
 	CD_EWS_TOGGLE:set(0)
 
-	RWR_BACKGROUND:set(0)
+	RWR_BACKGROUND:set(1)
 -- EMGY specific
 	CD_TEMP_TOGGLE:set(0)			-- 1 = on , 0 = off
 	CD_ENG_TOGGLE:set(0)			-- 1 = on , 0 = off
 	CD_VSI_TOGGLE:set(0)			-- 1 = on , 0 = off	
 	CD_FIX_TOGGLE:set(0)
-	
+
+-- RIGHT DISPLAY ===================	
+	RD_EMGY_MODE:set(0)
+-- EMGY specific
+	RD_TEMP_TOGGLE:set(1)			-- 1 = on , 0 = off
+	RD_ENG_TOGGLE:set(1)			-- 1 = on , 0 = off
+	RD_VSI_TOGGLE:set(1)			-- 1 = on , 0 = off	
+
 	BrightnessAtSpawn()
 	HideFc3Hud()
 	ChangeHudColor()
-	
 	
 	local birth = LockOn_Options.init_conditions.birth_place
     if birth=="GROUND_HOT" then
@@ -286,18 +300,31 @@ function post_initialize()	-- modes / toggle default settings
 end
 
 function SetCommand(command,value) 
--- CENTER DISPLAY ===================
+
 if get_param_handle("MAINPOWER"):get() == 1 then
+
+	if command == Keys.RDSK_1 or command == device_commands.RDSK_1 then
+		if RD_EMGY_MODE:get() == 0 then
+			RD_EMGY_MODE:set(1)
+			RDR_BACKGROUND:set(1)
+		else
+			RD_EMGY_MODE:set(0)
+			RDR_BACKGROUND:set(0)
+		end
+	end
+
+
+-- CENTER DISPLAY ===================
 	if (command == Keys.CDSK_1) or (command == device_commands.CDSK_1) then			-- Emergency page toggle. EMGY, always visible and functional
 		if CD_EMGY_MODE:get() == 0 then
 			CD_EMGY_MODE:set(1)
-			RWR_BACKGROUND:set(1)
-			--CD_last_page_was = CD_UPPER:get()
-			--CD_UPPER:set(0)
+			RWR_BACKGROUND:set(-1)
 		else
 			CD_EMGY_MODE:set(0)
-			RWR_BACKGROUND:set(0)
-			--CD_UPPER:set(CD_last_page_was)
+
+			if CD_FIX_TOGGLE:get() == 1 then
+				RWR_BACKGROUND:set(0)
+			end
 		end
 	end	
 
@@ -325,8 +352,10 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 		if (command == Keys.CDSK_6) or (command == device_commands.CDSK_6) then	
 			if CD_FIX_TOGGLE:get() == 0 then
 				CD_FIX_TOGGLE:set(1)
+				RWR_BACKGROUND:set(1)
 			else
 				CD_FIX_TOGGLE:set(0)
+				RWR_BACKGROUND:set(-1)
 			end
 		end			
 		--[[
@@ -393,15 +422,6 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 
 		end			
 		--]]
-		
-		
-	
-		
-		
-		
-		
-		
-
 	
 			-- END OF NON-EMGY 
 	
@@ -430,24 +450,6 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 		end
 	-- END OF EMGY 
 	end
-
-
-	if (command == Keys.CD_Brightness_Down) or (command == device_commands.CD_Brightness_Down) then
-		if CD_BRIGHTNESS:get() > 0.055 then
-			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() -0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
-		end
-	
-	elseif (command == Keys.CD_Brightness_Up) or (command == device_commands.CD_Brightness_Up) then
-		if CD_BRIGHTNESS:get() < 1 then
-			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() +0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
-		end
-	end
-
-
-
-
 
 -- LEFT DISPLAY ===================
 	if (command == Keys.LDSK_1) or (command == device_commands.LDSK_1) then			-- Emergency page toggle. EMGY, always visible and functional
@@ -707,7 +709,7 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 	
 	
 	if (command == Keys.LD_Brightness_Down) or (command == device_commands.LD_Brightness_Down) then
-		if LD_BRIGHTNESS:get() > 0.055 then
+		if LD_BRIGHTNESS:get() > 0.051 then
 			LD_BRIGHTNESS:set(LD_BRIGHTNESS:get() -0.05)
 			--print_message_to_user(LD_BRIGHTNESS:get())
 		end
@@ -718,33 +720,33 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 			--print_message_to_user(LD_BRIGHTNESS:get())
 		end
 	end
---[[
-	if STORES_TOGGLE:get() == 1 then
-		if (command == Keys.LDSK_8) or (command == device_commands.LDSK_8) then
-			PLAYER_SELECTED_STATION:set(0)	-- left wing tip
-			--print_message_to_user("player station 0")
-		elseif (command == Keys.LDSK_9) or (command == device_commands.LDSK_9) then
-			PLAYER_SELECTED_STATION:set(2)	-- left outer pylon
-			--print_message_to_user("player station 2")
-		elseif (command == Keys.LDSK_10) or (command == device_commands.LDSK_10) then
-			PLAYER_SELECTED_STATION:set(4)	-- left inner pylon
-			--print_message_to_user("player station 4")
-		elseif (command == Keys.LDSK_11) or (command == device_commands.LDSK_11) then
-			PLAYER_SELECTED_STATION:set(5)	-- right inner pylon
-			--print_message_to_user("player station 5")
-		elseif (command == Keys.LDSK_12) or (command == device_commands.LDSK_12) then
-			PLAYER_SELECTED_STATION:set(3)	-- right outer pylon
-			--print_message_to_user("player station 3")
-		elseif (command == Keys.LDSK_13) or (command == device_commands.LDSK_13) then
-			PLAYER_SELECTED_STATION:set(1)	-- right wing tip
-			--print_message_to_user("player station 1")
+
+	if (command == Keys.CD_Brightness_Down) or (command == device_commands.CD_Brightness_Down) then
+		if CD_BRIGHTNESS:get() > 0.051 then
+			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() -0.05)
+			--print_message_to_user(LD_BRIGHTNESS:get())
+		end
+	
+	elseif (command == Keys.CD_Brightness_Up) or (command == device_commands.CD_Brightness_Up) then
+		if CD_BRIGHTNESS:get() < 1 then
+			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() +0.05)
+			--print_message_to_user(LD_BRIGHTNESS:get())
 		end
 	end
---]]
+
+	if (command == Keys.RD_Brightness_Down) or (command == device_commands.RD_Brightness_Down) then
+		if RD_BRIGHTNESS:get() > 0.051 then
+			RD_BRIGHTNESS:set(RD_BRIGHTNESS:get() -0.05)
+			--print_message_to_user(RD_BRIGHTNESS:get())
+		end
 	
-	
-	
-	
+	elseif (command == Keys.RD_Brightness_Up) or (command == device_commands.RD_Brightness_Up) then
+		if RD_BRIGHTNESS:get() < 1 then
+			RD_BRIGHTNESS:set(RD_BRIGHTNESS:get() +0.05)
+			--print_message_to_user(RD_BRIGHTNESS:get())
+		end
+	end
+
 	
 	if command == 136 then
 		if CD_EWS_TOGGLE:get() == 0 then
@@ -826,6 +828,20 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 				ChangeHudColor()
 			end
 		end
+
+	elseif command == 109 then
+		--print_message_to_user("HMD")
+		if HUD_MODE:get() ~= 8 then
+			HUD_MODE:set(8)
+			ShowFc3Hud()
+			if RedHUD == 1 then
+				ChangeHudColor()
+			end
+		-- else 
+			-- HUD_MODE:set(0)
+			-- ShowFc3Hud()
+			-- ChangeHudColor()
+		end
 		
 	elseif command == 110 then
 		--print_message_to_user("LNGT")
@@ -879,83 +895,54 @@ if get_param_handle("MAINPOWER"):get() == 1 then
 		
 		elseif HUD_MODE:get() == 2 then
 			
-				if RedHUD == 1 then
-					ChangeHudColor()
-					ShowFc3Hud()
-				else 
-					ChangeHudColor()
-					HideFc3Hud()
-				
-				end
+			if RedHUD == 1 then
+				ChangeHudColor()
+				ShowFc3Hud()
+			else 
+				ChangeHudColor()
+				HideFc3Hud()
+			
+			end
 		
 		elseif HUD_MODE:get() == 3 then
 			
-				if RedHUD == 1 then
-					ChangeHudColor()
-					ShowFc3Hud()
-				else 
-					ChangeHudColor()
-					HideFc3Hud()
-				
-				end
+			if RedHUD == 1 then
+				ChangeHudColor()
+				ShowFc3Hud()
+			else 
+				ChangeHudColor()
+				HideFc3Hud()
+			
+			end
 		
 		elseif HUD_MODE:get() == 4 then
 			
-				if RedHUD == 1 then
-					ChangeHudColor()
-					ShowFc3Hud()
-				else 
-					ChangeHudColor()
-					HideFc3Hud()
-				
-				end
+			if RedHUD == 1 then
+				ChangeHudColor()
+				ShowFc3Hud()
+			else 
+				ChangeHudColor()
+				HideFc3Hud()
+			
+			end
 		
 		elseif HUD_MODE:get() == 6 then
 			
-				if RedHUD == 1 then
-					ChangeHudColor()
-					ShowFc3Hud()
-				else 
-					ChangeHudColor()
-					HideFc3Hud()
-				
-				end
-		
-		--elseif HUD_MODE:get() == 7 then
-
+			if RedHUD == 1 then
+				ChangeHudColor()
+				ShowFc3Hud()
+			else 
+				ChangeHudColor()
+				HideFc3Hud()
+			
+			end
 		end
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	end
-	
-	
-	
-	
-	
-
-	
--- UCP ===================
-	if command == device_commands.COM1 then
-		dispatch_action(nil,179)
-	end
-	
-	if command == device_commands.COM2 then
-		dispatch_action(nil,1560)
 	end
 	
 -- HUD ===================	
-	
 	if command == device_commands.HUD_Brightness then
-			HUD_BRIGHTNESS:set(value)
-	end
-	
+            HUD_BRIGHTNESS:set(value*value)
+    end	
 	
 end	
 end -- end of function
@@ -1048,16 +1035,13 @@ DigitalClock()
 	elseif (HOURTIME:get() < 19) then
 		LD_BRIGHTNESS:set(0.3)	
 	elseif (HOURTIME:get() >= 19) then
-		LD_BRIGHTNESS:set(0.05)		
+		LD_BRIGHTNESS:set(0.5)		
 	end
-	
-	
+		
 	CD_BRIGHTNESS:set(LD_BRIGHTNESS:get())
-	
+	RD_BRIGHTNESS:set(LD_BRIGHTNESS:get())
 	dev:performClickableAction(device_commands.HUD_Brightness,1, true)
 end
-
-
 
 function update()
 
@@ -1083,8 +1067,7 @@ function update()
 	elseif (LD_UPPER:get() ~= 4) and (LDP_BACKGROUND:get() == 1) or (LD_EMGY_MODE:get() == 1) then	
 		LDP_BACKGROUND:set(0)
 	end
-	
+
 end
 
 need_to_be_closed = false
-

@@ -1,0 +1,7 @@
+wave = "Effects/Aircrafts/Engines/CockpitAfterburner"
+inner_radius = 10
+outer_radius = 100
+position = {-14.0, 0, 0}
+release = 0.05
+gain = 2.5
+

@@ -1,19 +1,14 @@
 dofile(LockOn_Options.script_path.."command_defs.lua")
-
+dofile(LockOn_Options.script_path.."utils.lua")
 local update_time_step = 0.01 
 make_default_activity(update_time_step)
 
 local sensor_data = get_base_data()
 
---local rate_met2knot = 0.539956803456
-local ias_knots = 0 -- * rate_met2knot
 local LEF_STATE = 0
 local LEF_TARGET = 0
-local Diff1 = 0
-local Diff2 = 0
 --local DEGREE_TO_RAD  = 0.0174532925199433
 local RAD_TO_DEGREE  = 57.29577951308233
-local slat_system = GetSelf()
 local AOA = 0
 local MACH = 0
 local LEFTimeSec = 1.78
@@ -23,10 +18,6 @@ local arg14 = 0
 local DUMPINGLIFT = 0
 
 function Sensor_data()
-    --ias_knots = sensor_data.getIndicatedAirSpeed() * 3.6 * rate_met2knot
-    --print_message_to_user("ISA:")
-    --print_message_to_user(ias_knots)
-    --print_message_to_user("SLAT_POS:")
 	MACH = sensor_data.getMachNumber()
     AOA =(sensor_data.getAngleOfAttack() * RAD_TO_DEGREE)
     -- SLATS_STATE = tonumber(string.format(fmt,AOA))
@@ -105,14 +96,7 @@ function update()
 	--print_message_to_user(LEF_TARGET)
 --===================== Actuation of leading edge flaps ==========================	
 	
-	Diff1 = LEF_TARGET - LEF_STATE  			-- Difference between desired and current canard angle
-	Diff2 = LEF_STATE - LEF_TARGET				-- Difference between current and desired canard angle
-	
-	if (LEF_STATE < LEF_TARGET) and (Diff1 >= LEFIncrement) then
-		LEF_STATE = LEF_STATE + LEFIncrement
-	elseif (LEF_STATE > LEF_TARGET) and (Diff2 >= LEFIncrement) then
-		LEF_STATE = LEF_STATE - LEFIncrement
-	end
+	LEF_STATE = MoveControlSurface(LEF_STATE, LEF_TARGET, LEFIncrement)
 	
     set_aircraft_draw_argument_value(477,LEF_STATE - arg13)	-- Right LEF
     set_aircraft_draw_argument_value(478,LEF_STATE - arg14)	-- Left LEF

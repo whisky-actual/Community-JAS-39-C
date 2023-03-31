@@ -29,6 +29,7 @@ Add(LeftDisplayBase)
 dofile(LockOn_Options.script_path.."MFD/Indicator/LD_UPPER_AREA.lua")
 dofile(LockOn_Options.script_path.."MFD/Indicator/LD_LOWER_AREA.lua")
 dofile(LockOn_Options.script_path.."MFD/Indicator/LD_EMERGENCY_PAGE.lua")
+dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_RWR.lua")
  
 
  

@@ -2,4 +2,4 @@ wave = "Effects/Aircrafts/JAS39/Cockpit/jas39canopyjettison"
 inner_radius = 10
 outer_radius = 100
 position = {0.0, 0.0, 0.0}
-gain = 0.8
+gain = 4.0

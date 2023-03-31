@@ -23,18 +23,20 @@ GRAY_Background.controllers    	= {{"opacity_using_parameter", 0}}
 Add(GRAY_Background)
 
 BLACK_Background 					= CreateElement "ceMeshPoly"
-BLACK_Background.name 			= create_guid_string()
-BLACK_Background.primitivetype 	= "triangles"
-BLACK_Background.vertices	   		= { {-0.925 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.925,-0.9}, }
+BLACK_Background.name 				= create_guid_string()
+BLACK_Background.primitivetype 		= "triangles"
+BLACK_Background.vertices	   		= { {-0.905 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.905,-0.9}, }
 BLACK_Background.indices			= {0, 1, 2, 0, 2, 3}
 BLACK_Background.init_pos			= {0, 0, 0}
 BLACK_Background.material			= MakeMaterial(nil,{0, 0, 0,255})	--RGBA
-BLACK_Background.parent_element	= TAN_CD_MASTER.name
-BLACK_Background.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
-BLACK_Background.level			= MFD_DEFAULT_LEVEL
-BLACK_Background.change_opacity	= false
+BLACK_Background.parent_element		= TAN_CD_MASTER.name
+BLACK_Background.h_clip_relation 	= h_clip_relations.REWRITE_LEVEL
+BLACK_Background.level				= MFD_DEFAULT_LEVEL
+BLACK_Background.change_opacity		= false
 BLACK_Background.collimated 		= false
-BLACK_Background.isvisible		= true
+BLACK_Background.isvisible			= true
+BLACK_Background.element_params 	= {"CD_BRIGHTNESS", "CD_FIX_TOGGLE"}
+BLACK_Background.controllers    	= {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 0}}
 Add(BLACK_Background)
 
 
@@ -42,7 +44,7 @@ Add(BLACK_Background)
 TAN_Background 					= CreateElement "ceMeshPoly"
 TAN_Background.name 			= create_guid_string()
 TAN_Background.primitivetype 	= "triangles"
-TAN_Background.vertices	   		= { {-0.925 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.925,-0.9}, }
+TAN_Background.vertices	   		= { {-0.905 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.905,-0.9}, }
 TAN_Background.indices			= {0, 1, 2, 0, 2, 3}
 TAN_Background.init_pos			= {0, 0, 0}
 TAN_Background.material			= MakeMaterial(nil,{230, 220, 140, 255})	--RGBA
@@ -56,40 +58,29 @@ TAN_Background.element_params 	= {"CD_BRIGHTNESS","CD_FIX_TOGGLE"}
 TAN_Background.controllers    	= {{"opacity_using_parameter", 0},{"parameter_compare_with_number",1, 0}}
 Add(TAN_Background)
 
-SmallGray_Background 					= CreateElement "ceMeshPoly"
-SmallGray_Background.name 			= create_guid_string()
-SmallGray_Background.primitivetype 	= "triangles"
-SmallGray_Background.vertices	   		= { {-0.925 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.925,-0.9}, }
-SmallGray_Background.indices			= {0, 1, 2, 0, 2, 3}
-SmallGray_Background.init_pos			= {0, 0, 0}
-SmallGray_Background.material			= MakeMaterial(nil,{69, 69, 70,255})	--RGBA
-SmallGray_Background.parent_element	= TAN_CD_MASTER.name
-SmallGray_Background.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
-SmallGray_Background.level			= MFD_DEFAULT_LEVEL
-SmallGray_Background.change_opacity	= false
-SmallGray_Background.collimated 		= false
-SmallGray_Background.isvisible		= true
-SmallGray_Background.element_params 	= {"CD_BRIGHTNESS","CD_FIX_TOGGLE"}
-SmallGray_Background.controllers    	= {{"opacity_using_parameter", 0},{"parameter_compare_with_number",1, 1}}
-Add(SmallGray_Background)
+--SmallGray_Background 					= CreateElement "ceMeshPoly"
+--SmallGray_Background.name 			= create_guid_string()
+--SmallGray_Background.primitivetype 	= "triangles"
+--SmallGray_Background.vertices	   		= BLACK_Background.vertices
+--SmallGray_Background.indices			= {0, 1, 2, 0, 2, 3}
+--SmallGray_Background.init_pos			= {0, 0, 0}
+--SmallGray_Background.material			= MakeMaterial(nil,{69, 69, 70,255})	--RGBA
+--SmallGray_Background.parent_element	= TAN_CD_MASTER.name
+--SmallGray_Background.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
+--SmallGray_Background.level			= MFD_DEFAULT_LEVEL
+--SmallGray_Background.change_opacity	= false
+--SmallGray_Background.collimated 		= false
+--SmallGray_Background.isvisible		= true
+--SmallGray_Background.element_params 	= {"CD_BRIGHTNESS","CD_FIX_TOGGLE"}
+--SmallGray_Background.controllers    	= {{"opacity_using_parameter", 0},{"parameter_compare_with_number",1, 1}}
+--Add(SmallGray_Background)
 
 
-
-
-
-
-
-
-
-
-
-add_text_param(0.57, 1.34, "SECONDSTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
-add_text(",", 0.534, 1.3475, TAN_Background, "Gripen_Font_black" )
-add_text_param(0.48, 1.34, "MINUTESTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
-add_text(",", 0.445, 1.3475, TAN_Background, "Gripen_Font_black" )
-add_text_param(0.395, 1.34, "HOURTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
-
-
+add_text_param(0.57,  1.32, "SECONDSTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
+add_text(",", 0.534,  1.3275, TAN_Background, "Gripen_Font_black" )
+add_text_param(0.48,  1.32, "MINUTESTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
+add_text(",", 0.445,  1.3275, TAN_Background, "Gripen_Font_black" )
+add_text_param(0.395, 1.32, "HOURTIME", "%02.0f", TAN_Background, mfd_strdefs_digit_XS, "Gripen_Font_black")
 
 
 -- On-screen button lables
@@ -98,61 +89,54 @@ local FONT_SIZE = 0.64
 
 local EMGY			= create_mfd_tex(LD_LABLES, 0, 1270, 125 , 1700,FONT_SIZE) 
 EMGY.name			= create_guid_string()
-EMGY.init_pos		= {-0.96, 1.14}
+EMGY.init_pos		= {-0.930, 1.14}
 EMGY.parent_element	= TAN_CD_MASTER.name
 AddElement(EMGY)
 
 local EWS			= create_mfd_tex(LD_LABLES, 750, 1300, 840 , 1593,FONT_SIZE) 
 EWS.name			= create_guid_string()
-EWS.init_pos		= {-0.96, 0.533}
+EWS.init_pos		= {-0.939, 0.533}
 EWS.parent_element	= TAN_CD_MASTER.name
 AddElement(EWS)
 
 local EWS_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 EWS_BOX.name				= create_guid_string()
-EWS_BOX.init_pos			= {-0.965, 0.535}
+EWS_BOX.init_pos			= {-0.940, 0.535}
 EWS_BOX.parent_element		= TAN_CD_MASTER.name
 EWS_BOX.element_params 		= {"CD_EWS_TOGGLE"}
 EWS_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}} --
 AddElement(EWS_BOX)
 
-
-
-
 local MSSN			= create_mfd_tex(CENTER_DISPLAY_BLACK, 40, 1120, 120 , 1515,FONT_SIZE) 
 MSSN.name			= create_guid_string()
-MSSN.init_pos		= {-0.965, 0.25}
+MSSN.init_pos		= {-0.939, 0.25}
 MSSN.parent_element	= TAN_CD_MASTER.name
 AddElement(MSSN)
 
 local LINK			= create_mfd_tex(CENTER_DISPLAY_BLACK, 240, 1120, 310 , 1515,FONT_SIZE) 
 LINK.name			= create_guid_string()
-LINK.init_pos		= {-0.965, -0.06}
+LINK.init_pos		= {-0.939, -0.06}
 LINK.parent_element	= TAN_CD_MASTER.name
 AddElement(LINK)
 
 local FIX			= create_mfd_tex(CENTER_DISPLAY_BLACK, 350, 1120, 420 , 1515,FONT_SIZE) 
 FIX.name			= create_guid_string()
-FIX.init_pos		= {-0.962, -0.37}
+FIX.init_pos		= {-0.939, -0.37}
 FIX.parent_element	= TAN_CD_MASTER.name
 AddElement(FIX)
 
 local FIX_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 FIX_BOX.name				= create_guid_string()
-FIX_BOX.init_pos			= {-0.962, -0.335}
+FIX_BOX.init_pos			= {-0.939, -0.335}
 FIX_BOX.parent_element		= TAN_CD_MASTER.name
 FIX_BOX.element_params 		= {"CD_FIX_TOGGLE"}
 FIX_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}} --
 AddElement(FIX_BOX)
 
 
-
-
-
-
 local WARN			= create_mfd_tex(CENTER_DISPLAY_BLACK, 765, 1120, 855 , 1515,FONT_SIZE) 
 WARN.name			= create_guid_string()
-WARN.init_pos		= {-0.963, -0.63}
+WARN.init_pos		= {-0.939, -0.63}
 WARN.parent_element	= TAN_CD_MASTER.name
 AddElement(WARN)
 
@@ -239,9 +223,6 @@ AddElement(ALTITUDE_A)
 add_text_param(0.12, -0.0055 , "RAW_RALT", "%0.0f", ALTITUDE_A, mfd_strdefs_digit_S, "Gripen_Font_black")
 
 
-
-
-
 add_text("M", 0.75, -1.17, TAN_CD_MASTER, "Gripen_Font_black", mfd_strdefs_digit_S )
 
 Mach_indicator 				= CreateElement "ceStringPoly"
@@ -271,37 +252,21 @@ Mach_indicator2.controllers 		= {{"text_using_parameter",0,0},{"parameter_in_ran
 AddElement(Mach_indicator2)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local XTD				= create_mfd_tex(CENTER_DISPLAY_BLACK, 1330, 1425, 1555 , 1520, FONT_SIZE) 
 XTD.name				= create_guid_string()
-XTD.init_pos			= {-0.4, 1.33}
+XTD.init_pos			= {-0.4, 1.32}
 XTD.parent_element	= TAN_CD_MASTER.name
 AddElement(XTD)
 
 local XTD_METER				= create_mfd_tex(CENTER_DISPLAY_BLACK, 1535, 1120, 1616 , 1195, FONT_SIZE) 
 XTD_METER.name				= create_guid_string()
-XTD_METER.init_pos			= {-0.53, 1.3225}
+XTD_METER.init_pos			= {-0.53, 1.3125}
 XTD_METER.parent_element	= TAN_CD_MASTER.name
 AddElement(XTD_METER)
 
 add_text_param(-0.04,0 , "TERRAIN_DATA_ALT", "%0.0f", XTD_METER, mfd_strdefs_digit_S, "Gripen_Font_black")
 
-TAN_Background_Mask 					= CreateElement "ceMeshPoly"
+local TAN_Background_Mask 					= CreateElement "ceMeshPoly"
 TAN_Background_Mask.name 			= create_guid_string()
 TAN_Background_Mask.primitivetype 	= "triangles"
 TAN_Background_Mask.vertices	   		= { {-0.925 , 1.4 }, { 0.925,1.4}, { 0.925,-0.9}, {-0.925,-0.9}, }
@@ -314,7 +279,7 @@ TAN_Background_Mask.level			= MFD_DEFAULT_LEVEL
 TAN_Background_Mask.isvisible		= false
 AddElement2(TAN_Background_Mask)
 
-HORIZON_LINE_base 				= CreateElement "ceSimple"
+local HORIZON_LINE_base 				= CreateElement "ceSimple"
 HORIZON_LINE_base.init_pos		= {0, 0.195}	
 HORIZON_LINE_base.name			= create_guid_string()
 HORIZON_LINE_base.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL 
@@ -335,9 +300,9 @@ HORIZON_LINE.controllers		= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Brig
 AddElement2(HORIZON_LINE)
 
 
-local HORIZON_ALT_A			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1512, 1887, 1571 , 1960, 0.8) 
+local HORIZON_ALT_A			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1512, 1887, 1571 , 1960, 1) 
 HORIZON_ALT_A.name			= create_guid_string()
-HORIZON_ALT_A.init_pos		= {0.35, 0.039}
+HORIZON_ALT_A.init_pos		= {0.30, 0.039}
 HORIZON_ALT_A.parent_element	= HORIZON_LINE.name
 HORIZON_ALT_A.h_clip_relation  = h_clip_relations.DECREASE_IF_LEVEL  
 HORIZON_ALT_A.level			= MFD_DEFAULT_LEVEL + 1
@@ -345,7 +310,8 @@ HORIZON_ALT_A.element_params 	= {"CD_BRIGHTNESS"}
 HORIZON_ALT_A.controllers		= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 AddElement2(HORIZON_ALT_A)
 
-green_text_param_with_cd_brightness(0.1, 0 , "RAW_RALT", "%0.0f", HORIZON_ALT_A, mfd_strdefs_digit_S, "Gripen_Font_HL_Green")
+								
+green_text_param_with_cd_brightness(0.14, 0 , "RAW_RALT", "%0.0f", HORIZON_ALT_A, {0.007,0.007, 0, 0}, "Gripen_Font_HL_Green")
 
 
 local HORIZON_LINE_FPM			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1504, 1717, 1709 , 1818, 2) 
@@ -377,3 +343,54 @@ DISTANCE_SCALE.parent_element	= TAN_CD_MASTER.name
 DISTANCE_SCALE.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL 
 DISTANCE_SCALE.level           = MFD_DEFAULT_LEVEL + 1
 AddElement2(DISTANCE_SCALE)
+
+
+-- {"change_color_when_parameter_equal_to_number", param_nr, number, red, green, blue}
+-- {"text_using_parameter", param_nr, format_nr}
+-- {"move_left_right_using_parameter", param_nr, gain}
+-- {"move_up_down_using_parameter", param_nr, gain}
+-- {"opacity_using_parameter", param_nr}
+-- {"rotate_using_parameter", param_nr, gain}
+-- {"compare_parameters", param1_nr, param2_nr} -- if param1 == param2 then visible
+-- {"parameter_in_range", param_nr, greaterthanvalue, lessthanvalue} -- if greaterthanvalue < param < lessthanvalue then visible
+-- {"parameter_compare_with_number", param_nr, number} -- if param == number then visible
+-- {"draw_argument_in_range", arg_nr, greaterthanvalue, lessthanvalue} -- if greaterthanvalue < arg < lessthanvalue then visible
+-- {"line_object_set_point_using_parameters", point_nr, param_x, param_y, gain_x, gain_y} -- applies to ceSimpleLineObject at least
+
+for i = 1, 3 do
+local tilt = 0
+local pos = {0.0025, -0.1275  }
+local verts = { {0,0},{0, 0.1} }
+	if i == 1 then		
+		tilt = 165
+	elseif i == 2 then
+		tilt = -165
+	else
+		tilt = 90
+		verts = { {0,0},{0, 0.051764} }
+		pos = {0.0025 + 0.051764/2, -0.1 + 0.0075-0.1275  }
+	end
+
+local PositionLine				= CreateElement "ceSimpleLineObject"
+	PositionLine.init_pos			= pos
+	PositionLine.material			= MakeMaterial(nil,{50, 200, 50,255})
+	PositionLine.width				= 0.0045
+	PositionLine.parent_element		= TAN_CD_MASTER.name
+	PositionLine.vertices			= verts
+	PositionLine.init_rot			= {tilt, 0, 0}
+	PositionLine.element_params    	=  {"CD_BRIGHTNESS", "CD_FIX_TOGGLE"}
+	PositionLine.controllers        = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20],{"parameter_compare_with_number", 1, 0}}
+	AddElement(PositionLine)
+end
+
+for i = 0, 1500 do 
+	PositionLine				= CreateElement "ceSimpleLineObject"
+	PositionLine.init_pos			= {0.0025, -0.1275 }
+	PositionLine.material			= MakeMaterial(nil,{50, 200, 50,255})
+	PositionLine.width				= 0.0045
+	PositionLine.parent_element		= TAN_CD_MASTER.name
+	PositionLine.vertices			= { {0,0},{0, 0.00108 * i} }
+	PositionLine.element_params    =  {"CD_BRIGHTNESS", "CUR_GS", "CD_FIX_TOGGLE"}
+	PositionLine.controllers        = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20], {"parameter_in_range",1, i * 9, i * 10}, {"parameter_compare_with_number", 2, 0}}
+	AddElement(PositionLine)
+end

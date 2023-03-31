@@ -63,13 +63,6 @@ function Toggle_Button(hint_, device_, command_, arg_, sound_, animation_speed_)
     }
 end
 
-
-
-
-
-
-
-
 -- not in use
 function default_1_position_tumb(hint_, device_, command_, arg_, arg_val_, arg_lim_)
     local arg_val_ = arg_val_ or 1
@@ -97,6 +90,24 @@ function default_2_position_tumb(hint_, device_, command_, arg_, sound_, animati
         arg             = {arg_, arg_},
         arg_value       = {1, -1},
         arg_lim         = {{0, 1}, {0, 1}},
+        updatable       = true,
+        use_OBB         = true,
+        animated        = {true, true},
+        animation_speed = {animation_speed_, animation_speed_},
+        sound           = sound_ and {{sound_, sound_}} or nil
+    }
+end
+
+function fika_compartment(hint_, device_, command_, arg_, sound_, animation_speed_)
+    local animation_speed_ = animation_speed_ or anim_speed_default
+    return {
+        class           = {class_type.TUMB, class_type.TUMB},
+        hint            = hint_,
+        device          = device_,
+        action          = {command_, command_},
+        arg             = {arg_, arg_},
+        arg_value       = {1, -1},
+        arg_lim         = {{-1, 1}, {-1, 1}},
         updatable       = true,
         use_OBB         = true,
         animated        = {true, true},

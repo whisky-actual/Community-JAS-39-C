@@ -18,7 +18,7 @@ Light_Black_Background.init_pos			= {0, 0, 0}
 Light_Black_Background.material			= MakeMaterial(nil,{5, 5, 5,255})	--RGBA
 Light_Black_Background.parent_element	= CD_EMGY_PAGE.name
 Light_Black_Background.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
-Light_Black_Background.level			= MFD_DEFAULT_LEVEL
+Light_Black_Background.level			= MFD_DEFAULT_LEVEL - 3
 Light_Black_Background.change_opacity	= false
 Light_Black_Background.collimated 		= false
 Light_Black_Background.isvisible		= true
@@ -30,7 +30,7 @@ Add(Light_Black_Background)
 --ADI ball
 adi_background_mask 				= AddCircle(-0.01, 0.277, 0.47, 1, true)
 adi_background_mask.h_clip_relation = h_clip_relations.INCREASE_IF_LEVEL  
-adi_background_mask.level			= MFD_DEFAULT_LEVEL
+adi_background_mask.level			= MFD_DEFAULT_LEVEL - 3
 adi_background_mask.material		= MakeMaterial(nil,{0, 0, 0,255})	--RGBA
 adi_background_mask.isvisible		= false
 adi_background_mask.parent_element	= CD_EMGY_PAGE.name
@@ -39,7 +39,7 @@ AddElement2(adi_background_mask)
 
 adi_background_mask2 				 = AddCircle(-0.01, 0.24, 0.47, 1, true)
 adi_background_mask2.h_clip_relation = h_clip_relations.INCREASE_IF_LEVEL  
-adi_background_mask2.level			 = MFD_DEFAULT_LEVEL
+adi_background_mask2.level			 = MFD_DEFAULT_LEVEL - 3
 adi_background_mask2.material		= MakeMaterial(nil,{0, 0, 0,255})	--RGBA
 adi_background_mask2.isvisible		 = false
 adi_background_mask2.parent_element	 = CD_EMGY_PAGE.name
@@ -49,7 +49,7 @@ local ADI_BASE 				= CreateElement "ceSimple"		-- Ball background
 ADI_BASE.init_pos			= {0, 0.195+0.06}
 ADI_BASE.name				= create_guid_string()
 ADI_BASE.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-ADI_BASE.level           	= MFD_DEFAULT_LEVEL + 1
+ADI_BASE.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 ADI_BASE.parent_element	 	= CD_EMGY_PAGE.name
 ADI_BASE.element_params 	= {"ADI_ROLL",}
 ADI_BASE.controllers		= {{"rotate_using_parameter" ,0, 1},}
@@ -60,7 +60,7 @@ ADI_EMGY_BACKGROUND.name			= create_guid_string()
 ADI_EMGY_BACKGROUND.init_pos		= {0.62, 0}
 ADI_EMGY_BACKGROUND.parent_element	= ADI_BASE.name
 ADI_EMGY_BACKGROUND.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL  
-ADI_EMGY_BACKGROUND.level           = MFD_DEFAULT_LEVEL + 1
+ADI_EMGY_BACKGROUND.level           = MFD_DEFAULT_LEVEL - 3 + 1
 ADI_EMGY_BACKGROUND.element_params  = {"CD_BRIGHTNESS","ADI_ATTITUDE"}
 ADI_EMGY_BACKGROUND.controllers		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"move_up_down_using_parameter",1, 0.036}}
 AddElement2(ADI_EMGY_BACKGROUND)
@@ -219,7 +219,7 @@ HEADING_TAPE_EMGY_MASK.width		 		 = 0.4
 HEADING_TAPE_EMGY_MASK.vertices	 			 = {{0, 0.25}, {0,0}}
 HEADING_TAPE_EMGY_MASK.init_pos       		 = {0, 1.12}
 HEADING_TAPE_EMGY_MASK.h_clip_relation 		 = h_clip_relations.INCREASE_IF_LEVEL  
-HEADING_TAPE_EMGY_MASK.level				 = MFD_DEFAULT_LEVEL  
+HEADING_TAPE_EMGY_MASK.level				 = MFD_DEFAULT_LEVEL - 3  
 HEADING_TAPE_EMGY_MASK.isvisible			 = false
 HEADING_TAPE_EMGY_MASK.parent_element 		 = CD_EMGY_PAGE.name
 AddElement2(HEADING_TAPE_EMGY_MASK)
@@ -238,7 +238,7 @@ HEADING_TAPE_EMGY.name				= create_guid_string()
 HEADING_TAPE_EMGY.init_pos			= {1.26, 1.19}
 HEADING_TAPE_EMGY.parent_element	= CD_EMGY_PAGE.name
 HEADING_TAPE_EMGY.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-HEADING_TAPE_EMGY.level           	= MFD_DEFAULT_LEVEL + 1
+HEADING_TAPE_EMGY.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 HEADING_TAPE_EMGY.element_params  	= { "CD_BRIGHTNESS","EMGY_HEADING"}
 HEADING_TAPE_EMGY.controllers	 	= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_left_right_using_parameter",1, -0.00061001} }
 AddElement2(HEADING_TAPE_EMGY)
@@ -255,7 +255,7 @@ ALTITUDE_SCALE_EMGY_MASK.vertices	 			 = {{0, 0.5}, {0,0}}
 ALTITUDE_SCALE_EMGY_MASK.init_pos       		 = {1, 0.29}
 ALTITUDE_SCALE_EMGY_MASK.init_rot				 = {90, 0}
 ALTITUDE_SCALE_EMGY_MASK.h_clip_relation 		 = h_clip_relations.INCREASE_IF_LEVEL  
-ALTITUDE_SCALE_EMGY_MASK.level				 	 = MFD_DEFAULT_LEVEL  
+ALTITUDE_SCALE_EMGY_MASK.level				 	 = MFD_DEFAULT_LEVEL - 3  
 ALTITUDE_SCALE_EMGY_MASK.isvisible			 	 = false
 ALTITUDE_SCALE_EMGY_MASK.parent_element 		 = CD_EMGY_PAGE.name
 AddElement2(ALTITUDE_SCALE_EMGY_MASK)
@@ -267,7 +267,7 @@ ALTITUDE_SCALE_EMGY.init_pos			= {0.8, 2.458}
 ALTITUDE_SCALE_EMGY.init_rot			= {90, 0}
 ALTITUDE_SCALE_EMGY.parent_element		= CD_EMGY_PAGE.name
 ALTITUDE_SCALE_EMGY.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-ALTITUDE_SCALE_EMGY.level           	= MFD_DEFAULT_LEVEL + 1
+ALTITUDE_SCALE_EMGY.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 ALTITUDE_SCALE_EMGY.element_params  	= { "CD_BRIGHTNESS","EMGY_ALTITUDE"}
 ALTITUDE_SCALE_EMGY.controllers	 		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_left_right_using_parameter",1, -0.00001903} }
 AddElement2(ALTITUDE_SCALE_EMGY)
@@ -278,7 +278,7 @@ ALTITUDE_SCALE_EMGY2.init_pos			= {0.8, 7.1288}
 ALTITUDE_SCALE_EMGY2.init_rot			= {90, 0}
 ALTITUDE_SCALE_EMGY2.parent_element		= CD_EMGY_PAGE.name
 ALTITUDE_SCALE_EMGY2.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-ALTITUDE_SCALE_EMGY2.level           	= MFD_DEFAULT_LEVEL + 1
+ALTITUDE_SCALE_EMGY2.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 ALTITUDE_SCALE_EMGY2.element_params  	= { "CD_BRIGHTNESS","EMGY_ALTITUDE"}
 ALTITUDE_SCALE_EMGY2.controllers	 		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_left_right_using_parameter",1, -0.00001903} }
 AddElement2(ALTITUDE_SCALE_EMGY2)
@@ -289,7 +289,7 @@ ALTITUDE_SCALE_EMGY3.init_pos			= {0.8, 11.687}
 ALTITUDE_SCALE_EMGY3.init_rot			= {90, 0}
 ALTITUDE_SCALE_EMGY3.parent_element		= CD_EMGY_PAGE.name
 ALTITUDE_SCALE_EMGY3.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-ALTITUDE_SCALE_EMGY3.level           	= MFD_DEFAULT_LEVEL + 1
+ALTITUDE_SCALE_EMGY3.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 ALTITUDE_SCALE_EMGY3.element_params  	= { "CD_BRIGHTNESS","EMGY_ALTITUDE"}
 ALTITUDE_SCALE_EMGY3.controllers	 		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_left_right_using_parameter",1, -0.00001903} }
 AddElement2(ALTITUDE_SCALE_EMGY3)
@@ -300,7 +300,7 @@ ALTITUDE_SCALE_EMGY4.init_pos			= {0.8, 16.244}
 ALTITUDE_SCALE_EMGY4.init_rot			= {90, 0}
 ALTITUDE_SCALE_EMGY4.parent_element		= CD_EMGY_PAGE.name
 ALTITUDE_SCALE_EMGY4.h_clip_relation 	= h_clip_relations.DECREASE_IF_LEVEL  
-ALTITUDE_SCALE_EMGY4.level           	= MFD_DEFAULT_LEVEL + 1
+ALTITUDE_SCALE_EMGY4.level           	= MFD_DEFAULT_LEVEL - 3 + 1
 ALTITUDE_SCALE_EMGY4.element_params  	= { "CD_BRIGHTNESS","EMGY_ALTITUDE"}
 ALTITUDE_SCALE_EMGY4.controllers	 		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_left_right_using_parameter",1, -0.00001903} }
 AddElement2(ALTITUDE_SCALE_EMGY4)
@@ -349,7 +349,7 @@ local FONT_SIZE = 0.64
 
 local EMGY			= create_mfd_tex(ADI_FRAME_EMGY, 0, 1270, 125 , 1700,FONT_SIZE) 
 EMGY.name			= create_guid_string()
-EMGY.init_pos		= {-0.96, 1.1575}
+EMGY.init_pos		= {-0.939, 1.1575}
 EMGY.parent_element	= CD_EMGY_PAGE.name
 EMGY.element_params  = {"CD_BRIGHTNESS"}
 EMGY.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -357,7 +357,7 @@ AddElement(EMGY)
 
 local EMGY_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1950, 215, 2042 , 646, FONT_SIZE) 	-- 4 Letter box
 EMGY_BOX.name				= create_guid_string()
-EMGY_BOX.init_pos			= {-0.9698, 1.15}
+EMGY_BOX.init_pos			= {-0.944, 1.15}
 EMGY_BOX.parent_element		= CD_EMGY_PAGE.name
 EMGY_BOX.element_params 	= {"CD_BRIGHTNESS","CD_EMGY_MODE"}
 EMGY_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}}
@@ -365,7 +365,7 @@ AddElement(EMGY_BOX)
 
 local NORM			= create_mfd_tex(ADI_FRAME_EMGY, 1415, 435, 1482 , 825,FONT_SIZE) 
 NORM.name			= create_guid_string()
-NORM.init_pos		= {-0.91, 1.1495}
+NORM.init_pos		= {-0.885, 1.1495}
 NORM.parent_element	= CD_EMGY_PAGE.name
 NORM.element_params  = {"CD_BRIGHTNESS"}
 NORM.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -373,7 +373,7 @@ AddElement(NORM)
 
 local TEMP			= create_mfd_tex(ADI_FRAME_EMGY, 1512 , 435, 1582 , 825,FONT_SIZE) 
 TEMP.name			= create_guid_string()
-TEMP.init_pos		= {-0.968, -0.30125}
+TEMP.init_pos		= {-0.939, -0.30125}
 TEMP.parent_element	= CD_EMGY_PAGE.name
 TEMP.element_params  = {"CD_BRIGHTNESS"}
 TEMP.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -381,7 +381,7 @@ AddElement(TEMP)
 
 local TEMP_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1950, 215, 2042 , 646, FONT_SIZE) 	-- 4 Letter box
 TEMP_BOX.name				= create_guid_string()
-TEMP_BOX.init_pos			= {-0.9698, -0.30}
+TEMP_BOX.init_pos			= {-0.939, -0.30}
 TEMP_BOX.parent_element		= CD_EMGY_PAGE.name
 TEMP_BOX.element_params 	= {"CD_BRIGHTNESS", "CD_TEMP_TOGGLE"}
 TEMP_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}} --
@@ -389,7 +389,7 @@ AddElement(TEMP_BOX)
 
 local ENG			= create_mfd_tex(ADI_FRAME_EMGY, 1699, 435, 1768 , 727,FONT_SIZE) 
 ENG.name			= create_guid_string()
-ENG.init_pos		= {-0.968, -0.60125}
+ENG.init_pos		= {-0.939, -0.60125}
 ENG.parent_element	= CD_EMGY_PAGE.name
 ENG.element_params  = {"CD_BRIGHTNESS"}
 ENG.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -397,7 +397,7 @@ AddElement(ENG)
 
 local ENG_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 ENG_BOX.name				= create_guid_string()
-ENG_BOX.init_pos			= {-0.968, -0.60}
+ENG_BOX.init_pos			= {-0.939, -0.60}
 ENG_BOX.parent_element		= CD_EMGY_PAGE.name
 ENG_BOX.element_params 		= {"CD_BRIGHTNESS","CD_ENG_TOGGLE"}
 ENG_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"parameter_compare_with_number", 1, 1}} --,{"parameter_compare_with_number",1, 1}
@@ -405,7 +405,7 @@ AddElement(ENG_BOX)
 
 local VSI			= create_mfd_tex(ADI_FRAME_EMGY, 1606, 435, 1679 , 727,FONT_SIZE) 
 VSI.name			= create_guid_string()
-VSI.init_pos		= {0.968, -0.60125}
+VSI.init_pos		= {0.939, -0.60125}
 VSI.parent_element	= CD_EMGY_PAGE.name
 VSI.element_params  = {"CD_BRIGHTNESS"}
 VSI.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -413,7 +413,7 @@ AddElement(VSI)
 
 local VSI_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 VSI_BOX.name				= create_guid_string()
-VSI_BOX.init_pos			= {0.968, -0.60}
+VSI_BOX.init_pos			= {0.939, -0.60}
 VSI_BOX.parent_element		= CD_EMGY_PAGE.name
 VSI_BOX.element_params 		= {"CD_BRIGHTNESS","CD_VSI_TOGGLE"}
 VSI_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}} --

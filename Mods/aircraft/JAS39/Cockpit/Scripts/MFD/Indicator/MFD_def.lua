@@ -19,11 +19,16 @@ mfd_strdefs_digit_XXS = {0.0035,0.0035, 0, 0}
 mfd_strdefs_digit_b = {0.0075,0.0075, 0, 0}
 mfd_strdefs_digit_f = {0.008,0.008, 0, 0}
 
+lcp_strdefs_digit = {0.0045,0.0045, 0, 0}
+ucp_strdefs_digit = {0.0055,0.0055, 0, 0}
+
+
 materials = {}
 materials["DBG_GREY"]    = {5, 5, 5, 255}
 materials["DBG_BLACK"]   = {0, 0, 0, 255}
 materials["DBG_BLUE"]    = {0, 0, 100, 255}
 materials["DBG_GREEN"]   = {0, 80, 0, 255}
+materials["DBG_YELLOW"]   = {255, 194, 0, 255}
 materials["DBG_RED"]     = {255, 0, 0, 255}
 materials["DBG_WHITE"]   = {255, 255, 255, 255}
 materials["DBG_CYAN"]    = {1, 244, 244, 255}
@@ -32,20 +37,27 @@ materials["TAN_COLOR"]	 = {242, 235, 179,255}
 materials["DGREEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
 materials["BGCOLOR"]    = MakeMaterial(nil,{242, 235, 179,255})
 
+
 materials["MWHITE"]     = MakeMaterial(nil, materials["DBG_WHITE"])
 materials["BBLACK"]     = MakeMaterial(nil, materials["DBG_BLACK"])
 materials["TAN_BACKGROUND"]	 = MakeMaterial(nil,materials["TAN_COLOR"])
+
+materials["DGREEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
+materials["RWRGEEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
+materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"])
+materials["RWRRED"]     = MakeMaterial(nil, materials["DBG_RED"])
+materials["RWRGREY"]     = MakeMaterial(nil, materials["DBG_GREY"])
 -------FONTS-------
 local IndicationTexturesPath = LockOn_Options.script_path.."Resources/fonts/"
-
-
 
 
 BASE_COLOR  = {36,255,113,255}
 WHITE 		= {255,255,255,255}
 RED 		= {255,0,0,255}
 BLACK 		= {0,0,0,255}
-HORIZON_LINE_GREEN = {50,100,50,255}
+lcpGREEN	= {50,255,50,255}
+ucpGREEN	= {50,255,50,255}
+HORIZON_LINE_GREEN = {10,100,10,255}
 
 
 --Brightness Control
@@ -121,7 +133,7 @@ CMFD_Y_PIXEL =  144
 
 local Gripen_Font = 
 {
-    texture = IndicationTexturesPath.."Gripen_Font_MFD.dds",
+    texture = IndicationTexturesPath.."Gripen_Font_MFD",
     size        = {10, 10},
     resolution  = {1440, 1440},
     default     = {CMFD_X_PIXEL, CMFD_Y_PIXEL},
@@ -197,16 +209,215 @@ local Gripen_Font =
         
         {39, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- '
         {34, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- "
-        --{32, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- [space]
-        
-        {127, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- delta, use last ascii code
+		{127, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- delta
+		
+		{97, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- a
+		{98, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- b
+		{99, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- c
+		{100, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- d
+		{101, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- e
+		{102, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- f
+		{103, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- g
+		{104, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- h
+		{105, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- i
+		{106, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- j
+		{107, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- k
+		{108, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- l
+		{109, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- m
+		{110, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- n
+		{111, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- o
+		{112, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- p
+		{113, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- q
+		{114, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- r
+		{115, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- s
+		{116, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- t
+		{117, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- u
+		{118, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- v
+		{119, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- w
+		{120, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- x
+		{121, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- y
+		{122, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- z, use last ascii code
+       
     }
 }
+
+
+LCP_X_PIXEL =  144
+LCP_Y_PIXEL =  144
+
+local Gripen_LCP_FONT = 
+{
+    texture = IndicationTexturesPath.."Gripen_Font_LCP",
+    size        = {10, 10},
+    resolution  = {1440, 1440},
+    default     = {LCP_X_PIXEL, LCP_Y_PIXEL},
+    chars       = {
+        {32, LCP_X_PIXEL, LCP_Y_PIXEL}, -- space
+        {48, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 0
+        {49, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 1
+        {50, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 2
+        {51, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 3
+        {52, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 4
+        {53, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 5
+        {54, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 6
+        {55, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 7
+        {56, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 8
+        {57, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 9
+
+        {64, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Alpha -> @
+
+        {65, LCP_X_PIXEL, LCP_Y_PIXEL}, -- A
+        {66, LCP_X_PIXEL, LCP_Y_PIXEL}, -- B
+        {67, LCP_X_PIXEL, LCP_Y_PIXEL}, -- C
+        {68, LCP_X_PIXEL, LCP_Y_PIXEL}, -- D
+        {69, LCP_X_PIXEL, LCP_Y_PIXEL}, -- E
+        {70, LCP_X_PIXEL, LCP_Y_PIXEL}, -- F
+        {71, LCP_X_PIXEL, LCP_Y_PIXEL}, -- G
+        {72, LCP_X_PIXEL, LCP_Y_PIXEL}, -- H
+        {73, LCP_X_PIXEL, LCP_Y_PIXEL}, -- I
+        {74, LCP_X_PIXEL, LCP_Y_PIXEL}, -- J
+        {75, LCP_X_PIXEL, LCP_Y_PIXEL}, -- K
+        {76, LCP_X_PIXEL, LCP_Y_PIXEL}, -- L
+        {77, LCP_X_PIXEL, LCP_Y_PIXEL}, -- M
+        {78, LCP_X_PIXEL, LCP_Y_PIXEL}, -- N
+        {79, LCP_X_PIXEL, LCP_Y_PIXEL}, -- O
+        {80, LCP_X_PIXEL, LCP_Y_PIXEL}, -- P
+        {81, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Q
+        {82, LCP_X_PIXEL, LCP_Y_PIXEL}, -- R
+        {83, LCP_X_PIXEL, LCP_Y_PIXEL}, -- S
+        {84, LCP_X_PIXEL, LCP_Y_PIXEL}, -- T
+        {85, LCP_X_PIXEL, LCP_Y_PIXEL}, -- U
+        {86, LCP_X_PIXEL, LCP_Y_PIXEL}, -- V
+        {87, LCP_X_PIXEL, LCP_Y_PIXEL}, -- W
+        {88, LCP_X_PIXEL, LCP_Y_PIXEL}, -- X
+        {89, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Y
+        {90, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Z
+         
+        {42, LCP_X_PIXEL, LCP_Y_PIXEL}, -- *
+        {43, LCP_X_PIXEL, LCP_Y_PIXEL}, -- +
+        {45, LCP_X_PIXEL, LCP_Y_PIXEL}, -- -
+        {61, LCP_X_PIXEL, LCP_Y_PIXEL}, -- =
+        {47, LCP_X_PIXEL, LCP_Y_PIXEL}, -- /
+        {92, LCP_X_PIXEL, LCP_Y_PIXEL}, -- \
+        {40, LCP_X_PIXEL, LCP_Y_PIXEL}, -- (
+        {41, LCP_X_PIXEL, LCP_Y_PIXEL}, -- )
+        {91, LCP_X_PIXEL, LCP_Y_PIXEL}, -- [
+        {93, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ]
+        {123, LCP_X_PIXEL, LCP_Y_PIXEL}, -- {
+        {125, LCP_X_PIXEL, LCP_Y_PIXEL}, -- }
+        {60, LCP_X_PIXEL, LCP_Y_PIXEL}, -- <
+        {62, LCP_X_PIXEL, LCP_Y_PIXEL}, -- >
+        {63, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ?
+        {124, LCP_X_PIXEL, LCP_Y_PIXEL}, -- |
+        {33, LCP_X_PIXEL, LCP_Y_PIXEL}, -- !
+        {35, LCP_X_PIXEL, LCP_Y_PIXEL}, -- #
+        {37, LCP_X_PIXEL, LCP_Y_PIXEL}, -- %
+        {94, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ^
+        {38, LCP_X_PIXEL, LCP_Y_PIXEL}, -- &
+        {96, LCP_X_PIXEL, LCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+        {46, LCP_X_PIXEL, LCP_Y_PIXEL}, -- .
+        {58, LCP_X_PIXEL, LCP_Y_PIXEL}, -- :
+        {44, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ,
+        {95, LCP_X_PIXEL, LCP_Y_PIXEL}, -- _
+        
+        {127, LCP_X_PIXEL, LCP_Y_PIXEL}, -- delta, use last ascii code
+    }
+}
+
+UCP_X_PIXEL =  144
+UCP_Y_PIXEL =  144
+
+local Gripen_UCP_FONT = 
+{
+    texture = IndicationTexturesPath.."Gripen_Font_UCP",
+    size        = {10, 10},
+    resolution  = {1440, 1440},
+    default     = {UCP_X_PIXEL, UCP_Y_PIXEL},
+    chars       = {
+        {32, UCP_X_PIXEL, UCP_Y_PIXEL}, -- space
+        {48, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 0
+        {49, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 1
+        {50, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 2
+        {51, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 3
+        {52, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 4
+        {53, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 5
+        {54, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 6
+        {55, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 7
+        {56, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 8
+        {57, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 9
+
+        {64, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Alpha -> @
+
+        {65, UCP_X_PIXEL, UCP_Y_PIXEL}, -- A
+        {66, UCP_X_PIXEL, UCP_Y_PIXEL}, -- B
+        {67, UCP_X_PIXEL, UCP_Y_PIXEL}, -- C
+        {68, UCP_X_PIXEL, UCP_Y_PIXEL}, -- D
+        {69, UCP_X_PIXEL, UCP_Y_PIXEL}, -- E
+        {70, UCP_X_PIXEL, UCP_Y_PIXEL}, -- F
+        {71, UCP_X_PIXEL, UCP_Y_PIXEL}, -- G
+        {72, UCP_X_PIXEL, UCP_Y_PIXEL}, -- H
+        {73, UCP_X_PIXEL, UCP_Y_PIXEL}, -- I
+        {74, UCP_X_PIXEL, UCP_Y_PIXEL}, -- J
+        {75, UCP_X_PIXEL, UCP_Y_PIXEL}, -- K
+        {76, UCP_X_PIXEL, UCP_Y_PIXEL}, -- L
+        {77, UCP_X_PIXEL, UCP_Y_PIXEL}, -- M
+        {78, UCP_X_PIXEL, UCP_Y_PIXEL}, -- N
+        {79, UCP_X_PIXEL, UCP_Y_PIXEL}, -- O
+        {80, UCP_X_PIXEL, UCP_Y_PIXEL}, -- P
+        {81, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Q
+        {82, UCP_X_PIXEL, UCP_Y_PIXEL}, -- R
+        {83, UCP_X_PIXEL, UCP_Y_PIXEL}, -- S
+        {84, UCP_X_PIXEL, UCP_Y_PIXEL}, -- T
+        {85, UCP_X_PIXEL, UCP_Y_PIXEL}, -- U
+        {86, UCP_X_PIXEL, UCP_Y_PIXEL}, -- V
+        {87, UCP_X_PIXEL, UCP_Y_PIXEL}, -- W
+        {88, UCP_X_PIXEL, UCP_Y_PIXEL}, -- X
+        {89, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Y
+        {90, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Z
+         
+        {42, UCP_X_PIXEL, UCP_Y_PIXEL}, -- *
+        {43, UCP_X_PIXEL, UCP_Y_PIXEL}, -- +
+        {45, UCP_X_PIXEL, UCP_Y_PIXEL}, -- -
+        {61, UCP_X_PIXEL, UCP_Y_PIXEL}, -- =
+        {47, UCP_X_PIXEL, UCP_Y_PIXEL}, -- /
+        {92, UCP_X_PIXEL, UCP_Y_PIXEL}, -- \
+        {40, UCP_X_PIXEL, UCP_Y_PIXEL}, -- (
+        {41, UCP_X_PIXEL, UCP_Y_PIXEL}, -- )
+        {91, UCP_X_PIXEL, UCP_Y_PIXEL}, -- [
+        {93, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ]
+        {123, UCP_X_PIXEL, UCP_Y_PIXEL}, -- {
+        {125, UCP_X_PIXEL, UCP_Y_PIXEL}, -- }
+        {60, UCP_X_PIXEL, UCP_Y_PIXEL}, -- <
+        {62, UCP_X_PIXEL, UCP_Y_PIXEL}, -- >
+        {63, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ?
+        {124, UCP_X_PIXEL, UCP_Y_PIXEL}, -- |
+        {33, UCP_X_PIXEL, UCP_Y_PIXEL}, -- !
+        {35, UCP_X_PIXEL, UCP_Y_PIXEL}, -- #
+        {37, UCP_X_PIXEL, UCP_Y_PIXEL}, -- %
+        {94, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ^
+        {38, UCP_X_PIXEL, UCP_Y_PIXEL}, -- &
+        {96, UCP_X_PIXEL, UCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+        {46, UCP_X_PIXEL, UCP_Y_PIXEL}, -- .
+        {58, UCP_X_PIXEL, UCP_Y_PIXEL}, -- :
+        {44, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ,
+        {95, UCP_X_PIXEL, UCP_Y_PIXEL}, -- _
+        
+        {127, UCP_X_PIXEL, UCP_Y_PIXEL}, -- delta, use last ascii code
+    }
+}
+
+
+
+
+
+
 
 
 Gripen_Font_black  	= MakeFont(Gripen_Font, BLACK, "Gripen_Font_black")
 Gripen_Font_white  	= MakeFont(Gripen_Font, WHITE, "Gripen_Font_white")
 Gripen_Font_HL_Green  = MakeFont(Gripen_Font, HORIZON_LINE_GREEN, "Gripen_Font_Green_HL")
+Gripen_fontLCP = MakeFont(Gripen_LCP_FONT, lcpGREEN , "Gripen_Font_LCP")
+Gripen_fontUCP = MakeFont(Gripen_UCP_FONT, lcpGREEN , "Gripen_Font_UCP")
 fonts = {}
 
 fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_WHITE"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
@@ -220,6 +431,8 @@ fonts["FONT_gripen"]   = {fontdescription["font_39"], 10, materials["DBG_BLACK"]
 fonts["Gripen_Font_black"]  = Gripen_Font_black
 fonts["Gripen_Font_WHITE"]  = Gripen_Font_white
 fonts["Gripen_Font_HL_Green"]  = Gripen_Font_HL_Green
+fonts["Gripen_Font_LCP"]  = Gripen_fontLCP
+fonts["Gripen_Font_UCP"]  = Gripen_fontUCP
 --all vertices in files who include this file will be scaled in millyradians
 -- SetScale(MILLYRADIANS)
  
@@ -236,32 +449,33 @@ MFD_DAY_COLOR               = {255,255,255,255}
 MFD_DARK_COLOR               = {0,0,0,255}
 
 
-MFD_ELEMENTS = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD.png", MFD_DAY_COLOR)
-MFD_ELEMENTS_D = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD_D.png", MFD_DAY_COLOR)
-MFD_ELEMENTS_DARK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD_D.png", MFD_DARK_COLOR)
-ADI_FRAME_B = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_frame.dds", MFD_DAY_COLOR)
-LD_LABLES = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_frame.dds", MFD_DARK_COLOR)
-ADI_FRAME_EMGY = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_EMGY_frame.dds", MFD_DAY_COLOR)
-ADI_BACKGROUND_B = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Normal.dds", MFD_DAY_COLOR)
-ADI_BACKGROUND_TEST = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_background_WIDEtest.png", MFD_DAY_COLOR)
+MFD_ELEMENTS = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD", MFD_DAY_COLOR)
+MFD_ELEMENTS_D = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD_D", MFD_DAY_COLOR)
+MFD_ELEMENTS_DARK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Left_MFD_D", MFD_DARK_COLOR)
+ADI_FRAME_B = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_frame", MFD_DAY_COLOR)
+LD_LABLES = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_frame", MFD_DARK_COLOR)
+ADI_FRAME_EMGY = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_EMGY_frame", MFD_DAY_COLOR)
+ADI_BACKGROUND_B = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Normal", MFD_DAY_COLOR)
+ADI_BACKGROUND_TEST = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADIBALL_background_WIDEtest", MFD_DAY_COLOR)
 
-ADI_BACKGROUND_EMGY = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Emergency.dds", MFD_DAY_COLOR)
-ADI_BACKGROUND_MONITOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Monitor.dds", MFD_DAY_COLOR)
-MFD_ELEMENTS_PDD = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Gripen_PDD_Page.dds", MFD_DARK_COLOR)
-MFD_ELEMENTS_PDD_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Gripen_PDD_Page_White.dds", MFD_DAY_COLOR)
-NAV_WHEEL_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Navigation_Wheel.dds", MFD_DARK_COLOR)
-NAV_WHEEL_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Navigation_Wheel_White.dds", MFD_DAY_COLOR)
-AAR_LDP_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/AAR_LDP.dds", MFD_DARK_COLOR)
-AAR_LDP_WHITE_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/AAR_LDP.dds", MFD_DAY_COLOR)
-STORES_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Loadout_Indicator.dds", MFD_DARK_COLOR)
-STORES_WHITE_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Loadout_Indicator.dds", MFD_DAY_COLOR)
-CENTER_DISPLAY_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK_BOOST_CD_MARKINGS.dds", MFD_DAY_COLOR)
-CENTER_DISPLAY_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK_BOOST_CD_MARKINGS.dds", MFD_DARK_COLOR)
-LDP_BACKGROUND = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK.dds", MFD_DARK_COLOR)
-ADI_MASK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_MASK.dds", MFD_DARK_COLOR)
-EMGY_HEADING_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/EMGY_HEADING TAPE.dds", MFD_DAY_COLOR)
-EMGY_HEADING_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/EMGY_HEADING TAPE.dds", MFD_DARK_COLOR)
-ADI_VEELOCITYVECTOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_VelocityVector.dds", MFD_DARK_COLOR)
+ADI_BACKGROUND_EMGY = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Emergency", MFD_DAY_COLOR)
+ADI_BACKGROUND_MONITOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_Sphere_Monitor", MFD_DAY_COLOR)
+MFD_ELEMENTS_PDD = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Gripen_PDD_Page", MFD_DARK_COLOR)
+MFD_ELEMENTS_PDD_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Gripen_PDD_Page_White", MFD_DAY_COLOR)
+NAV_WHEEL_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Navigation_Wheel", MFD_DARK_COLOR)
+NAV_WHEEL_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Navigation_Wheel_White", MFD_DAY_COLOR)
+AAR_LDP_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/AAR_LDP", MFD_DARK_COLOR)
+AAR_LDP_WHITE_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/AAR_LDP", MFD_DAY_COLOR)
+STORES_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Loadout_Indicator", MFD_DARK_COLOR)
+STORES_WHITE_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/Loadout_Indicator", MFD_DAY_COLOR)
+CENTER_DISPLAY_COLOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK_BOOST_CD_MARKINGS", MFD_DAY_COLOR)
+CENTER_DISPLAY_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK_BOOST_CD_MARKINGS", MFD_DARK_COLOR)
+LDP_BACKGROUND = MakeMaterial(MFD_IND_TEX_PATH.."MFD/LDP_MASK", MFD_DARK_COLOR)
+ADI_MASK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_MASK", MFD_DARK_COLOR)
+EMGY_HEADING_WHITE = MakeMaterial(MFD_IND_TEX_PATH.."MFD/EMGY_HEADING TAPE", MFD_DAY_COLOR)
+EMGY_HEADING_BLACK = MakeMaterial(MFD_IND_TEX_PATH.."MFD/EMGY_HEADING TAPE", MFD_DARK_COLOR)
+ADI_VEELOCITYVECTOR = MakeMaterial(MFD_IND_TEX_PATH.."MFD/ADI_VelocityVector", MFD_DARK_COLOR)
+RMFD_BACKGRUND = MakeMaterial(MFD_IND_TEX_PATH.."MFD/RMFD", MFD_DARK_COLOR)
 
 default_MFD_x = 512
 default_MFD_y = 512
@@ -273,6 +487,8 @@ local box_indices =
 {
 	0,1,2;0,2,3
 }
+
+
 
 function mfd_texture_box (UL_X,UL_Y,W,H, texture_size_x, texture_size_y)
 local ux = UL_X / texture_size_x
@@ -880,7 +1096,38 @@ function green_text_param_with_cd_brightness(posx, posy, element_parm, tformat, 
 	return parent
 end
 
-
+function green_text_param_with_rd_brightness(posx, posy, element_parm, tformat, pparent, stringdefs, font_mat, talignment)
+	if tformat == nil then
+		tformat = "%.0f"
+	end
+	if talignment == nil then
+		talignment = "CenterCenter"
+	end
+	vfont_mat = fonts["FONT_GREEN"]
+	if font_mat ~= nil then
+		vfont_mat = fonts[font_mat]
+	end	
+	if stringdefs == nil then
+		stringdefs = mfd_strdefs_text
+	end	
+	
+	local parent          = CreateElement "ceStringPoly"
+	parent.name           = create_guid_string()
+	parent.material       = vfont_mat
+	parent.init_pos       = {posx, posy}
+	parent.stringdefs     = stringdefs
+	parent.alignment	  = talignment
+	if pparent ~= nil then
+		parent.parent_element = pparent.name
+	end
+	parent.formats           = {tformat} 
+	parent.element_params    = {"RD_BRIGHTNESS", element_parm,"%s"}
+	parent.controllers       = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20] ,{"text_using_parameter",1},}
+	AddElement(parent)
+	parent.level          = MFD_DEFAULT_LEVEL  
+	-------------------
+	return parent
+end
 
 function white_text_param_with_brightness(posx, posy, element_parm, tformat, pparent, stringdefs, font_mat, talignment)
 	if tformat == nil then
@@ -986,3 +1233,199 @@ function add_text_with_CD_brightness(text, posx, posy, pparent, font_mat, string
 	-------------------
 	return rec_parent
 end
+
+
+function AddRWRElement(object)
+	object.use_mipfilter    = true
+	object.additive_alpha   = false
+	object.change_opacity	 = false
+
+    if (object.h_clip_relation == nil) then
+        object.h_clip_relation = h_clip_relations.COMPARE
+    end 
+    
+    if (object.level == nil) or (object.level < MFD_DEFAULT_LEVEL) then
+        object.level        = MFD_DEFAULT_LEVEL
+    end
+	
+    Add(object)
+end
+
+function AddCompass(parent_element, element_params, scale, vypos)
+	local lstringdefs = {0.006 ,0.002}
+	local dstringdefs = {0.0042,0.0015}
+	aspect = 0.9
+	if vypos == nil then
+		vypos =  0
+	end
+	mfd_tsd_compass_base 				= CreateElement "ceSimple"
+	mfd_tsd_compass_base.init_pos		= {0,0}
+	mfd_tsd_compass_base.name			= create_guid_string()
+	mfd_tsd_compass_base.parent_element	= parent_element.name
+	-- mfd_tsd_compass.element_params 	= {element_params}
+	-- mfd_tsd_compass.controllers		= {{"rotate_using_parameter" ,0, math.rad(1)}, } 	
+	AddElement(mfd_tsd_compass_base)	
+
+	local xpos       = 0
+	local ypos       = 0
+
+	local TST  		 = MakeMaterial(nil,{0, 255, 0,255})
+	local SHOW_MASKS = false		 
+				 
+	local aspect       = GetAspect()  -- GetHalfHeight()/GetHalfWidth()
+
+	nav_total_field_of_view 				= CreateElement "ceMeshPoly"
+	nav_total_field_of_view.name 			= create_guid_string()
+	nav_total_field_of_view.primitivetype 	= "triangles"
+	nav_total_field_of_view.vertices	    = { {-aspect , aspect }, { aspect,aspect}, { aspect,-aspect}, {-aspect,-aspect}, }
+	nav_total_field_of_view.indices			= {0, 1, 2, 0, 2, 3}
+	nav_total_field_of_view.init_pos		= {0, 0, 0}
+	nav_total_field_of_view.material		= TST
+	nav_total_field_of_view.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+	nav_total_field_of_view.level			= MFD_DEFAULT_LEVEL   + 1
+	nav_total_field_of_view.change_opacity	= false
+	nav_total_field_of_view.collimated 		= false
+	nav_total_field_of_view.parent_element	= mfd_tsd_compass_base.name
+	nav_total_field_of_view.isvisible		= SHOW_MASKS
+	Add(nav_total_field_of_view)
+
+	mfd_base_clip 					= CreateElement "ceMeshPoly"
+	mfd_base_clip.name 				=  create_guid_string()
+	mfd_base_clip.primitivetype 	= "triangles"
+	mfd_base_clip.vertices	   	 	= { {-aspect , aspect }, { aspect,aspect}, { aspect ,-aspect}, {-aspect ,-aspect}, }
+	mfd_base_clip.indices			= {0, 1, 2, 0, 2, 3}
+	mfd_base_clip.init_pos			= {0, 0, 0}
+	mfd_base_clip.material			= TST
+	mfd_base_clip.h_clip_relation   = h_clip_relations.INCREASE_IF_LEVEL 
+	mfd_base_clip.level  		 	= MFD_DEFAULT_LEVEL   + 1
+	mfd_base_clip.change_opacity	= false
+	mfd_base_clip.collimated 		= false
+	mfd_base_clip.isvisible			= SHOW_MASKS
+	mfd_base_clip.parent_element	= mfd_tsd_compass_base.name
+	Add(mfd_base_clip)	
+
+	mfd_tsd_compass 				= CreateElement "ceSimple"
+	mfd_tsd_compass.init_pos		= {0, vypos}
+	mfd_tsd_compass.name			= create_guid_string()
+	mfd_tsd_compass.parent_element	= mfd_tsd_compass_base.name
+	mfd_tsd_compass.element_params 	= {element_params}
+	mfd_tsd_compass.h_clip_relation = h_clip_relations.INCREASE_IF_LEVEL 
+	mfd_tsd_compass.level  		 	= MFD_DEFAULT_LEVEL   + 2
+	mfd_tsd_compass.controllers		= {{"rotate_using_parameter" ,0, math.rad(1)}, } 	
+	AddElement(mfd_tsd_compass)		
+	
+	AddCircleClip2(0, 0, scale/1.57, 9, mfd_tsd_compass.name, false , "DGREEN" )
+	-- AddCircleClip(0, 0, scale/3.15, 9, mfd_tsd_compass.name, false, "DGREEN" )
+
+	
+	return mfd_tsd_compass
+end
+
+function AddCircleClip2(xpos, ypos, radius, border, parent_element, fill, color)
+	vmaterial =  materials["MWHITE"]
+	if border <=0 then
+		border = 1
+	end
+	if color ~= nil then
+		vmaterial =  materials[color]
+	end
+	for i=1, border do
+		RWR_circle_i 				= CreateElement "ceMeshPoly"
+		RWR_circle_i.name 			= create_guid_string()
+		RWR_circle_i.primitivetype 	= "triangles"
+		RWR_circle_i.init_pos       = {xpos, ypos}
+		RWR_circle_i.element_params    = {"LD_BRIGHTNESS"}
+		RWR_circle_i.controllers       = {{"opacity_using_parameter", 0}}	
+		RWR_circle_i.h_clip_relation   = h_clip_relations.INCREASE_IF_LEVEL 
+		RWR_circle_i.level  		 	  = MFD_DEFAULT_LEVEL  + 2
+		if fill == true then
+			set_circle	(RWR_circle_i, radius + 0.0020 )
+		else
+			set_circle	(RWR_circle_i, radius + 0.0020, radius - 0.0020, 360, 36)
+		end
+		RWR_circle_i.material 		= vmaterial
+		if parent_element ~= nil then
+			RWR_circle_i.parent_element = parent_element
+		end
+		AddElement(RWR_circle_i)
+		radius = radius + 0.001
+	end
+	-- return RWR_circle_i
+end
+
+
+
+function text_param_with_opacity(posx, posy, brightnessparam, element_parm2, tformat, pparent, stringdefs, font_mat, talignment)
+	if tformat == nil then
+		tformat = "%.0f"
+	end
+	if talignment == nil then
+		talignment = "CenterCenter"
+	end
+	vfont_mat = fonts["FONT_GREEN"]
+	if font_mat ~= nil then
+		vfont_mat = fonts[font_mat]
+	end	
+	if stringdefs == nil then
+		stringdefs = mfd_strdefs_text
+	end	
+	
+	local parent          = CreateElement "ceStringPoly"
+	parent.name           = create_guid_string()
+	parent.material       = vfont_mat
+	parent.init_pos       = {posx, posy}
+	parent.stringdefs     = stringdefs
+	parent.alignment	  = talignment
+	if pparent ~= nil then
+		parent.parent_element = pparent.name
+	end
+	parent.formats           = {tformat} 
+	parent.element_params    = {brightnessparam, element_parm2,"%s"}
+	parent.controllers       = {{"opacity_using_parameter", 0} ,{"text_using_parameter",1},}
+	parent.level          = MFD_DEFAULT_LEVEL  
+	AddElement(parent)
+	-------------------
+	return parent
+end
+
+function add_text_with_opacity(text, posx, posy,brightnessparam, pparent, font_mat, stringdefs, valign)
+
+	local rec_parent       		= CreateElement "ceSimple"
+	rec_parent.name				= create_guid_string()
+	rec_parent.init_pos       	= {posx, posy}
+	if pparent ~= nil then
+		rec_parent.parent_element	= pparent.name
+	end
+	AddElement(rec_parent)
+	-------------------
+	if valign == nil then
+		valign = "CenterCenter"
+	end
+	vfont_mat = fonts["FONT_GREEN"]
+	if font_mat ~= nil then
+		vfont_mat = fonts[font_mat]
+	end
+	if stringdefs == nil then
+		stringdefs = mfd_strdefs_text
+	end		
+	-------------------
+	if text ~= nil then
+		local parent          = CreateElement "ceStringPoly"
+		parent.name           = create_guid_string()
+		parent.material       = vfont_mat
+		parent.init_pos       = {0, 0}
+		parent.stringdefs     = stringdefs
+		parent.alignment	  = valign
+		parent.value  	      = text
+		parent.parent_element = rec_parent.name
+		parent.element_params    = {brightnessparam}
+		parent.controllers       = {{"opacity_using_parameter", 0}}
+
+
+		AddElement(parent)
+		parent.level          = MFD_DEFAULT_LEVEL  
+	end
+	-------------------
+	return rec_parent
+end
+

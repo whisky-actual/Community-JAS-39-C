@@ -2,5 +2,5 @@ wave = "Effects/Aircrafts/jas39/Cockpit/jas39apushutdown.wav"
 inner_radius = 10
 outer_radius = 100
 release = 2
-gain = 0.125
+gain = 2.5
 position = {-9, 0, 0}

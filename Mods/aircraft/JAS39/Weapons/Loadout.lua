@@ -3,7 +3,8 @@
 tail_solid  = { 1, 1, 1, 1 };
 tail_liquid = { 0.9, 0.9, 0.9, 0.05 };
 
-dofile(current_mod_path .. '/Weapons/Loadouts/jas39_m71.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_m71ld.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_m71hd.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_sdb.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-31-blu109.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-38.lua')
@@ -38,11 +39,13 @@ dofile(current_mod_path .. '/Weapons/Loadouts/jas39_gbu-16.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_dws39_arm.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_dws39_tv.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_rbs-15.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_rbs-15ai.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_stormshadow_arm.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_kepd-350_arm.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_asraam.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_flir.lua')
 dofile(current_mod_path .. '/Weapons/Loadouts/jas39_derby.lua')
-dofile(current_mod_path .. '/Weapons/Loadouts/jas39_rbs-15ai.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_agm-65k.lua')
+dofile(current_mod_path .. '/Weapons/Loadouts/jas39_agm-65h.lua')
 
 -- dofile(current_mod_path .. '/Weapons/Loadouts/jas39_tank1700.lua')

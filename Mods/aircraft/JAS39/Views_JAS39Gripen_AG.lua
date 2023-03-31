@@ -5,7 +5,7 @@ ViewSettings = {
 		CameraViewAngleLimits  = {20.000000,160.000000},
 		CameraAngleRestriction = {false,90.000000,0.400000},
 		CameraAngleLimits      = {190.000000,-75.000000,115.000000},--head turn = left right, down, up
-		EyePoint               = {0.000000,0.000000,0.000000},--front/back,up/down,left/right}<-'neck dimension'in meters 
+		EyePoint               = {-0.05,-0.75,0.000000},--front/back,up/down,left/right}<-'neck dimension'in meters 
 		limits_6DOF            = {x = {-0.05,0.47},y ={-0.3,0.035},z = {-0.25,0.25},roll = 90},--Move = back forwards, up down, left right
 		ShoulderSize		   = 0.15,-- moves body when azimuth value is more than 90 degrees
 		Allow360rotation	   = false,
@@ -132,13 +132,23 @@ SnapViews = {
 		rollAngle = 0.000000,
 	},
 	[13] = {--default view
-		viewAngle		= 110.274963,--FOV
-		hAngle			= -0.090332,
-		vAngle			= 0.772705,
-		x_trans			= 0.186777,
-		y_trans			= -0.015956,
+		viewAngle		= 96.575950,--FOV
+		hAngle			= 0.034180,
+		vAngle			= -4.602423,
+		x_trans			= 0.118790,
+		y_trans			= -0.026663,
 		z_trans			= 0.000000,
 		rollAngle		= 0.000000,
+		cockpit_version	= 0,
+	},
+	[14] = {--default view - VR
+		viewAngle		= 89.586250,--FOV
+		hAngle			= -11.816132,
+		vAngle			= -6.772053,
+		x_trans			= 0.124721,
+		y_trans			= -0.031267,
+		z_trans			= 0.023877,
+		rollAngle		= -1.207546,
 		cockpit_version	= 0,
 	},
 },

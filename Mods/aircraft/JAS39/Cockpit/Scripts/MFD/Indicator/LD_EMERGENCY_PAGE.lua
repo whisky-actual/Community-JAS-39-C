@@ -1,5 +1,8 @@
 scale = 2
 aspect = 0.9
+local xcor = 0.022
+
+
 
 EMGY_PAGE 			= CreateElement "ceSimple"
 EMGY_PAGE.init_pos	= {0,0}
@@ -350,7 +353,7 @@ local FONT_SIZE = 0.64
 
 local EMGY			= create_mfd_tex(ADI_FRAME_EMGY, 0, 1270, 125 , 1700,FONT_SIZE) 
 EMGY.name			= create_guid_string()
-EMGY.init_pos		= {-0.96, 1.1575}
+EMGY.init_pos		= {-0.96+xcor, 1.1575}
 EMGY.parent_element	= EMGY_PAGE.name
 EMGY.element_params  = {"LD_BRIGHTNESS"}
 EMGY.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -358,7 +361,7 @@ AddElement(EMGY)
 
 local EMGY_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1950, 215, 2042 , 646, FONT_SIZE) 	-- 4 Letter box
 EMGY_BOX.name				= create_guid_string()
-EMGY_BOX.init_pos			= {-0.9698, 1.15}
+EMGY_BOX.init_pos			= {-0.9698+xcor, 1.15}
 EMGY_BOX.parent_element		= EMGY_PAGE.name
 EMGY_BOX.element_params 	= {"LD_BRIGHTNESS","LD_EMGY_MODE"}
 EMGY_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}}
@@ -366,7 +369,7 @@ AddElement(EMGY_BOX)
 
 local NORM			= create_mfd_tex(ADI_FRAME_EMGY, 1415, 435, 1482 , 825,FONT_SIZE) 
 NORM.name			= create_guid_string()
-NORM.init_pos		= {-0.91, 1.1495}
+NORM.init_pos		= {-0.91+xcor, 1.1495}
 NORM.parent_element	= EMGY_PAGE.name
 NORM.element_params  = {"LD_BRIGHTNESS"}
 NORM.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -374,7 +377,7 @@ AddElement(NORM)
 
 local TEMP			= create_mfd_tex(ADI_FRAME_EMGY, 1512 , 435, 1582 , 825,FONT_SIZE) 
 TEMP.name			= create_guid_string()
-TEMP.init_pos		= {-0.968, -0.30125}
+TEMP.init_pos		= {-0.968+xcor, -0.30125}
 TEMP.parent_element	= EMGY_PAGE.name
 TEMP.element_params  = {"LD_BRIGHTNESS"}
 TEMP.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -382,7 +385,7 @@ AddElement(TEMP)
 
 local TEMP_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1950, 215, 2042 , 646, FONT_SIZE) 	-- 4 Letter box
 TEMP_BOX.name				= create_guid_string()
-TEMP_BOX.init_pos			= {-0.9698, -0.30}
+TEMP_BOX.init_pos			= {-0.9698+xcor, -0.30}
 TEMP_BOX.parent_element		= EMGY_PAGE.name
 TEMP_BOX.element_params 	= {"LD_BRIGHTNESS", "LD_TEMP_TOGGLE"}
 TEMP_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}} --
@@ -390,7 +393,7 @@ AddElement(TEMP_BOX)
 
 local ENG			= create_mfd_tex(ADI_FRAME_EMGY, 1699, 435, 1768 , 727,FONT_SIZE) 
 ENG.name			= create_guid_string()
-ENG.init_pos		= {-0.968, -0.60125}
+ENG.init_pos		= {-0.968+xcor, -0.60125}
 ENG.parent_element	= EMGY_PAGE.name
 ENG.element_params  = {"LD_BRIGHTNESS"}
 ENG.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -398,7 +401,7 @@ AddElement(ENG)
 
 local ENG_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 ENG_BOX.name				= create_guid_string()
-ENG_BOX.init_pos			= {-0.968, -0.60}
+ENG_BOX.init_pos			= {-0.968+xcor, -0.60}
 ENG_BOX.parent_element		= EMGY_PAGE.name
 ENG_BOX.element_params 		= {"LD_BRIGHTNESS","LD_ENG_TOGGLE"}
 ENG_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"parameter_compare_with_number", 1, 1}} --,{"parameter_compare_with_number",1, 1}
@@ -406,7 +409,7 @@ AddElement(ENG_BOX)
 
 local VSI			= create_mfd_tex(ADI_FRAME_EMGY, 1606, 435, 1679 , 727,FONT_SIZE) 
 VSI.name			= create_guid_string()
-VSI.init_pos		= {0.968, -0.60125}
+VSI.init_pos		= {0.968-xcor, -0.60125}
 VSI.parent_element	= EMGY_PAGE.name
 VSI.element_params  = {"LD_BRIGHTNESS"}
 VSI.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
@@ -414,7 +417,7 @@ AddElement(VSI)
 
 local VSI_BOX				= create_mfd_tex(NAV_WHEEL_WHITE, 1850, 215, 1942 , 552, FONT_SIZE) 	-- 3 Letter box
 VSI_BOX.name				= create_guid_string()
-VSI_BOX.init_pos			= {0.968, -0.60}
+VSI_BOX.init_pos			= {0.968-xcor, -0.60}
 VSI_BOX.parent_element		= EMGY_PAGE.name
 VSI_BOX.element_params 		= {"LD_BRIGHTNESS","LD_VSI_TOGGLE"}
 VSI_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}} --

@@ -1,8 +1,4 @@
 dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_def.lua")
-local MFDID=get_param_handle("MFDID")
-MFDID:set(MFDID:get()+1)
-MFD_ID = MFDID:get()
-
 SHOW_MASKS = true
 
 local aspect     = 1.2
@@ -29,5 +25,6 @@ RightDisplayBase.isvisible			= true
 Add(RightDisplayBase)
 
 dofile(LockOn_Options.script_path.."MFD/Indicator/RD_GENERAL.lua")
+dofile(LockOn_Options.script_path.."MFD/Indicator/RD_EMERGENCY_PAGE.lua")
 
  
