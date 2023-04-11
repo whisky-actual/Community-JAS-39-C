@@ -141,3 +141,5 @@ If your game fails to launch maybe the JAS39 mod is conflicting with another one
     Learn 3D, 2D, coding etc and join the dev team. Help us recruit members to fill gaps in the team. Constructively report bugs and inaccuracies. Contribute to discussions or questions in this Discord. Watch, like and subscribe to content creators who support our mod through trailers as well as tutorial. 
 - **Q: Will the JAS39 mod pass IC?**
   - Yes, but a public server will need to have the same version for it to work properly.
+- **Q: I can't fire!**
+  - There are two safety mechanisms modeled. First, you need to put the master arm switch to "Live". Look for a big knob surrounded by red and white stripes on the right-hand side of the cockpit ([video](https://youtu.be/uRtXBdGcmMY?t=945)). You can also keybind this (<kbd>MASS Live</kbd>, <kbd>MASS Standby</kbd> and <kbd>MASS Safe</kbd>). Second, whenever you shoot, you have to depress (or toggle) the trigger safe (<kbd>Trigger Safe - Hold</kbd> or <kbd>Trigger Safe - Switch</kbd>). If you only press the <kbd>Trigger</kbd> without releasing the trigger safe, nothing will happen.
