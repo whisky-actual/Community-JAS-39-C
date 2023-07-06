@@ -1,5 +1,0 @@
-wave = "Effects/Aircrafts/JAS39/Cockpit/jas39heavyswitch.wav"
-inner_radius = 10
-outer_radius = 100
-attack = 0.1
-gain = 0.2

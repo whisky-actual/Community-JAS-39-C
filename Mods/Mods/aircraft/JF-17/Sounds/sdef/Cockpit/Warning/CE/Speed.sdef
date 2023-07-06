@@ -1,0 +1,4 @@
+--speed¸æ¾¯
+wave = "/Effects/Cockpit/Warning/CE/Speed"
+inner_radius = 10
+outer_radius = 100

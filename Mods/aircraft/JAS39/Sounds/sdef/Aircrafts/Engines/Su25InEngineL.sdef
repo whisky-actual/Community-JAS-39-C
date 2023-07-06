@@ -1,4 +1,0 @@
-wave = "Effects/Aircrafts/Engines/Su25InEngineL"
-inner_radius = 10
-outer_radius = 100
-gain = 4.0

@@ -1,0 +1,4 @@
+--AOA告警
+wave = "/Effects/Cockpit/Warning/CE/AoA"
+inner_radius = 10
+outer_radius = 100

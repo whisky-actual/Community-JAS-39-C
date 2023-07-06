@@ -1,0 +1,4 @@
+--Lock¸æ¾¯
+wave = "/Effects/Cockpit/Warning/CE/Lock"
+inner_radius = 10
+outer_radius = 100

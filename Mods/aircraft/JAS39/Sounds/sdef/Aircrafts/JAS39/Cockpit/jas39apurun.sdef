@@ -1,6 +1,0 @@
-wave = "Effects/Aircrafts/jas39/Cockpit/jas39apurun.wav"
-inner_radius = 10
-outer_radius = 100
-attack = 3.0
-gain = 2.5
-position = {-9, 0, 0}

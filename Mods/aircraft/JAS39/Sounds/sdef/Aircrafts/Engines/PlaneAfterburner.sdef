@@ -1,7 +1,0 @@
-wave = "Effects/Aircrafts/Engines/PlaneAfterburner"
-inner_radius = 300
-outer_radius = 5000
-direction = {-1, 0, 0}
-release = 0.2
-attack = 0.5
-gain = 12.0

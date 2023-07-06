@@ -1,6 +1,0 @@
-inherit = "Aircrafts/Engines/PlaneFrontEngine"
-wave = "Effects/Aircrafts/Engines/Su25FrontEngine"
-inner_radius = 50
-outer_radius = 750
-direction = {1, 0, 0}
-gain = 4.0

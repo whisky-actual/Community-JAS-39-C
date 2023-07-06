@@ -1,0 +1,4 @@
+--fuel¸æ¾¯
+wave = "/Effects/Cockpit/Warning/CE/Fuel"
+inner_radius = 10
+outer_radius = 100

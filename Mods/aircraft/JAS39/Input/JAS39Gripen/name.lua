@@ -1,1 +1,0 @@
-return _('JAS39Gripen')
