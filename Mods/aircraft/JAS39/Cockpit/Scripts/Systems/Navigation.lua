@@ -14,9 +14,16 @@ local Terrain           = require('terrain')
 --X , Z , Alt Coords are in Meters!
 
 
-local TERRAIN_ALT = get_param_handle("TERRAIN_ALT")
-local GPS_ALTITUDE_FEET = get_param_handle("GPS_ALTITUDE_FEET")
+local terrainAlt = get_param_handle("terrainAlt")
+local GPSAlt = get_param_handle("GPSAlt")
 
+
+
+local absPitch = get_param_handle("absPitch")
+local absRoll  = get_param_handle("absRoll")
+
+
+local M_TO_FT = 3.2808399
 
 
 
@@ -144,7 +151,7 @@ function update()
 	--convert_to_dms(X_COORD_MET, Y_COORD_MET)
 
 
-		GPS_ALTITUDE_FEET:set(Z_COORD_MET* 3.2808399)
+		GPSAlt:set(Z_COORD_MET* 3.2808399)
 		
 	local LAT_COORD_DEC,LON_COORD_DEC = Terrain.convertMetersToLatLon(X_COORD_MET,Y_COORD_MET)
 	-- turns the Meters Coords system to LatLong (be aware , it returns 2 vars)
@@ -177,7 +184,12 @@ function update()
 	
 	local TerrainAltitude = Terrain.GetHeight(X_COORD_MET,Y_COORD_MET)	-- terrain altitude at given X,Y coordinates, in meters
 	
-	TERRAIN_ALT:set(TerrainAltitude* 3.2808399)	--Terrain Altitude in feet
+	if math.abs(math.deg(get_param_handle("pitchRad"):get())) >= 30 or math.abs(math.deg(get_param_handle("rollRad"):get())) >= 30 then
+		terrainAlt:set(TerrainAltitude * M_TO_FT)
+	else
+		terrainAlt:set(sensor_data.getBarometricAltitude() * M_TO_FT - sensor_data.getRadarAltitude() * M_TO_FT)
+	end
+	--terrainAlt:set(TerrainAltitude* 3.2808399)	--Terrain Altitude in feet
 	
 	local v_x, v_z, v_y = sensor_data.getSelfVelocity() --Velocity in m/s
 	
@@ -216,6 +228,49 @@ function update()
 
 -- terrain height of AC coords in 5 seconds  - AC Altitude in 5 seconds
 	PULLUPQUE:set(PlaneAltitude - CollisionAltitude)
+
+
+
+	--[[local airdromes = get_terrain_related_data('Airdromes')
+
+	function calculateSlantRange(x_plane, y_plane, z_plane, x_airport, y_airport, z_airport)
+		-- Beräkna horisontellt avstånd
+		local horizontal_distance = math.sqrt((x_plane - x_airport)^2 + (y_plane - y_airport)^2)
+		
+		-- Beräkna vertikalt avstånd
+		local vertical_distance = z_plane - z_airport
+		
+		-- Beräkna slant range
+		local slant_range = math.sqrt(horizontal_distance^2 + vertical_distance^2)
+		
+		return slant_range
+	end
+	
+	-- Exempelanvändning
+	local x_plane, y_plane, z_plane = 1000, 2000, 10000  -- Flygplanets koordinater i meter
+	local x_airport, y_airport, z_airport = 2000, 3000, 200  -- Flygplatsens koordinater i meter
+	
+	local slant_range = calculateSlantRange(X_COORD_MET, Y_COORD_MET, Z_COORD_MET, airdromes[12].reference_point.x, airdromes[12].reference_point.y, Terrain.GetHeight(airdromes[12].reference_point.x, airdromes[12].reference_point.y))
+	print_message_to_user("Slant Range: " .. slant_range .. " meters")
+	
+
+	function calculateElevationAngle(altitude_aircraft, altitude_airport, slant_range)
+		local elevation_difference = altitude_aircraft - altitude_airport
+		local elevation_angle = math.deg(math.atan(elevation_difference / slant_range))
+		return elevation_angle
+	end
+	
+	-- Exempelanvändning
+	local altitude_aircraft = 10000  -- Flygplanets höjd i meter
+	local altitude_airport = 200  -- Flygplatsens höjd i meter
+	--local slant_range = 5000  -- Horisontellt avstånd i meter
+	
+	local elevation_angle = calculateElevationAngle(sensor_data.getBarometricAltitude(), Terrain.GetHeight(airdromes[12].reference_point.x, airdromes[12].reference_point.y), slant_range)
+	print_message_to_user("Elevation Angle: " .. elevation_angle .. " degrees")
+
+	get_param_handle("12apel"):set(-elevation_angle - math.deg(sensor_data.getPitch()))--]]
+	
+	
 
 end
 

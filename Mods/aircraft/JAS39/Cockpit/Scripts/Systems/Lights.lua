@@ -13,62 +13,62 @@ function post_initialize()
     local birth = LockOn_Options.init_conditions.birth_place
 
     if birth=="AIR_HOT" then
-        dev:performClickableAction(device_commands.LandingTaxiLights, -1, true)		
-        dev:performClickableAction(device_commands.CovertLights, 1, true)
-        dev:performClickableAction(device_commands.AntiCollisionLights, 0, true)	
-        dev:performClickableAction(device_commands.FormationLights, 0, true)			
-        dev:performClickableAction(device_commands.FormFlashLights, 0, true)			
-        dev:performClickableAction(device_commands.NavigationLights, 0, true)
-		dev:performClickableAction(device_commands.MasterCaution, -1, true)
+        dev:performClickableAction(deviceCommands.LandingTaxiLights, -1, true)		
+        dev:performClickableAction(deviceCommands.CovertLights, 1, true)
+        dev:performClickableAction(deviceCommands.AntiCollisionLights, 0, true)	
+        dev:performClickableAction(deviceCommands.FormationLights, 0, true)			
+        dev:performClickableAction(deviceCommands.FormFlashLights, 0, true)			
+        dev:performClickableAction(deviceCommands.NavigationLights, 0, true)
+		dev:performClickableAction(deviceCommands.MasterCaution, -1, true)
 	
     elseif birth=="GROUND_HOT" then
-        dev:performClickableAction(device_commands.LandingTaxiLights, 1, true)
-        dev:performClickableAction(device_commands.CovertLights, 1, true)	
-        dev:performClickableAction(device_commands.AntiCollisionLights, 1, true)
-        dev:performClickableAction(device_commands.FormationLights, 0, true)			
-        dev:performClickableAction(device_commands.FormFlashLights, 1, true)			
-        dev:performClickableAction(device_commands.NavigationLights, 0, true)
-		dev:performClickableAction(device_commands.MasterCaution, -1, true)
+        dev:performClickableAction(deviceCommands.LandingTaxiLights, 1, true)
+        dev:performClickableAction(deviceCommands.CovertLights, 1, true)	
+        dev:performClickableAction(deviceCommands.AntiCollisionLights, 1, true)
+        dev:performClickableAction(deviceCommands.FormationLights, 0, true)			
+        dev:performClickableAction(deviceCommands.FormFlashLights, 1, true)			
+        dev:performClickableAction(deviceCommands.NavigationLights, 0, true)
+		dev:performClickableAction(deviceCommands.MasterCaution, -1, true)
 	
     elseif birth=="GROUND_COLD" then
-        dev:performClickableAction(device_commands.LandingTaxiLights, -1, true)
-        dev:performClickableAction(device_commands.CovertLights, 1, true)	
-        dev:performClickableAction(device_commands.AntiCollisionLights, 0, true)
-        dev:performClickableAction(device_commands.FormationLights, -1, true)			
-        dev:performClickableAction(device_commands.FormFlashLights, 0, true)			
-        dev:performClickableAction(device_commands.NavigationLights, -1, true)
-		dev:performClickableAction(device_commands.MasterCaution, -1, true)
+        dev:performClickableAction(deviceCommands.LandingTaxiLights, -1, true)
+        dev:performClickableAction(deviceCommands.CovertLights, 1, true)	
+        dev:performClickableAction(deviceCommands.AntiCollisionLights, 0, true)
+        dev:performClickableAction(deviceCommands.FormationLights, -1, true)			
+        dev:performClickableAction(deviceCommands.FormFlashLights, 0, true)			
+        dev:performClickableAction(deviceCommands.NavigationLights, -1, true)
+		dev:performClickableAction(deviceCommands.MasterCaution, -1, true)
 		
     end
 	
-	dev:performClickableAction(device_commands.BackLight, -1, true)
-	dev:performClickableAction(device_commands.FloodLight, -1, true)
+	dev:performClickableAction(deviceCommands.BackLight, -1, true)
+	dev:performClickableAction(deviceCommands.FloodLight, -1, true)
 	
 end
 
 
 
 
-dev:listen_command(device_commands.FloodLight)
-dev:listen_command(device_commands.BackLight)
-dev:listen_command(device_commands.IndicatorLight)
+dev:listen_command(deviceCommands.FloodLight)
+dev:listen_command(deviceCommands.BackLight)
+dev:listen_command(deviceCommands.IndicatorLight)
 
 
 
-dev:listen_command(device_commands.LandingTaxiLights)
-dev:listen_command(device_commands.CovertLights)
-dev:listen_command(device_commands.AntiCollisionLights)
-dev:listen_command(device_commands.FormationLights)
-dev:listen_command(device_commands.FormFlashLights)
-dev:listen_command(device_commands.NavigationLights)
+dev:listen_command(deviceCommands.LandingTaxiLights)
+dev:listen_command(deviceCommands.CovertLights)
+dev:listen_command(deviceCommands.AntiCollisionLights)
+dev:listen_command(deviceCommands.FormationLights)
+dev:listen_command(deviceCommands.FormFlashLights)
+dev:listen_command(deviceCommands.NavigationLights)
 
-dev:listen_command(Keys.LandingLights)
-dev:listen_command(Keys.TaxiLights)
-dev:listen_command(Keys.LandingTaxiLightsOff)  
+dev:listen_command(keys.LandingLights)
+dev:listen_command(keys.TaxiLights)
+dev:listen_command(keys.LandingTaxiLightsOff)  
 
 
-dev:listen_command(Keys.Main)  
-dev:listen_command(device_commands.Main)  
+dev:listen_command(keys.Main)  
+dev:listen_command(deviceCommands.Main)  
 
 local LD_BRIGHTNESS = get_param_handle("LD_BRIGHTNESS")
 
@@ -84,7 +84,7 @@ local navigation_lights_state = 0			-- -1: brt, 0: dim, 1: off
 
 
 
-local MAINPOWER = get_param_handle("MAINPOWER"):get()
+local mainpower = get_param_handle("mainpower"):get()
 
 local FLOOD_LIGHT = get_param_handle("FLOOD_LIGHT")
 
@@ -104,20 +104,20 @@ local tempindlight   = 0
 
 function SetCommand(command,value)
 	
-	if command == device_commands.FloodLight then
+	if command == deviceCommands.FloodLight then
 		--FLOOD_LIGHT:set(value)
 		tempfloodlight = value
-	elseif command == device_commands.BackLight then
+	elseif command == deviceCommands.BackLight then
 		--BACK_LIGHTS:set(value)
 		tempbacklight = value
 		
-	elseif command == device_commands.IndicatorLight then
+	elseif command == deviceCommands.IndicatorLight then
 		--INDICATOR_LIGHTS:set(value)
 		tempindlight = value
 	
 	
 	
-	elseif command == device_commands.LandingTaxiLights then
+	elseif command == deviceCommands.LandingTaxiLights then
 			if value == -1 then			
 				landing_lights_state = 0
 				taxi_lights_state = 0					
@@ -129,45 +129,45 @@ function SetCommand(command,value)
 				taxi_lights_state = 1
 			end
 	
-	elseif command == Keys.LandingLights then
-			dev:performClickableAction(device_commands.LandingTaxiLights, -1, true)		
+	elseif command == keys.LandingLights then
+			dev:performClickableAction(deviceCommands.LandingTaxiLights, -1, true)		
 			landing_lights_state = 0
 			taxi_lights_state = 0	
 				
-	elseif command == Keys.LandingTaxiLightsOff then		
-			dev:performClickableAction(device_commands.LandingTaxiLights, 0, true)
+	elseif command == keys.LandingTaxiLightsOff then		
+			dev:performClickableAction(deviceCommands.LandingTaxiLights, 0, true)
 			landing_lights_state = 0
 			taxi_lights_state = 1
 	
-	elseif command == Keys.TaxiLights then		
-			dev:performClickableAction(device_commands.LandingTaxiLights, 1, true)
+	elseif command == keys.TaxiLights then		
+			dev:performClickableAction(deviceCommands.LandingTaxiLights, 1, true)
 			landing_lights_state = 1
 			taxi_lights_state = 0		
 	
-	elseif command == device_commands.CovertLights then
+	elseif command == deviceCommands.CovertLights then
 		if value == 0 then
 			covert_lights_state = 1
 		elseif value == 1 then
 			covert_lights_state = 0					
 		end			
 	
-	elseif command == Keys.CovertLights then
+	elseif command == keys.CovertLights then
 		if covert_lights_state == 0 then
-			dev:performClickableAction(device_commands.CovertLights, 1, true)			
+			dev:performClickableAction(deviceCommands.CovertLights, 1, true)			
 			covert_lights_state = 1
 		elseif covert_lights_state == 1 then
-			dev:performClickableAction(device_commands.CovertLights, 0, true)			
+			dev:performClickableAction(deviceCommands.CovertLights, 0, true)			
 			covert_lights_state = 0					
 		end		
 	
-	elseif command == device_commands.AntiCollisionLights then
+	elseif command == deviceCommands.AntiCollisionLights then
 			if value == 0 then
 				anti_collision_lights_state = 0
 			elseif value == 1 then
 				anti_collision_lights_state = 1
 			end	
 		
-	elseif command == device_commands.FormationLights then
+	elseif command == deviceCommands.FormationLights then
 			if value == -1.0 then
 				formation_lights_state = 0.000
 			elseif value == -0.5 then
@@ -180,14 +180,14 @@ function SetCommand(command,value)
 				formation_lights_state = 1.000				
 			end		
 
-	elseif command == device_commands.FormFlashLights then
+	elseif command == deviceCommands.FormFlashLights then
 			if value == 0 then
 				formation_lights_flash_state = 0
 			elseif value == 1 then
 				formation_lights_flash_state = 1
 			end			
 
-	elseif command == device_commands.NavigationLights then
+	elseif command == deviceCommands.NavigationLights then
 			if value == -1 then
 				navigation_lights_state = 0
 			elseif value == 0 then
@@ -300,7 +300,7 @@ function interior_lights()
 
 	local floodlight_status = get_cockpit_draw_argument_value(180)
 
-	if get_param_handle("MAINPOWER"):get() == 1 then	
+	if get_param_handle("mainpower"):get() == 1 then	
 		set_aircraft_draw_argument_value(210,LD_BRIGHTNESS:get())
 		set_aircraft_draw_argument_value(212,LD_BRIGHTNESS:get())
 		FLOOD_LIGHT:set(tempfloodlight)
@@ -309,7 +309,7 @@ function interior_lights()
 		
 		
 		
-	elseif 	get_param_handle("MAINPOWER"):get() == 0 then
+	elseif 	get_param_handle("mainpower"):get() == 0 then
 		set_aircraft_draw_argument_value(210,-1)
 		set_aircraft_draw_argument_value(212,0)
 		FLOOD_LIGHT:set(0)

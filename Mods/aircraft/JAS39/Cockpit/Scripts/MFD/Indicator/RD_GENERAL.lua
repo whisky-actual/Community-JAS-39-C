@@ -1,7 +1,7 @@
 TAN_RD_MASTER 					= CreateElement "ceSimple"
 TAN_RD_MASTER.init_pos			= {0,0}
 TAN_RD_MASTER.name				= create_guid_string()
-TAN_RD_MASTER.element_params 	= {"pruttRD_EMGY_MODE", "MAINPOWER"}
+TAN_RD_MASTER.element_params 	= {"pruttRD_EMGY_MODE", "mainpower"}
 TAN_RD_MASTER.controllers    	= {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_RD_MASTER)
 
@@ -93,7 +93,7 @@ local GROUNDCOLLISION			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1380, 145, 1680 ,
 GROUNDCOLLISION.name			= create_guid_string()
 GROUNDCOLLISION.init_pos		= {0, 0.023}
 GROUNDCOLLISION.parent_element	= HORIZON_LINE_FPM.name
-GROUNDCOLLISION.element_params  = {"RD_BRIGHTNESS","PULLUPQUE", "ROLL_HUD", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
+GROUNDCOLLISION.element_params  = {"RD_BRIGHTNESS","PULLUPQUE", "rollRad", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
 												"CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_TD","CURRENT_PHASE_LR","CURRENT_PHASE_PAL", "PULLMORE"}
 GROUNDCOLLISION.controllers	 	= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],
 								  {"parameter_in_range",1, -10000,0},{"rotate_using_parameter" ,2, 1.00},

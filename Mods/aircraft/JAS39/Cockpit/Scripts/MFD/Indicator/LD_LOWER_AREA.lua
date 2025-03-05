@@ -2,7 +2,7 @@
 TAN_LD_MASTER 			= CreateElement "ceSimple"
 TAN_LD_MASTER.init_pos	= {0,0}
 TAN_LD_MASTER.name		= create_guid_string()
-TAN_LD_MASTER.element_params = {"LD_EMGY_MODE", "MAINPOWER"}
+TAN_LD_MASTER.element_params = {"LD_EMGY_MODE", "mainpower"}
 TAN_LD_MASTER.controllers    = {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_LD_MASTER)
 
@@ -90,7 +90,7 @@ AddElement(alfa_g_box)
 
 local G_indicator = add_text_param(0.04, -0.04, "CUR_G", "%0.1f", alfa_g_box, mfd_strdefs_digit, "Gripen_Font_black")
 
-local ALFA_indicator = add_text_param(0, 0.04, "CUR_AOA", "%0.0f", alfa_g_box, mfd_strdefs_digit, "Gripen_Font_black")
+local ALFA_indicator = add_text_param(0, 0.04, "AoA", "%0.0f", alfa_g_box, mfd_strdefs_digit, "Gripen_Font_black")
 
 -- Speedo
 
@@ -120,7 +120,7 @@ Mach_indicator.init_pos 			= {0, -0.04}
 Mach_indicator.alignment 			= "LeftCenter"
 Mach_indicator.stringdefs 			= mfd_strdefs_digit_S
 Mach_indicator.formats 				= {"%0.0f","%s"}
-Mach_indicator.element_params 		= {"MACH_B"}
+Mach_indicator.element_params 		= {"machDecimals"}
 Mach_indicator.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 3, 99.5}}
 AddElement(Mach_indicator)
 
@@ -134,7 +134,7 @@ Mach_indicator2.init_pos 			= {-0.059, -0.04}
 Mach_indicator2.alignment 			= "LeftCenter"
 Mach_indicator2.stringdefs 			= mfd_strdefs_digit_S
 Mach_indicator2.formats 			= {"%0.2f","%s"}
-Mach_indicator2.element_params 		= {"MACH_A"}
+Mach_indicator2.element_params 		= {"machWhole"}
 Mach_indicator2.controllers 		= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 0.995, 3}}
 AddElement(Mach_indicator2)
 
@@ -286,7 +286,7 @@ AIRSPEED_MONITOR_ARROW.element_params   = {"LD_BRIGHTNESS","EMGY_IAS",}
 AIRSPEED_MONITOR_ARROW.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_up_down_using_parameter", 1, 0.0000835}}
 AddElement(AIRSPEED_MONITOR_ARROW)
 
-AIRSPEED_MONITOR_READOUT = add_text_param(-0.08,0.0 , "CURR_IAS", "%0.0f", AIRSPEED_MONITOR_ARROW, mfd_strdefs_digit_XS, "Gripen_Font_black") 
+AIRSPEED_MONITOR_READOUT = add_text_param(-0.08,0.0 , "txtCAS", "%0.0f", AIRSPEED_MONITOR_ARROW, mfd_strdefs_digit_XS, "Gripen_Font_black") 
 
 ALFA_SYMBOL_MONITOR					 = create_mfd_tex(ADI_FRAME_B, 1795, 435 , 1875, 510,0.6)
 ALFA_SYMBOL_MONITOR.name			 = create_guid_string()
@@ -305,7 +305,7 @@ Mach_indicatorMonitor.init_pos 				= {-0.45, -1.12}
 Mach_indicatorMonitor.alignment 			= "LeftCenter"
 Mach_indicatorMonitor.stringdefs 			= mfd_strdefs_digit_XS
 Mach_indicatorMonitor.formats 				= {"%0.0f","%s"}
-Mach_indicatorMonitor.element_params 		= {"MACH_B"}
+Mach_indicatorMonitor.element_params 		= {"machDecimals"}
 Mach_indicatorMonitor.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 3, 99.5}}
 AddElement(Mach_indicatorMonitor)
 
@@ -319,7 +319,7 @@ Mach_indicatorMonitor2.init_pos 			= {-0.497, -1.12}
 Mach_indicatorMonitor2.alignment 			= "LeftCenter"
 Mach_indicatorMonitor2.stringdefs 			= mfd_strdefs_digit_XS
 Mach_indicatorMonitor2.formats 				= {"%0.2f","%s"}
-Mach_indicatorMonitor2.element_params 		= {"MACH_A"}
+Mach_indicatorMonitor2.element_params 		= {"machWhole"}
 Mach_indicatorMonitor2.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 0.995, 3}}
 AddElement(Mach_indicatorMonitor2)
 
@@ -329,7 +329,7 @@ add_text_param(-0.40, -1.12, "CUR_MACH", "%0.2f", MONITOR_PAGE, mfd_strdefs_digi
 Mach_text_MONITOR = add_text("M", -0.55, -1.12, MONITOR_PAGE, "Gripen_Font_black", mfd_strdefs_digit_XS)
 
 
-add_text_param(-0.45, -0.499, "CUR_AOA", "%0.0f", MONITOR_PAGE, mfd_strdefs_digit_XS, "Gripen_Font_black")
+add_text_param(-0.45, -0.499, "AoA", "%0.0f", MONITOR_PAGE, mfd_strdefs_digit_XS, "Gripen_Font_black")
 
 
 
@@ -2003,7 +2003,7 @@ GROUNDCOLLISION			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1380, 145, 1680 , 298, 
 GROUNDCOLLISION.name			= create_guid_string()
 GROUNDCOLLISION.init_pos		= {0, 0.023}
 GROUNDCOLLISION.parent_element	= HORIZON_LINE_FPM.name
-GROUNDCOLLISION.element_params  = {"LD_BRIGHTNESS","PULLUPQUE", "ROLL_HUD", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
+GROUNDCOLLISION.element_params  = {"LD_BRIGHTNESS","PULLUPQUE", "rollRad", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
 												"CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_TD","CURRENT_PHASE_LR","CURRENT_PHASE_PAL", "PULLMORE"}
 GROUNDCOLLISION.controllers	 	= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],
 								  {"parameter_in_range",1, -10000,0},{"rotate_using_parameter" ,2, 1.00},

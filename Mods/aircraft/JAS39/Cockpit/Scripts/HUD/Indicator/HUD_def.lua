@@ -586,7 +586,7 @@ function AddHudElement4(object)
     object.additive_alpha   = true
     object.collimated       = true
 	object.blend_mode 		=  blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-	parent.element_params 	= {"HUD_BRIGHTNESS"}
+	parent.element_params 	= {"HUDBrightness"}
 	parent.controllers    	= {{"opacity_using_parameter", 0}}
     Add(object)
 end
@@ -734,7 +734,7 @@ function add_text_hud(text, posx, posy, pparent, font_mat, stringdefs, valign)
 		parent.alignment	  = valign
 		parent.value  	      = text
 		parent.parent_element = rec_parent.name
-		parent.element_params 	= {"HUD_BRIGHTNESS"}
+		parent.element_params 	= {"HUDBrightness"}
 		parent.controllers    	= {{"opacity_using_parameter", 0}}
 		AddHudElement(parent)
 	end
@@ -807,7 +807,7 @@ function add_text_hud2(text, posx, posy, pparent, font_mat, stringdefs, valign)
 		parent.alignment	  = valign
 		parent.value  	      = text
 		parent.parent_element = rec_parent.name
-		parent.element_params 	= {"HUD_BRIGHTNESS"}
+		parent.element_params 	= {"HUDBrightness"}
 		parent.controllers    	= {{"opacity_using_parameter", 0}}
 		AddHudElement3(parent)
 	end

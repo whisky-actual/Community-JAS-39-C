@@ -3,7 +3,7 @@ dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_def.lua")
 LCP_BASE 					= CreateElement "ceSimple"
 LCP_BASE.init_pos			= {0,0}
 LCP_BASE.name				= create_guid_string()
-LCP_BASE.element_params 	= {"MAINPOWER"}
+LCP_BASE.element_params 	= {"mainpower"}
 LCP_BASE.controllers    	= {{"parameter_compare_with_number",0, 1}}
 AddElement(LCP_BASE)
 

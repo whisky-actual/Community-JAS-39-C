@@ -3,7 +3,7 @@ dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_def.lua")
 UCP_BASE 					= CreateElement "ceSimple"
 UCP_BASE.init_pos			= {0,0}
 UCP_BASE.name				= create_guid_string()
-UCP_BASE.element_params 	= {"MAINPOWER"}
+UCP_BASE.element_params 	= {"mainpower"}
 UCP_BASE.controllers    	= {{"parameter_compare_with_number",0, 1}}
 AddElement(UCP_BASE)
 
@@ -31,6 +31,6 @@ local RowMargin = -0.5
 for i = -5, -1 do
 	local j = math.abs(i)
 
-	text_param_with_opacity(-1, 1.35 - RowMargin * i, "UCP_BRIGHTNESS", "UCP_ROW"..j, "%0.23s", UCP_BASE, ucp_strdefs_digit, "Gripen_Font_UCP", "LeftLeft")
+	text_param_with_opacity(-1, 1.6 - RowMargin * i, "UCP_BRIGHTNESS", "UCPRow"..j, "%0.23s", UCP_BASE, ucp_strdefs_digit, "Gripen_Font_UCP", "LeftLeft")
 
 end

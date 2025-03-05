@@ -1,769 +1,329 @@
-dofile(LockOn_Options.common_script_path.."elements_defs.lua")
-dofile(LockOn_Options.common_script_path.."Fonts/symbols_locale.lua")
-dofile(LockOn_Options.common_script_path.."Fonts/fonts_cmn.lua")
-
-local HUD_IND_TEX_PATH        = LockOn_Options.script_path .. "Resources/"  
-
-SetScale(FOV)
-
-stringdefs = {0.012,0.75 * 0.012, 0, 0}
-HMD_strdefs_text = {0.015, 0.015, 0, 0}
-HMD_strdefs_digit = {0.015,0.015, 0, 0}
-HMD_strdefs_100s = {0.010,0.010, 0, 0}
-HUD_strdefs_text  = {0.009,0.009, 0, 0}
-HUD_strdefs_digit = {0.007,0.007, 0, 0}
-HUD_pitch_digit = {0.006,0.006, 0, 0}
-HUD_Heading_digit = {0.005,0.005, 0, 0}
-HUD_strdefs_digit_f = {0.01,0.0028, 0, 0}
-HUD_whenYouCantFindTheDigit = {0.1,0.1, 0, 0}
-
-HUD_HorizonLineHeading = {0.005,0.005, 0.0080, 0.0080}
+dofile(LockOn_Options.common_script_path .. "Fonts/symbols_locale.lua")
+dofile(LockOn_Options.common_script_path .. "Fonts/fonts_cmn.lua")
+dofile(LockOn_Options.common_script_path .. "elements_defs.lua")
 
 
 
-materials = {}
-materials["DBG_GREY"]    = {5, 5, 5, 255}
-materials["DBG_BLACK"]   = {0, 0, 0, 255}
-materials["DBG_BLUE"]    = {0, 0, 100, 255}
-materials["DBG_GREEN"]   = {0,255,0,255}	
-materials["DBG_YELLOW"]   = {255,   0,   0, 240}
-materials["DBG_RED"]     = {255, 0, 0, 255}
-materials["DBG_WHITE"]   = {255, 255, 255, 255}
-materials["DBG_CYAN"]    = {1, 244, 244, 255}
-materials["BASE_GREEN"]  = {0,255,0, 255}
+SetScale(MILLYRADIANS)
 
 
-materials["BGCOLOR"]    = MakeMaterial(nil,{242, 235, 179,255})
 
-materials["MWHITE"]     = MakeMaterial(nil, materials["DBG_WHITE"])
-materials["BBLACK"]     = MakeMaterial(nil, materials["DBG_BLACK"])
+aimingCircleRadius = math.rad(2) * 1000
 
--------FONTS-------
-local IndicationFontPath = LockOn_Options.script_path.."Resources/fonts/"
-local BASE_COLOR  = {36,255,113,255}
-local GREEN 		= {0,255,0,255}
- 
-fontdescription = {}
+attIndRadius = 200
 
-CMFD_X_PIXEL =  88
-CMFD_Y_PIXEL =  144
+base = "HMD_Base"
 
-local Gripen_Font = 
-{
-    texture = IndicationFontPath.."Gripen_Font_HUD",
-    size        = {10, 10},
-    resolution  = {1440, 1440},
-    default     = {CMFD_X_PIXEL, CMFD_Y_PIXEL},
+speedscaleHeight = 42.6733
+
+mult = 0.739292 --correct??
+
+
+
+align = {
+	CB = "CenterBottom", 
+	CC = "CenterCenter", 
+	CT = "CenterTop", 
+	LB = "LeftBottom", 
+	LC = "LeftCenter", 
+	LT = "LeftTop", 
+	RB = "RightBottom", 
+	RC = "RightCenter", 
+	RT = "RightTop"
+}
+
+
+ctrl = {
+	argInRange    = "draw_argument_in_range",                      --{ctrl.argInRange,argNum, greaterThanValue, lessThanValue} If greaterThanValue < argValue < lessThanValue then obj is visible.
+	changeColor   = "change_color_when_parameter_equal_to_number", --{ctrl.changeColor,paramNum, num, r, g, b} If paramNum == num then set color to rgb.
+	compareNum    = "parameter_compare_with_number",               --{ctrl.compareNum,paramNum, num} If paramValue == num then obj is visible.
+	compareParams = "compare_parameters",                          --{ctrl.compare,param1Num, param2Num} If param1Value == param1Value then obj is visible.
+	inRange       = "parameter_in_range",                          --{ctrl.inRange,paramNum, greaterThanValue, lessThanValue} If greaterThanValue < paramValue < lessThanValue then obj is visible.
+	moveX         = "move_left_right_using_parameter",             --{ctrl.moveX,paramNum, gain} Moves obj 1 gain on the x plane per value.
+	moveY         = "move_up_down_using_parameter",                --{ctrl.moveY,paramNum, gain} Moves obj 1 gain on the y plane per value.
+	opacity       = "opacity_using_parameter",                     --{ctrl.opacity,paramNum} Changes opacity with value (1 = 100%, 0 = 0%).
+	rotate        = "rotate_using_parameter",                      --{ctrl.rotate,paramNum, gain} Rotates obj 1 gain per value.
+	setPoint      = "line_object_set_point_using_parameters",      --{ctrl.setPoint,verticeNum, paramX, paramY, gainX, gainY} (ONLY APPLIES TO "ceSimpleLineObject") Moves verticeNum 1 gainX on the x plane per paramXValue + Moves verticeNum 1 gainY on the y plane per paramYValue.
+	text          = "text_using_parameter"                         --{ctrl.text,paramNum, formatNum} Prints paramNum value (dunno what formatNum means).
+}
+
+
+hcr = {
+	cmp   = h_clip_relations.COMPARE, 
+	dec   = h_clip_relations.DECREASE_LEVEL, 
+	decIf = h_clip_relations.DECREASE_IF_LEVEL, 
+	inc   = h_clip_relations.INCREASE_LEVEL, 
+	incIf = h_clip_relations.INCREASE_IF_LEVEL, 
+	rw    = h_clip_relations.REWRITE_LEVEL
+}
+
+
+lvl = {
+	def    = 4, 
+	mask   = 5, 
+	noclip = 3, 
+	alt    = 6, 
+	alt2   = 7
+}
+
+
+matl = {
+	g    = {0, 255, 0, 255}, 
+	mG   = MakeMaterial(nil, {0, 255, 0, 255}), 
+	mask = MakeMaterial(nil, {255, 0, 0, 255/2})
+}
+
+
+strdef = {
+	std                     = {0.01, 0.01}, 
+	alpha                   = {0.012, 0.012, 0, 0}, 
+	half                    = {0.005, 0.005, 0, 0}, 
+	whenYouCantFindTheDigit = {0.1, 0.1, 0, 0}, 
+	hundreds                = {0.006, 0.006, 0, 0},
+	seventyseven            = {0.0077, 0.0077, 0, 0}
+}
+
+
+
+--Fonts
+local HMDXPixel = 88
+local HMDYPixel = 144
+
+local gripenFont = {
+    texture = LockOn_Options.script_path .. "Resources/fonts/Gripen_Font_HUD", 
+    size        = {10, 10}, 
+    resolution  = {1440, 1440}, 
+    default     = {HMDXPixel, HMDYPixel}, 
     chars       = {
-        {32, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- space
-        {48, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 0
-        {49, CMFD_X_PIXEL*0.8, CMFD_Y_PIXEL}, -- 1
-        {50, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 2
-        {51, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 3
-        {52, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 4
-        {53, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 5
-        {54, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 6
-        {55, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 7
-        {56, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 8
-        {57, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 9
+        {32, HMDXPixel, HMDYPixel}, -- space
+        {48, HMDXPixel, HMDYPixel}, -- 0
+        {49, HMDXPixel * 0.8, HMDYPixel}, -- 1
+        {50, HMDXPixel, HMDYPixel}, -- 2
+        {51, HMDXPixel, HMDYPixel}, -- 3
+        {52, HMDXPixel, HMDYPixel}, -- 4
+        {53, HMDXPixel, HMDYPixel}, -- 5
+        {54, HMDXPixel, HMDYPixel}, -- 6
+        {55, HMDXPixel, HMDYPixel}, -- 7
+        {56, HMDXPixel, HMDYPixel}, -- 8
+        {57, HMDXPixel, HMDYPixel}, -- 9
 
-        {64, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Alpha -> @
+        {64, HMDXPixel, HMDYPixel}, -- Alpha -> @
 
-        {65, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- A
-        {66, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- B
-        {67, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- C
-        {68, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- D
-        {69, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- E
-        {70, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- F
-        {71, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- G
-        {72, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- H
-        {73, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- I
-        {74, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- J
-        {75, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- K
-        {76, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- L
-        {77, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- M
-        {78, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- N
-        {79, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- O
-        {80, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- P
-        {81, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Q
-        {82, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- R
-        {83, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- S
-        {84, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- T
-        {85, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- U
-        {86, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- V
-        {87, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- W
-        {88, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- X
-        {89, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Y
-        {90, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Z
+        {65, HMDXPixel, HMDYPixel}, -- A
+        {66, HMDXPixel, HMDYPixel}, -- B
+        {67, HMDXPixel, HMDYPixel}, -- C
+        {68, HMDXPixel, HMDYPixel}, -- D
+        {69, HMDXPixel, HMDYPixel}, -- E
+        {70, HMDXPixel, HMDYPixel}, -- F
+        {71, HMDXPixel, HMDYPixel}, -- G
+        {72, HMDXPixel, HMDYPixel}, -- H
+        {73, HMDXPixel, HMDYPixel}, -- I
+        {74, HMDXPixel, HMDYPixel}, -- J
+        {75, HMDXPixel, HMDYPixel}, -- K
+        {76, HMDXPixel, HMDYPixel}, -- L
+        {77, HMDXPixel, HMDYPixel}, -- M
+        {78, HMDXPixel, HMDYPixel}, -- N
+        {79, HMDXPixel, HMDYPixel}, -- O
+        {80, HMDXPixel, HMDYPixel}, -- P
+        {81, HMDXPixel, HMDYPixel}, -- Q
+        {82, HMDXPixel, HMDYPixel}, -- R
+        {83, HMDXPixel, HMDYPixel}, -- S
+        {84, HMDXPixel, HMDYPixel}, -- T
+        {85, HMDXPixel, HMDYPixel}, -- U
+        {86, HMDXPixel, HMDYPixel}, -- V
+        {87, HMDXPixel, HMDYPixel}, -- W
+        {88, HMDXPixel, HMDYPixel}, -- X
+        {89, HMDXPixel, HMDYPixel}, -- Y
+        {90, HMDXPixel, HMDYPixel}, -- Z
          
-        {42, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- *
-        {43, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- +
-        {45, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- -
-        {47, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- /
-        {92, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- \
-        {40, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- (
-        {41, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- )
-        {91, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- [
-        {93, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ]
-        {123, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- {
-        {125, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- }
-        {60, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- <
-        {62, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- >
-        {61, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- =
-        {63, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ?
-        {124, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- |
-        {33, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- !
-        {35, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- #
-        {37, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- %
-        {94, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ^
-        {38, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- &
-        {96, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
-        {46, CMFD_X_PIXEL*0.65, CMFD_Y_PIXEL*0.65}, -- .
-        {58, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- :
-        {44, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ,
-        {126, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- cursor -> ~
-        {95, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- _
+        {42, HMDXPixel, HMDYPixel}, -- *
+        {43, HMDXPixel, HMDYPixel}, -- +
+        {45, HMDXPixel, HMDYPixel}, -- -
+        {47, HMDXPixel, HMDYPixel}, -- /
+        {92, HMDXPixel, HMDYPixel}, -- \
+        {40, HMDXPixel, HMDYPixel}, -- (
+        {41, HMDXPixel, HMDYPixel}, -- )
+        {91, HMDXPixel, HMDYPixel}, -- [
+        {93, HMDXPixel, HMDYPixel}, -- ]
+        {123, HMDXPixel, HMDYPixel}, -- {
+        {125, HMDXPixel, HMDYPixel}, -- }
+        {60, HMDXPixel, HMDYPixel}, -- <
+        {62, HMDXPixel, HMDYPixel}, -- >
+        {61, HMDXPixel, HMDYPixel}, -- =
+        {63, HMDXPixel, HMDYPixel}, -- ?
+        {124, HMDXPixel, HMDYPixel}, -- |
+        {33, HMDXPixel, HMDYPixel}, -- !
+        {35, HMDXPixel, HMDYPixel}, -- #
+        {37, HMDXPixel, HMDYPixel}, -- %
+        {94, HMDXPixel, HMDYPixel}, -- ^
+        {38, HMDXPixel, HMDYPixel}, -- &
+        {96, HMDXPixel, HMDYPixel}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+        {46, HMDXPixel * 0.65, HMDYPixel * 0.65}, -- .
+        {58, HMDXPixel, HMDYPixel}, -- :
+        {44, HMDXPixel, HMDYPixel}, -- ,
+        {126, HMDXPixel, HMDYPixel}, -- cursor -> ~
+        {95, HMDXPixel, HMDYPixel}, -- _
         
-        {39, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- '
-        {34, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- "
-        --{32, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- [space]
+        {39, HMDXPixel, HMDYPixel}, -- '
+        {34, HMDXPixel, HMDYPixel}, -- "
+        --{32, HMDXPixel, HMDYPixel}, -- [space]
         
-        {127, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- delta, use last ascii code
+        {127, HMDXPixel, HMDYPixel}, -- delta, use last ascii code
     }
 }
 
 
-Gripen_Font_green  	= MakeFont(Gripen_Font, GREEN, "Gripen_Font_green")
+font = MakeFont(gripenFont, matl.g, "gripenFontGreen")
 
 
-fonts = {}
-fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_WHITE"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
-fonts["FONT_BLUE"]   = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_BLUE"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
-fonts["FONT_RED"]    = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_RED"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
-fonts["FONT_GREEN"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"}, materials["DBG_GREEN"],50,"test_font") 
-fonts["FONT_BLACK"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"}, materials["DBG_BLACK"],50,"test_font") 
-fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"}, materials["DBG_WHITE"],50,"test_font") 
 
-fonts["Gripen_Font_green"]  = Gripen_Font_green
+function setHMDBrightness(obj, elementParams, controllers)
+	if elementParams and controllers then
+		elementParams[#elementParams + 1] = "HMDBrightness"
+		controllers[#controllers + 1]     = {ctrl.opacity,#elementParams - 1}
 
-
---all vertices in files who include this file will be scaled in millyradians
--- SetScale(MILLYRADIANS)
- 
-DEGREE_TO_MRAD = 17.4532925199433
-DEGREE_TO_RAD  = 0.0174532925199433
-RAD_TO_DEGREE  = 57.29577951308233
-MRAD_TO_DEGREE = 0.05729577951308233
-
-HMD_DEFAULT_LEVEL = 2     
-HUD_DEFAULT_LEVEL = 2                               
-HUD_DEFAULT_NOCLIP_LEVEL  = HUD_DEFAULT_LEVEL - 1  
- 
-
-HUD_DAY_COLOR               = {255,255,255,255}
-HUD_DARK_COLOR               = {0,0,0,255}
-
-
-HMD_HORIZON = MakeMaterial(HUD_IND_TEX_PATH.."HUD/JAS_HUD_Symbols", GREEN)
-HMD_POSITIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLines", GREEN)
-HMD_NEGATIVE_PITCH = MakeMaterial(HUD_IND_TEX_PATH.."HUD/PitchLinesNegative", GREEN)
-HMD_HeadingScale = MakeMaterial(HUD_IND_TEX_PATH.."HUD/HUD_HeadingScale", GREEN)
-HMD_AimingCircle = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircle", GREEN)
-HMD_AimingCircleThin = MakeMaterial(HUD_IND_TEX_PATH.."HUD/WVR_AimingCircleThin", GREEN)
-HMD_GroundCollisionWarning = MakeMaterial(HUD_IND_TEX_PATH.."HUD/GroundCollisionWarning", GREEN)
-HMD_Circle = MakeMaterial(HUD_IND_TEX_PATH.."HUD/HMD_CIRCLE", GREEN)
-
-
-default_HUD_x = 512
-default_HUD_y = 512
-
-default_HUD_z_offset = 0.8
-default_HUD_rot_offset = 30
-
-local box_indices =
-{
-	0,1,2;0,2,3
-}
-
-function create_HMD_Circle(HUD_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
-
-	if sale == nil then
-		sale = 1.4
+		obj.element_params = elementParams
+		obj.controllers    = controllers
+	else
+		obj.element_params = {"HMDBrightness"}
+		obj.controllers    = {{ctrl.opacity,0}}
 	end
-	
-	local mils_per_pixel =  sale/1024
-	local W 	   		 = DR_X - UL_X
-	local H 	   		 = DR_Y - UL_Y
-	local cx		     = (UL_X + 0.5 * W)
-	local cy		     = (UL_Y + 0.5 * H)
-	
-	local CENTER_X 		 = CENTER_X or cx
-	local CENTER_Y 		 = CENTER_Y or cy
-	local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-	local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-	
-	local half_x 		 = 0.49 * W * mils_per_pixel
-	local half_y 		 = 0.49 * H * mils_per_pixel
-	
-	
-	local object = CreateElement "ceTexPoly"
-		  object.material =  HUD_material
-		   object.vertices =  {{-half_x - dcx, half_y + dcy},
-							  { half_x - dcx, half_y + dcy},
-							  { half_x - dcx,-half_y + dcy},
-							  {-half_x - dcx,-half_y + dcy}}
-		  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 2048, 2048)
-		  object.indices	  = box_indices
-		  return object
+end
+
+function setCommonHMDProperties(obj, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask)
+	obj.name                   = name or create_guid_string()
+	obj.init_pos               = pos or nil
+	obj.init_rot               = rot or nil
+	if parentElement then
+		if type(parentElement) == 'userdata' and parentElement.name then
+			obj.parent_element = parentElement.name
+		elseif type(parentElement) == 'string' then
+			obj.parent_element = parentElement
+		end
+	end
+	obj.h_clip_relation        = hClip or hcr.cmp
+	obj.level                  = level or lvl.def
+	setHMDBrightness(obj, elementParams, controllers)
+	obj.collimated             = true
+	obj.use_mipfilter          = true
+	obj.additive_alpha         = true
+	obj.blend_mode             = blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
+	obj.isvisible              = not isMask
+	Add(obj)
+
+	return obj
+end
+
+
+function copyHMDElement(obj, change, value)
+	if #change == #value then
+		num = #value
+	else
+		return
 	end
 
-function HMD_texture_box (UL_X,UL_Y,W,H, texture_size_x, texture_size_y)
-local ux = UL_X / texture_size_x
-local uy = UL_Y / texture_size_y
-local w  = W / texture_size_x
-local h  = H / texture_size_y
-return {{ux	    ,uy},
-		{ux + w ,uy},
-		{ux + w ,uy + h},
-		{ux	 	,uy + h}}
-end
- 
-function create_HMD_tex(HUD_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
 
-if sale == nil then
-	sale = 1.4
-end
-
-local mils_per_pixel =  sale/512
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.49 * W * mils_per_pixel
-local half_y 		 = 0.49 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  HUD_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy},
-						  { half_x - dcx, half_y + dcy},
-						  { half_x - dcx,-half_y + dcy},
-						  {-half_x - dcx,-half_y + dcy}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 1024, 1024)
-	  object.indices	  = box_indices
-	  return object
-end
-
-function create_HMD_GCW(HUD_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
-
-if sale == nil then
-	sale = 1.4
-end
-
-local mils_per_pixel =  sale/1450
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.49 * W * mils_per_pixel
-local half_y 		 = 0.49 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  HUD_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy},
-						  { half_x - dcx, half_y + dcy},
-						  { half_x - dcx,-half_y + dcy},
-						  {-half_x - dcx,-half_y + dcy}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 2900, 1600)
-	  object.indices	  = box_indices
-	  return object
-end
-
-function HMD_Heading_Scale(mfd_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
-
-if sale == nil then
-	sale = 1.25
-end
-
-local mils_per_pixel =  sale/4200
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.5 * W * mils_per_pixel
-local half_y 		 = 0.5 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  mfd_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy, 0.1},
-						  { half_x - dcx, half_y + dcy, 0.1},
-						  { half_x - dcx,-half_y + dcy, 0.1},
-						  {-half_x - dcx,-half_y + dcy, 0.1}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 8400, 200)
-	  object.indices	  = box_indices
-	 -- object.use_mipfilter    = true
-	 -- object.additive_alpha   = true
-	  --object.collimated		  = true
-	  --object.blend_mode 	=  blend_mode.IBM_REGULAR
-	  --object.h_clip_relation  = h_clip_relations.COMPARE
-	  object.level            = HMD_DEFAULT_LEVEL
-	  return object
-end
-
-
-
-
-
-function HMD_Horizon_Line(mfd_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
-
-if sale == nil then
-	sale = 1.25
-end
-
-local mils_per_pixel =  sale/1650
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.47 * W * mils_per_pixel
-local half_y 		 = 0.49 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  mfd_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy, 0.1 },
-						  { half_x - dcx, half_y + dcy, 0.1 },
-						  { half_x - dcx,-half_y + dcy, 0.1 },
-						  {-half_x - dcx,-half_y + dcy, 0.1 }}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 3328, 2048)
-	  object.indices	  = box_indices
-	 -- object.use_mipfilter    = true
-	 -- object.additive_alpha   = true
-	  --object.collimated		  = true
-	  --object.blend_mode 	=  blend_mode.IBM_REGULAR
-	  --object.h_clip_relation  = h_clip_relations.COMPARE
-	  object.level            = HMD_DEFAULT_LEVEL
-	  return object
-end
-
-
-function create_hdg_textr_box(vth_hdg_material, UL_X,UL_Y,DR_X,DR_Y,scale, CENTER_X,CENTER_Y)
-
-if scale == nil then
-	scale = 1.4
-end
-
-local mils_per_pixel =  scale/4096
-
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.5 * W * mils_per_pixel
-local half_y 		 = 0.5 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  vth_hdg_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy},
-						  { half_x - dcx, half_y + dcy},
-						  { half_x - dcx,-half_y + dcy},
-						  {-half_x - dcx,-half_y + dcy}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 4096,64)
-	  object.indices	  = box_indices
-	  return object
-end
-
-function create_HMD_tex_sq(HUD_material, UL_X,UL_Y,DR_X,DR_Y, sale,CENTER_X,CENTER_Y)
-
-if sale == nil then
-	sale = 1.4
-end
-
-local mils_per_pixel =  sale/1024
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.5 * W * mils_per_pixel
-local half_y 		 = 0.5 * H * mils_per_pixel
-
-
-local object = CreateElement "ceTexPoly"
-	  object.material =  HUD_material
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy},
-						  { half_x - dcx, half_y + dcy},
-						  { half_x - dcx,-half_y + dcy},
-						  {-half_x - dcx,-half_y + dcy}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H,2048,2048)
-	  object.indices	  = box_indices
-	  return object
-end
-
-function create_hdg_text_d(UL_X,UL_Y,DR_X,DR_Y, CENTER_X,CENTER_Y)
-local mils_per_pixel =  2.2/1024
-
-local W 	   		 = DR_X - UL_X
-local H 	   		 = DR_Y - UL_Y
-local cx		     = (UL_X + 0.5 * W)
-local cy		     = (UL_Y + 0.5 * H)
-
-local CENTER_X 		 = CENTER_X or cx
-local CENTER_Y 		 = CENTER_Y or cy
-local dcx 		 	 = mils_per_pixel * (CENTER_X - cx)
-local dcy 		     = mils_per_pixel * (CENTER_Y - cy)
-
-local half_x 		 = 0.5 * W * mils_per_pixel
-local half_y 		 = 0.5 * H * mils_per_pixel
-local object = CreateElement "ceTexPoly"
-	  object.material =  HUD_RPM_DIGIT_D
- 	  object.vertices =  {{-half_x - dcx, half_y + dcy},
-						  { half_x - dcx, half_y + dcy},
-						  { half_x - dcx,-half_y + dcy},
-						  {-half_x - dcx,-half_y + dcy}}
-	  object.tex_coords = HMD_texture_box(UL_X,UL_Y,W,H, 31, 324)
-	  object.indices	  = box_indices
-	  return object
-end
-
-
-
-
-function HMD_vert_gen(width, height)
-    return {{(0 - width) / 2 / default_HUD_x , (0 + height) / 2 / default_HUD_y},
-    {(0 + width) / 2 / default_HUD_x , (0 + height) / 2 / default_HUD_y},
-    {(0 + width) / 2 / default_HUD_x , (0 - height) / 2 / default_HUD_y},
-    {(0 - width) / 2 / default_HUD_x , (0 - height) / 2 / default_HUD_y},}
-end
-
-function HMD_duo_vert_gen(width, total_height, not_include_height)
-    return {
-        {(0 - width) / 2 / default_HUD_x , (0 + total_height) / 2 / default_HUD_y},
-        {(0 + width) / 2 / default_HUD_x , (0 + total_height) / 2 / default_HUD_y},
-        {(0 + width) / 2 / default_HUD_x , (0 + not_include_height) / 2 / default_HUD_y},
-        {(0 - width) / 2 / default_HUD_x , (0 + not_include_height) / 2 / default_HUD_y},
-        {(0 + width) / 2 / default_HUD_x , (0 - not_include_height) / 2 / default_HUD_y},
-        {(0 - width) / 2 / default_HUD_x , (0 - not_include_height) / 2 / default_HUD_y},
-        {(0 + width) / 2 / default_HUD_x , (0 - total_height) / 2 / default_HUD_y},
-        {(0 - width) / 2 / default_HUD_x , (0 - total_height) / 2 / default_HUD_y},
-    }
-end
-
-function tex_coord_gen(x_dis,y_dis,width,height,size_X,size_Y)
-    return {{x_dis / size_X , y_dis / size_Y},
-			{(x_dis + width) / size_X , y_dis / size_Y},
-			{(x_dis + width) / size_X , (y_dis + height) / size_Y},
-			{x_dis / size_X , (y_dis + height) / size_Y},}
-end
-
-function mirror_tex_coord_gen(x_dis,y_dis,width,height,size_X,size_Y)
-    return {{(x_dis + width) / size_X , y_dis / size_Y},
-			{x_dis / size_X , y_dis / size_Y},
-			{x_dis / size_X , (y_dis + height) / size_Y},
-			{(x_dis + width) / size_X , (y_dis + height) / size_Y},}
-end
-
-function AddHMDElement(object)
-	object.h_clip_relation  = h_clip_relations.COMPARE	--INCREASE_IF_LEVEL  
-	object.level  		 	= HMD_DEFAULT_LEVEL 
-    object.use_mipfilter    = true
-	object.additive_alpha   = true
-    object.collimated       = true
-	object.blend_mode 		=  blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-    Add(object)
-end
-
-function AddHMDElement2(object)
-    object.collimated       = true
-	object.use_mipfilter    = true
-	object.additive_alpha   = true
-	object.blend_mode 		=  blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-    Add(object)
-end
-
-function AddHMDElement3(object)
-    object.collimated       = true
-	object.use_mipfilter    = true
-	object.additive_alpha   = true
-	object.blend_mode 		=  blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-	object.h_clip_relation  = h_clip_relations.DECREASE_IF_LEVEL 
-	object.level  		 	= HMD_DEFAULT_LEVEL + 1
-    Add(object)
-end
-
-function AddHMDElement4(object)
-	object.h_clip_relation  = h_clip_relations.COMPARE	--INCREASE_IF_LEVEL  
-	object.level  		 	= HMD_DEFAULT_LEVEL 
-    object.isdraw           = true
-    object.isvisible        = true
-    object.use_mipfilter    = true
-    object.additive_alpha   = true
-    object.collimated       = true
-	object.blend_mode 		=  blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-	parent.element_params 	= {"HUD_BRIGHTNESS"}
-	parent.controllers    	= {{"opacity_using_parameter", 0}}
-    Add(object)
-end
-
-
-
-
-
-
-function create_line(PosX, PosY, lLenght, lwidth, parent, material, vertices)
-	vmaterial =  materials["MWHITE"]
-	if material ~= nil then
-		vmaterial =  materials[material]
+    copyObj = Copy(obj)
+	for i = 1, num do
+    	copyObj[change[i]] = value[i]
 	end
-	vvertices = {{0, 0}, {lLenght,0}}
-	if material ~= nil then
-		vvertices = vertices
-	end	
-	line_object				 = CreateElement "ceSimpleLineObject"
-	line_object.name		 = create_guid_string()
-	line_object.material	 = vmaterial
-	line_object.width		 = lwidth
-	line_object.vertices	 =  vvertices
-	line_object.init_pos     = {PosX, PosY}
-	line_object.parent_element	= parent.name
-	-- AddHUDElement(line_object)
-	return line_object
-end
+    Add(copyObj)
 
-function create_rect(xpos, ypos, bw, bh, Border, parent, material)
-	local rec_parent       		= CreateElement "ceSimple"
-	rec_parent.name				= create_guid_string()
-	rec_parent.init_pos       	= {xpos, ypos}
-	rec_parent.parent_element	= parent.name
-	
-	local  rect_top_line 		= create_line(0 ,0 , bw * 2, Border, rec_parent, material)
-	rect_top_line.init_pos 		= {-bw,bh}
-	AddHMDElement(rect_top_line)
-
-	local  rect_bottom_line = Copy(rect_top_line)
-	rect_bottom_line.init_pos 	= {-bw, -bh}
-	AddHMDElement(rect_bottom_line)
-
-	local  rect_left_line 		= create_line(Border ,0 , Border, bh , rec_parent, material)
-	rect_left_line.init_pos 	= {-bw +(Border ) - 0.005, 0}
-	AddHMDElement(rect_left_line)
-
-	local  rect_right_line = Copy(rect_left_line)
-	rect_right_line.init_pos 	= { bw -(Border ) , 0}
-	AddHMDElement(rect_right_line)
-	
-	return rec_parent
+    return copyObj
 end
 
 
-function AddHMDCircle(xpos, ypos, radius, border, fill, parent_element, color)
-	if border <=0 then
-		border = 1
-	end
-	if color == nil then
-		color =  "DBG_GREEN"
-	end
-	for i=1, border do
-		    RWR_circle_i 				= CreateElement "ceMeshPoly"
-			RWR_circle_i.name 			= create_guid_string()
-			RWR_circle_i.primitivetype 	= "triangles"
-			RWR_circle_i.init_pos       = {xpos, ypos}
-			if fill == true then
-				set_circle	(RWR_circle_i, radius + 0.0020 )
-			else
-				set_circle	(RWR_circle_i, radius + 0.003, radius - 0.003, 360, 180)
-			end
-			RWR_circle_i.material 		= color
-			RWR_circle_i.parent_element = parent_element
-			-- AddHUDElement(RWR_circle_i)
-			radius = radius + 0.001
-	end
-	
+function addHMDSimple(name, pos, rot, parentElement, hClip, level, elementParams, controllers)
+	local simple = CreateElement "ceSimple"
+	setCommonHMDProperties(simple, name, pos, rot, parentElement, hClip, level, elementParams, controllers)
 
-	return RWR_circle_i
+	return simple
 end
 
 
-function AddCircle_b(xpos, ypos, radius, border, fill, parent_element, color)
+function addHMDMeshPoly(name, pos, rot, parentElement, hClip, level, elementParams, controllers, vertices, indices, material, isMask)
+	local meshPoly         = CreateElement "ceMeshPoly"
+	meshPoly.primitivetype = "triangles"
+	meshPoly.vertices      = vertices
+	meshPoly.indices       = indices
+	meshPoly.material      = material or matl.mG
+	setCommonHMDProperties(meshPoly, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask)
 
-	local rec_parent       		= CreateElement "ceSimple"
-	rec_parent.name				= create_guid_string()
-	rec_parent.init_pos       	= {xpos, ypos}
-	rec_parent.parent_element	= parent_element
-	-- AddHUDElement(rec_parent)
-	
-	if border <=0 then
-		border = 1
-	end
-	if color == nil then
-		color =  "DBG_GREEN"
-	end
-	for i=1, border do
-		    RWR_circle_i 				= CreateElement "ceMeshPoly"
-			RWR_circle_i.name 			= create_guid_string()
-			RWR_circle_i.primitivetype 	= "triangles"
-			RWR_circle_i.init_pos       = {0 , 0}
-			if fill == true then
-				set_circle	(RWR_circle_i, radius + 0.0020 )
-			else
-				set_circle	(RWR_circle_i, radius + 0.0020, radius - 0.0020, 360, 36)
-			end
-			RWR_circle_i.material 		= color
-			RWR_circle_i.parent_element = rec_parent.name
-			AddHMDElement(RWR_circle_i)
-			radius = radius + 0.001
-	end
-	
-
-	return rec_parent
+	return meshPoly
 end
 
-function add_text_HMD(text, posx, posy, pparent, font_mat, stringdefs, valign)
+function addHMDCircle(name, pos, rot, parentElement, hClip, level, elementParams, controllers, outerRadius, innerRadius, arc, res, material, isMask)
+	local circle = {}
+	set_circle(circle, outerRadius, innerRadius, arc, res)
 
-	local rec_parent       		= CreateElement "ceSimple"
-	rec_parent.name				= create_guid_string()
-	rec_parent.init_pos       	= {posx, posy}
-	if pparent ~= nil then
-		rec_parent.parent_element	= pparent.name
-	end
-	AddHMDElement(rec_parent)
-	-------------------
-	if valign == nil then
-		valign = "CenterCenter"
-	end
-	vfont_mat = fonts["FONT_GREEN"]
-	if font_mat ~= nil then
-		vfont_mat = fonts[font_mat]
-	end
-	if stringdefs == nil then
-		stringdefs = HUD_strdefs_text
-	end		
-	-------------------
-	if text ~= nil then
-		local parent          = CreateElement "ceStringPoly"
-		parent.name           = create_guid_string()
-		parent.material       = vfont_mat
-		parent.init_pos       = {0, 0}
-		parent.stringdefs     = stringdefs
-		parent.alignment	  = valign
-		parent.value  	      = text
-		parent.parent_element = rec_parent.name
-		parent.element_params 	= {"HUD_BRIGHTNESS"}
-		parent.controllers    	= {{"opacity_using_parameter", 0}}
-		AddHMDElement(parent)
-	end
-	-------------------
-	return rec_parent
+	return addHMDMeshPoly(name, pos, rot, parentElement, hClip, level, elementParams, controllers, circle.vertices, circle.indices, material, isMask)
 end
 
-function add_text_HMD_param(posx, posy, element_parm, element_parm2, tformat, pparent, stringdefs, font_mat, talignment)
-	if tformat == nil then
-		tformat = "%.0f"
-	end
-	if talignment == nil then
-		talignment = "CenterCenter"
-	end
-	vfont_mat = fonts["FONT_GREEN"]
-	if font_mat ~= nil then
-		vfont_mat = fonts[font_mat]
-	end	
-	if stringdefs == nil then
-		stringdefs = HUD_strdefs_text
-	end	
-	
-	local parent          = CreateElement "ceStringPoly"
-	parent.name           = create_guid_string()
-	parent.material       = vfont_mat
-	parent.init_pos       = {posx, posy}
-	parent.stringdefs     = stringdefs
-	parent.alignment	  = talignment
-	if pparent ~= nil then
-		parent.parent_element = pparent.name
-	end
-	parent.formats           = {tformat} 
-	parent.element_params    = {element_parm2, element_parm,"%s"}
-	parent.controllers       = {{"opacity_using_parameter", 0},{"text_using_parameter",1}}
-	AddHMDElement(parent)
-	-------------------
-	return parent
+function addHMDBox(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, height, material, isMask)
+	local vertices = {{0, height / 2}, {0, -height / 2}}
+
+	return addHMDSimpleLine(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width / 2, vertices, material, isMask)
+end
+
+function addHMDSimpleLine(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, vertices, material, isMask)
+	local simpleLine           = CreateElement "ceSimpleLineObject"
+	simpleLine.width           = width or 0.5
+	simpleLine.vertices        = vertices or {{0}, {0}}
+	simpleLine.material        = material or matl.mG
+	setCommonHMDProperties(simpleLine, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask)
+
+	return simpleLine
 end
 
 
+function addHMDText(name, pos, parentElement, hClip, level, elementParams, controllers, text, alignment, stringdef)
+	if alignment == nil then
+		alignment = align.CC
+	end
+	if stringdef == nil then
+		stringdef = strdef.std
+	end
 
 
-function add_text_HMD2(text, posx, posy, pparent, font_mat, stringdefs, valign)
+	local textObj          = CreateElement "ceStringPoly"
+	textObj.value          = text
+	textObj.alignment      = alignment
+	textObj.stringdefs     = stringdef
+	textObj.material       = font
+	setCommonHMDProperties(textObj, name, pos, nil, parentElement, hClip, level, elementParams, controllers)
 
-	local rec_parent       		= CreateElement "ceSimple"
-	rec_parent.name				= create_guid_string()
-	rec_parent.init_pos       	= {posx, posy, 0.1}
-	if pparent ~= nil then
-		rec_parent.parent_element	= pparent.name
-	end
-	AddHMDElement(rec_parent)
-	-------------------
-	if valign == nil then
-		valign = "CenterCenter"
-	end
-	vfont_mat = fonts["FONT_GREEN"]
-	if font_mat ~= nil then
-		vfont_mat = fonts[font_mat]
-	end
-	if stringdefs == nil then
-		stringdefs = HUD_strdefs_text
-	end		
-	-------------------
-	if text ~= nil then
-		local parent          = CreateElement "ceStringPoly"
-		parent.name           = create_guid_string()
-		parent.material       = vfont_mat
-		parent.init_pos       = {0, 0}
-		parent.stringdefs     = stringdefs
-		parent.alignment	  = valign
-		parent.value  	      = text
-		parent.parent_element = rec_parent.name
-		parent.element_params 	= {"HUD_BRIGHTNESS"}
-		parent.controllers    	= {{"opacity_using_parameter", 0}}
-		AddHMDElement3(parent)
-	end
-	-------------------
-	return rec_parent
+	return textObj
 end
 
+function addHMDTextParam(name, pos, parentElement, hClip, level, elementParams, controllers, textParam, alignment, format, stringdef)
+	if textParam then
+		if elementParams and controllers then
+			elementParams[#elementParams + 1] = {textParam}
+			controllers[#controllers + 1]     = {{ctrl.text,#elementParams - 1}}
+		else
+			elementParams = {textParam}
+			controllers   = {{ctrl.text,0}}
+		end
+	end
+
+
+	if format == nil then
+		format = {"%.0f"}
+	end
+	if stringdef == nil then
+		stringdef = strdef.std
+	end
+	if alignment == nil then
+		alignment = align.CC
+	end
+
+
+	local textObj      = CreateElement "ceStringPoly"
+	textObj.alignment  = alignment
+	textObj.stringdefs = stringdef
+	textObj.formats    = format
+	textObj.material   = font
+	setCommonHMDProperties(textObj, name, pos, nil, parentElement, hClip, level, elementParams, controllers)
+
+	return textObj
+end

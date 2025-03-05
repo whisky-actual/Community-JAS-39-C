@@ -1,7 +1,7 @@
 TAN_CD_MASTER 					= CreateElement "ceSimple"
 TAN_CD_MASTER.init_pos			= {0,0}
 TAN_CD_MASTER.name				= create_guid_string()
-TAN_CD_MASTER.element_params 	= {"CD_EMGY_MODE", "MAINPOWER"}
+TAN_CD_MASTER.element_params 	= {"CD_EMGY_MODE", "mainpower"}
 TAN_CD_MASTER.controllers    	= {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_CD_MASTER)
 
@@ -175,7 +175,7 @@ local LDG_BOX				= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1942 , 552, FONT_S
 LDG_BOX.name				= create_guid_string()
 LDG_BOX.init_pos			= {0.96, 0.84}
 LDG_BOX.parent_element		= TAN_CD_MASTER.name
-LDG_BOX.element_params 		= {"LANDING_MODE"}
+LDG_BOX.element_params 		= {"landingMode"}
 LDG_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}} --
 AddElement(LDG_BOX)
 --]]
@@ -233,7 +233,7 @@ Mach_indicator.init_pos 			= {0.844, -1.17}
 Mach_indicator.alignment 			= "LeftCenter"
 Mach_indicator.stringdefs 			= mfd_strdefs_digit_S
 Mach_indicator.formats 				= {"%0.0f","%s"}
-Mach_indicator.element_params 		= {"MACH_B"}
+Mach_indicator.element_params 		= {"machWhole"}
 Mach_indicator.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 3, 99.5}}
 AddElement(Mach_indicator)
 
@@ -247,7 +247,7 @@ Mach_indicator2.init_pos 			= {0.79, -1.17}
 Mach_indicator2.alignment 			= "LeftCenter"
 Mach_indicator2.stringdefs 			= mfd_strdefs_digit_S
 Mach_indicator2.formats 			= {"%0.2f","%s"}
-Mach_indicator2.element_params 		= {"MACH_A"}
+Mach_indicator2.element_params 		= {"machWhole"}
 Mach_indicator2.controllers 		= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 0.995, 3}}
 AddElement(Mach_indicator2)
 
@@ -327,7 +327,7 @@ local GROUNDCOLLISION			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1380, 145, 1680 ,
 GROUNDCOLLISION.name			= create_guid_string()
 GROUNDCOLLISION.init_pos		= {0, 0.023}
 GROUNDCOLLISION.parent_element	= HORIZON_LINE_FPM.name
-GROUNDCOLLISION.element_params  = {"CD_BRIGHTNESS","PULLUPQUE", "ROLL_HUD", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
+GROUNDCOLLISION.element_params  = {"CD_BRIGHTNESS","PULLUPQUE", "rollRad", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
 												"CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_TD","CURRENT_PHASE_LR","CURRENT_PHASE_PAL", "PULLMORE"}
 GROUNDCOLLISION.controllers	 	= { JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],
 								  {"parameter_in_range",1, -10000,0},{"rotate_using_parameter" ,2, 1.00},

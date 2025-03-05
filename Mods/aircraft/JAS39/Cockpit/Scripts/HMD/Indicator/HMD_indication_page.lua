@@ -1,276 +1,127 @@
-dofile(LockOn_Options.script_path.."HUD/Indicator/HUD_def.lua")
-
---[[
-"HUD_BRIGHTNESS"
-{"opacity_using_parameter", 0}
-
---]]
-
-----
-local HMD_BASE 				= CreateElement "ceSimple"
-HMD_BASE.name  				= create_guid_string()
-HMD_BASE.init_pos			= {-0.08, 0, 1.5}									--{0, -1.345,0} -- 0,0.7,-1.5
-HMD_BASE.element_params     = {"MAINPOWER","HORIZONTAL_VIEW_HMD","VERTICAL_VIEW_HMD", "HMDTOGGLE"}          
-HMD_BASE.controllers        = {{"parameter_in_range" ,0,0.9,1.1},{"parameter_in_range" ,1, 23,360},{"parameter_in_range" ,2, -30,180}, {"parameter_in_range" ,3, 0.9,1.1} }
-AddHMDElement(HMD_BASE)
-----
-
-
-local ModesBase 			= CreateElement "ceSimple"
-ModesBase.name  			= create_guid_string()
-ModesBase.init_pos			= {0, -0.82, 0}
-ModesBase.parent_element	= HMD_BASE.name
-AddHMDElement(ModesBase)
-
-
----Landing mode indicator
-local landing_mode_ind 			 	= add_text_HMD("L", -0.0, -1.0, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-landing_mode_ind.element_params  	= {"LANDING_MODE","CANNON_MODE"}
-landing_mode_ind.controllers     	= {{"parameter_in_range" ,0,0.9,1.1}, {"parameter_in_range" ,1,-0.1,0.1} } 
-
-local nav_mode_ind 			 		= add_text_HMD("NAV", 0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-nav_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-nav_mode_ind.controllers     		= {{"parameter_in_range" ,0,0.9,1.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-	
-local bvr_mode_ind 			 		= add_text_HMD("BVR", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-bvr_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-bvr_mode_ind.controllers     		= {{"parameter_in_range" ,0,1.9,2.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-	
-local vs_mode_ind 			 		= add_text_HMD("VS", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-vs_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-vs_mode_ind.controllers     		= {{"parameter_in_range" ,0,2.9,3.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-	
-local bore_mode_ind 				= add_text_HMD("BORE", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-bore_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-bore_mode_ind.controllers     		= {{"parameter_in_range" ,0,3.9,4.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-	
-local lngt_mode_ind 				= add_text_HMD("LNGT", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-lngt_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-lngt_mode_ind.controllers     		= {{"parameter_in_range" ,0,5.9,6.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-
-local lngt_mode_ind 				= add_text_HMD("GUN", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-lngt_mode_ind.element_params  		= {"CANNON_MODE"}
-lngt_mode_ind.controllers     		= {{"parameter_in_range" ,0,0.1,1.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-
-local hmd_mode_ind 					= add_text_HMD("HMD", -0.0, -0.8, ModesBase , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-hmd_mode_ind.element_params  		= {"HUD_MODE","CANNON_MODE"}
-hmd_mode_ind.controllers     		= {{"parameter_in_range" ,0,7.9,8.1}, {"parameter_in_range" ,1,-0.1,0.1} }
-
-
-local Left_Side_Indication_base 			= CreateElement "ceSimple"
-Left_Side_Indication_base.name  			= create_guid_string()
-Left_Side_Indication_base.init_pos			= {-0.033, -0.15,0}
-Left_Side_Indication_base.parent_element	= HMD_BASE.name
-AddHMDElement(Left_Side_Indication_base)
-
-
---HMD Circle
-
-local AltimeterScaleArrow				= create_HMD_Circle(HMD_Circle, 0, 0, 2048, 2048, 2) 
-AltimeterScaleArrow.name				= create_guid_string()
-AltimeterScaleArrow.init_pos			= {0 ,-0.2, 0}
-AltimeterScaleArrow.init_rot			= {0, 0, 0}
-AltimeterScaleArrow.parent_element		= HMD_BASE.name	
-AltimeterScaleArrow.element_params		= {"HUD_BRIGHTNESS"}
-AltimeterScaleArrow.controllers			= { {"opacity_using_parameter" ,0}  }
-AddHMDElement(AltimeterScaleArrow)
-
---Indicators
-local alfa_text 		=  add_text_hud("@", -1.15, 0.333, Left_Side_Indication_base , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-local Alfa_indicator 	= add_text_HMD_param(-1, 0.333, "CUR_AOA","HUD_BRIGHTNESS", "%0.0f", Left_Side_Indication_base, HMD_strdefs_digit, "Gripen_Font_green")
-
-local KIAS_indicator 	= add_text_HMD_param(-1.0, -0.075, "CURR_IAS","HUD_BRIGHTNESS", "%0.0f", Left_Side_Indication_base, HMD_strdefs_digit, "Gripen_Font_green")
-
-
---Auto throttle on/off indicator
-local Auto_throttle_ind 		  	= add_text_HMD("AT", -0.82, -0.075, Left_Side_Indication_base , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-Auto_throttle_ind.element_params  	= {"AUTOTHROTTLE_ONOFF"}
-Auto_throttle_ind.controllers     	= {{"parameter_in_range" ,0,0.9,1.1} }
---Auto throttle mode 12 AoA
-
-local Auto_throttle_mode12 			 = add_text_HMD("12", -0.70, -0.075, Left_Side_Indication_base , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-Auto_throttle_mode12.element_params  = {"AUTOTHROTTLE_MODE"}
-Auto_throttle_mode12.controllers     = {{"parameter_in_range" ,0,0.4,0.6} }
---Auto throttle mode 14 AoA
-
-local Auto_throttle_mode14 			 = add_text_HMD("14", -0.70, -0.075, Left_Side_Indication_base , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-Auto_throttle_mode14.element_params  = {"AUTOTHROTTLE_MODE"}
-Auto_throttle_mode14.controllers     = {{"parameter_in_range" ,0,0.9,1.1} }
+addHMDText("AoA", {-140.5, 55.5}, base, nil, nil, nil, nil, "@", nil, strdef.alpha)
+addHMDTextParam(nil, {6, -1}, "AoA", nil, nil, nil, nil, "AoA", align.LC)
 
 
 
+addHMDText("AT", {-122.5, 12}, base, nil, nil, {"ATState"}, {{ctrl.compareNum,0, 1}}, "AT")
+
+addHMDText(nil, {22.5}, "AT", nil, nil, {"ATMode"}, {{ctrl.compareNum,0, 0.5}}, "12", align.RC)
+addHMDText(nil, {22.5}, "AT", nil, nil, {"ATMode"}, {{ctrl.compareNum,0, 1}}, "14", align.RC)
+
+
+addHMDTextParam(nil, {-100}, base, nil, nil, nil, nil, "txtCAS", align.RC)
+addHMDSimpleLine(nil, {-83}, nil, base, nil, nil, {"HUDDeclutt"}, {{ctrl.compareNum,0, 0}}, nil, {{-15, 4.1}, {0, 0}, {-15, -4.1}})
+
+
+addHMDText("Mach", {-134, -13}, base, nil, nil, {"HUDDeclutt", "machDecimals"}, {{ctrl.compareNum,0, 0}, {ctrl.inRange,1, 1, 999}}, "M")
+addHMDTextParam(nil, {5.14}, "Mach", nil, nil, {"machWhole", "HMDBrightness"}, {{ctrl.inRange,0, 0.995, 9}, {ctrl.text,0}, {ctrl.opacity,1}}, nil, align.LC, {"%.2f"})
+addHMDText(nil, {14}, "Mach", nil, nil, {"machDecimals"}, {{ctrl.inRange,0, 1, 99.5}}, ".")
+addHMDTextParam(nil, {17}, "Mach", nil, nil, {"machDecimals", "HMDBrightness"}, {{ctrl.inRange,0, 1, 99.5}, {ctrl.text,0}, {ctrl.opacity,1}}, nil, align.LC, {"%.0f"})
+
+
+addHMDText("GS", {-134, -26}, base, nil, nil, {"masterMode", "currentPhase", "HUDDeclutt"}, {{ctrl.inRange,0, -0.1, 1.1}, {ctrl.inRange,1, 6.9, 8.9}, {ctrl.compareNum,2, 0}}, "GS")
+addHMDTextParam(nil, {34}, "GS", nil, nil, nil, nil, "txtGS", align.RC)
 
 
 
-
-
---local tester 	= add_text_HMD_param(0, -0.1, "DEBUGPARAM","HUD_BRIGHTNESS", "%0.6f", Left_Side_Indication_base, HMD_strdefs_digit, "Gripen_Font_green")
-
-local TST_G		 = MakeMaterial(nil,{0,0,100,100})
-
-
-local ALT_BASE 					= CreateElement "ceSimple"
-ALT_BASE.name  					= create_guid_string()
-ALT_BASE.init_pos				= {0.82, 0}
-ALT_BASE.parent_element			= HMD_BASE.name
-AddHMDElement(ALT_BASE)
-
-
-local AltimeterScaleMask 					= CreateElement "ceMeshPoly"		-- change shape 
-AltimeterScaleMask.name 					=  create_guid_string()
-AltimeterScaleMask.primitivetype 			= "triangles"
-AltimeterScaleMask.material					= TST_G
-AltimeterScaleMask.parent_element			= ALT_BASE.name
-AltimeterScaleMask.vertices	   	 			= { {0.4, -0.02 }, { 0.9 , -0.02},
-												{ 0.9 ,-0.35 }, {0.4 ,-0.35 }, }
-AltimeterScaleMask.indices					= {0, 1, 2, 0, 2, 3}
-AltimeterScaleMask.init_pos					= {-0.15, 0, 0}
-AltimeterScaleMask.init_rot					= {0, 0, 0}
-AltimeterScaleMask.h_clip_relation   		= h_clip_relations.INCREASE_IF_LEVEL 
-AltimeterScaleMask.level  		 			= HMD_DEFAULT_LEVEL
-AltimeterScaleMask.element_params			= {"HUD_MODE"}
-AltimeterScaleMask.controllers				= { {"parameter_in_range",0, -1,7}  }
-AltimeterScaleMask.isvisible				= false
-Add(AltimeterScaleMask)
-
-local AltimeterScaleArrow					= HMD_Horizon_Line(HMD_HORIZON, 793, 987, 912, 1106, 1) 
-AltimeterScaleArrow.name					= create_guid_string()
-AltimeterScaleArrow.init_pos				= {0.31, -0.282, 0}
-AltimeterScaleArrow.init_rot				= {-90, 0, 0}
-AltimeterScaleArrow.parent_element			= ALT_BASE.name						
-AltimeterScaleArrow.h_clip_relation  		= h_clip_relations.DECREASE_IF_LEVEL 
-AltimeterScaleArrow.level  		 			= HMD_DEFAULT_LEVEL + 1
-AltimeterScaleArrow.element_params			= {"HUD_BRIGHTNESS"}
-AltimeterScaleArrow.controllers				= { {"opacity_using_parameter" ,0}  }
-AddHMDElement2(AltimeterScaleArrow)
-
---ALTITUDE_MODE:set(1)		-- 1 = barometric, 2 = Radar 
-
-local Altitude_mode_ind 			= add_text_HMD("77", 0.58, -0.50, ALT_BASE , "Gripen_Font_green", HUD_pitch_digit, "CenterCenter")
-Altitude_mode_ind.element_params  	= {"ALTITUDE_MODE","RadarAltAvail"}
-Altitude_mode_ind.controllers     	= {{"parameter_in_range" ,0, 1.9, 2.1},{"parameter_in_range" ,1, 0.9, 1.1} }
+addHMDSimpleLine(nil, {107}, nil, base, nil, nil, {"altitudeDeclutt"}, {{ctrl.compareNum,0, 0}}, nil, {{-15, 4.1}, {0, 0}, {-15, -4.1}})
+addHMDSimple("altBase", nil, nil, base, nil, nil, {"altitudeDeclutt", "altTape"}, {{ctrl.compareNum,0, 0}, {ctrl.moveY,1, -0.000175659}})
+addHMDBox("altMask", {132, 0}, nil, "altBase", hcr.rw, lvl.mask, {"altTape"}, {{ctrl.moveY,0, 0.000175659}}, 90, 64, matl.mask, true)
 
 
 
+addHMDText(nil, {105, -2.3}, "altBase", nil, lvl.mask, {"altMode", "terrainAlt"}, {{ctrl.compareNum,0, 1}, {ctrl.moveY,1, 0.000175659}}, "77", nil, strdef.seventyseven)
 
 
+local thousandsOffset = 131
+local hundredsOffsetX = 157
+local hundredsOffsetY = -2
+local altLineOffset = 25
+local altTextOffset = 25
 
-local ALTIMETER_BASE 				= CreateElement "ceSimple"
-ALTIMETER_BASE.name  				= create_guid_string()
-ALTIMETER_BASE.init_pos				= {-0.15, 0.782}
-ALTIMETER_BASE.parent_element		= ALT_BASE.name
-ALTIMETER_BASE.element_params     	= {"ALTITUDE_HUD"}             
-ALTIMETER_BASE.controllers        	= {{"move_up_down_using_parameter",0, -0.0001980675} }
-AddHMDElement(ALTIMETER_BASE)
-
-local ThousandsOffsetX = 0.655	
-local ThousandsOffsetY = -1
-
-local HundredsOffsetX = 0.777
-local HundredsOffsetY = -1.015
-local AltLineOffset = 0.15
---local AltTextOffset = 0.149955
-local AltTextOffset = 0.15
-
-local counter = - 1
+local counter = -1
 local hundreds = 0
-local Thousands = 0
+local thousands = 0
 
-for i = 0,810 do
-		local AltLine 						= HMD_Heading_Scale(HMD_HeadingScale, 193, 105, 207, 179, 3)
-		AltLine.name						= create_guid_string()
-		AltLine.init_pos					= {0.55, -1 + i * AltLineOffset, 0}
-		AltLine.init_rot					= {90, 0, 0}
-		AltLine.parent_element				= ALTIMETER_BASE.name
-		AltLine.element_params				= {"HUD_BRIGHTNESS"}
-		AltLine.controllers					= { {"opacity_using_parameter" ,0}  }
-		AddHMDElement3(AltLine)
-		
-		local AltLineShort 					= HMD_Heading_Scale(HMD_HeadingScale, 293, 141, 307, 179, 3)
-		AltLineShort.name					= create_guid_string()
-		AltLineShort.init_pos				= {0.541, -1.075 + i * AltLineOffset, 0}
-		AltLineShort.init_rot				= {90, 0, 0}
-		AltLineShort.parent_element			= ALTIMETER_BASE.name
-		AltLineShort.element_params			= {"HUD_BRIGHTNESS"}
-		AltLineShort.controllers			= { {"opacity_using_parameter" ,0}  }
-		AddHMDElement3(AltLineShort)
-		
-		counter = counter + 1
-		
-		if counter == 10 then
-			counter = 0
-			Thousands = Thousands + 1
-		end
-		
-		hundreds = counter
-		
-		if Thousands < 1 then
-		
-			if hundreds == 0 then
-				local Ahundreds		= add_text_HMD2(hundreds, HundredsOffsetX - 0.085, HundredsOffsetY+ i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-			else 
-				local Ahundreds		= add_text_HMD2(hundreds .. "00", HundredsOffsetX - 0.085, HundredsOffsetY+ i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_100s, "CenterCenter")
-			end
-			
-		elseif Thousands >= 1 and Thousands < 10 then
-		
-			local AThousands		= add_text_HMD2(Thousands, ThousandsOffsetX, ThousandsOffsetY + i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-			
-			local Ahundreds			= add_text_HMD2(hundreds .. "00", HundredsOffsetX - 0.005, HundredsOffsetY+ i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_100s, "CenterCenter")
+for i = 0, 810 do
+	counter = counter + 1
+	if counter == 10 then
+		counter = 0
+		thousands = thousands + 1
+	end
 
+	hundreds = counter
+
+
+	--addHMDSimpleLine(nil, {110, i * altLineOffset}, nil, "altBase", nil, lvl.mask, nil, nil, nil, {{0}, {13}}) Causing VR crash?
+	--addHMDSimpleLine(nil, {110, -altLineOffset / 2 + i * altLineOffset}, nil, "altBase", nil, lvl.mask, nil, nil, nil, {{0}, {6.5}})
+
+
+	if thousands < 1 then
+		if hundreds == 0 then
+			addHMDText(nil, {hundredsOffsetX - 27.5, i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, hundreds)
 		else
-			local AThousands		= add_text_HMD2(Thousands, ThousandsOffsetX - 0.0035 , ThousandsOffsetY + i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
-			
-			local Ahundreds			= add_text_HMD2(hundreds .. "00", HundredsOffsetX + 0.0075, HundredsOffsetY+ i * AltTextOffset, ALTIMETER_BASE , "Gripen_Font_green", HMD_strdefs_100s, "CenterCenter")
-
+			addHMDText(nil, {hundredsOffsetX - 17.5, i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, hundreds .. "00")
 		end
-
+	elseif thousands >= 1 and thousands < 10 then
+		addHMDText(nil, {thousandsOffset, i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, thousands)
+		addHMDText(nil, {hundredsOffsetX - 15, hundredsOffsetY + i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, hundreds .. "00", nil, strdef.hundreds)
+	elseif thousands <= 60 then
+		addHMDText(nil, {thousandsOffset, i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, thousands)
+		addHMDText(nil, {hundredsOffsetX - 10, hundredsOffsetY + i * altTextOffset}, "altBase", nil, lvl.mask, nil, nil, hundreds .. "00", nil, strdef.hundreds)
+	end
 end
 
--- air to ground mode altimeter
+addHMDText(nil, {129, -43}, base, nil, nil, {"altitudeDeclutt", "altMode"}, {{ctrl.compareNum,0, 0}, {ctrl.compareNum,1, 2}}, "R")
 
-local A2G_Altitude_BASE 					= CreateElement "ceSimple"
-A2G_Altitude_BASE.name  					= create_guid_string()
-A2G_Altitude_BASE.parent_element			= ALT_BASE.name
-A2G_Altitude_BASE.init_pos					= {0.65, 0 ,0}									--{0, -1.345,0}
-A2G_Altitude_BASE.element_params  			= {"HUD_MODE"}
-A2G_Altitude_BASE.controllers     			= { {"parameter_compare_with_number",0, 7}  }
-AddHMDElement(A2G_Altitude_BASE)
 
-local A2G_Altitude 			 				= add_text_HMD("A", 0, -0.1, A2G_Altitude_BASE  , "Gripen_Font_green", HMD_strdefs_text, "CenterCenter")
+local decluttAltInd = addHMDText(nil, {130, 15}, base, nil, nil, {"altitudeDeclutt", "altMode"}, {{ctrl.compareNum,0, 1}, {ctrl.compareNum,1, 1}}, "A")
+local dA            = addHMDTextParam(nil, {0, -15}, decluttAltInd, nil, nil, nil, nil, "txtAlt")
 
-local A2G_Altitude_Readout 					= add_text_HMD_param(0, -0.2, "ALTITUDE_HUD","HUD_BRIGHTNESS", "%0.0f", A2G_Altitude_BASE , HMD_strdefs_digit, "Gripen_Font_green")
+copyHMDElement(decluttAltInd, {"name", "value", "controllers",}, {"Declutt_Ralt", "RA", {{ctrl.compareNum,0, 1}, {ctrl.compareNum,1, 2}, {ctrl.opacity,2}}})
+copyHMDElement(dA, {"parent_element", "element_params"}, {"Declutt_Ralt", {"txtRalt"}})
 
 
 
+addHMDSimple("Status_Bar", {0, -166}, nil, base, nil, nil, {"currentPhase", "PULLUPQUE"}, {{ctrl.inRange,0, 6.9, 9.9}, {ctrl.inRange,1, -1, 999999}})
 
-local GroundCollisionWarning				= create_HUD_GCW(HUD_GroundCollisionWarning, 184, 458, 2682, 1348, 0.666) 
-GroundCollisionWarning.name					= create_guid_string()
-GroundCollisionWarning.init_pos				= {0, -0.3, 0}
-GroundCollisionWarning.init_rot				= {0, 0, 0}
-GroundCollisionWarning.parent_element		= HMD_BASE.name		
-GroundCollisionWarning.element_params		= {"HUD_BRIGHTNESS","PULLUPQUE", "ROLL_HUD", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
-												"CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_TD","CURRENT_PHASE_LR","CURRENT_PHASE_PAL", "PULLMORE","VELVEC_HUD_X"}
-GroundCollisionWarning.controllers			= { {"opacity_using_parameter" ,0}, {"parameter_in_range",1, -10000,0},{"rotate_using_parameter" ,2, 1.00},
-												{"move_up_down_using_parameter",3, 0.322} ,{"parameter_compare_with_number",4, 0},{"parameter_compare_with_number",5, 0},
-												{"parameter_compare_with_number",6, 0},{"parameter_compare_with_number",7, 0},{"parameter_compare_with_number",8, 0},
-												{"parameter_compare_with_number",9, 0},{"parameter_compare_with_number",10, 0},{"parameter_compare_with_number",11, 0}, {"parameter_in_range",12, -0.99,0.5},{"move_left_right_using_parameter",13, 0.322} }									
-AddHMDElement(GroundCollisionWarning)
+addHMDText(nil, {0, -10}, "Status_Bar", nil, nil, {"landingMode"}, {{ctrl.compareNum,0, 1}}, "L")
 
-local GCW_Arrow_L							= create_HMD_GCW(HMD_GroundCollisionWarning, 23, 23, 508, 443, 0.666) 
-GCW_Arrow_L.name							= create_guid_string()
-GCW_Arrow_L.init_pos						= {-0.2655 * 2, 0.09 * 2, 0}
-GCW_Arrow_L.init_rot						= {0, 0, 0}
-GCW_Arrow_L.parent_element					= GroundCollisionWarning.name	
-GCW_Arrow_L.element_params					= {"HUD_BRIGHTNESS","PULLUPQUE", "PULLMORE"}
-GCW_Arrow_L.controllers						= { {"opacity_using_parameter" ,0},{"move_up_down_using_parameter",1, -0.000006}, {"parameter_in_range",2, -0.99,0.5}  }									
-AddHMDElement(GCW_Arrow_L)
 
-local GCW_Arrow_R							= create_HMD_GCW(HMD_GroundCollisionWarning, 23, 23, 508, 443, 0.666) 
-GCW_Arrow_R.name							= create_guid_string()
-GCW_Arrow_R.init_pos						= {0.2655 * 2, 0.09 * 2, 0}
-GCW_Arrow_R.init_rot						= {0, 0, 0}
-GCW_Arrow_R.parent_element					= GroundCollisionWarning.name	
-GCW_Arrow_R.element_params					= {"HUD_BRIGHTNESS","PULLUPQUE", "PULLMORE"}
-GCW_Arrow_R.controllers						= { {"opacity_using_parameter" ,0},{"move_up_down_using_parameter",1, -0.000006}, {"parameter_in_range",2, -0.99,0.5}  }									
-AddHMDElement(GCW_Arrow_R)
+local GCWY = 180
+addHMDSimple("GCW_Base", nil, nil, base, nil, nil, {"rollRad", "currentPhase"}, {{ctrl.rotate,0, 1}, {ctrl.inRange,1, 5.9, 9.9}})
+
+local GCWLL = addHMDSimpleLine(nil, nil, nil, "GCW_Base", hcr.rw, nil, {"PULLUPQUE", "PULLMORE"}, {{ctrl.inRange,0, -10000, 0}, {ctrl.inRange,1, -0.99, 0.5}}, nil, {{-52, 40 - GCWY}, {-52, 0 - GCWY}, {-32.17, 0 - GCWY}})
+copyHMDElement(GCWLL, {"vertices"}, {{{-46, 40 - GCWY}, {-46, 2.8 - GCWY}, {-32.17, 2.8 - GCWY}}})
+copyHMDElement(GCWLL, {"vertices"}, {{{11.25, 2.8 - GCWY}, {-11.25, 2.8 - GCWY}}})
+copyHMDElement(GCWLL, {"vertices"}, {{{11.25, 0 - GCWY}, {-11.25, 0 - GCWY}}})
+copyHMDElement(GCWLL, {"vertices"}, {{{46, 40 - GCWY}, {46, 2.8 - GCWY}, {32.17, 2.8 - GCWY}}})
+copyHMDElement(GCWLL, {"vertices"}, {{{52, 40 - GCWY}, {52, 0 - GCWY}, {32.17, 0 - GCWY}}})
+
+local GCWLArrow = copyHMDElement(GCWLL, {"init_pos", "vertices", "controllers"}, {{0, -2}, {{-54.5, 35 - GCWY}, {-49, 50 - GCWY}, {-43.5, 35 - GCWY}, {-54.5, 35 - GCWY}}, {{ctrl.inRange,0, -10000, 0}, {ctrl.moveY,0, -0.00001}, {ctrl.inRange,1, -0.99, 0.5}, {ctrl.opacity,2}}})
+copyHMDElement(GCWLArrow, {"vertices"}, {{{54.5, 35 - GCWY}, {49, 50 - GCWY}, {43.5, 35 - GCWY}, {54.5, 35 - GCWY}}})
+
+
+
+local aILeftLine = addHMDSimpleLine(nil, {-attIndRadius}, nil, base, nil, nil, nil, nil, nil, {{-18, 0}, {-6, 0}})
+copyHMDElement(aILeftLine, {"init_pos", "vertices"}, {{attIndRadius}, {{6, 0}, {18, 0}}})
+
+
+addHMDSimpleLine(nil, nil, nil, base, nil, nil, {"rollRad"}, {{ctrl.rotate,0, 1}}, nil, {{-4, -attIndRadius + 8.1}, {0, -attIndRadius + 0.6}, {4, -attIndRadius + 8.1}})
+
+
+local attIndBase = addHMDSimple(nil, nil, nil, base, nil, nil, {"rollRad"}, {{ctrl.rotate,0, 1}})
+copyHMDElement(attIndBase, {"name"}, {"Att_Ind_Base2"})
+
+local aIMaskRight = addHMDCircle(nil, nil, {-180}, attIndBase, hcr.rw, lvl.alt, {"HMDPitch"}, {{ctrl.rotate,0, math.rad(1)}}, attIndRadius + 1.5, attIndRadius, 180, 18, matl.mask, true)
+local aIR         = addHMDCircle(nil, nil, nil, "Att_Ind_Base2", nil, lvl.alt, nil, nil, attIndRadius + 1.5, attIndRadius, 180, 18, matl.mG)
+
+copyHMDElement(aIMaskRight, {"init_rot", "parent_element", "level", "controllers"}, {{0}, "Att_Ind_Base2", lvl.alt2, {{ctrl.rotate,0, -math.rad(1)}}})
+copyHMDElement(aIR, {"init_rot", "level"}, {{180}, lvl.alt2})
+
+
+copyHMDElement(aILeftLine, {"init_pos", "vertices"}, {{0, -attIndRadius}, {{-4, -10}, {0, -2.5}, {4, -10}}})
+
+
+
+dofile(LockOn_Options.script_path .. "HMD/Indicator/HMD_Tac_Page.lua")

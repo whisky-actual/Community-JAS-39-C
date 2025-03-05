@@ -51,18 +51,18 @@ YAW_OUTPUT:set(0.0)
 FBW:listen_command(10061)--Pitch axis
 FBW:listen_command(10062)--roll
 FBW:listen_command(10063)--rudder/yaw
-FBW:listen_command(Keys.NoHotas) -- Enable keyboard controls
-FBW:listen_command(device_commands.MadeUpAltHoldCommand) -- AUTO
-FBW:listen_command(Keys.GripenPlaneUpStart)
-FBW:listen_command(Keys.GripenPlaneDownStart)
-FBW:listen_command(Keys.GripenPlaneLeftStart)
-FBW:listen_command(Keys.GripenPlaneRightStart)
-FBW:listen_command(Keys.GripenPlaneLeftRudderStart)
-FBW:listen_command(Keys.GripenPlaneRightRudderStart)
-FBW:listen_command(Keys.GripenPlaneLeftStop)
-FBW:listen_command(Keys.GripenPlaneRightStop)
-FBW:listen_command(Keys.GripenPlaneLeftRudderStop)
-FBW:listen_command(Keys.GripenPlaneRightRudderStop)
+FBW:listen_command(keys.NoHotas) -- Enable keyboard controls
+FBW:listen_command(deviceCommands.MadeUpAltHoldCommand) -- AUTO
+FBW:listen_command(keys.GripenPlaneUpStart)
+FBW:listen_command(keys.GripenPlaneDownStart)
+FBW:listen_command(keys.GripenPlaneLeftStart)
+FBW:listen_command(keys.GripenPlaneRightStart)
+FBW:listen_command(keys.GripenPlaneLeftRudderStart)
+FBW:listen_command(keys.GripenPlaneRightRudderStart)
+FBW:listen_command(keys.GripenPlaneLeftStop)
+FBW:listen_command(keys.GripenPlaneRightStop)
+FBW:listen_command(keys.GripenPlaneLeftRudderStop)
+FBW:listen_command(keys.GripenPlaneRightRudderStop)
 
 
 function AxisControl(AxisState, AxisTarget, Increment, Keyboard, Rudder)
@@ -106,19 +106,19 @@ function SetCommand(command,value)
 	end
 	
 --FC3====================
-	if command == Keys.GripenPlaneUpStart then
+	if command == keys.GripenPlaneUpStart then
 		if PITCH_INPUT > -1 + KB_PITCHIncrement then	
 			PITCH_INPUT = PITCH_INPUT - KB_PITCHIncrement
 		end
 	end
 	
-	if command == Keys.GripenPlaneDownStart then
+	if command == keys.GripenPlaneDownStart then
 		if PITCH_INPUT < 1 - KB_PITCHIncrement then
 			PITCH_INPUT = PITCH_INPUT + KB_PITCHIncrement
 		end
 	end
 
-	if command == Keys.GripenPlaneRightStart then 
+	if command == keys.GripenPlaneRightStart then 
 		KB_ROLL_TARGET = 1
 		
 		if KB_ROLL_STATE > 0 + KB_ROLLIncrement then
@@ -128,7 +128,7 @@ function SetCommand(command,value)
 		end
 	end
 		
-	if command == Keys.GripenPlaneLeftStart then 
+	if command == keys.GripenPlaneLeftStart then 
 		KB_ROLL_TARGET = -1
 		
 		if KB_ROLL_STATE < 0 - KB_ROLLIncrement then
@@ -138,22 +138,22 @@ function SetCommand(command,value)
 		end
 	end
 	
-	if command == Keys.GripenPlaneRightStop or command == Keys.GripenPlaneLeftStop then
+	if command == keys.GripenPlaneRightStop or command == keys.GripenPlaneLeftStop then
 		KB_ROLL_TARGET = 0
 		Recentering = true
 	end
 	
-	if command == Keys.GripenPlaneLeftRudderStart then
+	if command == keys.GripenPlaneLeftRudderStart then
 		KB_YAW_TARGET = -1
 		Recentering = false
 	end
 	
-	if command == Keys.GripenPlaneRightRudderStart then
+	if command == keys.GripenPlaneRightRudderStart then
 		KB_YAW_TARGET = 1
 		Recentering = false
 	end
 	
-	if command == Keys.GripenPlaneLeftRudderStop or command == Keys.GripenPlaneRightRudderStop then
+	if command == keys.GripenPlaneLeftRudderStop or command == keys.GripenPlaneRightRudderStop then
 		KB_YAW_TARGET = 0
 		Recentering = true
 	end

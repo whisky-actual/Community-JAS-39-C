@@ -10,7 +10,7 @@ local xcor = 0.022
 EMGY_PAGE 			= CreateElement "ceSimple"
 EMGY_PAGE.init_pos	= {0,0}
 EMGY_PAGE.name		= create_guid_string()
-EMGY_PAGE.element_params = {"RD_EMGY_MODE", "MAINPOWER"}
+EMGY_PAGE.element_params = {"RD_EMGY_MODE", "mainpower"}
 EMGY_PAGE.controllers    = {{"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number", 1, 1}}
 AddElement(EMGY_PAGE)		
 
@@ -154,7 +154,7 @@ Mach_indicator.init_pos 			= {-0.5, -0.2}
 Mach_indicator.alignment 			= "LeftCenter"
 Mach_indicator.stringdefs 			= mfd_strdefs_digit
 Mach_indicator.formats 				= {"%0.0f","%s"}
-Mach_indicator.element_params 		= {"RD_BRIGHTNESS","MACH_B"}
+Mach_indicator.element_params 		= {"RD_BRIGHTNESS","machWhole"}
 Mach_indicator.controllers 			= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"text_using_parameter",1,0},{"parameter_in_range" ,1, 3, 99.5}}
 AddElement(Mach_indicator)
 
@@ -168,7 +168,7 @@ Mach_indicator2.init_pos 			= {-0.568, -0.2}
 Mach_indicator2.alignment 			= "LeftCenter"
 Mach_indicator2.stringdefs 			= mfd_strdefs_digit
 Mach_indicator2.formats 			= {"%0.2f","%s"}
-Mach_indicator2.element_params 		= {"RD_BRIGHTNESS","MACH_A"}
+Mach_indicator2.element_params 		= {"RD_BRIGHTNESS","machWhole"}
 Mach_indicator2.controllers 		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"text_using_parameter",1},{"parameter_in_range" ,1, 0.995, 3}}
 AddElement(Mach_indicator2)
 
@@ -177,7 +177,7 @@ AddElement(Mach_indicator2)
 
 
 
-white_text_param_with_brightness(-0.5, 0.7, "CUR_AOA", "%0.0f", EMGY_PAGE, mfd_strdefs_digit, "Gripen_Font_WHITE")
+white_text_param_with_brightness(-0.5, 0.7, "AoA", "%0.0f", EMGY_PAGE, mfd_strdefs_digit, "Gripen_Font_WHITE")
 
 local ALFA_SYMBOL_EMGY			 = create_mfd_tex(ADI_FRAME_EMGY, 1795, 435 , 1875, 510,0.80)
 ALFA_SYMBOL_EMGY.name			 = create_guid_string()
@@ -216,7 +216,7 @@ AIRSPEED_EMGY_ARROW.element_params  = {"RD_BRIGHTNESS","EMGY_IAS"}
 AIRSPEED_EMGY_ARROW.controllers	    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"move_up_down_using_parameter", 1, 0.0001079*1.1125}}
 AddElement(AIRSPEED_EMGY_ARROW)
 
-AIRSPEED_EMGY_READOUT = white_text_param_with_brightness(-0.15,0.0 , "CURR_IAS", "%0.0f", AIRSPEED_EMGY_ARROW, mfd_strdefs_digit, "Gripen_Font_WHITE") 
+AIRSPEED_EMGY_READOUT = white_text_param_with_brightness(-0.15,0.0 , "txtCAS", "%0.0f", AIRSPEED_EMGY_ARROW, mfd_strdefs_digit, "Gripen_Font_WHITE") 
 
 
 local HEADING_TAPE_EMGY_MASK				 = CreateElement "ceSimpleLineObject"

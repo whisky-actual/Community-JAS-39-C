@@ -26,49 +26,49 @@ local SeatTarget = 0
 
 dev:listen_event("WeaponRearmSingleStepComplete")
 
-dev:listen_command(device_commands.CanopyLever)			-- 0 = closed, 1 = open
-dev:listen_command(Keys.CanopyLever)
+dev:listen_command(deviceCommands.CanopyLever)			-- 0 = closed, 1 = open
+dev:listen_command(keys.CanopyLever)
 dev:listen_command(71)								 	-- iCommandPlaneFonar
 dev:listen_command(144)									-- iCommandPlaneResetMasterWarning
-dev:listen_command(device_commands.MasterCaution)
+dev:listen_command(deviceCommands.MasterCaution)
 dev:listen_command(485)									-- iCommandViewPitCameraMoveDown	
 dev:listen_command(484)									-- iCommandViewPitCameraMoveUp	
-dev:listen_command(device_commands.SeatUpDown)
-dev:listen_command(device_commands.SeatEject)
-dev:listen_command(device_commands.SeatArm)
-dev:listen_command(device_commands.AARProbeCover)
-dev:listen_command(device_commands.AARProbe)
+dev:listen_command(deviceCommands.SeatUpDown)
+dev:listen_command(deviceCommands.SeatEject)
+dev:listen_command(deviceCommands.SeatArm)
+dev:listen_command(deviceCommands.AARProbeCover)
+dev:listen_command(deviceCommands.AARProbe)
 dev:listen_command(155)									-- PlaneAirRefuel
-dev:listen_command(Keys.AARProbeCover)
-dev:listen_command(Keys.AARProbe)
-dev:listen_command(Keys.SeatEject)
+dev:listen_command(keys.AARProbeCover)
+dev:listen_command(keys.AARProbe)
+dev:listen_command(keys.SeatEject)
 
 function post_initialize()
 
     local birth = LockOn_Options.init_conditions.birth_place
     if birth=="AIR_HOT" then
 		CanopyState = 0
-		dev:performClickableAction(device_commands.CanopyLever, 0, true)
+		dev:performClickableAction(deviceCommands.CanopyLever, 0, true)
 		SeatArmState = 0
-		dev:performClickableAction(device_commands.SeatArm, 0, true)
+		dev:performClickableAction(deviceCommands.SeatArm, 0, true)
 		AARProbeCoverState = 0	
-		dev:performClickableAction(device_commands.AARProbeCover, 0, true)
+		dev:performClickableAction(deviceCommands.AARProbeCover, 0, true)
 	   
 	elseif birth=="GROUND_HOT" then
 		CanopyState = 0
-		dev:performClickableAction(device_commands.CanopyLever, 0, true)
+		dev:performClickableAction(deviceCommands.CanopyLever, 0, true)
 		SeatArmState = 0
-		dev:performClickableAction(device_commands.SeatArm, 0, true)
+		dev:performClickableAction(deviceCommands.SeatArm, 0, true)
 		AARProbeCoverState = 0	
-		dev:performClickableAction(device_commands.AARProbeCover, 0, true)
+		dev:performClickableAction(deviceCommands.AARProbeCover, 0, true)
 		
     elseif birth=="GROUND_COLD" then
 		CanopyState = 1
-		dev:performClickableAction(device_commands.CanopyLever, 1, true)
+		dev:performClickableAction(deviceCommands.CanopyLever, 1, true)
 		SeatArmState = 1
-		dev:performClickableAction(device_commands.SeatArm, 1, true)
+		dev:performClickableAction(deviceCommands.SeatArm, 1, true)
 		AARProbeCoverState = 0	
-		dev:performClickableAction(device_commands.AARProbeCover, 0, true)	
+		dev:performClickableAction(deviceCommands.AARProbeCover, 0, true)	
     end
 
 	sndhost = create_sound_host("COCKPIT_CANOPY","3D",0,0,0)
@@ -80,7 +80,7 @@ function SetCommand(command,value)
 	
 	local rpms = sensor_data.getEngineLeftRPM() 
 	
-    if command == device_commands.CanopyLever then
+    if command == deviceCommands.CanopyLever then
 			if value == 0 then
 				if CanopyState == 1 then
 					dispatch_action(nil, 71)
@@ -93,21 +93,21 @@ function SetCommand(command,value)
 				end
 			end	
 	
-	elseif command == Keys.CanopyLever then
+	elseif command == keys.CanopyLever then
 			if CanopyState == 1 then
-				dev:performClickableAction(device_commands.CanopyLever, 0, true)	
+				dev:performClickableAction(deviceCommands.CanopyLever, 0, true)	
 				dispatch_action(nil, 71)
 				CanopyState = 0		
 			elseif CanopyState == 0 then
-				dev:performClickableAction(device_commands.CanopyLever, 1, true)				
+				dev:performClickableAction(deviceCommands.CanopyLever, 1, true)				
 				dispatch_action(nil, 71)
 				CanopyState = 1
 			end
 	
-	elseif command == device_commands.MasterCaution then
+	elseif command == deviceCommands.MasterCaution then
 		dispatch_action(nil,144)
 	
-	elseif command == device_commands.SeatUpDown then
+	elseif command == deviceCommands.SeatUpDown then
 		if value > 0 then
 			SeatTarget = 1
 		elseif value < 0 then
@@ -116,7 +116,7 @@ function SetCommand(command,value)
 			SeatTarget = 0
 		end	
 	
-	elseif command == device_commands.CanopyJettison then
+	elseif command == deviceCommands.CanopyJettison then
 		if value == 1 then
 			CanopyJettisonState = 1			
 			if CanopyJettisonDone == 0 then
@@ -128,33 +128,33 @@ function SetCommand(command,value)
 			CanopyJettisonState = 0
 		end	
 
-	elseif command == device_commands.SeatEject then
+	elseif command == deviceCommands.SeatEject then
 		if value == 1 then
 			if SeatArmState == 0 then
 				dispatch_action(nil,83)			
 			end
 		end	
 
-	elseif command == Keys.SeatEject then
+	elseif command == keys.SeatEject then
 		if SeatArmState == 0 then
 			dispatch_action(nil,83)					
 		end		
 	
-	elseif command == device_commands.SeatArm then
+	elseif command == deviceCommands.SeatArm then
 		if value == 1 then
 			SeatArmState = 1
 		elseif value == 0 then
 			SeatArmState = 0
 		end
 
-	elseif command == Keys.SeatArm then
+	elseif command == keys.SeatArm then
 		if SeatArmState == 0 then
 		SeatArmState = 1
 		elseif SeatArmState == 1 then
 		SeatArmState = 0
 		end
 
-	elseif command == device_commands.AARProbeCover then
+	elseif command == deviceCommands.AARProbeCover then
 		if value == 1 then 				
 			AARProbeCoverState = 1			
 		elseif value == 0 then 				
@@ -162,11 +162,11 @@ function SetCommand(command,value)
 				dispatch_action(nil,155)
 				AARProbeState = 0
 			end	
-			dev:performClickableAction(device_commands.AARProbe, 0, true)	
+			dev:performClickableAction(deviceCommands.AARProbe, 0, true)	
 			AARProbeCoverState = 0	
 		end
 
-	elseif command == device_commands.AARProbe then
+	elseif command == deviceCommands.AARProbe then
 		if rpms >= 60 then
 			if value == 1 then
 				if AARProbeCoverState == 1 then
@@ -185,22 +185,22 @@ function SetCommand(command,value)
 			end
 		end
 		
-	elseif command == Keys.AARProbeCover then
+	elseif command == keys.AARProbeCover then
 		if AARProbeCoverState == 0 then
-			dev:performClickableAction(device_commands.AARProbeCover, 1, true)
+			dev:performClickableAction(deviceCommands.AARProbeCover, 1, true)
 		elseif AARProbeCoverState == 1 then
-			dev:performClickableAction(device_commands.AARProbeCover, 0, true)
-			dev:performClickableAction(device_commands.AARProbe, 0, true)
+			dev:performClickableAction(deviceCommands.AARProbeCover, 0, true)
+			dev:performClickableAction(deviceCommands.AARProbe, 0, true)
 		end
 	
-	elseif command == Keys.AARProbe then
+	elseif command == keys.AARProbe then
 		if rpms >= 60 then
 			if AARProbeState == 0 then
 				if AARProbeCoverState == 1 then
-				dev:performClickableAction(device_commands.AARProbe, 1, true)	
+				dev:performClickableAction(deviceCommands.AARProbe, 1, true)	
 				end
 			elseif AARProbeState == 1 then
-				dev:performClickableAction(device_commands.AARProbe, 0, true)		
+				dev:performClickableAction(deviceCommands.AARProbe, 0, true)		
 			end
 		end
 	end		
@@ -217,7 +217,7 @@ end
 local canopy_light = get_param_handle("CANOPY_LIGHT")
 
 function canopy_warning_light()
-	if get_param_handle("MAINPOWER"):get() == 1 then
+	if get_param_handle("mainpower"):get() == 1 then
 		if CanopyState == 1 then 
 			canopy_light:set(1)		
 		elseif CanopyState == 0 then

@@ -25,8 +25,8 @@ local autothrottle_pid = PID(5, 0.02, 0.1, -0.85, 1.0, 1)   					-- Create the P
 dev:listen_command(10064)														-- Toggle autothrottle
 dev:listen_command(10065)														-- Toggle AoA 12/14
 dev:listen_command(10066)														-- Gripen Throttle Axis
-dev:listen_command(Keys.GripenThrottleIncrease)
-dev:listen_command(Keys.GripenThrottleDecrease)
+dev:listen_command(keys.GripenThrottleIncrease)
+dev:listen_command(keys.GripenThrottleDecrease)
 
 
 local ThrottleIncrement = 0.045
@@ -43,11 +43,11 @@ function SetCommand(command,value)
 		THROTTLE_INPUT = value
 	end	
    
-	if command == Keys.GripenThrottleDecrease and THROTTLE_INPUT < 1 then			-- 1 is off, -1 is AB
+	if command == keys.GripenThrottleDecrease and THROTTLE_INPUT < 1 then			-- 1 is off, -1 is AB
 		THROTTLE_INPUT = THROTTLE_INPUT + 0.045
 	end
 	
-	if command == Keys.GripenThrottleIncrease and THROTTLE_INPUT > -1 then
+	if command == keys.GripenThrottleIncrease and THROTTLE_INPUT > -1 then
 		THROTTLE_INPUT = THROTTLE_INPUT - 0.045
 	end
    
@@ -92,6 +92,7 @@ function update_autothrottle_aoa12()											-- AoA 12 landing mode function
         aoa_target = 144  -- (12^2)		
 		throttle = autothrottle_pid:run( aoa_target, aoadeg*aoadeg )
 		dispatch_action(nil, ThrottleAxis, (throttle * 0.999)) 
+		get_param_handle("ATMode"):set(0.5)
 	end	
 end
 
@@ -104,6 +105,7 @@ function update_autothrottle_aoa14()											-- AoA 14 landing mode function
         aoa_target = 196  -- (14^2)		
 		throttle = autothrottle_pid:run( aoa_target, aoadeg*aoadeg )
 		dispatch_action(nil, ThrottleAxis, (throttle * 0.999)) 		
+		get_param_handle("ATMode"):set(1)
 	end	
 end
 
@@ -211,6 +213,7 @@ function update()
 		end 		
 	end
 	
+	get_param_handle("ATState"):set(AUTOTHROTTLE_STATE)
 end
 
 need_to_be_closed = false

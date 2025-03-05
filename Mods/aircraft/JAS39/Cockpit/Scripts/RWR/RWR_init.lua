@@ -155,8 +155,7 @@ end
 
 -- DIFFERENCES--
 function post_initialize()
-    GetDevice(devices.RWR):set_power(true)
-    -- show_param_handles_list(true)--for testing
+	dev:set_power(true)
 end
 ---------------------------------
 function SetCommand(command, value)

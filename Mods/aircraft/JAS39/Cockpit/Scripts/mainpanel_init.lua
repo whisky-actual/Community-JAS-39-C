@@ -84,11 +84,11 @@ SpeedBrakeInd.input          	= {0,1}
 SpeedBrakeInd.output         	= {-1,1}                     
 SpeedBrakeInd.parameter_name	= "SpeedBrakeInd"
 
-HMD_LIGHT	            		= CreateGauge("parameter")
-HMD_LIGHT.arg_number     		= 2090
-HMD_LIGHT.input          		= {0,1}
-HMD_LIGHT.output         		= {-1,1}
-HMD_LIGHT.parameter_name		= "HMD_LIGHT"
+local HMD_LIGHT          = CreateGauge("parameter")
+HMD_LIGHT.arg_number     = 2090
+HMD_LIGHT.input          = {0, 1}
+HMD_LIGHT.output         = {-1, 1}
+HMD_LIGHT.parameter_name = "HMDButtonLight"
 
 ATT_LIGHT	            		= CreateGauge("parameter")
 ATT_LIGHT.arg_number     		= 2078
@@ -249,7 +249,7 @@ for i = 1, 30 do
     GreenLamp.arg_number            	= Stupidgreenlamps[i]
     GreenLamp.input                 	= {-1, 0}
     GreenLamp.output                	= {-1, 0}
-    GreenLamp.parameter_name        	= "littlegreendots" -- Not sure why MAINPOWER does not update the lights at spawn but this does...
+    GreenLamp.parameter_name        	= "littlegreendots" -- Not sure why mainpower does not update the lights at spawn but this does...
 end
 
 need_to_be_closed = true

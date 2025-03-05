@@ -9,9 +9,12 @@ make_default_activity(update_time_step)
 local RWR_Power = get_param_handle("RWRPOWER_STATE")
 
 function post_initialize()
+	electric_system:AC_Generator_1_on(true)
+	electric_system:AC_Generator_2_on(true)
+	electric_system:DC_Battery_on(true)
 	RWR_Power:set(1)
-
 end
+
+
+
 need_to_be_closed = false -- close lua state after initialization
-
-

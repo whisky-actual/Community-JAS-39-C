@@ -22,7 +22,7 @@ local ALTITUDE_T 	  	  	  = get_param_handle("ALTITUDE_T")
 local ALTITUDE_H 	  	  	  = get_param_handle("ALTITUDE_H")
 local ALT_ALTITUDE_T 	  	  	  = get_param_handle("ALT_ALTITUDE_T")
 local ALT_ALTITUDE_H 	  	  	  = get_param_handle("ALT_ALTITUDE_H")
-local GPS_ALTITUDE_FEET = get_param_handle("GPS_ALTITUDE_FEET")
+local GPSAlt = get_param_handle("GPSAlt")
 local EMGY_ALTITUDE = get_param_handle("EMGY_ALTITUDE")
 local EMGY_VS   =  get_param_handle("EMGY_VS")
 
@@ -48,7 +48,7 @@ local CUR_MACH = get_param_handle("CUR_MACH") 	-- Mach
 local CUR_GS = get_param_handle("CUR_GS") 		--Ground speed
 
 -- Flight data 
-local CUR_AOA = get_param_handle("CUR_AOA")		--Angle of attack
+local AoA = get_param_handle("AoA")		--Angle of attack
 local CUR_G = get_param_handle("CUR_G")			-- G loading
 
 local CURR_RPM = 0
@@ -84,9 +84,9 @@ local NUMERICAL_HEADING  = get_param_handle("NUMERICAL_HEADING")
 local EMGY_HEADING  = get_param_handle("EMGY_HEADING") 
 
 -- System indications
-local AT = get_param_handle("AUTOTHROTTLE_ONOFF")
+local AT = get_param_handle("ATState")
 AT:set(0)
-local AT_MODE = get_param_handle("AUTOTHROTTLE_MODE")
+local AT_MODE = get_param_handle("ATMode")
 
 dev:listen_command(10064) -- Toggle autothrottle
 dev:listen_command(10065) -- Toggle AoA 12/14
@@ -113,13 +113,13 @@ function update()
 	Local_RALT = sensor_data.getRadarAltitude() * 3.2808399
 
 
-	if get_param_handle("ALTITUDE_MODE"):get() == 1 then	-- 1 = barometric, 2 = Radar 
+	if get_param_handle("altMode"):get() == 1 then	-- 1 = barometric, 2 = Radar 
 		ALTITUDE_T:set(math.floor(sensor_data.getBarometricAltitude() * 3.2808399 / 1000))		-- feet
 		ALTITUDE_H:set(math.floor(sensor_data.getBarometricAltitude()* 3.2808399 % 1000))		-- feet
 	else
 		if (Local_RALT > 5249.4) and (Local_RALT < 5249.6) then
-			ALTITUDE_T:set(math.floor(GPS_ALTITUDE_FEET:get() - get_param_handle("TERRAIN_ALT"):get() ) / 1000)	
-			ALTITUDE_H:set(math.floor(GPS_ALTITUDE_FEET:get() - get_param_handle("TERRAIN_ALT"):get() )  % 1000)
+			ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get() ) / 1000)	
+			ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get() )  % 1000)
 		else
 			ALTITUDE_T:set(math.floor(sensor_data.getRadarAltitude() * 3.2808399 / 1000))		-- feet
 			ALTITUDE_H:set(math.floor(sensor_data.getRadarAltitude()* 3.2808399 % 1000))		-- feet
@@ -135,10 +135,10 @@ function update()
 	
 	
 	if (Local_RALT > 5249.4) and (Local_RALT < 5249.6) then	-- when Radar altimiter cant get an accurate readout it returs ~5249.5
-		RAW_RALT:set((sensor_data.getBarometricAltitude()* 3.2808399) - get_param_handle("TERRAIN_ALT"):get())
+		RAW_RALT:set((sensor_data.getBarometricAltitude()* 3.2808399) - get_param_handle("terrainAlt"):get())
 		
-		ALT_ALTITUDE_T:set(math.floor(GPS_ALTITUDE_FEET:get() - get_param_handle("TERRAIN_ALT"):get() ) / 1000)		-- feet
-		ALT_ALTITUDE_H:set(math.floor(GPS_ALTITUDE_FEET:get() - get_param_handle("TERRAIN_ALT"):get() )  % 1000)		-- feet		
+		ALT_ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get() ) / 1000)		-- feet
+		ALT_ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get() )  % 1000)		-- feet		
 	
 		
 	else
@@ -171,13 +171,6 @@ function update()
 	
 	
 -- Flight data ========================================================================================================================
-	if (get_param_handle("CURRENT_PHASE_PARKED"):get() == 1) or (get_param_handle("CURRENT_PHASE_STATIONARY"):get() == 1 )then	-- just to make it look nicer while parked 
-		CUR_AOA:set(0)			--Angle of attack
-	else 
-		CUR_AOA:set(sensor_data.getAngleOfAttack() * RAD_TO_DEGREE)			--Angle of attack
-	end
-
-
 	CUR_G:set(sensor_data.getVerticalAcceleration())						-- G loading	
 
  -- Speed====================================================================================================================================
@@ -294,7 +287,7 @@ function update()
 	EMGY_HEADING:set((sensor_data.getMagneticHeading() * RAD_TO_DEGREE))
 	--EMGY_HEADING:set(360)
 	
-	if get_param_handle("HEADING_MODE"):get() == 1 then
+	if get_param_handle("headingMode"):get() == 1 then
 		HEADING:set(360 - (sensor_data.getHeading() * RAD_TO_DEGREE))
 		--HEADING:set(360)
 		HEADINGCOMPASS:set(true_heading-180)

@@ -18,12 +18,12 @@ dev:listen_command(10039)
 dev:listen_event("WheelChocksOn")
 dev:listen_event("WheelChocksOff")
 dev:listen_event("Compartment")
-dev:listen_command(device_commands.Compartment)			-- 0 = closed, 1 = open
-dev:listen_command(Keys.Compartment)
+dev:listen_command(deviceCommands.Compartment)			-- 0 = closed, 1 = open
+dev:listen_command(keys.Compartment)
 
 function post_initialize()
 
-dev:performClickableAction(device_commands.Compartment, -1, true)		-- close compartment at mission start
+dev:performClickableAction(deviceCommands.Compartment, -1, true)		-- close compartment at mission start
 
 end
 

@@ -1,82 +1,154 @@
-dofile(LockOn_Options.script_path.."command_defs.lua")
-dofile(LockOn_Options.script_path.."devices.lua")
+dofile(LockOn_Options.script_path .. "command_defs.lua")
+dofile(LockOn_Options.script_path .. "devices.lua")
 
-local update_time_step = 1/60
-make_default_activity(update_time_step)
-local dev = GetSelf()
 
---Clickables:
-dev:listen_command(device_commands.UCP_MENU)
-dev:listen_command(device_commands.UCP_1)
-dev:listen_command(device_commands.UCP_2)
-dev:listen_command(device_commands.UCP_3)
-dev:listen_command(device_commands.UCP_DAT)
-dev:listen_command(device_commands.UCP_SHIFT)
-dev:listen_command(device_commands.UCP_4)
-dev:listen_command(device_commands.UCP_5)
-dev:listen_command(device_commands.UCP_6)
-dev:listen_command(device_commands.UCP_0)
-dev:listen_command(device_commands.UCP_AMFM_ENT)
-dev:listen_command(device_commands.UCP_7)
-dev:listen_command(device_commands.UCP_8)
-dev:listen_command(device_commands.UCP_9)
-dev:listen_command(device_commands.UCP_L)
-dev:listen_command(device_commands.UCP_CLR)
-dev:listen_command(device_commands.UCP_Brightness)
+
+local updateTimeStep = 1/60 --Refresh rate of device script.
+make_default_activity(updateTimeStep)
+
+
+local UCP = GetSelf()
+
+
+UCP:listen_command(deviceCommands.UCP_MENU)
+UCP:listen_command(deviceCommands.UCP_1)
+UCP:listen_command(deviceCommands.UCP_2)
+UCP:listen_command(deviceCommands.UCP_3)
+UCP:listen_command(deviceCommands.UCP_DAT)
+UCP:listen_command(deviceCommands.UCP_SHIFT)
+UCP:listen_command(deviceCommands.UCP_4)
+UCP:listen_command(deviceCommands.UCP_5)
+UCP:listen_command(deviceCommands.UCP_6)
+UCP:listen_command(deviceCommands.UCP_0)
+UCP:listen_command(deviceCommands.UCP_AMFM_ENT)
+UCP:listen_command(deviceCommands.UCP_7)
+UCP:listen_command(deviceCommands.UCP_8)
+UCP:listen_command(deviceCommands.UCP_9)
+UCP:listen_command(deviceCommands.UCP_L)
+UCP:listen_command(deviceCommands.UCP_CLR)
+UCP:listen_command(deviceCommands.UCP_Brightness)
+UCP:listen_command(deviceCommands.UCP_Cursor)
 --TODO add the following keybinds:
-dev:listen_command(Keys.UCP_MENU)
-dev:listen_command(Keys.UCP_1)
-dev:listen_command(Keys.UCP_2)
-dev:listen_command(Keys.UCP_3)
-dev:listen_command(Keys.UCP_DAT)
-dev:listen_command(Keys.UCP_SHIFT)
-dev:listen_command(Keys.UCP_4)
-dev:listen_command(Keys.UCP_5)
-dev:listen_command(Keys.UCP_6)
-dev:listen_command(Keys.UCP_0)
-dev:listen_command(Keys.UCP_AMFM_ENT)
-dev:listen_command(Keys.UCP_7)
-dev:listen_command(Keys.UCP_8)
-dev:listen_command(Keys.UCP_9)
-dev:listen_command(Keys.UCP_L)
-dev:listen_command(Keys.UCP_CLR)
-dev:listen_command(Keys.UCP_Brightness)
+UCP:listen_command(keys.UCP_MENU)
+UCP:listen_command(keys.UCP_1)
+UCP:listen_command(keys.UCP_2)
+UCP:listen_command(keys.UCP_3)
+UCP:listen_command(keys.UCP_DAT)
+UCP:listen_command(keys.UCP_SHIFT)
+UCP:listen_command(keys.UCP_4)
+UCP:listen_command(keys.UCP_5)
+UCP:listen_command(keys.UCP_6)
+UCP:listen_command(keys.UCP_0)
+UCP:listen_command(keys.UCP_AMFM_ENT)
+UCP:listen_command(keys.UCP_7)
+UCP:listen_command(keys.UCP_8)
+UCP:listen_command(keys.UCP_9)
+UCP:listen_command(keys.UCP_L)
+UCP:listen_command(keys.UCP_CLR)
+UCP:listen_command(keys.UCP_Brightness)
+
+
+local UCPRow1 = get_param_handle("UCPRow1")
+local UCPRow2 = get_param_handle("UCPRow2")
+local UCPRow3 = get_param_handle("UCPRow3")
+local UCPRow4 = get_param_handle("UCPRow4")
+local UCPRow5 = get_param_handle("UCPRow5")
+local UCPRow6 = get_param_handle("UCPRow6")
+
+local desiredHMDBrightness = get_param_handle("desiredHMDBrightness")
+
+
+local menu = 0
+local arrowRow = 0
+
+local tempHMDBrightness = 0
+
 
 
 function post_initialize()
-	--get_param_handle("UCP_BRIGHTNESS"):set(get_param_handle("LD_BRIGHTNESS"):get())
-	
-	dev:performClickableAction(device_commands.UCP_Brightness, get_param_handle("LD_BRIGHTNESS"):get(), true)
+	UCP:performClickableAction(deviceCommands.UCP_Brightness, get_param_handle("LD_BRIGHTNESS"):get(), true)
 
 
 
-	get_param_handle("UCP_ROW1"):set("121750A")
-	get_param_handle("UCP_ROW2"):set("XXXXXXXX")
-	get_param_handle("UCP_ROW3"):set("121500A")
-	get_param_handle("UCP_ROW4"):set(" ")
-	get_param_handle("UCP_ROW5"):set("MASTR 10")
+	UCPRow1:set("121750A ")
+	UCPRow2:set("XXXXXXXX")
+	UCPRow3:set("121500A ")
+	UCPRow4:set("        ")
+	UCPRow5:set("MASTR 10")
+	UCPRow6:set("--------")
 
 
 
-
-
-
-
-
+	tempHMDBrightness = desiredHMDBrightness:get()
 end
 
+function update()
+	
+end
 
+function SetCommand(command, value)
+	if command == deviceCommands.UCP_DAT and menu ~= 1 then
+		menu = 1
+		UCPRow1:set("HMD     ")
+		UCPRow2:set(" BRIGHT ")
+		UCPRow3:set(" DIM    ")
+		UCPRow4:set("        ")
+		UCPRow5:set("        ")
+		UCPRow6:set("        ")
 
-function SetCommand(command,value) -- Post initialize gets called once on mission start. SetCommand gets called when ever there is a button clicked
+		addArrowToRow(UCPRow2)
+		arrowRow = 2
+	end
+
+	if command == deviceCommands.UCP_Cursor then
+		if menu == 1 then
+			if arrowRow == 2 then
+				removeArrowToRow(UCPRow2)
+				addArrowToRow(UCPRow3)
+				arrowRow = 3
+			elseif arrowRow == 3 then
+				removeArrowToRow(UCPRow3)
+				addArrowToRow(UCPRow2)
+				arrowRow = 2
+			end
+		end
+	end
+
+	if command == deviceCommands.UCP_AMFM_ENT then
+		if menu == 1 then
+			if arrowRow == 2 then
+				if desiredHMDBrightness:get() == 0 then
+					desiredHMDBrightness:set(0.125)
+				else
+					tempHMDBrightness = desiredHMDBrightness:get() * 2
+					desiredHMDBrightness:set(tempHMDBrightness <= 1 and tempHMDBrightness or 1)
+				end
+			elseif arrowRow == 3 then
+				tempHMDBrightness = desiredHMDBrightness:get() * 0.5
+				desiredHMDBrightness:set(tempHMDBrightness >= 0.125 and tempHMDBrightness or 0)
+			end
+		end
+	end
+
+	if command == deviceCommands.UCP_MENU then
+		menu = 0
+		UCPRow1:set("121750A ")
+		UCPRow2:set("XXXXXXXX")
+		UCPRow3:set("121500A ")
+		UCPRow4:set("        ")
+		UCPRow5:set("MASTR 10")
+		UCPRow6:set("--------")
+	end
+
 -------------------------------------------------------
 --Test Functions
 --print_message_to_user(command)
 -------------------------------------------------------	
-	if command == device_commands.UCP_L then
+	if command == deviceCommands.UCP_L then
 		dispatch_action(OP_PHASES, 10060)
 	end
 
-	if command == (device_commands.UCP_Brightness) then
+	if command == (deviceCommands.UCP_Brightness) then
 		get_param_handle("UCP_BRIGHTNESS"):set(value)
 		--print_message_to_user(value)
 
@@ -84,5 +156,17 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 
 
 end
+
+
+function addArrowToRow(row)
+	row:set("-" .. row:get().sub(row:get(), 2, 8))
+	print_message_to_user(row:get().sub(row:get(), 2, 8))
+end
+
+function removeArrowToRow(row)
+	row:set(" " .. row:get().sub(row:get(), 2, 8))
+end
+
+
 
 need_to_be_closed = false

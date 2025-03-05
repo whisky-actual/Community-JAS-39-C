@@ -17,7 +17,7 @@ local FONT_SIZE = 0.64
 TAN_LD_MASTER 					= CreateElement "ceSimple"
 TAN_LD_MASTER.init_pos			= {0,0}
 TAN_LD_MASTER.name				= create_guid_string()
-TAN_LD_MASTER.element_params 	= {"LD_EMGY_MODE", "MAINPOWER"}
+TAN_LD_MASTER.element_params 	= {"LD_EMGY_MODE", "mainpower"}
 TAN_LD_MASTER.controllers    	= {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_LD_MASTER)
 
@@ -114,7 +114,7 @@ Mach_indicator.init_pos 			= {0, -0.04}
 Mach_indicator.alignment 			= "LeftCenter"
 Mach_indicator.stringdefs 			= mfd_strdefs_digit
 Mach_indicator.formats 				= {"%0.0f","%s"}
-Mach_indicator.element_params 		= {"MACH_B"}
+Mach_indicator.element_params 		= {"machDecimals"}
 Mach_indicator.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 3, 99.5}}
 AddElement(Mach_indicator)
 
@@ -128,7 +128,7 @@ Mach_indicator2.init_pos 			= {-0.068, -0.04}
 Mach_indicator2.alignment 			= "LeftCenter"
 Mach_indicator2.stringdefs 			= mfd_strdefs_digit
 Mach_indicator2.formats 			= {"%0.2f","%s"}
-Mach_indicator2.element_params 		= {"MACH_A"}
+Mach_indicator2.element_params 		= {"machWhole"}
 Mach_indicator2.controllers 		= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 0.995, 3}}
 AddElement(Mach_indicator2)
 
@@ -264,7 +264,7 @@ AOA_bar.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
 AOA_bar.level           = MFD_DEFAULT_LEVEL + 1
 AOA_bar.init_pos		= {0.035, -0.625}
 AOA_bar.parent_element	= AOA_ladder.name
-AOA_bar.element_params  = {"CUR_AOA"}
+AOA_bar.element_params  = {"AoA"}
 AOA_bar.controllers	 = {{"move_up_down_using_parameter",0, 0.00165}}
 AddElement2(AOA_bar)
 
@@ -757,15 +757,15 @@ Add(LDP_Background_Boost)
 --Auto throttle on/off indicator
 
 local Auto_throttle_ind = add_text("AT", -0.92, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_ind.element_params  = {"AUTOTHROTTLE_ONOFF"}
+Auto_throttle_ind.element_params  = {"ATState"}
 Auto_throttle_ind.controllers     = {{"parameter_in_range" ,0,0.9,1.1}  }
 --Auto throttle mode 12 AoA
 local Auto_throttle_mode12 = add_text("12", -0.82, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_mode12.element_params  = {"AUTOTHROTTLE_MODE"}
+Auto_throttle_mode12.element_params  = {"ATMode"}
 Auto_throttle_mode12.controllers     = {{"parameter_in_range" ,0,0.4,0.6} }
 --Auto throttle mode 14 AoA
 local Auto_throttle_mode14 = add_text("14", -0.82, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_mode14.element_params  = {"AUTOTHROTTLE_MODE"}
+Auto_throttle_mode14.element_params  = {"ATMode"}
 Auto_throttle_mode14.controllers     = {{"parameter_in_range" ,0,0.9,1.1} }
 
 local xcor = 0.022
@@ -834,7 +834,7 @@ local AD_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1745, 215, 1840 , 443, FONT_SIZ
 AD_BOX.name				= create_guid_string()
 AD_BOX.init_pos			= {0.9635-0.024, -0.60}
 AD_BOX.parent_element		= TAN_LD_MASTER.name
-AD_BOX.element_params 	= {"ALTITUDE_MODE"}
+AD_BOX.element_params 	= {"altMode"}
 AD_BOX.controllers   		= {{"parameter_compare_with_number",0, 1}}
 AddElement(AD_BOX)
 
@@ -848,7 +848,7 @@ local RALT_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_S
 RALT_BOX.name				= create_guid_string()
 RALT_BOX.init_pos			= {0.9140-0.025, -0.66}
 RALT_BOX.parent_element		= TAN_LD_MASTER.name
-RALT_BOX.element_params 	= {"ALTITUDE_MODE"}
+RALT_BOX.element_params 	= {"altMode"}
 RALT_BOX.controllers   		= {{"parameter_compare_with_number",0, 2}}
 AddElement(RALT_BOX)
 
@@ -968,7 +968,7 @@ local TRUE_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1950, 215, 2042 , 646, FONT_S
 TRUE_BOX.name				= create_guid_string()
 TRUE_BOX.init_pos			= {0.9575-0.0115, 1.102}
 TRUE_BOX.parent_element	= GEN_PAGE.name	
-TRUE_BOX.element_params = {"HEADING_MODE"}
+TRUE_BOX.element_params = {"headingMode"}
 TRUE_BOX.controllers    = {{"parameter_compare_with_number",0, 1}}
 AddElement(TRUE_BOX)
 
@@ -982,7 +982,7 @@ local MAG_BOX			= create_mfd_tex(NAV_WHEEL_BLACK, 1850, 215, 1945 , 555,FONT_SIZ
 MAG_BOX.name			= create_guid_string()
 MAG_BOX.init_pos		= {0.912-0.0125, 1.125}
 MAG_BOX.parent_element	= GEN_PAGE.name
-MAG_BOX.element_params = {"HEADING_MODE"}
+MAG_BOX.element_params = {"headingMode"}
 MAG_BOX.controllers    = {{"parameter_compare_with_number",0, 2}}
 AddElement(MAG_BOX)
 
