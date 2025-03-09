@@ -185,7 +185,7 @@ JAS_DWS_39_ARM =
     
     launcher =
     {
-        cluster = cluster_desc("Bomb_Other", wsType_Bomb_Cluster, 
+        cluster = cluster_desc("Bomb_Other", wsType_Bomb_Cluster, levParam),
         {
             scheme = 
             {
