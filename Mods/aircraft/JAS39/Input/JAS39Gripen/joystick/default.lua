@@ -42,10 +42,11 @@ ignore_features(res.keyCommands,{"dragchute"})
 {down = iCommandPlaneAutopilotOverrideOn, up = iCommandPlaneAutopilotOverrideOff, name = _('Autopilot override'), category = _('Autopilot')},
 ]]--
 join(res.keyCommands,{
+{down = keys.HMDToggle, up = keys.HMDToggle, name = _("HMD - Toggle"), category = _("Dashboard"), value_down = 1, value_up = 0}, 
 ---------------------------------------------
 -- GRIPEN BINDINGS --------------------------
 ---------------------------------------------
---{down = Keys.NoHotas, 																name = _('I dont have a Hotas'),    	   					category = _('Other')},
+--{down = keys.NoHotas, 																name = _('I dont have a Hotas'),    	   					category = _('Other')},
 ---------------------------------------------
 -- Systems ----------------------------------
 ---------------------------------------------
@@ -72,8 +73,9 @@ join(res.keyCommands,{
 {down = iCommandAutoLockOnNextSurfaceTarget,											name = _('Auto lock on next surface target'),				category = _('General')},
 {down = iCommandAutoLockOnPreviousSurfaceTarget, 										name = _('Auto lock on previous surface target'),			category = _('General')},
 -- Other 										
-{down = Keys.SeatEject,	               													name = _('Eject'), 			  								category = _('General')}, 
-{down = Keys.CanopyLever,	               												name = _('Canopy'),                    			  			category = _('General')},
+{down = keys.SeatEject,	               													name = _('Eject'), 			  								category = _('General')}, 
+{down = keys.CanopyLever,	               												name = _('Canopy'),                    			  			category = _('General')},
+{combos = {{key = 'H', reformers = {'LCtrl'}}},     down = keys.HUDDeclutt,                                   name = _('HUD Declutt - Toggle'),                       category = _('UCP')}, 
 {down = iCommandPlaneWingtipSmokeOnOff,													name = _('Smoke'),											category = _('General')},
 -- Systems Su33
 --{down = iCommandPlaneHook, 															name = _('Tail Hook'), 										category = _('General')},
@@ -86,12 +88,12 @@ join(res.keyCommands,{
 -- Stick ------------------------------------
 ---------------------------------------------
 -- Flight Controls Gripen						
-{pressed = Keys.GripenPlaneUpStart,				up = Keys.GripenPlaneUpStop,			name = _('Aircraft Pitch Down'),							category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
-{pressed = Keys.GripenPlaneDownStart,			up = Keys.GripenPlaneDownStop,			name = _('Aircraft Pitch Up'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
-{pressed = Keys.GripenPlaneLeftStart,			up = Keys.GripenPlaneLeftStop,			name = _('Aircraft Bank Left'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
-{pressed = Keys.GripenPlaneRightStart,			up = Keys.GripenPlaneRightStop,			name = _('Aircraft Bank Right'),							category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
-{pressed = Keys.GripenPlaneLeftRudderStart,		up = Keys.GripenPlaneLeftRudderStop,	name = _('Aircraft Rudder Left'),							category = {_('Flight Control')}},
-{pressed = Keys.GripenPlaneRightRudderStart,	up = Keys.GripenPlaneRightRudderStop,	name = _('Aircraft Rudder Right'),							category = {_('Flight Control')}},
+{pressed = keys.GripenPlaneUpStart,				up = keys.GripenPlaneUpStop,			name = _('Aircraft Pitch Down'),							category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
+{pressed = keys.GripenPlaneDownStart,			up = keys.GripenPlaneDownStop,			name = _('Aircraft Pitch Up'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
+{pressed = keys.GripenPlaneLeftStart,			up = keys.GripenPlaneLeftStop,			name = _('Aircraft Bank Left'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
+{pressed = keys.GripenPlaneRightStart,			up = keys.GripenPlaneRightStop,			name = _('Aircraft Bank Right'),							category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
+{pressed = keys.GripenPlaneLeftRudderStart,		up = keys.GripenPlaneLeftRudderStop,	name = _('Aircraft Rudder Left'),							category = {_('Flight Control')}},
+{pressed = keys.GripenPlaneRightRudderStart,	up = keys.GripenPlaneRightRudderStop,	name = _('Aircraft Rudder Right'),							category = {_('Flight Control')}},
 -- Trim Controls						
 {pressed = iCommandPlaneTrimUp,					up = iCommandPlaneTrimStop,				name = _('Trim: Nose Up'),									category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
 {pressed = iCommandPlaneTrimDown,				up = iCommandPlaneTrimStop,				name = _('Trim: Nose Down'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
@@ -100,10 +102,10 @@ join(res.keyCommands,{
 {pressed = iCommandPlaneTrimLeftRudder,		 	up = iCommandPlaneTrimStop,				name = _('Trim: Rudder Left'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
 {pressed = iCommandPlaneTrimRightRudder,	    up = iCommandPlaneTrimStop, 			name = _('Trim: Rudder Right'),								category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
 -- Weapons						
-{down = Keys.Trigger,	     					up = Keys.Trigger,      				name = _('Trigger'),      									category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
-{down = Keys.TriggerSafe,	 															name = _('Trigger Safe - Toggle'), 							category = {_('Stick'), _('HOTAS')}},
-{up = Keys.TriggerSafeHold,																name = _('Trigger Safe - Hold'), 							category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
-{down = Keys.CannonMode,	 															name = _('Cannon Mode'), 									category = {_('Stick'), _('HOTAS')}},
+{down = keys.Trigger,	     					up = keys.Trigger,      				name = _('Trigger'),      									category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
+{down = keys.TriggerSafe,	 															name = _('Trigger Safe - Toggle'), 							category = {_('Stick'), _('HOTAS')}},
+{down = keys.triggerSafeHold,		            up = keys.triggerSafeHold,              name = _('Trigger Safe - Hold'), 	                        category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
+{down = keys.CannonMode,	 															name = _('Cannon Mode'), 									category = {_('Stick'), _('HOTAS')}},
 -- FC3 Weapons                                                                       
 {down = iCommandPlaneSalvoOnOff, 														name = _('Salvo Mode'), 									category = {_('Stick'), _('HOTAS')}},
 {down = iCommandChangeRippleQuantity, 													name = _('Ripple Quantity Select/SPPU select'), 			category = {_('Stick'), _('HOTAS')}},
@@ -155,32 +157,33 @@ join(res.keyCommands,{
 {down = iCommandPlaneChangeTarget,														name = _('Next Waypoint, Airfield Or Target'),				category = {_('Throttle Quadrant'), _('HOTAS'), _('Sensors')}},
 {down = iCommandPlaneUFC_STEER_DOWN,													name = _('Previous Waypoint, Airfield Or Target'), 			category = {_('Throttle Quadrant'), _('HOTAS'), _('Sensors')}},
 -- Countermeasures						
-{down = Keys.CountermeasureRelease,	 													name = _('Countermeasure Dispense'), 						category = {_('Throttle Grip'), _('HOTAS')}},
+{down = keys.CountermeasureRelease,	 													name = _('Countermeasure Dispense'), 						category = {_('Throttle Grip'), _('HOTAS')}},
 {down = iCommandActiveJamming,															name = _('ECM'), 											category = {_('Throttle Grip'), _('HOTAS')}},--136
 -- Throttle Gripen									
-{pressed = Keys.GripenThrottleIncrease,			up = Keys.GripenThrottleStop,  			name = _('Throttle Up'),									category = {_('Throttle Grip'), _('HOTAS')}},
-{pressed = Keys.GripenThrottleDecrease,			up = Keys.GripenThrottleStop,  			name = _('Throttle Down'),									category = {_('Throttle Grip'), _('HOTAS')}},
+{pressed = keys.GripenThrottleIncrease,			up = keys.GripenThrottleStop,  			name = _('Throttle Up'),									category = {_('Throttle Grip'), _('HOTAS')}},
+{pressed = keys.GripenThrottleDecrease,			up = keys.GripenThrottleStop,  			name = _('Throttle Down'),									category = {_('Throttle Grip'), _('HOTAS')}},
 {down = AUTOTHROTTLE,																	name = _('Autothrottle - Toggle'), 							category = {_('Throttle Grip'), _('HOTAS'), _('Autopilot')}},			
 {down = ATAOA_1214,																		name = _('Autothrottle - Toggle AoA 12/14'),				category = {_('Throttle Grip'), _('HOTAS'), _('Autopilot')}},			
 -- Throttle FC3									
-{down = Keys.ThrottleStop,	               												name = _('Throttle Stop'),									category = {_('Throttle Grip'), _('HOTAS')},			 	value_down =  1.0,		value_up = 0.0},
+{down = keys.ThrottleStop,	               												name = _('Throttle Stop'),									category = {_('Throttle Grip'), _('HOTAS')},			 	value_down =  1.0,		value_up = 0.0},
 {down = iCommandPlaneAUTIncreaseRegime,													name = _('Throttle Step Up'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
 {down = iCommandPlaneAUTDecreaseRegime,													name = _('Throttle Step Down'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
 -- Airbrakes									
-{down = iCommandPlaneAirBrake,															name = _('Airbrake'),										category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
-{down = iCommandPlaneAirBrakeOn,														name = _('Airbrake On'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
-{down = iCommandPlaneAirBrakeOff,														name = _('Airbrake Off'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
+{down = keys.PlaneAirBrake,																name = _('Airbrake Toggle'),										category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
+
+{down = keys.PlaneAirBrakeOn,														name = _('Airbrake On'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
+{down = keys.PlaneAirBrakeOff,														name = _('Airbrake Off'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
 ---------------------------------------------						
 -- Left Lower Pannel ------------------------						
 ---------------------------------------------						
 -- Ligths						
-{down = Keys.TaxiLights,	               												name = _('Taxi Lights'), 			  						category = _('Left Lower Pannel')},
-{down = Keys.LandingTaxiLightsOff,	               										name = _('Landing and Taxi Lights Off'), 					category = _('Left Lower Pannel')},
-{down = Keys.LandingLights,	               												name = _('Landing Lights'), 			  					category = _('Left Lower Pannel')},
-{down = Keys.CovertLights,	               												name = _('Covert Lights'), 			  						category = _('Left Lower Pannel')},	
+{down = keys.TaxiLights,	               												name = _('Taxi Lights'), 			  						category = _('Left Lower Pannel')},
+{down = keys.LandingTaxiLightsOff,	               										name = _('Landing and Taxi Lights Off'), 					category = _('Left Lower Pannel')},
+{down = keys.LandingLights,	               												name = _('Landing Lights'), 			  					category = _('Left Lower Pannel')},
+{down = keys.CovertLights,	               												name = _('Covert Lights'), 			  						category = _('Left Lower Pannel')},	
 -- AAR                                                                                                                                  			   
-{down = Keys.AARProbeCover,	               												name = _('AAR Probe Cover'), 			  					category = _('Left Lower Pannel')},
-{down = Keys.AARProbe,	               													name = _('AAR Probe')	, 			  						category = _('Left Lower Pannel')}, 	
+{down = keys.AARProbeCover,	               												name = _('AAR Probe Cover'), 			  					category = _('Left Lower Pannel')},
+{down = keys.AARProbe,	               													name = _('AAR Probe')	, 			  						category = _('Left Lower Pannel')}, 	
 -- RWR									
 {down = iCommandChangeRWRMode, 				  											name = _('RWR/SPO Mode Select'), 							category = _('Left Lower Pannel')},
 {down = iCommandPlaneThreatWarnSoundVolumeDown, 										name = _('RWR/SPO Sound Signals Volume Down'), 				category = _('Left Lower Pannel')},
@@ -188,9 +191,9 @@ join(res.keyCommands,{
 ---------------------------------------------						
 -- Left Control Pannel ----------------------						
 ---------------------------------------------						
-{down = Keys.GearUp,	    				 											name = _('Landing Gear Up'),                    			category = _('Left Control Pannel')},
-{down = Keys.GearDown,                    												name = _('Landing Gear Down'),                  			category = _('Left Control Pannel')},
-{down = Keys.Start,	                			up = Keys.Start,		            	name = _('Engine Start'), 									category = _('Left Control Pannel'), value_down =  1.0, value_up = 0.0},
+{down = keys.GearUp,	    				 											name = _('Landing Gear Up'),                    			category = _('Left Control Pannel')},
+{down = keys.GearDown,                    												name = _('Landing Gear Down'),                  			category = _('Left Control Pannel')},
+{down = keys.Start,	                			up = keys.Start,		            	name = _('Engine Start'), 									category = _('Left Control Pannel'), value_down =  1.0, value_up = 0.0},
 ---------------------------------------------						
 -- Instrument Panel -------------------------						
 ---------------------------------------------						
@@ -201,60 +204,60 @@ join(res.keyCommands,{
 -- Other						
 {down = iCommandPlaneResetMasterWarning,												name = _('Audible Warning Reset'),							category = _('Instrument Panel')},
 -- Left Display (LD)
-{down = Keys.LDSK_1, 		     														name = _('LD Softkey 1'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_2, 		     														name = _('LD Softkey 2'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_3, 		     														name = _('LD Softkey 3'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_4, 		     														name = _('LD Softkey 4'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_5, 		     														name = _('LD Softkey 5'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_6, 		     														name = _('LD Softkey 6'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_7, 		     														name = _('LD Softkey 7'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},  
-{down = Keys.LDSK_8, 		     														name = _('LD Softkey 8'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_9, 		     														name = _('LD Softkey 9'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_10,		     														name = _('LD Softkey 10'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_11,		     														name = _('LD Softkey 11'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_12,		     														name = _('LD Softkey 12'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_13,		     														name = _('LD Softkey 13'),									category = {_('Instrument Panel'), _('Left Display (LD)')}}, 
-{down = Keys.LDSK_14,		     														name = _('LD Softkey 14'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_15,		     														name = _('LD Softkey 15'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_16,		     														name = _('LD Softkey 16'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_17,		     														name = _('LD Softkey 17'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_18,		     														name = _('LD Softkey 18'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_19,		     														name = _('LD Softkey 19'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LDSK_20,		     														name = _('LD Softkey 20'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LD_Brightness_Up,   														name = _('LD Brightness +'),								category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LD_Brightness_Down, 														name = _('LD Brightness -'),								category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LD_Contrast_Up,     														name = _('LD Contrast +'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
-{down = Keys.LD_Contrast_Down,   														name = _('LD Contrast -'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_1, 		     														name = _('LD Softkey 1'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_2, 		     														name = _('LD Softkey 2'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_3, 		     														name = _('LD Softkey 3'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_4, 		     														name = _('LD Softkey 4'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_5, 		     														name = _('LD Softkey 5'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_6, 		     														name = _('LD Softkey 6'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_7, 		     														name = _('LD Softkey 7'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},  
+{down = keys.LDSK_8, 		     														name = _('LD Softkey 8'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_9, 		     														name = _('LD Softkey 9'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_10,		     														name = _('LD Softkey 10'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_11,		     														name = _('LD Softkey 11'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_12,		     														name = _('LD Softkey 12'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_13,		     														name = _('LD Softkey 13'),									category = {_('Instrument Panel'), _('Left Display (LD)')}}, 
+{down = keys.LDSK_14,		     														name = _('LD Softkey 14'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_15,		     														name = _('LD Softkey 15'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_16,		     														name = _('LD Softkey 16'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_17,		     														name = _('LD Softkey 17'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_18,		     														name = _('LD Softkey 18'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_19,		     														name = _('LD Softkey 19'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LDSK_20,		     														name = _('LD Softkey 20'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LD_Brightness_Up,   														name = _('LD Brightness +'),								category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LD_Brightness_Down, 														name = _('LD Brightness -'),								category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LD_Contrast_Up,     														name = _('LD Contrast +'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
+{down = keys.LD_Contrast_Down,   														name = _('LD Contrast -'),									category = {_('Instrument Panel'), _('Left Display (LD)')}},
 -- Center Display (CD)														
-{down = Keys.CDSK_1, 			 														name = _('CD Softkey 1'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},	
-{down = Keys.CDSK_2, 			 														name = _('CD Softkey 2'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_3, 			 														name = _('CD Softkey 3'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_4, 			 														name = _('CD Softkey 4'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_5, 			 														name = _('CD Softkey 5'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_6, 			 														name = _('CD Softkey 6'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_7, 			 														name = _('CD Softkey 7'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},                     
-{down = Keys.CDSK_8, 			 														name = _('CD Softkey 8'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_9, 			 														name = _('CD Softkey 9'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_10,			 														name = _('CD Softkey 10'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_11,			 														name = _('CD Softkey 11'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_12,			 														name = _('CD Softkey 12'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_13,			 														name = _('CD Softkey 13'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},                   
-{down = Keys.CDSK_14,			 														name = _('CD Softkey 14'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_15,			 														name = _('CD Softkey 15'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_16,			 														name = _('CD Softkey 16'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_17,			 														name = _('CD Softkey 17'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_18,			 														name = _('CD Softkey 18'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_19,			 														name = _('CD Softkey 19'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CDSK_20,			 														name = _('CD Softkey 20'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CD_Brightness_Up,	 														name = _('CD Brightness +'), 								category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CD_Brightness_Down, 														name = _('CD Brightness -'),								category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CD_Contrast_Up, 	 														name = _('CD Contrast +'), 									category = {_('Instrument Panel'), _('Center Display (CD)')}},
-{down = Keys.CD_Contrast_Down,   														name = _('CD Contrast -'), 									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_1, 			 														name = _('CD Softkey 1'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},	
+{down = keys.CDSK_2, 			 														name = _('CD Softkey 2'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_3, 			 														name = _('CD Softkey 3'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_4, 			 														name = _('CD Softkey 4'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_5, 			 														name = _('CD Softkey 5'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_6, 			 														name = _('CD Softkey 6'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_7, 			 														name = _('CD Softkey 7'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},                     
+{down = keys.CDSK_8, 			 														name = _('CD Softkey 8'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_9, 			 														name = _('CD Softkey 9'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_10,			 														name = _('CD Softkey 10'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_11,			 														name = _('CD Softkey 11'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_12,			 														name = _('CD Softkey 12'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_13,			 														name = _('CD Softkey 13'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},                   
+{down = keys.CDSK_14,			 														name = _('CD Softkey 14'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_15,			 														name = _('CD Softkey 15'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_16,			 														name = _('CD Softkey 16'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_17,			 														name = _('CD Softkey 17'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_18,			 														name = _('CD Softkey 18'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_19,			 														name = _('CD Softkey 19'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CDSK_20,			 														name = _('CD Softkey 20'),									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CD_Brightness_Up,	 														name = _('CD Brightness +'), 								category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CD_Brightness_Down, 														name = _('CD Brightness -'),								category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CD_Contrast_Up, 	 														name = _('CD Contrast +'), 									category = {_('Instrument Panel'), _('Center Display (CD)')}},
+{down = keys.CD_Contrast_Down,   														name = _('CD Contrast -'), 									category = {_('Instrument Panel'), _('Center Display (CD)')}},
 -- Right Display (RD)																					
-{down = Keys.RD_Brightness_Up,   														name = _('RD Brightness +'), 								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
-{down = Keys.RD_Brightness_Down, 														name = _('RD Brightness -'), 								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
-{down = Keys.RD_Contrast_Up,     														name = _('RD Contrast +'),   								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
-{down = Keys.RD_Contrast_Down,   														name = _('RD Contrast -'),   								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
+{down = keys.RD_Brightness_Up,   														name = _('RD Brightness +'), 								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
+{down = keys.RD_Brightness_Down, 														name = _('RD Brightness -'), 								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
+{down = keys.RD_Contrast_Up,     														name = _('RD Contrast +'),   								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
+{down = keys.RD_Contrast_Down,   														name = _('RD Contrast -'),   								category = {_('Instrument Panel'), _('Right  Display (RD)')}},
 ---------------------------------------------
 -- Upfront Control Panel (UCP) --------------
 ---------------------------------------------
@@ -274,13 +277,13 @@ join(res.keyCommands,{
 ---------------------------------------------									
 -- Upper Right Pannel -----------------------									
 ---------------------------------------------									
-{down = Keys.Main,	                									 				name = _('Main Power'), 		  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
-{down = Keys.Fuel,	                									 				name = _('Fuel'), 			  								category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
-{down = Keys.APU,	                									 				name = _('APU'), 				  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
-{down = Keys.FuelCover,	            									 				name = _('Fuel Cover'), 		  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
-{down = Keys.MassSafe,	                       							 				name = _('MASS Safe'), 		  								category = _('Upper Right Pannel')},			 	
-{down = Keys.MassStby,	              									 				name = _('MASS Standby'), 	  								category = _('Upper Right Pannel')},			 	
-{down = Keys.MassLive,	              									 				name = _('MASS Live'), 		  								category = _('Upper Right Pannel')},
+{down = keys.Main,	                									 				name = _('Main Power'), 		  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
+{down = keys.Fuel,	                									 				name = _('Fuel'), 			  								category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
+{down = keys.APU,	                									 				name = _('APU'), 				  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
+{down = keys.FuelCover,	            									 				name = _('Fuel Cover'), 		  							category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
+{down = keys.MassSafe,	                       							 				name = _('MASS Safe'), 		  								category = _('Upper Right Pannel')},			 	
+{down = keys.MassStby,	              									 				name = _('MASS Standby'), 	  								category = _('Upper Right Pannel')},			 	
+{down = keys.MassLive,	              									 				name = _('MASS Live'), 		  								category = _('Upper Right Pannel')},
 {down = iCommandPlaneJettisonFuelTanks,									 				name = _('Jettison Fuel Tanks'),							category = _('Upper Right Pannel')},
 {down = iCommandPlaneJettisonWeapons,up = iCommandPlaneJettisonWeaponsUp,				name = _('Weapons Jettison'),   							category = _('Upper Right Pannel')},
 })

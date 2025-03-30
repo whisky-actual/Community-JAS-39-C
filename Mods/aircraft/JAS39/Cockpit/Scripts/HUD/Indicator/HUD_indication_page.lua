@@ -36,9 +36,9 @@ local bore_mode_ind                                 = add_text_hud("BORE", -0.69
 bore_mode_ind.element_params                  = {"HUD_MODE"}
 bore_mode_ind.controllers                     = {{"parameter_in_range" ,0,3.9,4.1} }
 
-local hmd_mode_ind                                         = add_text_hud("HMD", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-hmd_mode_ind.element_params                  = {"HUD_MODE"}
-hmd_mode_ind.controllers                     = {{"parameter_in_range" ,0,7.9,8.1} }
+local HMDMode_ind                                         = add_text_hud("HMD", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+HMDMode_ind.element_params                  = {"HUD_MODE"}
+HMDMode_ind.controllers                     = {{"parameter_in_range" ,0,7.9,8.1} }
 
 local lngt_mode_ind                                 = add_text_hud("LNGT", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
 lngt_mode_ind.element_params                  = {"HUD_MODE"}

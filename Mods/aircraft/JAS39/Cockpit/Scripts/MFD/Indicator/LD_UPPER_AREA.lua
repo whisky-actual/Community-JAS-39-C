@@ -398,7 +398,7 @@ DEF_PAGE.controllers    = {{"parameter_compare_with_number",0, 2}}
 AddElement(DEF_PAGE)
 
 
-hsi_mask = AddCircle(0, 0.55, 0.58, 9, true)
+--[[hsi_mask = AddCircle(0, 0.55, 0.58, 9, true)
 hsi_mask.h_clip_relation = h_clip_relations.INCREASE_IF_LEVEL  
 hsi_mask.level			 = MFD_DEFAULT_LEVEL  -1
 hsi_mask.isvisible		 = false
@@ -432,7 +432,7 @@ compass_indicator.parent_element = DEF_PAGE.name
 compass_indicator.init_pos		 = {0, 0.55}
 compass_indicator.element_params = {"HEADINGCOMPASS",}
 compass_indicator.controllers	 = {{"rotate_using_parameter" ,0, math.rad(360)/360},}
-AddElement(compass_indicator)
+AddElement(compass_indicator)--]]
 
 --CHAFF
 CHAFF_COUNTER_MASK			= create_mfd_tex(AAR_LDP_BLACK, 90, 27, 122, 178,1.3)

@@ -27,6 +27,12 @@ RWREWR:set(1)
 RWRSEA:set(1)
 RWRMIS:set(1)
 
+TYPEPlane = 1
+TYPESearchRadar = 2
+TYPEEWR = 3
+TYPESEA = 4
+TYPEMissile = 5
+
 device_timer_dt = 0.0166
 MaxThreats = 20
 EmitterLiveTime = 10.0
@@ -145,12 +151,10 @@ for ia = 1, MaxThreats do
 
         unit_type_ut = get_param_handle("RWR_CONTACT_" .. ia .. "_UT"),
 
-        hdg = get_param_handle("RWR_CONTACT" .. i .. "HDG"),
+        hdg = get_param_handle("RWR_CONTACT" .. i .. "HDG")
 
-        elevation_hud = get_param_handle("RWR_CONTACT" .. i .. "ELEVATION_HUD"),
-        azimuth_hud = get_param_handle("RWR_CONTACT" .. i .. "AZIMUTH_HUD")
-
-    }
+		medium = get_param_handle("RWR_CONTACT" .. i .. "Medium")
+}
 end
 
 -- DIFFERENCES--
@@ -164,6 +168,12 @@ end
 
 ---------------------------------
 function update()
+	get_param_handle("TRWRContact_01_Azimuth"):set(math.rad(0))
+	get_param_handle("TRWRContact_01_Power"):set(1) --min 0.375
+	get_param_handle("TRWRContact_01_Threat"):set(0)
+	get_param_handle("TRWRContact_01_Lock"):set(0)
+	get_param_handle("TRWRContact_01_Name"):set("JAS")
+	get_param_handle("TRWRContact_01_Signal"):set(3)
 
     prep_contacts()
     -- ADDED--------------------------
@@ -197,8 +207,6 @@ function prep_contacts()
         local tmp_rwr_power = 0
         local tmp_nb_contacts = 0
         local tmp_gen_type = 0
-        local tmp_pitch = 0
-        local tmp_roll = 0
         local tmp_power = 0
         local tmp_elevation = 0
         local tmp_azimuth = 0
@@ -284,23 +292,6 @@ function prep_contacts()
             end
         end
 
-        tmp_pitch = -(math.deg(sensor_data.getPitch()))
-        tmp_roll = sensor_data.getRoll()
-        tmp_power = rwr[i].power_h:get()
-        tmp_elevation = rwr[i].elevation_h:get()
-        tmp_azimuth = rwr[i].azimuth_h:get()
-
-        rwr[i].elevation_hud:set(rwr[i].elevation_h:get() - tmp_roll)
-        rwr[i].azimuth_hud:set(rwr[i].azimuth_h:get() - tmp_pitch)
-
-        local myhdg = math.deg(sensor_data.getHeading())
-        local hdg = (360 / tmp_azimuth) + myhdg
-        if hdg < 0 then
-            hdg = 360 + hdg
-        end
-        hdg = hdg % 360
-        rwr[i].hdg:set(hdg)
-
         local tmp = 0
         local tmp_power = rwr[i].power_h:get()
 
@@ -335,5 +326,13 @@ function prep_contacts()
         else
             rwr[i].power_syn_h:set(tmp)
         end
+		
+		local genType = rwr[i].general_type_h:get()
+
+		if genType == TYPEPlane or genType == TYPEMissile then
+			rwr[i].medium:set(1)
+		else
+			rwr[i].medium:set(0)
+		end
     end
 end

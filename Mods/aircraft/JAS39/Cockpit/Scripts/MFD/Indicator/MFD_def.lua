@@ -44,7 +44,7 @@ materials["TAN_BACKGROUND"]	 = MakeMaterial(nil,materials["TAN_COLOR"])
 
 materials["DGREEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
 materials["RWRGEEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
-materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"])
+materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"]) --MakeMaterial(nil, 255*0.708375, 255*0.361306, 255*0.036889, 255)
 materials["RWRRED"]     = MakeMaterial(nil, materials["DBG_RED"])
 materials["RWRGREY"]     = MakeMaterial(nil, materials["DBG_GREY"])
 -------FONTS-------
@@ -55,6 +55,7 @@ BASE_COLOR  = {36,255,113,255}
 WHITE 		= {255,255,255,255}
 RED 		= {255,0,0,255}
 BLACK 		= {0,0,0,255}
+YELLOW      = {255, 194, 0, 255}
 lcpGREEN	= {50,255,50,255}
 ucpGREEN	= {50,255,50,255}
 HORIZON_LINE_GREEN = {10,100,10,255}
@@ -414,6 +415,7 @@ local Gripen_UCP_FONT =
 
 
 Gripen_Font_black  	= MakeFont(Gripen_Font, BLACK, "Gripen_Font_black")
+Gripen_Font_Yellow  = MakeFont(Gripen_Font, YELLOW, "Gripen_Font_Yellow") --black
 Gripen_Font_white  	= MakeFont(Gripen_Font, WHITE, "Gripen_Font_white")
 Gripen_Font_HL_Green  = MakeFont(Gripen_Font, HORIZON_LINE_GREEN, "Gripen_Font_Green_HL")
 Gripen_fontLCP = MakeFont(Gripen_LCP_FONT, lcpGREEN , "Gripen_Font_LCP")
@@ -429,6 +431,7 @@ fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_
 
 fonts["FONT_gripen"]   = {fontdescription["font_39"], 10, materials["DBG_BLACK"]}
 fonts["Gripen_Font_black"]  = Gripen_Font_black
+fonts["Gripen_Font_Yellow"]  = Gripen_Font_Yellow
 fonts["Gripen_Font_WHITE"]  = Gripen_Font_white
 fonts["Gripen_Font_HL_Green"]  = Gripen_Font_HL_Green
 fonts["Gripen_Font_LCP"]  = Gripen_fontLCP
@@ -915,6 +918,51 @@ function AddCircle_b(xpos, ypos, radius, border, fill, parent_element, color)
 	
 
 	return rec_parent
+end
+
+function set_oval(obj, radius_outer, radius_inner, arc, sides, oval_multiplier)
+	local verts    = {}
+	local inds     = {}
+	local solid    = radius_inner == nil or radius_inner == 0
+	local arc      = arc or 360
+	if    arc > 360 then arc = 360 end
+	local count    = sides or 32 
+	local delta    = math.rad(arc/count)
+
+	local min_i    = 1
+	local max_i    = count + 1
+	verts[1] = {0,0}
+	for i=min_i,max_i do
+		if solid then
+			verts[1 + i]      = { radius_outer * math.sin(delta *(i-1)),radius_outer * math.cos(delta *(i-1)) * oval_multiplier}
+			inds[3*(i-1) + 1] = 0
+			inds[3*(i-1) + 2] = i - 1 
+			inds[3*(i-1) + 3] = i 
+		else
+			verts[2*(i - 1) + 1] = { radius_outer * math.sin(delta *(i-1)), radius_outer * math.cos(delta *(i-1)) * oval_multiplier}
+			verts[2*(i - 1) + 2] = { radius_inner * math.sin(delta *(i-1)), radius_inner * math.cos(delta *(i-1)) * oval_multiplier}
+			
+			if i == max_i  then
+			  if arc == 360 then  
+				inds[6*(i-1) + 1] = 2*(i     - 1)
+				inds[6*(i-1) + 2] = 2*(min_i - 1)
+				inds[6*(i-1) + 3] = 2*(i     - 1) + 1 
+				inds[6*(i-1) + 4] = 2*(i     - 1) + 1
+				inds[6*(i-1) + 5] = 2*(min_i - 1)
+				inds[6*(i-1) + 6] = 2*(min_i - 1) + 1 
+			  end        
+			else 
+				inds[6*(i-1) + 1] = 2*(i - 1)
+				inds[6*(i-1) + 2] = 2*(i) 
+				inds[6*(i-1) + 3] = 2*(i - 1) + 1 
+				inds[6*(i-1) + 4] = 2*(i - 1) + 1
+				inds[6*(i-1) + 5] = 2*(i) 
+				inds[6*(i-1) + 6] = 2*(i)     + 1  
+			end
+		end
+	end
+	obj.vertices         = verts              
+	obj.indices          = inds
 end
 
 function add_text(text, posx, posy, pparent, font_mat, stringdefs, valign)

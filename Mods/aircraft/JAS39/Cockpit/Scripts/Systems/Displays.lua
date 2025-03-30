@@ -223,6 +223,8 @@ dev:listen_command(keys.CannonMode) -- Cannon
 
 local masterMode = get_param_handle("masterMode")
 masterMode:set(1)
+local HMDMode = get_param_handle("HMDMode")
+HMDMode:set(1)
 local RedHUD = 0
 
 dev:listen_command(87)	-- TGP on
@@ -756,6 +758,22 @@ if get_param_handle("mainpower"):get() == 1 then
 			CD_EWS_TOGGLE:set(0)
 		end
 	end
+
+	if command == 105 then
+		HMDMode:set(1)
+	  elseif command == 106 then
+		HMDMode:set(2)
+	  elseif command == 107 then
+		HMDMode:set(3)
+	  elseif command == 108 then
+		HMDMode:set(4)
+	  elseif command == 109 then
+		HMDMode:set(5)
+	  elseif command == 110 then
+		HMDMode:set(6)
+	  elseif command == 111 then
+		HMDMode:set(7)
+	  end
 	
 	if (command == 105) or (command == 106) or (command == 107) or (command == 108) or (command == 109) or (command == 110) then
 -- if fc3 hud mode is changed from a2g, reset all LDP-related values	

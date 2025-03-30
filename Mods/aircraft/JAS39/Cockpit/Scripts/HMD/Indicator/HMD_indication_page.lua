@@ -19,7 +19,7 @@ addHMDText(nil, {14}, "Mach", nil, nil, {"machDecimals"}, {{ctrl.inRange,0, 1, 9
 addHMDTextParam(nil, {17}, "Mach", nil, nil, {"machDecimals", "HMDBrightness"}, {{ctrl.inRange,0, 1, 99.5}, {ctrl.text,0}, {ctrl.opacity,1}}, nil, align.LC, {"%.0f"})
 
 
-addHMDText("GS", {-134, -26}, base, nil, nil, {"masterMode", "currentPhase", "HUDDeclutt"}, {{ctrl.inRange,0, -0.1, 1.1}, {ctrl.inRange,1, 6.9, 8.9}, {ctrl.compareNum,2, 0}}, "GS")
+addHMDText("GS", {-134, -26}, base, nil, nil, {"HMDMode", "currentPhase", "HUDDeclutt"}, {{ctrl.inRange,0, -0.1, 1.1}, {ctrl.inRange,1, 6.9, 8.9}, {ctrl.compareNum,2, 0}}, "GS")
 addHMDTextParam(nil, {34}, "GS", nil, nil, nil, nil, "txtGS", align.RC)
 
 
