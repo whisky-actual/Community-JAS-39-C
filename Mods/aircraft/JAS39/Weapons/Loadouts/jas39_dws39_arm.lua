@@ -327,7 +327,7 @@ JAS_DWS_39_ARM =
             type_name       = _("cluster"),
             cluster_scheme  = "AGM-154B_cluster",
         }
-        )
+        }
     },
 }
 
