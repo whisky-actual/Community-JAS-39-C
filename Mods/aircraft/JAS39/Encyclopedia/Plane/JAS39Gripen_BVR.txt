@@ -1,0 +1,85 @@
+JAS 39 C "Gripen A/A BVR"
+
+JAS39Gripen_BVR
+
+
+Designation: JAS 39C "Gripen"
+Type:            Strike Fighter 
+Developer:    JAS Industry Group
+Origin:          Sweeden
+Crew:            1
+
+Introduction:  June 1996
+Users:           Sweeden, South Africa, Brazil,
+                    Hungary, Thailand, UK, 
+				    and Czech Republic. 
+Produced:      1987–present
+Number built: 271+
+
+>>>=========================
+
+>>> DIMENSIONS
+
+Length    : 14.1 m
+Wingspan: 8.40 m
+Height     : 4.5 m
+Wing area: 30.00 m2
+
+>>>=========================
+
+>>> PERFORMANCE
+
+Empty weight  : 14,991 lb. 
+Max T/O weight: 30,865 lb.
+Fuel capacity   : 790 Gal. internal,
+                  920 Gal. external.
+Powerplant: 1 * turbofan Volvo RM12, 
+            12,000 lb dry; 18,100 with afterburner.
+
+Max. speed   : 1,328 Knots, Mach 2
+Combat range: 500 miles
+Ferry range    : 2,000 miles.
+Service ceiling: 50,000 ft.
+G limits        : +9 / -3 g
+Take-Off Run  : 1,312 ft.
+Landing Run   : 1,640 ft.
+
+>>>=========================
+
+>>> ARMAMENT (as simulated)
+
+Guns: 1× 27 mm Mauser 
+Hardpoints: 3, centerline 1,000 kg, 
+           wing pylons 500 kg each.
+           total external stores 1,620 kg		   
+
+Bombs: Conventional: Mk-82 / Mk-83 / M71
+       Laser Guided: GBU-12 / GBU-16 
+	   TV Guided: GBU-32 / GBU-38 / GBU-39 / GBU-49
+	   Gliding: GBU-31 / GBU-32 / GBU-38
+
+Cluster Bombs: DWS 39
+
+Rockets: M70B
+	   
+AG Missiles: Brimstone / SPEAR-3 / Maverick / MAR-1
+
+AS Missiles: RBS-15
+
+AA Missiles: A-Darter / ASRAAM / AIM-9 / IRIS-T / Python-5
+
+>>>=========================
+
+>>> SERVICE HISTORY
+
+On 1980 the Swedish Government launched a competition to find a Viggen successor, Saab and other major swedish companies joined and formed the consortium IG JAS, to develop a new multirole combat aircraft.
+
+The development contract was signed on June 1982 and the workshare was 65% Saab, 16% Ericsson, 15% Volvo-Aero and 4% FFV. On April 1983 the Swedish Air Force ordered a first batch of 30 aircrafts.
+
+Enngine tests began on 1984 and the first of five prototypes rolled out on April 1987. Severe problems with its fly-by-wire software delayed the first flight to December 1988. A prototype landing accident on February 1989 delayed the program still more. On August 1993 a second Gripen crash caused a suspension on the flight program until December 1993.
+
+
+
+
+
+(Data summarized from World Air Power Journal, Vol.20 - 1995)

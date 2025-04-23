@@ -33,7 +33,8 @@ LogBook =
 			name		= _("JAS 39 Gripen"),
 			type		= "JAS39Gripen",
 		},
-	},			
+	},		
+encyclopedia_path = current_mod_path..'/Encyclopedia',		
 InputProfiles =
 	{
 		["JAS39Gripen"] = current_mod_path .. '/Input/JAS39Gripen',

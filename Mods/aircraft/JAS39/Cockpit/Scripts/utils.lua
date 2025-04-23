@@ -166,3 +166,17 @@ function MoveControlSurface(State, Target, Increment)
 	end
 return State
 end
+
+
+
+function wrapValue(low, high, value)
+    local step = high - low
+
+    if value > high then
+        return low + ((value - high- 1) % step) + 1
+    elseif value < low then
+        return high - ((low - value - 1) % step) - 1
+    else
+        return value
+    end
+end

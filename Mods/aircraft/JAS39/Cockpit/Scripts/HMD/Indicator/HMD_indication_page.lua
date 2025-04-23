@@ -24,7 +24,7 @@ addHMDTextParam(nil, {34}, "GS", nil, nil, nil, nil, "txtGS", align.RC)
 
 
 
-addHMDSimpleLine(nil, {107}, nil, base, nil, nil, {"altitudeDeclutt"}, {{ctrl.compareNum,0, 0}}, nil, {{-15, 4.1}, {0, 0}, {-15, -4.1}})
+addHMDSimpleLine(nil, {107}, nil, base, nil, nil, {"altitudeDeclutt"}, {{ctrl.compareNum,0, 0}}, nil, {{-15, 4.1}, {0, 0}, {-15, -4.1}}) --Altitude index
 addHMDSimple("altBase", nil, nil, base, nil, nil, {"altitudeDeclutt", "altTape"}, {{ctrl.compareNum,0, 0}, {ctrl.moveY,1, -0.000175659}})
 addHMDBox("altMask", {132, 0}, nil, "altBase", hcr.rw, lvl.mask, {"altTape"}, {{ctrl.moveY,0, 0.000175659}}, 90, 64, matl.mask, true)
 

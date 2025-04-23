@@ -546,7 +546,7 @@ Guns = {
 			{
 				arg = 308,
 				arg_value = 0.5,
-				DisplayName = "1",
+				DisplayName = "1L",
   				use_full_connector_position = true,
 				connector = "Pylon1",	--Wing tip left
 			},
@@ -556,7 +556,7 @@ Guns = {
 			{
 				arg = 309,
 				arg_value = 0.5,
-				DisplayName = "2",
+				DisplayName = "2L",
 				use_full_connector_position = true,
 				connector = "Pylon2",	--Outer left
 			},
@@ -567,7 +567,7 @@ Guns = {
 			{
 				arg = 310,
 				arg_value = 0.5,
-				DisplayName = "3",
+				DisplayName = "3L",
 				use_full_connector_position = true,
 				connector = "Pylon3",	--inner left
 			},
@@ -577,7 +577,7 @@ Guns = {
 			{
 				arg = 313,
 				arg_value = 0,
-				DisplayName = "4",
+				DisplayName = "5",
 				use_full_connector_position = true,
 				connector = "Pylon6",		--Centerline
 			},
@@ -587,7 +587,7 @@ Guns = {
             {
 				arg = 315,
 				arg_value = 0,
-				DisplayName = "5",--6
+				DisplayName = "4",--6
             	use_full_connector_position = true,
 				connector = "Pylon7",		--cheek
 			},
@@ -597,7 +597,7 @@ Guns = {
 			{
 				arg = 316,
 				arg_value = 0.5,
-				DisplayName = "6",
+				DisplayName = "3R",
 				use_full_connector_position = true,
 				connector = "Pylon9",		--inner right
 			},
@@ -608,7 +608,7 @@ Guns = {
 			{
 				arg = 317,
 				arg_value = 0.5,
-				DisplayName = "7",
+				DisplayName = "2R",
 				use_full_connector_position = true,
 				connector = "Pylon10",		--outer right
 			},
@@ -618,7 +618,7 @@ Guns = {
 			{
 				arg = 318,
 				arg_value = 0.5,
-				DisplayName = "8",
+				DisplayName = "1R",
 				use_full_connector_position = true,
 				connector = "Pylon11",	--Wing tip right
 			},

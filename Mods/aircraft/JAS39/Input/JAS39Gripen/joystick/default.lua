@@ -166,8 +166,8 @@ join(res.keyCommands,{
 {down = ATAOA_1214,																		name = _('Autothrottle - Toggle AoA 12/14'),				category = {_('Throttle Grip'), _('HOTAS'), _('Autopilot')}},			
 -- Throttle FC3									
 {down = keys.ThrottleStop,	               												name = _('Throttle Stop'),									category = {_('Throttle Grip'), _('HOTAS')},			 	value_down =  1.0,		value_up = 0.0},
-{down = iCommandPlaneAUTIncreaseRegime,													name = _('Throttle Step Up'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
-{down = iCommandPlaneAUTDecreaseRegime,													name = _('Throttle Step Down'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
+--{down = iCommandPlaneAUTIncreaseRegime,													name = _('Throttle Step Up'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
+--{down = iCommandPlaneAUTDecreaseRegime,													name = _('Throttle Step Down'),								category = {_('Throttle Grip'), _('HOTAS'), _('Flight Control')}},
 -- Airbrakes									
 {down = keys.PlaneAirBrake,																name = _('Airbrake Toggle'),										category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
 
