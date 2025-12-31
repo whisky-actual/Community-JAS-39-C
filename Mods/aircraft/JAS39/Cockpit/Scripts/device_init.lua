@@ -46,6 +46,7 @@ creators[devices.UCP]     			    = {"avLuaDevice"			,LockOn_Options.script_path.
 creators[devices.RWR]  		   	   		= {"avSimpleRWR"			,LockOn_Options.script_path.."RWR/RWR_init.lua"}
 creators[devices.FC3]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/FC3.lua"}
 creators[devices.flightData]      = {"avLuaDevice"          ,LockOn_Options.script_path .. "Systems/Flight_Data.lua"}
+creators[devices.SHC]             = {"avLuaDevice", LockOn_Options.script_path .. "Systems/SHC.lua"}
 
 
 

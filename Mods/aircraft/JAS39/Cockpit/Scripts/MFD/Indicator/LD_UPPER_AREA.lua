@@ -28,15 +28,13 @@ TAN_Background.primitivetype 	= "triangles"
 TAN_Background.vertices	   		= { {-1.0 , 1.4 }, { 1.0,1.4}, { 1.0,-1.4}, {-1.0,-1.4}, }
 TAN_Background.indices			= {0, 1, 2, 0, 2, 3}
 TAN_Background.init_pos			= {0, 0, 0}
-TAN_Background.material			= MakeMaterial(nil,{230, 220, 140, 255})	--RGBA
+TAN_Background.material			= materials["MFDBeige"] -- MakeMaterial(nil,{230, 220, 140, 255})	--RGBA
 TAN_Background.parent_element	= TAN_LD_MASTER.name
 TAN_Background.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
 TAN_Background.level			= MFD_DEFAULT_LEVEL
 TAN_Background.change_opacity	= false
 TAN_Background.collimated 		= false
 TAN_Background.isvisible		= true
-TAN_Background.element_params 	= {"LD_BRIGHTNESS"}
-TAN_Background.controllers    	= {{"opacity_using_parameter", 0}}
 Add(TAN_Background)
 
 
@@ -73,7 +71,7 @@ add_text_param(0.695, 1.34, "HOURTIME", "%02.0f", Clockparent, mfd_strdefs_digit
 
 
 --===================================================================================================================================================================================
--- 			[GEN]PAGE, flight data display			{"opacity_using_parameter" ,1, 20}		"LD_BRIGHTNESS"
+-- 			[GEN]PAGE, flight data display
 --===================================================================================================================================================================================
 
 GEN_PAGE 			= CreateElement "ceSimple"
@@ -85,50 +83,89 @@ GEN_PAGE.controllers    	= {{"parameter_compare_with_number",0, 1}  }
 AddElement(GEN_PAGE)
 
 
--- Speedo
-local speedometer_kts			= create_mfd_tex_3k(MFD_ELEMENTS_PDD, 10, 10, 850, 844)
-speedometer_kts.name			= create_guid_string()
-speedometer_kts.init_pos		= {-0.55, 0.96}
-speedometer_kts.parent_element	= GEN_PAGE.name	
-AddElement(speedometer_kts)	
+-- Speedometer
+local Speedometer = MakeDial(-0.55, 0.96, 0.26 * 1.25, 0.1 * 1.25, 180, 540, .0075, true, 36, "mainpower", "SPEEDOMETER_IAS", 360, materials["BBLACK"], GEN_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))           -- 0, 1.3, 1.3, 200
 
+for i = -340, -40, 40 do
+	if i == -60 then
+		j = i + 25
+	else
+		j = i
+	end
+	Speedometer_Nums = add_text(math.floor(math.abs(i) / 40), -0.55 + 0.26 * math.cos(math.rad(j + 90)), 0.96 + 0.26 * math.sin(math.rad(j + 90)), GEN_PAGE, "Gripen_Font_black", mfd_strdefs_digit)
+end
 
-local speedometer_needle 			= create_mfd_tex_3k(MFD_ELEMENTS_PDD, 82, 2230, 353, 2272, nil , -57 ,2260 + ((2243-2230)/2)  )
-speedometer_needle.name				= create_guid_string()
-speedometer_needle.init_pos			= {-0.547, 0.964}
-speedometer_needle.init_rot			= {90, 0}
-speedometer_needle.parent_element	= GEN_PAGE.name
-speedometer_needle.element_params   = {"CUR_IAS"}
-speedometer_needle.controllers	 	= {{"rotate_using_parameter" ,0, -math.rad(360)/1000},}
+for i = 60, 340, 20 do
+	if i == 60 then
+		rot = 35
+	else
+		rot = i
+	end
+
+	if i == 60 or i == 80 or i == 100 or i == 140 or i == 180 or i == 220 or i == 260 or i == 300 or rot == 340 then
+		vert = 0.035
+	else
+		vert = 0.045
+	end
+
+	Speedometer_Lines                = CreateElement "ceSimpleLineObject"
+	Speedometer_Lines.name           = create_guid_string()
+	Speedometer_Lines.material       = materials["BBLACK"]
+	Speedometer_Lines.vertices       = {{0, 0.06}, {0, vert}}
+	Speedometer_Lines.width          = 0.0025 * 1.25
+	Speedometer_Lines.init_pos       = {-0.55 + 0.26 * math.cos(math.rad(-rot + 90)), 0.96 + 0.26 * math.sin(math.rad(-rot + 90))}
+	Speedometer_Lines.init_rot       = {-rot}
+	Speedometer_Lines.parent_element = GEN_PAGE.name
+	AddElement(Speedometer_Lines)
+end
+
+for i = 35 + 9, 80 - 9, 9 do
+	local Speedometer_Lines2          = CreateElement "ceSimpleLineObject"
+	Speedometer_Lines2.name           = create_guid_string()
+	Speedometer_Lines2.material       = materials["BBLACK"]
+	Speedometer_Lines2.vertices       = {{0, 0.06}, {0, 0.045}}
+	Speedometer_Lines2.width          = 0.0025 * 1.25
+	Speedometer_Lines2.init_pos       = {-0.55 + 0.26 * math.cos(math.rad(-i + 90)), 0.96 + 0.26 * math.sin(math.rad(-i + 90))}
+	Speedometer_Lines2.init_rot       = {-i}
+	Speedometer_Lines2.parent_element = GEN_PAGE.name
+	AddElement(Speedometer_Lines2)
+end
+
+local speedometer_needle          = create_mfd_tex_3k(MFD_ELEMENTS_PDD, 82, 2230, 353, 2272, 1.25, -57, 2260 + ((2243 - 2230) / 2))
+speedometer_needle.name           = create_guid_string()
+speedometer_needle.init_pos       = {-0.55, 0.96}
+speedometer_needle.init_rot       = {90, 0}
+speedometer_needle.parent_element = GEN_PAGE.name
+speedometer_needle.level          = MFD_DEFAULT_LEVEL - 1
+speedometer_needle.element_params = {"SPEEDOMETER_IAS"}
+speedometer_needle.controllers    = {{"rotate_using_parameter", 0, -math.rad(1)}}
 AddElement(speedometer_needle)
 
-add_text("M", 0, 0.05, speedometer_kts, "Gripen_Font_black" )
+add_text("M", -0.5575, 1.01, GEN_PAGE, "Gripen_Font_black", mfd_strdefs_digit)
 
---add_text_param(0, -0.04, "CUR_MACH", "%0.2f", speedometer_kts, mfd_strdefs_digit, "Gripen_Font_black")
-
-local Mach_indicator 				= CreateElement "ceStringPoly"
+Mach_indicator 				= CreateElement "ceStringPoly"
 Mach_indicator.name 				= create_guid_string()
-Mach_indicator.parent_element		= speedometer_kts.name
+Mach_indicator.parent_element		= GEN_PAGE.name
 Mach_indicator.material				= fonts["Gripen_Font_black"]
-Mach_indicator.init_pos 			= {0, -0.04}
+Mach_indicator.init_pos 			= {-0.55, 0.94}
 Mach_indicator.alignment 			= "LeftCenter"
 Mach_indicator.stringdefs 			= mfd_strdefs_digit
 Mach_indicator.formats 				= {"%0.0f","%s"}
-Mach_indicator.element_params 		= {"machDecimals"}
+Mach_indicator.element_params 		= {"MACH_B"}
 Mach_indicator.controllers 			= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 3, 99.5}}
 AddElement(Mach_indicator)
 
-add_text(".", -0.011, 0, Mach_indicator, "Gripen_Font_black",mfd_strdefs_digit )
+add_text(".", -0.0115, 0, Mach_indicator, "Gripen_Font_black",mfd_strdefs_digit)
 
-local Mach_indicator2 				= CreateElement "ceStringPoly"
+Mach_indicator2 				= CreateElement "ceStringPoly"
 Mach_indicator2.name 				= create_guid_string()
-Mach_indicator2.parent_element		= speedometer_kts.name
+Mach_indicator2.parent_element		= GEN_PAGE.name
 Mach_indicator2.material			= fonts["Gripen_Font_black"]
-Mach_indicator2.init_pos 			= {-0.068, -0.04}
+Mach_indicator2.init_pos 			= {-0.609, 0.94}
 Mach_indicator2.alignment 			= "LeftCenter"
 Mach_indicator2.stringdefs 			= mfd_strdefs_digit
 Mach_indicator2.formats 			= {"%0.2f","%s"}
-Mach_indicator2.element_params 		= {"machWhole"}
+Mach_indicator2.element_params 		= {"MACH_A"}
 Mach_indicator2.controllers 		= {{"text_using_parameter",0,0},{"parameter_in_range" ,0, 0.995, 3}}
 AddElement(Mach_indicator2)
 
@@ -202,8 +239,8 @@ adi_background.init_pos		= {1.2825, 0}
 adi_background.parent_element	= adi_background_base.name
 adi_background.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL  
 adi_background.level           = MFD_DEFAULT_LEVEL + 1
-adi_background.element_params  = { "LD_BRIGHTNESS", "ADI_PITCH", "HEADING"}
-adi_background.controllers	 = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"move_up_down_using_parameter",1, 0.036}, {"move_left_right_using_parameter",2, -0.00061425} }
+adi_background.element_params  = {"ADI_PITCH", "HEADING"}
+adi_background.controllers	 = {{"move_up_down_using_parameter",0, 0.036}, {"move_left_right_using_parameter",1, -0.00061425} }
 AddElement2(adi_background)
 
 
@@ -214,8 +251,6 @@ local adi_indicator			= create_mfd_tex(ADI_FRAME_B, 0, 0, 1270, 1270,0.92)
 adi_indicator.name			= create_guid_string()
 adi_indicator.init_pos		= {0, 0.270}
 adi_indicator.parent_element	= GEN_PAGE.name
-adi_indicator.element_params  = {"LD_BRIGHTNESS"}
-adi_indicator.controllers	 = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 AddElement(adi_indicator)
 
 	
@@ -233,8 +268,8 @@ local adi_roll				= create_mfd_tex(ADI_FRAME_B, 1975, 0, 2038, 1143.27-110, 1.0 
 adi_roll.name				= create_guid_string()
 adi_roll.init_pos			= {-0.0065, 0}
 adi_roll.parent_element		= adi_indicator.name	
-adi_roll.element_params 	= {"LD_BRIGHTNESS", "ADI_ROLL",}
-adi_roll.controllers		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"rotate_using_parameter" ,1, 1}}
+adi_roll.element_params 	= {"ADI_ROLL",}
+adi_roll.controllers		= {{"rotate_using_parameter" ,0, 1}}
 AddElement(adi_roll)
 
 
@@ -539,21 +574,39 @@ AAR_PAGE.controllers    = {{"parameter_compare_with_number",0, 3}}
 AddElement(AAR_PAGE)
 
 
-local fuel_percent		= create_mfd_tex_3k(MFD_ELEMENTS_PDD,1724, 0, 2240, 512, 2.25 )
-fuel_percent.name			= create_guid_string()
-fuel_percent.init_pos		= {-0.5, 0.925}
-fuel_percent.parent_element	= AAR_PAGE.name
-AddElement(fuel_percent)
+--FUEL
+fuelCircleRadius = .375
+fuelDialInternal = MakeDial(-.5, .925, fuelCircleRadius, .08625 * (fuelCircleRadius / .2), 0, 150, .008, true, 15, "FUEL_IND_TOGGLE_M", "dialInternalFuel", 101, materials["BBLACK"], AAR_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))
+fuelDialXF = MakeDial(-.5, .925, fuelCircleRadius, .08625 * (fuelCircleRadius / .2), 360 - 150, 420, .008, true, 21, "FUEL_IND_TOGGLE_M", "dialXFuel", 140, materials["BBLACK"], AAR_PAGE.name, MakeMaterial(nil, {5 * 6, 7 * 6, 11 * 6, 200}))
 
-add_text_param(-0.002, 0, "FUEL", "%0.0f", fuel_percent, mfd_strdefs_digit_Large, "Gripen_Font_black")	-- Print fuel state in %, rounded to 0 decimals, using large numbers
+for i = 360 - 150 + 150, 360 - 150 + 330, 60 do
+	local fuelDialLines          = CreateElement "ceSimpleLineObject"
+	fuelDialLines.name           = create_guid_string()
+	fuelDialLines.material       = materials["BBLACK"]
+	fuelDialLines.vertices       = {{0, 0}, {0, -.03 * (fuelCircleRadius / .2)}}
+	fuelDialLines.width          = .005
+	fuelDialLines.init_pos       = {fuelCircleRadius * math.cos(math.rad(-i + 90)), fuelCircleRadius * math.sin(math.rad(-i + 90))}
+	fuelDialLines.init_rot       = {-i}
+	fuelDialLines.parent_element = fuelDialXF.name
+	AddElement(fuelDialLines)
+end
+
+--local fuel_percent		= create_mfd_tex_3k(MFD_ELEMENTS_PDD,1724, 0, 2240, 512, 2.25 )
+--fuel_percent.name			= create_guid_string()
+--fuel_percent.init_pos		= {-0.5, 0.925}
+--fuel_percent.parent_element	= AAR_PAGE.name
+--AddElement(fuel_percent)
+
+fuelReadout = add_text_param(-0.002, 0, "FUEL", "%0.0f", fuelDialInternal, mfd_strdefs_digit_Large, "Gripen_Font_black")	-- Print fuel state in %, rounded to 0 decimals, using large numbers
+fuelReadout.init_rot = {180}
 
 
 local FLOW			= create_mfd_tex(AAR_LDP_WHITE_COLOR, 1680, 10, 2045  , 115,1) 
 FLOW.name			= create_guid_string()
 FLOW.init_pos		= {0.5, 0.86}
 FLOW.parent_element	= AAR_PAGE.name
-FLOW.element_params = {"LD_BRIGHTNESS", "NORM_MODE", "FUEL_FLOW"}
-FLOW.controllers    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20], {"parameter_compare_with_number",1, 2}, {"parameter_compare_with_number",2, 1}}
+FLOW.element_params = {"NORM_MODE", "FUEL_FLOW"}
+FLOW.controllers    = {{"parameter_compare_with_number",0, 2}, {"parameter_compare_with_number",1, 1}}
 AddElement(FLOW)
 
 
@@ -562,8 +615,8 @@ local NO_FLOW			= create_mfd_tex(AAR_LDP_WHITE_COLOR, 1680, 120, 2045  , 220,1)
 NO_FLOW.name			= create_guid_string()
 NO_FLOW.init_pos		= {0.5, 0.86}
 NO_FLOW.parent_element	= AAR_PAGE.name
-NO_FLOW.element_params = {"LD_BRIGHTNESS", "NORM_MODE", "FUEL_FLOW"}
-NO_FLOW.controllers    = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 2}, {"parameter_compare_with_number",2, 0}}
+NO_FLOW.element_params = {"NORM_MODE", "FUEL_FLOW"}
+NO_FLOW.controllers    = {{"parameter_compare_with_number",0, 2}, {"parameter_compare_with_number",1, 0}}
 AddElement(NO_FLOW)	
 
 local TO_FILL			= create_mfd_tex(AAR_LDP_BLACK, 1180, 370, 1850  , 480 ,1) 
@@ -693,8 +746,8 @@ SYMB_XHAIR.init_pos				= {0.014, 0.570, 0.05}
 SYMB_XHAIR.parent_element		= TAN_LD_MASTER.name
 SYMB_XHAIR.h_clip_relation    	= h_clip_relations.REWRITE_LEVEL
 SYMB_XHAIR.level				= MFD_DEFAULT_LEVEL
-SYMB_XHAIR.element_params 		= {"LD_BRIGHTNESS", "SYMB_TOGGLE", "SRCH_TRCK_MODE","LD_UPPER"}
-SYMB_XHAIR.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}, {"parameter_compare_with_number",2, 1},{"parameter_compare_with_number",3, 4}}
+SYMB_XHAIR.element_params 		= {"SYMB_TOGGLE", "SRCH_TRCK_MODE","LD_UPPER"}
+SYMB_XHAIR.controllers   		= {{"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number",1, 1},{"parameter_compare_with_number",2, 4}}
 AddElement2(SYMB_XHAIR)
 
 local SYMB_XHAIR_SMALL				= create_mfd_tex(AAR_LDP_WHITE_COLOR, 20, 1340, 720 , 2030, 0.5) 	
@@ -703,8 +756,8 @@ SYMB_XHAIR_SMALL.init_pos			= {0.014, 0.570,0.05}
 SYMB_XHAIR_SMALL.parent_element		= TAN_LD_MASTER.name
 SYMB_XHAIR_SMALL.h_clip_relation    = h_clip_relations.REWRITE_LEVEL
 SYMB_XHAIR_SMALL.level				= MFD_DEFAULT_LEVEL
-SYMB_XHAIR_SMALL.element_params 	= {"LD_BRIGHTNESS", "SYMB_TOGGLE", "SRCH_TRCK_MODE","LD_UPPER"}
-SYMB_XHAIR_SMALL.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}, {"parameter_compare_with_number",2, 2},{"parameter_compare_with_number",3, 4}}
+SYMB_XHAIR_SMALL.element_params 	= {"SYMB_TOGGLE", "SRCH_TRCK_MODE","LD_UPPER"}
+SYMB_XHAIR_SMALL.controllers   		= {{"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number",1, 2},{"parameter_compare_with_number",2, 4}}
 AddElement2(SYMB_XHAIR_SMALL)
 
 local FLIR_HOT				= create_mfd_tex(AAR_LDP_BLACK, 270, 1220, 570 , 1268, 1.25) 	
@@ -719,8 +772,8 @@ local M_LASER				= create_mfd_tex(AAR_LDP_WHITE_COLOR, 10, 1225, 210 , 1275, 1.2
 M_LASER.name				= create_guid_string()
 M_LASER.init_pos			= {-0.4, 0.15,}
 M_LASER.parent_element		= TAN_LD_MASTER.name
-M_LASER.element_params 		= {"LD_BRIGHTNESS", "MLAS_TOGGLE", "LD_UPPER"}
-M_LASER.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1},{"parameter_compare_with_number",2, 4}}
+M_LASER.element_params 		= {"MLAS_TOGGLE", "LD_UPPER"}
+M_LASER.controllers   		= {{"parameter_compare_with_number",0, 1},{"parameter_compare_with_number",1, 4}}
 AddElement(M_LASER)
 
 local LDP_Background 				= create_mfd_tex(LDP_BACKGROUND, 30, 5, 1255 , 1085, 1.569)
@@ -743,8 +796,8 @@ LDP_Background_Boost.init_pos				= {0.0155, 0.5555, 0.025 }
 LDP_Background_Boost.parent_element			= LDP_PAGE.name
 LDP_Background_Boost.h_clip_relation 		= h_clip_relations.NULL
 LDP_Background_Boost.level					= MFD_DEFAULT_LEVEL
-LDP_Background_Boost.element_params 		= {"LD_BRIGHTNESS","BOST_TOGGLE"}
-LDP_Background_Boost.controllers   			= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1} }
+LDP_Background_Boost.element_params 		= {"BOST_TOGGLE"}
+LDP_Background_Boost.controllers   			= {{"parameter_compare_with_number",0, 1} }
 LDP_Background_Boost.change_opacity			= false
 LDP_Background_Boost.collimated 			= false
 LDP_Background_Boost.isvisible				= true
@@ -754,19 +807,20 @@ Add(LDP_Background_Boost)
 
 --===================================================================================================================================================================================
 
---Auto throttle on/off indicator
+-- Auto throttle on/off indicator
+local Auto_throttle_ind          = add_text("AT", -0.92, 1.33, TAN_LD_MASTER, "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
+Auto_throttle_ind.element_params = {"ATState"}
+Auto_throttle_ind.controllers    = {{"parameter_compare_with_number", 0, 1}}
 
-local Auto_throttle_ind = add_text("AT", -0.92, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_ind.element_params  = {"ATState"}
-Auto_throttle_ind.controllers     = {{"parameter_in_range" ,0,0.9,1.1}  }
---Auto throttle mode 12 AoA
-local Auto_throttle_mode12 = add_text("12", -0.82, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_mode12.element_params  = {"ATMode"}
-Auto_throttle_mode12.controllers     = {{"parameter_in_range" ,0,0.4,0.6} }
---Auto throttle mode 14 AoA
-local Auto_throttle_mode14 = add_text("14", -0.82, 1.33, TAN_LD_MASTER , "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
-Auto_throttle_mode14.element_params  = {"ATMode"}
-Auto_throttle_mode14.controllers     = {{"parameter_in_range" ,0,0.9,1.1} }
+-- Auto throttle mode 12 AoA
+local Auto_throttle_mode12          = add_text("12", -0.82, 1.33, TAN_LD_MASTER, "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
+Auto_throttle_mode12.element_params = {"ATState", "ATMode"}
+Auto_throttle_mode12.controllers    = {{"parameter_compare_with_number", 0, 1}, {"parameter_compare_with_number", 1, .5}}
+
+-- Auto throttle mode 14 AoA
+local Auto_throttle_mode14          = add_text("14", -0.82, 1.33, TAN_LD_MASTER, "Gripen_Font_black", MFD_strdefs_text, "CenterCenter")
+Auto_throttle_mode14.element_params = {"ATState", "ATMode"}
+Auto_throttle_mode14.controllers    = {{"parameter_compare_with_number", 0, 1}, {"parameter_compare_with_number", 1, 1}}
 
 local xcor = 0.022
 

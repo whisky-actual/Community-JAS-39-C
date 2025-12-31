@@ -173,6 +173,11 @@ join(res.keyCommands,{
 
 {down = keys.PlaneAirBrakeOn,														name = _('Airbrake On'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
 {down = keys.PlaneAirBrakeOff,														name = _('Airbrake Off'),									category = _('Throttle Grip'), _('HOTAS') , features = {"airbrake"}},
+
+-- System Hand Controller
+{down = keys.S10SpanScaleDown, name = _('Span Down (S10)'),  category = _('Throttle'), _("SHC")},
+{down = keys.S10SpanScaleUp, name = _('Span Up (S10)'),  category = _('Throttle'), _("SHC")},
+
 ---------------------------------------------						
 -- Left Lower Pannel ------------------------						
 ---------------------------------------------						

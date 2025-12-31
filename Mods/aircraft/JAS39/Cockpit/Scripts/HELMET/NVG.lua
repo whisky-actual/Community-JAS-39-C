@@ -1,2 +1,5 @@
-brightness = 0.5
-need_to_be_closed = true -- close lua state after initialization 
+brightness = .5
+
+
+
+need_to_be_closed = true -- Close lua state after initialization.

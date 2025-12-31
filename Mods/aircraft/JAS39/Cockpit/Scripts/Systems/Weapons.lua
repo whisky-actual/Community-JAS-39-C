@@ -280,7 +280,7 @@ function SetCommand(command,value)												-- Listen for commands
 end
 
 function update()		
-get_param_handle("CANNON_MODE"):set(PlaneCannonMode)
+get_param_handle("gunMode"):set(PlaneCannonMode)
 if OverrideLA == 0 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then
 	dispatch_action(nil,349)
 	OverrideLA = 1
@@ -291,7 +291,7 @@ if OverrideLA == 0 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then
      end
 end
       
-	-- print_message_to_user(get_param_handle("CANNON_MODE"):get())
+	-- print_message_to_user(get_param_handle("gunMode"):get())
 	
 				
 -- ======================== Stationary =====================================

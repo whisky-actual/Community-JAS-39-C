@@ -4,7 +4,7 @@ dofile(LockOn_Options.common_script_path .. "elements_defs.lua")
 
 UCP_DEFAULT_LEVEL = 7
 
---local aspect       = GetAspect()
+local aspect       = GetAspect()
 --local aspect     = 1
 --local xpos       = 0
 --local ypos       = 0
@@ -30,3 +30,16 @@ Add(nav_total_field_of_view_UCP)
 
  
 dofile(LockOn_Options.script_path.."UCP/Indicator/UCP_indication_page.lua")
+
+
+
+local UCPBrightness           = CreateElement "ceSimpleLineObject"
+UCPBrightness.name            = create_guid_string()
+UCPBrightness.vertices        = {{0, -aspect - .2}, {0, aspect + .2}}
+UCPBrightness.width           = 1.4
+UCPBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
+UCPBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+UCPBrightness.level           = MFD_DEFAULT_LEVEL
+UCPBrightness.element_params  = {"mainpower", "UCPBrightness"}
+UCPBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+Add(UCPBrightness)

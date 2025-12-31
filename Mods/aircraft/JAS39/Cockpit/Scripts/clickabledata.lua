@@ -107,7 +107,7 @@ elements["PNT_1274"] = Mfd_button(_("L (8)"),							devices.UCP,		deviceCommands
 elements["PNT_1275"] = Mfd_button(_("D (9)"),							devices.UCP,		deviceCommands.UCP_9,			1275,1,{0,1},JAS39MFD1)
 elements["PNT_1276"] = Mfd_button(_("CLR"),								devices.UCP,		deviceCommands.UCP_CLR,		1276,1,{0,1},JAS39MFD1)
 elements["PNT_1249"] = default_axis_limited(_("UCP Brightness"),		devices.UCP,		deviceCommands.UCP_Brightness, 1243, 0, 0.1, false, false, {0, 1})
-elements["PNT_1244"] = default_axis_limited(_("UCP Cursor Control"),	devices.UCP,		deviceCommands.UCP_Cursor, 1244, 0, 0.1, false, false, {99, 99})
+elements["PNT_1244"] = default_axis_limited(_("UCP Cursor Control"),	devices.UCP,		deviceCommands.UCP_Cursor, 1244, 0, 0.1, false, false, {0, 1})
 
 
 -- elements["PNT_1263"] = Mfd_button(_("COM1 EDIT"),						devices.UCP,		deviceCommands.UCP_COM1_EDIT,	1263,1,{0,1},JAS39MFD1)

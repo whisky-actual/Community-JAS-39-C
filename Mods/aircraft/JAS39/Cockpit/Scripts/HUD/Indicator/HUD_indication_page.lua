@@ -13,42 +13,96 @@ HUD_BASE.init_pos                        = {0, -1.17343,0}                      
 HUD_BASE.element_params     = {"mainpower"}             
 HUD_BASE.controllers        = {{"parameter_in_range" ,0,0.9,1.1} }
 AddHudElement(HUD_BASE)
-----
 
----Landing mode indicator
-local landing_mode_ind                                  = add_text_hud("L", -0.6, 0.4, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-landing_mode_ind.element_params          = {"LANDING_MODE"}
-landing_mode_ind.controllers             = {{"parameter_in_range" ,0,0.9,1.1} }
+
+
+local HUDMounter          = CreateElement "ceSimple"
+HUDMounter.name           = create_guid_string()
+HUDMounter.init_rot       = {0, 0, 15}
+HUDMounter.parent_element = HUD_BASE.name
+AddHudElement(HUDMounter)
+
+local nextWP           = CreateElement "ceMeshPoly"
+nextWP.name            = create_guid_string()
+nextWP.init_rot        = {90}
+nextWP.parent_element  = HUDMounter.name
+--nextWP.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+nextWP.material        = MakeMaterial(nil, {0, 255, 0, 255})
+nextWP.element_params  = {"currentPhase", "nextWPRange", "nextWPType", "nextWPHUDAz", "nextWPHUDEl", "rollRad", "HUDBrightness"}
+nextWP.controllers     = {{"parameter_in_range", 0, 6.9, 8.9}, {"parameter_in_range", 1, 0, 999}, {ctrl.inRange, 2, 1.9, 3.1}, {"move_up_down_using_parameter", 3, .6465}, {"move_left_right_using_parameter", 4, .6465}, {"rotate_using_parameter", 5, 1}, {ctrl.opacity, 6}}
+set_circle(nextWP, 6 / 230, 4 / 230, 180, 8)
+AddHudElement(nextWP)
+
+local nextWPClampLine           = CreateElement "ceSimpleLineObject"
+nextWPClampLine.name            = create_guid_string()
+nextWPClampLine.parent_element  = HUDMounter.name
+nextWPClampLine.init_rot        = {90}
+nextWPClampLine.vertices        = {{0}, {0}}
+nextWPClampLine.width           = 2 / 230 / 2
+--nextWPClampLine.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+nextWPClampLine.material        = MakeMaterial(nil, {0, 255, 0, 255})
+nextWPClampLine.element_params  = {"currentPhase", "nextWPHUDClamped", "nextWPType", "nextWPHUDAz", "nextWPHUDEl", "nextWPHUDAzUnclamped", "nextWPHUDElUnclamped", "HUDBrightness"}
+nextWPClampLine.controllers     = {{"parameter_in_range", 0, 6.9, 8.9}, {"parameter_compare_with_number", 1, 1}, {ctrl.inRange, 2, 1.9, 3.1}, {"line_object_set_point_using_parameters", 0, 4, 3, .6465, .6465}, {"line_object_set_point_using_parameters", 1, 6, 5, .6465, .6465}, {ctrl.opacity, 7}}
+AddHudElement(nextWPClampLine)
+
+addHUDSimple("Next_WP_Offset_Text", nil, {-90}, nextWP, nil, nil, {"nextWPHUDClamped", "rollRad"}, {{ctrl.compareNum, 0, 1}, {ctrl.rotate, 1, -1}})
+addHUDTextParam(nil, {0, -12.5 / 230}, "Next_WP_Offset_Text", hcr.rw, nil, nil, nil, "nextWPHUDClampText", nil, nil, strdefs.std)
+
+
+----
+local SID          = CreateElement "ceSimple"
+SID.name           = create_guid_string()
+SID.init_pos       = {0, -1.2}
+SID.parent_element = HUD_BASE.name
+SID.element_params = {"currentPhase", "AoA"} -- , "landingMode"}
+SID.controllers    = {{"parameter_in_range", 0, 6.9, 8.9}, {"parameter_in_range", 1, -999, 14}} --, {ctrl.moveY, 2, .205}} Will add when the whole HUD moves with VelVec.
+AddHudElement(SID)
+
+--- Landing mode indicator
+-- local landing_mode_ind          = add_text_hud("L", -.6, 0, SID, "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+-- landing_mode_ind.element_params = {"landingMode"}
+-- landing_mode_ind.controllers    = {{"parameter_compare_with_number", 0, 1}}
+
+add_text_hud_param(-.2, 0, "nextWPName", "HUDBrightness", "%s", SID, HUD_strdefs_text, "Gripen_Font_green", "LeftCenter")
+
+local wpRangeO10          = add_text_hud_param(.2, 0, "nextWPRange", "HUDBrightness", "R%0.0f", SID, HUD_strdefs_text, "Gripen_Font_green", "LeftCenter")
+wpRangeO10.element_params = {"nextWPRange", "HUDBrightness"}
+wpRangeO10.controllers    = {{"parameter_in_range", 0, 9.9, 999}, {"text_using_parameter", 0}, {"opacity_using_parameter", 1}}
+local wpRangeU10          = add_text_hud_param(.2, 0, "nextWPRange", "HUDBrightness", "R%0.1f", SID, HUD_strdefs_text, "Gripen_Font_green", "LeftCenter")
+wpRangeU10.element_params = {"nextWPRange", "HUDBrightness"}
+wpRangeU10.controllers    = {{"parameter_in_range", 0, 0, 9.9}, {"text_using_parameter", 0}, {"opacity_using_parameter", 1}}
+
+
 
 local nav_mode_ind                                          = add_text_hud("NAV", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-nav_mode_ind.element_params                  = {"HUD_MODE"}
+nav_mode_ind.element_params                  = {"masterMode"}
 nav_mode_ind.controllers                     = {{"parameter_in_range" ,0,0.9,1.1} }
 
 local bvr_mode_ind                                          = add_text_hud("BVR", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-bvr_mode_ind.element_params                  = {"HUD_MODE"}
+bvr_mode_ind.element_params                  = {"masterMode"}
 bvr_mode_ind.controllers                     = {{"parameter_in_range" ,0,1.9,2.1} }
 
 local vs_mode_ind                                          = add_text_hud("VS", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-vs_mode_ind.element_params                  = {"HUD_MODE"}
+vs_mode_ind.element_params                  = {"masterMode"}
 vs_mode_ind.controllers                     = {{"parameter_in_range" ,0,2.9,3.1} }
 
 local bore_mode_ind                                 = add_text_hud("BORE", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-bore_mode_ind.element_params                  = {"HUD_MODE"}
+bore_mode_ind.element_params                  = {"masterMode"}
 bore_mode_ind.controllers                     = {{"parameter_in_range" ,0,3.9,4.1} }
 
 local HMDMode_ind                                         = add_text_hud("HMD", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-HMDMode_ind.element_params                  = {"HUD_MODE"}
+HMDMode_ind.element_params                  = {"masterMode"}
 HMDMode_ind.controllers                     = {{"parameter_in_range" ,0,7.9,8.1} }
 
 local lngt_mode_ind                                 = add_text_hud("LNGT", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-lngt_mode_ind.element_params                  = {"HUD_MODE"}
+lngt_mode_ind.element_params                  = {"masterMode"}
 lngt_mode_ind.controllers                     = {{"parameter_in_range" ,0,5.9,6.1} }
 
 
-local Left_Side_Indication_base                         = CreateElement "ceSimple"
-Left_Side_Indication_base.name                          = create_guid_string()
-Left_Side_Indication_base.init_pos                        = {-0.033, -0.15,0}
-Left_Side_Indication_base.parent_element        = HUD_BASE.name
+local Left_Side_Indication_base          = CreateElement "ceSimple"
+Left_Side_Indication_base.name           = create_guid_string()
+Left_Side_Indication_base.init_pos       = {-0.033, -0.15}
+Left_Side_Indication_base.parent_element = HUD_BASE.name
 AddHudElement(Left_Side_Indication_base)
 
 
@@ -118,9 +172,23 @@ HUD_PITCH.init_pos                                                = {0, 0}
 HUD_PITCH.init_rot                                                = {0, 0, 15}
 HUD_PITCH.parent_element                                = HUD_BASE.name
 HUD_PITCH.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
-HUD_PITCH.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+HUD_PITCH.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(HUD_PITCH)
 
+--[[
+local boxW = math.rad(14 - 5.72) * 10
+local boxH = math.rad(10 - 2.86) * 10
+
+local boxaa           = CreateElement "ceSimpleLineObject"
+boxaa.name            = create_guid_string()
+boxaa.parent_element  = HUDMounter.name
+boxaa.init_pos       = {0, -math.rad(4) * 10 / 2}
+boxaa.vertices        = {{-boxW / 2, -boxH / 2}, {-boxW / 2, boxH / 2}, {boxW / 2, boxH / 2}, {boxW / 2, -boxH / 2}, {-boxW / 2, -boxH / 2}}
+boxaa.width           = .005
+boxaa.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+boxaa.material        = MakeMaterial(nil, {0, 255, 0, 255})
+AddHudElement(boxaa)
+--]]
 local HorizonLineHUD                                         = CreateElement "ceSimple"
 HorizonLineHUD.name                                                = create_guid_string()
 HorizonLineHUD.init_pos                                        = {0, 0, 0}
@@ -171,7 +239,7 @@ local TakeOffLinesVV                                         = Hud_Horizon_Line(
 TakeOffLinesVV.name                                                = create_guid_string()
 TakeOffLinesVV.init_pos                                        = {0, 0.1605, 0}
 TakeOffLinesVV.parent_element                        = HUD_PITCH.name
-TakeOffLinesVV.element_params                        = {"CURRENT_PHASE_CO","CURRENT_PHASE_PAL","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_TD","CURRENT_PHASE_LR","LANDING_MODE","HUDBrightness"}
+TakeOffLinesVV.element_params                        = {"CURRENT_PHASE_CO","CURRENT_PHASE_PAL","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_TD","CURRENT_PHASE_LR","landingMode","HUDBrightness"}
 TakeOffLinesVV.controllers                                = {{"parameter_in_range" ,0,-0.1,0.1},{"parameter_in_range" ,1,-0.1,0.1},{"parameter_in_range" ,2,-0.1,0.1},{"parameter_in_range" ,3,-0.1,0.1},{"parameter_in_range" ,4,-0.1,0.1},{"parameter_in_range" ,5,-0.1,0.1},{"opacity_using_parameter" ,6} }        
 AddHudElement(TakeOffLinesVV)
 
@@ -180,7 +248,7 @@ local VelocityVectorHUD                                 = Hud_Horizon_Line(HUD_H
 VelocityVectorHUD.name                                        = create_guid_string()
 VelocityVectorHUD.init_pos                                = {0, -0.0212, 0}
 VelocityVectorHUD.element_params                 = {"VELVEC_HUD_Y","VELVEC_HUD_X","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI","CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_LO","CURRENT_PHASE_TD","CURRENT_PHASE_LR","VV_LimitedLower","VV_LimitedUpper","HUDBrightness"} --
-VelocityVectorHUD.controllers                        = {{"move_up_down_using_parameter",0, 0.644},{"move_left_right_using_parameter",1, 0.644}, {"parameter_in_range" ,2, -0.1,0.1}, {"parameter_in_range" ,3, -0.1,0.1}, {"parameter_in_range" ,4, -0.1,0.1}, {"parameter_in_range" ,5, -0.1,0.1}, {"parameter_in_range" ,6, -0.1,0.1}, {"parameter_in_range" ,7, -0.1,0.1}, {"parameter_in_range" ,8, -0.1,0.1},{"parameter_in_range" ,9, -0.1,0.1}, {"parameter_in_range" ,10, -0.1,0.1}, {"parameter_in_range" ,11, -0.1,0.1},{"opacity_using_parameter" ,12} } --
+VelocityVectorHUD.controllers                        = {{"move_up_down_using_parameter",0, 0.6465},{"move_left_right_using_parameter",1, 0.6465}, {"parameter_in_range" ,2, -0.1,0.1}, {"parameter_in_range" ,3, -0.1,0.1}, {"parameter_in_range" ,4, -0.1,0.1}, {"parameter_in_range" ,5, -0.1,0.1}, {"parameter_in_range" ,6, -0.1,0.1}, {"parameter_in_range" ,7, -0.1,0.1}, {"parameter_in_range" ,8, -0.1,0.1},{"parameter_in_range" ,9, -0.1,0.1}, {"parameter_in_range" ,10, -0.1,0.1}, {"parameter_in_range" ,11, -0.1,0.1},{"opacity_using_parameter" ,12} } --
 VelocityVectorHUD.parent_element                = HUD_BASE.name
 AddHudElement(VelocityVectorHUD)
 
@@ -188,7 +256,7 @@ local VelocityVectorLimited                                = Hud_Horizon_Line(HU
 VelocityVectorLimited.name                                        = create_guid_string()
 VelocityVectorLimited.init_pos                                = {0, -1.29, 0}
 VelocityVectorLimited.element_params                 = {"HUDBrightness", "VV_LimitedLower","VELVEC_HUD_X"}
-VelocityVectorLimited.controllers                        = {{"opacity_using_parameter" ,0},  {"parameter_in_range" ,1, 0.9,1.1},{"move_left_right_using_parameter",2, 0.644}}
+VelocityVectorLimited.controllers                        = {{"opacity_using_parameter" ,0},  {"parameter_in_range" ,1, 0.9,1.1},{"move_left_right_using_parameter",2, 0.6465}}
 VelocityVectorLimited.parent_element                = HUD_BASE.name
 AddHudElement(VelocityVectorLimited)
 
@@ -225,7 +293,7 @@ X_AxisSymbol.name                                                = create_guid_s
 X_AxisSymbol.init_pos                                        = {0, -0.022, 0}
 X_AxisSymbol.parent_element                                = HUD_BASE.name
 X_AxisSymbol.element_params                                = {"HUDBrightness","CURRENT_PHASE_CO","VELVEC_HUD_Y","VELVEC_HUD_X","CURRENT_PHASE_PAL","VV_LimitedLower"}
-X_AxisSymbol.controllers                                = {{"opacity_using_parameter" ,0},{"parameter_in_range" ,1,-0.1,0.1}, {"move_up_down_using_parameter",2, 0.644},{"move_left_right_using_parameter",3, 0.644}, {"parameter_in_range" ,4,-0.1,0.1}, {"parameter_in_range" ,5,-0.1,0.1}  }                                                                
+X_AxisSymbol.controllers                                = {{"opacity_using_parameter" ,0},{"parameter_in_range" ,1,-0.1,0.1}, {"move_up_down_using_parameter",2, 0.6465},{"move_left_right_using_parameter",3, 0.6465}, {"parameter_in_range" ,4,-0.1,0.1}, {"parameter_in_range" ,5,-0.1,0.1}  }                                                                
 AddHudElement(X_AxisSymbol)
 
 local X_AxisSymbol_Line                                        = Hud_Horizon_Line(HUD_HORIZON, 1338, 991, 1352, 1059, 1)
@@ -272,30 +340,30 @@ AddHudElement(NegativePitchLinesHUD)
 
 
 
-WVR_CircleLNGT                                         = create_HUD_tex(HUD_AimingCircle, 0,0,1024,1024, 0.1)
-WVR_CircleLNGT.name                                = create_guid_string()
-WVR_CircleLNGT.init_pos                        = {0, 0, 0}
-WVR_CircleLNGT.parent_element        = HUD_BASE.name
-WVR_CircleLNGT.element_params         = {"HUDBrightness","HUD_MODE","RED_HUD"}
-WVR_CircleLNGT.controllers            = {{"opacity_using_parameter" ,0},{"parameter_compare_with_number",1, 6},{"parameter_compare_with_number",2, 1}}
+WVR_CircleLNGT                = create_HUD_tex(HUD_AimingCircle, 0, 0, 1024, 1024, 0.1)
+WVR_CircleLNGT.name           = create_guid_string()
+WVR_CircleLNGT.init_pos       = {0, 0, 0}
+WVR_CircleLNGT.parent_element = HUD_BASE.name
+WVR_CircleLNGT.element_params = {"HUDBrightness", "masterMode", "RED_HUD"}
+WVR_CircleLNGT.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 6}, {"parameter_compare_with_number", 2, 1}}
 AddHudElement(WVR_CircleLNGT)
 
-WVR_CircleVSBORE_AA                                         = create_HUD_tex(HUD_AimingCircleThin, 0,0,1024,1024, 0.21)
-WVR_CircleVSBORE_AA.name                                = create_guid_string()
-WVR_CircleVSBORE_AA.init_pos                        = {0, 0, 0}
-WVR_CircleVSBORE_AA.parent_element                = HUD_BASE.name
-WVR_CircleVSBORE_AA.element_params                 = {"HUDBrightness","HUD_MODE","GRIPEN_TYPE","RED_HUD"}
-WVR_CircleVSBORE_AA.controllers                    = {{"opacity_using_parameter" ,0},{"parameter_in_range" ,1, 2,6},{"parameter_compare_with_number",2, 1},{"parameter_compare_with_number",2, 1}}
+WVR_CircleVSBORE_AA                = create_HUD_tex(HUD_AimingCircleThin, 0, 0, 1024, 1024, 0.21)
+WVR_CircleVSBORE_AA.name           = create_guid_string()
+WVR_CircleVSBORE_AA.init_pos       = {0, 0, 0}
+WVR_CircleVSBORE_AA.parent_element = HUD_BASE.name
+WVR_CircleVSBORE_AA.element_params = {"HUDBrightness", "masterMode", "GRIPEN_TYPE", "RED_HUD"}
+WVR_CircleVSBORE_AA.controllers    = {{"opacity_using_parameter", 0}, {"parameter_in_range", 1, 2, 6}, {"parameter_compare_with_number", 2, 1}, {"parameter_compare_with_number", 2, 1}}
 AddHudElement(WVR_CircleVSBORE_AA)
 
 
-local GlideSlope                                = Hud_Horizon_Line(HUD_HORIZON, 849, 1567, 2451, 1581, 1) 
-GlideSlope.name                                        = create_guid_string()
-GlideSlope.init_pos                                = {0, -0.23967, 0}
-GlideSlope.parent_element                = HUD_PITCH.name
-GlideSlope.element_params                = {"HUDBrightness","LANDING_MODE","VELVEC_HUD_X"}
-GlideSlope.controllers                        = {{"opacity_using_parameter" ,0}, {"parameter_in_range" ,1, 0.9,1.1},{"move_left_right_using_parameter",2, 0.644}  }                                                                
-AddHudElement(GlideSlope)
+local glideSlope          = Hud_Horizon_Line(HUD_HORIZON, 849, 1567, 2451, 1581, 1)
+glideSlope.name           = create_guid_string()
+glideSlope.init_pos       = {0, -.23967}
+glideSlope.parent_element = HUD_PITCH.name
+glideSlope.element_params = {"HUDBrightness", "landingMode", "VELVEC_HUD_X"}
+glideSlope.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 1}, {"move_left_right_using_parameter", 2, .6465}}
+AddHudElement(glideSlope)
 
 local TST_G                 = MakeMaterial(nil,{0,0,100,100})
 
@@ -309,7 +377,7 @@ HeadingScaleMask.indices                                = {0, 1, 2, 0, 2, 3}
 HeadingScaleMask.init_pos                                = {0, 0.35, 0}
 HeadingScaleMask.h_clip_relation                   = h_clip_relations.INCREASE_IF_LEVEL 
 HeadingScaleMask.level                                   = HUD_DEFAULT_LEVEL
-HeadingScaleMask.element_params                        = {"HUD_MODE"}
+HeadingScaleMask.element_params                        = {"masterMode"}
 HeadingScaleMask.controllers                        = { {"parameter_in_range",0, -1,7}  }
 HeadingScaleMask.isvisible                                = false
 Add(HeadingScaleMask)
@@ -325,6 +393,19 @@ HeadingScale.h_clip_relation                           = h_clip_relations.DECREA
 HeadingScale.level                                           = HUD_DEFAULT_LEVEL + 1
 AddHudElement2(HeadingScale)
 
+addHUDSimple("Heading_Tape_POI", {-1.714, -.0325}, nil, HeadingScale, nil, nil, {"currentPhase", "nextWPHeadingClampedHUD"}, {{ctrl.inRange, 0, 6.9, 8.9}, {ctrl.moveX, 1, .0012575}})
+
+for i = -1, 1 do
+	local firstVert = {0, -.03}
+
+	if i == 0 then
+		firstVert = {0}
+	end
+
+	addHUDSimpleLine(nil, {i * .012}, nil, "Heading_Tape_POI", hcr.rw, nil, nil, nil, .002, {firstVert, {0, -.05}})
+end
+
+
 local HeadingScaleArrow                                        = Hud_Horizon_Line(HUD_HORIZON, 793, 987, 912, 1106, 0.5) 
 HeadingScaleArrow.name                                        = create_guid_string()
 HeadingScaleArrow.init_pos                                = {0, 0.20, 0}
@@ -335,14 +416,14 @@ HeadingScaleArrow.element_params                = {"HUDBrightness"}
 HeadingScaleArrow.controllers                        = { {"opacity_using_parameter" ,0}  }        
 AddHudElement2(HeadingScaleArrow)
 
---         HEADING_MODE:set(1)                        -- 1 = True, 2 = Magnetic 
+--         headingMode:set(1)                        -- 1 = True, 2 = Magnetic 
 
 local heading_mode_ind                                         = add_text_hud("T", 0.30, 0.30, HUD_BASE , "Gripen_Font_green", HUD_pitch_digit, "CenterCenter")
-heading_mode_ind.element_params                  = {"HEADING_MODE"}
+heading_mode_ind.element_params                  = {"headingMode"}
 heading_mode_ind.controllers                     = {{"parameter_in_range" ,0, 0.9, 1.1} }
 
-local heading_mode_ind                                         = add_text_hud("M", 0.30, 0.30, HUD_BASE , "Gripen_Font_green", HUD_pitch_digit, "CenterCenter")
-heading_mode_ind.element_params                  = {"HEADING_MODE"}
+local heading_mode_ind                                         = add_text_hud("M", -	0.30, 0.30, HUD_BASE , "Gripen_Font_green", HUD_pitch_digit, "CenterCenter")
+heading_mode_ind.element_params                  = {"headingMode"}
 heading_mode_ind.controllers                     = {{"parameter_in_range" ,0, 1.9, 2.1} }
 
 
@@ -352,6 +433,8 @@ local HorizonLineHeadingDots                        = add_text_hud("!,,,,!,,,,!,
 HorizonLineHeadingDots.init_pos                        = {0.03025, 0.0110,0.1}
 HorizonLineHeadingDots.element_params        = {"HEADING_HUD"}
 HorizonLineHeadingDots.controllers                = { {"move_left_right_using_parameter",0, -0.0110555}  }
+
+addHUDCircle(nil, {-.03025, -.011}, 0, HorizonLineHeadingDots.name, nil, nil, {"currentPhase", "nextWPHeadingHUD"}, {{ctrl.inRange, 0, 6.9, 8.9}, {ctrl.moveX, 1, .0110555}}, .011, .011 - .004, 360, 10)
 
 local TerrainAltitudeBox                                = Hud_Horizon_Line(HUD_HORIZON, 1861, 969, 2296, 1116, 0.8) 
 TerrainAltitudeBox.name                                        = create_guid_string()
@@ -365,21 +448,21 @@ AddHudElement(TerrainAltitudeBox)
 local TerrainAltitude         = add_text_hud_param(0, 0.028, "TERRAIN_ALT","HUDBrightness", "%0.0f", TerrainAltitudeBox, HUD_strdefs_digit, "Gripen_Font_green")
 
 
-local AltimeterScaleMask                                         = CreateElement "ceMeshPoly"                -- change shape 
-AltimeterScaleMask.name                                         =  create_guid_string()
-AltimeterScaleMask.primitivetype                         = "triangles"
-AltimeterScaleMask.material                                        = TST_G
-AltimeterScaleMask.parent_element                        = HUD_BASE.name
-AltimeterScaleMask.vertices                                            = { {0.5, -0.02 }, { 0.8 , -0.02},
-                                                                                                { 0.8 ,-0.48 }, {0.5 ,-0.48 }, }
-AltimeterScaleMask.indices                                        = {0, 1, 2, 0, 2, 3}
-AltimeterScaleMask.init_pos                                        = {0, 0, 0}
-AltimeterScaleMask.init_rot                                        = {0, 0, 0}
-AltimeterScaleMask.h_clip_relation                   = h_clip_relations.INCREASE_IF_LEVEL 
-AltimeterScaleMask.level                                           = HUD_DEFAULT_LEVEL
-AltimeterScaleMask.element_params                        = {"HUD_MODE"}
-AltimeterScaleMask.controllers                                = { {"parameter_in_range",0, -1,7}  }
-AltimeterScaleMask.isvisible                                = false
+local AltimeterScaleMask           = CreateElement "ceMeshPoly"                               -- change shape
+AltimeterScaleMask.name            = create_guid_string()
+AltimeterScaleMask.primitivetype   = "triangles"
+AltimeterScaleMask.material        = TST_G
+AltimeterScaleMask.parent_element  = HUD_BASE.name
+AltimeterScaleMask.vertices        = {{0.5, -0.02}, {0.8, -0.02},
+	{0.8,  -0.48}, {0.5, -0.48}}
+AltimeterScaleMask.indices         = {0, 1, 2, 0, 2, 3}
+AltimeterScaleMask.init_pos        = {0, 0, 0}
+AltimeterScaleMask.init_rot        = {0, 0, 0}
+AltimeterScaleMask.h_clip_relation = h_clip_relations.INCREASE_IF_LEVEL
+AltimeterScaleMask.level           = HUD_DEFAULT_LEVEL
+AltimeterScaleMask.element_params  = {"altitudeDeclutt"}
+AltimeterScaleMask.controllers     = {{"parameter_compare_with_number", 0, 0}}
+AltimeterScaleMask.isvisible       = false
 Add(AltimeterScaleMask)
 
 local AltimeterScaleArrow                                = Hud_Horizon_Line(HUD_HORIZON, 793, 987, 912, 1106, 0.5) 
@@ -473,20 +556,35 @@ for i = 0,810 do
 
 end
 
--- air to ground mode altimeter
+local RAltitudeInd          = add_text_hud("R", .6, -.6, AltimeterScaleMask, "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+RAltitudeInd.element_params = {"HUDBrightness", "altMode"}
+RAltitudeInd.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 2}}
 
-local A2G_Altitude_BASE                                         = CreateElement "ceSimple"
-A2G_Altitude_BASE.name                                          = create_guid_string()
-A2G_Altitude_BASE.parent_element                        = HUD_BASE.name
-A2G_Altitude_BASE.init_pos                                        = {0.65, 0 ,0}                                                                        --{0, -1.345,0}
-A2G_Altitude_BASE.element_params                          = {"HUD_MODE"}
-A2G_Altitude_BASE.controllers                             = { {"parameter_compare_with_number",0, 7}  }
+
+-- Air to ground mode altimeter
+local A2G_Altitude_BASE          = CreateElement "ceSimple"
+A2G_Altitude_BASE.name           = create_guid_string()
+A2G_Altitude_BASE.parent_element = HUD_BASE.name
+A2G_Altitude_BASE.init_pos       = {0.65} -- {0, -1.345,0}
+A2G_Altitude_BASE.element_params = {"altitudeDeclutt"}
+A2G_Altitude_BASE.controllers    = {{"parameter_compare_with_number", 0, 1}}
 AddHudElement(A2G_Altitude_BASE)
 
-local A2G_Altitude                                                  = add_text_hud("A", 0, -0.1, A2G_Altitude_BASE  , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+local A2G_Altitude          = add_text_hud("A", 0, -0.15, A2G_Altitude_BASE, "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+A2G_Altitude.element_params = {"HUDBrightness", "altMode"}
+A2G_Altitude.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 1}}
 
-local A2G_Altitude_Readout                                 = add_text_hud_param(0, -0.2, "ALTITUDE_HUD","HUDBrightness", "%0.0f", A2G_Altitude_BASE , HUD_strdefs_digit, "Gripen_Font_green")
+local A2G_Altitude_Readout          = add_text_hud_param(0, -0.21, "txtAlt", "HUDBrightness", "%0.0f", A2G_Altitude_BASE, HUD_strdefs_digit, "Gripen_Font_green")
+A2G_Altitude_Readout.element_params = {"HUDBrightness", "altMode", "txtAlt"}
+A2G_Altitude_Readout.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 1}, {"text_using_parameter", 2}}
 
+local A2G_RAltitude          = add_text_hud("RA", 0, -0.15, A2G_Altitude_BASE, "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
+A2G_RAltitude.element_params = {"HUDBrightness", "altMode"}
+A2G_RAltitude.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 2}}
+
+local A2G_RAltitude_Readout          = add_text_hud_param(0, -0.21, "txtRalt", "HUDBrightness", "%0.0f", A2G_Altitude_BASE, HUD_strdefs_digit, "Gripen_Font_green")
+A2G_RAltitude_Readout.element_params = {"HUDBrightness", "altMode", "txtRalt"}
+A2G_RAltitude_Readout.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 2}, {"text_using_parameter", 2}}
 
 
 local SpeedScaleMask                                         = CreateElement "ceMeshPoly"                -- change shape 
@@ -501,7 +599,7 @@ SpeedScaleMask.init_pos                                        = {0, 0, 0}
 SpeedScaleMask.init_rot                                        = {0, 0, 15}
 SpeedScaleMask.h_clip_relation                   = h_clip_relations.INCREASE_IF_LEVEL 
 SpeedScaleMask.level                                           = HUD_DEFAULT_LEVEL
---SpeedScaleMask.element_params                        = {"HUD_MODE"}
+--SpeedScaleMask.element_params                        = {"masterMode"}
 --SpeedScaleMask.controllers                                = { {"parameter_in_range",0, -1,7}  }
 SpeedScaleMask.isvisible                                = false
 Add(SpeedScaleMask)
@@ -565,10 +663,81 @@ AddHudElement(GCW_Arrow_R)
 
 
 
+-- HUD RWR
+local RWRBase          = CreateElement "ceSimple"
+RWRBase.name           = create_guid_string()
+RWRBase.parent_element = HUD_BASE.name
+RWRBase.init_pos       = {.7, -1.1}
+RWRBase.element_params = {"currentPhase", "activeRWRThreats"}
+RWRBase.controllers    = {{"parameter_in_range", 0, 5.9, 8.1}, {"parameter_in_range", 1, 0, 99}}
+AddHudElement(RWRBase)
+
+for i = 0, 90, 90 do
+	local RWRCross          = CreateElement "ceSimpleLineObject"
+	RWRCross.name           = create_guid_string()
+	RWRCross.material       = MakeMaterial(nil, {0, 255, 0, 255})
+	RWRCross.width          = .003
+	RWRCross.init_rot       = {i}
+	RWRCross.vertices       = {{-.6465 * math.rad(2.5 / 2) * 10}, {.6465 * math.rad(2.5 / 2) * 10}}
+	RWRCross.parent_element = RWRBase.name
+	RWRCross.element_params = {"HUDBrightness"}
+	RWRCross.controllers    = {{"opacity_using_parameter", 0}}
+	AddHudElement(RWRCross)
+end
+
+for i = 1, 20 do
+	local index = ""
+	if i < 10 then
+		index = "_0" .. i .. "_"
+	else
+		index = "_" .. i .. "_"
+	end
+
+	local baseName = "RWR_Contact_" .. index
+	local param = "RWR_CONTACT" .. index
 
 
 
+	local rotBase          = CreateElement "ceSimple"
+	rotBase.name           = baseName .. "Base"
+	rotBase.parent_element = RWRBase.name
+	rotBase.element_params = {param .. "heading", param .. "POWER", param .. "threat", "HUDBrightness"}
+	rotBase.controllers    = {{"rotate_using_parameter", 0, -1}, {"parameter_in_range", 1, 0, 1.1}, {"parameter_compare_with_number", 2, 1}, {"opacity_using_parameter", 3}}
+	AddHudElement(rotBase)
 
+
+	local powerBase          = Copy(rotBase)
+	powerBase.name           = baseName .. "Ground_Power_Base"
+	powerBase.init_pos       = {0, .6465 * math.rad(2.5 / 2) * 10}
+	powerBase.parent_element = rotBase.name
+	powerBase.element_params = {param .. "range", "HUDBrightness"}
+	powerBase.controllers    = {{"move_up_down_using_parameter", 0, 0.4}, {"opacity_using_parameter", 1}}
+	AddHudElement(powerBase)
+
+	for j = 0, 7 do
+		local starLine          = CreateElement "ceSimpleLineObject"
+		starLine.name           = create_guid_string()
+		starLine.material       = MakeMaterial(nil, {0, 255, 0, 255})
+		starLine.width          = .003
+		starLine.vertices       = {{.6465 * math.rad(.1 / 2) * 10}, {.6465 * math.rad(.3 / 2) * 10}}
+		starLine.init_rot       = {j * 45}
+		starLine.parent_element = baseName .. "Ground_Power_Base"
+		starLine.element_params = {param .. "heading", param .. "launchBlink", "HUDBrightness"}
+		starLine.controllers    = {{"rotate_using_parameter", 0, 1}, {"parameter_compare_with_number", 1, 1}, {"opacity_using_parameter", 2}}
+		AddHudElement(starLine)
+	end
+
+
+	local missileLine          = CreateElement "ceSimpleLineObject"
+	missileLine.name           = create_guid_string()
+	missileLine.material       = MakeMaterial(nil, {0, 255, 0, 255})
+	missileLine.parent_element = baseName .. "Base"
+	missileLine.width          = .003
+	missileLine.vertices       = {{0, .6465 * math.rad(2.5 / 2) * 10}, {0, 0}}
+	missileLine.element_params = {param .. "launch", "HUDBrightness"}
+	missileLine.controllers    = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+	AddHudElement(missileLine)
+end
 
 
 
@@ -583,7 +752,7 @@ PosPitch175_Base.init_pos                                                = {0, 0
 PosPitch175_Base.init_rot                                                = {5, 0, 0}
 PosPitch175_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch175_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch175_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch175_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch175_Base)
 
 
@@ -620,7 +789,7 @@ PosPitch155_Base.init_pos                                                = {0, 0
 PosPitch155_Base.init_rot                                                = {25, 0, 0}
 PosPitch155_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch155_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch155_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch155_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch155_Base)
 
 
@@ -660,7 +829,7 @@ PosPitch135_Base.init_pos                                                = {0, 0
 PosPitch135_Base.init_rot                                                = {45, 0, 0}
 PosPitch135_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch135_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch135_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch135_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch135_Base)
 
 
@@ -698,7 +867,7 @@ PosPitch115_Base.init_pos                                                = {0, 0
 PosPitch115_Base.init_rot                                                = {65, 0, 0}
 PosPitch115_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch115_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch115_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch115_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch115_Base)
 
 
@@ -735,7 +904,7 @@ PosPitch95_Base.init_pos                                                = {0, 0}
 PosPitch95_Base.init_rot                                                = {85, 0, 0}
 PosPitch95_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch95_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch95_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch95_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch95_Base)
 
 
@@ -773,7 +942,7 @@ PosPitch75_Base.init_pos                                                = {0, 0}
 PosPitch75_Base.init_rot                                                = {105, 0, 0}
 PosPitch75_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch75_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch75_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch75_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch75_Base)
 
 
@@ -809,7 +978,7 @@ PosPitch55_Base.init_pos                                                = {0, 0}
 PosPitch55_Base.init_rot                                                = {125, 0, 0}
 PosPitch55_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch55_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch55_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch55_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch55_Base)
 
 
@@ -845,7 +1014,7 @@ PosPitch35_Base.init_pos                                                = {0, 0}
 PosPitch35_Base.init_rot                                                = {145, 0, 0}
 PosPitch35_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch35_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch35_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch35_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch35_Base)
 
 
@@ -883,7 +1052,7 @@ PosPitch15_Base.init_pos                                                = {0, 0}
 PosPitch15_Base.init_rot                                                = {165, 0, 0}
 PosPitch15_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch15_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch15_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch15_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch15_Base)
 
 
@@ -919,7 +1088,7 @@ PosPitch185_Base.init_pos                                                = {0, 0
 PosPitch185_Base.init_rot                                                = {-15, 0, 0}
 PosPitch185_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch185_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch185_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch185_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch185_Base)
 
 
@@ -955,7 +1124,7 @@ PosPitch205_Base.init_pos                                                = {0, 0
 PosPitch205_Base.init_rot                                                = {-35, 0, 0}
 PosPitch205_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch205_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch205_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch205_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch205_Base)
 
 
@@ -993,7 +1162,7 @@ PosPitch225_Base.init_pos                                                = {0, 0
 PosPitch225_Base.init_rot                                                = {-55, 0, 0}
 PosPitch225_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch225_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch225_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch225_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch225_Base)
 
 
@@ -1029,7 +1198,7 @@ PosPitch245_Base.init_pos                                                = {0, 0
 PosPitch245_Base.init_rot                                                = {-75, 0, 0}
 PosPitch245_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch245_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch245_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch245_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch245_Base)
 
 
@@ -1065,7 +1234,7 @@ PosPitch265_Base.init_pos                                                = {0, 0
 PosPitch265_Base.init_rot                                                = {-95, 0, 0}
 PosPitch265_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch265_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch265_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch265_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch265_Base)
 
 
@@ -1103,7 +1272,7 @@ PosPitch285_Base.init_pos                                                = {0, 0
 PosPitch285_Base.init_rot                                                = {-115, 0, 0}
 PosPitch285_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch285_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch285_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch285_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch285_Base)
 
 
@@ -1139,7 +1308,7 @@ PosPitch305_Base.init_pos                                                = {0, 0
 PosPitch305_Base.init_rot                                                = {-135, 0, 0}
 PosPitch305_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch305_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch305_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch305_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch305_Base)
 
 
@@ -1175,7 +1344,7 @@ PosPitch325_Base.init_pos                                                = {0, 0
 PosPitch325_Base.init_rot                                                = {-155, 0, 0}
 PosPitch325_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch325_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch325_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch325_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch325_Base)
 
 
@@ -1213,7 +1382,7 @@ PosPitch345_Base.init_pos                                                = {0, 0
 PosPitch345_Base.init_rot                                                = {-175, 0, 0}
 PosPitch345_Base.parent_element                                = PositivePitchLinesHUD.name
 --PosPitch345_Base.element_params                                 = {"ROLL_HUD","PITCH_HUD"}
---PosPitch345_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--PosPitch345_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(PosPitch345_Base)
 
 
@@ -1252,7 +1421,7 @@ NegPitch175_Base.init_pos                                                = {0, 0
 NegPitch175_Base.init_rot                                                = {-5, 0, 0}
 NegPitch175_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch175_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch175_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch175_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch175_Base)
 
 
@@ -1289,7 +1458,7 @@ NegPitch155_Base.init_pos                                                = {0, 0
 NegPitch155_Base.init_rot                                                = {-25, 0, 0}
 NegPitch155_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch155_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch155_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch155_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch155_Base)
 
 
@@ -1329,7 +1498,7 @@ NegPitch135_Base.init_pos                                                = {0, 0
 NegPitch135_Base.init_rot                                                = {-45, 0, 0}
 NegPitch135_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch135_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch135_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch135_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch135_Base)
 
 
@@ -1369,7 +1538,7 @@ NegPitch115_Base.init_pos                                                = {0, 0
 NegPitch115_Base.init_rot                                                = {-65, 0, 0}
 NegPitch115_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch115_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch115_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch115_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch115_Base)
 
 
@@ -1405,7 +1574,7 @@ NegPitch95_Base.init_pos                                                = {0, 0}
 NegPitch95_Base.init_rot                                                = {-85, 0, 0}
 NegPitch95_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch95_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch95_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch95_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch95_Base)
 
 
@@ -1443,7 +1612,7 @@ NegPitch75_Base.init_pos                                                = {0, 0}
 NegPitch75_Base.init_rot                                                = {-105, 0, 0}
 NegPitch75_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch75_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch75_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch75_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch75_Base)
 
 
@@ -1481,7 +1650,7 @@ NegPitch55_Base.init_pos                                                = {0, 0}
 NegPitch55_Base.init_rot                                                = {-125, 0, 0}
 NegPitch55_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch55_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch55_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch55_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch55_Base)
 
 
@@ -1517,7 +1686,7 @@ NegPitch35_Base.init_pos                                                = {0, 0}
 NegPitch35_Base.init_rot                                                = {-145, 0, 0}
 NegPitch35_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch35_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch35_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch35_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch35_Base)
 
 
@@ -1555,7 +1724,7 @@ NegPitch15_Base.init_pos                                                = {0, 0}
 NegPitch15_Base.init_rot                                                = {-165, 0, 0}
 NegPitch15_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch15_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch15_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch15_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch15_Base)
 
 
@@ -1591,7 +1760,7 @@ NegPitch185_Base.init_pos                                                = {0, 0
 NegPitch185_Base.init_rot                                                = {15, 0, 0}
 NegPitch185_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch185_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch185_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch185_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch185_Base)
 
 
@@ -1627,7 +1796,7 @@ NegPitch205_Base.init_pos                                                = {0, 0
 NegPitch205_Base.init_rot                                                = {35, 0, 0}
 NegPitch205_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch205_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch205_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch205_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch205_Base)
 
 
@@ -1665,7 +1834,7 @@ NegPitch225_Base.init_pos                                                = {0, 0
 NegPitch225_Base.init_rot                                                = {55, 0, 0}
 NegPitch225_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch225_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch225_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch225_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch225_Base)
 
 
@@ -1703,7 +1872,7 @@ NegPitch245_Base.init_pos                                                = {0, 0
 NegPitch245_Base.init_rot                                                = {75, 0, 0}
 NegPitch245_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch245_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch245_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch245_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch245_Base)
 
 
@@ -1739,7 +1908,7 @@ NegPitch265_Base.init_pos                                                = {0, 0
 NegPitch265_Base.init_rot                                                = {95, 0, 0}
 NegPitch265_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch265_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch265_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch265_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch265_Base)
 
 
@@ -1777,7 +1946,7 @@ NegPitch285_Base.init_pos                                                = {0, 0
 NegPitch285_Base.init_rot                                                = {115, 0, 0}
 NegPitch285_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch285_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch285_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch285_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch285_Base)
 
 
@@ -1815,7 +1984,7 @@ NegPitch305_Base.init_pos                                                = {0, 0
 NegPitch305_Base.init_rot                                                = {135, 0, 0}
 NegPitch305_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch305_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch305_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch305_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch305_Base)
 
 
@@ -1851,7 +2020,7 @@ NegPitch325_Base.init_pos                                                = {0, 0
 NegPitch325_Base.init_rot                                                = {155, 0, 0}
 NegPitch325_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch325_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch325_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch325_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch325_Base)
 
 
@@ -1889,7 +2058,7 @@ NegPitch345_Base.init_pos                                                = {0, 0
 NegPitch345_Base.init_rot                                                = {175, 0, 0}
 NegPitch345_Base.parent_element                                = NegativePitchLinesHUD.name
 --NegPitch345_Base.element_params                                 = {"ROLL_HUD","NegPitch_HUD"}
---NegPitch345_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.644}}
+--NegPitch345_Base.controllers                                        = {{"rotate_using_parameter" ,0, 1.00},{"move_up_down_using_parameter",1, -0.6465}}
 AddHudElement(NegPitch345_Base)
 
 
@@ -1920,4 +2089,3 @@ NegPitch6_345.init_rot                        = {0, 0, 0}
 NegPitch7_345                                        = add_text_hud("-70", 0, 0, NegPitch345_Base , "Gripen_Font_green", HUD_pitch_digit, "CenterCenter")
 NegPitch7_345.init_pos                        = {0, 1.65, 0.10}
 NegPitch7_345.init_rot                        = {0, 0, 0}
-

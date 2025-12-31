@@ -21,8 +21,6 @@ GlowEffect.level			= LCP_DEFAULT_LEVEL
 --GlowEffect.change_opacity	= false
 --GlowEffect.collimated 		= false
 GlowEffect.isvisible		= true
-GlowEffect.element_params    = {"LCP_BRIGHTNESS" }
-GlowEffect.controllers       = {{"opacity_using_parameter", 0}}
 Add(GlowEffect)
 
 local AlignLeft = -0.75

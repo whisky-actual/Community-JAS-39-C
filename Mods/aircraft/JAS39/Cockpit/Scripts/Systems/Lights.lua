@@ -70,7 +70,7 @@ dev:listen_command(keys.LandingTaxiLightsOff)
 dev:listen_command(keys.Main)  
 dev:listen_command(deviceCommands.Main)  
 
-local LD_BRIGHTNESS = get_param_handle("LD_BRIGHTNESS")
+local LDBrightness = get_param_handle("LDBrightness")
 
 local landing_lights_state = 0              -- 0: off, 1: on
 local taxi_lights_state = 0                 -- 0: off, 1: on
@@ -301,8 +301,8 @@ function interior_lights()
 	local floodlight_status = get_cockpit_draw_argument_value(180)
 
 	if get_param_handle("mainpower"):get() == 1 then	
-		set_aircraft_draw_argument_value(210,LD_BRIGHTNESS:get())
-		set_aircraft_draw_argument_value(212,LD_BRIGHTNESS:get())
+		set_aircraft_draw_argument_value(210, 1 - LDBrightness:get())
+		set_aircraft_draw_argument_value(212, 1 - LDBrightness:get())
 		FLOOD_LIGHT:set(tempfloodlight)
 		BACK_LIGHTS:set(tempbacklight)
 		INDICATOR_LIGHTS:set(tempindlight)

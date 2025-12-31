@@ -3,19 +3,19 @@ dofile(LockOn_Options.script_path .. "devices.lua")
 
 
 
-local updateTimeStep = 1/180 --Refresh rate of device script.
+local updateTimeStep = 1 / 180 -- Refresh rate of device script.
 make_default_activity(updateTimeStep)
 
 
 local FD = GetSelf()
 
 
---FD:listen_command(nil)
+-- FD:listen_command(nil)
 
 
-local pCAS    = get_param_handle("CAS")
-local txtCAS = get_param_handle("txtCAS")
-local txtGS = get_param_handle("txtGS")
+local pCAS         = get_param_handle("CAS")
+local txtCAS       = get_param_handle("txtCAS")
+local txtGS        = get_param_handle("txtGS")
 local machWhole    = get_param_handle("machWhole")
 local machDecimals = get_param_handle("machDecimals")
 
@@ -36,7 +36,7 @@ local baseData = get_base_data()
 
 
 local MS_TO_KTS = 1.94384449
-local M_TO_FT = 3.2808399
+local M_TO_FT = 3.28083989501312335958
 
 
 local CAS, selfVelL, selfVelV, selfVelH, GS
@@ -47,12 +47,12 @@ local baroAlt, rAlt
 
 
 function post_initialize()
-	show_param_handles_list(true) --For testing.
+	show_param_handles_list(true) -- For testing.
 end
 
 function update()
 	CAS = baseData.getIndicatedAirSpeed() * MS_TO_KTS
-	selfVelL, selfVelV, selfVelH = baseData.getSelfAirspeed() --Prereq for ground speed in kts.
+	selfVelL, selfVelV, selfVelH = baseData.getSelfAirspeed() -- Prereq for ground speed in kts.
 	GS = math.sqrt(selfVelL^2 + selfVelH^2) * MS_TO_KTS
 
 	if CAS > 80 then
@@ -136,7 +136,7 @@ function update()
 end
 
 function SetCommand(command, value)
-	
+
 end
 
 

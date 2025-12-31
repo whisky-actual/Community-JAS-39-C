@@ -394,7 +394,8 @@ end
 
 
 
-function update()		
+function update()
+	get_param_handle("RWRPower"):set(mainpower:get())
 
 	sounds()
 	throttlestop()

@@ -13,24 +13,21 @@ GlowEffect.primitivetype 	= "triangles"
 GlowEffect.vertices	   	= { {-1.0 , 1.5 }, { 1.0,1.5}, { 1.0,-1.5}, {-1.0,-1.5}, }
 GlowEffect.indices			= {0, 1, 2, 0, 2, 3}
 GlowEffect.init_pos		= {0, 0, 0}
-GlowEffect.material		= MakeMaterial(nil,{0, 255, 0, 3})	--RGBA
+GlowEffect.material		= MakeMaterial(nil,{0, 255, 0, 4})	--RGBA
 GlowEffect.parent_element	= UCP_BASE.name
 GlowEffect.h_clip_relation  = h_clip_relations.REWRITE_LEVEL
 GlowEffect.level			= UCP_DEFAULT_LEVEL
 --GlowEffect.change_opacity	= false
 --GlowEffect.collimated 		= false
 GlowEffect.isvisible		= true
-GlowEffect.element_params    = {"UCP_BRIGHTNESS" }
-GlowEffect.controllers       = {{"opacity_using_parameter", 0}}
 Add(GlowEffect)
 
 
 
 local RowMargin = -0.5
 
-for i = -5, -1 do
+for i = -6, -1 do
 	local j = math.abs(i)
 
-	text_param_with_opacity(-1, 1.6 - RowMargin * i, "UCP_BRIGHTNESS", "UCPRow"..j, "%0.23s", UCP_BASE, ucp_strdefs_digit, "Gripen_Font_UCP", "LeftLeft")
-
+	text_param_with_opacity(-1, 1.6 - RowMargin * i, "UCP_BRIGHTNESS", "UCPRow" .. j, "%0.23s", UCP_BASE, ucp_strdefs_digit, "Gripen_Font_UCP", "LeftLeft")
 end

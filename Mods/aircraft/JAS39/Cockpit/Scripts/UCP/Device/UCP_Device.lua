@@ -1,9 +1,11 @@
 dofile(LockOn_Options.script_path .. "command_defs.lua")
 dofile(LockOn_Options.script_path .. "devices.lua")
+dofile(LockOn_Options.script_path .. "utils.lua")
+dofile(LockOn_Options.script_path .. "Systems/Navigation.lua")
 
 
 
-local updateTimeStep = 1/60 --Refresh rate of device script.
+local updateTimeStep = 1 / 60 -- Refresh rate of device script.
 make_default_activity(updateTimeStep)
 
 
@@ -28,7 +30,7 @@ UCP:listen_command(deviceCommands.UCP_L)
 UCP:listen_command(deviceCommands.UCP_CLR)
 UCP:listen_command(deviceCommands.UCP_Brightness)
 UCP:listen_command(deviceCommands.UCP_Cursor)
---TODO add the following keybinds:
+-- TODO add the following keybinds:
 UCP:listen_command(keys.UCP_MENU)
 UCP:listen_command(keys.UCP_1)
 UCP:listen_command(keys.UCP_2)
@@ -58,113 +60,269 @@ local UCPRow6 = get_param_handle("UCPRow6")
 local desiredHMDBrightness = get_param_handle("desiredHMDBrightness")
 
 
-local menu = 0
-local arrowRow = 0
+local loopStart = 0
 
-local tempHMDBrightness = 0
+local menu = 0 -- 0: Nothing, -1: Status info, 1: MENU, 2: MISSION, 3: DAT
+local carretRow = 0
+
+local UCPRows = {}
+local carretAvail = {}
+
+local prevCursVal = 0
+
+local scrollableUp = false
+local scrollableDown = false
+local scroll = 0
+
+local changeWPType = {}
+local changeWPTypeCounter = 0
 
 
 
 function post_initialize()
-	UCP:performClickableAction(deviceCommands.UCP_Brightness, get_param_handle("LD_BRIGHTNESS"):get(), true)
+	get_param_handle("UCPBrightness"):set(get_param_handle("LDBrightness"):get())
+	get_param_handle("UCP_BRIGHTNESS"):set(1)
 
 
 
-	UCPRow1:set("121750A ")
-	UCPRow2:set("XXXXXXXX")
-	UCPRow3:set("121500A ")
-	UCPRow4:set("        ")
-	UCPRow5:set("MASTR 10")
-	UCPRow6:set("--------")
-
-
-
-	tempHMDBrightness = desiredHMDBrightness:get()
+	menu = -1
 end
 
 function update()
-	
+	if menu == -1 then
+		UCPRows[1] = "121500F "
+		UCPRows[2] = "42{    U"
+		UCPRows[3] = "--------"
+		UCPRows[4] = "G       "
+		UCPRows[5] = "        "
+		UCPRows[6] = get_param_handle("nextWPName"):get() .. "      "
+
+		carretAvail = {}
+		scrollableUp = false
+		scrollableDown = false
+	elseif menu == 0 then
+		for i = 1, 6 do UCPRows[i] = "        " end
+
+		carretAvail = {}
+		scrollableUp = false
+		scrollableDown = false
+	elseif menu == 1 then
+		UCPRows[1] = "  MENU  "
+		UCPRows[2] = " COM    "
+		UCPRows[3] = " MISSION"
+		UCPRows[4] = " WEAPONS"
+		UCPRows[5] = " EWS    "
+		UCPRows[6] = "        "
+
+		carretAvail = {2, 3, 4, 5}
+		scrollableUp = false
+		scrollableDown = false
+	elseif menu == 2 then
+		if scroll == 0 then
+			UCPRows[1 - scroll] = "MISSION "
+		end
+
+		carretAvail = {}
+
+		for i = 1, #get_mission_route() or 39 do
+			local j = i + 1 - scroll
+			if next(changeWPType) ~= nil and j == carretRow and math.floor(changeWPTypeCounter * 2) % 2 == 0 then
+				UCPRows[j] = "        "
+			else
+				UCPRows[j] = " " .. waypoints[i].name:get()
+			end
+			if j < 7 then
+				table.insert(carretAvail, j)
+			end
+		end
+
+		if get_param_handle("numOfWP"):get() >= 6 + scroll then
+			scrollableDown = true
+		else
+			scrollableDown = false
+		end
+
+		if UCPRows[2] ~= " " .. waypoints[1].name:get() then
+			scrollableUp = true
+		else
+			scrollableUp = false
+		end
+	elseif menu == 3 then
+		UCPRows[1] = "HMD     "
+		UCPRows[2] = " BRIGHT "
+		UCPRows[3] = " DIM    "
+		UCPRows[4] = "        "
+		UCPRows[5] = "        "
+		UCPRows[6] = "        "
+
+		carretAvail = {2, 3}
+		scrollableUp = false
+		scrollableDown = false
+	end
+
+	updateCarret()
+
+	if next(changeWPType) ~= nil then
+		if changeWPType[3] ~= carretRow then
+			waypoints[changeWPType[1]].type:set(changeWPType[4])
+			changeWPTypeCounter = 0
+			changeWPType = {}
+		else
+			if changeWPTypeCounter >= 5 then
+				changeWPTypeCounter = 0
+				changeWPType = {}
+			else
+				changeWPTypeCounter = changeWPTypeCounter + updateTimeStep
+			end
+		end
+	end
+
+	UCPRow1:set(UCPRows[1])
+	UCPRow2:set(UCPRows[2])
+	UCPRow3:set(UCPRows[3])
+	UCPRow4:set(UCPRows[4])
+	UCPRow5:set(UCPRows[5])
+	UCPRow6:set(UCPRows[6])
+
+
+	-- printButBetter("cR: " .. carretRow, "cR")
+	-- printButBetter("cA[1]: " .. carretAvail[1], "cA[1]")
+	-- for k,v in ipairs(carretAvail) do
+	--     printButBetter(k.." = "..v, "cA" .. k)
+	-- end
+	-- printButBetter("sD: " .. tostring(scrollableDown), "sD")
 end
 
 function SetCommand(command, value)
-	if command == deviceCommands.UCP_DAT and menu ~= 1 then
-		menu = 1
-		UCPRow1:set("HMD     ")
-		UCPRow2:set(" BRIGHT ")
-		UCPRow3:set(" DIM    ")
-		UCPRow4:set("        ")
-		UCPRow5:set("        ")
-		UCPRow6:set("        ")
+	if get_param_handle("mainpower"):get() == 1 then
+		if command == deviceCommands.UCP_Cursor then
+			if value > prevCursVal then
+				if scrollableUp and carretRow == carretAvail[1] then
+					scroll = scroll - 1
 
-		addArrowToRow(UCPRow2)
-		arrowRow = 2
-	end
-
-	if command == deviceCommands.UCP_Cursor then
-		if menu == 1 then
-			if arrowRow == 2 then
-				removeArrowToRow(UCPRow2)
-				addArrowToRow(UCPRow3)
-				arrowRow = 3
-			elseif arrowRow == 3 then
-				removeArrowToRow(UCPRow3)
-				addArrowToRow(UCPRow2)
-				arrowRow = 2
-			end
-		end
-	end
-
-	if command == deviceCommands.UCP_AMFM_ENT then
-		if menu == 1 then
-			if arrowRow == 2 then
-				if desiredHMDBrightness:get() == 0 then
-					desiredHMDBrightness:set(0.125)
+					if menu == 2 then
+						carretRow = 2
+					end
 				else
-					tempHMDBrightness = desiredHMDBrightness:get() * 2
-					desiredHMDBrightness:set(tempHMDBrightness <= 1 and tempHMDBrightness or 1)
+					carretRow = wrapValue(carretAvail[1], carretAvail[#carretAvail] + 1, carretRow - 1)
 				end
-			elseif arrowRow == 3 then
-				tempHMDBrightness = desiredHMDBrightness:get() * 0.5
-				desiredHMDBrightness:set(tempHMDBrightness >= 0.125 and tempHMDBrightness or 0)
+			else
+				if scrollableDown and carretRow == 6 then
+					scroll = scroll + 1
+				else
+					carretRow = wrapValue(carretAvail[1] - 1, carretAvail[#carretAvail], carretRow + 1)
+				end
 			end
+			prevCursVal = value
+		end
+
+
+		if command == deviceCommands.UCP_MENU then
+			if menu ~= 1 then
+				menu = 1
+				carretRow = 2
+			else
+				menu = -1
+			end
+		end
+
+		if command == deviceCommands.UCP_AMFM_ENT then
+			if menu == 1 then
+				if carretRow == 2 or (carretRow > 3 and carretRow <= 5) then
+					menu = 0
+				elseif carretRow == 3 then
+					menu = 2
+					carretRow = 2
+				end
+			elseif menu == 2 then
+				if next(changeWPType) ~= nil then
+					changeWPTypeCounter = 5
+				end
+			elseif menu == 3 then
+				if carretRow == 2 then
+					desiredHMDBrightness:set(1)
+				else
+					desiredHMDBrightness:set(.0625)
+				end
+			end
+		end
+
+		if command == deviceCommands.UCP_2 or command == keys.UCP_2 then
+			if menu ~= 2 then
+				if get_param_handle("nextWPType"):get() == 3 then
+					loopStart = get_param_handle("selectedWP"):get()
+				else
+					loopStart = get_param_handle("selectedWP"):get() + 1
+				end
+
+				changeWP(2, loopStart)
+			else
+				changeWPType = {carretRow - 1 + scroll, 2, carretRow, waypoints[carretRow - 1 + scroll].type:get()}
+				waypoints[changeWPType[1]].type:set(changeWPType[2])
+			end
+		end
+
+		if command == deviceCommands.UCP_5 or command == keys.UCP_5 then
+			if menu ~= 2 then
+				if get_param_handle("nextWPType"):get() == 3 then
+					loopStart = get_param_handle("selectedWP"):get()
+				else
+					loopStart = get_param_handle("selectedWP"):get() + 1
+				end
+
+				changeWP(1, loopStart)
+			else
+				changeWPType = {carretRow - 1 + scroll, 1, carretRow, waypoints[carretRow - 1 + scroll].type:get()}
+				waypoints[changeWPType[1]].type:set(changeWPType[2])
+			end
+		end
+
+		if command == deviceCommands.UCP_L or command == keys.UCP_L then
+			if menu ~= 2 then
+				changeWP(3)
+			else
+				changeWPType = {carretRow - 1 + scroll, 3, carretRow, waypoints[carretRow - 1 + scroll].type:get()}
+				waypoints[changeWPType[1]].type:set(changeWPType[2])
+			end
+		end
+
+		if command == deviceCommands.UCP_DAT then
+			menu = menu ~= 3 and 3 or -1
+
+			carretRow = 2
 		end
 	end
 
-	if command == deviceCommands.UCP_MENU then
-		menu = 0
-		UCPRow1:set("121750A ")
-		UCPRow2:set("XXXXXXXX")
-		UCPRow3:set("121500A ")
-		UCPRow4:set("        ")
-		UCPRow5:set("MASTR 10")
-		UCPRow6:set("--------")
+
+
+	if command == deviceCommands.UCP_Brightness then
+		get_param_handle("UCPBrightness"):set(1 - value)
 	end
-
--------------------------------------------------------
---Test Functions
---print_message_to_user(command)
--------------------------------------------------------	
-	if command == deviceCommands.UCP_L then
-		dispatch_action(OP_PHASES, 10060)
-	end
-
-	if command == (deviceCommands.UCP_Brightness) then
-		get_param_handle("UCP_BRIGHTNESS"):set(value)
-		--print_message_to_user(value)
-
-	end
-
-
 end
 
 
-function addArrowToRow(row)
-	row:set("-" .. row:get().sub(row:get(), 2, 8))
-	print_message_to_user(row:get().sub(row:get(), 2, 8))
+function changeWP(WPType, startIndex)
+	local num = get_param_handle("numOfWP"):get()
+	if num == 0 then return end
+
+	for k = 0, num - 1 do
+		local i = (((startIndex or (get_param_handle("selectedWP"):get() % num) + 1) - 1 + k) % num) + 1
+		if get_param_handle("WP_" .. i .. "_type"):get() == WPType then
+			get_param_handle("selectedWP"):set(i)
+			return
+		end
+	end
 end
 
-function removeArrowToRow(row)
-	row:set(" " .. row:get().sub(row:get(), 2, 8))
+
+function updateCarret()
+	for i, el in ipairs(UCPRows) do
+		if tableContains(carretAvail, i) and carretRow == i then
+			UCPRows[i] = "}" .. string.sub(el, 2, 8)
+		elseif string.sub(el, 1, 2) == "}" then
+			UCPRows[i] = " " .. string.sub(el, 2, 8)
+		end
+	end
 end
 
 

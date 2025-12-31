@@ -42,9 +42,10 @@ local RWR_BACKGROUND = get_param_handle("RWR_BACKGROUND")
 local RDR_BACKGROUND = get_param_handle("RDR_BACKGROUND")
 
 local PLAYER_SELECTED_STATION = get_param_handle("PLAYER_SELECTED_STATION")
-local LD_BRIGHTNESS = get_param_handle("LD_BRIGHTNESS")
-local CD_BRIGHTNESS = get_param_handle("CD_BRIGHTNESS")
-local RD_BRIGHTNESS = get_param_handle("RD_BRIGHTNESS")
+local LDBrightness  = get_param_handle("LDBrightness")
+local CDBrightness = get_param_handle("CDBrightness")
+local RDBrightness = get_param_handle("RDBrightness")
+get_param_handle("ONE"):set(1)
 
 local HOURTIME = get_param_handle("HOURTIME")
 local MINUTESTIME = get_param_handle("MINUTESTIME")
@@ -76,7 +77,7 @@ local RD_VSI_TOGGLE = get_param_handle("RD_VSI_TOGGLE")
 
 
 local HUDBrightness = get_param_handle("HUDBrightness")
-HUDBrightness:set(1)
+
 
 -- commands =====================================================
 -- LEFT DISPLAY ===================
@@ -711,44 +712,23 @@ if get_param_handle("mainpower"):get() == 1 then
 	
 	
 	
-	if (command == keys.LD_Brightness_Down) or (command == deviceCommands.LD_Brightness_Down) then
-		if LD_BRIGHTNESS:get() > 0.051 then
-			LD_BRIGHTNESS:set(LD_BRIGHTNESS:get() -0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
+		if command == keys.LD_Brightness_Down or command == deviceCommands.LD_Brightness_Down then
+			LDBrightness:set(math.min(LDBrightness:get() + (1 - LDBrightness:get()) / 2, .96875)) -- f(x) = x + (1 - x) / 2
+		elseif command == keys.LD_Brightness_Up or command == deviceCommands.LD_Brightness_Up then
+			LDBrightness:set(math.max(2 * LDBrightness:get() - 1, 0)) -- f(x) = 2x - 1
 		end
-	
-	elseif (command == keys.LD_Brightness_Up) or (command == deviceCommands.LD_Brightness_Up) then
-		if LD_BRIGHTNESS:get() < 1 then
-			LD_BRIGHTNESS:set(LD_BRIGHTNESS:get() +0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
-		end
-	end
 
-	if (command == keys.CD_Brightness_Down) or (command == deviceCommands.CD_Brightness_Down) then
-		if CD_BRIGHTNESS:get() > 0.051 then
-			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() -0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
+		if command == keys.CD_Brightness_Down or command == deviceCommands.CD_Brightness_Down then
+			CDBrightness:set(math.min(CDBrightness:get() + (1 - CDBrightness:get()) / 2, .96875))
+		elseif (command == keys.CD_Brightness_Up) or (command == deviceCommands.CD_Brightness_Up) then
+			CDBrightness:set(math.max(2 * CDBrightness:get() - 1, 0))
 		end
-	
-	elseif (command == keys.CD_Brightness_Up) or (command == deviceCommands.CD_Brightness_Up) then
-		if CD_BRIGHTNESS:get() < 1 then
-			CD_BRIGHTNESS:set(CD_BRIGHTNESS:get() +0.05)
-			--print_message_to_user(LD_BRIGHTNESS:get())
-		end
-	end
 
-	if (command == keys.RD_Brightness_Down) or (command == deviceCommands.RD_Brightness_Down) then
-		if RD_BRIGHTNESS:get() > 0.051 then
-			RD_BRIGHTNESS:set(RD_BRIGHTNESS:get() -0.05)
-			--print_message_to_user(RD_BRIGHTNESS:get())
+		if command == keys.RD_Brightness_Down or command == deviceCommands.RD_Brightness_Down then
+			RDBrightness:set(math.min(RDBrightness:get() + (1 - RDBrightness:get()) / 2, .96875))
+		elseif command == keys.RD_Brightness_Up or command == deviceCommands.RD_Brightness_Up then
+			RDBrightness:set(math.max(2 * RDBrightness:get() - 1, 0))
 		end
-	
-	elseif (command == keys.RD_Brightness_Up) or (command == deviceCommands.RD_Brightness_Up) then
-		if RD_BRIGHTNESS:get() < 1 then
-			RD_BRIGHTNESS:set(RD_BRIGHTNESS:get() +0.05)
-			--print_message_to_user(RD_BRIGHTNESS:get())
-		end
-	end
 
 	
 	if command == 136 then
@@ -1039,33 +1019,47 @@ SECONDSTIME:set(frac1*59.49)
 end
 
 function BrightnessAtSpawn()
-DigitalClock()
+	DigitalClock()
 
-	if (HOURTIME:get() < 7) then
-		LD_BRIGHTNESS:set(0.05)
-	elseif (HOURTIME:get() < 8) then
-		LD_BRIGHTNESS:set(0.15)
-	elseif (HOURTIME:get() < 9) then
-		LD_BRIGHTNESS:set(0.25)
-	elseif (HOURTIME:get() < 10) then
-		LD_BRIGHTNESS:set(0.4)
-	elseif (HOURTIME:get() < 11) then
-		LD_BRIGHTNESS:set(0.6)
-	elseif (HOURTIME:get() < 14) then
-		LD_BRIGHTNESS:set(0.75)
-	elseif (HOURTIME:get() < 17) then
-		LD_BRIGHTNESS:set(0.75)	
-	elseif (HOURTIME:get() < 18) then
-		LD_BRIGHTNESS:set(0.5)	
-	elseif (HOURTIME:get() < 19) then
-		LD_BRIGHTNESS:set(0.3)	
-	elseif (HOURTIME:get() >= 19) then
-		LD_BRIGHTNESS:set(0.5)		
+
+
+	if HOURTIME:get() <= 5 then -- Might need tweaking
+		LDBrightness:set(.96875)
+	elseif HOURTIME:get() < 7 then
+		LDBrightness:set(.9375)
+	elseif HOURTIME:get() < 8 then
+		LDBrightness:set(.875)
+	elseif HOURTIME:get() < 9 then
+		LDBrightness:set(.75)
+	elseif HOURTIME:get() < 10 then
+		LDBrightness:set(.75)
+	elseif HOURTIME:get() < 11 then
+		LDBrightness:set(.75)
+	elseif HOURTIME:get() < 12 then
+		LDBrightness:set(.5)
+	elseif HOURTIME:get() < 14 then
+		LDBrightness:set(.5)
+	elseif HOURTIME:get() < 17 then
+		LDBrightness:set(.75)
+	elseif HOURTIME:get() < 18 then
+		LDBrightness:set(.875)
+	elseif HOURTIME:get() < 19 then
+		LDBrightness:set(.9375)
+	elseif HOURTIME:get() >= 19 then
+		LDBrightness:set(.96875)
 	end
-		
-	CD_BRIGHTNESS:set(LD_BRIGHTNESS:get())
-	RD_BRIGHTNESS:set(LD_BRIGHTNESS:get())
-	dev:performClickableAction(deviceCommands.HUD_Brightness, 1, true)
+
+	CDBrightness:set(LDBrightness:get())
+	RDBrightness:set(LDBrightness:get())
+
+	local birth = LockOn_Options.init_conditions.birth_place
+	if birth == "GROUND_HOT" or birth == "AIR_HOT" then
+		dev:performClickableAction(deviceCommands.HUD_Brightness, 1, true)
+		HUDBrightness:set(1)
+	elseif birth == "GROUND_COLD" then
+		dev:performClickableAction(deviceCommands.HUD_Brightness, 0, true)
+		HUDBrightness:set(0)
+	end
 end
 
 function update()

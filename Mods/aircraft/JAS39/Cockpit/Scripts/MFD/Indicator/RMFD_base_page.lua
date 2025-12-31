@@ -27,4 +27,15 @@ Add(RightDisplayBase)
 dofile(LockOn_Options.script_path.."MFD/Indicator/RD_GENERAL.lua")
 dofile(LockOn_Options.script_path.."MFD/Indicator/RD_EMERGENCY_PAGE.lua")
 
- 
+
+
+local RDBrightness           = CreateElement "ceSimpleLineObject"
+RDBrightness.name            = create_guid_string()
+RDBrightness.vertices        = {{0, -aspect}, {0, aspect + .1}}
+RDBrightness.width           = 1
+RDBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
+RDBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+RDBrightness.level           = MFD_DEFAULT_LEVEL
+RDBrightness.element_params  = {"mainpower", "RDBrightness"}
+RDBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+Add(RDBrightness)

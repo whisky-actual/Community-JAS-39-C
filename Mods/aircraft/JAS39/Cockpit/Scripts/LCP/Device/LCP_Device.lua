@@ -8,7 +8,7 @@ dev = GetSelf()
 -------------------------------------------------------
 local sensor_data = get_base_data()
 
-local LCP_Brightness = get_param_handle("LCP_BRIGHTNESS")
+local LCPBrightness = get_param_handle("LCPBrightness")
 
 dev:listen_command(keys.LCP_X)	      
 dev:listen_command(keys.LCP_SYS)       
@@ -84,13 +84,16 @@ dev:listen_command(deviceCommands.LCP_CLR)
 
 
 function post_initialize()
-	dev:performClickableAction(deviceCommands.LCP_Brightness, get_param_handle("LD_BRIGHTNESS"):get(), true)
+	LCPBrightness:set(get_param_handle("LDBrightness"):get())
+	-- dev:performClickableAction(deviceCommands.LCP_Brightness, get_param_handle("LDBrightness"):get(), true)
+
+	get_param_handle("LCP_BRIGHTNESS"):set(1)
 end
 
 function SetCommand(command,value)
 
 	if command == deviceCommands.LCP_Brightness then
-		LCP_Brightness:set(value)
+		LCPBrightness:set(1 - value)
 		--print_message_to_user(value)
 	end
 	

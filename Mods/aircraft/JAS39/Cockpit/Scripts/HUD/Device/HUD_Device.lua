@@ -30,7 +30,7 @@ local ROLL_HUD  = get_param_handle("ROLL_HUD")
 local HEADING_HUD = get_param_handle("HEADING_HUD")
 
 local ALTITUDE_HUD = get_param_handle("ALTITUDE_HUD")
-local HEADING_MODE = get_param_handle("HEADING_MODE")
+local headingMode = get_param_handle("headingMode")
 
 
 local VELVEC_HUD_Y  = get_param_handle("VELVEC_HUD_Y")
@@ -129,12 +129,17 @@ function update()
         end
 
 
-        if HEADING_MODE:get() == 1 then
+        if headingMode:get() == 1 then
                 HEADING_HUD:set(360 - (sensor_data.getHeading() * RAD_TO_DEGREE))
         else        
                 HEADING_HUD:set((sensor_data.getMagneticHeading() * RAD_TO_DEGREE))
         end
 
+	if get_param_handle("masterMode"):get() > 1 then
+		get_param_handle("altitudeDeclutt"):set(1)
+	else
+		get_param_handle("altitudeDeclutt"):set(0)
+	end
 
         if get_param_handle("ALTITUDE_MODE"):get() == 1 then        -- 1 = barometric, 2 = Radar
                 ALTITUDE_HUD:set(sensor_data.getBarometricAltitude() * 3.2808399)

@@ -30,4 +30,15 @@ dofile(LockOn_Options.script_path.."MFD/Indicator/CD_GENERAL.lua")
 dofile(LockOn_Options.script_path.."MFD/Indicator/CD_EMERGENCY_PAGE.lua")
 dofile(LockOn_Options.script_path.."MFD/Indicator/CD_RWR.lua")
 
- 
+
+
+local CDBrightness           = CreateElement "ceSimpleLineObject"
+CDBrightness.name            = create_guid_string()
+CDBrightness.vertices        = {{0, -aspect}, {0, aspect + .1}}
+CDBrightness.width           = 1
+CDBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
+CDBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+CDBrightness.level           = MFD_DEFAULT_LEVEL
+CDBrightness.element_params  = {"mainpower", "CDBrightness"}
+CDBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+Add(CDBrightness)
