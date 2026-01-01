@@ -28,7 +28,7 @@ materials["DBG_GREY"]    = {5, 5, 5, 255}
 materials["DBG_BLACK"]   = {0, 0, 0, 255}
 materials["DBG_BLUE"]    = {0, 0, 100, 255}
 materials["DBG_GREEN"]   = {0, 80, 0, 255}
-materials["DBG_YELLOW"]   = {255, 194, 0, 255}
+materials["DBG_YELLOW"]   = {255 * .708375, 255 * .361306, 255 * .036889, 255}
 materials["DBG_RED"]     = {255, 0, 0, 255}
 materials["DBG_WHITE"]   = {255, 255, 255, 255}
 materials["DBG_CYAN"]    = {1, 244, 244, 255}
@@ -44,9 +44,11 @@ materials["TAN_BACKGROUND"]	 = MakeMaterial(nil,materials["TAN_COLOR"])
 
 materials["DGREEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
 materials["RWRGEEN"]     = MakeMaterial(nil, materials["BASE_GREEN"])
-materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"])
+materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"]) --MakeMaterial(nil, 255*0.708375, 255*0.361306, 255*0.036889, 255)
 materials["RWRRED"]     = MakeMaterial(nil, materials["DBG_RED"])
 materials["RWRGREY"]     = MakeMaterial(nil, materials["DBG_GREY"])
+materials["MFDBeige"]  = MakeMaterial(nil, {1 * 255, .913098 * 255, .584078 * 255, 255})
+materials["MFDGray"] = MakeMaterial(nil, {.603827 * 255, .603827 * 255, .603827 * 255, 255})
 -------FONTS-------
 local IndicationTexturesPath = LockOn_Options.script_path.."Resources/fonts/"
 
@@ -55,6 +57,7 @@ BASE_COLOR  = {36,255,113,255}
 WHITE 		= {255,255,255,255}
 RED 		= {255,0,0,255}
 BLACK 		= {0,0,0,255}
+YELLOW      = {255, 194, 0, 255}
 lcpGREEN	= {50,255,50,255}
 ucpGREEN	= {50,255,50,255}
 HORIZON_LINE_GREEN = {10,100,10,255}
@@ -414,10 +417,13 @@ local Gripen_UCP_FONT =
 
 
 Gripen_Font_black  	= MakeFont(Gripen_Font, BLACK, "Gripen_Font_black")
+Gripen_Font_Yellow  = MakeFont(Gripen_Font, materials["DBG_YELLOW"], "Gripen_Font_Yellow") --black
 Gripen_Font_white  	= MakeFont(Gripen_Font, WHITE, "Gripen_Font_white")
 Gripen_Font_HL_Green  = MakeFont(Gripen_Font, HORIZON_LINE_GREEN, "Gripen_Font_Green_HL")
 Gripen_fontLCP = MakeFont(Gripen_LCP_FONT, lcpGREEN , "Gripen_Font_LCP")
 Gripen_fontUCP = MakeFont(Gripen_UCP_FONT, lcpGREEN , "Gripen_Font_UCP")
+
+Gripen_Font_HL_Blue = MakeFont(Gripen_Font, {0, 0, 255, 255}, "Gripen_Font_Green_HL")
 fonts = {}
 
 fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_WHITE"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
@@ -429,8 +435,10 @@ fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_
 
 fonts["FONT_gripen"]   = {fontdescription["font_39"], 10, materials["DBG_BLACK"]}
 fonts["Gripen_Font_black"]  = Gripen_Font_black
+fonts["Gripen_Font_Yellow"]  = Gripen_Font_Yellow
 fonts["Gripen_Font_WHITE"]  = Gripen_Font_white
 fonts["Gripen_Font_HL_Green"]  = Gripen_Font_HL_Green
+fonts["Gripen_Font_HL_Blue"]  = Gripen_Font_HL_Blue
 fonts["Gripen_Font_LCP"]  = Gripen_fontLCP
 fonts["Gripen_Font_UCP"]  = Gripen_fontUCP
 --all vertices in files who include this file will be scaled in millyradians
@@ -917,6 +925,51 @@ function AddCircle_b(xpos, ypos, radius, border, fill, parent_element, color)
 	return rec_parent
 end
 
+function set_oval(obj, radius_outer, radius_inner, arc, sides, oval_multiplier)
+	local verts    = {}
+	local inds     = {}
+	local solid    = radius_inner == nil or radius_inner == 0
+	local arc      = arc or 360
+	if    arc > 360 then arc = 360 end
+	local count    = sides or 32 
+	local delta    = math.rad(arc/count)
+
+	local min_i    = 1
+	local max_i    = count + 1
+	verts[1] = {0,0}
+	for i=min_i,max_i do
+		if solid then
+			verts[1 + i]      = { radius_outer * math.sin(delta *(i-1)),radius_outer * math.cos(delta *(i-1)) * oval_multiplier}
+			inds[3*(i-1) + 1] = 0
+			inds[3*(i-1) + 2] = i - 1 
+			inds[3*(i-1) + 3] = i 
+		else
+			verts[2*(i - 1) + 1] = { radius_outer * math.sin(delta *(i-1)), radius_outer * math.cos(delta *(i-1)) * oval_multiplier}
+			verts[2*(i - 1) + 2] = { radius_inner * math.sin(delta *(i-1)), radius_inner * math.cos(delta *(i-1)) * oval_multiplier}
+			
+			if i == max_i  then
+			  if arc == 360 then  
+				inds[6*(i-1) + 1] = 2*(i     - 1)
+				inds[6*(i-1) + 2] = 2*(min_i - 1)
+				inds[6*(i-1) + 3] = 2*(i     - 1) + 1 
+				inds[6*(i-1) + 4] = 2*(i     - 1) + 1
+				inds[6*(i-1) + 5] = 2*(min_i - 1)
+				inds[6*(i-1) + 6] = 2*(min_i - 1) + 1 
+			  end        
+			else 
+				inds[6*(i-1) + 1] = 2*(i - 1)
+				inds[6*(i-1) + 2] = 2*(i) 
+				inds[6*(i-1) + 3] = 2*(i - 1) + 1 
+				inds[6*(i-1) + 4] = 2*(i - 1) + 1
+				inds[6*(i-1) + 5] = 2*(i) 
+				inds[6*(i-1) + 6] = 2*(i)     + 1  
+			end
+		end
+	end
+	obj.vertices         = verts              
+	obj.indices          = inds
+end
+
 function add_text(text, posx, posy, pparent, font_mat, stringdefs, valign)
 
 	local rec_parent       		= CreateElement "ceSimple"
@@ -956,11 +1009,11 @@ end
 
 function add_text_with_brightness(text, posx, posy, pparent, font_mat, stringdefs, valign)
 
-	local rec_parent       		= CreateElement "ceSimple"
-	rec_parent.name				= create_guid_string()
-	rec_parent.init_pos       	= {posx, posy}
+	local rec_parent    = CreateElement "ceSimple"
+	rec_parent.name     = create_guid_string()
+	rec_parent.init_pos = {posx, posy}
 	if pparent ~= nil then
-		rec_parent.parent_element	= pparent.name
+		rec_parent.parent_element = pparent.name
 	end
 	AddElement(rec_parent)
 	-------------------
@@ -973,7 +1026,7 @@ function add_text_with_brightness(text, posx, posy, pparent, font_mat, stringdef
 	end
 	if stringdefs == nil then
 		stringdefs = mfd_strdefs_text
-	end		
+	end
 	-------------------
 	if text ~= nil then
 		local parent          = CreateElement "ceStringPoly"
@@ -981,13 +1034,11 @@ function add_text_with_brightness(text, posx, posy, pparent, font_mat, stringdef
 		parent.material       = vfont_mat
 		parent.init_pos       = {0, 0}
 		parent.stringdefs     = stringdefs
-		parent.alignment	  = valign
-		parent.value  	      = text
+		parent.alignment      = valign
+		parent.value          = text
 		parent.parent_element = rec_parent.name
-		parent.element_params  = {"LD_BRIGHTNESS"}
-		parent.controllers	 = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 		AddElement(parent)
-		parent.level          = MFD_DEFAULT_LEVEL  
+		parent.level = MFD_DEFAULT_LEVEL
 	end
 	-------------------
 	return rec_parent
@@ -1055,8 +1106,8 @@ function green_text_param_with_brightness(posx, posy, element_parm, tformat, ppa
 		parent.parent_element = pparent.name
 	end
 	parent.formats           = {tformat} 
-	parent.element_params    = {"LD_BRIGHTNESS", element_parm,"%s"}
-	parent.controllers       = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20] ,{"text_using_parameter",1},}
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0},}
 	AddElement(parent)
 	parent.level          = MFD_DEFAULT_LEVEL  
 	-------------------
@@ -1088,8 +1139,8 @@ function green_text_param_with_cd_brightness(posx, posy, element_parm, tformat, 
 		parent.parent_element = pparent.name
 	end
 	parent.formats           = {tformat} 
-	parent.element_params    = {"CD_BRIGHTNESS", element_parm,"%s"}
-	parent.controllers       = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20] ,{"text_using_parameter",1},}
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0}}
 	AddElement(parent)
 	parent.level          = MFD_DEFAULT_LEVEL  
 	-------------------
@@ -1121,8 +1172,8 @@ function green_text_param_with_rd_brightness(posx, posy, element_parm, tformat, 
 		parent.parent_element = pparent.name
 	end
 	parent.formats           = {tformat} 
-	parent.element_params    = {"RD_BRIGHTNESS", element_parm,"%s"}
-	parent.controllers       = {Green_Bright[1],Green_Bright[2],Green_Bright[3],Green_Bright[4],Green_Bright[5],Green_Bright[6],Green_Bright[7],Green_Bright[8],Green_Bright[9],Green_Bright[10],Green_Bright[11],Green_Bright[12],Green_Bright[13],Green_Bright[14],Green_Bright[15], Green_Bright[16],Green_Bright[17],Green_Bright[18],Green_Bright[19],Green_Bright[20] ,{"text_using_parameter",1},}
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0},}
 	AddElement(parent)
 	parent.level          = MFD_DEFAULT_LEVEL  
 	-------------------
@@ -1139,25 +1190,25 @@ function white_text_param_with_brightness(posx, posy, element_parm, tformat, ppa
 	vfont_mat = fonts["FONT_GREEN"]
 	if font_mat ~= nil then
 		vfont_mat = fonts[font_mat]
-	end	
+	end
 	if stringdefs == nil then
 		stringdefs = mfd_strdefs_text
-	end	
-	
-	local parent          = CreateElement "ceStringPoly"
-	parent.name           = create_guid_string()
-	parent.material       = vfont_mat
-	parent.init_pos       = {posx, posy}
-	parent.stringdefs     = stringdefs
-	parent.alignment	  = talignment
+	end
+
+	local parent      = CreateElement "ceStringPoly"
+	parent.name       = create_guid_string()
+	parent.material   = vfont_mat
+	parent.init_pos   = {posx, posy}
+	parent.stringdefs = stringdefs
+	parent.alignment  = talignment
 	if pparent ~= nil then
 		parent.parent_element = pparent.name
 	end
-	parent.formats           = {tformat} 
-	parent.element_params    = {"LD_BRIGHTNESS", element_parm,"%s"}
-	parent.controllers       = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20] ,{"text_using_parameter",1},}
+	parent.formats        = {tformat}
+	parent.element_params = {element_parm, "%s"}
+	parent.controllers    = {{"text_using_parameter", 0}}
 	AddElement(parent)
-	parent.level          = MFD_DEFAULT_LEVEL  
+	parent.level = MFD_DEFAULT_LEVEL
 	-------------------
 	return parent
 end
@@ -1187,8 +1238,8 @@ function white_text_param_with_CD_brightness(posx, posy, element_parm, tformat, 
 		parent.parent_element = pparent.name
 	end
 	parent.formats           = {tformat} 
-	parent.element_params    = {"CD_BRIGHTNESS", element_parm,"%s"}
-	parent.controllers       = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20] ,{"text_using_parameter",1},}
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0},}
 	AddElement(parent)
 	parent.level          = MFD_DEFAULT_LEVEL  
 	-------------------
@@ -1225,8 +1276,6 @@ function add_text_with_CD_brightness(text, posx, posy, pparent, font_mat, string
 		parent.alignment	  = valign
 		parent.value  	      = text
 		parent.parent_element = rec_parent.name
-		parent.element_params  = {"CD_BRIGHTNESS"}
-		parent.controllers	 = {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20]}
 		AddElement(parent)
 		parent.level          = MFD_DEFAULT_LEVEL  
 	end
@@ -1248,6 +1297,15 @@ function AddRWRElement(object)
         object.level        = MFD_DEFAULT_LEVEL
     end
 	
+    Add(object)
+end
+
+function AddRWRElement2(object)
+	object.use_mipfilter    = true
+	object.additive_alpha   = false
+	object.change_opacity	 = false
+    object.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
+    object.level        = MFD_DEFAULT_LEVEL + 1
     Add(object)
 end
 
@@ -1334,8 +1392,6 @@ function AddCircleClip2(xpos, ypos, radius, border, parent_element, fill, color)
 		RWR_circle_i.name 			= create_guid_string()
 		RWR_circle_i.primitivetype 	= "triangles"
 		RWR_circle_i.init_pos       = {xpos, ypos}
-		RWR_circle_i.element_params    = {"LD_BRIGHTNESS"}
-		RWR_circle_i.controllers       = {{"opacity_using_parameter", 0}}	
 		RWR_circle_i.h_clip_relation   = h_clip_relations.INCREASE_IF_LEVEL 
 		RWR_circle_i.level  		 	  = MFD_DEFAULT_LEVEL  + 2
 		if fill == true then
@@ -1429,3 +1485,87 @@ function add_text_with_opacity(text, posx, posy,brightnessparam, pparent, font_m
 	return rec_parent
 end
 
+function blue_text_param_with_cd_brightness(posx, posy, element_parm, tformat, pparent, stringdefs, font_mat, talignment)
+	if tformat == nil then
+		tformat = "%.0f"
+	end
+	if talignment == nil then
+		talignment = "CenterCenter"
+	end
+	vfont_mat = fonts["FONT_BLUE"]
+	if font_mat ~= nil then
+		vfont_mat = fonts[font_mat]
+	end	
+	if stringdefs == nil then
+		stringdefs = mfd_strdefs_text
+	end	
+	
+	local parent          = CreateElement "ceStringPoly"
+	parent.name           = create_guid_string()
+	parent.material       = vfont_mat
+	parent.init_pos       = {posx, posy}
+	parent.stringdefs     = stringdefs
+	parent.alignment	  = talignment
+	if pparent ~= nil then
+		parent.parent_element = pparent.name
+	end
+	parent.formats           = {tformat} 
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0},}
+	AddElement(parent)
+	parent.level          = MFD_DEFAULT_LEVEL  
+	-------------------
+	return parent
+end
+
+
+function MakeDial(Xpos, YPos, outer_radius, inner_radius, startpoint, endpoint, line_thickness, has_inner,
+				  segmentcount, dial_param, needle_param, max_value, cmaterial, parent, material)
+
+	local OuterDial          = CreateElement "ceMeshPoly"
+	OuterDial.name           = create_guid_string()
+	OuterDial.primitivetype  = "triangles"
+	OuterDial.init_pos       = {Xpos, YPos}
+	OuterDial.init_rot       = {180 + startpoint, 0}
+	OuterDial.material       = cmaterial
+	OuterDial.parent_element = parent
+	OuterDial.element_params = {dial_param}
+	OuterDial.controllers    = {{"parameter_compare_with_number", 0, 1}}
+	set_circle(OuterDial, outer_radius, outer_radius - line_thickness, endpoint - startpoint, segmentcount)
+	AddElement(OuterDial)
+
+	if has_inner == true then
+		local InnerDial          = CreateElement "ceMeshPoly"
+		InnerDial.name           = create_guid_string()
+		InnerDial.primitivetype  = "triangles"
+		InnerDial.material       = cmaterial
+		InnerDial.parent_element = OuterDial.name
+		set_circle(InnerDial, inner_radius, inner_radius - line_thickness, endpoint - startpoint, segmentcount)
+		AddElement(InnerDial)
+	end
+
+
+	for i = 0, max_value, 1 do
+		local DialGrayBackground          = CreateElement "ceMeshPoly" -- needed for opacity againist bright background
+		DialGrayBackground.name           = create_guid_string()
+		DialGrayBackground.primitivetype  = "triangles"
+		DialGrayBackground.material       = material
+		DialGrayBackground.parent_element = OuterDial.name
+		DialGrayBackground.element_params = {needle_param}
+		DialGrayBackground.controllers    = {{"parameter_in_range", 0, i - 1.00001, i}}
+		set_circle(DialGrayBackground, outer_radius - line_thickness, inner_radius, (endpoint - startpoint) / max_value * i, segmentcount)
+		AddElement(DialGrayBackground)
+
+		local DialGray          = CreateElement "ceMeshPoly"
+		DialGray.name           = create_guid_string()
+		DialGray.primitivetype  = "triangles"
+		DialGray.material       = materials["GRAY"]
+		DialGray.parent_element = OuterDial.name
+		DialGray.element_params = {needle_param}
+		DialGray.controllers    = {{"parameter_in_range", 0, i - 1.00001, i}}
+		set_circle(DialGray, outer_radius - line_thickness, inner_radius, (endpoint - startpoint) / max_value * i, segmentcount)
+		AddElement(DialGray)
+	end
+
+	return OuterDial
+end

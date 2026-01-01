@@ -27,9 +27,4 @@ planes = {
     name = _('JAS39 General bombs '),
     file = 'Jas39_General bombs.miz',
     },
-	{ 
-    name = _('JAS39 Roadbase exercise'),
-    file = 'JAS39 Roadbase exercise.miz',
-    },	
 }
-	 

@@ -76,9 +76,9 @@ local outboard 	= {
 	{ CLSID = "{JAS39_PYTHON-5}", attach_point_position = {0.1, -0.23, 0.0}, arg_value = 0.15 }, -- Python-5	
 	{ CLSID = "{JAS39_ASRAAM}", attach_point_position = {0.40, -0.23, 0.0}, arg_value = 0.17 }, -- AIM-132 ASRAAM
 	
---	=================== ANTI SHIP MISSILES ========================================================================
-	{ CLSID = "{JAS39_RBS15}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
-	{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir	
+--	=================== ANTI SHIP MISSILES ======================================================================== Not available on the outer pylons!
+	--{ CLSID = "{JAS39_RBS15}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir
+	--{ CLSID = "{JAS39_RBS15AI}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir	
 	
 --	=================== ANTI RADIATION MISSILES ===================================================================
 	{ CLSID = "{JAS39_MAR-1}", arg_value = 0.81, attach_point_position ={ -0.30, -0.125, 0.0} }, -- MAR-1
@@ -192,35 +192,38 @@ local fuselageRight	= {
 }
 
 local centerline 	= {				
---	=================== AIR TO GROUND MISSILES ===================================================================	
+--	=================== PODS =====================================================================================
+	--{ CLSID = "{JAS39_Litening}", arg_value = 0.86, required = {{station = 9,loadout = {"{JAS39_FLIR}"}}} },
+
+	--	=================== AIR TO GROUND MISSILES ===================================================================	
     -- { CLSID = "{JAS39_BRIMSTONE}", attach_point_position = {0.0, 0.02, 0.0}, arg_value = 0.67 }, -- Brimstone
 	
 --	=================== AIR LAUNCHED CRUISE MISSILES =============================================================			
 	-- { CLSID = "{JAS_Stormshadow}", attach_point_position = {-0.2, 0.025, 0.0}, arg_value = 0.85, Type = 1 }, -- Storm Shadow
 	
 --	=================== GUIDED BOMBS =============================================================================
-	-- { CLSID = "{JAS39_GBU49}", arg_value = 0.80}, -- GBU-49 TV Guided
-	-- { CLSID = "{JAS39_GBU31}", arg_value = 0.78}, -- GBU-31 TV Guided
-	-- { CLSID = "{JAS39_GBU31_BLU109}", arg_value = 0.79}, -- GBU-31 Penetrator TV Guide		
-	-- { CLSID = "{JAS39_GBU32}", arg_value = 0.77}, -- GBU-32 TV Guided
-	-- { CLSID = "{JAS39_GBU38}", arg_value = 0.76}, -- GBU-38 TV Guided
-	-- { CLSID = "{JAS39_SDB}", attach_point_position = {-0.25, -0.12, 0.0}, arg_value = 0.75, Type = 1}, -- GBU-39 SDB TV Guided		
-	-- { CLSID = "{JAS39_GBU10}", arg_value = 0.74 }, -- GBU-10 laser guided
-    -- { CLSID = "{JAS_GBU12}", arg_value = 0.72 }, -- GBU-12
-	-- { CLSID = "{JAS_GBU16}", arg_value = 0.73 }, -- GBU-16
-	-- { CLSID = "{JAS39_BRU33_GBU16}", arg_value = 0.73, Type = 1}, -- GBU-16 x 2	
-	-- { CLSID = "{JAS39_BRU33_GBU32}", arg_value = 0.77, Type = 1}, -- GBU-32 x 2		
+	 --{ CLSID = "{JAS39_GBU49}", arg_value = 0.80}, -- GBU-49 TV Guided
+	 --{ CLSID = "{JAS39_GBU31}", arg_value = 0.78}, -- GBU-31 TV Guided
+	 --{ CLSID = "{JAS39_GBU31_BLU109}", arg_value = 0.79}, -- GBU-31 Penetrator TV Guide		
+	 --{ CLSID = "{JAS39_GBU32}", arg_value = 0.77}, -- GBU-32 TV Guided
+	 --{ CLSID = "{JAS39_GBU38}", arg_value = 0.76}, -- GBU-38 TV Guided
+	 --{ CLSID = "{JAS39_SDB}", attach_point_position = {-0.25, -0.12, 0.0}, arg_value = 0.75, Type = 1}, -- GBU-39 SDB TV Guided		
+	 --{ CLSID = "{JAS39_GBU10}", arg_value = 0.74 }, -- GBU-10 laser guided
+     --{ CLSID = "{JAS_GBU12}", arg_value = 0.72 }, -- GBU-12
+	 --{ CLSID = "{JAS_GBU16}", arg_value = 0.73 }, -- GBU-16
+	 --{ CLSID = "{JAS39_BRU33_GBU16}", arg_value = 0.73, Type = 1}, -- GBU-16 x 2	
+	 --{ CLSID = "{JAS39_BRU33_GBU32}", arg_value = 0.77, Type = 1}, -- GBU-32 x 2		
 	
-	{ CLSID = "DIS_LS_6_100_DUAL_L", arg_value = 0.80}, 
+	--{ CLSID = "DIS_LS_6_100_DUAL_L", arg_value = 0.80}, 
 	
 	
 --	=================== UNGUIDED BOMBS ============================================================================
-	-- { CLSID = "{JAS39_MK82}", arg_value = 0.69 }, -- Mk-82
-	-- { CLSID = "{JAS39_MK83}", arg_value = 0.70 }, -- Mk-83
-	-- { CLSID = "{JAS39_MK84}", arg_value = 0.71 }, -- Mk-84
-	-- { CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
-	-- { CLSID = "{JAS39_BRU33_MK83}", arg_value = 0.70, Type = 1}, -- Mk-83 x 2	
-	-- { CLSID = "{JAS39_M71LD}", attach_point_position = {-0.50, 0.0, 0.0}, arg_value = 0.68 }, -- M71 x 4
+	--{ CLSID = "{JAS39_MK82}", arg_value = 0.69 }, -- Mk-82
+	--{ CLSID = "{JAS39_M71LD}", attach_point_position = {-0.50, 0.0, 0.0}, arg_value = 0.68 }, -- M71 x 4
+	--{ CLSID = "{JAS39_MK83}", arg_value = 0.70 }, -- Mk-83
+	--{ CLSID = "{JAS39_MK84}", arg_value = 0.71 }, -- Mk-84
+	--{ CLSID = "{JAS39_BRU33_MK82}", arg_value = 0.69, Type = 1}, -- Mk-82 x 2	
+	--{ CLSID = "{JAS39_BRU33_MK83}", arg_value = 0.70, Type = 1}, -- Mk-83 x 2	
 
 --	=================== DROP TANKS ================================================================================
     { CLSID = "{JAS39_TANK1100}", arg_value = 0.90 }, -- Drop tank 1100 litre
@@ -543,7 +546,7 @@ Guns = {
 			{
 				arg = 308,
 				arg_value = 0.5,
-				DisplayName = "1",
+				DisplayName = "1L",
   				use_full_connector_position = true,
 				connector = "Pylon1",	--Wing tip left
 			},
@@ -553,7 +556,7 @@ Guns = {
 			{
 				arg = 309,
 				arg_value = 0.5,
-				DisplayName = "2",
+				DisplayName = "2L",
 				use_full_connector_position = true,
 				connector = "Pylon2",	--Outer left
 			},
@@ -564,7 +567,7 @@ Guns = {
 			{
 				arg = 310,
 				arg_value = 0.5,
-				DisplayName = "3",
+				DisplayName = "3L",
 				use_full_connector_position = true,
 				connector = "Pylon3",	--inner left
 			},
@@ -574,7 +577,7 @@ Guns = {
 			{
 				arg = 313,
 				arg_value = 0,
-				DisplayName = "4",
+				DisplayName = "5",
 				use_full_connector_position = true,
 				connector = "Pylon6",		--Centerline
 			},
@@ -584,7 +587,7 @@ Guns = {
             {
 				arg = 315,
 				arg_value = 0,
-				DisplayName = "5",--6
+				DisplayName = "4",--6
             	use_full_connector_position = true,
 				connector = "Pylon7",		--cheek
 			},
@@ -594,7 +597,7 @@ Guns = {
 			{
 				arg = 316,
 				arg_value = 0.5,
-				DisplayName = "6",
+				DisplayName = "3R",
 				use_full_connector_position = true,
 				connector = "Pylon9",		--inner right
 			},
@@ -605,7 +608,7 @@ Guns = {
 			{
 				arg = 317,
 				arg_value = 0.5,
-				DisplayName = "7",
+				DisplayName = "2R",
 				use_full_connector_position = true,
 				connector = "Pylon10",		--outer right
 			},
@@ -615,7 +618,7 @@ Guns = {
 			{
 				arg = 318,
 				arg_value = 0.5,
-				DisplayName = "8",
+				DisplayName = "1R",
 				use_full_connector_position = true,
 				connector = "Pylon11",	--Wing tip right
 			},

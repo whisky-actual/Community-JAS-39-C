@@ -14,11 +14,11 @@ local birth = LockOn_Options.init_conditions.birth_place
 	if birth=="GROUND_HOT" or birth=="GROUND_COLD" then
 	LANDING_GEAR_STATE = 1														-- Landing gear states: 0 = up, 1 = down	
 	LANDING_GEAR_TARGET = 1
-	dev:performClickableAction(device_commands.LandingGearLever, 0, true)	
+	dev:performClickableAction(deviceCommands.LandingGearLever, 0, true)	
 	elseif birth=="AIR_HOT" then
 	LANDING_GEAR_STATE = 0
 	LANDING_GEAR_TARGET = 0	
-	dev:performClickableAction(device_commands.LandingGearLever, 1, true)	
+	dev:performClickableAction(deviceCommands.LandingGearLever, 1, true)	
 	end
 end	
 
@@ -42,32 +42,32 @@ local GearCloseIncrement = update_time_step / GearCloseTimeSec
 
 dev:listen_event("WeaponRearmSingleStepComplete")
 
-dev:listen_command(Keys.GearUp) 												-- Gear up
-dev:listen_command(Keys.GearDown) 												-- Gear down
-dev:listen_command(device_commands.LandingGearLever)							-- 1 = Landing gear up, 0 = Landing gear down
+dev:listen_command(keys.GearUp) 												-- Gear up
+dev:listen_command(keys.GearDown) 												-- Gear down
+dev:listen_command(deviceCommands.LandingGearLever)							-- 1 = Landing gear up, 0 = Landing gear down
 
 
 function SetCommand(command,value)												-- Listen for landing gear commands									
-    if command == Keys.GearUp then 
-		dev:performClickableAction(device_commands.LandingGearLever, 1, true)		
+    if command == keys.GearUp then 
+		dev:performClickableAction(deviceCommands.LandingGearLever, 1, true)		
 		LANDING_GEAR_TARGET = 0
 	end
 	
-	if command == Keys.GearDown then
-		dev:performClickableAction(device_commands.LandingGearLever, 0, true)		
+	if command == keys.GearDown then
+		dev:performClickableAction(deviceCommands.LandingGearLever, 0, true)		
 		LANDING_GEAR_TARGET = 1
 	end
 
-    if command == device_commands.LandingGearLever then 
+    if command == deviceCommands.LandingGearLever then 
 		if value == 1 then
-			dev:performClickableAction(device_commands.LandingGearLever, 1, true)		
+			dev:performClickableAction(deviceCommands.LandingGearLever, 1, true)		
 			LANDING_GEAR_TARGET = 0
 		end
 	end
 	
-	if command == device_commands.LandingGearLever then 
+	if command == deviceCommands.LandingGearLever then 
 		if value == 0 then
-			dev:performClickableAction(device_commands.LandingGearLever, 0, true)				
+			dev:performClickableAction(deviceCommands.LandingGearLever, 0, true)				
 			LANDING_GEAR_TARGET = 1
 		end
 	end
@@ -99,11 +99,11 @@ function landing_gear_lights()
 	local gear_l_down = sensor_data.getLeftMainLandingGearDown()				-- Main gear left down
 	local gear_r_down = sensor_data.getRightMainLandingGearDown()				-- Main gear right down
 
-	if get_param_handle("MAINPOWER"):get() == 1 then
+	if get_param_handle("mainpower"):get() == 1 then
 		gear_nose_light:set(gear_n_down)
 		gear_left_light:set(gear_l_down)
 		gear_right_light:set(gear_r_down)	
-	elseif get_param_handle("MAINPOWER"):get() == 0 then
+	elseif get_param_handle("mainpower"):get() == 0 then
 		gear_nose_light:set(0)	
 		gear_left_light:set(0)	
 		gear_right_light:set(0)							

@@ -24,26 +24,26 @@ dev:listen_command(10056)--left axis
 dev:listen_command(10057)--right axis
 dev:listen_command(10058)--both axis
 dev:listen_command(10059)--parking brake
-dev:listen_command(device_commands.ParkingBrake) 	-- Parking brake: 0 = enabled, 1 = disabled
+dev:listen_command(deviceCommands.ParkingBrake) 	-- Parking brake: 0 = enabled, 1 = disabled
 
 function post_initialize()
 
     local birth = LockOn_Options.init_conditions.birth_place
     if birth=="AIR_HOT" then
-		dev:performClickableAction(device_commands.ParkingBrake, 1, true)
+		dev:performClickableAction(deviceCommands.ParkingBrake, 1, true)
 		L_axis_value = -1
 		R_axis_value = -1
 		BrakesON = false
 	   
 	elseif birth=="GROUND_HOT" then
-		dev:performClickableAction(device_commands.ParkingBrake, 1, true)	
+		dev:performClickableAction(deviceCommands.ParkingBrake, 1, true)	
 		L_axis_value = -1
 		R_axis_value = -1
 		BrakesON = false
 			
 		
     elseif birth=="GROUND_COLD" then
-		dev:performClickableAction(device_commands.ParkingBrake, 0, true)
+		dev:performClickableAction(deviceCommands.ParkingBrake, 0, true)
 		L_axis_value = 1
 		R_axis_value = 1
 		BrakesON = true		
@@ -84,16 +84,16 @@ function SetCommand(command,value)
 	
 -- Parking brake toggle
 	if (command == 10059) and (BrakesON == false) then
-		dev:performClickableAction(device_commands.ParkingBrake, 0, true)	
+		dev:performClickableAction(deviceCommands.ParkingBrake, 0, true)	
 		L_axis_value = 1
 		R_axis_value = 1
 		BrakesON = true
 	elseif (command == 10059) and (BrakesON == true) then
-		dev:performClickableAction(device_commands.ParkingBrake, 1, true)		
+		dev:performClickableAction(deviceCommands.ParkingBrake, 1, true)		
 	    L_axis_value = -1
 		R_axis_value = -1
 		BrakesON = false
-	elseif command == device_commands.ParkingBrake then
+	elseif command == deviceCommands.ParkingBrake then
 		if value == 0 then
 			L_axis_value = 1
 			R_axis_value = 1

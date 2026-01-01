@@ -147,10 +147,16 @@ function update()
 --UNIT_MODE:set(1)			-- 1 = % , 2 = Litres, 3 = Lbs, 4 = Kg
 	fuel_pct:set(CURRENT_FUEL_AMOUNT_PCT)
 	if fuel_pct:get() >= 113 then
-		extra_fuel_pct:set(fuel_pct:get() -113)
+		extra_fuel_pct:set(fuel_pct:get() - 113)
+		get_param_handle("dialXFuel"):set(fuel_pct:get() - 100)
+		get_param_handle("dialInternalFuel"):set(CURRENT_FUEL_AMOUNT_PCT - (fuel_pct:get() - 100))
 	else 
 		extra_fuel_pct:set(0)
+		get_param_handle("dialXFuel"):set(CURRENT_FUEL_AMOUNT_PCT - 100)
+		get_param_handle("dialInternalFuel"):set(math.min(CURRENT_FUEL_AMOUNT_PCT, 100))
 	end
+	
+	
 
 	if (LD_UPPER:get() == 3) then --if aar page is selected
 	

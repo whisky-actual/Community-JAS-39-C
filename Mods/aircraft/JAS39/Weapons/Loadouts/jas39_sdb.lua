@@ -98,6 +98,7 @@ declare_loadout({
 	displayName		= _('4 x ' .. jas_sdb_bomb.user_name),
 	Weight			= jas_sdb_bomb.mass * 4 + 145,
 	ejectImpulse    = 140,
+    ejectDirection   = {0, -1, 0},		
 	Elements = {
 	
 		{
@@ -109,28 +110,28 @@ declare_loadout({
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.7,	-0.06,	-0.11}, --1
 			ShapeName	=	"jas39_gbu-39",
-			Rotation = {180,0,0},
+			Rotation = {0,0,0},
 		},
 		
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{-0.7,	-0.06, 0.11}, --2
 			ShapeName	=	"jas39_gbu-39",
-			Rotation = {180,0,0},
+			Rotation = {0,0,0},
 		},
 		
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{1.2,	-0.06, -0.11}, --3
 			ShapeName	=	"jas39_gbu-39",
-			Rotation = {180,0,0},
+			Rotation = {0,0,0},
 		},
 		
 		{
 			DrawArgs = {[1] = {1,1},[2] = {2,1},},
 			Position	=	{1.2,	-0.06, 0.11}, --4
 			ShapeName	=	"jas39_gbu-39",
-			Rotation = {180,0,0},
+			Rotation = {0,0,0},
 		},		
 		
 	},

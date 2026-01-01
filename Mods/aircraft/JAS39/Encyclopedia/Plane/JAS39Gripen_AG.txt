@@ -1,0 +1,77 @@
+JAS 39 C "Gripen A/G"
+
+JAS39Gripen_AG
+
+
+Designation: Saab JAS 39C "Gripen"
+Type:            Strike Fighter 
+Developer:    Saab AB
+Origin:          Sweeden
+Crew:            1
+
+Introduction:  June 1996
+Users:           Sweeden, South Africa, Brazil,
+                    Hungary, Thailand, UK, 
+				    and Czech Republic. 
+Produced:      1987–present
+Number built: 271+
+
+>>>=========================
+
+>>> DIMENSIONS
+
+Length    : 14.1 m
+Wingspan: 8.40 m
+Height     : 4.5 m
+Wing area: 30.00 m2
+
+>>>=========================
+
+>>> PERFORMANCE
+
+Empty weight  : 14,991 lb. 
+Max T/O weight: 30,865 lb.
+Fuel capacity   : 790 Gal. internal,
+                  920 Gal. external.
+Powerplant: 1 * turbofan Volvo RM12, 
+            12,000 lb dry; 18,100 with afterburner.
+
+Max. speed   : 1,328 Knots, Mach 2
+Combat range: 500 miles
+Ferry range    : 2,000 miles.
+Service ceiling: 50,000 ft.
+G limits        : +9 / -3 g
+Take-Off Run  : 1,312 ft.
+Landing Run   : 1,640 ft.
+
+>>>=========================
+
+>>> ARMAMENT (as simulated)
+
+Guns: 1× 27 mm Mauser 
+Hardpoints: 3, centerline 1,000 kg, 
+           wing pylons 500 kg each.
+           total external stores 1,620 kg		   
+
+Bombs: Conventional: Mk-82 / Mk-83 / M71
+       Laser Guided: GBU-12 / GBU-16 
+	   TV Guided: GBU-32 / GBU-38 / GBU-39 / GBU-49
+	   Gliding: GBU-31 / GBU-32 / GBU-38
+
+Cluster Bombs: DWS 39
+
+Rockets: M70B
+	   
+AG Missiles: Brimstone / SPEAR-3 / Maverick / MAR-1
+
+AS Missiles: RBS-15
+
+AA Missiles: A-Darter / ASRAAM / AIM-9 / IRIS-T / Python-5
+
+>>>=========================
+
+>>> SERVICE HISTORY
+
+
+
+(Data summarized from World Air Power Journal, Vol.6 - 1991)

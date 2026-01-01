@@ -35,7 +35,7 @@ creators[devices.CANOPY]     			= {"avLuaDevice"			,LockOn_Options.script_path..
 creators[devices.LIGHTS]     			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Lights.lua"}
 creators[devices.DISPLAYS]     		    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Displays.lua"}
 creators[devices.MFD]        			= {"avLuaDevice"			,LockOn_Options.script_path.."MFD/Device/MFD_Device.lua"}	
-creators[devices.HUD]        			= {"avLuaDevice"			,LockOn_Options.script_path.."HUD/Device/HUD Device.lua"}	
+creators[devices.HUD]        			= {"avLuaDevice"			,LockOn_Options.script_path.."HUD/Device/HUD_Device.lua"}	
 creators[devices.COUNTERMEASURES]       = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Countermeasures.lua"}
 creators[devices.STORES]       			= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Stores.lua"}
 creators[devices.FUEL]     		   		= {"avLuaDevice"			,LockOn_Options.script_path.."Systems/Fuel.lua"}	-- Needs to be after STORES in order for it to work
@@ -45,6 +45,8 @@ creators[devices.LCP]     			    = {"avLuaDevice"			,LockOn_Options.script_path.
 creators[devices.UCP]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."UCP/Device/UCP_Device.lua"}
 creators[devices.RWR]  		   	   		= {"avSimpleRWR"			,LockOn_Options.script_path.."RWR/RWR_init.lua"}
 creators[devices.FC3]     			    = {"avLuaDevice"			,LockOn_Options.script_path.."Systems/FC3.lua"}
+creators[devices.flightData]      = {"avLuaDevice"          ,LockOn_Options.script_path .. "Systems/Flight_Data.lua"}
+creators[devices.SHC]             = {"avLuaDevice", LockOn_Options.script_path .. "Systems/SHC.lua"}
 
 
 
@@ -117,8 +119,8 @@ indicators[#indicators + 1] = {"ccIndicator", LockOn_Options.script_path.."HMD/I
     {
 		{"JAS39-HUD-CENTER", "JAS39-HUD-DOWN", "JAS39-HUD-RIGHT"},	-- initial geometry anchor , triple of connector names. 
 		{sx_l =  0,  -- center position correction in meters (+forward , -backward)
-		 sy_l =  0,  -- center position correction in meters (+up , -down)
-		 sz_l =  0,  -- center position correction in meters (-left , +right)
+		 sy_l =  0.026,  -- center position correction in meters (+up , -down)
+		 sz_l =  -0.009876,  -- center position correction in meters (-left , +right)
 		 sh   =  0,  -- half height correction 
 		 sw   =  0,  -- half width correction 
 		 rz_l =  0,  -- rotation corrections  

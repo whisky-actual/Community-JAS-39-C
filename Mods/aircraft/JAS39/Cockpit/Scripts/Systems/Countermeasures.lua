@@ -11,7 +11,7 @@ CHAFFCOUNT:set(80)
 local FLAR_TOGGLE = get_param_handle("FLAR_TOGGLE")		
 local CHAF_TOGGLE = get_param_handle("CHAF_TOGGLE")
 	
-dev:listen_command(Keys.CountermeasureRelease)
+dev:listen_command(keys.CountermeasureRelease)
 
 dev:listen_event("WeaponRearmComplete")
 
@@ -24,7 +24,7 @@ end
 
 function SetCommand(command,value)
 
-	if (command == Keys.CountermeasureRelease) and (get_param_handle("MASS_PARAM"):get() ~= -1) and (sensor_data.getWOW_NoseLandingGear() == 0) then
+	if (command == keys.CountermeasureRelease) and (get_param_handle("MASS_PARAM"):get() ~= -1) and (sensor_data.getWOW_NoseLandingGear() == 0) then
 		-- when countermeasure dispense is pressed
 		if (FLAR_TOGGLE:get() == 1) and (FLARECOUNT:get() > 0) then	-- if Flares have been toggled on
 			dispatch_action(nil,357) 	-- dispense flares

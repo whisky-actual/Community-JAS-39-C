@@ -7,7 +7,7 @@ end
 -------------------------------------------------------
 --KEYS
 -------------------------------------------------------
-Keys =
+keys =
 {	
     Trigger      	     					= __custom_counter(),	
 	GearUp					                = __custom_counter(),
@@ -44,7 +44,7 @@ Keys =
 	SeatArm                                 = __custom_counter(),
 	DTU                                     = __custom_counter(),
 	TriggerSafe                             = __custom_counter(),
-	TriggerSafeHold                         = __custom_counter(),
+	triggerSafeHold                         = __custom_counter(),
 	CannonMode                              = __custom_counter(),
 	CountermeasureRelease					= __custom_counter(),	
 	AARProbeCover                          	= __custom_counter(),
@@ -68,6 +68,8 @@ Keys =
 	GripenPlaneRightStop		            = __custom_counter(),
 	GripenPlaneLeftRudderStop               = __custom_counter(),
 	GripenPlaneRightRudderStop              = __custom_counter(),
+
+	HMDToggle                               = __custom_counter(),
 
 
 -------------------------------------------------------
@@ -217,7 +219,7 @@ Keys =
 	PlaneResetMasterWarning 				= 144,
 	PlaneFlapsOn 							= 145,
 	PlaneFlapsOff 							= 146,
-	PlaneAirBrakeOn 						= 147,
+	PlaneAirBrakeOn 						= 147, --Whaaaa
 	PlaneAirBrakeOff 						= 148,
 	PlaneAirRefuel 							= 155,			
 	BrightnessILS 							= 156,			
@@ -518,6 +520,8 @@ Keys =
 	UCP_CLR									= __custom_counter(),
 	UCP_Brightness							= __custom_counter(),
 
+	HUDDeclutt                        = __custom_counter(), 
+
 -------------------------------------------------------
 --Instrument Panel
 -------------------------------------------------------
@@ -651,7 +655,8 @@ Keys =
 -------------------------------------------------------
 --HOTAS
 -------------------------------------------------------
-
+	S10SpanScaleUp   = __custom_counter(),
+	S10SpanScaleDown = __custom_counter(),
 -------------------------------------------------------
 --Ejection Seat
 -------------------------------------------------------
@@ -665,7 +670,7 @@ Keys =
 -------------------------------------------------------
 --DEVICE COMMANDS
 -------------------------------------------------------
-device_commands =
+deviceCommands =
 {
 	
 	 BrakesON      							= 10038,
@@ -689,7 +694,7 @@ local function __counter()
 	__count = __count + 1
 	return __count
 end
-device_commands =
+deviceCommands =
 {
 -------------------------------------------------------
 --FC3 Commands
@@ -846,11 +851,12 @@ device_commands =
 	UCP_CLR									= __counter(),
 	UCP_L									= __counter(),
 	UCP_Brightness							= __counter(),
+	UCP_Cursor                              = __counter(), 
 -------------------------------------------------------
 --Instrument Panel
 -------------------------------------------------------
 --HMD On off
-	HMDTOGGLE								= __counter(),	
+HMDToggle								= __counter(),	
 --HUD	
 	HUD_Brightness							= __counter(),
 -------------------------------------------------------

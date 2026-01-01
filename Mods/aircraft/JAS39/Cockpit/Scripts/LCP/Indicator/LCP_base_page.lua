@@ -2,7 +2,7 @@ dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_def.lua")
 dofile(LockOn_Options.common_script_path.."devices_defs.lua")
 dofile(LockOn_Options.common_script_path .. "elements_defs.lua")
 
---local aspect       = GetAspect()
+local aspect       = GetAspect()
 --local aspect     = 1
 --local xpos       = 0
 --local ypos       = 0
@@ -33,3 +33,16 @@ nav_total_field_of_view_LCP.isvisible		= false
 Add(nav_total_field_of_view_LCP)
  
 dofile(LockOn_Options.script_path.."LCP/Indicator/LCP_indication_page.lua")
+
+
+
+local LCPBrightness           = CreateElement "ceSimpleLineObject"
+LCPBrightness.name            = create_guid_string()
+LCPBrightness.vertices        = {{0, -aspect - .2}, {0, aspect + .2}}
+LCPBrightness.width           = 1.4
+LCPBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
+LCPBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
+LCPBrightness.level           = LCP_DEFAULT_LEVEL
+LCPBrightness.element_params  = {"mainpower", "LCPBrightness"}
+LCPBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+Add(LCPBrightness)

@@ -32,40 +32,40 @@ end
 -------------------------------------------------------
 -- Params
 -------------------------------------------------------
-dev:listen_command(device_commands.COM1)
-dev:listen_command(device_commands.COM2)
-dev:listen_command(device_commands.COM3)
-dev:listen_command(device_commands.AP_ALT)
-dev:listen_command(device_commands.AP_ATT)
-dev:listen_command(device_commands.AP_OFF)
-dev:listen_command(device_commands.NAV_NEXT)
-dev:listen_command(device_commands.NAV_PREV)
-dev:listen_command(device_commands.RDR_PRF)
-dev:listen_command(device_commands.RDR_PWR)
-dev:listen_command(device_commands.RDR_MODE)
-dev:listen_command(device_commands.RDR_IN)
-dev:listen_command(device_commands.RDR_OUT)
-dev:listen_command(device_commands.RDR_UP)
-dev:listen_command(device_commands.RDR_DOWN)
-dev:listen_command(device_commands.RDR_LEFT)
-dev:listen_command(device_commands.RDR_RIGHT)
+dev:listen_command(deviceCommands.COM1)
+dev:listen_command(deviceCommands.COM2)
+dev:listen_command(deviceCommands.COM3)
+dev:listen_command(deviceCommands.AP_ALT)
+dev:listen_command(deviceCommands.AP_ATT)
+dev:listen_command(deviceCommands.AP_OFF)
+dev:listen_command(deviceCommands.NAV_NEXT)
+dev:listen_command(deviceCommands.NAV_PREV)
+dev:listen_command(deviceCommands.RDR_PRF)
+dev:listen_command(deviceCommands.RDR_PWR)
+dev:listen_command(deviceCommands.RDR_MODE)
+dev:listen_command(deviceCommands.RDR_IN)
+dev:listen_command(deviceCommands.RDR_OUT)
+dev:listen_command(deviceCommands.RDR_UP)
+dev:listen_command(deviceCommands.RDR_DOWN)
+dev:listen_command(deviceCommands.RDR_LEFT)
+dev:listen_command(deviceCommands.RDR_RIGHT)
 
-dev:listen_command(device_commands.MIRROR)
-dev:listen_command(device_commands.LKneeboardDraw)
-dev:listen_command(device_commands.RKneeboardDraw)
-dev:listen_command(device_commands.JoystickDraw)
-dev:listen_command(device_commands.MAP)
-dev:listen_command(device_commands.KNEEBOARD)
-dev:listen_command(Keys.Plane_CockpitShowPilotOnOff)	-- pilot show/hide
+dev:listen_command(deviceCommands.MIRROR)
+dev:listen_command(deviceCommands.LKneeboardDraw)
+dev:listen_command(deviceCommands.RKneeboardDraw)
+dev:listen_command(deviceCommands.JoystickDraw)
+dev:listen_command(deviceCommands.MAP)
+dev:listen_command(deviceCommands.KNEEBOARD)
+dev:listen_command(keys.Plane_CockpitShowPilotOnOff)	-- pilot show/hide
 
-dev:listen_command(device_commands.UCP_MENU)
+dev:listen_command(deviceCommands.UCP_MENU)
 -------------------------------------------------------
 -- Complexe Functions
 -------------------------------------------------------
 
 function SetCommand(command,value) -- Post initialize gets called once on mission start. SetCommand gets called when ever there is a button clicked
 
-	if command == device_commands.RDR_UP then
+	if command == deviceCommands.RDR_UP then
 	   if RDR_UP == 0 then
 	
 	    dispatch_action (nil,141)
@@ -77,7 +77,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.RDR_DOWN then
+	if command == deviceCommands.RDR_DOWN then
 	   if RDR_DOWN == 0 then
 	
 	    dispatch_action (nil,142)
@@ -89,7 +89,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.RDR_LEFT then
+	if command == deviceCommands.RDR_LEFT then
 	   if RDR_LEFT == 0 then
 	
 	    dispatch_action (nil,139)
@@ -101,7 +101,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.RDR_RIGHT then
+	if command == deviceCommands.RDR_RIGHT then
 	   if RDR_RIGHT == 0 then
 			dispatch_action (nil,140)
 			RDR_RIGHT= 1 -- GO
@@ -111,7 +111,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.MIRROR then
+	if command == deviceCommands.MIRROR then
 	   if MIRROR:get()== 1 then
 			MIRROR:set(-1)
 		else
@@ -119,7 +119,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 		end
 	end
 
-	if command == device_commands.LKneeboardDraw then
+	if command == deviceCommands.LKneeboardDraw then
 	   if LKneeboardDraw:get()== 1 then
 			LKneeboardDraw:set(-1)
 		else
@@ -127,7 +127,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 		end
 	end
 
-	if command == device_commands.RKneeboardDraw then
+	if command == deviceCommands.RKneeboardDraw then
 	   if RKneeboardDraw:get()== 1 then
 			RKneeboardDraw:set(-1)
 		else
@@ -135,7 +135,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 		end
 	end
 
-		if command == device_commands.JoystickDraw then
+		if command == deviceCommands.JoystickDraw then
 	   if JoystickDraw:get()== 1 then
 			JoystickDraw:set(-1)
 		else
@@ -143,7 +143,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 		end
 	end
 
-	if command == device_commands.AP_ALT then
+	if command == deviceCommands.AP_ALT then
 	   if AP_ALT == 0 then
 	
 	    dispatch_action (nil,408)
@@ -161,7 +161,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.AP_ATT then
+	if command == deviceCommands.AP_ATT then
 	   if AP_ATT == 0 then
 	
 	    dispatch_action (nil,408)
@@ -179,7 +179,7 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 	   end
 	end
 	
-	if command == device_commands.AP_OFF then
+	if command == deviceCommands.AP_OFF then
 	   if AP_OFF == 0 then
 	
 	    dispatch_action (nil,408)
@@ -200,74 +200,74 @@ function SetCommand(command,value) -- Post initialize gets called once on missio
 -------------------------------------------------------	
 -- Simple Functions 
 -------------------------------------------------------
-	if command == device_commands.COM1 then
+	if command == deviceCommands.COM1 then
 		dispatch_action(nil,179)
 	end
 	
-	if command == device_commands.COM2 then
+	if command == deviceCommands.COM2 then
 		dispatch_action(nil,1560)
 	end
 
-	if command == device_commands.COM3 then
+	if command == deviceCommands.COM3 then
 	   dispatch_action(nil,62)
 	end
 
-	if command == device_commands.AP_RSET then
+	if command == deviceCommands.AP_RSET then
 		dispatch_action(nil,388)
 	end
 
-	if command == device_commands.EO then
+	if command == deviceCommands.EO then
 		dispatch_action(nil,87)
 	end
 
-	if command == device_commands.NAV_NEXT then
+	if command == deviceCommands.NAV_NEXT then
 		dispatch_action(nil,102)
 	end
 
-	if command == device_commands.NAV_PREV then
+	if command == deviceCommands.NAV_PREV then
 		dispatch_action(nil,1315)
 	end
 
-	if command == device_commands.RDR_PRF then
+	if command == deviceCommands.RDR_PRF then
 		dispatch_action(nil,394)
 	end
 
-	if command == device_commands.RDR_PWR then
+	if command == deviceCommands.RDR_PWR then
 		dispatch_action(nil,86)
 	end
 
-	if command == device_commands.RDR_MODE then
+	if command == deviceCommands.RDR_MODE then
 		dispatch_action(nil,285)
 	end
 
-	if command == device_commands.RDR_IN then
+	if command == deviceCommands.RDR_IN then
 		dispatch_action(nil,103)
 	end
 
-	if command == device_commands.RDR_OUT then
+	if command == deviceCommands.RDR_OUT then
 		dispatch_action(nil,104)
 	end
 	
-	if command == device_commands.RDR_LEFT then
+	if command == deviceCommands.RDR_LEFT then
 		dispatch_action(nil,263)
 	end
 
-	if command == device_commands.RDR_RIGHT then
+	if command == deviceCommands.RDR_RIGHT then
 		dispatch_action(nil,262)
 	end
 
-	if command == device_commands.MAP then
+	if command == deviceCommands.MAP then
 		dispatch_action(nil,1587)
 	end
 
-		if command == device_commands.KNEEBOARD then
+		if command == deviceCommands.KNEEBOARD then
 		dispatch_action(nil,975)
 	end
 -------------------------------------------------------
 --Test Functions
 -------------------------------------------------------	
 
-	if command == device_commands.UCP_MENU then
+	if command == deviceCommands.UCP_MENU then
 		dispatch_action(nil,390)
 	end
 

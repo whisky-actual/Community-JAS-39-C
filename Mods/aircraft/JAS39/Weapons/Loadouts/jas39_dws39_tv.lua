@@ -8,7 +8,7 @@ JAS_DWS_39_TV =
     category        = CAT_MISSILES,
     name            = jas_dws39_tv_name,
     user_name       = _("DWS 39 MJ2 TV Guided Cluster Bomb"),
-    scheme          = "AGM-154AB",
+    scheme          = "JSOW_AB",
     class_name      = "wAmmunitionCruise",
     model           = "bk_90",
     mass            = jas_dws39_tv_mass,
@@ -104,12 +104,11 @@ JAS_DWS_39_TV =
         no_wings_cx_coeff   = {1, 0.5, 0.8, 0.10, 1.6},
     },
     
-    simple_seeker = {
-        sensitivity = 0,
-        delay       = 0.0,
-        FOV         = 0.6,
-        maxW        = 500,
-        opTime      = 9999,
+    seeker = {
+        coalition                       = 2,
+        coalition_rnd_coeff             = 5.0,
+        can_update_target_pos           = 1,
+        target_point_always_on_surface  = 0,
     },
     
     control_block = {

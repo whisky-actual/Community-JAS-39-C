@@ -476,7 +476,7 @@ local unitPayloads = {
 			["tasks"] = {
 				[1] = 30,
 				[2] = 15,
-				[2] = 29,				
+				-- [2] = 29, -- Duplicate task entry commented
 			},
 		},
 		[15] = {
