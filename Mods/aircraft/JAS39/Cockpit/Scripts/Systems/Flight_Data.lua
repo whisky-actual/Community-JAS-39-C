@@ -47,7 +47,7 @@ local baroAlt, rAlt
 
 
 function post_initialize()
-	show_param_handles_list(true) -- For testing.
+	-- show_param_handles_list(true) -- For testing.
 end
 
 function update()
