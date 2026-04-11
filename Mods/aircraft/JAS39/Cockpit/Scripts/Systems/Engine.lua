@@ -12,9 +12,17 @@ local sensor_data = get_base_data()
 local mainpower = get_param_handle("mainpower")
 mainpower:set(0.0)
 
+adiWPx = get_param_handle("adiWPx")
+adiWPy = get_param_handle("adiWPy")
+adiWPd = get_param_handle("adiWPd")
+
+
+
+
 local APUPower = get_param_handle("APUPOWER")
 APUPower:set(0.0)
 local APURunning = get_param_handle("APURunning")
+local APUquickstart = 0
 
 local apu_start_light = get_param_handle("APU_START_LIGHT")
 local apu_running_light = get_param_handle("APU_RUNNING_LIGHT")
@@ -64,8 +72,30 @@ dev:listen_command(311) 															-- Engine start
 dev:listen_command(313) 															-- Engine stop
 dev:listen_command(deviceCommands.DTU)
 
+--everything for the sleep function (not used as of now)
+local pendingsleep = {}
+
+function sleep(delay, func)
+    local triggerTime = get_model_time() + delay
+    table.insert(pendingsleep, { time = triggerTime, func = func })
+end
+
+function processsleep()
+    local now = get_model_time()
+    local remaining = {}
+    for _, action in ipairs(pendingsleep) do
+        if now >= action.time then
+            action.func()
+        else
+            table.insert(remaining, action)
+        end
+    end
+    pendingsleep = remaining
+end
+
 
 function post_initialize()
+	show_param_handles_list(true)
 
     local birth = LockOn_Options.init_conditions.birth_place
     if birth=="AIR_HOT" then
@@ -81,6 +111,7 @@ function post_initialize()
 		dev:performClickableAction(deviceCommands.FuelCover, 0, true)
 		dev:performClickableAction(deviceCommands.Fuel, 0, true)
 		dev:performClickableAction(deviceCommands.APU, 1, true)
+		APUquickstart = 1
 		dev:performClickableAction(deviceCommands.ThrottleStop, 1, true)
 		dev:performClickableAction(deviceCommands.DTU, 0, true)		
 
@@ -201,7 +232,17 @@ local tposition = get_cockpit_draw_argument_value(1071)
 			if Fuel == 0 and rpms > 0 then
 				dispatch_action(nil, 313)
 			end
-        end
+			if APU_state > 0 then
+				if APU == 1 then
+					APU = 2	
+				end
+				if Main == 1 then
+					Main = 0
+					mainpower:set(0)
+					get_param_handle("littlegreendots"):set(-1)
+				end
+			end
+		end
 
     elseif command == keys.Fuel then
         if Fuel == 0 then 
@@ -210,26 +251,29 @@ local tposition = get_cockpit_draw_argument_value(1071)
         elseif Fuel == 1 then 
 			dev:performClickableAction(deviceCommands.Fuel, 1, true)				
 			Fuel = 0
-			if Fuel == 0 and rpms > 0 then
-				dispatch_action(nil, 313)
-			end
-        end
+		end
+	end
 
-    elseif command == deviceCommands.APU then
-        if value == 1 then 
+
+    if command == deviceCommands.APU then
+        if value == 1 and get_cockpit_draw_argument_value(1010) == 0 then 
 			APU = 1
-			APUPower:set(1)			
+			
+			APUPower:set(1)
 		elseif value == 0 then
 			if APU == 1 then
 				APU = 2				
 			end
+			Main = 0
+			mainpower:set(0)
+			get_param_handle("littlegreendots"):set(-1)
         end		
 	
     elseif command == keys.APU then
-        if APU == 0 then
+        if APU == 0 and Fuel == 1 then
 			dev:performClickableAction(deviceCommands.APU, 1, true)				
 			APU = 1
-			APUPower:set(1)				
+			APUPower:set(1)	
 		elseif APU == 1 then
 			dev:performClickableAction(deviceCommands.APU, 0, true)				
 			APU = 2
@@ -397,9 +441,14 @@ end
 function update()
 	get_param_handle("RWRPower"):set(mainpower:get())
 
+	processsleep()
 	sounds()
 	throttlestop()
 	apu_lights()	
+
+
+
+
 
 	local rpm = sensor_data.getEngineLeftRPM() 
 

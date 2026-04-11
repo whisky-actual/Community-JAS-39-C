@@ -118,11 +118,21 @@ function update()
 		scrollableUp = false
 		scrollableDown = false
 	elseif menu == 2 then
+
+
+		UCPRows[1] = ""
+		UCPRows[2] = ""
+		UCPRows[3] = ""
+		UCPRows[4] = ""
+		UCPRows[5] = ""
+		UCPRows[6] = ""
+
 		if scroll == 0 then
 			UCPRows[1 - scroll] = "MISSION "
 		end
 
 		carretAvail = {}
+		
 
 		for i = 1, #get_mission_route() or 39 do
 			local j = i + 1 - scroll
@@ -247,7 +257,7 @@ function SetCommand(command, value)
 			end
 		end
 
-		if command == deviceCommands.UCP_2 or command == keys.UCP_2 then
+		if command == deviceCommands.UCP_2 or command == keys.UCP_2 then --set tp
 			if menu ~= 2 then
 				if get_param_handle("nextWPType"):get() == 3 then
 					loopStart = get_param_handle("selectedWP"):get()
@@ -262,7 +272,7 @@ function SetCommand(command, value)
 			end
 		end
 
-		if command == deviceCommands.UCP_5 or command == keys.UCP_5 then
+		if command == deviceCommands.UCP_5 or command == keys.UCP_5 then --change to wp
 			if menu ~= 2 then
 				if get_param_handle("nextWPType"):get() == 3 then
 					loopStart = get_param_handle("selectedWP"):get()
@@ -277,7 +287,7 @@ function SetCommand(command, value)
 			end
 		end
 
-		if command == deviceCommands.UCP_L or command == keys.UCP_L then
+		if command == deviceCommands.UCP_L or command == keys.UCP_L then --change to Lp
 			if menu ~= 2 then
 				changeWP(3)
 			else
