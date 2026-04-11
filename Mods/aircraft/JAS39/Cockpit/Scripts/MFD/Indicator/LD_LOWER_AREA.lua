@@ -1,4 +1,11 @@
 
+
+get_param_handle("ADIWPLX"):set(1)
+get_param_handle("ADIWPLY"):set(-1)
+get_param_handle("ADIWPLL"):set(1)
+
+
+
 TAN_LD_MASTER 			= CreateElement "ceSimple"
 TAN_LD_MASTER.init_pos	= {0,0}
 TAN_LD_MASTER.name		= create_guid_string()
@@ -45,6 +52,7 @@ adi_background_base.element_params 	= {"ADI_ROLL",}
 adi_background_base.controllers		= {{"rotate_using_parameter" ,0, 1},}
 AddElement2(adi_background_base)	
 
+
 local adi_background			= create_mfd_tex_3300(ADI_BACKGROUND_B, 0, 0, 3072, 1920,1.6*1.372)
 adi_background.name			= create_guid_string()
 adi_background.init_pos		= {1.25, 0}
@@ -79,6 +87,89 @@ adi_roll.parent_element		= adi_indicator.name
 adi_roll.element_params 	= {"ADI_ROLL",}
 adi_roll.controllers		= {{"rotate_using_parameter" ,0, 1}}
 AddElement(adi_roll)
+
+
+-- Waypoint direction indicator on ADI ball
+
+local WP          = CreateElement "ceMeshPoly"
+WP.primitivetype  = "triangles"
+set_circle(WP, 0.03, 0.03 - 0.007, 360, 12)
+
+WP.name           = "TGTWP"
+WP.material       = MakeMaterial(nil, {0, 0, 0, 255})
+WP.parent_element = adi_Attitude.name
+WP.init_pos        = {0, 0}
+WP.element_params  = {
+	"nextWPADIAzUnclamped",
+    "nextWPADIElUnclamped",
+    "WP_2_distance",
+	"adi_roll",
+}
+WP.controllers     = {
+
+    {"move_left_right_using_parameter", 0, 0.025},
+	{"move_up_down_using_parameter",    1, 0.015},
+	{"rotate_using_parameter" ,3, 1},
+
+}
+WP.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL_IF_LEVEL
+WP.level           = MFD_DEFAULT_LEVEL - 1
+
+AddElement(WP)
+
+	--"WP_" .. selectedWP:get() .. "_CDX",
+    --"WP_" .. selectedWP:get() .. "_CDY",
+    --"WP_" .. selectedWP:get() .. "_distance",
+
+
+local wpLine           = CreateElement "ceSimpleLineObject"
+wpLine.name            = create_guid_string()
+wpLine.material        = MakeMaterial(nil, {0, 0, 0, 255})
+wpLine.parent_element  = WP.name
+wpLine.vertices        = {
+    {0, 0},
+    {0, 0}
+}
+wpLine.init_pos        = {0, 0}
+wpLine.width           = 0.0035
+
+wpLine.element_params  = {"ADIWPLX", "ADIWPLX", "ADIWPLY", "ADIWPLY", "ADIWPLL"}
+wpLine.controllers     = {
+    {"line_object_set_point_using_parameters", 0, 1, 1, 0.0015, 0.0015},
+    {"line_object_set_point_using_parameters", 2, 3, 3, 0.0015, 0.0015},
+}
+
+wpLine.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
+wpLine.level           = WP.level + 1
+
+AddElement(wpLine)
+
+local wpLine2          = CreateElement "ceSimpleLineObject"
+wpLine2.name            = create_guid_string()
+wpLine2.material        = MakeMaterial(nil, {0, 0, 0, 255})
+wpLine2.parent_element  = WP.name
+wpLine2.vertices        = {
+    {0, 0},
+    {0, 0}
+}
+wpLine2.init_pos        = {0, 0}
+wpLine2.width           = 0.0035
+
+wpLine2.element_params  = {"ADIWPLX", "ADIWPLX", "ADIWPLY", "ADIWPLY", "ADIWPLL"}
+wpLine2.controllers     = {
+    {"line_object_set_point_using_parameters", 0, 3, 1, 0.0015, 0.0015},
+    {"line_object_set_point_using_parameters", 2, 1, 3, 0.0015, 0.0015},
+}
+
+wpLine2.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
+wpLine2.level           = WP.level + 1
+
+AddElement(wpLine2)
+
+
+
+
+
 
 local alfa_g_box			= create_mfd_tex(NAV_WHEEL_BLACK, 1640, 0, 2048, 212,0.9)
 alfa_g_box.name				= create_guid_string()
