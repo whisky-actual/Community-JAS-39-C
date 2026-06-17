@@ -13,13 +13,16 @@ SHC:listen_command(keys.S10SpanScaleUp)
 SHC:listen_command(keys.S10SpanScaleDown)
 
 
-local CD_Scale = get_param_handle("CD_Scale")
+local CDScale = get_param_handle("CDScale")
+local RDRFullRange = get_param_handle("RDRFullRange")
+local RDRHalfRange = get_param_handle("RDRHalfRange")
 
 
 
 function post_initialize()
-	CD_Scale:set(getScale(800)) -- 40 nm (1:800)
-	get_param_handle("CD_SCALE_SYM"):set(40)
+	CDScale:set(getScale(800)) -- 40 nm (1:800)
+	RDRFullRange:set(40)
+	RDRHalfRange:set(20)
 end
 
 function update()
@@ -28,16 +31,18 @@ end
 
 function SetCommand(command, value)
 	if command == keys.S10SpanScaleUp then
-		if CD_Scale:get() ~= 240000 then
-			CD_Scale:set(CD_Scale:get() * 2)
-			get_param_handle("CD_SCALE_SYM"):set(getRange(CD_Scale:get()))
+		if CDScale:get() ~= 240000 then
+			CDScale:set(CDScale:get() * 2)
+			RDRFullRange:set(getRange(CDScale:get()))
 		end
 	elseif command == keys.S10SpanScaleDown then
-		if CD_Scale:get() ~= 15000 then
-			CD_Scale:set(CD_Scale:get() / 2)
-			get_param_handle("CD_SCALE_SYM"):set(getRange(CD_Scale:get()))
+		if CDScale:get() ~= 15000 then
+			CDScale:set(CDScale:get() / 2)
+			RDRFullRange:set(getRange(CDScale:get()))
 		end
 	end
+
+	RDRHalfRange:set(RDRFullRange:get() / 2)
 end
 
 

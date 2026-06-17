@@ -100,11 +100,11 @@ end
 local M2FT = 3.2808399
 local TWOPI = math.pi * 2
 
-
-
 function post_initialize()
 	selectedWP:set(1)
 	get_param_handle("numOfWP"):set(#get_mission_route())
+	--print_message_to_user(Dump(Terrain), 999)
+	recursively_print(Terrain, 100, 100, LockOn_Options.script_path .. "Dump.txt")
 end
 
 function update()
@@ -241,7 +241,7 @@ function update()
 
 	local selfVelL, selfVelV, selfVelH = baseData.getSelfAirspeed()
 	local distIn30s = math.sqrt(selfVelH^2 + selfVelL^2) * 30
-	get_param_handle("CDVelvec"):set(distIn30s / get_param_handle("CD_Scale"):get() * 1.725)
+	get_param_handle("CDVelvec"):set(distIn30s / get_param_handle("CDScale"):get() * 1.725)
 end
 
 
@@ -317,8 +317,8 @@ function loadWaypoints(missionRoute)
 		local dx = math.cos(own_hdg) * (missionRoute[i].y - yc) - math.sin(own_hdg) * (missionRoute[i].x - xc)
 		local dy = math.cos(own_hdg) * (missionRoute[i].x - xc) + math.sin(own_hdg) * (missionRoute[i].y - yc)
 
-		waypoints[i].CDX:set(dx / get_param_handle("CD_Scale"):get() * 1.725)
-		waypoints[i].CDY:set(dy / get_param_handle("CD_Scale"):get() * 1.725)
+		waypoints[i].CDX:set(dx / get_param_handle("CDScale"):get() * 1.725)
+		waypoints[i].CDY:set(dy / get_param_handle("CDScale"):get() * 1.725)
 
 
 
@@ -360,7 +360,7 @@ function loadWaypoints(missionRoute)
 	end
 
 	for i = -60, 115, 5 do
-		get_param_handle("distScale_" .. i):set((i / .000539956803) / get_param_handle("CD_Scale"):get() * 1.725)
+		get_param_handle("distScale_" .. i):set((i / .000539956803) / get_param_handle("CDScale"):get() * 1.725)
 	end
 
 	loop_once = 1

@@ -1,0 +1,20 @@
+{
+	"RWR": {
+		"00000000": {
+			"prevAz": 0,
+			"prevEl": 0,
+			"fAz": 0,
+			"unNormAz": 0,
+			"fEl": 0,
+			"azHUD": 0,
+			"elHUD": 0,
+			"azHMD": 0,
+			"elHMD": 0,
+			"prevPitch": 0,
+			"prevHdg": 0,
+			"obs": {},
+			"phyRange": 0,
+			"beenThreat": 0
+		}
+	}
+}

@@ -48,7 +48,7 @@ materials["RWRYELLOW"]     = MakeMaterial(nil, materials["DBG_YELLOW"]) --MakeMa
 materials["RWRRED"]     = MakeMaterial(nil, materials["DBG_RED"])
 materials["RWRGREY"]     = MakeMaterial(nil, materials["DBG_GREY"])
 materials["MFDBeige"]  = MakeMaterial(nil, {1 * 255, .913098 * 255, .584078 * 255, 255})
-materials["MFDGray"] = MakeMaterial(nil, {.603827 * 255, .603827 * 255, .603827 * 255, 255})
+materials["MFDBGGray"] = MakeMaterial(nil, {.603827 * 255, .603827 * 255, .603827 * 255, 255})
 -------FONTS-------
 local IndicationTexturesPath = LockOn_Options.script_path.."Resources/fonts/"
 
@@ -61,6 +61,7 @@ YELLOW      = {255, 194, 0, 255}
 lcpGREEN	= {50,255,50,255}
 ucpGREEN	= {50,255,50,255}
 HORIZON_LINE_GREEN = {10,100,10,255}
+Gripen_Font_ContactsOrange = {255,50,0,255}
 
 
 --Brightness Control
@@ -131,282 +132,282 @@ Green_Bright	=
 
 fontdescription = {}
 
-CMFD_X_PIXEL =  88
-CMFD_Y_PIXEL =  144
+CMFD_X_PIXEL = 88
+CMFD_Y_PIXEL = 144
 
-local Gripen_Font = 
+local Gripen_Font =
 {
-    texture = IndicationTexturesPath.."Gripen_Font_MFD",
-    size        = {10, 10},
-    resolution  = {1440, 1440},
-    default     = {CMFD_X_PIXEL, CMFD_Y_PIXEL},
-    chars       = {
-        {32, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- space
-        {48, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 0
-        {49, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 1
-        {50, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 2
-        {51, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 3
-        {52, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 4
-        {53, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 5
-        {54, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 6
-        {55, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 7
-        {56, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 8
-        {57, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- 9
+	texture    = IndicationTexturesPath .. "Gripen_Font_MFD",
+	size       = {10, 10},
+	resolution = {1440, 1440},
+	default    = {CMFD_X_PIXEL, CMFD_Y_PIXEL},
+	chars      = {
+		{32,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- space
+		{48,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 0
+		{49,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 1
+		{50,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 2
+		{51,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 3
+		{52,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 4
+		{53,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 5
+		{54,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 6
+		{55,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 7
+		{56,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 8
+		{57,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- 9
 
-        {64, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Alpha -> @
+		{64,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- Alpha -> @
 
-        {65, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- A
-        {66, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- B
-        {67, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- C
-        {68, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- D
-        {69, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- E
-        {70, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- F
-        {71, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- G
-        {72, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- H
-        {73, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- I
-        {74, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- J
-        {75, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- K
-        {76, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- L
-        {77, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- M
-        {78, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- N
-        {79, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- O
-        {80, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- P
-        {81, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Q
-        {82, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- R
-        {83, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- S
-        {84, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- T
-        {85, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- U
-        {86, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- V
-        {87, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- W
-        {88, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- X
-        {89, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Y
-        {90, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- Z
-         
-        {42, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- *
-        {43, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- +
-        {45, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- -
-        {47, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- /
-        {92, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- \
-        {40, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- (
-        {41, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- )
-        {91, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- [
-        {93, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ]
-        {123, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- {
-        {125, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- }
-        {60, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- <
-        {62, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- >
-        {61, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- =
-        {63, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ?
-        {124, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- |
-        {33, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- !
-        {35, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- #
-        {37, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- %
-        {94, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ^
-        {38, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- &
-        {96, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
-        {46, CMFD_X_PIXEL*0.5, CMFD_Y_PIXEL*0.6}, -- .
-        {58, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- :
-        {44, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- ,
-        {126, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- cursor -> ~
-        {95, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- _
-        
-        {39, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- '
-        {34, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- "
-		{127, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- delta
-		
-		{97, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- a
-		{98, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- b
-		{99, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- c
-		{100, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- d
-		{101, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- e
-		{102, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- f
-		{103, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- g
-		{104, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- h
-		{105, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- i
-		{106, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- j
-		{107, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- k
-		{108, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- l
-		{109, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- m
-		{110, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- n
-		{111, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- o
-		{112, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- p
-		{113, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- q
-		{114, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- r
-		{115, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- s
-		{116, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- t
-		{117, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- u
-		{118, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- v
-		{119, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- w
-		{120, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- x
-		{121, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- y
-		{122, CMFD_X_PIXEL, CMFD_Y_PIXEL}, -- z, use last ascii code
-       
-    }
+		{65,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- A
+		{66,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- B
+		{67,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- C
+		{68,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- D
+		{69,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- E
+		{70,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- F
+		{71,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- G
+		{72,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- H
+		{73,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- I
+		{74,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- J
+		{75,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- K
+		{76,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- L
+		{77,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- M
+		{78,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- N
+		{79,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- O
+		{80,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- P
+		{81,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- Q
+		{82,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- R
+		{83,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- S
+		{84,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- T
+		{85,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- U
+		{86,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- V
+		{87,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- W
+		{88,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- X
+		{89,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- Y
+		{90,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- Z
+
+		{42,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- *
+		{43,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- +
+		{45,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- -
+		{47,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- /
+		{92,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- \
+		{40,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- (
+		{41,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- )
+		{91,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- [
+		{93,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- ]
+		{123, CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- {
+		{125, CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- }
+		{60,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- <
+		{62,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- >
+		{61,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- =
+		{63,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- ?
+		{124, CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- |
+		{33,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- !
+		{35,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- #
+		{37,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- %
+		{94,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- ^
+		{38,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- &
+		{96,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+		{46,  CMFD_X_PIXEL * 0.5, CMFD_Y_PIXEL * 0.6}, -- .
+		{58,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- :
+		{44,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- ,
+		{126, CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- cursor -> ~
+		{95,  CMFD_X_PIXEL,     CMFD_Y_PIXEL},    -- _
+
+		{39,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- '
+		{34,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- "
+		{127, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- delta
+
+		{97,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- a
+		{98,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- b
+		{99,  CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- c
+		{100, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- d
+		{101, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- e
+		{102, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- f
+		{103, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- g
+		{104, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- h
+		{105, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- i
+		{106, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- j
+		{107, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- k
+		{108, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- l
+		{109, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- m
+		{110, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- n
+		{111, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- o
+		{112, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- p
+		{113, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- q
+		{114, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- r
+		{115, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- s
+		{116, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- t
+		{117, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- u
+		{118, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- v
+		{119, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- w
+		{120, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- x
+		{121, CMFD_X_PIXEL,     CMFD_Y_PIXEL}, -- y
+		{122, CMFD_X_PIXEL,     CMFD_Y_PIXEL} -- z, use last ascii code
+
+	}
 }
 
 
-LCP_X_PIXEL =  144
-LCP_Y_PIXEL =  144
+LCP_X_PIXEL = 144
+LCP_Y_PIXEL = 144
 
-local Gripen_LCP_FONT = 
+local Gripen_LCP_FONT =
 {
-    texture = IndicationTexturesPath.."Gripen_Font_LCP",
-    size        = {10, 10},
-    resolution  = {1440, 1440},
-    default     = {LCP_X_PIXEL, LCP_Y_PIXEL},
-    chars       = {
-        {32, LCP_X_PIXEL, LCP_Y_PIXEL}, -- space
-        {48, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 0
-        {49, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 1
-        {50, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 2
-        {51, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 3
-        {52, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 4
-        {53, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 5
-        {54, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 6
-        {55, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 7
-        {56, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 8
-        {57, LCP_X_PIXEL, LCP_Y_PIXEL}, -- 9
+	texture    = IndicationTexturesPath .. "Gripen_Font_LCP",
+	size       = {10, 10},
+	resolution = {1440, 1440},
+	default    = {LCP_X_PIXEL, LCP_Y_PIXEL},
+	chars      = {
+		{32,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- space
+		{48,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 0
+		{49,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 1
+		{50,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 2
+		{51,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 3
+		{52,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 4
+		{53,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 5
+		{54,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 6
+		{55,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 7
+		{56,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 8
+		{57,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- 9
 
-        {64, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Alpha -> @
+		{64,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- Alpha -> @
 
-        {65, LCP_X_PIXEL, LCP_Y_PIXEL}, -- A
-        {66, LCP_X_PIXEL, LCP_Y_PIXEL}, -- B
-        {67, LCP_X_PIXEL, LCP_Y_PIXEL}, -- C
-        {68, LCP_X_PIXEL, LCP_Y_PIXEL}, -- D
-        {69, LCP_X_PIXEL, LCP_Y_PIXEL}, -- E
-        {70, LCP_X_PIXEL, LCP_Y_PIXEL}, -- F
-        {71, LCP_X_PIXEL, LCP_Y_PIXEL}, -- G
-        {72, LCP_X_PIXEL, LCP_Y_PIXEL}, -- H
-        {73, LCP_X_PIXEL, LCP_Y_PIXEL}, -- I
-        {74, LCP_X_PIXEL, LCP_Y_PIXEL}, -- J
-        {75, LCP_X_PIXEL, LCP_Y_PIXEL}, -- K
-        {76, LCP_X_PIXEL, LCP_Y_PIXEL}, -- L
-        {77, LCP_X_PIXEL, LCP_Y_PIXEL}, -- M
-        {78, LCP_X_PIXEL, LCP_Y_PIXEL}, -- N
-        {79, LCP_X_PIXEL, LCP_Y_PIXEL}, -- O
-        {80, LCP_X_PIXEL, LCP_Y_PIXEL}, -- P
-        {81, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Q
-        {82, LCP_X_PIXEL, LCP_Y_PIXEL}, -- R
-        {83, LCP_X_PIXEL, LCP_Y_PIXEL}, -- S
-        {84, LCP_X_PIXEL, LCP_Y_PIXEL}, -- T
-        {85, LCP_X_PIXEL, LCP_Y_PIXEL}, -- U
-        {86, LCP_X_PIXEL, LCP_Y_PIXEL}, -- V
-        {87, LCP_X_PIXEL, LCP_Y_PIXEL}, -- W
-        {88, LCP_X_PIXEL, LCP_Y_PIXEL}, -- X
-        {89, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Y
-        {90, LCP_X_PIXEL, LCP_Y_PIXEL}, -- Z
-         
-        {42, LCP_X_PIXEL, LCP_Y_PIXEL}, -- *
-        {43, LCP_X_PIXEL, LCP_Y_PIXEL}, -- +
-        {45, LCP_X_PIXEL, LCP_Y_PIXEL}, -- -
-        {61, LCP_X_PIXEL, LCP_Y_PIXEL}, -- =
-        {47, LCP_X_PIXEL, LCP_Y_PIXEL}, -- /
-        {92, LCP_X_PIXEL, LCP_Y_PIXEL}, -- \
-        {40, LCP_X_PIXEL, LCP_Y_PIXEL}, -- (
-        {41, LCP_X_PIXEL, LCP_Y_PIXEL}, -- )
-        {91, LCP_X_PIXEL, LCP_Y_PIXEL}, -- [
-        {93, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ]
-        {123, LCP_X_PIXEL, LCP_Y_PIXEL}, -- {
-        {125, LCP_X_PIXEL, LCP_Y_PIXEL}, -- }
-        {60, LCP_X_PIXEL, LCP_Y_PIXEL}, -- <
-        {62, LCP_X_PIXEL, LCP_Y_PIXEL}, -- >
-        {63, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ?
-        {124, LCP_X_PIXEL, LCP_Y_PIXEL}, -- |
-        {33, LCP_X_PIXEL, LCP_Y_PIXEL}, -- !
-        {35, LCP_X_PIXEL, LCP_Y_PIXEL}, -- #
-        {37, LCP_X_PIXEL, LCP_Y_PIXEL}, -- %
-        {94, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ^
-        {38, LCP_X_PIXEL, LCP_Y_PIXEL}, -- &
-        {96, LCP_X_PIXEL, LCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
-        {46, LCP_X_PIXEL, LCP_Y_PIXEL}, -- .
-        {58, LCP_X_PIXEL, LCP_Y_PIXEL}, -- :
-        {44, LCP_X_PIXEL, LCP_Y_PIXEL}, -- ,
-        {95, LCP_X_PIXEL, LCP_Y_PIXEL}, -- _
-        
-        {127, LCP_X_PIXEL, LCP_Y_PIXEL}, -- delta, use last ascii code
-    }
+		{65,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- A
+		{66,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- B
+		{67,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- C
+		{68,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- D
+		{69,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- E
+		{70,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- F
+		{71,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- G
+		{72,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- H
+		{73,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- I
+		{74,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- J
+		{75,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- K
+		{76,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- L
+		{77,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- M
+		{78,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- N
+		{79,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- O
+		{80,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- P
+		{81,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- Q
+		{82,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- R
+		{83,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- S
+		{84,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- T
+		{85,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- U
+		{86,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- V
+		{87,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- W
+		{88,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- X
+		{89,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- Y
+		{90,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- Z
+
+		{42,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- *
+		{43,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- +
+		{45,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- -
+		{61,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- =
+		{47,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- /
+		{92,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- \
+		{40,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- (
+		{41,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- )
+		{91,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- [
+		{93,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- ]
+		{123, LCP_X_PIXEL, LCP_Y_PIXEL}, -- {
+		{125, LCP_X_PIXEL, LCP_Y_PIXEL}, -- }
+		{60,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- <
+		{62,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- >
+		{63,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- ?
+		{124, LCP_X_PIXEL, LCP_Y_PIXEL}, -- |
+		{33,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- !
+		{35,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- #
+		{37,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- %
+		{94,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- ^
+		{38,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- &
+		{96,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+		{46,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- .
+		{58,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- :
+		{44,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- ,
+		{95,  LCP_X_PIXEL, LCP_Y_PIXEL}, -- _
+
+		{127, LCP_X_PIXEL, LCP_Y_PIXEL}  -- delta, use last ascii code
+	}
 }
 
-UCP_X_PIXEL =  144
-UCP_Y_PIXEL =  144
+UCP_X_PIXEL = 144
+UCP_Y_PIXEL = 144
 
-local Gripen_UCP_FONT = 
+local Gripen_UCP_FONT =
 {
-    texture = IndicationTexturesPath.."Gripen_Font_UCP",
-    size        = {10, 10},
-    resolution  = {1440, 1440},
-    default     = {UCP_X_PIXEL, UCP_Y_PIXEL},
-    chars       = {
-        {32, UCP_X_PIXEL, UCP_Y_PIXEL}, -- space
-        {48, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 0
-        {49, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 1
-        {50, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 2
-        {51, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 3
-        {52, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 4
-        {53, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 5
-        {54, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 6
-        {55, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 7
-        {56, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 8
-        {57, UCP_X_PIXEL, UCP_Y_PIXEL}, -- 9
+	texture    = IndicationTexturesPath .. "Gripen_Font_UCP",
+	size       = {10, 10},
+	resolution = {1440, 1440},
+	default    = {UCP_X_PIXEL, UCP_Y_PIXEL},
+	chars      = {
+		{32,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- space
+		{48,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 0
+		{49,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 1
+		{50,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 2
+		{51,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 3
+		{52,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 4
+		{53,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 5
+		{54,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 6
+		{55,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 7
+		{56,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 8
+		{57,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- 9
 
-        {64, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Alpha -> @
+		{64,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- Alpha -> @
 
-        {65, UCP_X_PIXEL, UCP_Y_PIXEL}, -- A
-        {66, UCP_X_PIXEL, UCP_Y_PIXEL}, -- B
-        {67, UCP_X_PIXEL, UCP_Y_PIXEL}, -- C
-        {68, UCP_X_PIXEL, UCP_Y_PIXEL}, -- D
-        {69, UCP_X_PIXEL, UCP_Y_PIXEL}, -- E
-        {70, UCP_X_PIXEL, UCP_Y_PIXEL}, -- F
-        {71, UCP_X_PIXEL, UCP_Y_PIXEL}, -- G
-        {72, UCP_X_PIXEL, UCP_Y_PIXEL}, -- H
-        {73, UCP_X_PIXEL, UCP_Y_PIXEL}, -- I
-        {74, UCP_X_PIXEL, UCP_Y_PIXEL}, -- J
-        {75, UCP_X_PIXEL, UCP_Y_PIXEL}, -- K
-        {76, UCP_X_PIXEL, UCP_Y_PIXEL}, -- L
-        {77, UCP_X_PIXEL, UCP_Y_PIXEL}, -- M
-        {78, UCP_X_PIXEL, UCP_Y_PIXEL}, -- N
-        {79, UCP_X_PIXEL, UCP_Y_PIXEL}, -- O
-        {80, UCP_X_PIXEL, UCP_Y_PIXEL}, -- P
-        {81, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Q
-        {82, UCP_X_PIXEL, UCP_Y_PIXEL}, -- R
-        {83, UCP_X_PIXEL, UCP_Y_PIXEL}, -- S
-        {84, UCP_X_PIXEL, UCP_Y_PIXEL}, -- T
-        {85, UCP_X_PIXEL, UCP_Y_PIXEL}, -- U
-        {86, UCP_X_PIXEL, UCP_Y_PIXEL}, -- V
-        {87, UCP_X_PIXEL, UCP_Y_PIXEL}, -- W
-        {88, UCP_X_PIXEL, UCP_Y_PIXEL}, -- X
-        {89, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Y
-        {90, UCP_X_PIXEL, UCP_Y_PIXEL}, -- Z
-         
-        {42, UCP_X_PIXEL, UCP_Y_PIXEL}, -- *
-        {43, UCP_X_PIXEL, UCP_Y_PIXEL}, -- +
-        {45, UCP_X_PIXEL, UCP_Y_PIXEL}, -- -
-        {61, UCP_X_PIXEL, UCP_Y_PIXEL}, -- =
-        {47, UCP_X_PIXEL, UCP_Y_PIXEL}, -- /
-        {92, UCP_X_PIXEL, UCP_Y_PIXEL}, -- \
-        {40, UCP_X_PIXEL, UCP_Y_PIXEL}, -- (
-        {41, UCP_X_PIXEL, UCP_Y_PIXEL}, -- )
-        {91, UCP_X_PIXEL, UCP_Y_PIXEL}, -- [
-        {93, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ]
-        {123, UCP_X_PIXEL, UCP_Y_PIXEL}, -- {
-        {125, UCP_X_PIXEL, UCP_Y_PIXEL}, -- }
-        {60, UCP_X_PIXEL, UCP_Y_PIXEL}, -- <
-        {62, UCP_X_PIXEL, UCP_Y_PIXEL}, -- >
-        {63, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ?
-        {124, UCP_X_PIXEL, UCP_Y_PIXEL}, -- |
-        {33, UCP_X_PIXEL, UCP_Y_PIXEL}, -- !
-        {35, UCP_X_PIXEL, UCP_Y_PIXEL}, -- #
-        {37, UCP_X_PIXEL, UCP_Y_PIXEL}, -- %
-        {94, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ^
-        {38, UCP_X_PIXEL, UCP_Y_PIXEL}, -- &
-        {96, UCP_X_PIXEL, UCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
-        {46, UCP_X_PIXEL, UCP_Y_PIXEL}, -- .
-        {58, UCP_X_PIXEL, UCP_Y_PIXEL}, -- :
-        {44, UCP_X_PIXEL, UCP_Y_PIXEL}, -- ,
-        {95, UCP_X_PIXEL, UCP_Y_PIXEL}, -- _
-        
-        {127, UCP_X_PIXEL, UCP_Y_PIXEL}, -- delta, use last ascii code
-    }
+		{65,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- A
+		{66,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- B
+		{67,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- C
+		{68,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- D
+		{69,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- E
+		{70,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- F
+		{71,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- G
+		{72,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- H
+		{73,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- I
+		{74,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- J
+		{75,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- K
+		{76,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- L
+		{77,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- M
+		{78,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- N
+		{79,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- O
+		{80,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- P
+		{81,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- Q
+		{82,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- R
+		{83,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- S
+		{84,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- T
+		{85,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- U
+		{86,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- V
+		{87,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- W
+		{88,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- X
+		{89,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- Y
+		{90,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- Z
+
+		{42,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- *
+		{43,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- +
+		{45,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- -
+		{61,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- =
+		{47,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- /
+		{92,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- \
+		{40,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- (
+		{41,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- )
+		{91,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- [
+		{93,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- ]
+		{123, UCP_X_PIXEL, UCP_Y_PIXEL}, -- {
+		{125, UCP_X_PIXEL, UCP_Y_PIXEL}, -- }
+		{60,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- <
+		{62,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- >
+		{63,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- ?
+		{124, UCP_X_PIXEL, UCP_Y_PIXEL}, -- |
+		{33,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- !
+		{35,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- #
+		{37,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- %
+		{94,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- ^
+		{38,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- &
+		{96,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+		{46,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- .
+		{58,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- :
+		{44,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- ,
+		{95,  UCP_X_PIXEL, UCP_Y_PIXEL}, -- _
+
+		{127, UCP_X_PIXEL, UCP_Y_PIXEL}  -- delta, use last ascii code
+	}
 }
 
 
@@ -420,6 +421,9 @@ Gripen_Font_black  	= MakeFont(Gripen_Font, BLACK, "Gripen_Font_black")
 Gripen_Font_Yellow  = MakeFont(Gripen_Font, materials["DBG_YELLOW"], "Gripen_Font_Yellow") --black
 Gripen_Font_white  	= MakeFont(Gripen_Font, WHITE, "Gripen_Font_white")
 Gripen_Font_HL_Green  = MakeFont(Gripen_Font, HORIZON_LINE_GREEN, "Gripen_Font_Green_HL")
+
+Gripen_Font_ContactsOrange  = MakeFont(Gripen_Font, Gripen_Font_ContactsOrange, "Gripen_Font_ContactsOrange")
+
 Gripen_fontLCP = MakeFont(Gripen_LCP_FONT, lcpGREEN , "Gripen_Font_LCP")
 Gripen_fontUCP = MakeFont(Gripen_UCP_FONT, lcpGREEN , "Gripen_Font_UCP")
 
@@ -438,6 +442,7 @@ fonts["Gripen_Font_black"]  = Gripen_Font_black
 fonts["Gripen_Font_Yellow"]  = Gripen_Font_Yellow
 fonts["Gripen_Font_WHITE"]  = Gripen_Font_white
 fonts["Gripen_Font_HL_Green"]  = Gripen_Font_HL_Green
+fonts["Gripen_Font_ContactsOrange"]  = Gripen_Font_ContactsOrange
 fonts["Gripen_Font_HL_Blue"]  = Gripen_Font_HL_Blue
 fonts["Gripen_Font_LCP"]  = Gripen_fontLCP
 fonts["Gripen_Font_UCP"]  = Gripen_fontUCP
@@ -495,6 +500,65 @@ local box_indices =
 {
 	0,1,2;0,2,3
 }
+
+
+
+function orange_text_param_with_cd_brightness(posx, posy, element_parm, tformat, pparent, stringdefs, font_mat, talignment)
+	if tformat == nil then
+		tformat = "%.0f"
+	end
+	if talignment == nil then
+		talignment = "CenterCenter"
+	end
+	vfont_mat = fonts["FONT_GREEN"]
+	if font_mat ~= nil then
+		vfont_mat = fonts[font_mat]
+	end	
+	if stringdefs == nil then
+		stringdefs = mfd_strdefs_text
+	end	
+	
+	local parent          = CreateElement "ceStringPoly"
+	parent.name           = create_guid_string()
+	parent.material       = vfont_mat
+	parent.init_pos       = {posx, posy}
+	parent.stringdefs     = stringdefs
+	parent.alignment	  = talignment
+	if pparent ~= nil then
+		parent.parent_element = pparent.name
+	end
+	parent.formats           = {tformat} 
+	parent.element_params    = {element_parm,"%s"}
+	parent.controllers       = {{"text_using_parameter",0},}
+	AddElement(parent)
+	parent.level          = MFD_DEFAULT_LEVEL  
+	-------------------
+	return parent
+end
+
+
+
+function make_softkey_box(length, posx, posy, rot, skbParent, skbParam)
+
+	local softkey_box           = CreateElement "ceMeshPoly"
+	softkey_box.name            = create_guid_string()
+	softkey_box.primitivetype   = "triangles"
+	softkey_box.vertices        = {{(-0.002 - 0.021),-(length / 35)}, {(0.002 - 0.021),-(length / 35)}, {(-0.002 - 0.021),(length / 35)}, {(0.002 - 0.021),(length / 35)},
+	                               {(-0.002 + 0.021),-(length / 35)}, {(0.002 + 0.021),-(length / 35)}, {(-0.002 + 0.021),(length / 35)}, {(0.002 + 0.021),(length / 35)},
+								   {(0.002 - 0.021),(length / 35) - 0.004}, {(0.002 + 0.021),(length / 35) - 0.004},
+								   {(0.002 - 0.021),-(length / 35) + 0.004}, {(0.002 + 0.021),-(length / 35) + 0.004}}
+	softkey_box.indices         = {0,1,2 , 3,2,1,
+	                               4,5,6 , 7,6,5,
+								   8,9,3 , 6,3,9,
+								   1,4,10 , 11,10,4}
+	softkey_box.init_pos        = {posx, posy}
+	softkey_box.init_rot        = {rot, 0}
+	softkey_box.material        = MakeMaterial(nil, {0, 0, 0, 255})
+	softkey_box.parent_element  = skbParent.name
+	softkey_box.element_params  = {skbParam}
+	softkey_box.controllers     = {{"parameter_compare_with_number",0, 1}}
+	return softkey_box	
+end
 
 
 
