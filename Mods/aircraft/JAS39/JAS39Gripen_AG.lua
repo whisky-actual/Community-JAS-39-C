@@ -75,6 +75,13 @@ local outboard 	= {
 	{ CLSID = "{JAS39_AIM-9X}", attach_point_position = {0.25, 0.0, 0.0}, arg_value = 0.53 }, -- AIM-9X	
 	{ CLSID = "{JAS39_PYTHON-5}", attach_point_position = {0.1, -0.23, 0.0}, arg_value = 0.15 }, -- Python-5	
 	{ CLSID = "{JAS39_ASRAAM}", attach_point_position = {0.40, -0.23, 0.0}, arg_value = 0.17 }, -- AIM-132 ASRAAM
+
+--	=================== BVR AIR TO AIR MISSILES ==============================================================	
+	{ CLSID = "{JAS39_Meteor}", attach_point_position = {0.4, -0.12, 0.0}, arg_value = 0.22 }, -- Meteor
+	{ CLSID = "{JAS39_AIM120B}" ,arg_value = 0.18, attach_point_position = {0.30, -0.13, 0.0}},   -- AIM-120B
+	{ CLSID = "{JAS39_AIM120C5}" ,arg_value = 0.19, attach_point_position = {0.30, -0.13, 0.0}},  -- AIM-120C-5
+	{ CLSID = "{JAS39_AIM120C7}" ,arg_value = 0.20, attach_point_position = {0.30, -0.13, 0.0}},  -- AIM-120C-7
+	{ CLSID = "{JAS39_Derby}", attach_point_position = {0.1, -0.23, 0.0}, arg_value = 0.21 }, -- I-Derby ER		
 	
 --	=================== ANTI SHIP MISSILES ======================================================================== Not available on the outer pylons!
 	--{ CLSID = "{JAS39_RBS15}", arg_value = 0.84, Type = 1, attach_point_position ={ 0.0, -0.27, 0.0} }, -- RBS-15F Mk4 Gungnir

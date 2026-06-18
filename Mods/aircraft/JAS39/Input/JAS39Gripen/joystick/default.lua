@@ -125,6 +125,7 @@ join(res.keyCommands,{
 -- Throttle Grip ----------------------------
 ---------------------------------------------
 -- TDC
+{combos = {{key = 'Enter'}}, down = iCommandPlane_LockOn_start, up = iCommandPlane_LockOn_finish, name = 'Target Lock', category = {_('Throttle Grip'), _('HOTAS'), _('Sensors')}},
 {pressed = iCommandPlaneRadarUp, 				up = iCommandPlaneRadarStop, 			name = _('Target Designator Up'),   						category = {_('Throttle Grip'), _('HOTAS'), _('Sensors')}},
 {pressed = iCommandPlaneRadarDown, 				up = iCommandPlaneRadarStop, 			name = _('Target Designator Down'), 						category = {_('Throttle Grip'), _('HOTAS'), _('Sensors')}},
 {pressed = iCommandPlaneRadarLeft, 				up = iCommandPlaneRadarStop, 			name = _('Target Designator Left'), 						category = {_('Throttle Grip'), _('HOTAS'), _('Sensors')}},

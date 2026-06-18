@@ -701,13 +701,13 @@ for i = 1, 20 do
 	local rotBase          = CreateElement "ceSimple"
 	rotBase.name           = baseName .. "Base"
 	rotBase.parent_element = RWRBase.name
-	rotBase.element_params = {param .. "heading", param .. "POWER", param .. "threat", "HUDBrightness"}
+	rotBase.element_params = {param .. "hdg", param .. "POWER", param .. "threat", "HUDBrightness"}
 	rotBase.controllers    = {{"rotate_using_parameter", 0, -1}, {"parameter_in_range", 1, 0, 1.1}, {"parameter_compare_with_number", 2, 1}, {"opacity_using_parameter", 3}}
 	AddHudElement(rotBase)
 
 
 	local powerBase          = Copy(rotBase)
-	powerBase.name           = baseName .. "Ground_Power_Base"
+	powerBase.name           = baseName .. "Power_Base"
 	powerBase.init_pos       = {0, .6465 * math.rad(2.5 / 2) * 10}
 	powerBase.parent_element = rotBase.name
 	powerBase.element_params = {param .. "range", "HUDBrightness"}
@@ -721,8 +721,8 @@ for i = 1, 20 do
 		starLine.width          = .003
 		starLine.vertices       = {{.6465 * math.rad(.1 / 2) * 10}, {.6465 * math.rad(.3 / 2) * 10}}
 		starLine.init_rot       = {j * 45}
-		starLine.parent_element = baseName .. "Ground_Power_Base"
-		starLine.element_params = {param .. "heading", param .. "launchBlink", "HUDBrightness"}
+		starLine.parent_element = baseName .. "Power_Base"
+		starLine.element_params = {param .. "hdg", param .. "launchBlink", "HUDBrightness"}
 		starLine.controllers    = {{"rotate_using_parameter", 0, 1}, {"parameter_compare_with_number", 1, 1}, {"opacity_using_parameter", 2}}
 		AddHudElement(starLine)
 	end
@@ -739,6 +739,39 @@ for i = 1, 20 do
 	AddHudElement(missileLine)
 end
 
+
+for i = 1, 20 do
+	local index = ""
+	if i < 10 then
+		index = "_0" .. i .. "_"
+	else
+		index = "_" .. i .. "_"
+	end
+
+	local param = "RWR_CONTACT" .. index
+
+
+
+	local contactBase          = CreateElement "ceSimple"
+	contactBase.name           = create_guid_string()
+	contactBase.parent_element = HUD_BASE.name
+	contactBase.element_params = {param .. "POWER", param .. "azHUD", param .. "elHUD", "rollRad", "HUDBrightness"}
+	contactBase.controllers    = {{"parameter_in_range", 0, 0, 1.1}, {"move_left_right_using_parameter", 1, -.6465}, {"move_up_down_using_parameter", 2, .6465}, {"rotate_using_parameter", 3, 1}, {"opacity_using_parameter", 4}}
+	AddHudElement(contactBase)
+	
+	for j = 0, 7 do
+		local starLine          = CreateElement "ceSimpleLineObject"
+		starLine.name           = create_guid_string()
+		starLine.material       = MakeMaterial(nil, {0, 255, 0, 255})
+		starLine.width          = .003
+		starLine.vertices       = {{.6465 * math.rad(.1 / 2) * 10}, {.6465 * math.rad(.3 / 2) * 10}}
+		starLine.init_rot       = {j * 45}
+		starLine.parent_element = contactBase.name
+		starLine.element_params = {param .. "launchBlink", "HUDBrightness"}
+		starLine.controllers    = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
+		AddHudElement(starLine)
+	end
+end
 
 
 

@@ -95,8 +95,126 @@ local HUDFont = {
 }
 
 
+local MFDXPixel = 88
+local MFDYPixel = 144
+
+local MFDFont = {
+	texture    = fontPath .. "Gripen_Font_MFD",
+	size       = {10, 10},
+	resolution = {1440, 1440},
+	default    = {MFDXPixel, MFDYPixel},
+	chars      = {
+		{32,  MFDXPixel,       MFDYPixel}, -- space
+		{48,  MFDXPixel,       MFDYPixel}, -- 0
+		{49,  MFDXPixel,       MFDYPixel}, -- 1
+		{50,  MFDXPixel,       MFDYPixel}, -- 2
+		{51,  MFDXPixel,       MFDYPixel}, -- 3
+		{52,  MFDXPixel,       MFDYPixel}, -- 4
+		{53,  MFDXPixel,       MFDYPixel}, -- 5
+		{54,  MFDXPixel,       MFDYPixel}, -- 6
+		{55,  MFDXPixel,       MFDYPixel}, -- 7
+		{56,  MFDXPixel,       MFDYPixel}, -- 8
+		{57,  MFDXPixel,       MFDYPixel}, -- 9
+
+		{64,  MFDXPixel,       MFDYPixel}, -- Alpha -> @
+
+		{65,  MFDXPixel,       MFDYPixel}, -- A
+		{66,  MFDXPixel,       MFDYPixel}, -- B
+		{67,  MFDXPixel,       MFDYPixel}, -- C
+		{68,  MFDXPixel,       MFDYPixel}, -- D
+		{69,  MFDXPixel,       MFDYPixel}, -- E
+		{70,  MFDXPixel,       MFDYPixel}, -- F
+		{71,  MFDXPixel,       MFDYPixel}, -- G
+		{72,  MFDXPixel,       MFDYPixel}, -- H
+		{73,  MFDXPixel,       MFDYPixel}, -- I
+		{74,  MFDXPixel,       MFDYPixel}, -- J
+		{75,  MFDXPixel,       MFDYPixel}, -- K
+		{76,  MFDXPixel,       MFDYPixel}, -- L
+		{77,  MFDXPixel,       MFDYPixel}, -- M
+		{78,  MFDXPixel,       MFDYPixel}, -- N
+		{79,  MFDXPixel,       MFDYPixel}, -- O
+		{80,  MFDXPixel,       MFDYPixel}, -- P
+		{81,  MFDXPixel,       MFDYPixel}, -- Q
+		{82,  MFDXPixel,       MFDYPixel}, -- R
+		{83,  MFDXPixel,       MFDYPixel}, -- S
+		{84,  MFDXPixel,       MFDYPixel}, -- T
+		{85,  MFDXPixel,       MFDYPixel}, -- U
+		{86,  MFDXPixel,       MFDYPixel}, -- V
+		{87,  MFDXPixel,       MFDYPixel}, -- W
+		{88,  MFDXPixel,       MFDYPixel}, -- X
+		{89,  MFDXPixel,       MFDYPixel}, -- Y
+		{90,  MFDXPixel,       MFDYPixel}, -- Z
+
+		{42,  MFDXPixel,       MFDYPixel}, -- *
+		{43,  MFDXPixel,       MFDYPixel}, -- +
+		{45,  MFDXPixel,       MFDYPixel}, -- -
+		{47,  MFDXPixel,       MFDYPixel}, -- /
+		{92,  MFDXPixel,       MFDYPixel}, -- \
+		{40,  MFDXPixel,       MFDYPixel}, -- (
+		{41,  MFDXPixel,       MFDYPixel}, -- )
+		{91,  MFDXPixel,       MFDYPixel}, -- [
+		{93,  MFDXPixel,       MFDYPixel}, -- ]
+		{123, MFDXPixel,       MFDYPixel}, -- {
+		{125, MFDXPixel,       MFDYPixel}, -- }
+		{60,  MFDXPixel,       MFDYPixel}, -- <
+		{62,  MFDXPixel,       MFDYPixel}, -- >
+		{61,  MFDXPixel,       MFDYPixel}, -- =
+		{63,  MFDXPixel,       MFDYPixel}, -- ?
+		{124, MFDXPixel,       MFDYPixel}, -- |
+		{33,  MFDXPixel,       MFDYPixel}, -- !
+		{35,  MFDXPixel,       MFDYPixel}, -- #
+		{37,  MFDXPixel,       MFDYPixel}, -- %
+		{94,  MFDXPixel,       MFDYPixel}, -- ^
+		{38,  MFDXPixel,       MFDYPixel}, -- &
+		{96,  MFDXPixel,       MFDYPixel}, -- o -- degree, change its ascii code to 96 ', original 248 (out of index)
+		{46,  MFDXPixel * 0.5, MFDYPixel * 0.6}, -- .
+		{58,  MFDXPixel,       MFDYPixel}, -- :
+		{44,  MFDXPixel,       MFDYPixel}, -- ,
+		{126, MFDXPixel,       MFDYPixel}, -- cursor -> ~
+		{95,  MFDXPixel,       MFDYPixel}, -- _
+
+		{39,  MFDXPixel,       MFDYPixel}, -- '
+		{34,  MFDXPixel,       MFDYPixel}, -- "
+		{127, MFDXPixel,       MFDYPixel}, -- delta
+
+		{97,  MFDXPixel,       MFDYPixel}, -- a
+		{98,  MFDXPixel,       MFDYPixel}, -- b
+		{99,  MFDXPixel,       MFDYPixel}, -- c
+		{100, MFDXPixel,       MFDYPixel}, -- d
+		{101, MFDXPixel,       MFDYPixel}, -- e
+		{102, MFDXPixel,       MFDYPixel}, -- f
+		{103, MFDXPixel,       MFDYPixel}, -- g
+		{104, MFDXPixel,       MFDYPixel}, -- h
+		{105, MFDXPixel,       MFDYPixel}, -- i
+		{106, MFDXPixel,       MFDYPixel}, -- j
+		{107, MFDXPixel,       MFDYPixel}, -- k
+		{108, MFDXPixel,       MFDYPixel}, -- l
+		{109, MFDXPixel,       MFDYPixel}, -- m
+		{110, MFDXPixel,       MFDYPixel}, -- n
+		{111, MFDXPixel,       MFDYPixel}, -- o
+		{112, MFDXPixel,       MFDYPixel}, -- p
+		{113, MFDXPixel,       MFDYPixel}, -- q
+		{114, MFDXPixel,       MFDYPixel}, -- r
+		{115, MFDXPixel,       MFDYPixel}, -- s
+		{116, MFDXPixel,       MFDYPixel}, -- t
+		{117, MFDXPixel,       MFDYPixel}, -- u
+		{118, MFDXPixel,       MFDYPixel}, -- v
+		{119, MFDXPixel,       MFDYPixel}, -- w
+		{120, MFDXPixel,       MFDYPixel}, -- x
+		{121, MFDXPixel,       MFDYPixel}, -- y
+		{122, MFDXPixel,       MFDYPixel} -- z, use last ascii code
+
+	}
+}
+
+
 newFonts = {}
 newFonts.HUD = MakeFont(HUDFont, colors.green)
+
+for name, color in pairs(colors) do
+	newFonts["MFD_" .. name] = MakeFont(MFDFont, color)
+end
+
 
 -- for name, icolor in pairs(colors) do
 -- 	newFonts[name] = MakeFont(HUDFont, icolor)

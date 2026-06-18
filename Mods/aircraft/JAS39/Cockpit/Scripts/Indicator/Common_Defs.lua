@@ -5,9 +5,6 @@ dofile(LockOn_Options.script_path .. "Indicator/Fonts.lua")
 
 
 
--- lineThickness = .0008
-
-
 align = {
 	CB = "CenterBottom",
 	CC = "CenterCenter",
@@ -21,17 +18,17 @@ align = {
 }
 
 ctrl = {
-	argInRange    = "draw_argument_in_range",                      -- {ctrl.argInRange, argNum, greaterThanValue, lessThanValue} If greaterThanValue < argValue < lessThanValue then obj is visible.
+	argInRange    = "draw_argument_in_range",                   -- {ctrl.argInRange, argNum, greaterThanValue, lessThanValue} If greaterThanValue < argValue < lessThanValue then obj is visible.
 	changeColor   = "change_color_when_parameter_equal_to_number", -- {ctrl.changeColor, paramNum, num, r, g, b} If paramNum == num then set color to rgb.
-	compareNum    = "parameter_compare_with_number",               -- {ctrl.compareNum, paramNum, num} If paramValue == num then obj is visible.
-	compareParams = "compare_parameters",                          -- {ctrl.compare, param1Num, param2Num} If param1Value == param1Value then obj is visible.
-	inRange       = "parameter_in_range",                          -- {ctrl.inRange, paramNum, greaterThanValue, lessThanValue} If greaterThanValue < paramValue < lessThanValue then obj is visible.
-	moveX         = "move_left_right_using_parameter",             -- {ctrl.moveX, paramNum, gain} Moves obj 1 gain on the x plane per value.
-	moveY         = "move_up_down_using_parameter",                -- {ctrl.moveY, paramNum, gain} Moves obj 1 gain on the y plane per value.
-	opacity       = "opacity_using_parameter",                     -- {ctrl.opacity, paramNum} Changes opacity with value (1 = 100%, 0 = 0%).
-	rotate        = "rotate_using_parameter",                      -- {ctrl.rotate, paramNum, gain} Rotates obj 1 gain per value.
-	setPoint      = "line_object_set_point_using_parameters",      -- {ctrl.setPoint, verticeNum, paramX, paramY, gainX, gainY} (ONLY APPLIES TO "ceSimpleLineObject") Moves verticeNum 1 gainX on the x plane per paramXValue + Moves verticeNum 1 gainY on the y plane per paramYValue.
-	text          = "text_using_parameter"                         -- {ctrl.text, paramNum, formatNum} Prints paramNum value (dunno what formatNum means).
+	compareNum    = "parameter_compare_with_number",            -- {ctrl.compareNum, paramNum, num} If paramValue == num then obj is visible.
+	compareParams = "compare_parameters",                       -- {ctrl.compare, param1Num, param2Num} If param1Value == param1Value then obj is visible.
+	inRange       = "parameter_in_range",                       -- {ctrl.inRange, paramNum, greaterThanValue, lessThanValue} If greaterThanValue < paramValue < lessThanValue then obj is visible.
+	moveX         = "move_left_right_using_parameter",          -- {ctrl.moveX, paramNum, gain} Moves obj 1 gain on the x plane per value.
+	moveY         = "move_up_down_using_parameter",             -- {ctrl.moveY, paramNum, gain} Moves obj 1 gain on the y plane per value.
+	opacity       = "opacity_using_parameter",                  -- {ctrl.opacity, paramNum} Changes opacity with value (1 = 100%, 0 = 0%).
+	rotate        = "rotate_using_parameter",                   -- {ctrl.rotate, paramNum, gain} Rotates obj 1 gain per value.
+	setPoint      = "line_object_set_point_using_parameters",   -- {ctrl.setPoint, verticeNum, paramX, paramY, gainX, gainY} (ONLY APPLIES TO "ceSimpleLineObject") Moves verticeNum 1 gainX on the x plane per paramXValue + Moves verticeNum 1 gainY on the y plane per paramYValue.
+	text          = "text_using_parameter"                      -- {ctrl.text, paramNum, formatNum} Prints paramNum value (dunno what formatNum means).
 }
 
 hcr = {
@@ -86,7 +83,10 @@ end
 --- @param isMask boolean Whether the element is invisible or not.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return Element obj The element with the set properties.
-function setCommonProperties(obj, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask, collimationType)
+function setCommonProperties(
+	obj, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask,
+	collimationType
+)
 	obj.name     = name or create_guid_string()
 	obj.init_pos = pos
 	obj.init_rot = rot
@@ -178,7 +178,10 @@ end
 --- @param isMask boolean Whether the element is invisible or not.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table ceMeshPoly The created "ceMeshPoly" element.
-function addMeshPoly(name, pos, rot, parentElement, hClip, level, elementParams, controllers, vertices, indices, material, isMask, collimationType)
+function addMeshPoly(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, vertices, indices,
+	material, isMask, collimationType
+)
 	local meshPoly         = CreateElement "ceMeshPoly"
 	meshPoly.primitivetype = "triangles"
 	meshPoly.vertices      = vertices
@@ -206,7 +209,10 @@ end
 --- @param isMask boolean Whether the element is invisible or not.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table ceMeshPoly The created "ceMeshPoly" element with the shape of a circle.
-function addCircle(name, pos, rot, parentElement, hClip, level, elementParams, controllers, outerRadius, innerRadius, arc, res, material, isMask, collimationType)
+function addCircle(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, outerRadius,
+	innerRadius, arc, res, material, isMask, collimationType
+)
 	local circle = {}
 	set_circle(circle, outerRadius, innerRadius, arc, res)
 
@@ -228,7 +234,10 @@ end
 --- @param isMask boolean Whether the element is invisible or not.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table simpleLine The created "ceSimpleLineObject" element.
-function addSimpleLine(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, vertices, material, isMask, collimationType)
+function addSimpleLine(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, vertices,
+	material, isMask, collimationType
+)
 	local simpleLine    = CreateElement "ceSimpleLineObject"
 	simpleLine.width    = width
 	simpleLine.vertices = vertices or {{0}, {0}}
@@ -253,7 +262,10 @@ end
 --- @param isMask boolean Whether the element is invisible or not.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table ceSimpleLineObject The created "ceSimpleLineObject" element with a width and height.
-function addBox(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, height, material, isMask, collimationType)
+function addBox(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, width, height,
+	material, isMask, collimationType
+)
 	return addSimpleLine(name, pos, rot, parentElement, hClip, level, elementParams, controllers, width / 2, {{0, height / 2}, {0, -height / 2}}, material, isMask, collimationType)
 end
 
@@ -270,15 +282,18 @@ end
 --- @param text string The text to display in the element.
 --- @param alignment string The alignment of the text (default is align.CC).
 --- @param stringdef table The text size for the text (default is strdefs.std).
---- @param font string The font to use for the text (default is fonts["white"]).
+--- @param font string The font to use for the text.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table ceStringPoly The created "ceStringPoly" element.
-function addText(name, pos, rot, parentElement, hClip, level, elementParams, controllers, text, alignment, stringdef, font, collimationType)
+function addText(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, text, alignment,
+	stringdef, font, collimationType
+)
 	local textObj      = CreateElement "ceStringPoly"
 	textObj.value      = text
 	textObj.alignment  = alignment or align.CC
 	textObj.stringdefs = stringdef
-	textObj.material   = font or fonts["white"]
+	textObj.material   = font
 	setCommonProperties(textObj, name, pos, rot, parentElement, hClip, level, elementParams, controllers, false, collimationType)
 
 	return textObj
@@ -297,18 +312,19 @@ end
 --- @param alignment string The alignment of the text (default is align.CC).
 --- @param format table The formats for the text (default is {"%.0f"}, use {"%s"} for param handles that are strings).
 --- @param stringdef table The text size for the text (default is strdefs.std).
---- @param font string The font to use for the text (default is fonts["white"]).
+--- @param font string The font to use for the text.
 --- @param collimationType string The collimation type of the element ("HUD"/"HMD" for collimated elements, nil for non-collimated elements).
 --- @return table ceStringPoly The created "ceStringPoly" element.
-function addTextParam(name, pos, rot, parentElement, hClip, level, elementParams, controllers, textParam, alignment, format, stringdef, font, collimationType)
-	if textParam then
-		if elementParams and controllers then
-			elementParams[#elementParams+1] = {textParam}
-			controllers[#controllers+1]     = {{ctrl.text, #elementParams - 1}}
-		else
-			elementParams = {textParam}
-			controllers   = {{ctrl.text, 0}}
-		end
+function addTextParam(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, textParam,
+	alignment, format, stringdef, font, collimationType
+)
+	if textParam and elementParams and controllers then
+		elementParams[#elementParams+1] = {textParam}
+		controllers[#controllers+1]     = {{ctrl.text, #elementParams - 1}}
+	elseif textParam then
+		elementParams = {textParam}
+		controllers   = {{ctrl.text, 0}}
 	end
 
 
@@ -357,7 +373,10 @@ end
 --- @param centerY integer The center Y coordinate of the texture (default is the center of the texture).
 --- @param isMask boolean Whether the texture is a mask (default is false).
 --- @return table The created "ceTexPoly" element.
-function addTex(name, pos, rot, parentElement, hClip, level, elementParams, controllers, texture, upperLeftX, upperLeftY, lowerRightX, lowerRightY, scale, centerX, centerY, isMask)
+function addTex(
+	name, pos, rot, parentElement, hClip, level, elementParams, controllers, texture, upperLeftX,
+	upperLeftY, lowerRightX, lowerRightY, scale, centerX, centerY, isMask
+)
 	local finalScale = scale or 1
 
 	local milsPerPixel = finalScale / (1024 * 16)
