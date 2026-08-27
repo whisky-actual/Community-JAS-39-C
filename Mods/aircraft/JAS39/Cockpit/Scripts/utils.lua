@@ -27,7 +27,7 @@ function PID.new(Kp, Ki, Kd, umin, umax, uscale)
 	self.e = 0
 
 	self.du = 0 -- delta U()
-	self.u = 0  -- U() term for output
+	self.u = 0 -- U() term for output
 
 	self.umax = umax or 999999 -- allow bounding of e for PID output limits
 	self.umin = umin or -999999
@@ -279,4 +279,112 @@ function tableContains(table, value)
 		end
 	end
 	return false
+end
+
+
+
+function recursively_print(table_to_print, max_depth, max_number_tables, filepath)
+	local file = io.open(filepath, "w")
+	file:write("Key,Value\n")
+
+	local stack = {}
+
+	table.insert(stack, {key = "start", value = table_to_print, level = 0})
+
+	local total = 0
+
+	local hash_table = {}
+
+	hash_table[tostring(hash_table)] = 2
+	hash_table[tostring(stack)] = 2
+
+	local item = true
+	while (item) do
+		item = table.remove(stack)
+
+		if (item == nil) then
+			break
+		end
+		local key = item.key
+		local value = item.value
+		local level = item.level
+
+		file:write(string.rep("\t", level) .. tostring(key) .. " = " .. tostring(value) .. "\n")
+
+		local hash = hash_table[tostring(value)]
+		local valid_table = (hash == nil or hash < 2)
+
+		if (type(value) == "table" and valid_table) then
+			for k, v in pairs(value) do
+				if (v ~= nil and level <= max_depth and total < max_number_tables) then
+					table.insert(stack, {key = k, value = v, level = level + 1})
+					if (type(v) == "table") then
+						if (hash_table[tostring(v)] == nil) then
+							hash_table[tostring(v)] = 1
+						elseif (hash_table[tostring(v)] < 2) then
+							hash_table[tostring(v)] = 2
+						end
+						total = total + 1
+					end
+				end
+			end
+		end
+
+		if (getmetatable(value) and valid_table) then
+			for k, v in pairs(getmetatable(value)) do
+				if (v ~= nil and level <= max_depth and total < max_number_tables) then
+					table.insert(stack, {key = k, value = v, level = level + 1})
+					if (type(v) == "table") then
+						if (hash_table[tostring(v)] == nil) then
+							hash_table[tostring(v)] = 1
+						elseif (hash_table[tostring(v)] < 2) then
+							hash_table[tostring(v)] = 2
+						end
+						total = total + 1
+					end
+				end
+			end
+		end
+	end
+
+	file:close()
+end
+
+
+
+function Dump(o)
+	if type(o) == "table" then
+		local s = "{ "
+		for k, v in pairs(o) do
+			if type(k) ~= "number" then k = '"' .. k .. '"' end
+			s = s .. "[" .. k .. "] = " .. Dump(v) .. ","
+		end
+		return s .. "} "
+	else
+		return tostring(o)
+	end
+end
+
+
+
+Math = {}           -- The table representing the class, which will double as the metatable for the instances
+Math.__index = Math -- Failed table lookups on the instances should fallback to the class table, to get methods
+
+--- Returns the cotangent of `x` (assumed to be in radians).
+function Math.cot(x)
+	return math.cos(x) / math.sin(x)
+end
+
+--- Returns the arccotangent of `x` (assumed to be in radians).
+function Math.acot(x)
+	return math.tan(1 - x)
+end
+
+
+--- Comparing a varible to a never ending fraction (e.g 1/3) will give `false`.
+--- This function solves that, returns `true` if `input` and `value` are close enough.
+function aboutEqualTo(input, value, resolution)
+	local res = resolution or .01
+
+	return ((input - res) < value and (input + res) > value)
 end

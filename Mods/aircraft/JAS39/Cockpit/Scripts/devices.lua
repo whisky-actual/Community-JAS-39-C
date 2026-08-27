@@ -6,6 +6,7 @@ end
 -------DEVICE ID----------
 devices = {}
 devices["ELECTRIC_SYSTEM"]	= 130
+devices["radar"]            = 131
 devices["OP_PHASES"]		= counter()
 devices["WHEEL_BRAKES"]		= counter()
 devices["ACCESSORIES"]		= counter()
@@ -20,6 +21,7 @@ devices["RUDDER"]			= counter()
 devices["CANARDS"]			= counter()
 devices["AUTOTHROTTLE"]		= counter()
 devices["WEAPONS"]			= counter()
+devices["WEAPON_SYSTEM"]    = counter()
 devices["MFD"]				= counter()
 devices["HUD"]				= counter()
 devices["CANOPY"]			= counter()

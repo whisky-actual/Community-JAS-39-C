@@ -10,9 +10,6 @@ make_default_activity(updateTimeStep)
 local FD = GetSelf()
 
 
--- FD:listen_command(nil)
-
-
 local pCAS         = get_param_handle("CAS")
 local txtCAS       = get_param_handle("txtCAS")
 local txtGS        = get_param_handle("txtGS")
@@ -39,7 +36,7 @@ local MS_TO_KTS = 1.94384449
 local M_TO_FT = 3.28083989501312335958
 
 
-local CAS, selfVelL, selfVelV, selfVelH, GS
+local CAS, selfVelL, selfVelV, selfVelH, GS, mach
 local spdUpdateFreq = 0.3
 
 local baroAlt, rAlt
@@ -47,7 +44,7 @@ local baroAlt, rAlt
 
 
 function post_initialize()
-	-- show_param_handles_list(true) -- For testing.
+	show_param_handles_list(true) -- For testing.
 end
 
 function update()

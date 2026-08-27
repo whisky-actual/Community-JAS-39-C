@@ -39,6 +39,7 @@ local altLineHi = 0
 
 
 function post_initialize()
+	print_message_to_user(Dump(getmetatable(HMD)))
 	birth = LockOn_Options.init_conditions.birth_place
 
 

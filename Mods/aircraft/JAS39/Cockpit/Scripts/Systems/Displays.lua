@@ -68,6 +68,7 @@ local CD_VSI_TOGGLE = get_param_handle("CD_VSI_TOGGLE")
 
 -- RIGHT DISPLAY ===================
 local RD_EMGY_MODE = get_param_handle("RD_EMGY_MODE")
+local RDPage = get_param_handle("RDPage")
 
 -- EMGY specific
 local RD_TEMP_TOGGLE = get_param_handle("RD_TEMP_TOGGLE")
@@ -265,7 +266,6 @@ function post_initialize()	-- modes / toggle default settings
 	PLAYER_SELECTED_STATION:set(0) -- First pylon: selected by default
 	
 -- CENTER DISPLAY ===================
-
 	CD_EMGY_MODE:set(0)
 	CD_LDG_TOGGLE:set(0)
 	CD_EWS_TOGGLE:set(0)
@@ -279,6 +279,8 @@ function post_initialize()	-- modes / toggle default settings
 
 -- RIGHT DISPLAY ===================	
 	RD_EMGY_MODE:set(0)
+	RDPage:set(1)
+	get_param_handle("RDRScopeMode"):set(1)
 -- EMGY specific
 	RD_TEMP_TOGGLE:set(1)			-- 1 = on , 0 = off
 	RD_ENG_TOGGLE:set(1)			-- 1 = on , 0 = off
@@ -766,117 +768,116 @@ if get_param_handle("mainpower"):get() == 1 then
 	end                                                
 
 
-	if command == 105 then
-		--print_message_to_user("NAV")
-		if masterMode:get() ~= 1 then
-			masterMode:set(1)
-			HideFc3Hud()
-			if RedHUD == 0 then
+		if command == 105 then
+			-- print_message_to_user("NAV")
+			if masterMode:get() ~= 1 then
+				masterMode:set(1)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				ShowFc3Hud()
 				ChangeHudColor()
 			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			ChangeHudColor()
-		end
-		
-	elseif command == 106 then
-		--print_message_to_user("BVR")
-		if masterMode:get() ~= 2 then
-			masterMode:set(2)
-			HideFc3Hud()
-			if RedHUD == 0 then
-				ChangeHudColor()
-			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			if RedHUD == 1 then
-				ChangeHudColor()
-			end
-		end
-		
-	elseif command == 107 then
-		--print_message_to_user("VS")
-		if masterMode:get() ~= 3 then
-			masterMode:set(3)
-			HideFc3Hud()
-			if RedHUD == 0 then
-				ChangeHudColor()
-			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			if RedHUD == 1 then
-				ChangeHudColor()
-			end
-		end
-		
-	elseif command == 108 then
-		--print_message_to_user("BORE")
-		if masterMode:get() ~= 4 then
-			masterMode:set(4)
-			HideFc3Hud()
-			if RedHUD == 0 then
-				ChangeHudColor()
-			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			if RedHUD == 1 then
-				ChangeHudColor()
-			end
-		end
 
-	elseif command == 109 then
-		--print_message_to_user("HMD")
-		if masterMode:get() ~= 5 then
-			masterMode:set(5)
-			HideFc3Hud()
-			if RedHUD == 0 then
-				ChangeHudColor()
+		elseif command == 106 then
+			-- print_message_to_user("BVR")
+			if masterMode:get() ~= 2 then
+				masterMode:set(2)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				ShowFc3Hud()
+				if RedHUD == 1 then
+					ChangeHudColor()
+				end
 			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			if RedHUD == 1 then
-				ChangeHudColor()
-			end
-		end
-		
-	elseif command == 110 then
-		--print_message_to_user("LNGT")
-		if masterMode:get() ~= 6 then
-			masterMode:set(6)
-			HideFc3Hud()
-			if RedHUD == 0 then
-				ChangeHudColor()
-			end
-		else 
-			masterMode:set(0)
-			ShowFc3Hud()
-			ChangeHudColor()
-			
-		end
 
-		
-	elseif command == 111 then
-		--print_message_to_user("AIR TO GROUND")
-		
-		if masterMode:get() ~= 7 then
-			masterMode:set(7)
-			ShowFc3Hud()
-			if RedHUD == 1 then
-				ChangeHudColor()
+		elseif command == 107 then
+			-- print_message_to_user("VS")
+			if masterMode:get() ~= 3 then
+				masterMode:set(3)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				ShowFc3Hud()
+				if RedHUD == 1 then
+					ChangeHudColor()
+				end
 			end
-		else 
-			masterMode:set(0)
-			HideFc3Hud()
-			if RedHUD == 0 then
+
+		elseif command == 108 then
+			-- print_message_to_user("BORE")
+			if masterMode:get() ~= 4 then
+				masterMode:set(4)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				ShowFc3Hud()
+				if RedHUD == 1 then
+					ChangeHudColor()
+				end
+			end
+
+		elseif command == 109 then
+			-- print_message_to_user("HMD")
+			-- if masterMode:get() ~= 5 then -- Commented out fixes not going to HMD mode after one click of the HMD mode button.
+				-- masterMode:set(5)
+				-- HideFc3Hud()
+				-- if RedHUD == 0 then
+					-- ChangeHudColor()
+				-- end
+			-- else
+				masterMode:set(0)
+				ShowFc3Hud()
+				if RedHUD == 1 then
+					ChangeHudColor()
+				end
+			-- end
+		elseif command == 110 then
+			-- print_message_to_user("LNGT")
+			if masterMode:get() ~= 6 then
+				masterMode:set(6)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				ShowFc3Hud()
 				ChangeHudColor()
+
+			end
+
+
+		elseif command == 111 then
+			-- print_message_to_user("AIR TO GROUND")
+
+			if masterMode:get() ~= 7 then
+				masterMode:set(7)
+				ShowFc3Hud()
+				if RedHUD == 1 then
+					ChangeHudColor()
+				end
+			else
+				masterMode:set(0)
+				HideFc3Hud()
+				if RedHUD == 0 then
+					ChangeHudColor()
+				end
 			end
 		end
-	end
 
 	if command == keys.CannonMode then
 		if masterMode:get() == 1 then

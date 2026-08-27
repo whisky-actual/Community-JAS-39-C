@@ -80,7 +80,7 @@ local function drawContact(index)
 	local rotBase          = CreateElement "ceSimple"
 	rotBase.name           = baseName .. "Base"
 	rotBase.parent_element = MFD_RWR.name
-	rotBase.element_params = {param .. "heading", param .. "POWER"}
+	rotBase.element_params = {param .. "hdg", param .. "POWER"}
 	rotBase.controllers    = {{"rotate_using_parameter", 0, -1}, {"parameter_in_range", 1, 0, 1.1}}
 	AddRWRElement2(rotBase)
 
@@ -117,7 +117,7 @@ local function drawContact(index)
 	nameQ2.alignment      = "CenterTop"
 	nameQ2.parent_element = baseName .. "Air_Power_Base"
 	nameQ2.formats        = {"%s"}
-	nameQ2.element_params = {param .. "heading", param .. "name", param .. "threat"}
+	nameQ2.element_params = {param .. "hdg", param .. "name", param .. "threat"}
 	nameQ2.controllers    = {{"parameter_in_range", 0, -1, math.rad(90)}, {"text_using_parameter", 1}, {"change_color_when_parameter_equal_to_number", 2, 1, 1, .011612, .008568}}
 	AddRWRElement2(nameQ2)
 
@@ -145,13 +145,13 @@ local function drawContact(index)
 	groundOval.name           = create_guid_string()
 	groundOval.material       = materials["RWRYELLOW"]
 	groundOval.parent_element = baseName .. "Ground_Power_Base"
-	groundOval.element_params = {param .. "threat", param .. "heading", param .. "launchBlink"}
+	groundOval.element_params = {param .. "threat", param .. "hdg", param .. "launchBlink"}
 	groundOval.controllers    = {{"change_color_when_parameter_equal_to_number", 0, 1, 1, .011612, .008568}, {"rotate_using_parameter", 1, 1}, {"opacity_using_parameter", 2}}
 	set_oval(groundOval, .030991, .030991 - .006198, 360, 12, 1.8)
 	AddRWRElement2(groundOval)
 
 	local groundGlockOval          = Copy(groundOval)
-	groundGlockOval.element_params = {param .. "SIGNAL", param .. "threat", param .. "heading", param .. "launchBlink"}
+	groundGlockOval.element_params = {param .. "SIGNAL", param .. "threat", param .. "hdg", param .. "launchBlink"}
 	groundGlockOval.controllers    = {{"parameter_compare_with_number", 0, 2}, {"change_color_when_parameter_equal_to_number", 1, 1, 1, .088655, .082282}, {"rotate_using_parameter", 2, 1}, {"opacity_using_parameter", 3}}
 	set_oval(groundGlockOval, .030991 - .006198, 0, 360, 12, 1.8)
 	AddRWRElement2(groundGlockOval)
@@ -349,7 +349,7 @@ for i = -60, 115, 5 do
 		distanceMarkerNum.parent_element = distanceMarker.name
 		distanceMarkerNum.value          = tostring(j)
 		distanceMarkerNum.formats        = {"%s"}
-		distanceMarkerNum.element_params = {"CD_SCALE_SYM"}
+		distanceMarkerNum.element_params = {"RDRFullRange"}
 		distanceMarkerNum.controllers    = {{"parameter_in_range", 0, controllerRange[1], controllerRange[2]}}
 		AddRWRElement2(distanceMarkerNum)
 	end
