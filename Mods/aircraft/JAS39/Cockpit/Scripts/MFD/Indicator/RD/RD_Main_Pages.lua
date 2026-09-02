@@ -263,7 +263,74 @@ addRDTextParam(
 
 -- ========== Bscope ==========
 
+local scpSize = 1.6 / 2
+local halfScpW = 0.8 / 2
+local scpX = 0
+local scpY = -0.4
+local scpBG = scpSize + normLineThickness
+local scpBGTopW = scpBG + .05 
 
+local scpFullRangeDist = scpSize * 2
+
+addRDBox("Scope_BG", {scpX, scpY}, nil, "RDR_Page", nil, nil, nil, nil, scpBG * 2, scpBG * 2)
+addRDSimpleLine(
+	nil, {0, scpBG - normLineThickness / 2}, nil, "Scope_BG", nil, nil, nil, nil, nil,
+	{{-scpBGTopW}, {scpBGTopW}}
+)
+
+addRDBox(
+	"Scope", nil, nil, "Scope_BG", hcr.rw, lvls.mask, nil, nil, scpSize * 2, scpSize * 2,
+	materials["MFDLightBlue"]
+)
+addRDBox("scanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, nil, nil, scpSize * 1, scpSize * 2, materials["MFDBeige"])
+
+
+
+-- Side azimuth tick marks from alt scope
+local tmpCounter = 0
+for i = -2 / 3, 2 / 3, 1 / 3 do
+	local longLine = tmpCounter == 1 or tmpCounter == 3
+
+	addRDSimpleLine(
+		nil, {-scpSize - normLineThickness / 2, i * scpSize}, nil, "Scope_BG", hcr.rw, nil, nil, nil, nil,
+		longLine and {{-altScpSideLinesW}, {altScpSideLinesW}} or {{0}, {altScpSideLinesW}}
+	)
+
+	addRDSimpleLine(
+		nil, {scpSize + normLineThickness / 2, i * scpSize}, nil, "Scope_BG", hcr.rw, nil, nil, nil, nil,
+		longLine and {{-altScpSideLinesW}, {altScpSideLinesW}} or {{-altScpSideLinesW}, {0}}
+	)
+
+	tmpCounter = tmpCounter + 1
+end
+
+-- Range tick marks along the bottom (range = 0 at bottom, increasing upward)
+for i = 1, 7 do
+	if i ~= 4 then
+		addRDSimpleLine(
+			nil, {-scpSize - normLineThickness / 2 + i * (scpFullRangeDist / 8), -scpBG}, nil, "Scope_BG", hcr.rw, nil, nil,
+			nil, nil, (i % 2 == 0) and {{0}, {0, altScpSideLinesW * 2}} or {{0}, {0, altScpSideLinesW}}
+		)
+	end
+end
+
+-- Range labels, now as horizontal bands stacked vertically instead of side-by-side bars
+
+local scpRangeMargin = .1 
+
+local scpFullRangeY = scpSize - scpRangeMargin
+local scpHalfRangeY = -scpBG + ((scpFullRangeY - (-scpBG)) / 2)
+addRDBox("Scope_Full_Range", {0, scpFullRangeY}, nil, "Scope_BG", nil, lvls.mask, nil, nil, scpBG * 2, normLineThickness * 1)
+addRDTextParam(
+	nil, {.01 - scpBG, .03}, nil, "Scope_Full_Range", nil, lvls.mask, nil, nil, "RDRFullRange",
+	align.LC
+)
+
+addRDBox("Scope_Half_Range", {0, scpHalfRangeY}, nil, "Scope_BG", nil, lvls.mask, nil, nil, scpBG * 2, normLineThickness * 1)
+addRDTextParam(
+	nil, {.01 - scpBG, .03}, nil, "Scope_Half_Range", nil, lvls.mask, nil, nil, "RDRHalfRange",
+	align.LC
+)
 
 -- ========== PPI scope ==========
 
@@ -273,6 +340,10 @@ addRDTextParam(
 -- local AirContactScale = (.025 * width) / 2
 local cursorGain = .08292
 local altScpRangeGain = 396.75
+local ScpRangeGain = 0.2
+local ScpAzimuthGain = 3
+local bsXGain = 0.043
+local bsYGain = 0.012
 
 local normContactScale = .025
 local prioContactScale = (.03 * width) / 2
@@ -281,8 +352,50 @@ local prioContactScale = (.03 * width) / 2
 
 
 local houseVerts = {{-normContactScale, normContactScale}, {normContactScale, normContactScale}, {normContactScale, -normContactScale}, {-normContactScale, -normContactScale}, {0, normContactScale * 2}}
+local BhouseVerts = {{-normContactScale, normContactScale}, {normContactScale, normContactScale}, {normContactScale, -normContactScale}, {-normContactScale, -normContactScale}, {0, normContactScale * 2}}
 local houseInds = {0, 4, 1, 0, 1, 2, 0, 2, 3}
 local RWRLineThickness = .007
+
+
+
+local function makeCircle(radius, segments)
+	local verts = {{0, 0}} -- center point, needed for the triangle fan
+	local inds = {}
+
+	for i = 0, segments do
+		local angle = (i / segments) * 2 * math.pi
+		table.insert(verts, {math.cos(angle) * radius, math.sin(angle) * radius})
+	end
+
+	for i = 1, segments do
+		table.insert(inds, 0)
+		table.insert(inds, i)
+		table.insert(inds, i + 1)
+	end
+
+	return verts, inds
+end
+
+local circleVerts, circleInds = makeCircle(normContactScale, 12)
+local bcircleVerts, bcircleInds = makeCircle(normContactScale, 12)
+
+
+local function copyVerts(verts)
+	local copy = {}
+
+	for i, vert in ipairs(verts) do
+		copy[i] = {vert[1], vert[2]}
+	end
+
+	for i = #verts, 1, -1 do
+		verts[i] = nil
+	end
+
+	return copy
+end
+
+
+
 
 local function createFriendlyContact(n)
 	local i
@@ -327,20 +440,30 @@ local function createFriendlyContact(n)
 	contactVelvec.element_params = {"RADAR_CONTACT" .. i .. "RDVelvec", "ONE"}
 	contactVelvec.controllers    = {{"line_object_set_point_using_parameters", 1, 1, 0, 0, cursorGain}}
 	AddElement(contactVelvec)
-	--]]
+	]]--
 
 
 
-	addRDMeshPoly( -- TODO: Fix altInFtGain and altScpRangeGain to work no matter the altitude scope size
+	addRDMeshPoly(
 		"Alt_Scope_Contact" .. i, {-halfAltScpW, -halfAltScpH}, nil, "Alt_Scope", hcr.rw, nil,
-		{contactSTR .. "altScpRange", contactSTR .. "alt", contactSTR .. "pitch"},
-		{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.rotate, 2, 1}}, houseVerts, houseInds, materials["MFDGreen"]
+		{contactSTR .. "altScpRange", contactSTR .. "alt", contactSTR .. "pitch", contactSTR .. "FRIENDLY"},
+		{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.rotate, 2, 1}, {ctrl.compareNum, 3, 1}}, copyVerts(houseVerts), houseInds, materials["MFDGreen"]
 	)
 	addRDSimpleLine(
 		nil, nil, nil, "Alt_Scope_Contact" .. i, hcr.rw, nil, {contactSTR .. "altScpVelvec", "ONE"},
 		{{ctrl.setPoint, 1, 1, 0, 0, altScpRangeGain}}, nil, nil, materials["MFDGreen"]
 	)
 
+	addRDMeshPoly(
+		"B_Scope_Contact" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+		{contactSTR .. "BSX", contactSTR .. "BSY", contactSTR .. "FRIENDLY", contactSTR .. "isFresh"},
+		{{ctrl.moveX, 0, 0.08}, {ctrl.moveY, 1, 0.08}, {ctrl.compareNum, 2, 1}, {ctrl.compareNum, 3, 1}},
+		copyVerts(houseVerts), houseInds, materials["MFDGreen"]
+	)
+	addRDSimpleLine(
+	nil, nil, nil, "B_Scope_Contact" .. i, hcr.rw, nil, {contactSTR .. "BSHdg"},
+	{{ctrl.rotate, 0, 1}}, nil, {{0, 0}, {0, .06}}, materials["MFDGreen"]
+	)
 
 	
 	--[[
@@ -419,91 +542,66 @@ local function createFriendlyContact(n)
 end
 
 local function createThreatContact(n)
-	-- local contactBase           = CreateElement "ceSimple"
-	-- contactBase.name            = "Enemy_Air_Contact_"..n
-	-- contactBase.element_params  = {"TargetInfo_"..n.."_CD_X", "TargetInfo_"..n.."_CD_Y", "TargetInfo_"..n.."_is_sensor_contact", "TargetInfo_"..n.."_Heading",
-	-- 							   "TargetInfo_"..n.."_Coalition"}
-	-- contactBase.controllers     = {{"move_left_right_using_parameter",0, cursorGain}, {"move_up_down_using_parameter",1, cursorGain}, {"parameter_compare_with_number",2, -1},
-	-- 							   {"rotate_using_parameter",3, -1}, {"parameter_compare_with_number",4, 2}}
-	----contactBase.use_mipfilter   = true
-	----contactBase.additive_alpha  = false
-	----contactBase.change_opacity  = false
-	----contactBase.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
-	----contactBase.level           = MFD_DEFAULT_LEVEL + 1
-	-- Add(contactBase)
+	local i
+	local enemycontactSTR
 
-
-	local contactBase           = CreateElement "ceMeshPoly"
-	contactBase.name            = "Enemy_Air_Contact_" .. n
-	contactBase.primitivetype   = "triangles"
-	contactBase.material        = MakeMaterial(nil, {255, 50, 0, 255})
-	contactBase.parent_element  = ContactBase.name
-	contactBase.element_params  = {"TargetInfo_" .. n .. "_CD_X", "TargetInfo_" .. n .. "_CD_Y", "TargetInfo_" .. n .. "_is_sensor_contact", "TargetInfo_" .. n .. "_Heading",
-		"TargetInfo_" .. n .. "_Coalition"}
-	contactBase.controllers     = {{"move_left_right_using_parameter", 0, cursorGain}, {"move_up_down_using_parameter", 1, cursorGain}, {"parameter_compare_with_number", 2, -1},
-		{"rotate_using_parameter",          3, -1}, {"parameter_compare_with_number", 4, 2}}
-	contactBase.use_mipfilter   = true
-	contactBase.additive_alpha  = false
-	contactBase.change_opacity  = false
-	contactBase.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
-	contactBase.level           = MFD_DEFAULT_LEVEL + 1
-	set_circle(contactBase, normContactScale, 0, 360, 18)
-	Add(contactBase)
-
-	local prioCircle          = Copy(contactBase)
-	prioCircle.name           = create_guid_string()
-	prioCircle.parent_element = "Enemy_Air_Contact_" .. n
-	prioCircle.element_params = {"TargetInfo_" .. n .. "_Priority"}
-	prioCircle.controllers    = {{"parameter_in_range", 0, 0, 5}}
-	set_circle(prioCircle, prifContactScale, 0, 360, 18)
-	Add(prioCircle)
-
-	for i = -1, 1, 2 do
-		PrioOne                 = CreateElement "ceSimpleLineObject"
-		PrioOne.name            = create_guid_string()
-		PrioOne.init_pos        = {0, 0}
-		PrioOne.init_rot        = {45 * i, 0}
-		PrioOne.material        = MakeMaterial(nil, {255, 50, 0, 255})
-		PrioOne.width           = .0033
-		PrioOne.parent_element  = "Enemy_Air_Contact_" .. n
-		PrioOne.vertices        = {{0, -.05}, {0, .05}}
-		PrioOne.element_params  = {"TargetInfo_" .. n .. "_Priority", "Prif_SelectedNum"}
-		PrioOne.controllers     = {{"compare_parameters", 0, 2}} -- if param1 == param2 then visible, }
-		PrioOne.use_mipfilter   = true
-		PrioOne.additive_alpha  = false
-		PrioOne.change_opacity  = false
-		PrioOne.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
-		PrioOne.level           = MFD_DEFAULT_LEVEL + 1
-		Add(PrioOne)
+	if n < 10 then
+		i = "_0" .. n .. "_"
+	else
+		i = "_" .. n .. "_"
 	end
 
+	enemycontactSTR = "RADAR_CONTACT" .. i
 
-	for i = 0, 1000, 50 do
-		PositionLine                 = CreateElement "ceSimpleLineObject"
-		PositionLine.name            = create_guid_string()
-		PositionLine.init_pos        = {0, 0}
-		PositionLine.material        = MakeMaterial(nil, {255, 50, 0, 255})
-		PositionLine.width           = .0033
-		PositionLine.parent_element  = "Enemy_Air_Contact_" .. n
-		PositionLine.vertices        = {{0, 0}, {0, .0004 * i}}
-		PositionLine.element_params  = {"TargetInfo_" .. n .. "_Speed"}
-		PositionLine.controllers     = {{"parameter_in_range", 0, i - 50, i}}
-		PositionLine.use_mipfilter   = true
-		PositionLine.additive_alpha  = false
-		PositionLine.change_opacity  = false
-		PositionLine.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
-		PositionLine.level           = MFD_DEFAULT_LEVEL + 1
-		Add(PositionLine)
-	end
+	-- Alt scope
 
-	local Alt_readout           = orange_text_param_with_cd_brightness(0, -prifContactScale * 2, "TargetInfo_" .. n .. "_Altitude_KFeet", "%.0f", contactBase, {.005, .005, 0, 0}, "Gripen_Font_ContactsOrange")
-	Alt_readout.h_clip_relation = h_clip_relations.DECREASE_IF_LEVEL
-	Alt_readout.level           = MFD_DEFAULT_LEVEL + 1
+	addRDMeshPoly(
+		"Alt_Scope_Enemy" .. i, {-halfAltScpW, -halfAltScpH}, nil, "Alt_Scope", hcr.rw, nil,
+		{enemycontactSTR .. "altScpRange", enemycontactSTR .. "alt", enemycontactSTR .. "FRIENDLY"},
+		{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.compareNum, 2, 0}},
+		copyVerts(circleVerts), circleInds, materials["red"]
+	)
+
+
+
+
+
+
+	--[[addRDMeshPoly(
+		"Alt_Scope_Enemy" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+		{contactSTR .. "altScpRange", contactSTR .. "alt", contactSTR .. "FRIENDLY"},
+		{{ctrl.moveX, 1, altScpRangeGain}, {ctrl.moveY, 0, altInFtGain}, {ctrl.compareNum, 2, 0}},
+		circleVerts, circleInds, materials["MFDRed"]
+	)]]
+
+	-- B-scope
+	addRDMeshPoly(
+		"B_Scope_Enemy" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+		{enemycontactSTR .. "BSX", enemycontactSTR .. "BSY", enemycontactSTR .. "FRIENDLY"},
+		{{ctrl.moveX, 0, 0.12}, {ctrl.moveY, 1, 0.08}, {ctrl.compareNum, 2, 0}},
+		copyVerts(bcircleVerts), circleInds, materials["red"]
+	)
+	addRDSimpleLine(
+	nil, nil, nil, "B_Scope_Enemy" .. i, hcr.rw, nil, {enemycontactSTR .. "BSHdg"},
+	{{ctrl.rotate, 0, 1}}, nil, {{0, 0}, {0, .06}}, materials["red"]
+	)
+
 end
-
-
 
 for n = 1, 99 do
 	createFriendlyContact(n)
-	-- createThreatContact(n)
+	createThreatContact(n)
 end
+
+
+
+-- ========== radar cursor ==========
+
+addRDMeshPoly(
+	nil, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil, {"Cursor_Y", "Cursor_X"},
+	{{ctrl.moveY, 0, 0.079}, {ctrl.moveX, 1, 0.083}},
+	{{-.004, -.07}, {.004, -.07}, {-.004, -.02}, {.004, -.02}, {-.004, .02}, {.004, .02}, {-.004, .07}, {.004, .07}, {-.004, -.004}, {.004, -.004}, {-.004, .004}, {.004, .004}, {-.074, -.004},
+		{-.018, -.004}, {-.074, .004}, {-.018, .004}, {.074, .004}, {.018, .004}, {.074, -.004}, {.018, -.004}
+	}, {0, 1, 2, 3, 2, 1, 4, 5, 6, 7, 6, 5, 8, 9, 10, 11, 10, 9, 12, 13, 14, 15, 14, 13, 16, 17, 18, 19, 18, 17}, materials["black"]
+)
+

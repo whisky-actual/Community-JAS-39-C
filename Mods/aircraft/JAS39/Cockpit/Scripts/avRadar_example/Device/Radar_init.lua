@@ -100,6 +100,10 @@ for n = 1, 99 do
 		RDX = get_param_handle(contactSTR .. "RDX"),     -- X coordinate of contact on RD
 		RDY = get_param_handle(contactSTR .. "RDY"),     -- Y coordinate of contact on RD
 		RDVelvec = get_param_handle(contactSTR .. "RDVelvec"), -- Length of contact velocity vector on RD
+		BSX = get_param_handle(contactSTR .. "BSX"),
+    	BSY = get_param_handle(contactSTR .. "BSY"),
+    	BSVelvec = get_param_handle(contactSTR .. "BSVelvec"),
+		BSHdg = get_param_handle(contactSTR .. "BSHdg"),
 		alt = get_param_handle(contactSTR .. "alt"),
 		altK = get_param_handle(contactSTR .. "altK"), -- Length of contact velocity vector on RD
 		altScpRange = get_param_handle(contactSTR .. "altScpRange"),
@@ -182,7 +186,7 @@ perfomance = {
 }
 -- ==From avSimpleRadar==
 
-
+local contactDebugTimer = 0
 
 local function updateBaseData()
 	selfAltFt = baseData.getBarometricAltitude() * M_TO_FT
@@ -216,9 +220,51 @@ function post_initialize()
 	radar.IFF_INTERROGATOR_STATUS:set(1)
 	radar.SCAN_ZONE_VOLUME_ELEVATION:set(math.rad(elSettings[1]) * 2)
 	-- radar.SCAN_ZONE_VOLUME_ELEVATION:set(math.rad(120))
+
+	radar.RADAR_TDC_RANGE:set(0)
+	radar.RADAR_TDC_AZIMUTH:set(0)
 end
 
+
+local Cursor_X = get_param_handle("Cursor_X")
+local Cursor_Y = get_param_handle("Cursor_Y")
+local scpsize = 1.6 / 2
+local scopeHalfExtent = 0.8
+
+
+
+
 function update()
+
+	
+	
+
+
+	local function computeBscopePos(az, rangeNM)
+    	local bsAzLimit = perfomance.scan_volume_azimuth / 2
+    	local bsMaxRange = RDRFullRange:get()
+
+    	local x = (az / bsAzLimit) * scopeHalfExtent
+    	local y = (rangeNM / bsMaxRange) * (scopeHalfExtent * 2)
+
+    	x = math.max(-scopeHalfExtent, math.min(scopeHalfExtent, x))
+    	--y = math.max(0, math.min(scopeHalfExtent * 2, y))
+
+    	return x, y
+	end
+
+
+	if get_param_handle("RDRScopeMode"):get() == 1 then
+    	local tdcAz = radar.RADAR_TDC_AZIMUTH:get()
+    	local tdcRangeNM = radar.RADAR_TDC_RANGE:get() * M_TO_NMI
+
+    	local cx, cy = computeBscopePos(tdcAz, tdcRangeNM)
+    	Cursor_X:set(cx)
+    	Cursor_Y:set(cy)
+		
+	end
+
+	
 	updateBaseData()
 
 
@@ -256,7 +302,46 @@ function update()
 	-- TDCElLower:set(((baseData.getBarometricAltitude() + math.tan(radar.SCAN_ZONE_ORIGIN_ELEVATION:get() - (perfomance.scan_volume_elevation / 2)) * radar.RADAR_TDC_RANGE:get())) * M_TO_FT)
 
 	-- get_param_handle("TDC_rng"):set(radar.RADAR_TDC_RANGE:get() * .000539956803)
+	local relPositions = {}
 
+	for i = 1, 99 do
+	    local contact = contacts[i]
+	    local rawAz = contact.AZIMUTH:get()
+	    local rawEl = contact.ELEVATION:get()
+	    local rawRange = contact.RANGE:get()
+	    local rawTime = contact.TIME:get()
+
+	    local horDist = math.cos(rawEl) * rawRange
+	    local relX = math.sin(rawAz) * horDist
+	    local relZ = math.cos(rawAz) * horDist
+	    local relY = math.sin(rawEl) * rawRange
+
+	    relPositions[i] = {x = relX, y = relY, z = relZ, active = rawTime > 0}
+	end
+
+	local dupDistanceMeters = 2
+
+	for i = 1, 99 do
+	    local isDup = false
+
+	    if relPositions[i].active then
+	        for j = i + 1, 99 do
+	            if relPositions[j].active then
+	                local dx = relPositions[i].x - relPositions[j].x
+	                local dy = relPositions[i].y - relPositions[j].y
+	                local dz = relPositions[i].z - relPositions[j].z
+	                local dist = math.sqrt(dx*dx + dy*dy + dz*dz)
+
+	                if dist < dupDistanceMeters then
+	                    isDup = true
+	                    break
+	                end
+	            end
+	        end
+	    end
+
+	    contacts[i].isFresh:set(isDup and 0 or 1)
+	end
 
 
 	for i = 1, 99 do
@@ -275,8 +360,26 @@ function update()
 		local rawVX    = contact.VX:get()
 		local rawVY    = contact.VY:get()
 		local rawVZ    = contact.VZ:get()
+		
+
+		
+		local bsAzLimit = perfomance.scan_volume_azimuth / 2
+
+		local bsMaxRange = RDRFullRange:get()
+
+		local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+		contact.BSX:set(bx)
+		contact.BSY:set(by)
 
 
+		
+		--[[if contactDebugTimer <= 0 then
+    		print_message_to_user(string.format(
+        		"C%d: TIME=%.3f  FRIENDLY=%.0f  BSX=%.3f  BSY=%.3f",
+        		i, contact.TIME:get(), contact.FRIENDLY:get(), contact.BSX:get(), contact.BSY:get()
+    		))
+		end]]
+		
 
 		if rawTime > 0 then
 			local ownHdg = baseData.getHeading()
@@ -302,7 +405,27 @@ function update()
 
 			-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
 
-			contact.relHdg:set(TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg)
+			local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
+			contact.relHdg:set(relHdgVal)
+
+			-- Predicted-heading line for the B-scope
+			local predictSeconds = 20 -- how far ahead to project
+
+			local relX = math.sin(rawAz) * rawRange
+			local relZ = math.cos(rawAz) * rawRange
+
+			local velRelX = horVel * math.sin(relHdgVal)
+			local velRelZ = horVel * math.cos(relHdgVal)
+
+			local predRelX = relX + velRelX * predictSeconds
+			local predRelZ = relZ + velRelZ * predictSeconds
+
+			local predRange = math.sqrt(predRelX^2 + predRelZ^2)
+			local predAz = math.atan2(predRelX, predRelZ)
+
+			local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
+
+			contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
 
 			-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
 			-- contactX = selfX - deltaCX
@@ -328,7 +451,6 @@ function update()
 
 
 			contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
-
 			u_hat = {
 				x = math.cos(ownHdg),
 				y = math.sin(ownHdg)
@@ -338,7 +460,7 @@ function update()
 				x = rawVX,
 				y = rawVZ
 			}
-
+			--z
 			v_hy = {
 				x = u_hat.x * v_xz.x + u_hat.y * v_xz.y,
 				y = rawVY
@@ -352,6 +474,7 @@ function update()
 			contact.prevTime = rawTime
 		end
 	end
+	
 end
 
 function SetCommand(command, value)
@@ -388,11 +511,10 @@ function SetCommand(command, value)
 	if radar.RADAR_TDC_RANGE:get() < 0 then
 		radar.RADAR_TDC_RANGE:set(0)
 	end
-
-	if radar.RADAR_TDC_AZIMUTH:get() > .5 then
-		radar.RADAR_TDC_AZIMUTH:set(.5)
-	elseif radar.RADAR_TDC_AZIMUTH:get() < -.5 then
-		radar.RADAR_TDC_AZIMUTH:set(-.5)
+	if radar.RADAR_TDC_AZIMUTH:get() > 1.05 then
+		radar.RADAR_TDC_AZIMUTH:set(1.04)
+	elseif radar.RADAR_TDC_AZIMUTH:get() < -1.05 then
+		radar.RADAR_TDC_AZIMUTH:set(-1.04)
 	end
 
 	-------------------------------------------------
@@ -404,6 +526,21 @@ function SetCommand(command, value)
 	if command == 2031 then
 		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + value * 10)
 	end
+
+	if command == 88 then -- Left
+	    radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() - 0.03)
+	elseif command == 89 then -- Right
+	    radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + 0.03)
+	end
+
+	if command == 90 then -- Up
+    	radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() + 600)
+	elseif command == 91 then -- Down
+    	radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() - 600)
+	end
+
+	
+
 end
 
 
