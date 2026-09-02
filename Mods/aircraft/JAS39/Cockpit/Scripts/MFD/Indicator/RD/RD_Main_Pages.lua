@@ -36,6 +36,14 @@ copyElement(SOIMark, {"init_pos", "init_rot"}, {{SOIMarkLowerX * halfWidth, SOIM
 copyElement(SOIMark, {"init_pos", "init_rot"}, {{(-SOIMarkLowerX + .008) * halfWidth, (SOIMarkLowerY - .0019) * halfWidth}, {90}})
 
 
+addRDMeshPoly(
+	nil, nil, nil, "Main_RD_Pages", hcr.rw, nil, {"Cursor_Y", "Cursor_X"},
+	{{ctrl.moveY, 0, 0}, {ctrl.moveX, 1, 0}}, -- TODO: Fix cursor movement gain
+	{{-.004, -.07}, {.004, -.07}, {-.004, -.02}, {.004, -.02}, {-.004, .02}, {.004, .02}, {-.004, .07}, {.004, .07}, {-.004, -.004}, {.004, -.004}, {-.004, .004}, {.004, .004}, {-.074, -.004},
+		{-.018, -.004}, {-.074, .004}, {-.018, .004}, {.074, .004}, {.018, .004}, {.074, -.004}, {.018, -.004}
+	}, {0, 1, 2, 3, 2, 1, 4, 5, 6, 7, 6, 5, 8, 9, 10, 11, 10, 9, 12, 13, 14, 15, 14, 13, 16, 17, 18, 19, 18, 17}, materials["black"]
+)
+
 
 
 local EMGYText = addRDText(nil, SK1, nil, "Main_RD_Pages", nil, nil, nil, nil, "E\nM\nG\nY", align.LC)
