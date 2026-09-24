@@ -5,7 +5,7 @@ dofile(LockOn_Options.script_path .. "Indicator/Materials.lua")
 
 
 
-local fontPath = LockOn_Options.script_path .. "Resources/fonts/"
+local fontPath = LockOn_Options.script_path .. "Resources/Fonts/"
 
 
 local HUDXPixel = 88

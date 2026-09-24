@@ -119,15 +119,15 @@ A/S
 RCE
 ]], -0.97 + 0.07, 0.56, GEN_PAGE, "Gripen_Font_black", mfd_strdefs_digit_S)
 
-local AA_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.65, 90, TAN_RD_MASTER, "masterMode")
+local AA_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.65, 90, TAN_RD_MASTER, "primaryMode")
 AA_BOX.controllers = {{"parameter_compare_with_number", 0, 0}}
 AddElement(AA_BOX)
 
-local AS_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.59, 90, TAN_RD_MASTER, "masterMode")
+local AS_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.59, 90, TAN_RD_MASTER, "primaryMode")
 AS_BOX.controllers = {{"parameter_compare_with_number", 0, 1}}
 AddElement(AS_BOX)
 
-local RCE_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.53, 90, TAN_RD_MASTER, "masterMode")
+local RCE_BOX       = make_softkey_box(2, -0.97 + 0.07, 0.53, 90, TAN_RD_MASTER, "primaryMode")
 RCE_BOX.controllers = {{"parameter_compare_with_number", 0, 2}}
 AddElement(RCE_BOX)
 

@@ -289,7 +289,7 @@ function update()
 				if angleDiff(rwr[i].prevFAz, rawAz) > math.rad(0.3) or angleDiff(rwr[i].prevFEl, rawEl) > math.rad(0.3) then
 					-- spara observation
 					local x, y, z = baseData.getSelfCoordinates()
-					print_message_to_user(i .. #rwr[i].obs)
+					-- print_message_to_user(i .. #rwr[i].obs)
 					rwr[i].obs[#rwr[i].obs+1] = {
 						pos = {x = x, y = y, z = z},
 						az = rwr[i].unNormAz,
@@ -490,13 +490,13 @@ local function normalize(v)
 end
 function triangulate(P1, d1, P2, d2, index)
 	local baseline = math.sqrt(dot(sub(P2, P1), sub(P2, P1)))
-	print_message_to_user(
-		string.format(
-			"baseline=%.1f angle=%.2f deg",
-			math.sqrt(dot(sub(rwr[index].obs[2].pos, rwr[index].obs[1].pos), sub(rwr[index].obs[2].pos, rwr[index].obs[1].pos))),
-			math.deg(math.acos(dot(d1, d2)))
-		)
-	)
+	-- print_message_to_user(
+	-- 	string.format(
+	-- 		"baseline=%.1f angle=%.2f deg",
+	-- 		math.sqrt(dot(sub(rwr[index].obs[2].pos, rwr[index].obs[1].pos), sub(rwr[index].obs[2].pos, rwr[index].obs[1].pos))),
+	-- 		math.deg(math.acos(dot(d1, d2)))
+	-- 	)
+	-- )
 
 	if baseline < 50 then return end -- för liten rörelse
 	local angle = math.acos(dot(d1, d2))

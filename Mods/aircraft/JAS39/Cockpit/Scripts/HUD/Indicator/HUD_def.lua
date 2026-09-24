@@ -35,7 +35,7 @@ materials["MWHITE"]     = MakeMaterial(nil, materials["DBG_WHITE"])
 materials["BBLACK"]     = MakeMaterial(nil, materials["DBG_BLACK"])
 
 -------FONTS-------
-local IndicationFontPath = LockOn_Options.script_path.."Resources/fonts/"
+local IndicationFontPath = LockOn_Options.script_path.."Resources/Fonts/"
 local BASE_COLOR  = {36,255,113,255}
 local GREEN 		= {0,500,0,1000}
 --local GREEN 		= {-50,255,-50,1000}

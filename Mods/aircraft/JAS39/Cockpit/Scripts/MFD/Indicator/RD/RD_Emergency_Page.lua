@@ -1,5 +1,3 @@
-
-
 --[[
 scale = 2
 aspect = 0.9
@@ -425,6 +423,4 @@ VSI_BOX.parent_element		= EMGY_PAGE.name
 VSI_BOX.element_params 		= {"RD_BRIGHTNESS","RD_VSI_TOGGLE"}
 VSI_BOX.controllers   		= {JAS_Bright[1],JAS_Bright[2],JAS_Bright[3],JAS_Bright[4],JAS_Bright[5],JAS_Bright[6],JAS_Bright[7],JAS_Bright[8],JAS_Bright[9],JAS_Bright[10],JAS_Bright[11],JAS_Bright[12],JAS_Bright[13],JAS_Bright[14],JAS_Bright[15], JAS_Bright[16],JAS_Bright[17],JAS_Bright[18],JAS_Bright[19],JAS_Bright[20],{"parameter_compare_with_number",1, 1}} --
 AddElement(VSI_BOX)
-]]--
-
-
+--]]

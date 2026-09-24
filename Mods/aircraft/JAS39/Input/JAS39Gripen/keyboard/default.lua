@@ -99,8 +99,8 @@ join(res.keyCommands,{
 {combos = {{key = 'Z', reformers = {'RCtrl'}}},	pressed = iCommandPlaneTrimLeftRudder,	up = iCommandPlaneTrimStop, name = _('Trim: Rudder Left'),		category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
 {combos = {{key = 'X', reformers = {'RCtrl'}}},	pressed = iCommandPlaneTrimRightRudder,	up = iCommandPlaneTrimStop, name = _('Trim: Rudder Right'),		category = {_('Stick'), _('HOTAS'), _('Flight Control')}},
 -- Weapons
-{combos = {{key = 'Space'}}, 						down = keys.Trigger,	     		up = keys.Trigger,      	name = _('Trigger'),      			category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
-{combos = {{key = 'C', reformers = {'RAlt'}}}, 		down = keys.TriggerSafe,	 									name = _('Trigger Safe - Toggle'), 	category = {_('Stick'), _('HOTAS')}},
+{combos = {{key = 'Space'}}, 						down = keys.trigger,	     		up = keys.trigger,      	name = _('Trigger'),      			category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
+{combos = {{key = 'C', reformers = {'RAlt'}}}, 		down = keys.triggerSafe,	 									name = _('Trigger Safe - Toggle'), 	category = {_('Stick'), _('HOTAS')}},
 {													down = keys.triggerSafeHold,		up = keys.triggerSafeHold,      name = _('Trigger Safe - Hold'), 	category = {_('Stick'), _('HOTAS')}, 			value_down =  1.0,		value_up = 0.0},
 {combos = {{key = 'C'}}, 							down = keys.CannonMode,	 										name = _('Cannon Mode'), 			category = {_('Stick'), _('HOTAS')}},
 -- FC3 Weapons                                                                       
@@ -175,6 +175,12 @@ join(res.keyCommands,{
 -- System Hand Controller
 {down = keys.S10SpanScaleDown, name = _('Span Down (S10)'),  category = _('Throttle'), _("SHC")},
 {down = keys.S10SpanScaleUp, name = _('Span Up (S10)'),  category = _('Throttle'), _("SHC")},
+
+	-- Flightstick
+	{down = keys.stickS5Up,                          up = keys.stickS5Up,                                         name = _("A/A Mode / Next A/A Weapon (S5 Up)"),               category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
+	{down = keys.stickS5Down,                        up = keys.stickS5Down,                                       name = _("A/S Mode / Next A/S Weapon (S5 Down)"),             category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
+	{down = keys.stickS5Left,                        up = keys.stickS5Left,                                       name = _("Dogfight Mode / Next WVR Weapon (S5 Left)"),        category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
+	{down = keys.stickS5Right,                       up = keys.stickS5Right,                                      name = _("Gun Mode (S5 Right)"),                              category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
 
 ---------------------------------------------
 -- Left Lower Pannel ------------------------
@@ -284,9 +290,9 @@ join(res.keyCommands,{
 {down = keys.Fuel,	                													  									 name = _('Fuel'), 				  category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
 {down = keys.APU,	                													  									 name = _('APU'), 				  category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
 {down = keys.FuelCover,	            													  									 name = _('Fuel Cover'), 		  category = _('Upper Right Pannel'), value_down =  1.0, value_up = 0.0},
-{down = keys.MassSafe,	                       																				 name = _('MASS Safe'), 		  category = _('Upper Right Pannel')},			 	
-{combos = {{key = 'M', reformers = {'LCtrl'}}}, 	down = keys.MassStby,	              									 name = _('MASS Standby'), 		  category = _('Upper Right Pannel')},			 	
-{combos = {{key = 'M', reformers = {'LShift'}}}, 	down = keys.MassLive,	              									 name = _('MASS Live'), 		  category = _('Upper Right Pannel')},
+{down = keys.MASSSafe,	                       																				 name = _('MASS Safe'), 		  category = _('Upper Right Pannel')},			 	
+{combos = {{key = 'M', reformers = {'LCtrl'}}}, 	down = keys.MASSStby,	              									 name = _('MASS Standby'), 		  category = _('Upper Right Pannel')},			 	
+{combos = {{key = 'M', reformers = {'LShift'}}}, 	down = keys.MASSLive,	              									 name = _('MASS Live'), 		  category = _('Upper Right Pannel')},
 {combos = {{key = 'R', reformers = {'LAlt'}}}, 		down = iCommandPlaneJettisonFuelTanks,									 name = _('Jettison Fuel Tanks'), category = _('Upper Right Pannel')},
 {combos = {{key = 'W', reformers = {'LCtrl'}}},		down = iCommandPlaneJettisonWeapons,up = iCommandPlaneJettisonWeaponsUp, name = _('Weapons Jettison'), 	  category = _('Upper Right Pannel')},
 })

@@ -187,7 +187,7 @@ local lastprint = {}
 --- @param id string The identifier for the message group.
 function printButBetter(input, id)
 	if input ~= lastprint[id] then
-		print_message_to_user(input)
+		print_message_to_user(tostring(input))
 	end
 
 	lastprint[id] = input

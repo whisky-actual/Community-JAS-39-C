@@ -1,64 +1,40 @@
-local dev = GetSelf()
+dofile(LockOn_Options.common_script_path .. "devices_defs.lua")
+dofile(LockOn_Options.script_path .. "devices.lua")
+dofile(LockOn_Options.script_path .. "command_defs.lua")
 
-dofile(LockOn_Options.common_script_path.."devices_defs.lua")
-dofile(LockOn_Options.script_path.."devices.lua")
-dofile(LockOn_Options.script_path.."command_defs.lua")
+
 
 local update_time_step = 0.02
 make_default_activity(update_time_step)
 
-local sensor_data = get_base_data()
 
-function post_initialize()
-    local birth = LockOn_Options.init_conditions.birth_place
-    if birth=="GROUND_HOT" then
-		MASTER_ARM = 0
-		dev:performClickableAction(deviceCommands.Mass, 0, true)
-		TRIGGER_ARM = 0
-		dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)	
-		
-    elseif birth=="AIR_HOT" then	
-		MASTER_ARM = 0
-		dev:performClickableAction(deviceCommands.Mass, 0, true)
-		TRIGGER_ARM = 0
-		dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)	
-	
-    elseif birth=="GROUND_COLD" then
-		MASTER_ARM = -1
-		dev:performClickableAction(deviceCommands.Mass, -1, true)
-		TRIGGER_ARM = 0
-		dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)		
-    end
+local dev = GetSelf()
 
-end
 
-dev:listen_command(84)															-- PlaneFire
-dev:listen_command(85) 															-- PlaneFireOff
-dev:listen_command(350)                                                         -- PickleOn
-dev:listen_command(351)                                                         -- PickleOff
-dev:listen_command(178)															-- Tank Jettison
-dev:listen_command(82)															-- Weapon Jettison  
-dev:listen_command(171)															-- Weapon Jettison Up  
-dev:listen_command(deviceCommands.Mass)										-- MASS switch, -1 = Safe, 1 = Live, 0 = Standby
-dev:listen_command(keys.Trigger)
+
+dev:listen_command(84)  -- PlaneFire
+dev:listen_command(85)  -- PlaneFireOff
+dev:listen_command(350) -- PickleOn
+dev:listen_command(351) -- PickleOff
+dev:listen_command(178) -- Tank Jettison
+dev:listen_command(82)  -- Weapon Jettison
+dev:listen_command(171) -- Weapon Jettison Up
+dev:listen_command(keys.trigger)
 dev:listen_command(keys.WeaponJettison)
 dev:listen_command(keys.WeaponJettisonCover)
 dev:listen_command(keys.TankJettison)
 dev:listen_command(keys.TankJettisonCover)
-dev:listen_command(keys.MassLive)
-dev:listen_command(keys.MassStby)
-dev:listen_command(keys.MassSafe)
 dev:listen_command(deviceCommands.WeaponJettison)
 dev:listen_command(deviceCommands.WeaponJettisonCover)
 dev:listen_command(deviceCommands.TankJettison)
 dev:listen_command(deviceCommands.TankJettisonCover)
 dev:listen_command(deviceCommands.TriggerSafe)
-dev:listen_command(keys.TriggerSafe)
+dev:listen_command(keys.triggerSafe)
 dev:listen_command(keys.triggerSafeHold)
 dev:listen_command(keys.CannonMode)
 dev:listen_command(deviceCommands.EmergencyJettisonCover)
 dev:listen_command(deviceCommands.EmergencyJettison)
-dev:listen_command(105) -- PlaneModeNAV 
+dev:listen_command(105) -- PlaneModeNAV
 dev:listen_command(106) -- PlaneModeBVR 	
 dev:listen_command(107) -- PlaneModeVS 	
 dev:listen_command(108) -- PlaneModeBore 	
@@ -78,64 +54,24 @@ local OverrideLA = 0
 
 local GripenType = get_aircraft_type()
 
-local MASS_PARAM = get_param_handle("MASS_PARAM")
-MASS_PARAM:set(MASTER_ARM)
+local MASSParam = get_param_handle("MASSParam")
+MASSParam:set(MASTER_ARM)
 
 local TRIGGER_SAFE_PARAM = get_param_handle("triggerSafe")
 TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
 
-function SetCommand(command,value)												-- Listen for commands									
-
-    if command == deviceCommands.Mass then 
-		if value == 1 then		
-		MASTER_ARM = 1
-		MASS_PARAM:set(MASTER_ARM)
-		end
-	end
-	
-	if command == deviceCommands.Mass then 
-		if value == 0 then				
-		MASTER_ARM = 0
-		MASS_PARAM:set(MASTER_ARM)
-		end
-	end
-
-	if command == deviceCommands.Mass then 
-		if value == -1 then			
-		MASTER_ARM = -1
-		MASS_PARAM:set(MASTER_ARM)
-		end
-	end
-	
-    if command == keys.MassLive then 
-		dev:performClickableAction(deviceCommands.Mass, 1, true)	
-		MASTER_ARM = 1
-		MASS_PARAM:set(MASTER_ARM) 		
-	end
-	
-	if command == keys.MassStby then 
-		dev:performClickableAction(deviceCommands.Mass, 0, true)	
-		MASTER_ARM = 0
-		MASS_PARAM:set(MASTER_ARM) 		
-	end
-
-	if command == keys.MassSafe then 	
-		dev:performClickableAction(deviceCommands.Mass, -1, true)	
-		MASTER_ARM = -1
-		MASS_PARAM:set(MASTER_ARM) 		
-	end	
-	
- 	if command == keys.CannonMode then
+function SetCommand(command, value) -- Listen for commands
+	if command == keys.CannonMode then
 		if PlaneCannonMode == 0 then
-			dispatch_action(nil,113)
+			dispatch_action(nil, 113)
 			PlaneCannonMode = 1
 			MissileMode = 0
 		elseif PlaneCannonMode == 1 then
-			dispatch_action(nil,113)	
+			dispatch_action(nil, 113)
 			PlaneCannonMode = 0
-			MissileMode = 1		
+			MissileMode = 1
 		end
-	end	   
+	end
 
 	if command == 105 then
 		if PlaneCannonMode == 1 then
@@ -146,128 +82,128 @@ function SetCommand(command,value)												-- Listen for commands
 		if PlaneCannonMode == 1 then
 			PlaneCannonMode = 0
 		end
-		
+
 	elseif command == 107 then
-		MissileMode = 1		
+		MissileMode = 1
 		if PlaneCannonMode == 1 then
-			PlaneCannonMode = 0	
+			PlaneCannonMode = 0
 		end
 	elseif command == 108 then
-		MissileMode = 1				
+		MissileMode = 1
 		if PlaneCannonMode == 1 then
-			PlaneCannonMode = 0	
+			PlaneCannonMode = 0
 		end
 	elseif command == 110 then
-		MissileMode = 1		
+		MissileMode = 1
 		if PlaneCannonMode == 1 then
-			PlaneCannonMode = 0		
+			PlaneCannonMode = 0
 		end
 	elseif command == 111 then
 		if PlaneCannonMode == 1 then
 			MissileMode = 0
 		elseif PlaneCannonMode == 0 then
 			MissileMode = 1
-		end	
-		
-	end	
-		
-	if command == keys.Trigger then
-		if value == 1 then
-			get_param_handle("trigger"):set(1)
-		elseif value == 0 then
-			get_param_handle("trigger"):set(0)
 		end
-        if GripenType == 'JAS39Gripen_BVR' then		
-			if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 1 and MissileMode == 0 then 
-				dispatch_action(nil,84)
-			elseif value == 0 then
-				dispatch_action(nil,85)
-			elseif value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 0 and MissileMode == 1 then 
-				dispatch_action(nil,350)
-			elseif value == 0 then
-				dispatch_action(nil,351)				
-			end
-		elseif GripenType == 'JAS39Gripen' or 'JAS39Gripen_AG' then
-			if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then 
-				dispatch_action(nil,84)
-			elseif value == 0 then
-				dispatch_action(nil,85)	
-			end
-		end	
+
 	end
 
-    if command == deviceCommands.TankJettisonCover then 
+	-- if command == keys.trigger then
+	-- 	if value == 1 then
+	-- 		get_param_handle("trigger"):set(1)
+	-- 	elseif value == 0 then
+	-- 		get_param_handle("trigger"):set(0)
+	-- 	end
+	-- 	if GripenType == "JAS39Gripen_BVR" then
+	-- 		if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 1 and MissileMode == 0 then
+	-- 			dispatch_action(nil, 84)
+	-- 		elseif value == 0 then
+	-- 			dispatch_action(nil, 85)
+	-- 		elseif value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 and PlaneCannonMode == 0 and MissileMode == 1 then
+	-- 			dispatch_action(nil, 350)
+	-- 		elseif value == 0 then
+	-- 			dispatch_action(nil, 351)
+	-- 		end
+	-- 	elseif GripenType == "JAS39Gripen" or "JAS39Gripen_AG" then
+	-- 		if value == 1 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then
+	-- 			dispatch_action(nil, 84)
+	-- 		elseif value == 0 then
+	-- 			dispatch_action(nil, 85)
+	-- 		end
+	-- 	end
+	-- end
+
+	if command == deviceCommands.TankJettisonCover then
 		if value == 1 then
-			TankJettisonCover = 1				
-		elseif value == 0 then	
-			TankJettisonCover = 0			
+			TankJettisonCover = 1
+		elseif value == 0 then
+			TankJettisonCover = 0
 		end
-	end	
-	
-    if command == deviceCommands.TankJettison then 
+	end
+
+	if command == deviceCommands.TankJettison then
 		if value == 1 then
 			if TankJettisonCover == 1 and MASTER_ARM == 1 then
-				dispatch_action(nil,178)
-			end		
+				dispatch_action(nil, 178)
+			end
 		end
-	end		
+	end
 
-    if command == deviceCommands.WeaponJettisonCover then 
+	if command == deviceCommands.WeaponJettisonCover then
 		if value == 1 then
-			WeaponJettisonCover = 1			
-		elseif value == 0 then	
-			WeaponJettisonCover = 0		
-		end
-	end	
-
-    if command == deviceCommands.WeaponJettison then 
-		if value == 1 then
-			if WeaponJettisonCover == 1 and MASTER_ARM == 1 then				
-				dispatch_action(nil,82)
-			end	
+			WeaponJettisonCover = 1
 		elseif value == 0 then
-			dispatch_action(nil,171)
+			WeaponJettisonCover = 0
 		end
-	end	
+	end
 
-    if command == deviceCommands.EmergencyJettisonCover then 
+	if command == deviceCommands.WeaponJettison then
 		if value == 1 then
-			EmergencyJettisonCover = 1		
-		elseif value == 0 then	
-			EmergencyJettisonCover = 0			
-		end
-	end	
-
-    if command == deviceCommands.EmergencyJettison then 
-		if value == 1 then
-			if EmergencyJettisonCover == 1 and MASTER_ARM >= 0 then				
-				dispatch_action(nil,82)
-				dispatch_action(nil,82)
-				dispatch_action(nil,82)
-				dispatch_action(nil,82)				
-			end	
+			if WeaponJettisonCover == 1 and MASTER_ARM == 1 then
+				dispatch_action(nil, 82)
+			end
 		elseif value == 0 then
-			dispatch_action(nil,171)
+			dispatch_action(nil, 171)
 		end
-	end	
-	
+	end
+
+	if command == deviceCommands.EmergencyJettisonCover then
+		if value == 1 then
+			EmergencyJettisonCover = 1
+		elseif value == 0 then
+			EmergencyJettisonCover = 0
+		end
+	end
+
+	if command == deviceCommands.EmergencyJettison then
+		if value == 1 then
+			if EmergencyJettisonCover == 1 and MASTER_ARM >= 0 then
+				dispatch_action(nil, 82)
+				dispatch_action(nil, 82)
+				dispatch_action(nil, 82)
+				dispatch_action(nil, 82)
+			end
+		elseif value == 0 then
+			dispatch_action(nil, 171)
+		end
+	end
+
 	if command == deviceCommands.TriggerSafe then
 		if value == 1 then
 			TRIGGER_ARM = 1
-			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)			
+			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
 		elseif value == 0 then
 			TRIGGER_ARM = 0
-			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)				
-		end	
-	end		
-	
-	if command == keys.TriggerSafe then
+			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
+		end
+	end
+
+	if command == keys.triggerSafe then
 		if TRIGGER_ARM == 0 then
 			dev:performClickableAction(deviceCommands.TriggerSafe, 1, true)
 		elseif TRIGGER_ARM == 1 then
 			dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)
 		end
-	end		
+	end
 
 	if command == keys.triggerSafeHold then
 		if value == 1 then
@@ -275,79 +211,23 @@ function SetCommand(command,value)												-- Listen for commands
 		elseif value == 0 then
 			dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)
 		end
-	end	
-	
+	end
+
 end
 
-function update()		
-get_param_handle("gunMode"):set(PlaneCannonMode)
-if OverrideLA == 0 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then
-	dispatch_action(nil,349)
-	OverrideLA = 1
-   elseif MASTER_ARM == 0 or TRIGGER_ARM == 0 then
-     if OverrideLA == 1 then
- 		dispatch_action(nil,349)
+function update()
+	get_param_handle("gunMode"):set(PlaneCannonMode)
+	if OverrideLA == 0 and MASTER_ARM == 1 and TRIGGER_ARM == 1 then
+		dispatch_action(nil, 349)
+		OverrideLA = 1
+	elseif MASTER_ARM == 0 or TRIGGER_ARM == 0 then
+		if OverrideLA == 1 then
+			dispatch_action(nil, 349)
 			OverrideLA = 0
-     end
+		end
+	end
 end
-      
-	-- print_message_to_user(get_param_handle("gunMode"):get())
-	
-				
--- ======================== Stationary =====================================
-	-- if get_param_handle("CURRENT_PHASE_STATIONARY"):get() > 0.0 then						
-		-- if GEAR_BAY_STATE < GEAR_BAY_TARGET_OPEN then
-		-- GEAR_BAY_STATE = GEAR_BAY_STATE + BayDoorOpenCloseIncrement
-		-- end
 
--- ======================== Parked =========================================	
-	-- elseif get_param_handle("CURRENT_PHASE_PARKED"):get() > 0.0 and (self_gs > 11) then		
-		-- if GEAR_BAY_STATE > GEAR_BAY_TARGET_CLOSE then
-		-- GEAR_BAY_STATE = GEAR_BAY_STATE - BayDoorOpenCloseIncrement
-		-- end
 
--- ======================== Taxi ===========================================	
-	-- elseif get_param_handle("CURRENT_PHASE_TAXI"):get() > 0.0 and (self_gs > 11) then
-		-- if GEAR_BAY_STATE > GEAR_BAY_TARGET_CLOSE then
-		-- GEAR_BAY_STATE = GEAR_BAY_STATE - BayDoorOpenCloseIncrement
-		-- end
-
--- ======================== Take off Ground Roll ===========================		
-	-- elseif get_param_handle("CURRENT_PHASE_TGR"):get() > 0.0 and (self_gs > 11) then
-		-- if GEAR_BAY_STATE > GEAR_BAY_TARGET_CLOSE then
-		-- GEAR_BAY_STATE = GEAR_BAY_STATE - BayDoorOpenCloseIncrement
-		-- end
-
--- ======================== Rotation =======================================
-	-- elseif get_param_handle("CURRENT_PHASE_ROT"):get() > 0.0 and (self_gs > 11) then
-    	-- if GEAR_BAY_STATE > GEAR_BAY_TARGET_CLOSE then
-    	-- GEAR_BAY_STATE = GEAR_BAY_STATE - BayDoorOpenCloseIncrement
-    	-- end
-
--- ======================== Lift Off =======================================
-    -- elseif get_param_handle("CURRENT_PHASE_LO"):get() > 0.0 then							
-		-- GEAR_BAY_STATE = -1			
-
--- ======================== Combat =========================================
-    -- if get_param_handle("CURRENT_PHASE_CO"):get() > 0.0 then							
-		-- if MASTER_ARM == 1 then
-		-- dispatch_action(nil, 84)
-	-- end	
-
--- ======================== Powered Approach and Landing ===================
-	-- elseif get_param_handle("CURRENT_PHASE_PAL"):get() > 0.0 then							
-		-- GEAR_BAY_STATE = -1	
-	
-	-- end
-	
-    -- if GEAR_BAY_TARGET_CLOSE < 0 then
-        -- GEAR_BAY_TARGET_CLOSE = 0
-    -- elseif GEAR_BAY_TARGET_OPEN > 1 then
-        -- GEAR_BAY_TARGET_OPEN = 1
-    -- end
-
-	-- set_aircraft_draw_argument_value(498,GEAR_BAY_STATE)
-
-end
 
 need_to_be_closed = false

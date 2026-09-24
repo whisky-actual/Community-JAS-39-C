@@ -1,0 +1,175 @@
+dofile(LockOn_Options.common_script_path .. "../../../Database/wsTypes.lua")
+dofile(LockOn_Options.script_path .. "Systems/Weapon_Data.lua")
+dofile(LockOn_Options.script_path .. "command_defs.lua")
+dofile(LockOn_Options.script_path .. "devices.lua")
+dofile(LockOn_Options.script_path .. "utils.lua")
+
+
+
+local updateTimeStep = 1 / 60
+make_default_activity(updateTimeStep)
+
+
+local WS = GetSelf()
+
+WS:listen_command(350)
+WS:listen_command(keys.trigger)
+WS:listen_command(keys.stickS5Up)
+WS:listen_command(keys.stickS5Down)
+WS:listen_command(keys.stickS5Left)
+WS:listen_command(keys.stickS5Right)
+
+
+local ammoCount = get_param_handle("ammoCount")
+
+local MASSParam = get_param_handle("MASSParam")
+
+local primaryMode = get_param_handle("primaryMode")
+local weaponsMode = get_param_handle("weaponsMode") -- 0: NAV, 1: BVR, 2: WVR, 3: A/G, 4: Cannon (both A/A and A/G depending on primaryMode)
+
+
+
+local baseData = get_base_data()
+
+
+local MS_TO_KTS = 1.94384449
+local M_TO_FT = 3.28083989501312335958
+
+
+local pylonOrder = {"p1L", "p1R", "p2L", "p2R", "p3L", "p3R", "FLIR", "p4", "p5", "ELINT", "EWS39"}
+local pylonInfo = {}
+
+local selectedPylon = -1
+
+local ASModeClock = false
+local ASModeClockTime = 0
+
+local modeCommands = { -- TODO: Fix so the others actually work, rn only the BVR works
+	[keys.stickS5Up]    = {weaponsMode = wTypes.BVR},
+	[keys.stickS5Down]  = {weaponsMode = wTypes.AS, primaryMode = 2},
+	[keys.stickS5Left]  = {weaponsMode = wTypes.WVR},
+	[keys.stickS5Right] = {weaponsMode = wTypes.gun}
+}
+
+local trigger = false
+
+
+
+local function updateAmmoCount()
+	local count = GetDevice(devices["gun"]):getAmmoCount()
+
+	ammoCount:set(count)
+
+	return count
+end
+
+local function updatePylonInfo()
+	for i, name in ipairs(pylonOrder) do
+		local info = WS:get_station_info(i - 1)
+		local weaponModes = weaponData[info["CLSID"]].modes or wTypes.none
+		-- local weaponType = CLSID2Type[info["CLSID"]] or wTypes.none
+		local pylon = pylonInfo[name]
+
+		pylon.mode = weaponModes
+		pylon.count = info["count"]
+
+		-- printButBetter(name .. ": " .. weaponModes, name .. "type")
+	end
+end
+
+local function getCurPylonType()
+	local name = pylonOrder[selectedPylon + 1] -- nil when selectedPylon == -1
+
+	return name and pylonInfo[name].type or nil
+end
+
+local function findPylon(weaponType, startIndex)
+	startIndex = startIndex or -1
+	local n = #pylonOrder
+
+	for offset = 1, n do
+		local index = (startIndex + offset) % n
+		local p = pylonInfo[pylonOrder[index + 1]]
+		if p.type == weaponType and (p.count or 0) > 0 then
+			return index
+		end
+	end
+
+	return nil
+end
+
+local function selectPylon(idx)
+	if idx then
+		selectedPylon = idx
+		WS:select_station(idx)
+	end
+end
+
+local function cycleWeapon()
+	updatePylonInfo()
+
+	local wpnMode = weaponsMode:get()
+	local start = (getCurPylonType() == wpnMode) and selectedPylon or -1
+	selectPylon(findPylon(wpnMode, start))
+end
+
+local function selectMode(primaryMode_, weaponsMode_)
+	primaryMode:set(primaryMode_)
+	weaponsMode:set(weaponsMode_)
+	cycleWeapon()
+end
+
+
+function post_initialize()
+	for _, name in ipairs(pylonOrder) do
+		pylonInfo[name] = {}
+	end
+
+	updateAmmoCount()
+	updatePylonInfo()
+end
+
+function update()
+	if selectedPylon > -1 then
+		printButBetter("p: " .. pylonOrder[selectedPylon + 1], "selected pylon")
+	end
+
+	get_param_handle("WS_IR_MISSILE_SEEKER_DESIRED_AZIMUTH"):set(-get_param_handle("RADAR_STT_AZIMUTH"):get())
+	get_param_handle("WS_IR_MISSILE_SEEKER_DESIRED_ELEVATION"):set(get_param_handle("RADAR_STT_ELEVATION"):get())
+
+
+
+	if ASModeClock then
+		if ASModeClockTime + updateTimeStep < .7 then
+			ASModeClockTime = ASModeClockTime + updateTimeStep
+		elseif ASModeClockTime + updateTimeStep >= .7 then
+			ASModeClock = false
+			ASModeClockTime = 0
+
+			selectMode(2, wTypes.AS)
+		end
+	end
+end
+
+function SetCommand(command, value)
+	local mode = modeCommands[command]
+
+	if mode and value == 1 then
+		if command == keys.stickS5Down and weaponsMode:get() ~= wTypes.AS then
+			ASModeClock = true
+		else
+			selectMode(mode.primaryMode or 1, mode.weaponsMode)
+		end
+	end
+
+
+	if command == keys.trigger and value == 1 and not trigger then
+		trigger = true
+
+		WS:launch_station(selectedPylon)
+		updatePylonInfo()
+		cycleWeapon()
+	elseif command == keys.trigger and value == 0 then
+		trigger = false
+	end
+end
