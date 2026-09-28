@@ -14,7 +14,8 @@ align = {
 	LT = "LeftTop",
 	RB = "RightBottom",
 	RC = "RightCenter",
-	RT = "RightTop"
+	RT = "RightTop",
+	RR = "RightRight"
 }
 
 ctrl = {
@@ -87,6 +88,11 @@ function setCommonProperties(
 	obj, name, pos, rot, parentElement, hClip, level, elementParams, controllers, isMask,
 	collimationType
 )
+	if controllers and type(controllers[1]) ~= "table" then -- Prevents crash if controllers accedentally are {ctrl.x, y}, {ctrl.z, w}, instead of {{ctrl.x, y}, {ctrl.z, w}}
+		print_message_to_user("Ähh nu blev det fel med controllersarna right?")
+		return
+	end
+
 	obj.name     = name or create_guid_string()
 	obj.init_pos = pos
 	obj.init_rot = rot
@@ -319,9 +325,12 @@ function addTextParam(
 	name, pos, rot, parentElement, hClip, level, elementParams, controllers, textParam,
 	alignment, format, stringdef, font, collimationType
 )
+	local params = {}
+	local controls = {}
+
 	if textParam and elementParams and controllers then
-		elementParams[#elementParams+1] = {textParam}
-		controllers[#controllers+1]     = {{ctrl.text, #elementParams - 1}}
+		elementParams[#elementParams+1] = textParam
+		controllers[#controllers+1]     = {ctrl.text, #elementParams - 1}
 	elseif textParam then
 		elementParams = {textParam}
 		controllers   = {{ctrl.text, 0}}
