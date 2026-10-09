@@ -135,7 +135,7 @@ function update()
                 HEADING_HUD:set((sensor_data.getMagneticHeading() * RAD_TO_DEGREE))
         end
 
-	if get_param_handle("masterMode"):get() > 1 then
+	if get_param_handle("primaryMode"):get() > 1 then
 		get_param_handle("altitudeDeclutt"):set(1)
 	else
 		get_param_handle("altitudeDeclutt"):set(0)

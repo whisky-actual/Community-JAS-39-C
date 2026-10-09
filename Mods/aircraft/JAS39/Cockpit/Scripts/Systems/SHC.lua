@@ -11,13 +11,15 @@ local SHC = GetSelf()
 
 SHC:listen_command(keys.S10SpanScaleUp)
 SHC:listen_command(keys.S10SpanScaleDown)
+SHC:listen_command(keys.S5stage1)
+SHC:listen_command(keys.S5stage2)
 
 
 local CDScale = get_param_handle("CDScale")
 local RDRFullRange = get_param_handle("RDRFullRange")
 local RDRHalfRange = get_param_handle("RDRHalfRange")
 
-
+local nextpriority = get_param_handle("nextpriority")
 
 function post_initialize()
 	CDScale:set(getScale(800)) -- 40 nm (1:800)
@@ -41,6 +43,15 @@ function SetCommand(command, value)
 			RDRFullRange:set(getRange(CDScale:get()))
 		end
 	end
+
+
+	if command == keys.S5stage1 then
+		nextpriority:set(1)
+	elseif command == keys.S5stage2 then
+		nextpriority:set(0)
+	end
+
+
 
 	RDRHalfRange:set(RDRFullRange:get() / 2)
 end

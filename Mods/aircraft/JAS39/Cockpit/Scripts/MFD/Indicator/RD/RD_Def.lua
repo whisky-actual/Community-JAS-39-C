@@ -55,6 +55,7 @@ lvls = { -- RD levels start on 10
 
 strdefs = { -- Font size (vertical_size, horizontal_size, horizontal_spacing, vertical_spacing)
 	std                    = {.0049, .0049, 0, -.0002},
+	big                    = {.0085, .0085, 0.0001, -.0004},
 	small                  = {.0045, .0045, 0, 0},
 	half                   = {.0025, .0025, 0, 0},
 	whenYouCantFindTheText = {.1, .1, 0, 0}

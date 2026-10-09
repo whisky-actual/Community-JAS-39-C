@@ -3,7 +3,7 @@ dofile(LockOn_Options.script_path .. "devices.lua")
 
 
 
-local updateTimeStep = 1 / 180 -- Refresh rate of device script.
+local updateTimeStep = 1 / 120 -- Refresh rate of device script.
 make_default_activity(updateTimeStep)
 
 

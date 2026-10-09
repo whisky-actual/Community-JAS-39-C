@@ -333,6 +333,7 @@ function loadWaypoints(missionRoute)
 			get_param_handle("nextWPHUDAz"):set(HUDAz)
 			get_param_handle("nextWPHUDEl"):set(HUDEl)
 			get_param_handle("nextWPHUDAzUnclamped"):set(fAz)
+			get_param_handle("nextWPRDAzUnclamped"):set((math.max(-60, math.min(60, math.deg(az)))))
 			get_param_handle("nextWPADIAzUnclamped"):set(math.sin(math.max(-1.6, math.min(1.6, -fAz))))
 			get_param_handle("nextWPHUDElUnclamped"):set(fEl)
 			get_param_handle("nextWPADIElUnclamped"):set(math.sin(math.max(-1.6, math.min(1.6, fEl))))
@@ -358,6 +359,7 @@ function loadWaypoints(missionRoute)
 			-- TODO: WP info on CD and mach fix on CD, correct types for every wp, (pressing T on UCP changes current W to T), W scrolls through W, T scrolls through T, L scrolls though L, change landing mode keybind.
 			get_param_handle("nextWPHeadingClampedHUD"):set(clampToRect(selfHDG - math.deg(az), 0, 14, 1, selfHDG, 0))
 			get_param_handle("nextWPHeadingHUD"):set(selfHDG - math.deg(az))
+			get_param_handle("nextWPHeadingRD"):set(selfHDG - math.deg(az))
 		end
 	end
 

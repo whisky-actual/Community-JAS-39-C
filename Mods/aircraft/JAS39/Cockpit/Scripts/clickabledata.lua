@@ -44,7 +44,6 @@ elements["PNT_1099"] = Mfd_button(_("Radar Pulse Repeat Frequency"),devices.FC3,
 elements["PNT_1100"] = Mfd_button(_("Radar Zoom Out"),		    devices.FC3,	deviceCommands.RDR_OUT,	1100,1,{0,1},JAS39MFD1)
 elements["PNT_1101"] = Mfd_button(_("Radar Zoom In"),		    devices.FC3,	deviceCommands.RDR_IN,		1101,1,{0,1},JAS39MFD1)
 elements["PNT_1102"] = Mfd_button(_("Scan Zone Left/Radar Scan Zone Decrease"), devices.FC3,	deviceCommands.RDR_LEFT,	1102,1,{0,1},JAS39MFD1)
-elements["PNT_1103"] = Mfd_button(_("Scan Zone Right/Radar Scan Zone Increase"),devices.FC3,	deviceCommands.RDR_RIGHT,	1103,1,{0,1},JAS39MFD1)
 elements["PNT_1086"] = Mfd_button(_("Electro-Optical System On/Off"),			devices.FC3,	deviceCommands.EO,			1086,1,{0,1},JAS39MFD1)
 elements["PNT_1087"] = Mfd_button(_("Scan Zone Up"),			devices.FC3,	deviceCommands.RDR_UP,		1087,1,{0,1},JAS39MFD1)
 elements["PNT_1088"] = Mfd_button(_("Scan Zone Down"),		    devices.FC3,	deviceCommands.RDR_DOWN,	1088,1,{0,1},JAS39MFD1)
@@ -234,6 +233,7 @@ elements["PNT_1223"] = Mfd_button(_("Contrast - CD")  ,devices.DISPLAYS, deviceC
 --RD (Check FC3 Commands)
 -------------------------------------------------------
 elements["PNT_1082"] = Mfd_button(_("Softkey 1 RD") ,devices.DISPLAYS, deviceCommands.RDSK_1,  1082,1,{0,1},JAS39MFD1)
+elements["PNT_1103"] = Mfd_button(_("Softkey 14 RD"), devices.DISPLAYS, deviceCommands.RDSK14, 1103, 1, {0, 1}, JAS39MFD1)
 --[[
 
 elements["PNT_1083"] = Mfd_button(_("Softkey 2 RD") ,devices.DISPLAYS, deviceCommands.RDSK_2,  1083,1,{0,1},JAS39MFD1)
@@ -276,7 +276,7 @@ elements["PNT_1281"] = fika_compartment("Compartment (Open/Close)", devices.ACCE
 elements["PNT_946"]	= default_axis_limited(_("Flood Lights"),	devices.LIGHTS, deviceCommands.FloodLight, 946)
 elements["PNT_945"]	= default_axis_limited(_("Backlights"),	devices.LIGHTS, deviceCommands.BackLight, 945)
 elements["PNT_944"]	= default_axis_limited(_("Indicator Lights"),	devices.LIGHTS, deviceCommands.IndicatorLight, 944)
-elements["PNT_1013"] = default_3_position_tumb(_("Mass (Safe/Stby/Live)"),	devices.WEAPONS,	deviceCommands.Mass, 	1013,nil,true,JAS39KNOB2)
+elements["PNT_1013"] = default_3_position_tumb(_("MASS (Safe/Stby/Live)"),	devices.WEAPON_SYSTEM,	deviceCommands.MASS, 	1013,nil,true,JAS39KNOB2)
 elements["PNT_904"] = default_2_position_tumb(_("Main Power (On/Off)"),	devices.ENGINE,	deviceCommands.Main, 	904,JAS39CLICK2)
 elements["PNT_1061"] = default_2_position_tumb(_("APU (On/Off)"),	devices.ENGINE,	deviceCommands.APU, 	1061,JAS39CLICK2)
 elements["PNT_1005"] = default_2_position_tumb("Canopy (Open/Close)", devices.CANOPY, deviceCommands.CanopyLever, 1005,JAS39HEAVYSWITCH, 1.5)

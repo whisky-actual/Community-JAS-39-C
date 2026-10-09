@@ -28,12 +28,24 @@ for i = 1, 6 do
 	addHMDText(nil, {-17.5, -67.5}, ACBase, nil, nil, {"HMDMode", "gunMode"}, {{ctrl.compareNum, 0, i + 1}, {ctrl.compareNum, 1, 0}}, weaponModes[i])
 end
 
-addHMDText(nil, {-17.5, -67.5}, ACBase, nil, nil, {"gunMode"}, {{ctrl.compareNum, 0, 1}}, "GUN")
+addHMDText(nil, {-2, -67.5}, ACBase, nil, nil, {"gunMode"}, {{ctrl.compareNum, 0, 1}}, "G   ", align.RC)
+addHMDTextParam(nil, {-4, -67.5}, ACBase, nil, nil, {"gunMode", "ammoCount"}, {{ctrl.compareNum, 0, 1}, {ctrl.text, 1}}, "ammoCount", align.RC) -- TODO: Fix the controllers and params having to be set up like this
 
 addHMDText(nil, {17.5, -67.5}, ACBase, nil, nil, {"triggerSafe"}, {{ctrl.compareNum, 0, 0}}, "SAFE")
 
 
 
+
+
+-- addHMDSimpleLine(
+	-- "IR_Box", nil, nil, base, hcr.rw, nil, {"rollRad", "WS_IR_MISSILE_TARGET_AZIMUTH", "WS_IR_MISSILE_TARGET_ELEVATION"},
+	-- {{ctrl.rotate, 0, 0}, {ctrl.moveX, 1, mult}, {ctrl.moveY, 2, mult}}, nil, {{-5, 0}, {-3, -6.25}, {3, -6.25}, {5, 0}}
+-- )
+-- addHMDSimpleLine(
+	-- nil, nil, nil, base, nil, nil,
+	-- {"WEAPONMODE", "IRHMDCLAMPED", "rollRad", "IRHMDX", "IRHMDY", "WS_IR_MISSILE_TARGET_AZIMUTH", "WS_IR_MISSILE_TARGET_ELEVATION"}, 
+	-- {{ctrl.compareNum, 0, 2}, {ctrl.compareNum, 1, 1}, {ctrl.rotate, 2, 1}, {ctrl.setPoint, 0, 3, 4, mult, mult}, {ctrl.setPoint, 1, 5, 6, mult, mult}}
+-- )
 -- for i = 1, 20 do
 -- 	local index = ""
 -- 	if i < 10 then
@@ -47,7 +59,7 @@ addHMDText(nil, {17.5, -67.5}, ACBase, nil, nil, {"triggerSafe"}, {{ctrl.compare
 
 
 -- 	addHMDSimple("HMD_RWR_Contact" .. index, nil, nil, base, nil, nil, {param .. "POWER", param .. "azHMD", param .. "elHMD", "rollRad"}, {{ctrl.inRange, 0, 0, 1.1}, {ctrl.moveX, 1, -.702422}, {ctrl.moveY, 2, .702422}, {ctrl.rotate, 3, 1}})
-	
+
 -- 	for j = 0, 7 do
 -- 		addHMDSimpleLine(nil, nil, {j * 45}, "HMD_RWR_Contact" .. index, hcr.rw, nil, {param .. "launchBlink"}, {{ctrl.compareNum, 0, 1}}, .003 * 230, {{(.6465 * math.rad(.1 / 2) * 10) * 230}, {(.6465 * math.rad(.3 / 2) * 10) * 230}})
 -- 	end
@@ -57,7 +69,7 @@ addHMDText(nil, {17.5, -67.5}, ACBase, nil, nil, {"triggerSafe"}, {{ctrl.compare
 
 -- addHMDSimpleLine(nil, {0, 10}, nil, base, hcr.rw, nil, nil, nil, 10, {{-900}, {0}})
 -- addHMDSimpleLine(nil, nil, nil, base, hcr.rw, nil, {"ONE"}, {{ctrl.moveX, 0, .702422}}, 10, {{-100 * 1000}, {0}})
--- 
+--
 for n = 1, 99 do
 	local i
 

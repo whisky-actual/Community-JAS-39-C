@@ -1,0 +1,137 @@
+wTypes = {
+	none = -1,
+	BVR = 1,
+	WVR = 2,
+	gun = 3, -- Used in Weapon_System.lua
+	AS = 4,
+	pod = 5,
+	tank = 6,
+	smoke = 7,
+	integrated = 8
+}
+
+
+weaponData = {
+	["{JAS39_Meteor}"]                         = {modes = {{wTypes.BVR, 1}, {wTypes.WVR, 9}}},
+	["{JAS39_Derby}"]                          = {modes = {{wTypes.BVR, 2}, {wTypes.WVR, 8}}},
+	["{JAS39_AIM120C7}"]                       = {modes = {{wTypes.BVR, 3}, {wTypes.WVR, 10}}},
+	["{JAS39_AIM120C5}"]                       = {modes = {{wTypes.BVR, 4}, {wTypes.WVR, 11}}},
+	["{JAS39_AIM120B}"]                        = {modes = {{wTypes.BVR, 5}, {wTypes.WVR, 12}}},
+	["{JAS39_ASRAAM}"]                         = {modes = {{wTypes.BVR, 6}, {wTypes.WVR, 2}}},
+	["{JAS39_IRIS-T}"]                         = {modes = {{wTypes.BVR, 7}, {wTypes.WVR, 1}}},
+	["{JAS39_A-DARTER}"]                       = {modes = {{wTypes.BVR, 8}, {wTypes.WVR, 3}}},
+	["{JAS39_PYTHON-5}"]                       = {modes = {{wTypes.BVR, 9}, {wTypes.WVR, 4}}},
+	["{JAS39_AIM-9X}"]                         = {modes = {{wTypes.BVR, 10}, {wTypes.WVR, 5}}},
+	["{JAS39_AIM-9M}"]                         = {modes = {{wTypes.BVR, 11}, {wTypes.WVR, 6}}},
+	["{JAS39_AIM-9L}"]                         = {modes = {{wTypes.BVR, 12}, {wTypes.WVR, 7}}},
+	["{JAS39_KEPD350_ARM}"]                    = {modes = {{wTypes.AS, 1}}},
+	["{JAS39_STORMSHADOW_ARM}"]                = {modes = {{wTypes.AS, 2}}},
+	["{JAS39_RBS15}"]                          = {modes = {{wTypes.AS, 3}}},
+	["{JAS39_SPEAREW}"]                        = {modes = {{wTypes.AS, 4}}},
+	["{JAS39_SPEAR3}"]                         = {modes = {{wTypes.AS, 5}}},
+	["{JAS39_MAR-1}"]                          = {modes = {{wTypes.AS, 6}}},
+	["{JAS39_BRIMSTONE}"]                      = {modes = {{wTypes.AS, 7}}},
+	["{JAS39_AGM_65K}"]                        = {modes = {{wTypes.AS, 8}}},
+	["{JAS39_AGM_65H}"]                        = {modes = {{wTypes.AS, 9}}},
+	["{JAS39_DWS39_ARM}"]                      = {modes = {{wTypes.AS, 10}}},
+	["{JAS39_DWS39_TV}"]                       = {modes = {{wTypes.AS, 11}}},
+	["{JAS39_SDB}"]                            = {modes = {{wTypes.AS, 12}}},
+	["{JAS39_GBU31_BLU109}"]                   = {modes = {{wTypes.AS, 13}}},
+	["{JAS39_GBU31}"]                          = {modes = {{wTypes.AS, 14}}},
+	["{JAS39_BRU33_GBU32}"]                    = {modes = {{wTypes.AS, 15}}},
+	["{JAS39_GBU32}"]                          = {modes = {{wTypes.AS, 16}}},
+	["{JAS39_BRU33_GBU49}"]                    = {modes = {{wTypes.AS, 17}}},
+	["{JAS39_GBU49}"]                          = {modes = {{wTypes.AS, 18}}},
+	["{JAS39_BRU33_GBU38}"]                    = {modes = {{wTypes.AS, 19}}},
+	["{JAS39_GBU38}"]                          = {modes = {{wTypes.AS, 20}}},
+	["{JAS39_GBU10}"]                          = {modes = {{wTypes.AS, 21}}},
+	["{JAS39_BRU33_GBU16}"]                    = {modes = {{wTypes.AS, 22}}},
+	["{JAS39_GBU16}"]                          = {modes = {{wTypes.AS, 23}}},
+	["{JAS39_BRU33_GBU12}"]                    = {modes = {{wTypes.AS, 24}}},
+	["{JAS39_GBU12}"]                          = {modes = {{wTypes.AS, 25}}},
+	["{JAS39_MK84}"]                           = {modes = {{wTypes.AS, 26}}},
+	["{JAS39_BRU33_MK83}"]                     = {modes = {{wTypes.AS, 27}}},
+	["{JAS39_MK83}"]                           = {modes = {{wTypes.AS, 28}}},
+	["{JAS39_BRU33_MK82}"]                     = {modes = {{wTypes.AS, 29}}},
+	["{JAS39_MK82}"]                           = {modes = {{wTypes.AS, 30}}},
+	["{JAS39_M71LD}"]                          = {modes = {{wTypes.AS, 31}}},
+	["{JAS39_M71HD}"]                          = {modes = {{wTypes.AS, 32}}},
+	["{JAS39_M70BHE}"]                         = {modes = {{wTypes.AS, 33}}},
+	["{JAS39_M70BAP}"]                         = {modes = {{wTypes.AS, 34}}},
+	["{AIS_ASQ_T50}"]                          = {prioMode = wTypes.pod},
+	["{JAS39_Litening}"]                       = {prioMode = wTypes.pod},
+	["{JAS39_TANK1100}"]                       = {prioMode = wTypes.tank},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E741}"] = {prioMode = wTypes.smoke},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E742}"] = {prioMode = wTypes.smoke},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E743}"] = {prioMode = wTypes.smoke},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E744}"] = {prioMode = wTypes.smoke},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E745}"] = {prioMode = wTypes.smoke},
+	["{A4BCC903-06C8-47bb-9937-A30FEDB4E746}"] = {prioMode = wTypes.smoke},
+	["{JAS39_FLIR}"]                           = {prioMode = wTypes.integrated},
+	["{JAS39_ELINT}"]                          = {prioMode = wTypes.integrated},
+	["{JAS39_EWS39}"]                          = {prioMode = wTypes.integrated}
+}
+
+
+
+
+
+-- Prio list per type/mode:
+-- BVR:
+-- Meteor
+-- I-DERBY ER
+-- 120C-7
+-- 120C-5
+-- 120B
+-- ASRAAM
+-- IRIS-T
+-- A-Darter
+-- Python-5
+-- 9X
+-- 9M
+-- 9L
+-- Gun
+--
+-- WVR:
+-- IRIS-T
+-- ASRAAM
+-- A-Darter
+-- Python-5
+-- 9X
+-- 9M
+-- 9L
+-- I-Derby ER
+-- Meteor
+-- 120C-7
+-- 120C-5
+-- 120B
+-- Gun
+--
+-- AS:
+-- KEPD 350
+-- Storm Shadow
+-- RBS-15
+-- SPEAR-EW
+-- SPEAR-3
+-- MAR-1
+-- Brimstone
+-- 65K
+-- 65H
+-- DWS 39 ARM
+-- DWS 39 TV
+-- GBU 39 SDB
+-- GBU-31 BLU-109
+-- GBU-31
+-- GBU-32
+-- GBU-49
+-- GBU-38
+-- GBU-10
+-- GBU-16
+-- GBU-12
+-- Mk84
+-- Mk83
+-- Mk82
+-- M71 LD
+-- M71 HD
+-- M70B HE
+-- M70B AP

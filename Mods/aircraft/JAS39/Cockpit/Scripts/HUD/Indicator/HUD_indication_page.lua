@@ -75,27 +75,27 @@ wpRangeU10.controllers    = {{"parameter_in_range", 0, 0, 9.9}, {"text_using_par
 
 
 local nav_mode_ind                                          = add_text_hud("NAV", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-nav_mode_ind.element_params                  = {"masterMode"}
+nav_mode_ind.element_params                  = {"primaryMode"}
 nav_mode_ind.controllers                     = {{"parameter_in_range" ,0,0.9,1.1} }
 
 local bvr_mode_ind                                          = add_text_hud("BVR", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-bvr_mode_ind.element_params                  = {"masterMode"}
+bvr_mode_ind.element_params                  = {"primaryMode"}
 bvr_mode_ind.controllers                     = {{"parameter_in_range" ,0,1.9,2.1} }
 
 local vs_mode_ind                                          = add_text_hud("VS", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-vs_mode_ind.element_params                  = {"masterMode"}
+vs_mode_ind.element_params                  = {"primaryMode"}
 vs_mode_ind.controllers                     = {{"parameter_in_range" ,0,2.9,3.1} }
 
 local bore_mode_ind                                 = add_text_hud("BORE", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-bore_mode_ind.element_params                  = {"masterMode"}
+bore_mode_ind.element_params                  = {"primaryMode"}
 bore_mode_ind.controllers                     = {{"parameter_in_range" ,0,3.9,4.1} }
 
 local HMDMode_ind                                         = add_text_hud("HMD", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-HMDMode_ind.element_params                  = {"masterMode"}
+HMDMode_ind.element_params                  = {"primaryMode"}
 HMDMode_ind.controllers                     = {{"parameter_in_range" ,0,7.9,8.1} }
 
 local lngt_mode_ind                                 = add_text_hud("LNGT", -0.69, -0.7, HUD_BASE , "Gripen_Font_green", HUD_strdefs_text, "CenterCenter")
-lngt_mode_ind.element_params                  = {"masterMode"}
+lngt_mode_ind.element_params                  = {"primaryMode"}
 lngt_mode_ind.controllers                     = {{"parameter_in_range" ,0,5.9,6.1} }
 
 
@@ -344,7 +344,7 @@ WVR_CircleLNGT                = create_HUD_tex(HUD_AimingCircle, 0, 0, 1024, 102
 WVR_CircleLNGT.name           = create_guid_string()
 WVR_CircleLNGT.init_pos       = {0, 0, 0}
 WVR_CircleLNGT.parent_element = HUD_BASE.name
-WVR_CircleLNGT.element_params = {"HUDBrightness", "masterMode", "RED_HUD"}
+WVR_CircleLNGT.element_params = {"HUDBrightness", "primaryMode", "RED_HUD"}
 WVR_CircleLNGT.controllers    = {{"opacity_using_parameter", 0}, {"parameter_compare_with_number", 1, 6}, {"parameter_compare_with_number", 2, 1}}
 AddHudElement(WVR_CircleLNGT)
 
@@ -352,7 +352,7 @@ WVR_CircleVSBORE_AA                = create_HUD_tex(HUD_AimingCircleThin, 0, 0, 
 WVR_CircleVSBORE_AA.name           = create_guid_string()
 WVR_CircleVSBORE_AA.init_pos       = {0, 0, 0}
 WVR_CircleVSBORE_AA.parent_element = HUD_BASE.name
-WVR_CircleVSBORE_AA.element_params = {"HUDBrightness", "masterMode", "GRIPEN_TYPE", "RED_HUD"}
+WVR_CircleVSBORE_AA.element_params = {"HUDBrightness", "primaryMode", "GRIPEN_TYPE", "RED_HUD"}
 WVR_CircleVSBORE_AA.controllers    = {{"opacity_using_parameter", 0}, {"parameter_in_range", 1, 2, 6}, {"parameter_compare_with_number", 2, 1}, {"parameter_compare_with_number", 2, 1}}
 AddHudElement(WVR_CircleVSBORE_AA)
 
@@ -377,7 +377,7 @@ HeadingScaleMask.indices                                = {0, 1, 2, 0, 2, 3}
 HeadingScaleMask.init_pos                                = {0, 0.35, 0}
 HeadingScaleMask.h_clip_relation                   = h_clip_relations.INCREASE_IF_LEVEL 
 HeadingScaleMask.level                                   = HUD_DEFAULT_LEVEL
-HeadingScaleMask.element_params                        = {"masterMode"}
+HeadingScaleMask.element_params                        = {"primaryMode"}
 HeadingScaleMask.controllers                        = { {"parameter_in_range",0, -1,7}  }
 HeadingScaleMask.isvisible                                = false
 Add(HeadingScaleMask)
@@ -599,7 +599,7 @@ SpeedScaleMask.init_pos                                        = {0, 0, 0}
 SpeedScaleMask.init_rot                                        = {0, 0, 15}
 SpeedScaleMask.h_clip_relation                   = h_clip_relations.INCREASE_IF_LEVEL 
 SpeedScaleMask.level                                           = HUD_DEFAULT_LEVEL
---SpeedScaleMask.element_params                        = {"masterMode"}
+--SpeedScaleMask.element_params                        = {"primaryMode"}
 --SpeedScaleMask.controllers                                = { {"parameter_in_range",0, -1,7}  }
 SpeedScaleMask.isvisible                                = false
 Add(SpeedScaleMask)

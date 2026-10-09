@@ -22,6 +22,9 @@ mfd_strdefs_digit_f = {0.008,0.008, 0, 0}
 lcp_strdefs_digit = {0.0045,0.0045, 0, 0}
 ucp_strdefs_digit = {0.0055,0.0055, 0, 0}
 
+-- Font size (vertical_size, horizontal_size, horizontal_spacing, vertical_spacing)
+gunAmmo_strdefs_digit = {0.00575,0.0055, -.00025, 0}
+
 
 materials = {}
 materials["DBG_GREY"]    = {5, 5, 5, 255}
@@ -50,7 +53,7 @@ materials["RWRGREY"]     = MakeMaterial(nil, materials["DBG_GREY"])
 materials["MFDBeige"]  = MakeMaterial(nil, {1 * 255, .913098 * 255, .584078 * 255, 255})
 materials["MFDBGGray"] = MakeMaterial(nil, {.603827 * 255, .603827 * 255, .603827 * 255, 255})
 -------FONTS-------
-local IndicationTexturesPath = LockOn_Options.script_path.."Resources/fonts/"
+local IndicationTexturesPath = LockOn_Options.script_path.."Resources/Fonts/"
 
 
 BASE_COLOR  = {36,255,113,255}
@@ -428,6 +431,8 @@ Gripen_fontLCP = MakeFont(Gripen_LCP_FONT, lcpGREEN , "Gripen_Font_LCP")
 Gripen_fontUCP = MakeFont(Gripen_UCP_FONT, lcpGREEN , "Gripen_Font_UCP")
 
 Gripen_Font_HL_Blue = MakeFont(Gripen_Font, {0, 0, 255, 255}, "Gripen_Font_Green_HL")
+
+Gripen_Font_MFDBG = MakeFont(Gripen_Font, {1 * 255, .913098 * 255, .584078 * 255, 255} , "Gripen_Font_MFDBG")
 fonts = {}
 
 fonts["FONT_WHITE"]  = MakeFont({used_DXUnicodeFontData = "FUI/Fonts/font_arial_17"},materials["DBG_WHITE"],50,"test_font") --this is font object declaration. Mig-21 does not have fonts, therefore disabled.
@@ -446,6 +451,7 @@ fonts["Gripen_Font_ContactsOrange"]  = Gripen_Font_ContactsOrange
 fonts["Gripen_Font_HL_Blue"]  = Gripen_Font_HL_Blue
 fonts["Gripen_Font_LCP"]  = Gripen_fontLCP
 fonts["Gripen_Font_UCP"]  = Gripen_fontUCP
+fonts["Gripen_Font_MFDBG"] = Gripen_Font_MFDBG
 --all vertices in files who include this file will be scaled in millyradians
 -- SetScale(MILLYRADIANS)
  
@@ -1345,6 +1351,23 @@ function add_text_with_CD_brightness(text, posx, posy, pparent, font_mat, string
 	end
 	-------------------
 	return rec_parent
+end
+
+
+
+function SelectedPylon(xpos, ypos, Pylonn, SPParent)
+	local SPylon          = CreateElement "ceMeshPoly"
+	SPylon.name           = create_guid_string()
+	SPylon.primitivetype  = "triangles"
+	SPylon.vertices       = {{-0.081, -0.027}, {0.091, -0.027}, {-0.081, 0.03}, {0.091, 0.03}}
+	SPylon.indices        = {0,1,2 , 3,2,1}
+	SPylon.init_pos       = {xpos, ypos}
+	SPylon.material       = MakeMaterial(nil, {0, 0, 0, 255})
+	SPylon.parent_element = SPParent
+	SPylon.level          = MFD_DEFAULT_LEVEL -1
+	SPylon.element_params = {"selectedPylon"}
+	SPylon.controllers    = {{"parameter_in_range",0, (Pylonn - 1) + 0.9, Pylonn + 0.1}}
+	return SPylon
 end
 
 
