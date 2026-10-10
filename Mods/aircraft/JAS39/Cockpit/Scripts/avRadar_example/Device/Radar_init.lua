@@ -1,6 +1,7 @@
 dofile(LockOn_Options.script_path .. "utils.lua")
 
 --[[
+--[[
 -- Path to your DLL files folder
 local dll_path = LockOn_Options.script_path:gsub("([^/]+/[^/]+/)$", "") .. "bin/" -- gsub removes "Cockpit\Script\" from the end
 
@@ -16,6 +17,7 @@ end
 
 local Avionics = load_dll()
 print_message_to_user(tostring(Dump(Avionics)))
+--]]
 --]]
 
 
@@ -36,6 +38,11 @@ local radar = {
 	RADAR_TDC_AZIMUTH           = get_param_handle("RADAR_TDC_AZIMUTH"),        -- =WRITE= TDC azimuth in radians
 	RADAR_TDC_RANGE_CARRET_SIZE = get_param_handle("RADAR_TDC_RANGE_CARRET_SIZE"), -- =WRITE= Range sensitivity of TDC in meters. Larger value: Less range precision needed to lock, default: 6000
 
+	-- STT params moved to the STTContact table below.
+	-- RADAR_STT_AZIMUTH   = get_param_handle("RADAR_STT_AZIMUTH"), -- =READ= Azimuth to STT target in radians, normalized with roll
+	-- RADAR_STT_ELEVATION = get_param_handle("RADAR_STT_ELEVATION"), -- =READ= Elevation to STT target in radians, normalized with roll
+	-- RADAR_STT_RANGE     = get_param_handle("RADAR_STT_RANGE"),  -- =READ= Range to STT target in meters
+	-- RADAR_STT_FRIENDLY  = get_param_handle("RADAR_STT_FRIENDLY"), -- =READ= IFF status of target. -1: IFF is off, 0: Hostile or unknown, 1: Friendly
 	-- STT params moved to the STTContact table below.
 	-- RADAR_STT_AZIMUTH   = get_param_handle("RADAR_STT_AZIMUTH"), -- =READ= Azimuth to STT target in radians, normalized with roll
 	-- RADAR_STT_ELEVATION = get_param_handle("RADAR_STT_ELEVATION"), -- =READ= Elevation to STT target in radians, normalized with roll
@@ -63,6 +70,8 @@ local radar = {
 	RADAR_BIT = get_param_handle("RADAR_BIT"), -- Unkown
 
 	CLOSEST_RANGE_RESPONSE = get_param_handle("CLOSEST_RANGE_RESPONSE") -- Unkown, glithces between really large numbers
+
+	-- Custom (camelCase):
 
 	-- Custom (camelCase):
 }
@@ -105,8 +114,14 @@ for n = 1, 99 do
 		RDY = get_param_handle(contactSTR .. "RDY"),       -- Y coordinate of contact on RD
 		RDVelvecX = get_param_handle(contactSTR .. "RDVelvecX"), -- Length of contact velocity vector on x-axis on RD
 		RDVelvecY = get_param_handle(contactSTR .. "RDVelvecY"), -- Length of contact velocity vector on y-axis on RD
+		RDX = get_param_handle(contactSTR .. "RDX"),       -- X coordinate of contact on RD
+		RDY = get_param_handle(contactSTR .. "RDY"),       -- Y coordinate of contact on RD
+		RDVelvecX = get_param_handle(contactSTR .. "RDVelvecX"), -- Length of contact velocity vector on x-axis on RD
+		RDVelvecY = get_param_handle(contactSTR .. "RDVelvecY"), -- Length of contact velocity vector on y-axis on RD
 		RDVelvec = get_param_handle(contactSTR .. "RDVelvec"), -- Length of contact velocity vector on RD
 		BSX = get_param_handle(contactSTR .. "BSX"),
+		BSY = get_param_handle(contactSTR .. "BSY"),
+		BSVelvec = get_param_handle(contactSTR .. "BSVelvec"),
 		BSY = get_param_handle(contactSTR .. "BSY"),
 		BSVelvec = get_param_handle(contactSTR .. "BSVelvec"),
 		BSHdg = get_param_handle(contactSTR .. "BSHdg"),
@@ -119,6 +134,10 @@ for n = 1, 99 do
 		selfPitch = 0,
 		antennaEl = get_param_handle(contactSTR .. "antennaEl"),
 		prevTime = 11,
+		HUDEl = get_param_handle(contactSTR .. "HUDEl"),
+		isFresh = get_param_handle(contactSTR .. "isFresh"),
+		prevAz = 0,
+		prevAzVel = 0
 		HUDEl = get_param_handle(contactSTR .. "HUDEl"),
 		isFresh = get_param_handle(contactSTR .. "isFresh"),
 		prevAz = 0,
@@ -240,6 +259,7 @@ local HALFPI = math.pi / 2
 local scanAzimuthAngle = 60
 local scanElevationAngle = 60
 local detectionDist = 670820
+local detectionDist = 670820
 local elSettings = {2.5, 5, 10}
 
 local RDRAltScpW = 1.707094 / 2
@@ -314,6 +334,7 @@ function post_initialize()
 	simpleRadar:listen_command(2032)
 
 	-- print_message_to_user("Radar - INIT")
+	-- print_message_to_user("Radar - INIT")
 
 
 	radar.RADAR_PITCH_BANK_STABILIZATION:set(1)
@@ -325,6 +346,7 @@ function post_initialize()
 
 	radar.RADAR_TDC_RANGE:set(0)
 	radar.RADAR_TDC_AZIMUTH:set(0)
+	radar.RADAR_TDC_RANGE_CARRET_SIZE:set(12000)
 	radar.RADAR_TDC_RANGE_CARRET_SIZE:set(12000)
 end
 
@@ -347,13 +369,18 @@ function update()
 	local function computeBscopePos(az, rangeNM)
 		local bsAzLimit = perfomance.scan_volume_azimuth / 2
 		local bsMaxRange = RDRFullRange:get()
+		local bsAzLimit = perfomance.scan_volume_azimuth / 2
+		local bsMaxRange = RDRFullRange:get()
 
 		local x = (az / bsAzLimit) * scopeHalfExtent
 		local y = (rangeNM / bsMaxRange) * (scopeHalfExtent * 2)/1.2
 
 		x = math.max(-scopeHalfExtent, math.min(scopeHalfExtent, x))
 		-- y = math.max(0, math.min(scopeHalfExtent * 2, y))
+		x = math.max(-scopeHalfExtent, math.min(scopeHalfExtent, x))
+		-- y = math.max(0, math.min(scopeHalfExtent * 2, y))
 
+		return x, y
 		return x, y
 	end
 	
@@ -380,6 +407,8 @@ function update()
 
 
 	if get_param_handle("RDRScopeMode"):get() == 1 then
+		local tdcAz = radar.RADAR_TDC_AZIMUTH:get()
+		local tdcRangeNM = radar.RADAR_TDC_RANGE:get() * M_TO_NMI
 		local tdcAz = radar.RADAR_TDC_AZIMUTH:get()
 		local tdcRangeNM = radar.RADAR_TDC_RANGE:get() * M_TO_NMI
 
@@ -765,6 +794,7 @@ function update()
 	end
 
 
+
 	updateBaseData()
 
 
@@ -806,6 +836,15 @@ function update()
 	if radar.RADAR_MODE:get() == 1 then
 		local relPositions = {}
 
+	if radar.RADAR_MODE:get() == 1 then
+		local relPositions = {}
+
+		for i = 1, 99 do
+			local contact = contacts[i]
+			local rawAz = contact.AZIMUTH:get()
+			local rawEl = contact.ELEVATION:get()
+			local rawRange = contact.RANGE:get()
+			local rawTime = contact.TIME:get()
 		for i = 1, 99 do
 			local contact = contacts[i]
 			local rawAz = contact.AZIMUTH:get()
@@ -825,12 +864,24 @@ function update()
 
 			relPositions[i] = {x = relX, y = relY, z = relZ, active = rawTime > 0}
 		end
+			relPositions[i] = {x = relX, y = relY, z = relZ, active = rawTime > 0}
+		end
 
+		local dupDistanceMeters = 2
 		local dupDistanceMeters = 2
 
 		for i = 1, 99 do
 			local isDup = false
+		for i = 1, 99 do
+			local isDup = false
 
+			if relPositions[i].active then
+				for j = i + 1, 99 do
+					if relPositions[j].active then
+						local dx = relPositions[i].x - relPositions[j].x
+						local dy = relPositions[i].y - relPositions[j].y
+						local dz = relPositions[i].z - relPositions[j].z
+						local dist = math.sqrt(dx * dx + dy * dy + dz * dz)
 			if relPositions[i].active then
 				for j = i + 1, 99 do
 					if relPositions[j].active then
@@ -846,13 +897,38 @@ function update()
 					end
 				end
 			end
+						if dist < dupDistanceMeters then
+							isDup = true
+							break
+						end
+					end
+				end
+			end
 
+			contacts[i].isFresh:set((isDup or contacts[i].TIME:get() > 2 or contacts[i].TIME:get() == -1) and 0 or 1)
+		end
 			contacts[i].isFresh:set((isDup or contacts[i].TIME:get() > 2 or contacts[i].TIME:get() == -1) and 0 or 1)
 		end
 
 
 		for i = 1, 99 do
 			local contact = contacts[i]
+		for i = 1, 99 do
+			local contact = contacts[i]
+
+			local rawAz    = contact.AZIMUTH:get()
+			local rawEl    = contact.ELEVATION:get()
+			-- local rawFriend   = contact.FRIENDLY:get()
+			-- local rawNCTR     = contact.NCTR:get()
+			-- local rawNoise    = contact.NOISE:get()
+			local rawRange = contact.RANGE:get()
+			-- local rawRCS      = contact.RCS:get()
+			-- local rawRCSCoeff = contact.RCS_COEFF:get()
+			-- local rawRND      = contact.RND:get()
+			local rawTime  = contact.TIME:get()
+			local rawVX    = contact.VX:get()
+			local rawVY    = contact.VY:get()
+			local rawVZ    = contact.VZ:get()
 
 			local rawAz    = contact.AZIMUTH:get()
 			local rawEl    = contact.ELEVATION:get()
@@ -872,13 +948,21 @@ function update()
 
 			local bsAzLimit = perfomance.scan_volume_azimuth / 2
 
+			local bsAzLimit = perfomance.scan_volume_azimuth / 2
+
+			local bsMaxRange = RDRFullRange:get()
 			local bsMaxRange = RDRFullRange:get()
 
 			local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
 			contact.BSX:set(bx)
 			contact.BSY:set(by)
+			local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+			contact.BSX:set(bx)
+			contact.BSY:set(by)
 
 
+
+			--[[if contactDebugTimer <= 0 then
 
 			--[[if contactDebugTimer <= 0 then
     		print_message_to_user(string.format(
@@ -888,10 +972,15 @@ function update()
 		end]]
 
 
+
+			if rawTime > 0 then
+				local ownHdg = baseData.getHeading()
+				-- local selfX, selfY, selfZ = baseData.getSelfCoordinates()
 			if rawTime > 0 then
 				local ownHdg = baseData.getHeading()
 				-- local selfX, selfY, selfZ = baseData.getSelfCoordinates()
 
+				local horVel, horVelKts, displayZoom, alt, u_hat, v_xz, v_hy, corrEl -- , deltaCX, deltaCZ, contactX, contactZ, dx, dz
 				local horVel, horVelKts, displayZoom, alt, u_hat, v_xz, v_hy, corrEl -- , deltaCX, deltaCZ, contactX, contactZ, dx, dz
 
 
@@ -901,39 +990,70 @@ function update()
 					contact.selfPitch = baseData.getPitch()
 					contact.antennaEl:set(radar.SCAN_ZONE_ORIGIN_ELEVATION:get())
 				end
+				if rawTime < contact.prevTime then
+					contact.selfAltFt = baseData.getBarometricAltitude()
+					contact.selfPitch = baseData.getPitch()
+					contact.antennaEl:set(radar.SCAN_ZONE_ORIGIN_ELEVATION:get())
+				end
 
+				corrEl = rawEl + math.tan(contact.antennaEl:get())
+				contact.HUDEl:set(corrEl) -- + (contact.selfPitch - baseData.getPitch())) -- Why tf isn't this working
 				corrEl = rawEl + math.tan(contact.antennaEl:get())
 				contact.HUDEl:set(corrEl) -- + (contact.selfPitch - baseData.getPitch())) -- Why tf isn't this working
 
 				horVel = math.sqrt(rawVX^2 + rawVZ^2)
 				horVelKts = horVel * MS_TO_KTS
 				-- contact.horVel:set(horVelKts)
+				horVel = math.sqrt(rawVX^2 + rawVZ^2)
+				horVelKts = horVel * MS_TO_KTS
+				-- contact.horVel:set(horVelKts)
 
 
 				-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
+				-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
 
+				local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
+				contact.relHdg:set(relHdgVal)
 				local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
 				contact.relHdg:set(relHdgVal)
 
 				-- Predicted-heading line for the B-scope
 				local predictSeconds = 20 -- how far ahead to project
+				-- Predicted-heading line for the B-scope
+				local predictSeconds = 20 -- how far ahead to project
 
+				local relX = math.sin(rawAz) * rawRange
+				local relZ = math.cos(rawAz) * rawRange
 				local relX = math.sin(rawAz) * rawRange
 				local relZ = math.cos(rawAz) * rawRange
 
 				local velRelX = horVel * math.sin(relHdgVal)
 				local velRelZ = horVel * math.cos(relHdgVal)
+				local velRelX = horVel * math.sin(relHdgVal)
+				local velRelZ = horVel * math.cos(relHdgVal)
 
+				local predRelX = relX + velRelX * predictSeconds
+				local predRelZ = relZ + velRelZ * predictSeconds
 				local predRelX = relX + velRelX * predictSeconds
 				local predRelZ = relZ + velRelZ * predictSeconds
 
 				local predRange = math.sqrt(predRelX^2 + predRelZ^2)
 				local predAz = math.atan2(predRelX, predRelZ)
+				local predRange = math.sqrt(predRelX^2 + predRelZ^2)
+				local predAz = math.atan2(predRelX, predRelZ)
 
+				local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
 				local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
 
 				contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
+				contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
 
+				-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
+				-- contactX = selfX - deltaCX
+				-- deltaCZ = math.sin(rawAz + math.pi / 2) * rawRange
+				-- contactZ = selfZ - deltaCZ
+				-- dx = math.cos(ownHdg) * -deltaCZ - math.sin(ownHdg) * deltaCX
+				-- dz = math.cos(ownHdg) * deltaCX + math.sin(ownHdg) * deltaCZ
 				-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
 				-- contactX = selfX - deltaCX
 				-- deltaCZ = math.sin(rawAz + math.pi / 2) * rawRange
@@ -945,10 +1065,46 @@ function update()
 
 				if radarScopeMode:get() == 1 then
 					displayZoom = CDScale:get() * RDMult
+				if radarScopeMode:get() == 1 then
+					displayZoom = CDScale:get() * RDMult
 
 					contact.RDX:set((math.cos(-rawAz + HALFPI) * rawRange) / displayZoom)
 					contact.RDY:set((math.sin(-rawAz + HALFPI) * rawRange) / displayZoom)
+					contact.RDX:set((math.cos(-rawAz + HALFPI) * rawRange) / displayZoom)
+					contact.RDY:set((math.sin(-rawAz + HALFPI) * rawRange) / displayZoom)
 
+					contact.RDVelvec:set((horVel * 30) / displayZoom)
+				elseif radarScopeMode:get() == 2 then
+					displayZoom = CDScale:get()
+					-- local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+					local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI) -- TODO: Fix so this uses the cursorGain stuff
+					contact.RDX:set(bx)
+					contact.RDY:set(by)
+
+					--[[
+				local deltaAz = rawAz - contact.prevAz
+				local angularVelocity
+
+				if deltaAz ~= 0 then
+					-- printButBetter("a", "RC" .. i)
+					contact.prevAz = rawAz
+					
+					angularVelocity = deltaAz / updateTimeStep --[rad/s]
+					contact.prevAzVel = angularVelocity
+				else
+					-- printButBetter("b", "RC" .. i)
+					angularVelocity = contact.prevAzVel
+				end
+				
+				--(math.sqrt(angularVelocity^2 + (rawVZ * M_TO_NMI)^2) * 30) / displayZoom
+				--]]
+
+					local RdVelvecY = (rawVZ * M_TO_NMI * 30) / displayZoom
+
+					contact.RDVelvecX:set(Math.cot(contact.BSHdg:get() + math.rad(90)) * RdVelvecY) -- TODO: Fix and use the commented code above, this is flawed because the value blows up at some angles. (OLD: math.rad(angularVelocity) * 30)
+					contact.RDVelvecY:set(RdVelvecY)
+					contact.RDVelvec:set(math.sqrt(contact.RDVelvecX:get()^2 + contact.RDVelvecY:get()^2)) -- [math.sqrt(deg^2 + nmi^2)/s]
+				end
 					contact.RDVelvec:set((horVel * 30) / displayZoom)
 				elseif radarScopeMode:get() == 2 then
 					displayZoom = CDScale:get()
@@ -985,8 +1141,16 @@ function update()
 				alt = (contact.selfAltFt + math.sin(corrEl) * rawRange) * M_TO_FT -- Flawed because there's no exact pos of the contact
 				contact.alt:set(alt)
 				contact.altK:set(alt / 1000)
+				alt = (contact.selfAltFt + math.sin(corrEl) * rawRange) * M_TO_FT -- Flawed because there's no exact pos of the contact
+				contact.alt:set(alt)
+				contact.altK:set(alt / 1000)
 
 
+				contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
+				u_hat = {
+					x = math.cos(ownHdg),
+					y = math.sin(ownHdg)
+				}
 				contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
 				u_hat = {
 					x = math.cos(ownHdg),
@@ -1002,12 +1166,142 @@ function update()
 					x = u_hat.x * v_xz.x + u_hat.y * v_xz.y,
 					y = rawVY
 				}
+				v_xz = {
+					x = rawVX,
+					y = rawVZ
+				}
 
+				v_hy = {
+					x = u_hat.x * v_xz.x + u_hat.y * v_xz.y,
+					y = rawVY
+				}
+
+				contact.pitch:set(math.atan2(v_hy.x, v_hy.y))
+				contact.altScpVelvec:set((math.sqrt(v_hy.x^2 + v_hy.y^2) * 30 * M_TO_NMI) / CDScale:get())
 				contact.pitch:set(math.atan2(v_hy.x, v_hy.y))
 				contact.altScpVelvec:set((math.sqrt(v_hy.x^2 + v_hy.y^2) * 30 * M_TO_NMI) / CDScale:get())
 
 
 
+				contact.prevTime = rawTime
+			end
+		end
+	elseif radar.RADAR_MODE:get() == 3 then
+		local contact = STTContact
+
+		local rawAz    = contact.AZIMUTH:get()
+		local rawEl    = contact.ELEVATION:get()
+		-- local rawFriend   = contact.FRIENDLY:get()
+		local rawRange = contact.RANGE:get()
+
+
+
+		local bsAzLimit = perfomance.scan_volume_azimuth / 2
+
+		local bsMaxRange = RDRFullRange:get()
+
+		local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+
+
+
+		local ownHdg = baseData.getHeading()
+		-- local selfX, selfY, selfZ = baseData.getSelfCoordinates()
+
+		local horVel, horVelKts, displayZoom, alt, u_hat, v_xz, v_hy, corrEl -- , deltaCX, deltaCZ, contactX, contactZ, dx, dz
+
+
+		corrEl = rawEl + math.tan(contact.antennaEl:get())
+		contact.HUDEl:set(corrEl) -- + (contact.selfPitch - baseData.getPitch())) -- Why tf isn't this working
+
+		-- horVel = math.sqrt(rawVX^2 + rawVZ^2)
+		-- horVelKts = horVel * MS_TO_KTS
+		-- contact.horVel:set(horVelKts)
+
+
+		-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
+
+		--local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
+		-- contact.relHdg:set(relHdgVal)
+
+		-- Predicted-heading line for the B-scope
+		local predictSeconds = 20 -- how far ahead to project
+
+		local relX = math.sin(rawAz) * rawRange
+		local relZ = math.cos(rawAz) * rawRange
+
+		-- local velRelX = horVel * math.sin(relHdgVal)
+		-- local velRelZ = horVel * math.cos(relHdgVal)
+
+		-- local predRelX = relX + velRelX * predictSeconds
+		-- local predRelZ = relZ + velRelZ * predictSeconds
+
+		-- local predRange = math.sqrt(predRelX^2 + predRelZ^2)
+		-- local predAz = math.atan2(predRelX, predRelZ)
+
+		-- local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
+
+		-- contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
+
+		-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
+		-- contactX = selfX - deltaCX
+		-- deltaCZ = math.sin(rawAz + math.pi / 2) * rawRange
+		-- contactZ = selfZ - deltaCZ
+		-- dx = math.cos(ownHdg) * -deltaCZ - math.sin(ownHdg) * deltaCX
+		-- dz = math.cos(ownHdg) * deltaCX + math.sin(ownHdg) * deltaCZ
+
+
+
+		if radarScopeMode:get() == 1 then
+			displayZoom = CDScale:get() * RDMult
+
+			contact.RDX:set((math.cos(-rawAz + HALFPI) * rawRange) / displayZoom)
+			contact.RDY:set((math.sin(-rawAz + HALFPI) * rawRange) / displayZoom)
+
+			contact.RDVelvec:set((horVel * 30) / displayZoom)
+		elseif radarScopeMode:get() == 2 then
+			displayZoom = CDScale:get()
+			-- local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+			local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI) -- TODO: Fix so this uses the cursorGain stuff
+			contact.RDX:set(bx)
+			contact.RDY:set(by)
+
+			--[[
+				local deltaAz = rawAz - contact.prevAz
+				local angularVelocity
+
+				if deltaAz ~= 0 then
+					-- printButBetter("a", "RC" .. i)
+					contact.prevAz = rawAz
+					
+					angularVelocity = deltaAz / updateTimeStep --[rad/s]
+					contact.prevAzVel = angularVelocity
+				else
+					-- printButBetter("b", "RC" .. i)
+					angularVelocity = contact.prevAzVel
+				end
+				
+				--(math.sqrt(angularVelocity^2 + (rawVZ * M_TO_NMI)^2) * 30) / displayZoom
+			--]]
+
+			-- local RdVelvecY = (rawVZ * M_TO_NMI * 30) / displayZoom
+
+			-- contact.RDVelvecX:set(Math.cot(contact.BSHdg:get() + math.rad(90)) * RdVelvecY) -- TODO: Fix and use the commented code above, this is flawed because the value blows up at some angles. (OLD: math.rad(angularVelocity) * 30)
+			-- contact.RDVelvecY:set(RdVelvecY)
+			-- contact.RDVelvec:set(math.sqrt(contact.RDVelvecX:get()^2 + contact.RDVelvecY:get()^2)) -- [math.sqrt(deg^2 + nmi^2)/s]
+		end
+
+		contact.selfAltFt = baseData.getBarometricAltitude()
+		alt = (contact.selfAltFt + math.sin(corrEl) * rawRange) * M_TO_FT -- Flawed because there's no exact pos of the contact
+		contact.alt:set(alt)
+		contact.altK:set(alt / 1000)
+
+
+		contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
+		u_hat = {
+			x = math.cos(ownHdg),
+			y = math.sin(ownHdg)
+		}
+	end
 				contact.prevTime = rawTime
 			end
 		end
@@ -1164,6 +1458,7 @@ function SetCommand(command, value)
 		radar.RADAR_TDC_RANGE:set(0)
 	end
 
+
 	if radar.RADAR_TDC_AZIMUTH:get() > 1.05 then
 		radar.RADAR_TDC_AZIMUTH:set(1.04)
 	elseif radar.RADAR_TDC_AZIMUTH:get() < -1.05 then
@@ -1182,13 +1477,17 @@ function SetCommand(command, value)
 
 	if command == 88 then -- Left
 		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() - 0.015 / 2)
+		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() - 0.015 / 2)
 	elseif command == 89 then -- Right
+		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + 0.015 / 2)
 		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + 0.015 / 2)
 	end
 
 	if command == 90 then -- Up
 		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() + 600 / 2)
+		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() + 600 / 2)
 	elseif command == 91 then -- Down
+		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() - 600 / 2)
 		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() - 600 / 2)
 	end
 end

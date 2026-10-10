@@ -1,5 +1,7 @@
 local start_custom_command = 10100
+local start_custom_command = 10100
 local __count_custom = start_custom_command - 1
+
 
 local function __custom_counter()
 	__count_custom = __count_custom + 1
@@ -10,8 +12,13 @@ end
 -------------------------------------------------------
 keys = {
 	trigger                = __custom_counter(),
+keys = {
+	trigger                = __custom_counter(),
 	GearUp                 = __custom_counter(),
 	GearDown               = __custom_counter(),
+	MASSSafe               = __custom_counter(),
+	MASSStby               = __custom_counter(),
+	MASSLive               = __custom_counter(),
 	MASSSafe               = __custom_counter(),
 	MASSStby               = __custom_counter(),
 	MASSLive               = __custom_counter(),
@@ -43,6 +50,7 @@ keys = {
 	SeatEject              = __custom_counter(),
 	SeatArm                = __custom_counter(),
 	DTU                    = __custom_counter(),
+	triggerSafe            = __custom_counter(),
 	triggerSafe            = __custom_counter(),
 	triggerSafeHold        = __custom_counter(),
 	CannonMode             = __custom_counter(),
@@ -633,6 +641,7 @@ keys = {
 	RDSK_12            = __custom_counter(),
 	RDSK_13            = __custom_counter(),
 	RDSK14            = __custom_counter(),
+	RDSK14            = __custom_counter(),
 	RDSK_15            = __custom_counter(),
 	RDSK_16            = __custom_counter(),
 	RDSK_17            = __custom_counter(),
@@ -855,6 +864,7 @@ deviceCommands =
 	CanopyJettison         = __counter(),
 	CanopyLever            = __counter(),
 	MASS                   = __counter(),
+	MASS                   = __counter(),
 	ThrottleStop           = __counter(),
 	MasterCaution          = __counter(),
 	CovertLights           = __counter(),
@@ -870,6 +880,7 @@ deviceCommands =
 	IN_Knob                = __counter(), -- Work
 	SeatArm                = __counter(),
 	DTU                    = __counter(),
+	triggerSafe            = __counter(),
 	triggerSafe            = __counter(),
 	CannonMode             = __counter(),
 	AARProbeCover          = __counter(),
@@ -979,6 +990,7 @@ deviceCommands =
 	RDSK_11                = __counter(),
 	RDSK_12                = __counter(),
 	RDSK_13                = __counter(),
+	RDSK14                = __counter(),
 	RDSK14                = __counter(),
 	RDSK_15                = __counter(),
 	RDSK_16                = __counter(),
