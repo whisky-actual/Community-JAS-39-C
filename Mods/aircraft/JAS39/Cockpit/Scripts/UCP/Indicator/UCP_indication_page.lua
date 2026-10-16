@@ -3,7 +3,7 @@ dofile(LockOn_Options.script_path.."MFD/Indicator/MFD_def.lua")
 UCP_BASE 					= CreateElement "ceSimple"
 UCP_BASE.init_pos			= {0,0}
 UCP_BASE.name				= create_guid_string()
-UCP_BASE.element_params 	= {"mainpower"}
+UCP_BASE.element_params 	= {"Electric_Main_bus_A_115200VAC"}
 UCP_BASE.controllers    	= {{"parameter_compare_with_number",0, 1}}
 AddElement(UCP_BASE)
 

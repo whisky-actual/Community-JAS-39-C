@@ -43,6 +43,7 @@ function post_initialize()
 	
 	dev:performClickableAction(deviceCommands.BackLight, -1, true)
 	dev:performClickableAction(deviceCommands.FloodLight, -1, true)
+	dev:performClickableAction(deviceCommands.IndicatorLight, -0.5, true)
 	
 end
 
@@ -84,7 +85,7 @@ local navigation_lights_state = 0			-- -1: brt, 0: dim, 1: off
 
 
 
-local mainpower = get_param_handle("mainpower"):get()
+local MAINPOWER = get_param_handle("MAINPOWER"):get()
 
 local FLOOD_LIGHT = get_param_handle("FLOOD_LIGHT")
 
@@ -300,7 +301,7 @@ function interior_lights()
 
 	local floodlight_status = get_cockpit_draw_argument_value(180)
 
-	if get_param_handle("mainpower"):get() == 1 then	
+	if get_param_handle("Electric_Battery_bus_B_28VDC"):get() == 1 then	
 		set_aircraft_draw_argument_value(210, 1 - LDBrightness:get())
 		set_aircraft_draw_argument_value(212, 1 - LDBrightness:get())
 		FLOOD_LIGHT:set(tempfloodlight)
@@ -309,7 +310,7 @@ function interior_lights()
 		
 		
 		
-	elseif 	get_param_handle("mainpower"):get() == 0 then
+	elseif 	get_param_handle("Electric_Battery_bus_B_28VDC"):get() == 0 then
 		set_aircraft_draw_argument_value(210,-1)
 		set_aircraft_draw_argument_value(212,0)
 		FLOOD_LIGHT:set(0)

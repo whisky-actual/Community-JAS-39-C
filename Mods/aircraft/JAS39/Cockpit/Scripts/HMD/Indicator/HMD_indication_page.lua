@@ -19,7 +19,7 @@ addHMDText(nil, {14}, "Mach", nil, nil, {"machDecimals"}, {{ctrl.inRange, 0, 1, 
 addHMDTextParam(nil, {17}, "Mach", nil, nil, {"machDecimals", "HMDBrightness"}, {{ctrl.inRange, 0, 1, 99.5}, {ctrl.text, 0}, {ctrl.opacity, 1}}, nil, align.LC, {"%.0f"})
 
 
-addHMDText("GS", {-134, -26}, base, nil, nil, {"HMDMode", "currentPhase", "HUDDeclutt"}, {{ctrl.inRange, 0, -0.1, 1.1}, {ctrl.inRange, 1, 6.9, 8.9}, {ctrl.compareNum, 2, 0}}, "GS")
+addHMDText("GS", {-134, -26}, base, nil, nil, {"HMDMode", "CURRENT_PHASE", "HUDDeclutt"}, {{ctrl.inRange, 0, -0.1, 1.1}, {ctrl.inRange, 1, 6.9, 8.9}, {ctrl.compareNum, 2, 0}}, "GS")
 addHMDTextParam(nil, {34}, "GS", nil, nil, nil, nil, "txtGS", align.RC)
 
 
@@ -55,13 +55,13 @@ copyElement(dA, {"parent_element", "element_params"}, {"Declutt_Ralt", {"txtRalt
 
 
 
-addHMDSimple("Status_Bar", {0, -166}, nil, base, nil, nil, {"currentPhase", "PULLUPQUE"}, {{ctrl.inRange, 0, 6.9, 9.9}, {ctrl.inRange, 1, -1, 999999}})
+addHMDSimple("Status_Bar", {0, -166}, nil, base, nil, nil, {"CURRENT_PHASE", "PULLUPQUE"}, {{ctrl.inRange, 0, 6.9, 9.9}, {ctrl.inRange, 1, -1, 999999}})
 
 addHMDText(nil, {0, -10}, "Status_Bar", nil, nil, {"landingMode"}, {{ctrl.compareNum, 0, 1}}, "L")
 
 
 local GCWY = 180
-addHMDSimple("GCW_Base", nil, nil, base, nil, nil, {"rollRad", "currentPhase"}, {{ctrl.rotate, 0, 1}, {ctrl.inRange, 1, 5.9, 9.9}})
+addHMDSimple("GCW_Base", nil, nil, base, nil, nil, {"rollRad", "CURRENT_PHASE"}, {{ctrl.rotate, 0, 1}, {ctrl.inRange, 1, 5.9, 9.9}})
 
 local GCWLL = addHMDSimpleLine(nil, nil, nil, "GCW_Base", hcr.rw, nil, {"PULLUPQUE", "PULLMORE"}, {{ctrl.inRange, 0, -10000, 0}, {ctrl.inRange, 1, -0.99, 0.5}}, nil, {{-52, 40 - GCWY}, {-52, 0 - GCWY}, {-32.17, 0 - GCWY}})
 copyElement(GCWLL, {"vertices"}, {{{-46, 40 - GCWY}, {-46, 2.8 - GCWY}, {-32.17, 2.8 - GCWY}}})

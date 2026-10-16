@@ -4,7 +4,7 @@ aspect = 0.9
 CD_EMGY_PAGE 			= CreateElement "ceSimple"
 CD_EMGY_PAGE.init_pos	= {0,0}
 CD_EMGY_PAGE.name		= create_guid_string()
-CD_EMGY_PAGE.element_params = {"CD_EMGY_MODE", "mainpower"}
+CD_EMGY_PAGE.element_params = {"CD_EMGY_MODE", "MAINPOWER"}
 CD_EMGY_PAGE.controllers    = {{"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number", 1, 1}}
 AddElement(CD_EMGY_PAGE)		
 
@@ -83,7 +83,7 @@ ADI_EMGY_ROLL_MARKER.element_params 	= {"ADI_ROLL",}
 ADI_EMGY_ROLL_MARKER.controllers		= {{"rotate_using_parameter" ,0, 1},}
 AddElement(ADI_EMGY_ROLL_MARKER)
 --****************** RPM Gauge
-local RPMDial = MakeDial(-.53, -.835, .25, 0, 0, 270, .01, false, 36, "mainpower", "RPM_NEEDLE", 270, materials["MWHITE"], CD_EMGY_PAGE.name, MakeMaterial(nil, {50, 50, 50, 50})) -- 0, 1.3, 1.3, 200
+local RPMDial = MakeDial(-.53, -.835, .25, 0, 0, 270, .01, false, 36, "DisplaysBooted", "RPM_NEEDLE", 270, materials["MWHITE"], CD_EMGY_PAGE.name, MakeMaterial(nil, {50, 50, 50, 50})) -- 0, 1.3, 1.3, 200
 RPMDial.element_params = {"CD_ENG_TOGGLE"}
 RPMDial.controllers    = {{"parameter_compare_with_number", 0, 1}}
 
@@ -136,7 +136,7 @@ digitalRPM100.controllers    = {{"parameter_compare_with_number", 0, 1}}
 
 
 -- Engine temp
-local TGTDial          = MakeDial(.15, -.835, .25, 0, 0, 270, .01, false, 36, "mainpower", "TGT_NEEDLE", 270, materials["MWHITE"], CD_EMGY_PAGE.name, MakeMaterial(nil, {50, 50, 50, 50})) -- 0, 1.3, 1.3, 200
+local TGTDial          = MakeDial(.15, -.835, .25, 0, 0, 270, .01, false, 36, "DisplaysBooted", "TGT_NEEDLE", 270, materials["MWHITE"], CD_EMGY_PAGE.name, MakeMaterial(nil, {50, 50, 50, 50})) -- 0, 1.3, 1.3, 200
 TGTDial.element_params = {"CD_ENG_TOGGLE"}
 TGTDial.controllers    = {{"parameter_compare_with_number", 0, 1}}
 

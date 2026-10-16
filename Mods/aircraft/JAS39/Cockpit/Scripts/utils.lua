@@ -182,15 +182,17 @@ end
 
 
 local lastprint = {}
+
 --- Instead of printing the same message multiple times, this function will only print it once per id.
 --- @param input string The message to print.
 --- @param id string The identifier for the message group.
 function printButBetter(input, id)
-	if input ~= lastprint[id] then
-		print_message_to_user(tostring(input))
-	end
+	local strInput = tostring(input)
+	local strID = tostring(id)
 
-	lastprint[id] = input
+	if strInput ~= lastprint[strID] then print_message_to_user(strInput) end
+
+	lastprint[strID] = strInput
 end
 
 

@@ -70,16 +70,16 @@ addHMDText(nil, {17.5, -67.5}, ACBase, nil, nil, {"triggerSafe"}, {{ctrl.compare
 -- addHMDSimpleLine(nil, {0, 10}, nil, base, hcr.rw, nil, nil, nil, 10, {{-900}, {0}})
 -- addHMDSimpleLine(nil, nil, nil, base, hcr.rw, nil, {"ONE"}, {{ctrl.moveX, 0, .702422}}, 10, {{-100 * 1000}, {0}})
 --
-for n = 1, 99 do
-	local i
-
-	if n < 10 then
-		i = "RADAR_CONTACT_0" .. n .. "_"
-	else
-		i = "RADAR_CONTACT_" .. n .. "_"
-	end
-
-	addHMDSimpleLine(i .. "Box", nil, nil, base, hcr.rw, nil, {i .. "TIME", i .. "HUDEl", i .. "AZIMUTH"}, {{ctrl.inRange, 0, 0, 6}, {ctrl.moveY, 1, mult}, {ctrl.moveX, 2, mult}}, nil, {{-5, 2.5}, {5, 2.5}, {2.5, 2.5}, {2.5, -2.5}, {5, -2.5}, {-5, -2.5}, {-2.5, -2.5}, {-2.5, 2.5}})
-	addHMDSimpleLine(nil, {0, 0.25}, nil, i .. "Box", hcr.rw, nil, {i .. "FRIENDLY"}, {{ctrl.compareNum, 0, 1}}, nil, {{-5, 5}, {0, 10}, {5, 5}})
+-- for n = 1, 99 do
+	-- local i
+-- 
+	-- if n < 10 then
+		-- i = "RADAR_CONTACT_0" .. n .. "_"
+	-- else
+		-- i = "RADAR_CONTACT_" .. n .. "_"
+	-- end
+-- 
+	-- addHMDSimpleLine(i .. "Box", nil, nil, base, hcr.rw, nil, {i .. "TIME", i .. "HUDEl", i .. "AZIMUTH"}, {{ctrl.inRange, 0, 0, 6}, {ctrl.moveY, 1, mult}, {ctrl.moveX, 2, mult}}, nil, {{-5, 2.5}, {5, 2.5}, {2.5, 2.5}, {2.5, -2.5}, {5, -2.5}, {-5, -2.5}, {-2.5, -2.5}, {-2.5, 2.5}})
+	-- addHMDSimpleLine(nil, {0, 0.25}, nil, i .. "Box", hcr.rw, nil, {i .. "FRIENDLY"}, {{ctrl.compareNum, 0, 1}}, nil, {{-5, 5}, {0, 10}, {5, 5}})
 	-- addHMDSimpleLine(nil, nil, nil, base, nil, nil, {i .. "ObjNum", i .. "HMD_CLAMPED", "rollRad", i .. "HMD_AZ", i .. "HMD_EL", i .. "Az", i .. "El"}, {{ctrl.inRange,0, -1, 999}, {ctrl.compareNum,1, 1}, {ctrl.rotate,2, 1}, {ctrl.setPoint,0, 3, 4, mult, mult}, {ctrl.setPoint,1, 5, 6, mult, mult}})
-end
+-- end

@@ -317,7 +317,7 @@ end
 
 function SetCommand(command, value)
 
-	if get_param_handle("mainpower"):get() == 1 then
+	if get_param_handle("DisplaysBooted"):get() == 1 then
 
 		if command == keys.RDSK_1 or command == deviceCommands.RDSK_1 then
 			if RD_EMGY_MODE:get() == 0 then
@@ -986,33 +986,22 @@ end -- end of function
 
 
 function HideFc3Hud()
-	local i = 100
-	for i = 100, 1, -1 do
+	for _ = 1, 100 do
 		dispatch_action(nil, 747)
 	end
-
 end
 
 function ShowFc3Hud()
-	local i = 100
-	for i = 100, 1, -1 do
+	for _ = 100, 1, -1 do
 		dispatch_action(nil, 746)
 	end
-
-
 end
 
 
 
 function ChangeHudColor()
-
-
-
-	local i = 5
-
-	for i = 5, 1, -1 do
+	for _ = 5, 1, -1 do
 		dispatch_action(nil, 156)
-
 	end
 
 	if RedHUD == 0 then

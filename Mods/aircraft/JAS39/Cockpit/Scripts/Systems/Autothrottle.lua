@@ -5,14 +5,6 @@ dofile(LockOn_Options.script_path.."devices.lua")
 dofile(LockOn_Options.script_path.."command_defs.lua")
 dofile(LockOn_Options.script_path.."utils.lua")
 
-local degrees_per_radian = 57.2957795
-local feet_per_meter_per_minute = 196.8
-local meters_to_feet = 3.2808399
-local GALLON_TO_KG = 3.785 * 0.8
-local KG_TO_POUNDS = 2.20462
-local MPS_TO_KNOTS = 1.94384
-local RADIANS_TO_DEGREES = 57.2958
-
 local update_time_step = 0.01 
 make_default_activity(update_time_step)
 
@@ -20,7 +12,13 @@ local sensor_data = get_base_data()
 
 local ThrottleAxis = 2005														-- FC3 Left Throttle Axis
 
-local autothrottle_pid = PID(5, 0.02, 0.1, -0.85, 1.0, 1)   					-- Create the PID controller ( Kp, Ki, Kd, umin, umax, uscale )
+--local autothrottle_pid = PID(5, 0.02, 0.1, -0.71, 1.0, 1)   					-- Create the PID controller ( Kp, Ki, Kd, umin, umax, uscale )
+
+local AT_P = get_param_handle("AT_PID_Kp")
+local AT_I = get_param_handle("AT_PID_Ki")
+local AT_D = get_param_handle("AT_PID_Kd")
+--min = idle, max = Mil. Hardcoded
+
 
 dev:listen_command(10064)														-- Toggle autothrottle
 dev:listen_command(10065)														-- Toggle AoA 12/14
@@ -36,6 +34,9 @@ local speedHold = -100
 local throttle = 0
 local THROTTLE_INPUT = 1
 local tpos = 0
+
+local AT_Target = get_param_handle("AutoThrottle_Target")
+local AT_Current = get_param_handle("AutoThrottle_Current")
 
 function SetCommand(command,value)
 
@@ -57,9 +58,11 @@ function SetCommand(command,value)
 			AUTOTHROTTLE_STATE = 1
 			tpos = THROTTLE_INPUT
 			speedHold = sensor_data.getTrueAirSpeed()
+			--print_message_to_user(speedHold)
 		elseif AUTOTHROTTLE_STATE == 1 then
 			AUTOTHROTTLE_STATE = 0
 			speedHold = -100
+			AT_Target:set(0)
 		end  
 	end
 
@@ -76,41 +79,41 @@ function SetCommand(command,value)
 function update_autothrottle()													-- Autothrottle function
 	
     if AUTOTHROTTLE_STATE == 1 then
-        tas = -math.sqrt(sensor_data.getTrueAirSpeed())
-        tastarget = -math.sqrt(speedHold)
-        throttle = autothrottle_pid:run( tastarget, tas )
-		dispatch_action(nil, ThrottleAxis, (throttle * 0.999))
+		AT_Target:set(speedHold)
+		AT_Current:set(sensor_data.getTrueAirSpeed())
+		AT_P:set(0.1337)
+		AT_I:set(0.069)
+		AT_D:set(0.0420)
  	end	
 end
 
 function update_autothrottle_aoa12()											-- AoA 12 landing mode function
-	local aoadeg
-    local aoa_target
-	
+
 	if AUTOTHROTTLE_STATE == 1 then	
-		aoadeg = math.deg(sensor_data.getAngleOfAttack())
-        aoa_target = 144  -- (12^2)		
-		throttle = autothrottle_pid:run( aoa_target, aoadeg*aoadeg )
-		dispatch_action(nil, ThrottleAxis, (throttle * 0.999)) 
-		get_param_handle("ATMode"):set(0.5)
+		AT_Target:set(12)
+		AT_Current:set(math.deg(sensor_data.getAngleOfAttack()))
+		AT_P:set(-1)
+		AT_I:set(-0.03)
+		AT_D:set(-1)
 	end	
+
+
+
 end
 
 function update_autothrottle_aoa14()											-- AoA 14 landing mode function
-	local aoadeg
-    local aoa_target
 	
 	if AUTOTHROTTLE_STATE == 1 then	
-		aoadeg = math.deg(sensor_data.getAngleOfAttack())
-        aoa_target = 196  -- (14^2)		
-		throttle = autothrottle_pid:run( aoa_target, aoadeg*aoadeg )
-		dispatch_action(nil, ThrottleAxis, (throttle * 0.999)) 		
-		get_param_handle("ATMode"):set(1)
+		AT_Target:set(14)
+		AT_Current:set(math.deg(sensor_data.getAngleOfAttack()))
+		AT_P:set(-1)
+		AT_I:set(-0.03)
+		AT_D:set(-1)
 	end	
 end
 
 function throttle_axis()
-	dispatch_action(nil, ThrottleAxis, THROTTLE_INPUT)
+	--dispatch_action(nil, ThrottleAxis, THROTTLE_INPUT)
 end			
 
 function throttle_override()
@@ -125,7 +128,7 @@ function update()
 
 --print_message_to_user(THROTTLE_INPUT)
 
-	local ias = sensor_data.getIndicatedAirSpeed()*1.944						-- IAS in kts
+	local ias = sensor_data.getIndicatedAirSpeed() * 1.944						-- IAS in kts
 
 -- ======================== Stationary =====================================
 	if get_param_handle("CURRENT_PHASE_STATIONARY"):get() > 0.0 then	
@@ -213,7 +216,6 @@ function update()
 		end 		
 	end
 	
-	get_param_handle("ATState"):set(AUTOTHROTTLE_STATE)
 end
 
 need_to_be_closed = false

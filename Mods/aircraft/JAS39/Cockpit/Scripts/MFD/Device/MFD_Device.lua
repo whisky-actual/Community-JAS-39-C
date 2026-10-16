@@ -10,6 +10,9 @@ local sensor_data = get_base_data()
 -- Conversions
 local RAD_TO_DEGREE = 57.29577951308233
 
+local Conf_Boot_Seconds = update_time_step
+local Display_Boot_Timer = 0
+
 
 -- adi
 local adi_level_enable = get_param_handle("ADI_LINE_GROUP")
@@ -103,7 +106,26 @@ function post_initialize()
 	elseif birth == "GROUND_COLD" then
 	end
 end
+
+function BootSequence()
+	if get_param_handle("Electric_Main_bus_A_115200VAC"):get() == 1 and get_param_handle("CryptoErased"):get() == 0 then 
+
+		if Display_Boot_Timer < Conf_Boot_Seconds then
+			Display_Boot_Timer = Display_Boot_Timer + update_time_step
+		elseif Display_Boot_Timer >= Conf_Boot_Seconds then
+			Display_Boot_Timer = Conf_Boot_Seconds
+			get_param_handle("DisplaysBooted"):set(1)
+		end
+	else
+		Display_Boot_Timer = 0
+		get_param_handle("DisplaysBooted"):set(0)
+	end
+
+	
+end
+
 function update()
+	BootSequence()
 
 
 	-- ADI====================================================================================================================================

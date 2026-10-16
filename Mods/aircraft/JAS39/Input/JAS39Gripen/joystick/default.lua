@@ -313,12 +313,13 @@ join(res.axisCommands,{
 ---------------------------------------------
 -- Gripen Axes ------------------------------
 ---------------------------------------------
+{action = efm_commands.BRAKE_COMBO_axis,	name = _('Gripen Wheel Brake Both')},
+{action = efm_commands.BRAKE_L_axis,		name = _('Gripen Wheel Brake Left')},
+{action = efm_commands.BRAKE_R_axis,		name = _('Gripen Wheel Brake Right')},
+
 {action = PITCHBW_AXIS,		                 											name = _('Gripen Pitch Axis')}, 		
 {action = ROLLBW_AXIS,		                 											name = _('Gripen Roll Axis')}, 		
-{action = YAWBW_AXIS,		                 											name = _('Gripen Rudder Axis')}, 	
-{action = B_BRAKE,		                     											name = _('Gripen Wheel Brake Both')}, 
-{action = L_BRAKE,		                     											name = _('Gripen Wheel Brake Left')}, 
-{action = R_BRAKE,		                     											name = _('Gripen Wheel Brake Right')},
+{action = YAWBW_AXIS,		                 											name = _('Gripen Rudder Axis')},
 {action = THROTTLE_AXIS,		             											name = _('Gripen Throttle Axis')}, 	
 })
 return res
