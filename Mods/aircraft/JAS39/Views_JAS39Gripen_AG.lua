@@ -6,7 +6,7 @@ ViewSettings = {
 			CameraAngleRestriction = {false, 90.000000, 0.400000},
 			CameraAngleLimits      = {190.000000, -75.000000, 115.000000},                -- head turn = left right, down, up
 			EyePoint               = {-0.05, -0.75, 0.000000},                            -- front/back,up/down,left/right}<-'neck dimension'in meters
-			limits_6DOF            = {x = {-0.05, 0.47}, y = {-0.3, 0.035}, z = {-0.25, 0.25}, roll = 90}, -- Move = back forwards, up down, left right
+			limits_6DOF            = {x = {-95.05,95.47},y ={-95,95.035},z = {-95.25,95.25},roll = 90}, -- Move = back forwards, up down, left right -- {x = {-0.05, 0.47}, y = {-0.3, 0.035}, z = {-0.25, 0.25}, roll = 90}
 			ShoulderSize           = 0.15,                                                -- moves body when azimuth value is more than 90 degrees
 			Allow360rotation       = false
 		}

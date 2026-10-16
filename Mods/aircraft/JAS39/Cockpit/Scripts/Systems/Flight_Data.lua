@@ -18,15 +18,13 @@ local machDecimals = get_param_handle("machDecimals")
 
 local AoA = get_param_handle("AoA")
 
-local altMode = get_param_handle("altMode")
-local altTape = get_param_handle("altTape")
 local txtAlt  = get_param_handle("txtAlt")
 local txtRalt = get_param_handle("txtRalt")
 
 local pitchRad = get_param_handle("pitchRad")
 local rollRad = get_param_handle("rollRad")
 
-local currentPhase = get_param_handle("currentPhase")
+local CURRENT_PHASE = get_param_handle("CURRENT_PHASE")
 
 
 local baseData = get_base_data()
@@ -36,7 +34,7 @@ local MS_TO_KTS = 1.94384449
 local M_TO_FT = 3.28083989501312335958
 
 
-local CAS, selfVelL, selfVelV, selfVelH, GS, mach
+local CAS, selfVelL, selfVelV, selfVelH, GS, mach, machDec
 local spdUpdateFreq = 0.3
 
 local baroAlt, rAlt
@@ -61,7 +59,7 @@ function update()
 
 	if spdUpdateFreq >= 0.3 then
 		if GS > 5 or CAS > 5 then
-			if currentPhase:get() <= 4 or currentPhase:get() == 10 then
+			if CURRENT_PHASE:get() <= 4 or CURRENT_PHASE:get() == 10 then
 				if CAS > 80 then
 					txtCAS:set(CAS)
 				else
@@ -101,7 +99,7 @@ function update()
 
 
 
-	if (GS >= 40 and currentPhase:get() <= 4) or CAS >= 40 then
+	if (GS >= 40 and CURRENT_PHASE:get() <= 4) or CAS >= 40 then
 		AoA:set(math.deg(baseData.getAngleOfAttack()))
 	else
 		AoA:set(0)
@@ -122,14 +120,10 @@ function update()
 	end
 
 
+	get_param_handle("baroAlt"):set(baroAlt)
+	get_param_handle("radarAlt"):set(rAlt)
 	txtAlt:set(math.floor((baroAlt + 5) / 10) * 10)
 	txtRalt:set(math.floor((rAlt + 5) / 10) * 10)
-
-	if altMode:get() == 1 then
-		altTape:set(baroAlt)
-	elseif altMode:get() == 2 then
-		altTape:set(rAlt)
-	end
 end
 
 function SetCommand(command, value)

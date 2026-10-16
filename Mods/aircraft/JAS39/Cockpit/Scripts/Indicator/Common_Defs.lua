@@ -105,6 +105,7 @@ function setCommonProperties(
 	end
 	obj.h_clip_relation = hClip or hcr.cmp
 	obj.level           = level
+	obj.isdraw = true
 	obj.use_mipfilter   = true
 	if collimationType then
 		obj.collimated     = true

@@ -40,6 +40,6 @@ UCPBrightness.width           = 1.4
 UCPBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
 UCPBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
 UCPBrightness.level           = MFD_DEFAULT_LEVEL
-UCPBrightness.element_params  = {"mainpower", "UCPBrightness"}
+UCPBrightness.element_params  = {"Electric_Main_bus_A_115200VAC", "UCPBrightness"}
 UCPBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
 Add(UCPBrightness)

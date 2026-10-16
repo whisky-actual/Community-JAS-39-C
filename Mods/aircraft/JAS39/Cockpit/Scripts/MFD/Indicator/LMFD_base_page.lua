@@ -45,6 +45,6 @@ LDBrightness.width           = 1
 LDBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
 LDBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
 LDBrightness.level           = MFD_DEFAULT_LEVEL
-LDBrightness.element_params  = {"mainpower", "LDBrightness"}
+LDBrightness.element_params  = {"DisplaysBooted", "LDBrightness"}
 LDBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
 Add(LDBrightness)

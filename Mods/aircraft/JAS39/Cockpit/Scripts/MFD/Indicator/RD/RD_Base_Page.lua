@@ -9,12 +9,12 @@ base = "RD_Base"
 
 
 
-addRDBox(nil, nil, nil, nil, hcr.rw, lvls.noclip, {"mainpower"}, {{ctrl.compareNum, 0, 1}}, width / halfWidth, height / halfWidth, materials["green"], true)  -- Mask for clipping.
-addRDBox(nil, nil, nil, nil, hcr.incIf, lvls.noclip, {"mainpower"}, {{ctrl.compareNum, 0, 1}}, width / halfWidth, height / halfWidth, materials["MFDBGGray"]) -- Mask for clipping and background.
+addRDBox(nil, nil, nil, nil, hcr.rw, lvls.noclip, {"DisplaysBooted"}, {{ctrl.compareNum, 0, 1}}, width / halfWidth, height / halfWidth, materials["green"], true)  -- Mask for clipping.
+addRDBox(nil, nil, nil, nil, hcr.incIf, lvls.noclip, {"DisplaysBooted"}, {{ctrl.compareNum, 0, 1}}, width / halfWidth, height / halfWidth, materials["MFDBGGray"]) -- Mask for clipping and background.
 
 
 
-addRDSimple(base, nil, nil, nil, nil, nil, {"mainpower"}, {{ctrl.compareNum, 0, 1}})
+addRDSimple(base, nil, nil, nil, nil, nil, {"DisplaysBooted"}, {{ctrl.compareNum, 0, 1}})
 
 
 

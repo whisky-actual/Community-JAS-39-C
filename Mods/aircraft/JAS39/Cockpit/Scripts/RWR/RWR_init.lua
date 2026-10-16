@@ -167,6 +167,7 @@ local baseData = get_base_data()
 
 
 function post_initialize()
+	RWRPower:set(1)
 	-- -- Params for test contact:
 	-- -- Standard from avSimpleRWR:
 	-- local testAz          = get_param_handle(testContactSTR .. "AZIMUTH")

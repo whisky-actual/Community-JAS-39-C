@@ -43,6 +43,6 @@ LCPBrightness.width           = 1.4
 LCPBrightness.material        = MakeMaterial(nil, {0, 0, 0, 255})
 LCPBrightness.h_clip_relation = h_clip_relations.REWRITE_LEVEL
 LCPBrightness.level           = LCP_DEFAULT_LEVEL
-LCPBrightness.element_params  = {"mainpower", "LCPBrightness"}
+LCPBrightness.element_params  = {"DisplaysBooted", "LCPBrightness"}
 LCPBrightness.controllers     = {{"parameter_compare_with_number", 0, 1}, {"opacity_using_parameter", 1}}
 Add(LCPBrightness)

@@ -74,12 +74,12 @@ elements["PNT_952"] = default_2_position_tumb(_("Anti collision Lights (On/Off)"
 elements["PNT_980"] = springloaded_3_pos_tumb(_("Seat (Down/Up"),	devices.CANOPY,	deviceCommands.SeatUpDown,  980,false,JAS39CLICK2,10)
 elements["PNT_1065"] = default_3_position_tumb(_("Landing and Taxi Lights (Land/Off/Taxi"),	devices.LIGHTS, deviceCommands.LandingTaxiLights, 1065,nil,true,JAS39CLICK2)
 elements["PNT_1011"] = default_2_position_tumb(_("Fuel Switch Cover (Open/Close)"),	devices.ENGINE,	deviceCommands.FuelCover, 	1011,JAS39KNOB1)
-elements["PNT_1010"] = default_2_position_tumb(_("Fuel Switch (On/Off)"),	devices.ENGINE,	deviceCommands.Fuel, 	1010,JAS39CLICK2)
+elements["PNT_1010"] = default_2_position_tumb(_("Fuel Switch (On/Off)"),	nil,	efm_commands.FUEL_switch, 	1010,JAS39CLICK2)
 -------------------------------------------------------
 --Left Auxiliary Console
 -------------------------------------------------------
 elements["PNT_1003"] = default_2_position_tumb(_("Landing Gear (Up/Down)"),	devices.GEAR,	deviceCommands.LandingGearLever,	1003,JAS39HEAVYSWITCH,1.5)
-elements["PNT_1060"] = springloaded_3_pos_tumb(_("Start (On/Off)"),	devices.ENGINE,	deviceCommands.Start, 	1060, false, JAS39KNOB1,5)
+elements["PNT_1060"] = springloaded_3_pos_tumb(_("Start (On/Off)"),	nil,	efm_commands.START_ENGINE_switch, 	1060, false, JAS39KNOB1,5)
 elements["PNT_1080"] = default_2_position_tumb(_("Emergency Jettison Cover (Open/Close)"),	devices.WEAPONS,	deviceCommands.EmergencyJettisonCover, 	1080,JAS39KNOB1)
 elements["PNT_1081"] = default_button(_("Emergency Jettison"),	devices.WEAPONS,	deviceCommands.EmergencyJettison,	1081,1,{0,1},JAS39CLICK1)
 -------------------------------------------------------
@@ -277,8 +277,8 @@ elements["PNT_946"]	= default_axis_limited(_("Flood Lights"),	devices.LIGHTS, de
 elements["PNT_945"]	= default_axis_limited(_("Backlights"),	devices.LIGHTS, deviceCommands.BackLight, 945)
 elements["PNT_944"]	= default_axis_limited(_("Indicator Lights"),	devices.LIGHTS, deviceCommands.IndicatorLight, 944)
 elements["PNT_1013"] = default_3_position_tumb(_("MASS (Safe/Stby/Live)"),	devices.WEAPON_SYSTEM,	deviceCommands.MASS, 	1013,nil,true,JAS39KNOB2)
-elements["PNT_904"] = default_2_position_tumb(_("Main Power (On/Off)"),	devices.ENGINE,	deviceCommands.Main, 	904,JAS39CLICK2)
-elements["PNT_1061"] = default_2_position_tumb(_("APU (On/Off)"),	devices.ENGINE,	deviceCommands.APU, 	1061,JAS39CLICK2)
+elements["PNT_904"] = default_2_position_tumb(_("Main Power (On/Off)"),	nil,	efm_commands.MAIN_PWR_switch, 	904,JAS39CLICK2)
+elements["PNT_1061"] = default_2_position_tumb(_("APU (On/Off)"),	nil,	efm_commands.APU_ON_switch, 	1061,JAS39CLICK2)
 elements["PNT_1005"] = default_2_position_tumb("Canopy (Open/Close)", devices.CANOPY, deviceCommands.CanopyLever, 1005,JAS39HEAVYSWITCH, 1.5)
 elements["PNT_1018"] = default_2_position_tumb(_("Tank Jettison Cover (Open/Close)"),	devices.WEAPONS,	deviceCommands.TankJettisonCover, 	1018,JAS39KNOB1)
 elements["PNT_1016"] = default_button(_("Tank Jettison"),	devices.WEAPONS,	deviceCommands.TankJettison,	1016,1,{0,1},JAS39CLICK1)
@@ -290,13 +290,30 @@ elements["PNT_953"] = default_2_position_tumb(_("DTU (Insert/Eject)"),	devices.E
 -------------------------------------------------------
 --HOTAS
 -------------------------------------------------------
-elements["PNT_571"] = default_2_position_tumb(_("ThrottleStop (On/Off)"),	devices.ENGINE,	deviceCommands.ThrottleStop, 	571,JAS39KNOB2,3.0)
-elements["PNT_1075"] = default_2_position_tumb(_("Trigger Safe (Safe/Armed)"),	devices.WEAPONS,	deviceCommands.TriggerSafe, 	1075,JAS39MFD1)
+elements["PNT_571"] = default_2_position_tumb(_("ThrottleStop (On/Off)"),	nil,	efm_commands.Throttle_latch, 	571,JAS39KNOB2,3.0)
+elements["PNT_1075"] = default_2_position_tumb(_("Trigger Safe (Safe/Armed)"),	devices.WEAPON_SYSTEM,	deviceCommands.triggerSafe, 	1075,JAS39MFD1)
 -------------------------------------------------------
 --Ejection Seat
 -------------------------------------------------------
 elements["PNT_973"] = default_axis_limited(_("Ejection handle"),  devices.CANOPY, deviceCommands.SeatEject,  973)
 elements["PNT_972"] = default_2_position_tumb(_("Ejection Seat (Safe/Arm)"),	devices.CANOPY,	deviceCommands.SeatArm,	972,JAS39HEAVYSWITCH,1.5)
+
+
+
+
+
+
+elements["PNT_511"] = default_2_position_tumb(_("FCS (On/Off)"),	nil,	efm_commands.FCS_PWR_switch, 	511,JAS39CLICK2)
+elements["PNT_539"] = default_2_position_tumb(_("PEACE / WAR"),	nil,	efm_commands.PEACE_WAR_switch, 	539,JAS39CLICK2)
+
+
+
+
+
+
+
+
+
 -------------------------------------------------------
 --FOR REFERENCE 
 -------------------------------------------------------

@@ -175,6 +175,10 @@ function update()
 	
 	end
 
+
+
+	get_param_handle("INTEGER_FUELPCT"):set(math.floor(CURRENT_FUEL_AMOUNT_PCT))
+
 end
 
 need_to_be_closed = 0

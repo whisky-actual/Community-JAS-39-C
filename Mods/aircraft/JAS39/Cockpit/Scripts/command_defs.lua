@@ -659,6 +659,8 @@ keys = {
 	S10SpanScaleDown = __custom_counter(),
 
 	-- Stick:
+	-- stickS3AimingMode = __custom_counter(),
+
 	stickS5Up = __custom_counter(),
 	stickS5Down = __custom_counter(),
 	stickS5Left = __custom_counter(),
@@ -1029,4 +1031,45 @@ deviceCommands =
 	-------------------------------------------------------
 	-- Others
 	-------------------------------------------------------
+}
+
+
+
+efm_commands =
+{
+	CHOCKS_LADDER_PLACE = 3896,
+	CHOCKS_LADDER_REMOVE = 3897,
+	GROUND_PWR_CONNECT = 3898,
+	GROUND_PWR_DISCONNECT = 3899,
+	
+	PEACE_WAR_switch = 3900,
+
+	MAIN_PWR_switch = 3901,
+	FCS_PWR_switch = 3902,
+	APU_ON_switch = 3903,
+	THRM_BATT_switch = 3904,
+	START_ENGINE_switch = 3905,
+	FUEL_switch = 3906,
+	Throttle_latch = 3907,
+
+	Canopy_lever = 3908,
+	Gear_lever = 3909,
+	AAR_PROBE_switch = 3910,
+	EMGY_Throttle_axis = 3911,
+	ANTI_ICE_switch = 3912,
+	ENG_PERF_switch = 3913,
+	EMGY_GEAR_switch = 3914,
+	APU_EMGY_switch = 3915,
+	ENG_CRTL_switch = 3916,
+
+	BRAKE_L_axis = 3917,
+	BRAKE_R_axis = 3918,
+	BRAKE_COMBO_axis = 3919,
+
+	AUTOPILOT_ALT = 3920,
+	AUTOPILOT_ATT = 3921, 
+	AUTOPILOT_MAN = 3922, 
+	AUTOPILOT_RESET = 3923, 
+	AUTOPILOT_ALT_S3 = 3924,
+	FCS_AIMINGMODE = 3925,
 }

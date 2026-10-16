@@ -7,7 +7,7 @@ get_param_handle("ADIWPLL"):set(1)
 TAN_LD_MASTER 			= CreateElement "ceSimple"
 TAN_LD_MASTER.init_pos	= {0,0}
 TAN_LD_MASTER.name		= create_guid_string()
-TAN_LD_MASTER.element_params = {"LD_EMGY_MODE", "mainpower"}
+TAN_LD_MASTER.element_params = {"LD_EMGY_MODE", "DisplaysBooted"}
 TAN_LD_MASTER.controllers    = {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_LD_MASTER)
 
@@ -73,7 +73,7 @@ local adi_Attitude				= create_mfd_VELVEC(ADI_VEELOCITYVECTOR, 20, 55, 354, 285,
 adi_Attitude.name				= create_guid_string()
 adi_Attitude.init_pos			= {0, -0.77}
 adi_Attitude.parent_element		= GENERAL_PAGE.name
-adi_Attitude.element_params 	= {"VELVEC_HUD_Y","VELVEC_HUD_X"}
+adi_Attitude.element_params 	= {"velVecHUDY","velVecHUDX"}
 adi_Attitude.controllers    	= { {"move_up_down_using_parameter",0, 0.036}, {"move_left_right_using_parameter",1, 0.036}}
 AddElement(adi_Attitude)
 	
@@ -180,7 +180,7 @@ local G_indicator = add_text_param(0.04, -0.04, "CUR_G", "%0.1f", alfa_g_box, mf
 local ALFA_indicator = add_text_param(0, 0.04, "AoA", "%0.0f", alfa_g_box, mfd_strdefs_digit, "Gripen_Font_black")
 
 -- Speedometer
-local Speedometer = MakeDial(-0.61, -0.5, 0.26, 0.1, 180, 540, 0.0075, true, 36, "mainpower", "SPEEDOMETER_IAS", 360, materials["BBLACK"], GENERAL_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))
+local Speedometer = MakeDial(-0.61, -0.5, 0.26, 0.1, 180, 540, 0.0075, true, 36, "DisplaysBooted", "SPEEDOMETER_IAS", 360, materials["BBLACK"], GENERAL_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))
 
 for i = -340, -40, 40 do
 	if i == -60 then
@@ -594,7 +594,7 @@ ENGINE_PAGE.controllers    = {{"parameter_compare_with_number",0, 3}}
 AddElement(ENGINE_PAGE)
 
 -- Engine RPM
-RPMDial = MakeDial(-.53, -.835, .25, 0, 0, 270, .008, false, 36, "mainpower", "RPM_NEEDLE", 270, materials["BBLACK"], ENGINE_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175})) -- 0, 1.3, 1.3, 200
+RPMDial = MakeDial(-.53, -.835, .25, 0, 0, 270, .008, false, 36, "DisplaysBooted", "RPM_NEEDLE", 270, materials["BBLACK"], ENGINE_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175})) -- 0, 1.3, 1.3, 200
 
 for i = 0, 240, 30 do
 	local RPMDialLines          = CreateElement "ceSimpleLineObject"
@@ -643,7 +643,7 @@ digitalRPM100.init_rot       = {180}
 digitalRPM100.element_params = {"RPM_PARAM"}
 digitalRPM100.controllers    = {{"parameter_compare_with_number", 0, 1}}
 -- Engine temp
-TGTDial = MakeDial(.15, -.835, .25, 0, 0, 270, .008, false, 36, "mainpower", "TGT_NEEDLE", 270, materials["BBLACK"], ENGINE_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))
+TGTDial = MakeDial(.15, -.835, .25, 0, 0, 270, .008, false, 36, "DisplaysBooted", "TGT_NEEDLE", 270, materials["BBLACK"], ENGINE_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))
 
 for i = 120, 240, 60 do
 	TGTDialLines                = CreateElement "ceSimpleLineObject"
@@ -911,7 +911,7 @@ HORIZON_LINE_FPM			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1504, 1717, 1709 , 181
 HORIZON_LINE_FPM.name			= create_guid_string()
 HORIZON_LINE_FPM.init_pos		= {0, 0.043}
 HORIZON_LINE_FPM.parent_element	= HORIZON_LINE.name
-HORIZON_LINE_FPM.element_params  = {"ADI_ROLL","VELVEC_HUD_Y","VELVEC_HUD_X","ADI_PITCH"}
+HORIZON_LINE_FPM.element_params  = {"ADI_ROLL","velVecHUDY","velVecHUDX","ADI_PITCH"}
 HORIZON_LINE_FPM.controllers	 = {{"rotate_using_parameter" ,0, -1},{"move_up_down_using_parameter",1, 0.036}, {"move_left_right_using_parameter",2, 0.036},{"move_up_down_using_parameter",3, -0.036} }
 AddElement3(HORIZON_LINE_FPM)
 
@@ -919,7 +919,7 @@ GROUNDCOLLISION			= create_mfd_tex(CENTER_DISPLAY_COLOR, 1380, 145, 1680 , 298, 
 GROUNDCOLLISION.name			= create_guid_string()
 GROUNDCOLLISION.init_pos		= {0, 0.023}
 GROUNDCOLLISION.parent_element	= HORIZON_LINE_FPM.name
-GROUNDCOLLISION.element_params  = {"PULLUPQUE", "rollRad", "VELVEC_HUD_Y","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
+GROUNDCOLLISION.element_params  = {"PULLUPQUE", "rollRad", "velVecHUDY","CURRENT_PHASE_STATIONARY","CURRENT_PHASE_PARKED","CURRENT_PHASE_TAXI",
 												"CURRENT_PHASE_TGR","CURRENT_PHASE_ROT","CURRENT_PHASE_TD","CURRENT_PHASE_LR","CURRENT_PHASE_PAL", "PULLMORE"}
 GROUNDCOLLISION.controllers	 	= {{"parameter_in_range",0, -10000,0},{"rotate_using_parameter" ,1, 1.00},
 								  {"move_up_down_using_parameter",2, 0.1} ,{"parameter_compare_with_number",3, 0},{"parameter_compare_with_number",4, 0},

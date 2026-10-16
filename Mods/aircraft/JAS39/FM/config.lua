@@ -18,7 +18,7 @@ local mainGear = {
 	amortizer_back_damper_force_factor		= 20000,
 	allowable_hard_contact_length			= 0.1,
 
-	anti_skid_installed = true,
+	anti_skid_installed = false,
 
 	crossover_locked_wheel_protection			= true,
 	crossover_locked_wheel_protection_speed_min	= 18.0,
@@ -26,25 +26,25 @@ local mainGear = {
 	anti_skid_gain								= 400.0,
 
 	wheel_radius					= 0.3245, 
-	wheel_static_friction_factor	= 0.42,
-	wheel_glide_friction_factor		= 0.8,
-	wheel_side_friction_factor		= 0.95,
-	wheel_roll_friction_factor		= 0.067,
+	wheel_static_friction_factor	= 0.75,
+	wheel_glide_friction_factor		= 0.6,
+	wheel_side_friction_factor		= 0.75,
+	wheel_roll_friction_factor		= 0.025,
 	wheel_damage_force_factor		= 200.0, --450.0,
-	wheel_brake_moment_max			= 35000.0,
+	wheel_brake_moment_max			= 7000,
 	wheel_kz_factor					= 0.52,
-	noise_k							= 0.0,
+	noise_k							= 0.05,
 	wheel_damage_speedX				= 270, --115,
 	wheel_damage_delta_speedX		= 22.5, --11.5,
 }
 
 
 FM = {
-center_of_mass		= {0.0  ,  0.0,	   0},--x,y,z  // Model has origin at actual COM
+center_of_mass		= {-0.4617  ,  0,	  0.0}, -- x,y,z  
 
 
 
-moment_of_inertia 	= {8131/0.73  ,41767/0.73 ,49019/0.73 ,830/0.73},--Ix,Iy,Iz,Ixy = Roll, yaw pitch. Values from VSP but maybe too low (esp roll) testing conversion from slug/sqfeet to kg/m2
+moment_of_inertia 	= {8131/0.73  ,41767/0.73 ,49019/0.73 ,-830/0.73},--Ix,Iy,Iz,Ixy = Roll, yaw pitch. Values from VSP but maybe too low (esp roll) testing conversion from slug/sqfeet to kg/m2
 
 
 
@@ -70,17 +70,17 @@ suspension 			= {
 			amortizer_direct_damper_force_factor		= 15000,
 			amortizer_back_damper_force_factor			= 15000,
 			
-			wheel_brake_moment_max			= 8000.0,
+			wheel_brake_moment_max			= 12000.0,
 			anti_skid_installed							= true,
 
 			wheel_radius								= 0.1845,	
-			wheel_static_friction_factor				= 0.35,
-			wheel_side_friction_factor					= 1.1, --0.45,
-			wheel_roll_friction_factor					= 0.06,
-			wheel_glide_friction_factor					= 0.58,
+			wheel_static_friction_factor				= 0.75,
+			wheel_side_friction_factor					= 0.75 * 2, --0.45,
+			wheel_roll_friction_factor					= 0.025,
+			wheel_glide_friction_factor					= 0.6,
 			wheel_damage_force_factor					= 450.0, --450.0,
 			wheel_kz_factor								= 0.3,
-			noise_k										= 0,
+			noise_k										= 0.1,
 			wheel_damage_speedX							= 270.0, --115,
 			wheel_damage_delta_speedX					= 22.5, --11.5,
 
@@ -168,27 +168,5 @@ suspension 			= {
 	}, -- gears suspension
 	
 disable_built_in_oxygen_system	= true,
---[[ ------------------------------------------------------------- ]]--
--- END -- this part of the file is not intended for an end-user editing
 
-	-- FFB force multiplier
-	ffbPitchK	= 0.65,
-	ffbRollK	= 0.65,
-
-	-- view shake amplitude
-	minor_shake_ampl = 0.07,
-	major_shake_ampl = 0.25,
-
-
--- view shake amplitude
-cs_shakeAoA0 				=   10, -- shake0 start at AoA 17° NEW//NEW 13° // NEW 10
-cs_shakeAoA1 				= 	14, -- shake1 start at AoA 19° NEW// NEW 16° // NEW 14
-cs_shakeNy0 				= 	5.5, -- shake0 start bei 6,5 Gs NEW//NEW 5,5 Gs
-cs_shakeNy1 				= 	6.5, -- shake1 start at 7,5 Gs NEW//NEW 6,5 Gs
-cs_shakeAmpl 				=   0.7, -- shake amplitude NEW // NEW 0.7
-cs_shakeFreq 				= 	3,--5, -- shake frequency NEW // NEW 5
-
--- debug
-debugLine = "{M}:%1.3f {IAS}:%4.1f {AoA}:%2.1f {ny}:%2.1f {nx}:%1.2f {AoS}:%2.1f {mass}:%2.1f {Fy}:%2.1f {Fx}:%2.1f {wx}:%.1f {wy}:%.1f {wz}:%.1f {Vy}:%2.1f {dPsi}:%2.1f",
-record_enabled = false,
 }

@@ -28,9 +28,6 @@ dev:listen_command(deviceCommands.WeaponJettison)
 dev:listen_command(deviceCommands.WeaponJettisonCover)
 dev:listen_command(deviceCommands.TankJettison)
 dev:listen_command(deviceCommands.TankJettisonCover)
-dev:listen_command(deviceCommands.TriggerSafe)
-dev:listen_command(keys.triggerSafe)
-dev:listen_command(keys.triggerSafeHold)
 dev:listen_command(keys.CannonMode)
 dev:listen_command(deviceCommands.EmergencyJettisonCover)
 dev:listen_command(deviceCommands.EmergencyJettison)
@@ -56,9 +53,6 @@ local GripenType = get_aircraft_type()
 
 local MASSParam = get_param_handle("MASSParam")
 MASSParam:set(MASTER_ARM)
-
-local TRIGGER_SAFE_PARAM = get_param_handle("triggerSafe")
-TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
 
 function SetCommand(command, value) -- Listen for commands
 	if command == keys.CannonMode then
@@ -187,31 +181,7 @@ function SetCommand(command, value) -- Listen for commands
 		end
 	end
 
-	if command == deviceCommands.TriggerSafe then
-		if value == 1 then
-			TRIGGER_ARM = 1
-			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
-		elseif value == 0 then
-			TRIGGER_ARM = 0
-			TRIGGER_SAFE_PARAM:set(TRIGGER_ARM)
-		end
-	end
-
-	if command == keys.triggerSafe then
-		if TRIGGER_ARM == 0 then
-			dev:performClickableAction(deviceCommands.TriggerSafe, 1, true)
-		elseif TRIGGER_ARM == 1 then
-			dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)
-		end
-	end
-
-	if command == keys.triggerSafeHold then
-		if value == 1 then
-			dev:performClickableAction(deviceCommands.TriggerSafe, 1, true)
-		elseif value == 0 then
-			dev:performClickableAction(deviceCommands.TriggerSafe, 0, true)
-		end
-	end
+	
 
 end
 
