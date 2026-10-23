@@ -13,7 +13,7 @@ MaxThreats = 20
 MFD_RWR                = CreateElement "ceSimple"
 MFD_RWR.init_pos       = {.075, .575}
 MFD_RWR.name           = create_guid_string()
-MFD_RWR.element_params = {"LD_UPPER", "RWRPower", "mainpower", "LD_EMGY_MODE"}
+MFD_RWR.element_params = {"LD_UPPER", "RWRPower", "DisplaysBooted", "LD_EMGY_MODE"}
 MFD_RWR.controllers    = {{"parameter_compare_with_number", 0, 2}, {"parameter_compare_with_number", 1, 1}, {"parameter_compare_with_number", 2, 1}, {"parameter_compare_with_number", 3, 0}}
 MFD_RWR.material       = MakeMaterial(nil, {0, 220, 0, 255})
 MFD_RWR.isvisible      = true
@@ -81,7 +81,7 @@ RWRCompassBase                = CreateElement "ceSimple"
 RWRCompassBase.init_rot       = {90, 0}
 RWRCompassBase.name           = create_guid_string()
 RWRCompassBase.parent_element = MFD_RWR.name
-RWRCompassBase.element_params = {"HEADING_HUD"}
+RWRCompassBase.element_params = {"HEADING"}
 RWRCompassBase.controllers    = {{"rotate_using_parameter", 0, math.rad(1)}}
 RWRCompassBase.isvisible      = false
 AddRWRElement(RWRCompassBase)

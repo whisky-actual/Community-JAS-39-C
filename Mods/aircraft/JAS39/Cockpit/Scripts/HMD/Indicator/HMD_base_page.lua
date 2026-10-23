@@ -13,7 +13,7 @@ hologramFilm.controllers    = nil
 addHMDCircle(nil, nil, {0, 0, rot}, nil, hcr.incIf, lvl.noclip, nil, nil, 310, 0, 360, 36, materials.HUDMask, true)
 
 
-addHMDSimple(base, nil, {0, 0, rot}, nil, nil, nil, {"mainpower", "HMDState"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 1}})
+addHMDSimple(base, nil, {0, 0, rot}, nil, nil, nil, {"DisplaysBooted", "HMDState"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 1}})
 
 
 

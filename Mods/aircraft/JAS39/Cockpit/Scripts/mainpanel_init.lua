@@ -249,7 +249,7 @@ for i = 1, 30 do
     GreenLamp.arg_number            	= Stupidgreenlamps[i]
     GreenLamp.input                 	= {-1, 0}
     GreenLamp.output                	= {-1, 0}
-    GreenLamp.parameter_name        	= "littlegreendots" -- Not sure why mainpower does not update the lights at spawn but this does...
+    GreenLamp.parameter_name        	= "littlegreendots" -- Not sure why MAINPOWER does not update the lights at spawn but this does...
 end
 
 need_to_be_closed = true

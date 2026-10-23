@@ -1196,6 +1196,7 @@ function update()
 
 
 
+		get_param_handle("RADAR_STT_RANGE_NM"):set(rawRange * M_TO_NMI)
 		local bsAzLimit = perfomance.scan_volume_azimuth / 2
 
 		local bsMaxRange = RDRFullRange:get()

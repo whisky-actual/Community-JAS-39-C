@@ -7,7 +7,7 @@ dofile(LockOn_Options.script_path .. "utils.lua")
 TAN_RD_MASTER                = CreateElement "ceSimple"
 TAN_RD_MASTER.init_pos       = {0, 0}
 TAN_RD_MASTER.name           = create_guid_string()
-TAN_RD_MASTER.element_params = {"pruttRD_EMGY_MODE", "mainpower"}
+TAN_RD_MASTER.element_params = {"pruttRD_EMGY_MODE", "DisplaysBooted"}
 TAN_RD_MASTER.controllers    = {{"parameter_compare_with_number", 0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_RD_MASTER)
 
@@ -30,7 +30,7 @@ GRAY_Background.isvisible       = true
 -- GRAY_Background.controllers    	= {{"opacity_using_parameter", 0}}
 Add(GRAY_Background)
 
--- TAN_Background_Mask.element_params 		= {"mainpower"}
+-- TAN_Background_Mask.element_params 		= {"MAINPOWER"}
 -- TAN_Background_Mask.controllers    		= {{"Electric_Main_bus_A_115200VAC",0, 1}}
 
 
@@ -1045,7 +1045,7 @@ local HORIZON_LINE_FPM          = create_mfd_tex(CENTER_DISPLAY_COLOR, 1504, 171
 HORIZON_LINE_FPM.name           = create_guid_string()
 HORIZON_LINE_FPM.init_pos       = {0, 0.043}
 HORIZON_LINE_FPM.parent_element = HORIZON_LINE.name
-HORIZON_LINE_FPM.element_params = {"ADI_ROLL", "VELVEC_HUD_Y", "VELVEC_HUD_X", "ADI_PITCH"}
+HORIZON_LINE_FPM.element_params = {"ADI_ROLL", "velVecHUDY", "velVecHUDX", "ADI_PITCH"}
 HORIZON_LINE_FPM.controllers    = {{"rotate_using_parameter", 0, -1}, {"move_up_down_using_parameter", 1, 0.036}, {"move_left_right_using_parameter", 2, 0.036}, {"move_up_down_using_parameter", 3, -0.036}}
 AddElement(HORIZON_LINE_FPM)
 
@@ -1053,7 +1053,7 @@ local GROUNDCOLLISION          = create_mfd_tex(CENTER_DISPLAY_COLOR, 1380, 145,
 GROUNDCOLLISION.name           = create_guid_string()
 GROUNDCOLLISION.init_pos       = {0, 0.023}
 GROUNDCOLLISION.parent_element = HORIZON_LINE_FPM.name
-GROUNDCOLLISION.element_params = {"PULLUPQUE", "ROLL_HUD", "VELVEC_HUD_Y", "CURRENT_PHASE_STATIONARY", "CURRENT_PHASE_PARKED", "CURRENT_PHASE_TAXI",
+GROUNDCOLLISION.element_params = {"PULLUPQUE", "rollRad", "velVecHUDY", "CURRENT_PHASE_STATIONARY", "CURRENT_PHASE_PARKED", "CURRENT_PHASE_TAXI",
 	"CURRENT_PHASE_TGR", "CURRENT_PHASE_ROT", "CURRENT_PHASE_TD", "CURRENT_PHASE_LR", "CURRENT_PHASE_PAL", "PULLMORE"}
 GROUNDCOLLISION.controllers    = {{"parameter_in_range", 0, -10000, 0}, {"rotate_using_parameter", 1, 1.00},
 	{"move_up_down_using_parameter", 2, 0.1}, {"parameter_compare_with_number", 3, 0}, {"parameter_compare_with_number", 4, 0},

@@ -87,7 +87,7 @@ function update()
 
 
 
-	get_param_handle("HMDButtonLight"):set((get_param_handle("mainpower"):get() == 1 and HMDState:get() == 1) and 1 or 0)
+	get_param_handle("HMDButtonLight"):set((get_param_handle("DisplaysBooted"):get() == 1 and HMDState:get() == 1) and 1 or 0)
 
 
 

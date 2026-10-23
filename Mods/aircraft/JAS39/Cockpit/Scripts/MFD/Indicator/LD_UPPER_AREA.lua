@@ -17,7 +17,7 @@ local FONT_SIZE = 0.64
 TAN_LD_MASTER 					= CreateElement "ceSimple"
 TAN_LD_MASTER.init_pos			= {0,0}
 TAN_LD_MASTER.name				= create_guid_string()
-TAN_LD_MASTER.element_params 	= {"LD_EMGY_MODE", "mainpower"}
+TAN_LD_MASTER.element_params 	= {"LD_EMGY_MODE", "DisplaysBooted"}
 TAN_LD_MASTER.controllers    	= {{"parameter_compare_with_number",0, 0}, {"parameter_compare_with_number", 1, 1}}
 AddElement(TAN_LD_MASTER)
 
@@ -84,7 +84,7 @@ AddElement(GEN_PAGE)
 
 
 -- Speedometer
-local Speedometer = MakeDial(-0.55, 0.96, 0.26 * 1.25, 0.1 * 1.25, 180, 540, .0075, true, 36, "mainpower", "SPEEDOMETER_IAS", 360, materials["BBLACK"], GEN_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))           -- 0, 1.3, 1.3, 200
+local Speedometer = MakeDial(-0.55, 0.96, 0.26 * 1.25, 0.1 * 1.25, 180, 540, .0075, true, 36, "DisplaysBooted", "SPEEDOMETER_IAS", 360, materials["BBLACK"], GEN_PAGE.name, MakeMaterial(nil, {5 * 9, 7 * 9, 11 * 9, 175}))           -- 0, 1.3, 1.3, 200
 
 for i = -340, -40, 40 do
 	if i == -60 then
@@ -259,7 +259,7 @@ local adi_Attitude			= create_mfd_VELVEC(ADI_VEELOCITYVECTOR, 20, 55, 354, 285,1
 adi_Attitude.name			= create_guid_string()
 adi_Attitude.init_pos		= {0, 0.270}
 adi_Attitude.parent_element	= GEN_PAGE.name
-adi_Attitude.element_params 	= {"VELVEC_HUD_Y","VELVEC_HUD_X"}
+adi_Attitude.element_params 	= {"velVecHUDY","velVecHUDX"}
 adi_Attitude.controllers    	= { {"move_up_down_using_parameter",0, 0.036}, {"move_left_right_using_parameter",1, 0.036}}
 AddElement(adi_Attitude)
 	

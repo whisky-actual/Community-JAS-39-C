@@ -13,6 +13,10 @@ make_default_activity(updateTimeStep)
 local WS = GetSelf()
 
 WS:listen_command(keys.trigger)
+WS:listen_command(deviceCommands.triggerSafe)
+WS:listen_command(keys.triggerSafe)
+WS:listen_command(keys.triggerSafeHold)
+WS:listen_command(keys.stickS3AimingMode)
 WS:listen_command(keys.stickS5Up)
 WS:listen_command(keys.stickS5Down)
 WS:listen_command(keys.stickS5Left)
@@ -25,8 +29,10 @@ WS:listen_command(keys.MASSSafe)
 
 local ammoCount = get_param_handle("ammoCount")
 local selectedPylon = get_param_handle("selectedPylon")
+local selectedPylonName = get_param_handle("selectedPylonName")
 
 local MASSParam = get_param_handle("MASSParam")
+local triggerSafe = get_param_handle("triggerSafe")
 
 local primaryMode = get_param_handle("primaryMode") -- Primary modes: 1 = A/A, 2 = A/S, 3 = RCE
 local weaponsMode = get_param_handle("weaponsMode") -- holds a wTypes value: AA = 1, dogfight = 2, gun = 3, AS = 4 (0 = NAV)
@@ -62,6 +68,7 @@ local MASSCommands = {
 }
 
 local MASSState
+local triggerSafeState
 
 local trigger = false
 local gunFiring = false
@@ -92,7 +99,8 @@ local function updatePylonInfo()
 
 
 		if count > 0 then
-			pylonName:set(data.name or "Har du lagt till nya vapen igen, Current?")
+			pylon.name = data.name or "Har du lagt till nya vapen igen, Current?"
+			pylonName:set(pylon.name)
 		else
 			pylonName:set("") -- empty string when pylon is spent
 		end
@@ -191,6 +199,7 @@ local function selectFrom(mode, fromIndex, includeGun)
 
 	if selectedStation ~= GUN_PYLON then
 		WS:select_station(selectedStation)
+		selectedPylonName:set(pylonInfo[pylonOrder[selectedStation + 1]].name)
 	end
 end
 
@@ -221,6 +230,7 @@ local function selectPylon(pylon)
 		selectedStation = pylon - 1
 		selectedPylon:set(selectedStation)
 		WS:select_station(selectedStation)
+		selectedPylonName:set(pylonInfo[pylonOrder[selectedStation + 1]].name)
 	end
 end
 
@@ -245,6 +255,7 @@ function post_initialize()
 	end
 
 	selectedPylon:set(selectedStation)
+	weaponsMode:set(-1)
 
 	updateAmmoCount()
 	updatePylonInfo()
@@ -273,6 +284,8 @@ function update()
 
 
 	if trigger and selectedStation == GUN_PYLON then updateAmmoCount() end
+
+	get_param_handle("trigger"):set(trigger and 1 or 0)
 end
 
 function SetCommand(command, value)
@@ -286,7 +299,16 @@ function SetCommand(command, value)
 	end
 
 
-	if command == keys.trigger then
+	if command == keys.triggerSafe then WS:performClickableAction(deviceCommands.triggerSafe, triggerSafeState == 0 and 1 or 0, true) end
+	if command == keys.triggerSafeHold then WS:performClickableAction(deviceCommands.triggerSafe, value, true) end
+
+	if command == deviceCommands.triggerSafe then
+		triggerSafeState = value
+		triggerSafe:set(triggerSafeState)
+	end
+
+
+	if command == keys.trigger and MASSState == 1 then
 		if value == 1 and not trigger then
 			trigger = true
 
@@ -336,6 +358,10 @@ function SetCommand(command, value)
 			ASModeClock = true -- Delay entering A/S so it isn't triggered by accident from A/A
 		else
 			selectMode(mode.primaryMode or 1, mode.weaponsMode)
+
+			if mode.weaponsMode == wTypes.dogfight then
+				get_param_handle("AimingMode"):set(0)
+			end
 		end
 	elseif mode and value == 0 and command == keys.stickS5Down and ASModeClock == true then
 		ASModeClock = false

@@ -8,7 +8,7 @@ local xcor = 0.022
 EMGY_PAGE 			= CreateElement "ceSimple"
 EMGY_PAGE.init_pos	= {0,0}
 EMGY_PAGE.name		= create_guid_string()
-EMGY_PAGE.element_params = {"RD_EMGY_MODE", "mainpower"}
+EMGY_PAGE.element_params = {"RD_EMGY_MODE", "DisplaysBooted"}
 EMGY_PAGE.controllers    = {{"parameter_compare_with_number",0, 1}, {"parameter_compare_with_number", 1, 1}}
 AddElement(EMGY_PAGE)		
 

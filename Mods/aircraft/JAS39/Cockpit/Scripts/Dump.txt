@@ -1,4 +1,5 @@
 Key,Value
+<<<<<<< HEAD
 start = table: 000001A6B22E9B28
 	GetMGRScoordinates = function: 000001A30EF95148
 	convertMetersToLatLon = function: 000001A30EF95170
@@ -30,3 +31,36 @@ start = table: 000001A6B22E9B28
 	GetTerrainConfig = function: 000001A30EF95030
 	getTerrainShpare = function: 000001A30EF95508
 	GetSurfaceType = function: 000001A30EF950F8
+=======
+start = table: 00000006397B3848
+	GetMGRScoordinates = function: 0000000124D249C0
+	convertMetersToLatLon = function: 0000000124D249E8
+	FindOptimalPath = function: 0000000124D24A60
+	Release = function: 0000000124D24858
+	GetSeasons = function: 0000000124D24880
+	convertLatLonToMeters = function: 0000000124D24A10
+	GetHeight = function: 0000000124D248F8
+	FindNearestPoint = function: 0000000124D24AB0
+	getRunwayHeading = function: 0000000124D24BC8
+	Create = function: 0000000124D248D0
+	getObjectPosition = function: 0000000124D24C18
+	getClosestValidPoint = function: 0000000124D24CE0
+	Init = function: 0000000124D24808
+	getRadio = function: 0000000124D24C90
+	isVisible = function: 0000000124D24948
+	getTempratureRangeByDate = function: 0000000124D24C68
+	getClosestPointOnRoads = function: 0000000124D24CB8
+	getRunwayList = function: 0000000124D24B78
+	convertMGRStoMeters = function: 0000000124D24A38
+	getCrossParam = function: 0000000124D24B28
+	InitLight = function: 0000000124D24830
+	getBeacons = function: 0000000124D24BF0
+	GetSurfaceHeightWithSeabed = function: 0000000124D24920
+	getTechSkinByDate = function: 0000000124D24C40
+	getStandList = function: 0000000124D24AD8
+	getObjectsAtMapPoint = function: 0000000124D24D58
+	findPathOnRoads = function: 0000000124D24D08
+	GetTerrainConfig = function: 0000000124D248A8
+	getTerrainShpare = function: 0000000124D24D80
+	GetSurfaceType = function: 0000000124D24970
+>>>>>>> b7df2707e205390fde814a49ef083a4cd686e40d

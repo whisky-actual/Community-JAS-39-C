@@ -204,7 +204,7 @@ function update()
 end
 
 function SetCommand(command, value)
-	if get_param_handle("mainpower"):get() == 1 then
+	if get_param_handle("Electric_Main_bus_A_115200VAC"):get() == 1 then
 		if command == deviceCommands.UCP_Cursor then
 			if value > prevCursVal then
 				if scrollableUp and carretRow == carretAvail[1] then
