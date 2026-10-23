@@ -257,6 +257,87 @@ addRDTextParam(
 
 
 -- ========== Information segment ==========
+addRDBox("InfoBG",{0,0.6}, nil, "RDR_Page", nil, lvls.mask, nil, nil, 1.6, 0.4, nil, true)
+
+--radar mode(LP or STT only right now)
+addRDText("RDR_MODE",{-0.7,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 0}}, "RDR LP", align.CL, nil, nil)
+addRDText("RDR_MODE",{-0.7,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 2}}, "RDR ST", align.CL, nil, nil)
+addRDText("RDR_MODE",{-0.7,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RDR ST", align.CL, nil, nil)
+
+
+-- IFF response(HOSTL, FRND, UNK)
+addRDText("IFF",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "RADAR_STT_FRIENDLY"}, {{ctrl.compareNum, 0, 3}, {ctrl.compareNum, 1, 0}}, "HOSTL", align.CL, nil, nil)
+addRDText("IFF",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "RADAR_STT_FRIENDLY"}, {{ctrl.compareNum, 0, 3}, {ctrl.compareNum, 1, 1}}, "FREND", align.CL, nil, nil)
+addRDText("IFF",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "RADAR_STT_FRIENDLY"}, {{ctrl.compareNum, 0, 3}, {ctrl.compareNum, 1, -1}}, "BOGEY", align.CL, nil, nil)
+
+
+-- IFF code(i think???)
+addRDText("IFF",{-0.1,0.15}, nil, "InfoBG", nil, nil,  {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "X----", align.CL, nil, nil)
+
+-- range to STT target
+addRDText(nil,{-0.79,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "R", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RADAR_STT_RANGEnmi", align.RC, nil, nil)
+
+-- altitude of STT target(doesnt work yet, need to figure out how to get the altitude of the target)
+addRDText(nil,{-0.79,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "A", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RADAR_STT_altitude", align.RC, nil, nil)
+
+-- velocity of STT target(non functional)
+addRDText(nil,{-0.79,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "M", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RADAR_STT_vel", align.RC, nil, nil)
+
+-- azimuth to the STT target
+addRDText(nil,{-0.48,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "BE", align.CL, nil, nil)
+addRDTextParam(nil,{-0.44,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RADAR_STT_azimuthdegrees", align.LC, nil, nil)
+
+
+
+local heading180 = get_param_handle("HEADING180"):get() / 180
+local headingtapefix = 0.4 / -360
+local compasswidth = 0.8
+local test = 0.1225 *1.08
+
+-- heading tape for the B scope
+addRDBox("BScopecompassmask",{0,0.47}, nil, "RDR_Page", hcr.rw, lvls.mask, {"radarScopeMode"}, {{ctrl.compareNum, 0, 2}}, 1.6, 0.13, nil, true)
+
+addRDBox("compassline",{0,-0.01}, nil, "BScopecompassmask", hcr.rw, nil, nil, nil, 1.6, 0.006, nil, false)
+
+for i = -43, 6, 1 do
+	local j = -i
+	if j < 0 then
+		j = 36 + j
+	elseif j >= 36 then
+		j = j - 36
+	end
+
+	local tickName = "HeadingTick" .. i
+
+	addRDBox(tickName,{-i*compasswidth / 6 ,-0.001}, nil, "BScopecompassmask", nil, lvls.mask, {"HEADING"}, {{ctrl.moveX, 0, 1 * headingtapefix}}, 0.007, 0.011, nil, nil)
+
+	if j % 3 == 0 then
+		local displayval = (j == 0) and 36 or j
+		local label = (displayval< 10) and ("0".. displayval) or tostring(displayval)
+		addRDText(nil,{-i*compasswidth / 6 ,0.04}, nil, "BScopecompassmask", nil, lvls.mask, {"HEADING"}, {{ctrl.moveX, 0, 1 * headingtapefix}}, label, align.CC, nil, newFonts["MFD_MFDFGGray"])
+	end
+	
+	--addRDText(nil,{-0*headingtapefix2 ,0.04}, nil, "BScopecompassBG", nil, nil, {"HEADING"}, {{ctrl.moveX, 0, 1 * headingtapefix}, {ctrl.inRange, "HEADINGoffset", 360-60, 360+60}}, "36", align.CC, nil, nil)
+
+
+
+
+
+end
+
+-- waypoint direction symbol
+
+addRDBox(nil,{0,-0.040}, nil, "BScopecompassmask", nil, lvls.mask, {"nextWPRDAzUnclamped"}, {{ctrl.moveX, 0, 1 * headingtapefix}}, 0.009, 0.06, materials["blue"])
+addRDBox(nil,{-0.015,-0.050}, nil, "BScopecompassmask", nil, lvls.mask, {"nextWPRDAzUnclamped"}, {{ctrl.moveX, 0, 1 * headingtapefix}}, 0.009, 0.03, materials["blue"])
+addRDBox(nil,{0.015,-0.050}, nil, "BScopecompassmask", nil, lvls.mask, {"nextWPRDAzUnclamped"}, {{ctrl.moveX, 0, 1 * headingtapefix}}, 0.009, 0.03, materials["blue"])
+
+
+-- direction symbol thingy
+addRDBox(nil,{0.008,-0.03}, {25}, "BScopecompassmask", nil, lvls.mask, nil, nil, 0.009, 0.035, nil, nil)
+addRDBox(nil,{-0.008,-0.03}, {-25}, "BScopecompassmask", nil, lvls.mask, nil, nil, 0.009, 0.035, nil, nil)
 
 
 
@@ -281,9 +362,17 @@ addRDBox(
 	"Scope", nil, nil, "Scope_BG", hcr.rw, lvls.mask, nil, nil, scpSize * 2, scpSize * 2,
 	materials["MFDLightBlue"]
 )
-addRDBox("scanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, nil, nil, scpSize * 1, scpSize * 2, materials["MFDBeige"])
 
 
+
+addRDBox("scanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask,  {"RADAR_MODE", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 0}}, scpSize * 1, scpSize * 2, materials["MFDBeige"])
+
+
+local STTContactSTR = "RADAR_STT_"
+
+addRDBox("STTscanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "STT_RDX_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.inRange, 0, 2.9, 3.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
+
+addRDBox("STTscanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "Cursor_X_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.inRange, 0, 1.9, 2.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
 
 -- Side azimuth tick marks from alt scope
 local tmpCounter = 0
@@ -330,6 +419,16 @@ addRDTextParam(
 	nil, {.01 - scpBG, .03}, nil, "Scope_Half_Range", nil, lvls.mask, nil, nil, "RDRHalfRange",
 	align.LC
 )
+
+-- scope mode text
+
+addRDText(nil,{0 ,-0.25}, nil, "Scope_Full_Range", nil, lvls.mask, {"BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.compareNum, 0, 1}}, "WAIT", align.CC, strdefs.big, nil)
+-- addRDText(nil,{0 ,-0.25}, nil, "Scope_Full_Range", nil, lvls.mask, nil, nil, "VERT", align.CC, strdefs.big, nil)
+-- addRDText(nil,{0 ,-0.25}, nil, "Scope_Full_Range", nil, lvls.mask, nil, nil, "HUD", align.CC, strdefs.big, nil)
+-- addRDText(nil,{0 ,-0.25}, nil, "Scope_Full_Range", nil, lvls.mask, nil, nil, "HMD", align.CC, strdefs.big, nil)
+addRDText(nil,{0.55 ,-1.4}, nil, "Scope_Full_Range", nil, lvls.mask, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 1}}, "XA", align.CC, strdefs.big, nil)
+addRDText(nil,{0.55 ,-1.4}, nil, "Scope_Full_Range", nil, lvls.mask, {"RADAR_MODE"}, {{ctrl.inRange, 0, 1.9, 3.1}}, "ST", align.CC, strdefs.big, nil)
+
 
 -- ========== PPI scope ==========
 --[[
@@ -676,7 +775,7 @@ end
 
 local function createThreatContact(n)
 	local i
-	local enemyContactSTR
+	local filteredSTR 
 
 	if n < 10 then
 		i = "_0" .. n .. "_"
@@ -684,17 +783,17 @@ local function createThreatContact(n)
 		i = "_" .. n .. "_"
 	end
 
-	enemyContactSTR = "RADAR_CONTACT" .. i
+	filteredSTR = "FILTERED_CONTACT" .. i
 	
 
 
 	-- Alt scope
 
-	addRDMeshPoly(
-		"Alt_Scope_Enemy" .. i, {-halfAltScpW, -halfAltScpH}, nil, "Alt_Scope", hcr.rw, nil,
-		{enemyContactSTR .. "altScpRange", enemyContactSTR .. "alt", enemyContactSTR .. "FRIENDLY"},
-		{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.compareNum, 2, 0}}, copyVerts(circleVerts), circleInds, materials["red"]
-	)
+	--addRDMeshPoly(
+	--	"Alt_Scope_Enemy" .. i, {-halfAltScpW, -halfAltScpH}, nil, "Alt_Scope", hcr.rw, nil,
+	--	{enemyContactSTR .. "altScpRange", enemyContactSTR .. "alt", enemyContactSTR .. "FRIENDLY"},
+	--	{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.compareNum, 2, 0}}, copyVerts(circleVerts), circleInds, materials["red"]
+	--)
 
 
 
@@ -717,24 +816,30 @@ local function createThreatContact(n)
 	-- )
 	addRDSimple( -- Planning for TWS when we will need to have TWS and non TWS targets.
 		"Radar_Contact_Enemy" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
-		{"RADAR_MODE", enemyContactSTR .. "isFresh", enemyContactSTR .. "FRIENDLY", enemyContactSTR .. "RDX", enemyContactSTR .. "RDY", enemyContactSTR .. "BSHdg"},
-		{{ctrl.inRange, 0, .9, 2.9}, {ctrl.compareNum, 1, 1}, {ctrl.inRange, 2, -1.1, 0.1}, {ctrl.moveX, 3, .0836}, {ctrl.moveY, 4, .0936}, {ctrl.rotate, 5, 1}}
+		{"RADAR_MODE", filteredSTR .. "FRIENDLY", filteredSTR .. "BSX", filteredSTR .. "BSY", filteredSTR .. "BSHdg", filteredSTR .. "FRESH"},
+		{{ctrl.inRange, 0, .9, 2.9}, {ctrl.inRange, 1, -1.1, 0.1}, {ctrl.moveX, 2, .0836}, {ctrl.moveY, 3, .0936}, {ctrl.rotate, 4, 1}, {ctrl.compareNum, 5, 1}}
 	)
 
+	--addRDCircle(
+	--	nil, nil, nil, "Radar_Contact_Enemy_priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "priority"},
+	--	{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.inRange, 1, 0.9, 2.9}}, AirContactScale, 0, 360, 15, materials["MFDDayYellow"]
+	--)
+
+
 	addRDCircle(
-		nil, nil, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil, {enemyContactSTR .. "FRIENDLY"},
+		nil, nil, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY"},
 		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}}, enemyNormRadius, 0, 360, 10, materials["MFDDayYellow"]
 	)
 
 	addRDSimpleLine(
 		nil, nil, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil,
-		{enemyContactSTR .. "BSHdg", enemyContactSTR .. "RDVelvecX", enemyContactSTR .. "RDVelvecY", enemyContactSTR .. "FRIENDLY"},
+		{filteredSTR .. "BSHdg", filteredSTR .. "RDVelvecX", filteredSTR .. "RDVelvecY", filteredSTR .. "FRIENDLY"},
 		{{ctrl.rotate, 0, -1}, {ctrl.setPoint, 1, 1, 2, 376, 376}, {ctrl.changeColor, 3, 0, 1, 0.0116122451797439, 0.00856812561806931}}, nil, nil, materials["MFDDayYellow"]
 	) -- .002225 / 2
 
 	addRDTextParam(
-		nil, {0, -.04}, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil, {enemyContactSTR .. "FRIENDLY", enemyContactSTR .. "altK"},
-		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.text, 1}}, enemyContactSTR .. "altK", nil, {"%.0f"}, strdefs["half"],
+		nil, {0, -.04}, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "altK"},
+		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.text, 1}}, filteredSTR .. "altK", nil, {"%.0f"}, strdefs["half"],
 		newFonts["MFD_MFDDayYellow"]
 	)
 end
@@ -784,7 +889,7 @@ end
 
 addRDMeshPoly(
 	nil, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil, {"Cursor_Y", "Cursor_X"},
-	{{ctrl.moveY, 0, 0.079}, {ctrl.moveX, 1, 0.083}},
+	{{ctrl.moveY, 0, 0.0936}, {ctrl.moveX, 1, 0.083}},
 	{{-.004, -.07}, {.004, -.07}, {-.004, -.02}, {.004, -.02}, {-.004, .02}, {.004, .02}, {-.004, .07}, {.004, .07}, {-.004, -.004}, {.004, -.004}, {-.004, .004}, {.004, .004}, {-.074, -.004},
 		{-.018, -.004}, {-.074, .004}, {-.018, .004}, {.074, .004}, {.018, .004}, {.074, -.004}, {.018, -.004}
 	}, {0, 1, 2, 3, 2, 1, 4, 5, 6, 7, 6, 5, 8, 9, 10, 11, 10, 9, 12, 13, 14, 15, 14, 13, 16, 17, 18, 19, 18, 17}, materials["black"]
