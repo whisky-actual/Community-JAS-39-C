@@ -5,13 +5,15 @@ dofile(LockOn_Options.script_path .. "utils.lua")
 
 
 
-local update_time_step = 0.05
+local update_time_step = 1/60
 make_default_activity(update_time_step)
-local dev = GetSelf()
+local displays = GetSelf()
 -- Local variables ==================
 local Page_changed = 0
 
 -- params =====================================================
+local primaryAltVal = get_param_handle("primaryAltVal")
+
 -- LEFT DISPLAY ===================
 local LD_UPPER = get_param_handle("LD_UPPER")
 local LD_LOWER = get_param_handle("LD_LOWER")
@@ -88,131 +90,132 @@ local HUDBrightness = get_param_handle("HUDBrightness")
 
 
 -- commands =====================================================
+displays:listen_command(keys.stickS10)
 -- LEFT DISPLAY ===================
 -- Keybinds
-dev:listen_command(keys.LDSK_1)
-dev:listen_command(keys.LDSK_2)
-dev:listen_command(keys.LDSK_3)
-dev:listen_command(keys.LDSK_4)
-dev:listen_command(keys.LDSK_5)
-dev:listen_command(keys.LDSK_6)
-dev:listen_command(keys.LDSK_7)
-dev:listen_command(keys.LDSK_8)
-dev:listen_command(keys.LDSK_9)
-dev:listen_command(keys.LDSK_10)
-dev:listen_command(keys.LDSK_11)
-dev:listen_command(keys.LDSK_12)
-dev:listen_command(keys.LDSK_13)
-dev:listen_command(keys.LDSK_14)
-dev:listen_command(keys.LDSK_15)
-dev:listen_command(keys.LDSK_16)
-dev:listen_command(keys.LDSK_17)
-dev:listen_command(keys.LDSK_18)
-dev:listen_command(keys.LDSK_19)
-dev:listen_command(keys.LDSK_20)
+displays:listen_command(keys.LDSK_1)
+displays:listen_command(keys.LDSK_2)
+displays:listen_command(keys.LDSK_3)
+displays:listen_command(keys.LDSK_4)
+displays:listen_command(keys.LDSK_5)
+displays:listen_command(keys.LDSK_6)
+displays:listen_command(keys.LDSK_7)
+displays:listen_command(keys.LDSK_8)
+displays:listen_command(keys.LDSK_9)
+displays:listen_command(keys.LDSK_10)
+displays:listen_command(keys.LDSK_11)
+displays:listen_command(keys.LDSK_12)
+displays:listen_command(keys.LDSK_13)
+displays:listen_command(keys.LDSK_14)
+displays:listen_command(keys.LDSK_15)
+displays:listen_command(keys.LDSK_16)
+displays:listen_command(keys.LDSK_17)
+displays:listen_command(keys.LDSK_18)
+displays:listen_command(keys.LDSK_19)
+displays:listen_command(keys.LDSK_20)
 
-dev:listen_command(keys.LD_Brightness_Up)
-dev:listen_command(keys.LD_Brightness_Down)
+displays:listen_command(keys.LD_Brightness_Up)
+displays:listen_command(keys.LD_Brightness_Down)
 
 
 -- Clickable
-dev:listen_command(deviceCommands.LDSK_1)
-dev:listen_command(deviceCommands.LDSK_2)
-dev:listen_command(deviceCommands.LDSK_3)
-dev:listen_command(deviceCommands.LDSK_4)
-dev:listen_command(deviceCommands.LDSK_5)
-dev:listen_command(deviceCommands.LDSK_6)
-dev:listen_command(deviceCommands.LDSK_7)
-dev:listen_command(deviceCommands.LDSK_8)
-dev:listen_command(deviceCommands.LDSK_9)
-dev:listen_command(deviceCommands.LDSK_10)
-dev:listen_command(deviceCommands.LDSK_11)
-dev:listen_command(deviceCommands.LDSK_12)
-dev:listen_command(deviceCommands.LDSK_13)
-dev:listen_command(deviceCommands.LDSK_14)
-dev:listen_command(deviceCommands.LDSK_15)
-dev:listen_command(deviceCommands.LDSK_16)
-dev:listen_command(deviceCommands.LDSK_17)
-dev:listen_command(deviceCommands.LDSK_18)
-dev:listen_command(deviceCommands.LDSK_19)
-dev:listen_command(deviceCommands.LDSK_20)
+displays:listen_command(deviceCommands.LDSK_1)
+displays:listen_command(deviceCommands.LDSK_2)
+displays:listen_command(deviceCommands.LDSK_3)
+displays:listen_command(deviceCommands.LDSK_4)
+displays:listen_command(deviceCommands.LDSK_5)
+displays:listen_command(deviceCommands.LDSK_6)
+displays:listen_command(deviceCommands.LDSK_7)
+displays:listen_command(deviceCommands.LDSK_8)
+displays:listen_command(deviceCommands.LDSK_9)
+displays:listen_command(deviceCommands.LDSK_10)
+displays:listen_command(deviceCommands.LDSK_11)
+displays:listen_command(deviceCommands.LDSK_12)
+displays:listen_command(deviceCommands.LDSK_13)
+displays:listen_command(deviceCommands.LDSK_14)
+displays:listen_command(deviceCommands.LDSK_15)
+displays:listen_command(deviceCommands.LDSK_16)
+displays:listen_command(deviceCommands.LDSK_17)
+displays:listen_command(deviceCommands.LDSK_18)
+displays:listen_command(deviceCommands.LDSK_19)
+displays:listen_command(deviceCommands.LDSK_20)
 
-dev:listen_command(deviceCommands.LD_Brightness_Up)
-dev:listen_command(deviceCommands.LD_Brightness_Down)
+displays:listen_command(deviceCommands.LD_Brightness_Up)
+displays:listen_command(deviceCommands.LD_Brightness_Down)
 
 -- CENTER DISPLAY ===================
-dev:listen_command(keys.CDSK_1)
-dev:listen_command(keys.CDSK_2)
-dev:listen_command(keys.CDSK_3)
-dev:listen_command(keys.CDSK_4)
-dev:listen_command(keys.CDSK_5)
-dev:listen_command(keys.CDSK_6)
-dev:listen_command(keys.CDSK_7)
-dev:listen_command(keys.CDSK_8)
-dev:listen_command(keys.CDSK_9)
-dev:listen_command(keys.CDSK_10)
-dev:listen_command(keys.CDSK_11)
-dev:listen_command(keys.CDSK_12)
-dev:listen_command(keys.CDSK_13)
-dev:listen_command(keys.CDSK_14)
-dev:listen_command(keys.CDSK_15)
-dev:listen_command(keys.CDSK_16)
-dev:listen_command(keys.CDSK_17)
-dev:listen_command(keys.CDSK_18)
-dev:listen_command(keys.CDSK_19)
-dev:listen_command(keys.CDSK_20)
+displays:listen_command(keys.CDSK_1)
+displays:listen_command(keys.CDSK_2)
+displays:listen_command(keys.CDSK_3)
+displays:listen_command(keys.CDSK_4)
+displays:listen_command(keys.CDSK_5)
+displays:listen_command(keys.CDSK_6)
+displays:listen_command(keys.CDSK_7)
+displays:listen_command(keys.CDSK_8)
+displays:listen_command(keys.CDSK_9)
+displays:listen_command(keys.CDSK_10)
+displays:listen_command(keys.CDSK_11)
+displays:listen_command(keys.CDSK_12)
+displays:listen_command(keys.CDSK_13)
+displays:listen_command(keys.CDSK_14)
+displays:listen_command(keys.CDSK_15)
+displays:listen_command(keys.CDSK_16)
+displays:listen_command(keys.CDSK_17)
+displays:listen_command(keys.CDSK_18)
+displays:listen_command(keys.CDSK_19)
+displays:listen_command(keys.CDSK_20)
 
-dev:listen_command(keys.CD_Brightness_Up)
-dev:listen_command(keys.CD_Brightness_Down)
+displays:listen_command(keys.CD_Brightness_Up)
+displays:listen_command(keys.CD_Brightness_Down)
 
-dev:listen_command(keys.RD_Brightness_Up)
-dev:listen_command(keys.RD_Brightness_Down)
+displays:listen_command(keys.RD_Brightness_Up)
+displays:listen_command(keys.RD_Brightness_Down)
 
 -- Clickable
-dev:listen_command(deviceCommands.CDSK_1)
-dev:listen_command(deviceCommands.CDSK_2)
-dev:listen_command(deviceCommands.CDSK_3)
-dev:listen_command(deviceCommands.CDSK_4)
-dev:listen_command(deviceCommands.CDSK_5)
-dev:listen_command(deviceCommands.CDSK_6)
-dev:listen_command(deviceCommands.CDSK_7)
-dev:listen_command(deviceCommands.CDSK_8)
-dev:listen_command(deviceCommands.CDSK_9)
-dev:listen_command(deviceCommands.CDSK_10)
-dev:listen_command(deviceCommands.CDSK_11)
-dev:listen_command(deviceCommands.CDSK_12)
-dev:listen_command(deviceCommands.CDSK_13)
-dev:listen_command(deviceCommands.CDSK_14)
-dev:listen_command(deviceCommands.CDSK_15)
-dev:listen_command(deviceCommands.CDSK_16)
-dev:listen_command(deviceCommands.CDSK_17)
-dev:listen_command(deviceCommands.CDSK_18)
-dev:listen_command(deviceCommands.CDSK_19)
-dev:listen_command(deviceCommands.CDSK_20)
+displays:listen_command(deviceCommands.CDSK_1)
+displays:listen_command(deviceCommands.CDSK_2)
+displays:listen_command(deviceCommands.CDSK_3)
+displays:listen_command(deviceCommands.CDSK_4)
+displays:listen_command(deviceCommands.CDSK_5)
+displays:listen_command(deviceCommands.CDSK_6)
+displays:listen_command(deviceCommands.CDSK_7)
+displays:listen_command(deviceCommands.CDSK_8)
+displays:listen_command(deviceCommands.CDSK_9)
+displays:listen_command(deviceCommands.CDSK_10)
+displays:listen_command(deviceCommands.CDSK_11)
+displays:listen_command(deviceCommands.CDSK_12)
+displays:listen_command(deviceCommands.CDSK_13)
+displays:listen_command(deviceCommands.CDSK_14)
+displays:listen_command(deviceCommands.CDSK_15)
+displays:listen_command(deviceCommands.CDSK_16)
+displays:listen_command(deviceCommands.CDSK_17)
+displays:listen_command(deviceCommands.CDSK_18)
+displays:listen_command(deviceCommands.CDSK_19)
+displays:listen_command(deviceCommands.CDSK_20)
 
-dev:listen_command(deviceCommands.CD_Brightness_Up)
-dev:listen_command(deviceCommands.CD_Brightness_Down)
+displays:listen_command(deviceCommands.CD_Brightness_Up)
+displays:listen_command(deviceCommands.CD_Brightness_Down)
 
-dev:listen_command(deviceCommands.RDSK_1)
-dev:listen_command(deviceCommands.RDSK14)
-dev:listen_command(keys.RDSK_1)
-dev:listen_command(keys.RDSK14)
-dev:listen_command(deviceCommands.RD_Brightness_Up)
-dev:listen_command(deviceCommands.RD_Brightness_Down)
+displays:listen_command(deviceCommands.RDSK_1)
+displays:listen_command(deviceCommands.RDSK14)
+displays:listen_command(keys.RDSK_1)
+displays:listen_command(keys.RDSK14)
+displays:listen_command(deviceCommands.RD_Brightness_Up)
+displays:listen_command(deviceCommands.RD_Brightness_Down)
 
-dev:listen_command(deviceCommands.HIDE_HUD)
+displays:listen_command(deviceCommands.HIDE_HUD)
 
 
 -- UCP ===================
-dev:listen_command(deviceCommands.LANDING_MODE)
+displays:listen_command(deviceCommands.LANDING_MODE)
 
 -- HUD ===================
 
-dev:listen_command(deviceCommands.HUD_Brightness)
+displays:listen_command(deviceCommands.HUD_Brightness)
 
 
-dev:listen_command(136) -- active jamming
--- dev:listen_command(10060) 	-- landing mode
+displays:listen_command(136) -- active jamming
+-- displays:listen_command(10060) 	-- landing mode
 --[[
 	PlaneModeNAV							= 105,
 	PlaneModeBVR							= 106,
@@ -222,15 +225,15 @@ dev:listen_command(136) -- active jamming
 	PlaneModeFI0							= 110,
 	PlaneModeGround							= 111,
 --]]
-dev:listen_command(105)
-dev:listen_command(106)
-dev:listen_command(107)
-dev:listen_command(108)
-dev:listen_command(109)
-dev:listen_command(110)
-dev:listen_command(111)
+displays:listen_command(105)
+displays:listen_command(106)
+displays:listen_command(107)
+displays:listen_command(108)
+displays:listen_command(109)
+displays:listen_command(110)
+displays:listen_command(111)
 
-dev:listen_command(keys.CannonMode) -- Cannon
+displays:listen_command(keys.CannonMode) -- Cannon
 
 local primaryMode = get_param_handle("primaryMode")
 primaryMode:set(1)
@@ -238,7 +241,7 @@ local HMDMode = get_param_handle("HMDMode")
 HMDMode:set(1)
 local RedHUD = 0
 
-dev:listen_command(87) -- TGP on
+displays:listen_command(87) -- TGP on
 
 
 function post_initialize() -- modes / toggle default settings
@@ -318,6 +321,8 @@ end
 function SetCommand(command, value)
 
 	if get_param_handle("DisplaysBooted"):get() == 1 then
+		if command == keys.stickS10 and value == 0 then altMode:set(altMode:get() == 1 and 2 or 1) end
+
 
 		if command == keys.RDSK_1 or command == deviceCommands.RDSK_1 then
 			if RD_EMGY_MODE:get() == 0 then
@@ -1075,10 +1080,10 @@ function BrightnessAtSpawn()
 
 	local birth = LockOn_Options.init_conditions.birth_place
 	if birth == "GROUND_HOT" or birth == "AIR_HOT" then
-		dev:performClickableAction(deviceCommands.HUD_Brightness, 1, true)
+		displays:performClickableAction(deviceCommands.HUD_Brightness, 1, true)
 		HUDBrightness:set(1)
 	elseif birth == "GROUND_COLD" then
-		dev:performClickableAction(deviceCommands.HUD_Brightness, 0, true)
+		displays:performClickableAction(deviceCommands.HUD_Brightness, 0, true)
 		HUDBrightness:set(0)
 	end
 end
@@ -1108,6 +1113,15 @@ function update()
 		LDP_BACKGROUND:set(0)
 	end
 
+
+
+	if altMode:get() == 1 then
+		primaryAltVal:set(get_param_handle("baroAlt"):get())
+	elseif altMode:get() == 2 then
+		primaryAltVal:set(get_param_handle("radarAlt"):get())
+	end
 end
+
+
 
 need_to_be_closed = false

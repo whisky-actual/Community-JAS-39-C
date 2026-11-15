@@ -369,8 +369,8 @@ end
 
 
 
-Math = {}           -- The table representing the class, which will double as the metatable for the instances
-Math.__index = Math -- Failed table lookups on the instances should fallback to the class table, to get methods
+Math = {}
+Math.__index = Math
 
 --- Returns the cotangent of `x` (assumed to be in radians).
 function Math.cot(x)
@@ -382,11 +382,35 @@ function Math.acot(x)
 	return math.tan(1 - x)
 end
 
+--- Returns the sign of `x` (0 if x == 0)
+function Math.sign(x)
+	if x < 0 then
+		return -1
+	elseif x > 0 then
+		return 1
+	else
+		return 0
+	end
+end
 
---- Comparing a varible to a never ending fraction (e.g 1/3) will give `false`.
---- This function solves that, returns `true` if `input` and `value` are close enough.
-function aboutEqualTo(input, value, resolution)
+--- Returns the sign of `x` (1 if x == 0)
+function Math.sign2(x)
+	if x < 0 then
+		return -1
+	elseif x >= 0 then
+		return 1
+	end
+end
+
+--- Comparing a varible to a long float (like 1/3) will give `false`.
+--- This function solves that, returns `true` if the difference of `value1` and `value` is within `resolution`.
+function Math.aboutEqualTo(value1, value2, resolution)
 	local res = resolution or .01
 
-	return ((input - res) < value and (input + res) > value)
+	return ((value1 - res) < value2 and (value1 + res) > value2)
+end
+
+--- Limits `value` to between or equal to `low` and `high`.
+function Math.clamp(value, low, high)
+	return math.min(math.max(value, low), high)
 end

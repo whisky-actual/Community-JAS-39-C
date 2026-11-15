@@ -487,7 +487,7 @@ local ALTIMETER_BASE                                 = CreateElement "ceSimple"
 ALTIMETER_BASE.name                                  = create_guid_string()
 ALTIMETER_BASE.init_pos                                = {0, 0.718}
 ALTIMETER_BASE.parent_element                = HUD_BASE.name
-ALTIMETER_BASE.element_params             = {"altTape"}             
+ALTIMETER_BASE.element_params             = {"primaryAltVal"}             
 ALTIMETER_BASE.controllers                = {{"move_up_down_using_parameter",0, -0.0001980675} }
 AddHudElement(ALTIMETER_BASE)
 

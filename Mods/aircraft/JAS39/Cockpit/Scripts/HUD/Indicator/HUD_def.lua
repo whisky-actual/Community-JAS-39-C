@@ -15,11 +15,11 @@ fov2MilRad = 230
 
 
 HUDLvls = {
+	noclip = 3,
 	def    = 4,
 	mask   = 5,
-	noclip = 3,
-	alt    = 6,
-	alt2   = 7
+	mask2  = 6,
+	mask3  = 7
 }
 
 HUDStrdefs = {

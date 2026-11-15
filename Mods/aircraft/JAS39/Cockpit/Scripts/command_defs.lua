@@ -666,6 +666,8 @@ keys = {
 	stickS5Left = __custom_counter(),
 	stickS5Right = __custom_counter(),
 
+	stickS10 = __custom_counter(),
+
 	-------------------------------------------------------
 	-- Ejection Seat
 	-------------------------------------------------------

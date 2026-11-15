@@ -25,11 +25,11 @@ addHMDTextParam(nil, {34}, "GS", nil, nil, nil, nil, "txtGS", align.RC)
 
 
 addHMDSimpleLine(nil, {107}, nil, base, nil, nil, {"altitudeDeclutt"}, {{ctrl.compareNum, 0, 0}}, nil, {{-15, 4.1}, {0, 0}, {-15, -4.1}}) -- Altitude index
-addHMDSimple("altBase", nil, nil, base, nil, nil, {"altitudeDeclutt", "altTape"}, {{ctrl.compareNum, 0, 0}, {ctrl.moveY, 1, -0.000175659}})
-addHMDBox("altMask", {132, 0}, nil, "altBase", hcr.rw, lvl.mask, {"altTape"}, {{ctrl.moveY, 0, 0.000175659}}, 81, 64, materials.HUDMask, true)
+addHMDSimple("altBase", nil, nil, base, nil, nil, {"altitudeDeclutt", "primaryAltVal"}, {{ctrl.compareNum, 0, 0}, {ctrl.moveY, 1, -0.000175659}})
+addHMDBox("altMask", {132, 0}, nil, "altBase", hcr.rw, lvl.mask, {"primaryAltVal"}, {{ctrl.moveY, 0, 0.000175659}}, 81, 64, materials.HUDMask, true)
 
 
-addHMDText(nil, {105, -2.3}, "altBase", nil, lvl.mask, {"altMode", "terrainAlt"}, {{ctrl.compareNum, 0, 1}, {ctrl.moveY, 1, 0.000175659}}, "77", nil, strdefs.seventyseven)
+addHMDText(nil, {105, -2.3}, "altBase", nil, lvl.mask, {"altMode", "radarTerrainAlt"}, {{ctrl.compareNum, 0, 1}, {ctrl.moveY, 1, 0.000175659}}, "77", nil, strdefs.seventyseven)
 
 
 local hundredsOffsetY = -2

@@ -4,7 +4,7 @@ dofile(LockOn_Options.script_path .. "utils.lua")
 
 
 
-local updateTimeStep = 1 / 30 -- Refresh rate of device script.
+local updateTimeStep = 1 / 60 -- Refresh rate of device script.
 make_default_activity(updateTimeStep)
 
 
@@ -91,7 +91,7 @@ function update()
 
 
 
-	curAlt = math.floor(get_param_handle("altTape"):get())
+	curAlt = math.floor(get_param_handle("primaryAltVal"):get())
 	altLineLo = curAlt - 150
 	altLineHi = curAlt + 150
 

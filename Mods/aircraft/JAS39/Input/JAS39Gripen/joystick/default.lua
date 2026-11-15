@@ -184,7 +184,7 @@ join(res.keyCommands,{
 	{down = keys.stickS5Down,                        up = keys.stickS5Down,                                       name = _("A/S Mode / Next A/S Weapon (S5 Down)"),             category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
 	{down = keys.stickS5Left,                        up = keys.stickS5Left,                                       name = _("Dogfight Mode / Next WVR Weapon (S5 Left)"),        category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
 	{down = keys.stickS5Right,                       up = keys.stickS5Right,                                      name = _("Gun Mode (S5 Right)"),                              category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
-
+	{down = keys.stickS10,                           up = keys.stickS10,                                          name = _("Toggle Altitude Reference AD/RALT (S10)"),          category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
 
 ---------------------------------------------						
 -- Left Lower Pannel ------------------------						

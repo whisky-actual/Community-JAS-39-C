@@ -23,7 +23,7 @@ local Terrain = require("terrain")
 -- x, z, alt coords are in meters!
 
 
-local terrainAlt = get_param_handle("terrainAlt")
+local radarTerrainAlt = get_param_handle("radarTerrainAlt")
 local GPSAlt = get_param_handle("GPSAlt")
 
 local LCP_CoordLAT = get_param_handle("LCP_LAT")
@@ -149,12 +149,12 @@ function update()
 
 	local TerrainAltitude = Terrain.GetHeight(X_COORD_MET, Y_COORD_MET) -- terrain altitude at given X,Y coordinates, in meters
 
-	if math.abs(math.deg(get_param_handle("pitchRad"):get())) >= 30 or math.abs(math.deg(get_param_handle("rollRad"):get())) >= 30 then
-		terrainAlt:set(TerrainAltitude * M2FT)
+	if math.abs(TerrainAltitude * M2FT - (baseData.getBarometricAltitude() * M2FT - baseData.getRadarAltitude() * M2FT)) >= 300 then -- math.abs(math.deg(get_param_handle("pitchRad"):get())) >= 30 or math.abs(math.deg(get_param_handle("rollRad"):get())) >= 30 then
+		radarTerrainAlt:set(-9999)
 	else
-		terrainAlt:set(baseData.getBarometricAltitude() * M2FT - baseData.getRadarAltitude() * M2FT)
+		radarTerrainAlt:set(baseData.getBarometricAltitude() * M2FT - baseData.getRadarAltitude() * M2FT)
 	end
-	-- terrainAlt:set(TerrainAltitude* M2FT)	--Terrain Altitude in feet
+	-- radarTerrainAlt:set(TerrainAltitude* M2FT)	--Terrain Altitude in feet
 
 	local v_x, v_z, v_y = baseData.getSelfVelocity() -- Velocity in m/s
 

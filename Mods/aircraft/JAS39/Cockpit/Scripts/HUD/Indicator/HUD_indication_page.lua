@@ -122,226 +122,138 @@ addHUDTextParam("GS_Readout", {30.5}, "GS_GS", nil, nil, nil, nil, "txtGS", alig
 
 
 
+-- TODO Altitude Scale:
+-- (Add runway altitude box for future functionality.)
+-- (If a runway is selected - show altitude readout under 10 000 ft, 100 ft resolution? (check panda vid))
+-- (Make the altitude scale work with negative numbers (works until like -75 ft, good enough for now))
 
-local rightSideX = d2Mr(7.767) -- Distance from the velvec/center to the right most element (ex: landing speed) of the speed tape column
+local rightSideX = d2Mr(7.767) -- Distance from the velvec/center to the right most element (ex: landing speed) of the speed scale column
 local rightSideWidth = d2Mr(2.75)
-local rightSideHeight = d2Mr(8.5) -- Change to be more accurate
 
-addHUDBox( -- TODO: Make this clip out from the HUD Sphere
-	"Right_Side", {rightSideX + rightSideWidth / 2}, nil, "Moving_Sides", nil, nil, {"HUDDeclutt"}, {{ctrl.compareNum, 0, 0}},
-	rightSideWidth, rightSideHeight, materials.HUDMask, true
-)
+addHUDSimple("Right_Side", {rightSideX + rightSideWidth / 2}, nil, "Moving_Sides", nil, nil, {"HUDRightSideX"}, {{ctrl.moveX, 0, mult}})
 
 
-local altitudeTapeHeight = d2Mr(5)
-local altitudeTapeWidth = rightSideWidth
-local altitudeTapeMult = -altitudeTapeHeight * .0006
+local altitudeScaleHeight = d2Mr(5)
+local altitudeScaleWidth = rightSideWidth
+local altitudeScaleMult = -altitudeScaleHeight * .0006
 
-addHUDBox(
-	"Altitude_Tape_Mask", {altitudeTapeWidth / 2 - rightSideWidth / 2}, nil, "Right_Side", hcr.inc, HUDLvls.mask, {"altitudeDeclutt"},
-	{{ctrl.compareNum, 0, 0}}, altitudeTapeWidth, altitudeTapeHeight, materials.HUDMask2, true
+addHUDSimple(
+	"Altitude_Scale_Base", {altitudeScaleWidth / 2 - rightSideWidth / 2}, nil, "Right_Side", nil, nil, {"altitudeDeclutt"},
+	{{ctrl.compareNum, 0, 0}}
 )
 
 addHUDSimpleLine(
-	"Altitude_Tape_Arrow", {-18.5}, nil, "Altitude_Tape_Mask", nil, HUDLvls.mask, nil, nil, nil,
+	"Alt_Scale_Mask_Big", nil, nil, "Altitude_Scale_Base", hcr.inc, HUDLvls.mask, {"HUDAltMaskTop", "HUDAltMaskBottom", "ONE"},
+	{{ctrl.setPoint, 0, 2, 0, 0, -altitudeScaleMult}, {ctrl.setPoint, 1, 2, 1, 0, -altitudeScaleMult}}, altitudeScaleWidth / 2 + 2.5, nil, materials.HUDMask,
+	true
+)
+
+addHUDSimpleLine(
+	"Alt_Scale_Mask_Small", nil, nil, "Altitude_Scale_Base", hcr.inc, HUDLvls.mask2, nil, nil, altitudeScaleWidth / 2,
+	{{0, -altitudeScaleHeight / 2}, {0, altitudeScaleHeight * .575}}, materials.HUDMask2, true
+)
+
+addHUDSimpleLine(
+	"Alt_Scale_Arrow", {-18.5}, nil, "Alt_Scale_Mask_Small", nil, HUDLvls.mask2, nil, nil, nil,
 	{{-speedTapeWidth / 2, 3.25}, {0}, {-speedTapeWidth / 2, -3.25}}
 )
-addHUDTextParam("Alt_Tape_Alt_Readout", {-8}, "Altitude_Tape_Arrow", nil, nil, {"HUDAltReadoutShow"}, {{ctrl.compareNum, 0, 1}}, "HUDAltReadout", align.RC)
-
-addHUDSimple(
-	"Altitude_Tape_Moving_Base", nil, nil, "Altitude_Tape_Mask", nil, HUDLvls.mask, {"altTape"},
-	{{ctrl.moveY, 0, -0}}
+addHUDSimple("Alt_Scale_Readout_Base", {-8}, nil, "Alt_Scale_Arrow", nil, nil, {"HUDAltReadoutAvail"}, {{ctrl.compareNum, 0, 1}})
+addHUDTextParam(
+	"Alt_Scale_Readout_Low", nil, "Alt_Scale_Readout_Base", nil, nil, {"HUDAltReadout"}, {{ctrl.inRange, 0, -1000, 1000}},
+	"HUDAltReadout", align.RC
 )
-
--- addHUDText(
--- "Altitude_Tape_Terrain_Height", {-18.5, -2.3}, "Altitude_Tape_Moving_Base", nil, HUDLvls.mask, {"altMode", "terrainAlt"},
--- {{ctrl.compareNum, 0, 1}, {ctrl.moveY, 1, .000175659}}, "77", nil, HUDStrdefs.seventyseven
--- )
+addHUDTextParam(
+	"Alt_Scale_Readout_High_Thousands", {-13.5}, "Alt_Scale_Readout_Base", nil, nil, {"HUDAltReadoutThousands"}, {{ctrl.inRange, 0, -100, 100}},
+	"HUDAltReadoutThousands", align.RC
+)
+addHUDTextParam(
+	"Alt_Scale_Readout_High_Hundreds", {0, -1.6}, "Alt_Scale_Readout_High_Thousands", nil, nil, nil, nil,
+	"HUDAltReadoutHundreds", align.LC, {"%s"}, HUDStrdefs.hundreds
+)
+addHUDSimpleLine(
+	"Alt_Scale_Readout_Box", {1}, nil, "Alt_Scale_Readout_Base", hcr.inc, nil, {"HUDAltReadout"}, {{ctrl.inRange, 0, -9999, 0}},
+	nil, {{-36, -6}, {-36, 6}, {0, 6}, {0, -6}, {-36, -6}}
+)
 
 for i = 1, 2 do
 	local zeroAltLine = addHUDSimpleLine(
-		nil, {-17}, nil, "Altitude_Tape_Moving_Base", nil, i == 1 and HUDLvls.mask, {"zeroAltLine"}, {{ctrl.moveY, 0, altitudeTapeMult}},
-		nil, {{0}, {6.5}}
+		nil, {-17}, nil, "Alt_Scale_Mask_Small", nil, i == 1 and HUDLvls.mask2 or HUDLvls.mask, {"zeroAltLine"},
+		{{ctrl.moveY, 0, -altitudeScaleMult}}, nil, {{0}, {6.5}}
 	)
 	addHUDBox(
-		"Altitude_Tape_Zero_Altitude_Vertical_Line", nil, nil, zeroAltLine, nil, i == 1 and HUDLvls.mask, nil, nil, 1,
+		"Alt_Scale_Zero_Altitude_Vertical_Line", nil, nil, zeroAltLine, nil, i == 1 and HUDLvls.mask2 or HUDLvls.mask, nil, nil, 1,
 		5
 	)
-	addHUDText("Altitude_tape_Zero_Text", {8}, zeroAltLine, nil, i == 1 and HUDLvls.mask, nil, nil, "0", align.LC)
+	addHUDText("Alt_Scale_Zero_Text", {8}, zeroAltLine, nil, i == 1 and HUDLvls.mask2 or HUDLvls.mask, nil, nil, "0", align.LC)
+
+
+
+	addHUDText(
+		"Alt_Scale_Terrain_Height", {-20.8, -3.1}, "Alt_Scale_Mask_Small", nil, i == 1 and HUDLvls.mask2 or HUDLvls.mask, {"HUD77Avail", "HUD77Y"},
+		{{ctrl.compareNum, 0, 1}, {ctrl.moveY, 1, -altitudeScaleMult}}, "77", nil, HUDStrdefs.seventyseven
+	)
 end
 
 for i = 1, 9 do
 	addHUDSimple(
-		"Alt_Tape_Line_" .. i .. "_Base", {-17}, nil, "Altitude_Tape_Mask", nil, nil, {"HUDAltLineY_" .. i},
-		{{ctrl.moveY, 0, -altitudeTapeMult}}
+		"Alt_Scale_Line_" .. i .. "_Base", {-17}, nil, "Alt_Scale_Mask_Small", nil, nil, {"HUDAltLineY_" .. i},
+		{{ctrl.moveY, 0, -altitudeScaleMult}}
 	)
 
 	addHUDSimpleLine(
-		"Alt_Tape_Line_" .. i .. "_Long", nil, nil, "Alt_Tape_Line_" .. i .. "_Base", nil, HUDLvls.mask, {"HUDAltLineIsShort_" .. i},
+		"Alt_Scale_Line_" .. i .. "_Long", nil, nil, "Alt_Scale_Line_" .. i .. "_Base", nil, HUDLvls.mask2, {"HUDAltLineIsShort_" .. i},
 		{{ctrl.compareNum, 0, 0}}, nil, {{0}, {6.5}}
 	)
 	addHUDSimpleLine(
-		"Alt_Tape_Line_" .. i .. "_Short", nil, nil, "Alt_Tape_Line_" .. i .. "_Base", nil, HUDLvls.mask, {"HUDAltLineIsShort_" .. i},
+		"Alt_Scale_Line_" .. i .. "_Short", nil, nil, "Alt_Scale_Line_" .. i .. "_Base", nil, HUDLvls.mask2, {"HUDAltLineIsShort_" .. i},
 		{{ctrl.compareNum, 0, 1}}, nil, {{0}, {6.5 / 2}}
 	)
 
 	addHUDTextParam(
-		"Alt_Tape_" .. i .. "_Text_Thousands_L", {21}, "Alt_Tape_Line_" .. i .. "_Base", nil, HUDLvls.mask, {"HUDAltLineTextKAvail_" .. i},
+		"Alt_Scale_" .. i .. "_Text_Thousands_L", {21}, "Alt_Scale_Line_" .. i .. "_Base", nil, HUDLvls.mask2, {"HUDAltLineTextKAvail_" .. i},
 		{{ctrl.compareNum, 0, 1}}, "HUDAltLineTextKL_" .. i, align.RC
 	)
 	addHUDTextParam(
-		"Alt_Tape_" .. i .. "_Text_Thousands_S", {-32.5, -1.55}, "Alt_Tape_" .. i .. "_Text_Thousands_L", nil, HUDLvls.mask, nil, nil,
+		"Alt_Scale_" .. i .. "_Text_Thousands_S", {-32.5, -1.6}, "Alt_Scale_" .. i .. "_Text_Thousands_L", nil, HUDLvls.mask2, nil, nil,
 		"HUDAltLineTextKS_" .. i, align.LC, {"%s"}, HUDStrdefs.hundreds
 	)
+
+	addHUDTextParam(
+		"Alt_Scale_" .. i .. "_Text_Hundreds", {8.5}, "Alt_Scale_Line_" .. i .. "_Base", nil, HUDLvls.mask2, {"HUDAltLineTextHAvail_" .. i},
+		{{ctrl.compareNum, 0, 1}}, "HUDAltLineTextH_" .. i, align.LC
+	)
 end
--- TODO: 
--- Fix text <1000 ft
--- Add 77 - dissapears if RALT >= 30 000 ft
--- Add runway altitude box for future functionality.
--- If in landing mode - show altitude readout under 10 000 ft, 100 ft resolution? (check panda vid)
--- Fix alt tape height, seems to be unevevn (larger above arrow)
 
-
--- local hundredsOffsetY = -1.75
---
--- for i = 1, 3 do
--- local longAltLine = copyElement(zeroAltLine, {"element_params", "controllers"}, {{"HMDShortAltLine_" .. i, "HUDBrightness"}, {{ctrl.moveY, 0, .000175659}}})
---
--- copyElement(longAltLine, {"element_params", "vertices"}, {{"HMDShortAltLine_" .. i, "HUDBrightness"}, {{0}, {3.25}}})
---
--- addHUDTextParam(nil, {10}, longAltLine, nil, HUDLvls.mask, nil, nil, "HMDAltBig_" .. i, align.LC)
--- addHUDTextParam(
--- nil, {-21.5, hundredsOffsetY}, longAltLine, nil, HUDLvls.mask, {"HMDAltBig_" .. i, "HMDAltSmallStr_" .. i},
--- {{ctrl.inRange, 0, 9, 100}, {ctrl.inRange, 1, -.1, 9.1}}, "HMDAltSmall_" .. i, align.LC, {"%s"}, HUDStrdefs.hundreds
--- )
--- addHUDTextParam(
--- nil, {-29, hundredsOffsetY}, longAltLine, nil, HUDLvls.mask, {"HMDAltBig_" .. i, "HMDAltSmallStr_" .. i, "HMDAltSmall_" .. i},
--- {{ctrl.inRange, 0, 0, 10}, {ctrl.inRange, 1, -.1, 9.1}, {ctrl.text, 2}}, nil, align.LC, {"%s"}, HUDStrdefs.hundreds
--- )
--- end
-
-
---[[
 addHUDText(
-	"Alt_Mode_Ind", {.58 * fov2MilRad, -.5 * fov2MilRad}, "Moving_Sides", nil, nil, {"altMode", "RadarAltAvail", "HUDDeclutt", "ALT_77"},
-	{{ctrl.inRange, 0, 1.9, 2.1}, {ctrl.inRange, 1, .9, 1.1}, {ctrl.compareNum, 2, 0}, {ctrl.moveY, 3, .00001}}, "77", nil, HUDStrdefs.seventyseven
+	"Alt_Scale_RA_Ind", {-9, -11.25}, "Alt_Scale_Mask_Small", nil, HUDLvls.mask, {"altMode", "altRIndY"},
+	{{ctrl.compareNum, 0, 2}, {ctrl.moveY, 1, -altitudeScaleMult}}, "R", align.LC
 )
 
 
-addHUDSimple(
-	"Alt_Tape_Base", {0, 173}, nil, "Moving_Sides", nil, nil, {"ALTITUDE_HUD", "HUDDeclutt"},
-	{{ctrl.moveY, 0, -.00020944}, {ctrl.compareNum, 1, 0}}
-)
-
+addHUDSimple("Declutt_Altitude_Base", {0, 7}, nil, "Right_Side", nil, nil, {"altitudeDeclutt"}, {{ctrl.compareNum, 0, 1}})
+addHUDText("D_Alt_A", nil, "Declutt_Altitude_Base", hcr.rw, nil, {"altMode"}, {{ctrl.compareNum, 0, 1}}, "A")
+addHUDText("D_Alt_RA", nil, "Declutt_Altitude_Base", hcr.rw, nil, {"altMode"}, {{ctrl.compareNum, 0, 2}}, "RA")
+addHUDSimple("D_Alt_Readout_Base", {11, -12}, nil, "Declutt_Altitude_Base", nil, nil, {"HUDAltReadoutAvail"}, {{ctrl.compareNum, 0, 1}})
 addHUDTextParam(
-	"Ralt_Readout", {.528 * fov2MilRad, -.282 * fov2MilRad}, "Moving_Sides", hcr.rw, nil, {"TEXT_RALT", "HUDDeclutt", "altMode"},
-	{{ctrl.inRange, 0, 0, 10000}, {ctrl.compareNum, 1, 0}, {ctrl.compareNum, 2, 2}}, "TEXT_RALT", align.RC
+	"D_Alt_Readout_Low", nil, "D_Alt_Readout_Base", nil, nil, {"HUDAltReadout"}, {{ctrl.inRange, 0, -1000, 1000}},
+	"HUDAltReadout", align.RC
+)
+addHUDTextParam(
+	"D_Alt_Readout_High_Thousands", {-16}, "D_Alt_Readout_Base", nil, nil, {"HUDAltReadoutThousands"}, {{ctrl.inRange, 0, -100, 100}},
+	"HUDAltReadoutThousands", align.RC
+)
+addHUDTextParam(
+	"D_Alt_Readout_High_Hundreds", {0, -1.6}, "D_Alt_Readout_High_Thousands", nil, nil, nil, nil,
+	"HUDAltReadoutHundreds", align.LC, nil, HUDStrdefs.hundreds
+)
+addHUDText( -- Such a bad way to fix it, but hey, it works.
+	"D_Alt_Readout_High_Hundreds000", nil, "D_Alt_Readout_High_Hundreds", nil, nil, {"HUDAltReadoutHundreds"}, {{ctrl.compareNum, 0, 0}},
+	"000", align.LC, HUDStrdefs.hundreds
 )
 
 
-local thousandsOffsetX = .655 * fov2MilRad
-local thousandsOffsetY = -1 * fov2MilRad
-
-local hundredsOffsetX = .72 * fov2MilRad
-local hundredsOffsetY = -1.0075 * fov2MilRad
-local altLineOffset = .15 * fov2MilRad
--- local altTextOffset = .149955
-local altTextOffset = math.rad(2) * 1000
-
-local counter = -1
-local hundreds = 0
-local Thousands = 0
-
-for i = 0, 810 do
-	-- AltitudeLine 						= CreateElement "ceMeshPoly"
-	-- AltitudeLine.name 					= create_guid_string()
-	-- AltitudeLine.primitivetype 			= "triangles"
-	-- AltitudeLine.vertices				= {{-headinglineThickness, hdgLineHeight}, {headinglineThickness, hdgLineHeight}, {headinglineThickness, 0}, {-headinglineThickness, 0}}
-	-- AltitudeLine.material				= MakeMaterial(nil,{0, 255, 0,255})
-	-- AltitudeLine.indices				= {0,1,2 , 0,2,3}
-	-- AltitudeLine.init_pos				= { 0, altTextOffset * i }	-- placing segments as a function of iteration step
-	-- AltitudeLine.init_rot				= {90, 0 , 0}	
-	-- AltitudeLine.h_clip_relation		= h_clip_relations.INCREASE_IF_LEVEL--DECREASE_IF_LEVEL  	--INCREASE_IF_LEVEL
-	-- AltitudeLine.level  		 		= HUD_DEFAULT_LEVEL --+ 1
-	-- AltitudeLine.use_mipfilter			= true
-	-- AltitudeLine.additive_alpha			= true
-	-- AltitudeLine.collimated				= true
-	-- AltitudeLine.parent_element			= "Alt_Tape_Base".name
-	-- AltitudeLine.blend_mode 			= blend_mode.IBM_REGULAR_ADDITIVE_ALPHA
-	-- AltitudeLine.ScreenType				= Stype
-	-- AltitudeLine.element_params			= {"HUDBrightness"}
-	-- AltitudeLine.controllers			= {{ctrl.opacity ,0}}	
-	-- Add(AltitudeLine)
-
-	counter = counter + 1
-
-	if counter == 10 then
-		counter = 0
-		Thousands = Thousands + 1
-	end
-
-	hundreds = counter
-
-	if Thousands < 1 then
-		if hundreds == 0 then
-			addHUDText(
-				"Hundreds_" .. hundreds, {hundredsOffsetX, hundredsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-				nil, hundreds
-			)
-		else
-			addHUDText(
-				"Hundreds_" .. hundreds .. "00", {hundredsOffsetX, hundredsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-				nil, hundreds
-			)
-		end
-	elseif Thousands >= 1 and Thousands < 10 then
-		local hundredsOffsetX = .705 * fov2MilRad
-
-		addHUDText(
-			"Thousands_" .. Thousands, {thousandsOffsetX, thousandsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-			nil, Thousands
-		)
-
-		addHUDText(
-			"Hundreds_2_" .. hundreds .. "00", {hundredsOffsetX, hundredsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-			nil, hundreds .. "00", nil, HUDStrdefs.altitudeSmall
-		)
-	else
-		local hundredsOffsetX = .725 * fov2MilRad
-
-		addHUDText(
-			"Thousands_2_" .. Thousands, {thousandsOffsetX, thousandsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-			nil, Thousands
-		)
-
-		addHUDText(
-			"Hundreds_3_" .. hundreds .. "00", {hundredsOffsetX, hundredsOffsetY + i * altTextOffset, 0.1}, "Alt_Tape_Base", hcr.decIf, HUDLvls.mask, nil,
-			nil, hundreds .. "00", nil, HUDStrdefs.altitudeSmall
-		)
-	end
-end
-
-addHUDSimple(
-	"Terrain_Alt_Box", {.68 * fov2MilRad, -.62 * fov2MilRad}, nil, "Moving_Sides", nil, nil, {"ALTITUDE_HUD", "HUDDeclutt"},
-	{{ctrl.inRange, 0, 1000, 81000}, {ctrl.compareNum, 1, 0}}
-)
--- local TerrainAltitudeBox          = Hud_Horizon_Line(HUD_HORIZON, 1861, 969, 2296, 1116, .8 * fov2MilRad)
--- TerrainAltitudeBox.name           = create_guid_string()
--- TerrainAltitudeBox.init_pos       = {.68 * fov2MilRad, -.62 * fov2MilRad, 0}
--- TerrainAltitudeBox.init_rot       = {0, 0, 0}
--- TerrainAltitudeBox.parent_element = "Moving_Sides"
--- TerrainAltitudeBox.element_params = {"HUDBrightness", "ALTITUDE_HUD", "HUDDeclutt"}
--- TerrainAltitudeBox.controllers    = {{ctrl.opacity, 0}, {ctrl.inRange, 1, 1000, 81000}, {ctrl.compareNum, 2, 0}}
--- AddHudElement(TerrainAltitudeBox)
-
-addHUDTextParam("Terrain_Alt_Readout", {0, .028}, "Terrain_Alt_Box", nil, nil, nil, nil, "TERRAIN_ALT")
 
 
-addHUDSimple("Alt_A2G_Base", {.65 * fov2MilRad}, nil, "Moving_Sides", nil, nil, {"weaponsMode"}, {{ctrl.compareNum, 0, 4}})
-
-addHUDText("Alt_A2G_A", {0, -.1 * fov2MilRad}, "Alt_A2G_Base", nil, nil, nil, nil, "A")
-addHUDTextParam("Alt_A2G_Readout", {0, -.2 * fov2MilRad}, "Alt_A2G_Base", nil, nil, nil, nil, "ALTITUDE_HUD")
---]]
 
 
 
@@ -424,7 +336,7 @@ for i = 0, 360, 30 do
 	local angle = math.rad(i + 90)
 	local name = "Aiming_Circle_Circles_" .. i + 90
 
-	copyElement(aimingCircle, {"name", "init_pos"}, {name, {40 * math.cos(angle), 40 * math.sin(angle)}})
+	copyElement(aimingCircle, {"name", "init_pos"}, {name, {35 * math.cos(angle), 35 * math.sin(angle)}})
 
 	if i == 90 then
 		addHUDSimpleLine(nil, nil, nil, name, nil, nil, nil, nil, nil, {{0}, {-7}})
@@ -436,13 +348,13 @@ end
 local minRange = 30
 local angleMinRange = math.rad(180 + minRange)
 local aimingCircleMinRange = addHUDSimpleLine(
-	nil, {40 * math.cos(angleMinRange), 40 * math.sin(angleMinRange)}, {-90 + minRange}, aimingCircle, nil, nil,
+	nil, {35 * math.cos(angleMinRange), 35 * math.sin(angleMinRange)}, {-90 + minRange}, aimingCircle, nil, nil,
 	nil, nil, nil, {{0, -1}, {0, -4.8}, {2.5, -4.8}}
 )
 
 get_param_handle("RADAR_STT_RANGE_CARROT_RANGE"):set(.6)
 for i = 0, 999, 1 do
-	addHUDCircle(nil, nil, {90, 180}, aimingCircle, nil, nil, {"RADAR_STT_RANGE_CARROT_RANGE"}, {{ctrl.inRange, 0, (i - 1) / 180, i / 180}}, 41, 39.1, i, 186)
+	addHUDCircle(nil, nil, {90, 180}, aimingCircle, nil, nil, {"RADAR_STT_RANGE_CARROT_RANGE"}, {{ctrl.inRange, 0, (i - 1) / 180, i / 180}}, 41 - 5, 39.1 - 5, i, 186)
 end
 
 addHUDSimple(
@@ -453,8 +365,8 @@ copyElement(
 	aimingCircleMinRange, {"init_pos", "init_rot", "vertices"}, {
 		{0}, {0},
 		{
-			{-2 + (40 * math.sin(math.rad(180))), 7 + (40 * math.cos(math.rad(180)))}, {0 + (40 * math.sin(math.rad(180))), 2.1 + (40 * math.cos(math.rad(180)))},
-			{2 + (40 * math.sin(math.rad(180))),  7 + (40 * math.cos(math.rad(180)))}
+			{-2 + (35 * math.sin(math.rad(180))), 7 + (35 * math.cos(math.rad(180)))}, {0 + (35 * math.sin(math.rad(180))), 2.1 + (35 * math.cos(math.rad(180)))},
+			{2 + (35 * math.sin(math.rad(180))),  7 + (35 * math.cos(math.rad(180)))}
 		}
 	}
 )
@@ -462,7 +374,7 @@ copyElement(
 local innerOuterRange = 163
 local angleIORange = math.rad(180 + innerOuterRange)
 copyElement(
-	aimingCircleMinRange, {"init_pos", "init_rot", "vertices"}, {{40 * math.cos(angleIORange), 40 * math.sin(angleIORange)}, {-90 + innerOuterRange}, {
+	aimingCircleMinRange, {"init_pos", "init_rot", "vertices"}, {{35 * math.cos(angleIORange), 35 * math.sin(angleIORange)}, {-90 + innerOuterRange}, {
 		{0, -1}, {0, -4.8}, {-2.5, -4.8}, {2.5, -4.8}
 	}}
 )
