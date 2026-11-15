@@ -27,6 +27,7 @@ local rollRad = get_param_handle("rollRad")
 local CURRENT_PHASE = get_param_handle("CURRENT_PHASE")
 
 
+local terrain = require("terrain")
 local baseData = get_base_data()
 
 
@@ -112,18 +113,22 @@ function update()
 
 
 
+	local selfX, selfZ, selfY = baseData.getSelfCoordinates()
+
 	baroAlt = baseData.getBarometricAltitude() * M_TO_FT
+
 	if math.abs(math.deg(pitchRad:get())) >= 30 or math.abs(math.deg(rollRad:get())) >= 30 then
-		rAlt = get_param_handle("GPSAlt"):get() - get_param_handle("terrainAlt"):get()
+		rAlt = get_param_handle("GPSAlt"):get() - get_param_handle("radarTerrainAlt"):get()
 	else
 		rAlt = baseData.getRadarAltitude() * M_TO_FT
 	end
 
 
 	get_param_handle("baroAlt"):set(baroAlt)
-	get_param_handle("radarAlt"):set(rAlt)
-	txtAlt:set(math.floor((baroAlt + 5) / 10) * 10)
-	txtRalt:set(math.floor((rAlt + 5) / 10) * 10)
+	get_param_handle("radarAlt"):set(M_TO_FT * (selfZ - terrain.GetHeight(selfX, selfY)))
+
+	-- txtAlt:set(math.floor((baroAlt + 5) / 10) * 10)
+	-- txtRalt:set(math.floor((rAlt + 5) / 10) * 10)
 end
 
 function SetCommand(command, value)

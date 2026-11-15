@@ -142,8 +142,8 @@ function update()
 		ALTITUDE_H:set(math.floor(sensor_data.getBarometricAltitude() * 3.2808399 % 1000)) -- feet
 	else
 		if (Local_RALT > 5249.4) and (Local_RALT < 5249.6) then
-			ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get()) / 1000)
-			ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get()) % 1000)
+			ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("radarTerrainAlt"):get()) / 1000)
+			ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("radarTerrainAlt"):get()) % 1000)
 		else
 			ALTITUDE_T:set(math.floor(sensor_data.getRadarAltitude() * 3.2808399 / 1000)) -- feet
 			ALTITUDE_H:set(math.floor(sensor_data.getRadarAltitude() * 3.2808399 % 1000)) -- feet
@@ -159,10 +159,10 @@ function update()
 
 
 	if (Local_RALT > 5249.4) and (Local_RALT < 5249.6) then -- when Radar altimiter cant get an accurate readout it returs ~5249.5
-		RAW_RALT:set((sensor_data.getBarometricAltitude() * 3.2808399) - get_param_handle("terrainAlt"):get())
+		RAW_RALT:set((sensor_data.getBarometricAltitude() * 3.2808399) - get_param_handle("radarTerrainAlt"):get())
 
-		ALT_ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get()) / 1000) -- feet
-		ALT_ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("terrainAlt"):get()) % 1000) -- feet		
+		ALT_ALTITUDE_T:set(math.floor(GPSAlt:get() - get_param_handle("radarTerrainAlt"):get()) / 1000) -- feet
+		ALT_ALTITUDE_H:set(math.floor(GPSAlt:get() - get_param_handle("radarTerrainAlt"):get()) % 1000) -- feet		
 
 
 	else
@@ -174,7 +174,7 @@ function update()
 
 	end
 
-	local EMGY_VSI = sensor_data.getVerticalVelocity() * 3.2808399 * 60
+	local EMGY_VSI = sensor_data.getVerticalVelocity() * 3.2808399 * 60 -- ft/min
 
 	if EMGY_VSI > 2000 then
 		EMGY_VSI = 2000
