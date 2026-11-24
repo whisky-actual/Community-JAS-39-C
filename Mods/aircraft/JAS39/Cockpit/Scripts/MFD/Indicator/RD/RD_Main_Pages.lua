@@ -257,6 +257,10 @@ addRDTextParam(
 
 
 -- ========== Information segment ==========
+
+
+--STT Locked target
+
 addRDBox("InfoBG",{0,0.6}, nil, "RDR_Page", nil, lvls.mask, nil, nil, 1.6, 0.4, nil, true)
 
 --radar mode(LP or STT only right now)
@@ -289,6 +293,69 @@ addRDTextParam(nil,{-0.63,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctr
 -- azimuth to the STT target
 addRDText(nil,{-0.48,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "BE", align.CL, nil, nil)
 addRDTextParam(nil,{-0.44,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE"}, {{ctrl.compareNum, 0, 3}}, "RADAR_STT_azimuthdegrees", align.LC, nil, nil)
+
+-- for priority targets
+-- 1 priority target(same as STT target)
+
+
+
+-- IFF response(HOSTL, FRND, UNK) prio - 1
+addRDText("IFF1",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_01_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 0},{ctrl.inRange, 2, 0.9, 5}}, "HOSTL", align.CL, nil, nil)
+addRDText("IFF1",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_01_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 1},{ctrl.inRange, 2, 0.9, 5}}, "FREND", align.CL, nil, nil)
+addRDText("IFF1",{-0.4,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_01_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, -1},{ctrl.inRange, 2, 0.9, 5}}, "BOGEY", align.CL, nil, nil)
+
+
+-- IFF code(i think???) prio - 1
+addRDText("IFF1",{-0.1,0.15}, nil, "InfoBG", nil, nil,  {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "X----", align.CL, nil, nil)
+
+-- range to STT target prio - 1
+addRDText(nil,{-0.79,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "R", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "RADAR_STT_RANGEnmi", align.RC, nil, nil)
+
+-- altitude of STT target(doesnt work yet, need to figure out how to get the altitude of the target)
+-- prio - 1 
+addRDText(nil,{-0.79,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "A", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "PRIORITY_CONTACT_01_altK", align.RC, nil, nil)
+
+-- velocity of STT target(non functional) prio - 1
+addRDText(nil,{-0.79,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "M", align.CL, nil, nil)
+addRDTextParam(nil,{-0.63,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "RADAR_STT_vel", align.RC, nil, nil)
+
+-- azimuth to the STT target prio - 1
+addRDText(nil,{-0.48,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "BE", align.CL, nil, nil)
+addRDTextParam(nil,{-0.44,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 0.9, 5}}, "PRIORITY_CONTACT_01_heading", align.LC, nil, nil)
+
+
+
+-- prio 2
+
+
+-- IFF response(HOSTL, FRND, UNK) prio - 2
+addRDText("IFF1",{0.32,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_02_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 0},{ctrl.inRange, 2, 1.9, 5}}, "HOSTL", align.CL, nil, nil)
+addRDText("IFF1",{0.32,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_02_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, 1},{ctrl.inRange, 2, 1.9, 5}}, "FREND", align.CL, nil, nil)
+addRDText("IFF1",{0.32,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE", "PRIORITY_CONTACT_02_FRIENDLY","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1}, {ctrl.compareNum, 1, -1},{ctrl.inRange, 2, 1.9, 5}}, "BOGEY", align.CL, nil, nil)
+
+addRDText("IFF1",{0.55,0.15}, nil, "InfoBG", nil, nil,  {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "X----", align.CL, nil, nil)
+
+
+-- range to STT target prio - 2
+addRDText(nil,{0.07,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "R", align.CL, nil, nil)
+addRDTextParam(nil,{0.19,0.15}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "RADAR_STT_RANGEnmi", align.RC, nil, nil)
+
+-- altitude of STT target(doesnt work yet, need to figure out how to get the altitude of the target)
+-- prio - 2
+addRDText(nil,{0.07,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "A", align.CL, nil, nil)
+addRDTextParam(nil,{0.19,0.09}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "PRIORITY_CONTACT_02_altK", align.RC, nil, nil)
+
+-- velocity of STT target(non functional) prio - 2
+addRDText(nil,{0.07,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "M", align.CL, nil, nil)
+addRDTextParam(nil,{0.19,0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "RADAR_STT_vel", align.RC, nil, nil)
+
+-- azimuth to the STT target prio - 2
+addRDText(nil,{0.38,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "BE", align.CL, nil, nil)
+addRDTextParam(nil,{0.38,-0.03}, nil, "InfoBG", nil, nil, {"RADAR_MODE","NumberOfPriorityTargets"}, {{ctrl.compareNum, 0, 1},{ctrl.inRange, 1, 1.9, 5}}, "PRIORITY_CONTACT_02_heading", align.LC, nil, nil)
+
+
 
 
 
@@ -370,9 +437,10 @@ addRDBox("scanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask,  {"RADAR_MODE", 
 
 local STTContactSTR = "RADAR_STT_"
 
-addRDBox("STTscanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "STT_RDX_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.inRange, 0, 2.9, 3.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
+addRDBox("STTscanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "STT_RDX_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.inRange, 0, 2.9, 3.1}, {ctrl.moveX, 1, 0.0836 },}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
 
-addRDBox("STTscanbox", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "Cursor_X_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR"}, {{ctrl.inRange, 0, 1.9, 2.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
+addRDBox("STTscanbox1", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "Cursor_X_Clamped", "BASE_SENSOR_WOW_LEFT_GEAR","NumberOfPriorityTargets"}, {{ctrl.inRange, 0, 1.9, 2.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0}, {ctrl.compareNum, 3, 0}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
+addRDBox("STTscanbox2", {0, 0}, nil, "Scope_BG", hcr.rw, lvls.mask, {"RADAR_MODE", "PRIORITY_CONTACT_01_RDX", "BASE_SENSOR_WOW_LEFT_GEAR","NumberOfPriorityTargets"}, {{ctrl.inRange, 0, 1.9, 2.1}, {ctrl.moveX, 1, 0.0836 }, {ctrl.compareNum, 2, 0},{ctrl.inRange, 3, 0.9, 5}}, scpSize * 1/24, scpSize * 2, materials["MFDBeige"])
 
 -- Side azimuth tick marks from alt scope
 local tmpCounter = 0
@@ -783,7 +851,7 @@ local function createThreatContact(n)
 		i = "_" .. n .. "_"
 	end
 
-	filteredSTR = "FILTERED_CONTACT" .. i
+	filteredSTR = "FILTERED_CONTACT_" .. i
 	
 
 
@@ -834,7 +902,7 @@ local function createThreatContact(n)
 	addRDSimpleLine(
 		nil, nil, nil, "Radar_Contact_Enemy" .. i, hcr.rw, nil,
 		{filteredSTR .. "BSHdg", filteredSTR .. "RDVelvecX", filteredSTR .. "RDVelvecY", filteredSTR .. "FRIENDLY"},
-		{{ctrl.rotate, 0, -1}, {ctrl.setPoint, 1, 1, 2, 376, 376}, {ctrl.changeColor, 3, 0, 1, 0.0116122451797439, 0.00856812561806931}}, nil, nil, materials["MFDDayYellow"]
+		{{ctrl.rotate, 0, -1}, {ctrl.setPoint, 1, 1, 2, 0.2, 0.2}, {ctrl.changeColor, 3, 0, 1, 0.0116122451797439, 0.00856812561806931}}, nil, nil, materials["MFDDayYellow"]
 	) -- .002225 / 2
 
 	addRDTextParam(
@@ -844,11 +912,108 @@ local function createThreatContact(n)
 	)
 end
 
+local function createPrioContact(n)
+	local i
+	local filteredSTR 
+
+	if n < 10 then
+		i = "_0" .. n .. "_"
+	else
+		i = "_" .. n .. "_"
+	end
+
+	filteredSTR = "PRIORITY_CONTACT" .. i
+	
+
+
+	-- Alt scope
+
+	--addRDMeshPoly(
+	--	"Alt_Scope_Enemy" .. i, {-halfAltScpW, -halfAltScpH}, nil, "Alt_Scope", hcr.rw, nil,
+	--	{enemyContactSTR .. "altScpRange", enemyContactSTR .. "alt", enemyContactSTR .. "FRIENDLY"},
+	--	{{ctrl.moveX, 0, altScpRangeGain}, {ctrl.moveY, 1, altInFtGain}, {ctrl.compareNum, 2, 0}}, copyVerts(circleVerts), circleInds, materials["red"]
+	--)
+
+
+
+
+
+
+	--[[addRDMeshPoly(
+		"Alt_Scope_Enemy" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+		{contactSTR .. "altScpRange", contactSTR .. "alt", contactSTR .. "FRIENDLY"},
+		{{ctrl.moveX, 1, altScpRangeGain}, {ctrl.moveY, 0, altInFtGain}, {ctrl.compareNum, 2, 0}},
+		circleVerts, circleInds, materials["MFDRed"]
+	)]]
+
+	-- BScope:
+	-- addRDMeshPoly(
+	-- 	"BScope_Enemy" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+	-- 	{enemyContactSTR .. "BSX", enemyContactSTR .. "BSY", enemyContactSTR .. "FRIENDLY"},
+	-- 	{{ctrl.moveX, 0, 0.12}, {ctrl.moveY, 1, 0.08}, {ctrl.compareNum, 2, 0}},
+	-- 	copyVerts(bcircleVerts), circleInds, materials["red"]
+	-- )
+	addRDSimple( -- Planning for TWS when we will need to have TWS and non TWS targets.
+		"Radar_Contact_Priority" .. i, {0, -scpSize}, nil, "Scope_BG", hcr.rw, nil,
+		{"RADAR_MODE", filteredSTR .. "FRIENDLY", filteredSTR .. "BSX", filteredSTR .. "BSY", filteredSTR .. "BSHdg", filteredSTR .. "FRESH"},
+		{{ctrl.inRange, 0, .9, 2.9}, {ctrl.inRange, 1, -1.1, 0.1}, {ctrl.moveX, 2, .0836}, {ctrl.moveY, 3, .0936}, {ctrl.rotate, 4, 1}, {ctrl.compareNum, 5, 1}}
+	)
+
+	--addRDCircle(
+	--	nil, nil, nil, "Radar_Contact_Enemy_priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "priority"},
+	--	{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.inRange, 1, 0.9, 2.9}}, AirContactScale, 0, 360, 15, materials["MFDDayYellow"]
+	--)
+
+
+
+
+	addRDCircle(
+		nil, nil, nil, "Radar_Contact_Priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY"},
+		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}}, AirContactScale, 0, 360, 15, materials["MFDDayYellow"]
+	)
+
+
+	-- The cross only shows on priority 1 (the target S11 locks).
+	for rot = 0, 1 do
+		addRDSimpleLine(
+			nil, nil, {45 + 90 * rot}, "Radar_Contact_Priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "priority"},
+			{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.compareNum, 1, 1}}, nil, {{-.04}, {.04}}, materials["MFDDayYellow"]
+		)
+	end
+
+
+	addRDSimpleLine(
+		nil, nil, nil, "Radar_Contact_Priority" .. i, hcr.rw, nil,
+		{filteredSTR .. "BSHdg", filteredSTR .. "RDVelvecX", filteredSTR .. "RDVelvecY", filteredSTR .. "FRIENDLY"},
+		{{ctrl.rotate, 0, -1}, {ctrl.setPoint, 1, 1, 2, 0.001, 0.001}, {ctrl.changeColor, 3, 0, 1, 0.0116122451797439, 0.00856812561806931}}, nil, nil, materials["MFDDayYellow"]
+	) -- .002225 / 2
+
+	addRDTextParam(
+		nil, {0, -.04}, nil, "Radar_Contact_Priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "altK"},
+		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.text, 1}}, filteredSTR .. "altK", nil, {"%.0f"}, strdefs["half"],
+		newFonts["MFD_MFDDayYellow"]
+	)
+
+	-- the priority number (1-4)
+	addRDTextParam(
+		nil, {.045, .045}, nil, "Radar_Contact_Priority" .. i, hcr.rw, nil, {filteredSTR .. "FRIENDLY", filteredSTR .. "priority"},
+		{{ctrl.changeColor, 0, 0, 1, 0.0116122451797439, 0.00856812561806931}, {ctrl.text, 1}}, filteredSTR .. "priority", nil, {"%.0f"}, strdefs["half"],
+		newFonts["MFD_MFDDayYellow"]
+	)
+end
+
+
+
+
+
 for n = 1, 99 do
 	createFriendlyContact(n)
 	createThreatContact(n)
 end
 
+for n = 1, 4 do
+	createPrioContact(n)
+end
 
 local STTContactSTR = "RADAR_STT_"
 

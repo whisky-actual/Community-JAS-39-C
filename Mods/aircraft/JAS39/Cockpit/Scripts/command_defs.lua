@@ -657,7 +657,10 @@ keys = {
 	-------------------------------------------------------
 	S10SpanScaleUp   = __custom_counter(),
 	S10SpanScaleDown = __custom_counter(),
-
+	S5StageOne = __custom_counter(),
+	S5StageTwo = __custom_counter(),
+	S1PriorityStep = __custom_counter(),
+	S11Lock = __custom_counter(),
 	-- Stick:
 	-- stickS3AimingMode = __custom_counter(),
 

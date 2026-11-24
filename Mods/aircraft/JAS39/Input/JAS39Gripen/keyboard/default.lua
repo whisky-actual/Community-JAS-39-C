@@ -176,6 +176,13 @@ join(res.keyCommands,{
 {down = keys.S10SpanScaleDown, name = _('Span Down (S10)'),  category = _('Throttle'), _("SHC")},
 {down = keys.S10SpanScaleUp, name = _('Span Up (S10)'),  category = _('Throttle'), _("SHC")},
 
+{down = keys.S5StageOne, name = _('Prioritze Target (S5 Stage One)'),  category = _('Throttle'), _("SHC")},
+{down = keys.S5StageTwo, name = _('Prioritze Target (S5 Stage Two)'),  category = _('Throttle'), _("SHC")},
+{down = keys.S1PriorityStep, name = _('Target Priority Step (S1)'),  category = _('Throttle'), _("SHC")},
+{down = keys.S11Lock, name = _('Lock (S11)'),  category = _('Throttle'), _("SHC")},
+
+
+
 	-- Flightstick
 	{down = keys.stickS5Up,                          up = keys.stickS5Up,                                         name = _("A/A Mode / Next A/A Weapon (S5 Up)"),               category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},
 	{down = keys.stickS5Down,                        up = keys.stickS5Down,                                       name = _("A/S Mode / Next A/S Weapon (S5 Down)"),             category = _("Stick"),                                    value_down = 1.0,                                         value_up = 0.0},

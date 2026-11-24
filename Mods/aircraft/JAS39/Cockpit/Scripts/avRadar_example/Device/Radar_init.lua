@@ -1,5 +1,6 @@
+dofile(LockOn_Options.script_path .. "command_defs.lua")
 dofile(LockOn_Options.script_path .. "utils.lua")
-
+local lock = 0
 --[[
 -- Path to your DLL files folder
 local dll_path = LockOn_Options.script_path:gsub("([^/]+/[^/]+/)$", "") .. "bin/" -- gsub removes "Cockpit\Script\" from the end
@@ -19,12 +20,13 @@ print_message_to_user(tostring(Dump(Avionics)))
 --]]
 
 
-
 -- Variables from avDevice/other globals/init
 local updateTimeStep = 1 / 60
 make_default_activity(updateTimeStep)
 
 local simpleRadar = GetSelf()
+
+
 
 local baseData = get_base_data()
 
@@ -97,7 +99,6 @@ for n = 1, 99 do
 		VZ = get_param_handle(contactSTR .. "VZ"),         -- Velocity Z in m/s
 
 		-- Custom:
-		priority = get_param_handle(contactSTR .. "priority"), -- Priority of contact (0-4) 0 = non priority
 		vel = get_param_handle(contactSTR .. "vel"), -- Velocity in kts
 		horVel = get_param_handle(contactSTR .. "horVel"), -- Hozisontal velocity in kts
 		relHdg = get_param_handle(contactSTR .. "relHdg"), -- Heading of contact
@@ -122,7 +123,12 @@ for n = 1, 99 do
 		HUDEl = get_param_handle(contactSTR .. "HUDEl"),
 		isFresh = get_param_handle(contactSTR .. "isFresh"),
 		prevAz = 0,
-		prevAzVel = 0
+		prevAzVel = 0,
+		fPrevAz = 0,     -- used by the filter to spot a new radar return
+		fPrevEl = 0,
+		fPrevRange = 0,
+		ownerTrack = 0,  -- filtered track this slot last fed
+		ownerGen = 0
 	}
 end
 
@@ -166,7 +172,32 @@ local STTContact = {
 	altitude = get_param_handle(STTContactSTR .. "altitude") -- alitude in nautical miles
 }
 
-local MAX_FILTERED = 99 
+-- ============================================================
+-- FILTERED CONTACTS
+-- A persistent track list built from the raw radar returns.
+-- Tracks are stored in WORLD coordinates (X = north, Z = east, metres),
+-- so they don't care how far you move or turn between radar returns.
+--
+-- Every filtered contact exposes the same params as a raw contact
+-- (FILTERED_CONTACT__01_AZIMUTH, ..._RANGE, ..._BSX, ..._NCTR, etc.)
+-- so the draw file can point at them instead of RADAR_CONTACT_xx_*.
+-- Extra params only filtered contacts have:
+--   FRESH  - 1 while the track exists, 0 for an empty slot
+--   WORLDX - track position in metres (north)
+--   WORLDZ - track position in metres (east)
+-- ============================================================
+
+local MAX_FILTERED = 99
+
+local filteredParamNames = {
+	-- same as RADAR_CONTACT_xx_*
+	"AZIMUTH", "ELEVATION", "FRIENDLY", "NCTR", "NOISE", "RANGE", "RCS", "RCS_COEFF", "RND", "TIME", "VX", "VY", "VZ",
+	"vel", "horVel", "relHdg", "heading", "RDX", "RDY", "RDVelvecX", "RDVelvecY", "RDVelvec",
+	"BSX", "BSY", "BSVelvec", "BSHdg", "alt", "altK", "altScpRange", "pitch", "altScpVelvec",
+	"antennaEl", "HUDEl", "isFresh",
+	-- filtered only
+	"FRESH", "WORLDX", "WORLDZ"
+}
 
 local filteredContacts = {}
 for n = 1, MAX_FILTERED do
@@ -176,39 +207,53 @@ for n = 1, MAX_FILTERED do
 	else
 		fi = "_" .. n .. "_"
 	end
-	local filteredSTR = "FILTERED_CONTACT" .. fi
+	local filteredSTR = "FILTERED_CONTACT_" .. fi
 
-	filteredContacts[n] = {
-		FRESH = get_param_handle(filteredSTR .. "FRESH"),       -- 1 = active track, 0 = empty slot
-		AZIMUTH = get_param_handle(filteredSTR .. "AZIMUTH"),   -- smoothed, radians
-		RANGE = get_param_handle(filteredSTR .. "RANGE"),       -- smoothed, meters
-		FRIENDLY = get_param_handle(filteredSTR .. "FRIENDLY"),
-		BSX = get_param_handle(filteredSTR .. "BSX"),
-		BSY = get_param_handle(filteredSTR .. "BSY"),
-		BSHdg = get_param_handle(filteredSTR .. "BSHdg"),
-		VX = get_param_handle(filteredSTR .. "VX"),
-		VY = get_param_handle(filteredSTR .. "VY"),
-		VZ = get_param_handle(filteredSTR .. "VZ"),
-		PRIORITY = get_param_handle(filteredSTR .. "PRIORITY"),
-		isFresh = get_param_handle(filteredSTR .. "isFresh"),
-
-
-		
+	local ft = {
+		-- internal state (not params)
 		active = false,
-		az = 0,
-		range = 0,
-		vx = 0,
+		worldX = 0,        -- metres, north
+		worldZ = 0,        -- metres, east
+		vx = 0,            -- m/s, world frame
 		vy = 0,
 		vz = 0,
-		framesSinceMatch = 0
+		el = 0,            -- elevation of the last return
+		nctr = "",
+		age = 0,           -- seconds since the last confirmed return
+		index = n,
+		gen = 0,           -- changes every time this slot starts a new track
+		srcSlot = 0,       -- raw slot that last fed this track
+		velInit = false,   -- true once a speed has been measured
+		refX = 0,          -- where the last speed measurement started (metres)
+		refZ = 0,
+		refT = 0,          -- and when (filterClock)
+
+		-- needed by processContact(), same as the raw contacts
+		selfAltFt = 0,
+		selfPitch = 0,
+		prevTime = 11
 	}
+
+	for _, name in ipairs(filteredParamNames) do
+		ft[name] = get_param_handle(filteredSTR .. name)
+	end
+
+	filteredContacts[n] = ft
 end
 
-local gateAngle = math.rad(5)  -- matching gate — degrees converted to radians
-local gateRangeMeters = 3000     -- matching gate — meters
-local blendFactor = 1          -- position smoothing speed; higher = snappier, lower = smoother/laggier
-local trackTimeoutFrames = 60   -- ~3s at 60fps before an unmatched track is dropped
-local myspeed = get_param_handle("SPEEDOMETER_IAS")
+-- Filter tuning (ive got it down pretty good but i think it can be improved)
+local gateDistanceMeters = 7000   -- a return within this distance of a track (in the world) joins that track
+local blendFactor = 1             -- 1 = new return replaces the position, lower = smoother but laggier
+local trackTimeoutSeconds = 2     -- seconds without a confirmed return before a track is dropped. Raise it if tracks flicker between scan passes
+local coastTracks = true          -- keep moving a track along its velocity between returns
+local nctrEmptyIsWildcard = false -- false: different NCTR never combine. true: an empty NCTR can combine with any
+local HDG_SIGN = 1                -- (DONT CHANGE THIS IT DONT WORK)0 = work out which way your heading counts from how you actually fly or forces it with 1 or -1
+local velocityMinInterval = 6   -- seconds between the two positions used to measure speed
+local velocityBlend = 0.5         -- how much each new speed measurement counts (1 just overwrites the earlier ones, 0.5 seems the best)
+local velocityMaxInterval = 8     -- a measurement spanning more than this many seconds are thrown away
+local velocityMaxSpeed = 1200     -- m/s, a measurement faster than this is thrown away(this needs change)
+local filterClock = 0.5             -- seconds, only used to time the speed measurements
+local filterDebug = false         -- true: print the track count once a second
 
 
 
@@ -223,7 +268,6 @@ local RDRElLimLowerY = get_param_handle("RDRElLimLowerY")
 local radarScopeMode = get_param_handle("radarScopeMode")
 
 local SnappedContactNum = get_param_handle("SnappedContactNum")
-local nextpriority = get_param_handle("nextpriority")
 
 -- Constants
 local NMI_TO_M = 1852
@@ -313,6 +357,11 @@ function post_initialize()
 	simpleRadar:listen_command(2031)
 	simpleRadar:listen_command(2032)
 
+	simpleRadar:listen_command(keys.S5StageOne) -- gives a target priority
+	simpleRadar:listen_command(keys.S5StageTwo) -- takes a targets priority
+	simpleRadar:listen_command(keys.S1PriorityStep) -- cycles through the priority targets
+	simpleRadar:listen_command(keys.S11Lock) -- locks priority target, STT for now
+	
 	-- print_message_to_user("Radar - INIT")
 
 
@@ -337,26 +386,949 @@ local roll = get_param_handle("BASE_SENSOR_ROLL"):get()
 local snappedContactIndex = nil
 local snapGate = 0.05
 
+-- ============================================================
+-- CURSOR
+-- The cursor is its own thing: it has its own azimuth/range and the hat moves THAT.
+-- The hat no longer touches RADAR_TDC_AZIMUTH / RADAR_TDC_RANGE. The radar's TDC is only
+-- sent to the cursor when you press lock (or every frame if tdcFollowsCursor is true).
+-- ============================================================
+-- The cursor lives ON THE SCREEN. cursorX / cursorY are in the same units as Cursor_X / Cursor_Y,
+-- so where it sits and how fast it moves don't depend on the radar's range scale at all.
+-- The range scale only matters when you press lock: that converts the screen position
+-- into an azimuth and range using whatever scale is selected at that moment.
+local cursorX = 0
+local cursorY = 0
+local cursorStepX = 0.0075 / (perfomance.scan_volume_azimuth / 2) * scopeHalfExtent -- per hat press (0.0075 rad, same as before)
+local cursorStepY = 0.0054                   -- per hat press (this is what 300 m was on a 40 nm scale)
+local cursorXLimit = 1.04 / (perfomance.scan_volume_azimuth / 2) * scopeHalfExtent   -- left/right edge (1.04 rad, same as before)
+local cursorMinY = 0                         -- bottom of the scope
+local cursorMaxY = scopeHalfExtent * 2 / 1.2 -- the full-range line. Raise it if you want the cursor able to leave the top
+
+local bscopeYDivisor = 1.2 -- shared by computeBscopePos and bscopeToPolar so they can't drift apart
+
+-- Screen position -> azimuth (radians) and range (nautical miles) at the CURRENT range scale.
+-- This is the exact inverse of computeBscopePos.
+local function bscopeToPolar(x, y)
+	local az = (x / scopeHalfExtent) * (perfomance.scan_volume_azimuth / 2)
+	local rangeNM = y * bscopeYDivisor / (scopeHalfExtent * 2) * RDRFullRange:get()
+
+	return az, rangeNM
+end
+
+-- Commands that mean "lock what the cursor is on". Press your lock button and read the
+-- "RDR SC: C: ..." message, then keep only the number your button sends.
+local lockCommands = {[509] = true, [100] = true}
+
+-- true: RADAR_TDC_* copies the cursor every frame. Turn it on if the FIRST lock press
+-- locks the old position (the radar read the TDC before this script wrote to it).
+local tdcFollowsCursor = false
+
+-- Counts down after S11 so the normal lock doesn't drag the TDC back to the cursor
+local priorityLockTimer = 0
+
+-- What the cursor is pointing at: a snapped contact's exact az/range, otherwise the free cursor
+local function getCursorTarget()
+	if snappedContactIndex then
+		local sc = contacts[snappedContactIndex]
+
+		if sc.TIME:get() > 0 and sc.isFresh:get() == 1 then
+			return sc.AZIMUTH:get(), sc.RANGE:get()
+		end
+	end
+
+	local az, rangeNM = bscopeToPolar(cursorX, cursorY)
+
+	return az, rangeNM * NMI_TO_M
+end
+
+local function moveTDCToCursor()
+	if priorityLockTimer > 0 then
+		return -- a priority lock just pointed the TDC at its target, don't override it
+	end
+
+	local az, range = getCursorTarget()
+
+	radar.RADAR_TDC_AZIMUTH:set(az)
+	radar.RADAR_TDC_RANGE:set(range)
+end
+
+
+-- ============================================================
+-- PRIORITY TARGETS (a simple pseudo TWS)
+--
+-- Up to MAX_PRIORITY filtered tracks can be given a priority number 1..N.
+--   S5StageOne      gives the target under the cursor the next free number (1, 2, 3, 4)
+--   S5StageTwo      takes the priority off the target under the cursor (the numbers close up)
+--   S1PriorityStep  rotates the numbers: 1 -> N, 2 -> 1, 3 -> 2, ...
+--   S11Lock         points the TDC at priority 1 and starts the lock (STT for now)
+--
+-- PRIORITY_CONTACT_01_* is ALWAYS the priority 1 target, _02_ the priority 2 target, and so on.
+-- Each group has the same params as a filtered contact (AZIMUTH, RANGE, BSX, BSY, NCTR, WORLDX, ...) plus
+--   priority - the group's number (1..N), 0 for an empty group
+--   FRESH    - 1 while the group holds a target
+-- NumberOfPriorityTargets says how many groups are in use.
+-- ============================================================
+
+local MAX_PRIORITY = 4              -- the most priority targets at once. Change this to change the limit (the draw file needs matching icons)
+local prioritySelectGate = 0.08     -- how close (screen units) the cursor must be to a track to pick it
+local priorityLockSendsCommand = true -- true: S11 also starts the radar's lock itself. false: S11 only points the TDC at the target
+local priorityLockStart = 509       -- sent to the radar when S11 is pressed
+local priorityLockFinish = 510      -- sent to the radar when S11 is released
+local priorityLockHold = 0.5        -- seconds after S11 during which the normal lock won't move the TDC back to the cursor
+
+local priorityTargets = {}
+for k = 1, MAX_PRIORITY do
+	local sfx
+	if k < 10 then
+		sfx = "_0" .. k .. "_"
+	else
+		sfx = "_" .. k .. "_"
+	end
+	local prioritySTR = "PRIORITY_CONTACT" .. sfx
+
+	local pt = {
+		active = false,   -- true while this group holds a target
+		trackIndex = 0,   -- which filtered track it is
+		trackGen = 0      -- that track's generation, so a reused slot isn't mistaken for it
+	}
+
+	for _, name in ipairs(filteredParamNames) do
+		pt[name] = get_param_handle(prioritySTR .. name)
+	end
+	pt.priority = get_param_handle(prioritySTR .. "priority")
+
+	priorityTargets[k] = pt
+end
+
+local NumberOfPriorityTargets = get_param_handle("NumberOfPriorityTargets")
+local priorityLockPressed = false
+
+local function countPriority()
+	local n = 0
+
+	for k = 1, MAX_PRIORITY do
+		if priorityTargets[k].active then
+			n = n + 1
+		end
+	end
+
+	return n
+end
+
+local function findPriorityOfTrack(trackIndex)
+	for k = 1, MAX_PRIORITY do
+		local pt = priorityTargets[k]
+
+		if pt.active and pt.trackIndex == trackIndex and pt.trackGen == filteredContacts[trackIndex].gen then
+			return k
+		end
+	end
+
+	return nil
+end
+
+-- removes a priority target and closes the gap: everything below it moves up one group
+local function removePriority(k)
+	for j = k, MAX_PRIORITY - 1 do
+		local a, b = priorityTargets[j], priorityTargets[j + 1]
+
+		a.active, a.trackIndex, a.trackGen = b.active, b.trackIndex, b.trackGen
+	end
+
+	local last = priorityTargets[MAX_PRIORITY]
+	last.active = false
+	last.trackIndex = 0
+	last.trackGen = 0
+end
+
+-- the filtered track closest to the cursor, if it's near enough
+local function trackUnderCursor()
+	local cx, cy = Cursor_X:get(), Cursor_Y:get()
+	local best, bestDist = nil, prioritySelectGate
+
+	for n = 1, MAX_FILTERED do
+		local ft = filteredContacts[n]
+
+		if ft.active then
+			local dx = cx - ft.BSX:get()
+			local dy = cy - ft.BSY:get()
+			local d = math.sqrt(dx * dx + dy * dy)
+
+			if d < bestDist then
+				best, bestDist = n, d
+			end
+		end
+	end
+
+	return best
+end
+
+local function givePriority()
+	local n = trackUnderCursor()
+	if not n or findPriorityOfTrack(n) then
+		return -- nothing there, or it's already a priority target
+	end
+
+	local count = countPriority()
+	if count >= MAX_PRIORITY then
+		return -- full
+	end
+
+	local pt = priorityTargets[count + 1]
+	pt.active = true
+	pt.trackIndex = n
+	pt.trackGen = filteredContacts[n].gen
+end
+
+local function takePriority()
+	local n = trackUnderCursor()
+	if not n then
+		return
+	end
+
+	local k = findPriorityOfTrack(n)
+	if k then
+		removePriority(k)
+	end
+end
+
+-- 1 -> N, 2 -> 1, 3 -> 2, 4 -> 3 (the targets move between groups, the groups keep their numbers)
+local function stepPriority()
+	local count = countPriority()
+	if count < 2 then
+		return
+	end
+
+	local firstTrack, firstGen = priorityTargets[1].trackIndex, priorityTargets[1].trackGen
+
+	for j = 1, count - 1 do
+		local a, b = priorityTargets[j], priorityTargets[j + 1]
+
+		a.trackIndex, a.trackGen = b.trackIndex, b.trackGen
+	end
+
+	priorityTargets[count].trackIndex = firstTrack
+	priorityTargets[count].trackGen = firstGen
+end
+
+local function sendToRadar(command, value)
+	local ok, err = pcall(function()
+		simpleRadar:SetCommand(command, value)
+	end)
+
+	if not ok then
+		print_message_to_user("PRIORITY LOCK: could not send command " .. tostring(command) .. " to the radar: " .. tostring(err))
+	end
+end
+
+-- S11 pressed: point the TDC at priority 1 and start the lock
+local function pressPriorityLock()
+	local pt = priorityTargets[1]
+
+	if pt.active then
+		local ft = filteredContacts[pt.trackIndex]
+
+		priorityLockTimer = priorityLockHold
+		radar.RADAR_TDC_AZIMUTH:set(ft.AZIMUTH:get())
+		radar.RADAR_TDC_RANGE:set(ft.RANGE:get())
+
+		priorityLockPressed = true
+
+		if priorityLockSendsCommand then
+			sendToRadar(priorityLockStart, 1)
+		end
+	end
+end
+
+-- S11 released
+local function releasePriorityLock()
+	if not priorityLockPressed then
+		return
+	end
+
+	priorityLockPressed = false
+	priorityLockTimer = priorityLockHold
+
+	if priorityLockSendsCommand then
+		sendToRadar(priorityLockFinish, 1)
+	end
+end
+
+local function updatePriorityTargets(dt)
+	if priorityLockTimer > 0 then
+		priorityLockTimer = priorityLockTimer - dt
+	end
+
+	-- a priority target whose track is gone is dropped, and the ones below it move up
+	local g = 1
+	while g <= MAX_PRIORITY do
+		local pt = priorityTargets[g]
+
+		if pt.active then
+			local ft = filteredContacts[pt.trackIndex]
+
+			if ft.active and ft.gen == pt.trackGen then
+				g = g + 1
+			else
+				removePriority(g) -- the next target has moved into this group, so look at it again
+			end
+		else
+			g = g + 1
+		end
+	end
+
+	-- write the params: group k is the priority k target
+	for k = 1, MAX_PRIORITY do
+		local pt = priorityTargets[k]
+
+		if pt.active then
+			local ft = filteredContacts[pt.trackIndex]
+
+			for _, name in ipairs(filteredParamNames) do
+				pt[name]:set(ft[name]:get())
+			end
+
+			pt.priority:set(k)
+		else
+			pt.FRESH:set(0)
+			pt.isFresh:set(0)
+			pt.TIME:set(-1)
+			pt.priority:set(0)
+		end
+	end
+
+	NumberOfPriorityTargets:set(countPriority())
+end
+
+
+
+-- stuff which makes life easier
+
+
+local function computeBscopePos(az, rangeNM)
+	local bsAzLimit = perfomance.scan_volume_azimuth / 2
+	local bsMaxRange = RDRFullRange:get()
+
+	local x = (az / bsAzLimit) * scopeHalfExtent
+	local y = (rangeNM / bsMaxRange) * (scopeHalfExtent * 2) / bscopeYDivisor
+
+	x = math.max(-scopeHalfExtent, math.min(scopeHalfExtent, x))
+	-- y = math.max(0, math.min(scopeHalfExtent * 2, y))
+
+	return x, y
+end
+
+
+-- Works out every derived param (BSX/BSY, relHdg, RDX/RDY, alt, pitch, ...) for one contact.
+-- Used for the raw RADAR_CONTACT_xx contacts AND the filtered contacts, so both always match.
+local function processContact(contact, rawAz, rawEl, rawRange, rawTime, rawVX, rawVY, rawVZ)
+	local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+	contact.BSX:set(bx)
+	contact.BSY:set(by)
+
+
+
+	--[[if contactDebugTimer <= 0 then
+    		print_message_to_user(string.format(
+        		"C%d: TIME=%.3f  FRIENDLY=%.0f  BSX=%.3f  BSY=%.3f",
+        		i, contact.TIME:get(), contact.FRIENDLY:get(), contact.BSX:get(), contact.BSY:get()
+    		))
+end]]
+
+
+	if rawTime > 0 then
+		local ownHdg = baseData.getHeading()
+		-- local selfZ, selfY, selfX = baseData.getSelfCoordinates()
+
+		local horVel, horVelKts, displayZoom, alt, u_hat, v_xz, v_hy, corrEl -- , deltaCX, deltaCZ, contactX, contactZ, dx, dz
+
+
+
+		if rawTime < contact.prevTime then
+			contact.selfAltFt = baseData.getBarometricAltitude()
+			contact.selfPitch = baseData.getPitch()
+			contact.antennaEl:set(radar.SCAN_ZONE_ORIGIN_ELEVATION:get())
+		end
+
+		corrEl = rawEl + math.tan(contact.antennaEl:get())
+		contact.HUDEl:set(corrEl) -- + (contact.selfPitch - baseData.getPitch())) -- Why tf isn't this working
+
+		horVel = math.sqrt(rawVX^2 + rawVZ^2)
+		horVelKts = horVel * MS_TO_KTS
+		-- contact.horVel:set(horVelKts)
+
+
+		-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
+
+		local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
+		contact.relHdg:set(relHdgVal)
+
+		-- Predicted-heading line for the B-scope
+		local predictSeconds = 20 -- how far ahead it will be
+
+		local relX = math.sin(rawAz) * rawRange
+		local relZ = math.cos(rawAz) * rawRange
+
+		local velRelX = horVel * math.cos(relHdgVal)
+		local velRelZ = horVel * math.sin(relHdgVal)
+
+		local predRelX = relX + velRelX * predictSeconds
+		local predRelZ = relZ + velRelZ * predictSeconds
+
+		local predRange = math.sqrt(predRelX^2 + predRelZ^2)
+		local predAz = math.atan2(predRelX, predRelZ)
+
+		local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
+
+		contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
+
+		-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
+		-- contactX = selfX - deltaCX
+		-- deltaCZ = math.sin(rawAz + math.pi / 2) * rawRange
+		-- contactZ = selfZ - deltaCZ
+		-- dx = math.cos(ownHdg) * -deltaCZ - math.sin(ownHdg) * deltaCX
+		-- dz = math.cos(ownHdg) * deltaCX + math.sin(ownHdg) * deltaCZ
+
+
+
+		if radarScopeMode:get() == 1 then
+			displayZoom = CDScale:get() * RDMult
+
+			contact.RDX:set((math.cos(-rawAz + HALFPI) * rawRange) / displayZoom)
+			contact.RDY:set((math.sin(-rawAz + HALFPI) * rawRange) / displayZoom)
+
+			contact.RDVelvec:set((horVel * 30) / displayZoom)
+		elseif radarScopeMode:get() == 2 then
+			displayZoom = CDScale:get()
+			-- local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
+			local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI) -- TODO: Fix so this uses the cursorGain stuff
+			contact.RDX:set(bx)
+			contact.RDY:set(by)
+
+			--[[
+		local deltaAz = rawAz - contact.prevAz
+		local angularVelocity
+
+		if deltaAz ~= 0 then
+			-- printButBetter("a", "RC" .. i)
+			contact.prevAz = rawAz
+			
+			angularVelocity = deltaAz / updateTimeStep --[rad/s]
+			contact.prevAzVel = angularVelocity
+		else
+			-- printButBetter("b", "RC" .. i)
+			angularVelocity = contact.prevAzVel
+		end
+		
+		--(math.sqrt(angularVelocity^2 + (rawVZ * M_TO_NMI)^2) * 30) / displayZoom
+		--]]
+
+			local RdVelvecY = (rawVZ * M_TO_NMI * 30) / displayZoom
+
+			contact.RDVelvecX:set(Math.cot(contact.BSHdg:get() + math.rad(90)) * RdVelvecY) -- TODO: Fix and use the commented code above, this is flawed because the value blows up at some angles. (OLD: math.rad(angularVelocity) * 30)
+			contact.RDVelvecY:set(RdVelvecY)
+			contact.RDVelvec:set(math.sqrt(contact.RDVelvecX:get()^2 + contact.RDVelvecY:get()^2)) -- [math.sqrt(deg^2 + nmi^2)/s]
+		end
+
+		alt = (contact.selfAltFt + math.sin(corrEl) * rawRange) * M_TO_FT -- Flawed because there's no exact pos of the contact
+		contact.alt:set(alt)
+		contact.altK:set(alt / 1000)
+
+
+		contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
+		u_hat = {
+			x = math.cos(ownHdg),
+			y = math.sin(ownHdg)
+		}
+
+		v_xz = {
+			x = rawVX,
+			y = rawVZ
+		}
+
+		v_hy = {
+			x = u_hat.x * v_xz.x + u_hat.y * v_xz.y,
+			y = rawVY
+		}
+
+		contact.pitch:set(math.atan2(v_hy.x, v_hy.y))
+		contact.altScpVelvec:set((math.sqrt(v_hy.x^2 + v_hy.y^2) * 30 * M_TO_NMI) / CDScale:get())
+
+
+
+		contact.prevTime = rawTime
+	end
+end
+
+
+
+-- stuff to help with the filter
+
+
+
+local function relativeToWorld(az, el, slantRange, selfX, selfZ, hdg)
+	local hRange = math.cos(el) * slantRange
+	local fwd = math.cos(az) * hRange
+	local right = math.sin(az) * hRange
+
+	return selfX + fwd * math.cos(hdg) - right * math.sin(hdg),
+		selfZ + fwd * math.sin(hdg) + right * math.cos(hdg)
+end
+
+-- returns azimuth and HORIZONTAL range
+local function worldToRelative(wx, wz, selfX, selfZ, hdg)
+	local dx = wx - selfX
+	local dz = wz - selfZ
+
+	local fwd = dx * math.cos(hdg) + dz * math.sin(hdg)
+	local right = -dx * math.sin(hdg) + dz * math.cos(hdg)
+
+	return math.atan2(right, fwd), math.sqrt(fwd * fwd + right * right)
+end
+
+local function nctrCompatible(a, b)
+	if a == b then
+		return true
+	end
+
+	if nctrEmptyIsWildcard and (a == nil or a == "" or b == nil or b == "") then
+		return true
+	end
+
+	return false
+end
+
+local function distanceToTrack(ft, wx, wz)
+	local dx = wx - ft.worldX
+	local dz = wz - ft.worldZ
+	return math.sqrt(dx * dx + dz * dz)
+end
+
+-- Merge one radar return into a track
+local function applyPlot(ft, p)
+	local c = p.raw
+
+	ft.worldX = ft.worldX + (p.wx - ft.worldX) * blendFactor
+	ft.worldZ = ft.worldZ + (p.wz - ft.worldZ) * blendFactor
+	ft.el = p.el
+
+	-- Speed and heading come from where the target actually was (its world coordinates),
+	-- not from the radar's own VX/VZ. The speed is measured between two positions at least
+	-- velocityMinInterval seconds apart.
+	local span = filterClock - ft.refT
+
+	if span >= velocityMinInterval then
+		if span <= velocityMaxInterval then
+			local mx = (p.wx - ft.refX) / span
+			local mz = (p.wz - ft.refZ) / span
+
+			if math.sqrt(mx * mx + mz * mz) <= velocityMaxSpeed then
+				if ft.velInit then
+					ft.vx = ft.vx + (mx - ft.vx) * velocityBlend
+					ft.vz = ft.vz + (mz - ft.vz) * velocityBlend
+				else
+					ft.vx = mx
+					ft.vz = mz
+					ft.velInit = true
+				end
+			end
+		end
+
+		ft.refX = p.wx
+		ft.refZ = p.wz
+		ft.refT = filterClock
+	end
+
+	-- this still comes from the radar might make it custom later
+	ft.vy = c.VY:get()
+
+	-- identity / signal fields are overwritten by the winning return
+	ft.nctr = p.nctr
+	ft.NCTR:set(p.nctr)
+	ft.FRIENDLY:set(c.FRIENDLY:get())
+	ft.NOISE:set(c.NOISE:get())
+	ft.RCS:set(c.RCS:get())
+	ft.RCS_COEFF:set(c.RCS_COEFF:get())
+	ft.RND:set(c.RND:get())
+
+	ft.age = 0
+	ft.srcSlot = p.rawIndex
+	c.ownerTrack = ft.index
+	c.ownerGen = ft.gen
+end
+
+local function spawnTrack(p)
+	for n = 1, MAX_FILTERED do
+		local ft = filteredContacts[n]
+
+		if not ft.active then
+			ft.active = true
+			ft.worldX = p.wx
+			ft.worldZ = p.wz
+			ft.selfAltFt = 0
+			ft.selfPitch = 0
+			ft.prevTime = 11
+			ft.gen = ft.gen + 1
+
+			-- no speed known yet, it's measured from the next returns
+			ft.vx = 0
+			ft.vy = 0
+			ft.vz = 0
+			ft.velInit = false
+			ft.refX = p.wx
+			ft.refZ = p.wz
+			ft.refT = filterClock
+
+			applyPlot(ft, p)
+			return n
+		end
+	end
+
+	return nil
+end
+
+local function deactivateTrack(ft)
+	ft.active = false
+	ft.srcSlot = 0
+
+	ft.FRESH:set(0)
+	ft.isFresh:set(0)
+	ft.TIME:set(-1)
+	ft.WORLDX:set(0)
+	ft.WORLDZ:set(0)
+end
+
+
+-- this is the headache part, this turns the radar returns into coordinates using the aircrafts pos and heading
+-- it uses where your going to compensate for your own movement(finally it works lmao)
+
+
+local hdgSign = (HDG_SIGN ~= 0) and HDG_SIGN or 1
+local hdgSignLocked = (HDG_SIGN ~= 0)
+local hdgPrevX, hdgPrevZ = nil, nil
+local hdgTimer = 0
+local hdgScorePlus, hdgScoreMinus, hdgSamples = 0, 0, 0
+local FilterHdgSign = get_param_handle("FilterHdgSign")
+
+local function updateHeadingSign(selfX, selfZ, rawHdg, dt)
+	FilterHdgSign:set(hdgSign)
+
+	if hdgSignLocked then
+		return
+	end
+
+	hdgTimer = hdgTimer + dt
+	if hdgTimer < 0.5 then
+		return
+	end
+
+	local span = hdgTimer
+	hdgTimer = 0
+
+	if hdgPrevX == nil then
+		hdgPrevX, hdgPrevZ = selfX, selfZ
+		return
+	end
+
+	local dx = selfX - hdgPrevX
+	local dz = selfZ - hdgPrevZ
+	hdgPrevX, hdgPrevZ = selfX, selfZ
+
+	if math.sqrt(dx * dx + dz * dz) / span < 60 then
+		return -- too slow to say which way you're going
+	end
+
+	if math.abs(math.sin(rawHdg)) < 0.35 then
+		return -- pointing (nearly) north/south: both signs predict the same ground track
+	end
+
+	local track = math.atan2(dz, dx)
+
+	hdgScorePlus = hdgScorePlus + math.cos(track - rawHdg)
+	hdgScoreMinus = hdgScoreMinus + math.cos(track + rawHdg)
+	hdgSamples = hdgSamples + 1
+
+	if hdgSamples >= 6 then
+		local plus = hdgScorePlus / hdgSamples
+		local minus = hdgScoreMinus / hdgSamples
+
+		if plus > 0.8 and minus < 0.5 then
+			hdgSign = 1
+			hdgSignLocked = true
+		elseif minus > 0.8 and plus < 0.5 then
+			hdgSign = -1
+			hdgSignLocked = true
+
+			-- everything so far was placed with the wrong sign, start the tracks again
+			for n = 1, MAX_FILTERED do
+				if filteredContacts[n].active then
+					deactivateTrack(filteredContacts[n])
+				end
+			end
+
+			print_message_to_user("FILTER: your heading counts the other way round, now using HDG_SIGN = -1")
+		else
+			print_message_to_user("FILTER: your ground track doesn't match your heading either way round, the x/z axes may be swapped")
+		end
+
+		FilterHdgSign:set(hdgSign)
+		hdgScorePlus, hdgScoreMinus, hdgSamples = 0, 0, 0
+	end
+end
+
+
+-- where a track will be on the B-scope in some seconds
+local function projectedScreenPos(ft, seconds, selfX, selfZ, hdg)
+	local wx = ft.worldX + ft.vx * seconds
+	local wz = ft.worldZ + ft.vz * seconds
+
+	local az, hRange = worldToRelative(wx, wz, selfX, selfZ, hdg)
+
+	return computeBscopePos(az, (hRange / math.max(math.cos(ft.el), 0.2)) * M_TO_NMI)
+end
+
+-- Speed and heading params for a filtered track, from its coordinates.
+-- Runs after processContact, so these replace what the radar's own velocity would have given. (these are more accurate)
+local function applyTrackMotion(ft, selfX, selfZ, hdg)
+	local vx, vz = ft.vx, ft.vz
+	local speed = math.sqrt(vx * vx + vz * vz)
+
+	ft.horVel:set(speed * MS_TO_KTS)                                  -- knots
+	ft.vel:set(math.sqrt(speed * speed + ft.vy * ft.vy) * MS_TO_KTS)  -- knots
+
+
+	local trueHdg = math.atan2(vz, vx)
+	ft.heading:set(math.deg(trueHdg % TWOPI))
+	ft.relHdg:set((trueHdg - hdg) % TWOPI)
+
+	-- the heading line i think
+	local bx, by = projectedScreenPos(ft, 0, selfX, selfZ, hdg)
+
+	if speed > 1 then
+		local bx2, by2 = projectedScreenPos(ft, 20, selfX, selfZ, hdg)
+		ft.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
+	end
+
+	if radarScopeMode:get() == 2 then
+		-- 30 seconds of travel
+		local bx3, by3 = projectedScreenPos(ft, 30, selfX, selfZ, hdg)
+		local f = (scopeHalfExtent * 2) / bscopeYDivisor
+		local vX = (bx3 - bx) / f
+		local vY = (by3 - by) / f
+
+		ft.RDVelvecX:set(vX)
+		ft.RDVelvecY:set(vY)
+		ft.RDVelvec:set(math.sqrt(vX * vX + vY * vY))
+	end
+end
+
+local filterDebugTimer = 0
+
+local function updateFilteredContacts()
+	local searching = radar.RADAR_MODE:get() == 1
+
+	local selfX, selfZ, _  = baseData.getSelfCoordinates()
+	local dt = updateTimeStep
+
+	filterClock = filterClock + dt
+	updateHeadingSign(selfX, selfZ, baseData.getHeading(), dt)
+	local hdg = baseData.getHeading() * hdgSign
+
+
+	-- 1. Age and coast every active track
+	for n = 1, MAX_FILTERED do
+		local ft = filteredContacts[n]
+
+		if ft.active then
+			if searching then
+				ft.age = ft.age + dt -- only searching ages a track out
+			end
+
+			if coastTracks then
+				ft.worldX = ft.worldX + ft.vx * dt
+				ft.worldZ = ft.worldZ + ft.vz * dt
+			end
+		end
+	end
+
+
+	-- 2. get new radar returns. A raw slot only counts when its az/el/range just changed,
+	--    stale stuff is ignored(like when you roll)
+	local plots = {}
+
+	for i = 1, 99 do
+		local c = contacts[i]
+
+		local az = c.AZIMUTH:get()
+		local el = c.ELEVATION:get()
+		local rng = c.RANGE:get()
+
+		local changed = az ~= c.fPrevAz or el ~= c.fPrevEl or rng ~= c.fPrevRange
+		c.fPrevAz, c.fPrevEl, c.fPrevRange = az, el, rng
+
+		if searching and changed and c.TIME:get() >= 0 and rng > 0 then
+			local wx, wz = relativeToWorld(az, el, rng, selfX, selfZ, hdg)
+
+			plots[#plots + 1] = {
+				raw = c, rawIndex = i, el = el, wx = wx, wz = wz,
+				nctr = c.NCTR:get(),
+				track = nil, dist = math.huge
+			}
+		end
+	end
+
+
+	-- 3. finds other tracks in range and correct NCTR
+	for _, p in ipairs(plots) do
+		local bestTrack, bestDist = nil, gateDistanceMeters
+
+		for n = 1, MAX_FILTERED do
+			local ft = filteredContacts[n]
+
+			if ft.active and nctrCompatible(ft.nctr, p.nctr) then
+				local d = distanceToTrack(ft, p.wx, p.wz)
+
+				if d < bestDist then
+					bestTrack, bestDist = n, d
+				end
+			end
+		end
+
+		p.track, p.dist = bestTrack, bestDist
+	end
+
+
+	-- 4. closest one wins
+	local winner = {}
+
+	for pi, p in ipairs(plots) do
+		if p.track then
+			local w = winner[p.track]
+
+			if not w or p.dist < plots[w].dist then
+				winner[p.track] = pi
+			end
+		end
+	end
+
+	for n, pi in pairs(winner) do
+		applyPlot(filteredContacts[n], plots[pi])
+	end
+
+
+	-- 5. Returns that matched nothing start new tracks
+	for _, p in ipairs(plots) do
+		if not p.track then
+			local isCopy = false
+
+			for n = 1, MAX_FILTERED do
+				local ft = filteredContacts[n]
+
+				if ft.active and nctrCompatible(ft.nctr, p.nctr)
+				and distanceToTrack(ft, p.wx, p.wz) < gateDistanceMeters then
+					isCopy = true
+					break
+				end
+			end
+
+			if not isCopy then
+				spawnTrack(p)
+			end
+		end
+	end
+
+
+	-- 6. Drop old tracks, then write every param for the rest
+	for n = 1, MAX_FILTERED do
+		local ft = filteredContacts[n]
+
+		-- How long since this track was last confirmed? Normally that's the time since the last
+		-- merged return, but if the raw slot that feeds it is still being refreshed
+
+		local ageNow = ft.age
+
+		if ft.active and ft.srcSlot > 0 then
+			local src = contacts[ft.srcSlot]
+
+			if src.ownerTrack == ft.index and src.ownerGen == ft.gen then
+				local srcTime = src.TIME:get()
+
+				if srcTime > 0 and srcTime < ageNow then
+					ageNow = srcTime
+				end
+			end
+		end
+
+		if ft.active and searching then
+			ft.age = ageNow -- a long STT lock doesn't make the track look old
+		end
+
+		if ft.active and ageNow > trackTimeoutSeconds then
+			deactivateTrack(ft)
+		end
+
+		if ft.active then
+			-- the track lives in the world, so az/range are recomputed from where you are now
+			local az, hRange = worldToRelative(ft.worldX, ft.worldZ, selfX, selfZ, hdg)
+			local range = hRange / math.max(math.cos(ft.el), 0.2)
+			local time = math.max(ageNow, dt)
+
+			ft.AZIMUTH:set(az)
+			ft.ELEVATION:set(ft.el)
+			ft.RANGE:set(range)
+			ft.TIME:set(time)
+
+			ft.VX:set(ft.vx)
+			ft.VY:set(ft.vy)
+			ft.VZ:set(ft.vz)
+
+			ft.WORLDX:set(ft.worldX)
+			ft.WORLDZ:set(ft.worldZ)
+
+			ft.FRESH:set(1)
+			ft.isFresh:set(1)
+
+			processContact(ft, az, ft.el, range, time, ft.vx, ft.vy, ft.vz)
+			applyTrackMotion(ft, selfX, selfZ, hdg)
+		end
+	end
+
+
+	if filterDebug then
+		filterDebugTimer = filterDebugTimer - dt
+
+		if filterDebugTimer <= 0 then
+			filterDebugTimer = 1
+
+			local count = 0
+			for n = 1, MAX_FILTERED do
+				if filteredContacts[n].active then
+					count = count + 1
+				end
+			end
+
+			local line = string.format("FILTER: %d tracks, %d new returns, hdgSign %d", count, #plots, hdgSign)
+
+			for n = 1, MAX_FILTERED do
+				local ft = filteredContacts[n]
+
+				if ft.active then
+					local src = contacts[ft.srcSlot > 0 and ft.srcSlot or 1]
+					line = line .. string.format(" | track %d: %.0f kts hdg %.0f (radar says %.0f kts)", n,
+						math.sqrt(ft.vx ^ 2 + ft.vz ^ 2) * MS_TO_KTS, math.deg(math.atan2(ft.vz, ft.vx) % TWOPI),
+						math.sqrt(src.VX:get() ^ 2 + src.VZ:get() ^ 2) * MS_TO_KTS)
+					break
+				end
+			end
+
+			print_message_to_user(line)
+		end
+	end
+end
+
 
 function update()
 
-	local myspeed = get_param_handle("SPEEDOMETER_IAS"):get() * 1.94384449
-	local myspeedratio = 1 + (myspeed / 1100)
-	local gateRangeMeters = 3000 * myspeedratio     -- matching gate — meters
-
-	local function computeBscopePos(az, rangeNM)
-		local bsAzLimit = perfomance.scan_volume_azimuth / 2
-		local bsMaxRange = RDRFullRange:get()
-
-		local x = (az / bsAzLimit) * scopeHalfExtent
-		local y = (rangeNM / bsMaxRange) * (scopeHalfExtent * 2)/1.2
-
-		x = math.max(-scopeHalfExtent, math.min(scopeHalfExtent, x))
-		-- y = math.max(0, math.min(scopeHalfExtent * 2, y))
-
-		return x, y
-	end
-	
 	STTContact.altnmi:set(STTContact.alt:get() * M_TO_NMI)
 	STTContact.RANGEnmi:set(STTContact.RANGE:get() * M_TO_NMI)
 	STTContact.azimuthdegrees:set(math.deg(STTContact.AZIMUTH:get()) % 360)
@@ -380,363 +1352,9 @@ function update()
 
 
 	if get_param_handle("RDRScopeMode"):get() == 1 then
-		local tdcAz = radar.RADAR_TDC_AZIMUTH:get()
-		local tdcRangeNM = radar.RADAR_TDC_RANGE:get() * M_TO_NMI
+		local cx, cy = cursorX, cursorY
 
-		local cx, cy = computeBscopePos(tdcAz, tdcRangeNM)
 
-
-
-		-- ===== Filtered contact tracking =====
-
-		local function angleDifference(a, b)
-			return math.abs((a - b + math.pi) % (2 * math.pi) - math.pi)
-		end
-
-		-- ============================================================
-		-- FILTERED CONTACT TRACKING
-		-- ============================================================
-
-		local function angleDifference(a, b)
-			return math.abs((a - b + math.pi) % (2 * math.pi) - math.pi)
-		end
-
-
-		-- ============================================================
-		-- PASS 1
-		-- Match raw contacts to existing filtered contacts
-		-- ============================================================
-
-		local rawClaimed = {}
-
-		for n = 1, MAX_FILTERED do
-
-			local ft = filteredContacts[n]
-
-			if ft.active then
-
-				local bestRaw = nil
-				local bestScore = math.huge
-
-				for i = 1, 99 do
-
-					local c = contacts[i]
-
-					if c.TIME:get() > 0 then
-
-						local rawAz = c.AZIMUTH:get()
-						local rawRange = c.RANGE:get()
-
-						local dAz =
-							angleDifference(rawAz, ft.az)
-
-						local dRange =
-							math.abs(rawRange - ft.range)
-
-
-						-- Matching zone
-						if dAz <= gateAngle
-						and dRange <= gateRangeMeters then
-
-							-- Find the closest raw detection
-							local score =
-								(dAz / gateAngle) ^ 2 +
-								(dRange / gateRangeMeters) ^ 2
-
-							if score < bestScore then
-								bestScore = score
-								bestRaw = i
-							end
-						end
-					end
-				end
-
-
-				-- ====================================================
-				-- Matching raw contact found
-				-- ====================================================
-
-				if bestRaw then
-
-					local c = contacts[bestRaw]
-
-					rawClaimed[bestRaw] = true
-
-
-					-- Immediately replace filtered data
-					ft.az = c.AZIMUTH:get()
-					ft.range = c.RANGE:get()
-
-					ft.vx = c.VX:get()
-					ft.vy = c.VY:get()
-					ft.vz = c.VZ:get()
-
-
-					-- Update parameters
-					ft.AZIMUTH:set(ft.az)
-					ft.RANGE:set(ft.range)
-
-					ft.FRIENDLY:set(
-						c.FRIENDLY:get()
-					)
-
-					ft.VX:set(ft.vx)
-					ft.VY:set(ft.vy)
-					ft.VZ:set(ft.vz)
-
-
-					-- Contact was seen
-					ft.framesSinceMatch = 0
-
-
-				else
-
-					-- No raw detection matched this track
-					ft.framesSinceMatch =
-						ft.framesSinceMatch + 1
-
-
-					-- Keep contact for ~3 seconds
-					if ft.framesSinceMatch > trackTimeoutFrames then
-
-						ft.active = false
-						ft.FRESH:set(0)
-
-					end
-				end
-			end
-		end
-
-
-		-- ============================================================
-		-- PASS 2
-		-- Find raw contacts that belong to an existing filtered
-		-- contact but weren't selected as its best raw detection
-		-- ============================================================
-
-		for i = 1, 99 do
-
-			local c = contacts[i]
-
-			if c.TIME:get() > 0
-			and not rawClaimed[i] then
-
-				local belongsToExisting = false
-
-				for n = 1, MAX_FILTERED do
-
-					local ft = filteredContacts[n]
-
-					if ft.active then
-
-						local dAz =
-							angleDifference(
-								c.AZIMUTH:get(),
-								ft.az
-							)
-
-						local dRange =
-							math.abs(
-								c.RANGE:get() -
-								ft.range
-							)
-
-
-						if dAz <= gateAngle
-						and dRange <= gateRangeMeters then
-
-							belongsToExisting = true
-							break
-
-						end
-					end
-				end
-
-
-				-- Mark it as part of an existing track.
-				-- This prevents it from creating another target.
-				if belongsToExisting then
-					rawClaimed[i] = true
-				end
-			end
-		end
-
-
-		-- ============================================================
-		-- PASS 3
-		-- Create new filtered contacts for raw contacts that don't
-		-- belong to ANY existing filtered contact.
-		-- ============================================================
-
-		for i = 1, 99 do
-
-			local c = contacts[i]
-
-			if c.TIME:get() > 0
-			and not rawClaimed[i] then
-
-				for n = 1, MAX_FILTERED do
-
-					local ft = filteredContacts[n]
-
-					if not ft.active then
-
-						-- Create new filtered track
-						ft.active = true
-
-						ft.az =
-							c.AZIMUTH:get()
-
-						ft.range =
-							c.RANGE:get()
-
-						ft.vx =
-							c.VX:get()
-
-						ft.vy =
-							c.VY:get()
-
-						ft.vz =
-							c.VZ:get()
-
-						ft.framesSinceMatch = 0
-
-
-						-- Output parameters
-						ft.FRESH:set(1)
-
-						ft.AZIMUTH:set(ft.az)
-						ft.RANGE:set(ft.range)
-
-						ft.FRIENDLY:set(
-							c.FRIENDLY:get()
-						)
-
-						ft.VX:set(ft.vx)
-						ft.VY:set(ft.vy)
-						ft.VZ:set(ft.vz)
-
-						ft.PRIORITY:set(0)
-
-
-						-- This raw contact has now been consumed
-						rawClaimed[i] = true
-
-						break
-					end
-				end
-			end
-		end
-
-
-		-- ============================================================
-		-- PASS 4
-		-- Calculate B-scope position and predicted heading
-		-- ============================================================
-
-		for n = 1, MAX_FILTERED do
-
-			local ft = filteredContacts[n]
-
-			if ft.active then
-
-				-- Current B-scope position
-				local bx, by =
-					computeBscopePos(
-						ft.az,
-						ft.range * M_TO_NMI
-					)
-
-				ft.BSX:set(bx)
-				ft.BSY:set(by)
-
-
-				-- Horizontal velocity
-				local horVel =
-					math.sqrt(
-						ft.vx^2 +
-						ft.vz^2
-					)
-
-
-				local ownHdg =
-					baseData.getHeading()
-
-
-				local relHdgVal =
-					TWOPI -
-					(math.atan2(ft.vx, ft.vz) + HALFPI) -
-					ownHdg
-
-
-				local predictSeconds = 20
-
-
-				-- Current relative position
-				local relX =
-					math.sin(ft.az) *
-					ft.range
-
-				local relZ =
-					math.cos(ft.az) *
-					ft.range
-
-
-				-- Relative velocity
-				local velRelX =
-					horVel *
-					math.sin(relHdgVal)
-
-				local velRelZ =
-					horVel *
-					math.cos(relHdgVal)
-
-
-				-- Predicted position
-				local predRelX =
-					relX +
-					velRelX *
-					predictSeconds
-
-				local predRelZ =
-					relZ +
-					velRelZ *
-					predictSeconds
-
-
-				-- Predicted range
-				local predRange =
-					math.sqrt(
-						predRelX^2 +
-						predRelZ^2
-					)
-
-
-				-- Predicted azimuth
-				local predAz =
-					math.atan2(
-						predRelX,
-						predRelZ
-					)
-
-
-				-- Predicted B-scope position
-				local bx2, by2 =
-					computeBscopePos(
-						predAz,
-						predRange * M_TO_NMI
-					)
-
-
-				-- Predicted heading
-				ft.BSHdg:set(
-					math.atan2(
-						-(bx2 - bx),
-						by2 - by
-					)
-				)
-			end
-		end
 
 		-- Check if we should release an existing snap
 		if snappedContactIndex then
@@ -781,6 +1399,10 @@ function update()
 		Cursor_X:set(cx)
 		get_param_handle("Cursor_X_Clamped"):set(math.min(math.max(cx, -0.7825), 0.7825))
 		Cursor_Y:set(cy)
+	end
+
+	if tdcFollowsCursor then
+		moveTDCToCursor()
 	end
 
 
@@ -837,11 +1459,6 @@ function update()
 			local relZ = math.cos(rawAz) * horDist
 			local relY = math.sin(rawEl) * rawRange
 
-			if i == get_param_handle("SnappedContactNum"):get() and nextpriority:get() == 1 then
-				contact.priority:set(1)
-				nextpriority:set(0)
-			end
-
 			relPositions[i] = {x = relX, y = relY, z = relZ, active = rawTime > 0}
 		end
 
@@ -873,162 +1490,10 @@ function update()
 		for i = 1, 99 do
 			local contact = contacts[i]
 
-			local rawAz    = contact.AZIMUTH:get()
-			local rawEl    = contact.ELEVATION:get()
-			-- local rawFriend   = contact.FRIENDLY:get()
-			-- local rawNCTR     = contact.NCTR:get()
-			-- local rawNoise    = contact.NOISE:get()
-			local rawRange = contact.RANGE:get()
-			-- local rawRCS      = contact.RCS:get()
-			-- local rawRCSCoeff = contact.RCS_COEFF:get()
-			-- local rawRND      = contact.RND:get()
-			local rawTime  = contact.TIME:get()
-			local rawVX    = contact.VX:get()
-			local rawVY    = contact.VY:get()
-			local rawVZ    = contact.VZ:get()
-
-
-
-			local bsAzLimit = perfomance.scan_volume_azimuth / 2
-
-			local bsMaxRange = RDRFullRange:get()
-
-			local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
-			contact.BSX:set(bx)
-			contact.BSY:set(by)
-
-
-
-			--[[if contactDebugTimer <= 0 then
-    		print_message_to_user(string.format(
-        		"C%d: TIME=%.3f  FRIENDLY=%.0f  BSX=%.3f  BSY=%.3f",
-        		i, contact.TIME:get(), contact.FRIENDLY:get(), contact.BSX:get(), contact.BSY:get()
-    		))
-		end]]
-
-
-			if rawTime > 0 then
-				local ownHdg = baseData.getHeading()
-				-- local selfX, selfY, selfZ = baseData.getSelfCoordinates()
-
-				local horVel, horVelKts, displayZoom, alt, u_hat, v_xz, v_hy, corrEl -- , deltaCX, deltaCZ, contactX, contactZ, dx, dz
-
-
-
-				if rawTime < contact.prevTime then
-					contact.selfAltFt = baseData.getBarometricAltitude()
-					contact.selfPitch = baseData.getPitch()
-					contact.antennaEl:set(radar.SCAN_ZONE_ORIGIN_ELEVATION:get())
-				end
-
-				corrEl = rawEl + math.tan(contact.antennaEl:get())
-				contact.HUDEl:set(corrEl) -- + (contact.selfPitch - baseData.getPitch())) -- Why tf isn't this working
-
-				horVel = math.sqrt(rawVX^2 + rawVZ^2)
-				horVelKts = horVel * MS_TO_KTS
-				-- contact.horVel:set(horVelKts)
-
-
-				-- contact.vel:set(math.sqrt(horVelKts^2 + (rawVY * MS_TO_KTS)^2))
-
-				local relHdgVal = TWOPI - (math.atan2(rawVX, rawVZ) + HALFPI) - ownHdg
-				contact.relHdg:set(relHdgVal)
-
-				-- Predicted-heading line for the B-scope
-				local predictSeconds = 20 -- how far ahead to project
-
-				local relX = math.sin(rawAz) * rawRange
-				local relZ = math.cos(rawAz) * rawRange
-
-				local velRelX = horVel * math.sin(relHdgVal)
-				local velRelZ = horVel * math.cos(relHdgVal)
-
-				local predRelX = relX + velRelX * predictSeconds
-				local predRelZ = relZ + velRelZ * predictSeconds
-
-				local predRange = math.sqrt(predRelX^2 + predRelZ^2)
-				local predAz = math.atan2(predRelX, predRelZ)
-
-				local bx2, by2 = computeBscopePos(predAz, predRange * M_TO_NMI)
-
-				contact.BSHdg:set(math.atan2(-(bx2 - bx), by2 - by))
-
-				-- deltaCX = math.cos(rawAz + math.pi / 2) * rawRange
-				-- contactX = selfX - deltaCX
-				-- deltaCZ = math.sin(rawAz + math.pi / 2) * rawRange
-				-- contactZ = selfZ - deltaCZ
-				-- dx = math.cos(ownHdg) * -deltaCZ - math.sin(ownHdg) * deltaCX
-				-- dz = math.cos(ownHdg) * deltaCX + math.sin(ownHdg) * deltaCZ
-
-
-
-				if radarScopeMode:get() == 1 then
-					displayZoom = CDScale:get() * RDMult
-
-					contact.RDX:set((math.cos(-rawAz + HALFPI) * rawRange) / displayZoom)
-					contact.RDY:set((math.sin(-rawAz + HALFPI) * rawRange) / displayZoom)
-
-					contact.RDVelvec:set((horVel * 30) / displayZoom)
-				elseif radarScopeMode:get() == 2 then
-					displayZoom = CDScale:get()
-					-- local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI)
-					local bx, by = computeBscopePos(rawAz, rawRange * M_TO_NMI) -- TODO: Fix so this uses the cursorGain stuff
-					contact.RDX:set(bx)
-					contact.RDY:set(by)
-
-					--[[
-				local deltaAz = rawAz - contact.prevAz
-				local angularVelocity
-
-				if deltaAz ~= 0 then
-					-- printButBetter("a", "RC" .. i)
-					contact.prevAz = rawAz
-					
-					angularVelocity = deltaAz / updateTimeStep --[rad/s]
-					contact.prevAzVel = angularVelocity
-				else
-					-- printButBetter("b", "RC" .. i)
-					angularVelocity = contact.prevAzVel
-				end
-				
-				--(math.sqrt(angularVelocity^2 + (rawVZ * M_TO_NMI)^2) * 30) / displayZoom
-				--]]
-
-					local RdVelvecY = (rawVZ * M_TO_NMI * 30) / displayZoom
-
-					contact.RDVelvecX:set(Math.cot(contact.BSHdg:get() + math.rad(90)) * RdVelvecY) -- TODO: Fix and use the commented code above, this is flawed because the value blows up at some angles. (OLD: math.rad(angularVelocity) * 30)
-					contact.RDVelvecY:set(RdVelvecY)
-					contact.RDVelvec:set(math.sqrt(contact.RDVelvecX:get()^2 + contact.RDVelvecY:get()^2)) -- [math.sqrt(deg^2 + nmi^2)/s]
-				end
-
-				alt = (contact.selfAltFt + math.sin(corrEl) * rawRange) * M_TO_FT -- Flawed because there's no exact pos of the contact
-				contact.alt:set(alt)
-				contact.altK:set(alt / 1000)
-
-
-				contact.altScpRange:set((rawRange * M_TO_NMI) / CDScale:get())
-				u_hat = {
-					x = math.cos(ownHdg),
-					y = math.sin(ownHdg)
-				}
-
-				v_xz = {
-					x = rawVX,
-					y = rawVZ
-				}
-
-				v_hy = {
-					x = u_hat.x * v_xz.x + u_hat.y * v_xz.y,
-					y = rawVY
-				}
-
-				contact.pitch:set(math.atan2(v_hy.x, v_hy.y))
-				contact.altScpVelvec:set((math.sqrt(v_hy.x^2 + v_hy.y^2) * 30 * M_TO_NMI) / CDScale:get())
-
-
-
-				contact.prevTime = rawTime
-			end
+			processContact(
+				contact, contact.AZIMUTH:get(), contact.ELEVATION:get(), contact.RANGE:get(),
+				contact.TIME:get(), contact.VX:get(), contact.VY:get(), contact.VZ:get()
+			)
 		end
 	elseif radar.RADAR_MODE:get() == 3 then
 		local contact = STTContact
@@ -1146,10 +1611,31 @@ function update()
 			y = math.sin(ownHdg)
 		}
 	end
+
+	updateFilteredContacts()
+	updatePriorityTargets(updateTimeStep)
 end
 
 function SetCommand(command, value)
 	print_message_to_user(string.format("RDR SC: C: %i   V: %.8f", command, value))
+
+	-- Priority targets (only the press counts, not the release)
+	if command == keys.S5StageOne then
+		givePriority()
+	elseif command == keys.S5StageTwo then
+		takePriority()
+	elseif command == keys.S1PriorityStep then
+		stepPriority()
+	elseif command == keys.S11Lock then
+		if lock == 0 then
+			pressPriorityLock()
+		else
+			releasePriorityLock()
+			lock = 0
+		end
+
+		
+	end
 
 
 
@@ -1179,35 +1665,32 @@ function SetCommand(command, value)
 
 	----------------------------------------------------------------------	
 
-	if radar.RADAR_TDC_RANGE:get() < 0 then
-		radar.RADAR_TDC_RANGE:set(0)
-	end
-
-	if radar.RADAR_TDC_AZIMUTH:get() > 1.05 then
-		radar.RADAR_TDC_AZIMUTH:set(1.04)
-	elseif radar.RADAR_TDC_AZIMUTH:get() < -1.05 then
-		radar.RADAR_TDC_AZIMUTH:set(-1.04)
-	end
-
-	-------------------------------------------------
-
+	-- The hat and the slew axes move the CURSOR on the screen (not the radar's TDC)
 	if command == 2032 then
-		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() - value * 200000)
+		cursorY = cursorY - value * 10
 	end
 
 	if command == 2031 then
-		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + value * 10)
+		cursorX = cursorX + value * 10
 	end
 
 	if command == 88 then -- Left
-		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() - 0.015 / 2)
+		cursorX = cursorX - cursorStepX
 	elseif command == 89 then -- Right
-		radar.RADAR_TDC_AZIMUTH:set(radar.RADAR_TDC_AZIMUTH:get() + 0.015 / 2)
+		cursorX = cursorX + cursorStepX
 	end
 
 	if command == 90 then -- Up
-		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() + 600 / 2)
+		cursorY = cursorY + cursorStepY
 	elseif command == 91 then -- Down
-		radar.RADAR_TDC_RANGE:set(radar.RADAR_TDC_RANGE:get() - 600 / 2)
+		cursorY = cursorY - cursorStepY
+	end
+
+	cursorY = math.max(cursorMinY, math.min(cursorMaxY, cursorY))
+	cursorX = math.max(-cursorXLimit, math.min(cursorXLimit, cursorX))
+
+	-- Lock: send the radar's TDC to wherever the cursor is, so it locks what you're looking at
+	if lockCommands[command] then
+		moveTDCToCursor()
 	end
 end
